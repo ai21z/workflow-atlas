@@ -66,4 +66,4 @@ The case explains proposed study work. It is not evidence of a deployed integrat
 
 Existing topic identifiers, including `construct-study`, remain stable so saved links still work. Public Talos repository references remain attributed where they contributed a reviewed practice.
 
-This content revision does not publish a deployment or push the repository.
+The Atlas content is included in the public static site. Reading it does not execute workflows or change project decisions.

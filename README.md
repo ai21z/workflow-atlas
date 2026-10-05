@@ -221,9 +221,9 @@ Spec Kit, AgentRC and APM integrations are potential future adapters. Referencin
 
 ## Scope and ownership
 
-This local version exports files for review. It does not execute or schedule workflows, connect application accounts, change another repository or enforce runtime permissions.
+Atlas exports files for review. It does not execute or schedule workflows, connect application accounts, change another repository or enforce runtime permissions.
 
-The preserved Atlas includes an adapted reference-to-configuration feasibility case with internal identifiers omitted. New factory examples use synthetic names and values. These cases demonstrate planning, not a completed workplace implementation. This delivery does not publish a deployment.
+The preserved Atlas includes an adapted reference-to-configuration feasibility case with internal identifiers omitted. New factory examples use synthetic names and values. These cases demonstrate planning, not a completed workplace implementation. Atlas does not deploy generated workflows.
 
 I maintain the project. Original contributions use my repository identity. Referenced projects and vendored libraries retain required notices.
 
