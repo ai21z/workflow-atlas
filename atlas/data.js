@@ -4,54 +4,59 @@ window.TOPIC_DATA = {
       "id": "overview",
       "parent": null,
       "title": "Project overview",
-      "summary": "Three bounded workflows sharing evidence, verification, model routing, and cost controls.",
+      "summary": "Understand a workflow, choose relevant practices and see how steps, outputs and checks connect.",
       "sections": [
         {
+          "type": "p",
+          "label": "Start with the outcome",
+          "text": "Name the result, who needs it and what would make it acceptable. Then identify the steps, responsible people or systems, inputs and evidence. Use a model only where its contribution is useful."
+        },
+        {
           "type": "table",
-          "label": "The three proposed workflows",
+          "label": "Three examples to adapt",
           "headers": [
-            "Workflow",
+            "Example workflow",
             "Result"
           ],
           "rows": [
             [
-              "Requirements and debt investigation",
-              "Evidence-backed implementation brief or actionable finding"
+              "Investigate requirements or debt",
+              "A supported brief, decision or actionable finding"
             ],
             [
-              "Implementation and verification",
-              "Bitbucket PR with revision-linked executed checks"
+              "Implement and verify a change",
+              "A reviewable change with evidence for the relevant revision"
             ],
             [
-              "Country-data curation",
-              "Candidate assertion packet with source support, scope, and uncertainty"
+              "Curate domain data",
+              "A candidate assertion with source support, scope and uncertainty"
             ]
           ]
         },
         {
           "type": "p",
-          "label": "Project context",
-          "text": "This reference map uses examples from issue tracking, documentation, source control, CI, application services and graph data. Named technologies illustrate options. They are not requirements for your project."
+          "label": "Examples are optional",
+          "text": "The map includes issue tracking, documentation, source control, CI, services and graph data. Named technologies illustrate particular environments. Choose the practices that match your task."
         },
         {
           "type": "p",
-          "label": "First shared deliverable",
-          "text": "A versioned task-and-evidence packet connecting requirements, source material, code/data revisions, tests, findings, and cost observations."
+          "label": "How to use this map",
+          "text": "Read a general topic, follow a relevant example and compare its assumptions with your project. The map groups related knowledge. Its lines do not schedule work or pass data between running agents."
         },
         {
           "type": "p",
-          "label": "What is still unknown",
-          "text": "No reader's repository or pipeline has been audited by this map. Actual debt, coverage gaps, model fit, integration effort and savings must be established for each project."
+          "label": "What Atlas currently does",
+          "text": "The Factory records decisions in supported development recipes and exports instructions and evidence templates. Configurable outcome branches and correction loops are planned. Reading these patterns does not add them to your project or execute them."
         },
         {
           "type": "p",
-          "label": "How this map is organized",
-          "text": "Graph branches group topics. “Connected topics” expresses relationships across branches. Published capabilities, proposed practices, and findings from inspected example repositories are labeled separately."
+          "label": "What remains unknown",
+          "text": "This map has not audited your repository or process. Establish actual requirements, coverage, model fit, integration effort and benefits with project evidence."
         },
         {
           "type": "p",
-          "label": "Ticket-scoped case study",
-          "text": "The adapted reference-to-configuration example assesses turning an engineer-assisted process into a governed service. Selected Atlas practices apply to this bounded study. Broad rollout and savings remain unproven."
+          "label": "Worked feasibility study",
+          "text": "The reference-to-configuration example assesses whether an engineer-assisted process should become a governed service. It illustrates a study, with no claim of measured savings or a deployed integration."
         }
       ],
       "refs": [],
@@ -59,7 +64,11 @@ window.TOPIC_DATA = {
         "task-contract",
         "pilot",
         "confidence-summary",
-        "construct-study"
+        "construct-study",
+        "workflow-patterns",
+        "architecture-decisions",
+        "work-breakdown",
+        "release-operations"
       ],
       "basis": "Research synthesis",
       "confidence": "High for documented facts; moderate for fit"
@@ -73,22 +82,22 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Recommended architecture",
-          "text": "Begin with three bounded workflows. Share the harness, but use different evidence standards for code changes and statutory assertions."
+          "text": "Start with one bounded outcome. Identify the steps, their inputs and outputs, who performs them and what happens after each check. Share useful instructions and controls where their assumptions fit."
         },
         {
           "type": "p",
           "label": "Control and judgment",
-          "text": "Code enforces transitions, versions, permissions, and required checks. Models investigate ambiguities, propose changes, and explain findings."
+          "text": "For an automated process, code enforces state transitions, permissions and limits. Models can investigate ambiguity, propose results and explain findings. A manual process can use the same explicit steps and checks with people responsible for them."
         },
         {
           "type": "p",
           "label": "Platform choice",
-          "text": "Use existing Atlassian Automation and Jenkins where adequate. Evaluate a durable engine only when restart recovery, long waits, or reliable external-action resumption require it."
+          "text": "Check whether existing automation and CI can meet the need. Atlassian Automation and Jenkins are examples. Evaluate durable execution when restart recovery, long waits or reliable resumption of external actions justify it."
         },
         {
           "type": "p",
           "label": "Apply proportionately",
-          "text": "Map the existing product-generation process and assess a governed service. The broad three-workflow proposal is a research framework rather than the scope of the worked feasibility study."
+          "text": "Distinguish the work of developing a capability from what the finished application does for each request. A study may end in a decision package. It does not require building an execution platform."
         }
       ],
       "refs": [
@@ -99,10 +108,326 @@ window.TOPIC_DATA = {
         "task-contract",
         "pilot",
         "construct-study",
-        "study-contract"
+        "study-contract",
+        "workflow-patterns",
+        "architecture-decisions"
       ],
       "basis": "Proposed design",
       "confidence": "Moderate"
+    },
+    {
+      "id": "workflow-patterns",
+      "parent": "workflows",
+      "title": "Reusable workflow patterns",
+      "summary": "Connect steps, results and checks. Decide what happens when a result passes, needs correction or cannot continue.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Start with five questions",
+          "text": "What happens here, who does it, what does it need, what does it produce and how do we know the result is acceptable? A person, ordinary code, an agent or an existing system can perform a step."
+        },
+        {
+          "type": "table",
+          "label": "Choose a pattern",
+          "headers": [
+            "Pattern",
+            "Use it when"
+          ],
+          "rows": [
+            [
+              "Sequence",
+              "A known step produces an input for the next one."
+            ],
+            [
+              "Review gate",
+              "A check or authorized review determines whether work can continue."
+            ],
+            [
+              "Bounded correction",
+              "Useful feedback can improve a result and the process has a clear stopping rule."
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "label": "Three different connections",
+          "headers": [
+            "Connection",
+            "Meaning"
+          ],
+          "rows": [
+            [
+              "Input",
+              "The check needs this candidate and these criteria."
+            ],
+            [
+              "Outcome route",
+              "A repairable finding sends work to the correction step."
+            ],
+            [
+              "Instruction",
+              "The assigned skill describes how that step should be carried out."
+            ]
+          ]
+        },
+        {
+          "type": "code",
+          "label": "Example correction flow",
+          "text": "Produce or supply a candidate\n → Check the candidate\n   Pass → approval if required → deliver\n   Repairable → limit allows → correct → check again\n   Missing input → ask for clarification\n   Blocked or limit reached → stop with findings"
+        },
+        {
+          "type": "list",
+          "label": "Define the loop",
+          "items": [
+            "Return the relevant candidate and specific findings to the correction step.",
+            "Record an attempt limit and its counting rule. Add time or spending limits with units when needed.",
+            "Keep unknown, unavailable and unrun checks separate from a pass.",
+            "Check the revised candidate. Preserve earlier evidence as history rather than approving the new version automatically.",
+            "If approval is needed, name its authority and the candidate it concerns. Changed work may need approval again.",
+            "Define what happens when correction cannot help, input is missing or the limit is reached."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Approval outcomes",
+          "text": "Approval concerns the checked candidate. Declined approval stops or follows its explicit route. Requested changes may enter the bounded correction path. A revision must go through the relevant checks and any required approval again."
+        },
+        {
+          "type": "p",
+          "label": "Retry or correction",
+          "text": "A transport retry repeats an operation. A correction changes a candidate using feedback and then checks it again. If a timeout may have followed a write, establish the resulting state before repeating that action."
+        },
+        {
+          "type": "p",
+          "label": "Choose the right check",
+          "text": "Use applicable schema checks, tests, evidence review or human judgment. Model grading needs evaluation against reviewed examples. The generator saying it succeeded is not enough. Passing a format check does not establish that the result meets the intended meaning."
+        },
+        {
+          "type": "table",
+          "label": "The same structure in different work",
+          "headers": [
+            "Case",
+            "Result and feedback"
+          ],
+          "rows": [
+            [
+              "Backend generation",
+              "A candidate configuration and validation findings."
+            ],
+            [
+              "Bug repair",
+              "A proposed change and regression evidence."
+            ],
+            [
+              "Document review",
+              "A draft and requested changes against the brief."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Development and application behavior",
+          "text": "How a team builds and releases a generator is different from what the generator does on each request. Link the development evaluation to the application behavior it tests. Do not mix those steps into one unexplained process."
+        },
+        {
+          "type": "p",
+          "label": "Current Atlas boundary",
+          "text": "This topic teaches a design pattern. The Factory currently uses fixed development recipes and exports files. Editable outcome routes and correction loops are planned, not implemented. General document workflows are outside the current JEV recipe suggestions."
+        },
+        {
+          "type": "p",
+          "label": "Source and adaptation",
+          "text": "Anthropic describes chains with programmatic gates and an evaluator-optimizer loop using model feedback. The broader person, code and agent examples here are proposed Atlas adaptations. A runtime must implement and enforce the designed behavior."
+        }
+      ],
+      "refs": [
+        "simple-agents",
+        "evals"
+      ],
+      "related": [
+        "task-contract",
+        "retries",
+        "architecture",
+        "study-contract",
+        "study-quality",
+        "verification-loops",
+        "post-change-checks"
+      ],
+      "basis": "Documented patterns + proposed adaptation",
+      "confidence": "Moderate for fit. No workflow execution established"
+    },
+    {
+      "id": "architecture-decisions",
+      "parent": "workflows",
+      "title": "Architecture decisions",
+      "summary": "Choose a proportionate design from the required behavior, existing systems and evidence.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Start with the decision",
+          "text": "Describe the outcome and constraints that the design must satisfy. Identify which decision is needed now and who can accept it. Leave missing business or operating requirements explicit."
+        },
+        {
+          "type": "steps",
+          "label": "Compare workable approaches",
+          "items": [
+            "Read the agreed behavior, relevant constraints and evidence about the current system.",
+            "Map affected components, interfaces, data ownership and external dependencies.",
+            "Compare retaining the current approach with proportionate changes. State tradeoffs in quality, effort, cost and recovery.",
+            "Investigate the uncertainty most likely to change the choice, using a small experiment where useful.",
+            "Record the selected approach, reasons, alternatives, owner and unresolved questions."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "When an agent is part of the design",
+          "text": "Separate the model task from application controls. Define its input, output, permitted tools, checks and failure outcomes. Controller and harness guidance explains this particular architecture concern."
+        },
+        {
+          "type": "p",
+          "label": "Example decision",
+          "text": "A configuration service might compare extending an existing API with a separate generation job. Request duration, recovery, user feedback and access requirements inform the choice. This example does not establish which approach your project needs."
+        },
+        {
+          "type": "p",
+          "label": "Useful result",
+          "text": "A decision record and component or interface sketch that another developer can explain and challenge. A list of fashionable tools is not enough to establish architectural fit."
+        }
+      ],
+      "refs": [],
+      "related": [
+        "requirements-workflow",
+        "impact-skill",
+        "architecture",
+        "study-contract",
+        "durable-execution",
+        "work-breakdown"
+      ],
+      "basis": "Proposed practice",
+      "confidence": "Moderate. Project constraints require investigation"
+    },
+    {
+      "id": "work-breakdown",
+      "parent": "workflows",
+      "title": "Break work into deliverable changes",
+      "summary": "Turn an agreed outcome into reviewable pieces with clear acceptance, owners and dependencies.",
+      "sections": [
+        {
+          "type": "steps",
+          "label": "Plan the pieces",
+          "items": [
+            "Start with the outcome, selected approach and remaining uncertainty.",
+            "Choose a small useful result that can be reviewed and checked.",
+            "Describe the work, acceptance examples and responsible actor for each piece.",
+            "Identify required inputs and dependent work. An existing artifact can satisfy an input.",
+            "Separate investigation of an unresolved decision from implementation that depends on it.",
+            "Keep integration and end-to-end acceptance visible across the pieces."
+          ]
+        },
+        {
+          "type": "table",
+          "label": "Example feature slices",
+          "headers": [
+            "Piece",
+            "Observable result"
+          ],
+          "rows": [
+            [
+              "Save and reopen a basic search",
+              "A supported set of criteria survives reopening."
+            ],
+            [
+              "Handle invalid and failed saves",
+              "The user receives the agreed recovery behavior."
+            ],
+            [
+              "Add naming, if required",
+              "A named search behaves according to its acceptance examples."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Adapt the granularity",
+          "text": "A slice may need coordinated UI, service and data changes. Do not claim that every technical subtask is independently releasable. For a bug or debt finding, use the remediation guidance to plan a coherent correction."
+        },
+        {
+          "type": "p",
+          "label": "Breakdown and traceability",
+          "text": "Breakdown decides which work pieces exist and their order. Traceability explains how those pieces, requirements and checks relate. Use both where they help."
+        },
+        {
+          "type": "p",
+          "label": "Useful result",
+          "text": "Each work item contributes to the outcome, has checkable acceptance and names its prerequisites. Unknown estimates and decisions remain visible."
+        }
+      ],
+      "refs": [],
+      "related": [
+        "architecture-decisions",
+        "requirements-workflow",
+        "traceability",
+        "decomposition",
+        "implementation-workflow"
+      ],
+      "basis": "Proposed practice with fictional example",
+      "confidence": "Moderate. Granularity depends on the project"
+    },
+    {
+      "id": "release-operations",
+      "parent": "workflows",
+      "title": "Release and operate",
+      "summary": "Plan how a checked change reaches its users, how its behavior is observed and how problems are handled.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "When this applies",
+          "text": "Use this guidance when a software or data change is moving into an operating environment. A feasibility study may instead end with a recommendation. Piloting a new automation is a separate adoption decision."
+        },
+        {
+          "type": "steps",
+          "label": "Prepare the release",
+          "items": [
+            "Identify the candidate revision and required acceptance evidence, including unresolved checks.",
+            "Confirm the release owner, decision authority and existing deployment process.",
+            "Review relevant interface, configuration and data changes and their compatibility requirements.",
+            "Define how exposure, observation and recovery will work for this change.",
+            "After deployment, inspect relevant service and user behavior and record the actual result.",
+            "Hand over operating ownership, support information and remaining follow-up work."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Recovery is a design decision",
+          "text": "Choose an applicable recovery path, such as rollback, disabling a feature or a forward correction. A data migration or external action may not be reversible. Establish the recovery procedure and its constraints before relying on it."
+        },
+        {
+          "type": "p",
+          "label": "An AI feature needs both checks",
+          "text": "Evaluate the service and its failure paths before release. Where required, also validate individual generated results during use. A successful pre-release evaluation does not make every later result correct."
+        },
+        {
+          "type": "p",
+          "label": "Example to adapt",
+          "text": "A configuration generator can retain a checked draft until its application is explicitly authorized. An ordinary web feature may use the existing release pipeline. Neither example requires a particular CI product."
+        },
+        {
+          "type": "p",
+          "label": "Useful result",
+          "text": "A release plan and, after execution, evidence of the deployed candidate, observed behavior and operating owner. A passing check or a generated plan alone does not establish deployment."
+        }
+      ],
+      "refs": [],
+      "related": [
+        "verification-loops",
+        "qa-packet",
+        "pilot",
+        "workflow-patterns",
+        "eval-metrics",
+        "study-contract"
+      ],
+      "basis": "Proposed practice",
+      "confidence": "Moderate. Release procedures are project specific"
     },
     {
       "id": "requirements-workflow",
@@ -157,12 +482,12 @@ window.TOPIC_DATA = {
           "type": "steps",
           "label": "Sequence",
           "items": [
-            "Confirm the task contract and exact checkout/submodule state.",
+            "Confirm the task contract and relevant repository revision, including submodules where used.",
             "Inspect affected source and tests.",
             "Make the smallest coherent change.",
             "Run focused verification after the relevant edits.",
             "Review the diff and use broader checks at the established gate.",
-            "Prepare the Bitbucket PR and evidence packet."
+            "Prepare the pull request or review submission with its evidence packet."
           ]
         },
         {
@@ -174,6 +499,11 @@ window.TOPIC_DATA = {
           "type": "p",
           "label": "Scope control",
           "text": "New requirements or unrelated refactors become explicit proposals; they do not silently enlarge the change."
+        },
+        {
+          "type": "p",
+          "label": "Example toolchain",
+          "text": "A team using Bitbucket can attach the review to a pull request and link Jenkins results. Use the equivalent review and verification records for your environment."
         }
       ],
       "refs": [
@@ -183,7 +513,10 @@ window.TOPIC_DATA = {
         "post-change-checks",
         "jenkins",
         "bitbucket",
-        "qa-packet"
+        "qa-packet",
+        "workflow-patterns",
+        "work-breakdown",
+        "release-operations"
       ],
       "basis": "Proposed design",
       "confidence": "Moderate"
@@ -282,7 +615,9 @@ window.TOPIC_DATA = {
         "task-contract",
         "agent-roles",
         "durable-execution",
-        "skill-definition"
+        "skill-definition",
+        "architecture-decisions",
+        "workflow-patterns"
       ],
       "basis": "Proposed design",
       "confidence": "Moderate"
@@ -297,23 +632,23 @@ window.TOPIC_DATA = {
           "type": "list",
           "label": "Required fields",
           "items": [
-            "Task identity, owner, desired outcome, and exclusions.",
-            "Repository commit, submodule revisions, and relevant source/document versions.",
+            "Task identity, owner, desired outcome and exclusions.",
+            "Relevant input and source versions. Include repository and dependency revisions when the task changes or inspects code.",
             "Allowed actions and affected systems.",
-            "Required verification and expected evidence.",
-            "Model, tool-call, time, spend, and repair-attempt limits.",
-            "Expected output structure and conditions requiring escalation."
+            "Acceptance criteria, required checks and expected evidence.",
+            "Applicable time, correction, tool-call or spending limits, with units and a stopping outcome.",
+            "Expected outputs and conditions requiring clarification or assistance."
           ]
         },
         {
           "type": "p",
           "label": "Completion record",
-          "text": "Observed facts, inferences, unresolved questions, executed checks, and exceptions are distinct. Any later relevant change invalidates earlier verification."
+          "text": "Keep observed facts, inferences, unresolved questions, executed checks and exceptions distinct. A relevant change requires a review of which earlier checks or approvals still apply. Preserve the earlier evidence as history."
         },
         {
           "type": "p",
           "label": "Reusable across workflows",
-          "text": "The same envelope can contain a code investigation, Jira brief, or data review. Each workflow adds its own acceptance criteria."
+          "text": "The same structure can describe a code investigation, document review or data curation task. Each adds its own acceptance criteria. A repository, model call or automated write is not required for every task."
         }
       ],
       "refs": [],
@@ -322,7 +657,8 @@ window.TOPIC_DATA = {
         "finding-contract",
         "answer-contract",
         "budgets",
-        "permissions"
+        "permissions",
+        "workflow-patterns"
       ],
       "basis": "Proposed design",
       "confidence": "Moderate"
@@ -420,7 +756,7 @@ window.TOPIC_DATA = {
       "sections": [
         {
           "type": "p",
-          "label": "Useful split",
+          "label": "Example split",
           "text": "One investigator traces React behavior while another checks SPARQL fixtures. They return structured findings with versions and source locations."
         },
         {
@@ -525,8 +861,13 @@ window.TOPIC_DATA = {
       "id": "retries",
       "parent": "workflows",
       "title": "Retries & stopping rules",
-      "summary": "Repair failures only while new evidence or progress justifies another attempt.",
+      "summary": "Distinguish repeating an operation from correcting a result, and define when each must stop.",
       "sections": [
+        {
+          "type": "p",
+          "label": "Retry or correction",
+          "text": "A retry repeats an operation after a failure such as a connection problem. A correction uses findings to change an unacceptable result. An uncertain write outcome needs confirmation or reconciliation before another write."
+        },
         {
           "type": "list",
           "label": "Proposed controls",
@@ -540,6 +881,11 @@ window.TOPIC_DATA = {
         },
         {
           "type": "p",
+          "label": "A bounded correction loop",
+          "text": "Specify which step receives the candidate and findings, what counts as an attempt and where the process stops. For example, two corrections after the initial candidate is a clear counting rule, not a recommended default. Recheck the revised result."
+        },
+        {
+          "type": "p",
           "label": "Acceptance",
           "text": "A run can end with a useful partial finding rather than fabricate completion. The reviewer can inspect attempted actions and remaining blockers."
         }
@@ -550,7 +896,8 @@ window.TOPIC_DATA = {
       "related": [
         "budgets",
         "verdicts",
-        "event-state"
+        "event-state",
+        "workflow-patterns"
       ],
       "basis": "Proposed design",
       "confidence": "Moderate"
@@ -558,13 +905,18 @@ window.TOPIC_DATA = {
     {
       "id": "toolchain",
       "parent": "overview",
-      "title": "Your toolchain",
+      "title": "Tools and integrations",
       "summary": "Assign existing systems concrete responsibilities and verify actual integration boundaries.",
       "sections": [
         {
           "type": "p",
-          "label": "Proposed division",
-          "text": "Jira defines work; Confluence preserves decisions; Bitbucket versions code/data; IntelliJ/Copilot supports local work; Jenkins/Sonar produce execution evidence; Rovo handles configured Atlassian-context tasks; Neptune serves the approved graph."
+          "label": "Start with responsibilities",
+          "text": "Identify where requests, decisions, source files, checks and operational records live today. Keep existing systems when they meet the need. Add an integration only when a workflow requires a supported action."
+        },
+        {
+          "type": "p",
+          "label": "Example toolchain",
+          "text": "One workplace example uses Jira for requests, Confluence for reviewed decisions, Bitbucket for source control, IntelliJ/Copilot for local work, Jenkins/Sonar for checks, Rovo for configured Atlassian tasks and Neptune for graph data. These are possible assignments, not required products."
         },
         {
           "type": "p",
@@ -832,7 +1184,7 @@ window.TOPIC_DATA = {
           "label": "Proposed controls",
           "items": [
             "Scope tools and credentials to the assigned task and environment.",
-            "Specify whether a Rovo action uses a requesting user or managed agent identity.",
+            "Record the identity performing each action, such as a requesting user or a service account. Check the configured actor for tools such as Rovo.",
             "Filter retrieval by access rights before generating output.",
             "Constrain both model-invoked tools and direct workflow code.",
             "Keep code review, data approval, and publication rules executable and attributable."
@@ -867,13 +1219,18 @@ window.TOPIC_DATA = {
           "type": "list",
           "label": "Inventory",
           "items": [
-            "Copilot client, IntelliJ plugin version, and active agent harness.",
-            "Models available and enabled by organization policy.",
-            "Actual model reported for parent and subagent runs.",
-            "Supported tools, Rovo connected applications, and action actor.",
-            "Bitbucket/Jenkins/Neptune access and execution environment.",
-            "Billing reports, budgets, logging, and evidence retention."
+            "The clients, extensions, runtime and versions actually used.",
+            "Models available under the applicable account and organization settings, where AI is used.",
+            "The model actually reported for each role or delegated run, when relevant.",
+            "Supported tools and integrations, their permissions and the identity performing each action.",
+            "Access to the relevant source, checks, data and execution environment.",
+            "Operating ownership, billing, budgets and evidence retention."
           ]
+        },
+        {
+          "type": "p",
+          "label": "Example inventory",
+          "text": "For the workplace example, inspect Copilot in IntelliJ, Rovo connections, and access to Bitbucket, Jenkins and Neptune. Another project needs an inventory of its own systems."
         },
         {
           "type": "p",
@@ -991,7 +1348,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Not a ranking",
-          "text": "These are starting candidates. Performance on your RDF, Java, React, source-language, and review tasks is unmeasured."
+          "text": "These are starting candidates, not measured recommendations for your tasks. RDF, Java, React, source-language and review work are example benchmark areas. Evaluate the tasks your project actually needs."
         }
       ],
       "refs": [
@@ -1315,12 +1672,17 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Starting package",
-          "text": "Requirements investigation, impact analysis, Jenkins diagnosis, RDF/SPARQL verification, source review, and review-packet preparation."
+          "text": "Choose procedures that repeat in the actual work, such as requirements investigation, impact analysis, verification or review preparation. Add specialized skills only when their tasks are present."
         },
         {
           "type": "p",
           "label": "Author from evidence",
           "text": "Create a skill when a useful procedure repeats or an observed failure reveals missing guidance. A large persona catalog does not substitute for working tools and acceptance criteria."
+        },
+        {
+          "type": "p",
+          "label": "Specialized examples",
+          "text": "Jenkins diagnosis, RDF/SPARQL verification and country-source review illustrate particular environments. They are not a required starter package."
         }
       ],
       "refs": [
@@ -1385,7 +1747,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Inputs",
-          "text": "Jira request, reviewed decisions, relevant source material, pinned repository, and existing tests."
+          "text": "The request, reviewed decisions, relevant source material, affected implementation versions where available and existing acceptance evidence."
         },
         {
           "type": "p",
@@ -1416,12 +1778,17 @@ window.TOPIC_DATA = {
       "id": "impact-skill",
       "parent": "skills",
       "title": "Change-impact skill",
-      "summary": "Trace dependencies across data, queries, services, API, UI, and tests.",
+      "summary": "Trace the parts of a system affected by a proposed change and identify what needs verification.",
       "sections": [
         {
           "type": "p",
           "label": "Inputs",
-          "text": "Proposed change, ontology concepts, TTL/query locations, module/submodule revisions, API consumers, and verification map."
+          "text": "The proposed outcome, known component and data dependencies, relevant versions, consumer contracts and existing checks."
+        },
+        {
+          "type": "p",
+          "label": "Graph application example",
+          "text": "For an RDF application, the inputs may include ontology concepts, TTL and query locations, service revisions and API consumers. These are one implementation of the general dependency investigation."
         },
         {
           "type": "p",
@@ -1443,7 +1810,9 @@ window.TOPIC_DATA = {
       "related": [
         "traceability",
         "decomposition",
-        "neptune-stack"
+        "neptune-stack",
+        "architecture-decisions",
+        "work-breakdown"
       ],
       "basis": "Proposed design",
       "confidence": "Moderate"
@@ -1694,7 +2063,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Trace",
-          "text": "Source/decision → ontology and TTL → SPARQL → Spring/API → React → verification. Preserve links in both directions."
+          "text": "Source or decision → required behavior → affected components → meaningful checks → delivery evidence. Preserve enough links to move from the requirement to its verification and back."
         }
       ],
       "refs": [
@@ -1759,12 +2128,17 @@ window.TOPIC_DATA = {
       "id": "traceability",
       "parent": "requirements",
       "title": "End-to-end traceability",
-      "summary": "Connect a requirement to its data representation, implementation, and meaningful checks.",
+      "summary": "Connect a requirement to affected components, meaningful checks and delivery evidence.",
       "sections": [
         {
           "type": "code",
           "label": "Trace chain",
-          "text": "Source evidence / approved requirement\n → ontology concepts and TTL\n → SPARQL behavior\n → Spring service and REST contract\n → React behavior\n → verification"
+          "text": "Source or reviewed decision\n → required behavior\n → affected components and interfaces\n → meaningful checks\n → evidence for the delivered revision"
+        },
+        {
+          "type": "code",
+          "label": "Example for a graph application",
+          "text": "Requirement\n → ontology concepts and TTL\n → SPARQL behavior\n → Spring service and REST contract\n → React behavior\n → verification"
         },
         {
           "type": "p",
@@ -1783,7 +2157,8 @@ window.TOPIC_DATA = {
       "related": [
         "impact-skill",
         "coverage",
-        "engineering-knowledge"
+        "engineering-knowledge",
+        "work-breakdown"
       ],
       "basis": "Proposed design",
       "confidence": "Moderate"
@@ -1910,11 +2285,16 @@ window.TOPIC_DATA = {
           "items": [
             "Select a concrete user/domain scenario and identify its owner.",
             "Read the request and reviewed decisions at known versions.",
-            "Trace actual TTL/query/service/API/UI behavior.",
+            "Follow the relevant data, components, interfaces and user behavior using actual evidence.",
             "Inspect existing tests and recent pipeline evidence.",
             "Classify requirements and unresolved assumptions.",
             "Prepare acceptance scenarios, impact, and a reviewed implementation brief."
           ]
+        },
+        {
+          "type": "p",
+          "label": "Example to adapt",
+          "text": "In a graph-backed web application, the investigation may cross TTL, SPARQL, a service, an API and a UI. A document or process study uses its own sources and handoffs."
         },
         {
           "type": "p",
@@ -1946,7 +2326,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Operating method",
-          "text": "Collect specific findings, deduplicate, prioritize consequences, and break remediation into reviewable outcomes. Avoid flooding Jira with every static-analysis smell."
+          "text": "Collect specific findings, deduplicate, prioritize consequences and break remediation into reviewable outcomes. Avoid flooding the issue tracker with every static-analysis finding."
         }
       ],
       "refs": [],
@@ -2131,7 +2511,8 @@ window.TOPIC_DATA = {
       "related": [
         "impact-skill",
         "implementation-workflow",
-        "traceability"
+        "traceability",
+        "work-breakdown"
       ],
       "basis": "Proposed design",
       "confidence": "Moderate"
@@ -2140,50 +2521,55 @@ window.TOPIC_DATA = {
       "id": "coverage",
       "parent": "debt",
       "title": "Coverage dimensions",
-      "summary": "Execution percentages cover only part of correctness in this project.",
+      "summary": "Choose checks for the consequences of a change. Execution percentages describe only part of that evidence.",
       "sections": [
         {
           "type": "table",
-          "label": "Dimension",
+          "label": "Possible dimensions",
           "headers": [
             "Area",
             "Question"
           ],
           "rows": [
             [
-              "Java",
-              "Which instructions/branches ran, with what assertions?"
+              "Code execution",
+              "Which instructions or branches ran, and what did the assertions check?"
             ],
             [
-              "React",
-              "Which user states and flows were exercised?"
+              "User experience",
+              "Which relevant states, interactions and failure cases were exercised?"
             ],
             [
-              "API",
-              "Do consumer contracts preserve semantics?"
+              "Interfaces",
+              "Do the affected producer and consumer contracts agree?"
             ],
             [
-              "RDF/SPARQL",
-              "Do relevant graph fixtures yield expected outputs?"
+              "Data",
+              "Do representative inputs produce the expected meaning and results?"
             ],
             [
-              "SHACL",
-              "Does data satisfy applicable structural constraints?"
+              "Structural constraints",
+              "Do applicable schemas or validation rules hold?"
             ],
             [
               "Source support",
-              "Are meaning, scope, and applicability preserved?"
+              "Are meaning, scope and applicability preserved?"
             ],
             [
               "Requirements",
-              "Do accepted requirements have meaningful verification?"
+              "Do the accepted requirements have meaningful verification?"
             ]
           ]
         },
         {
           "type": "p",
+          "label": "Technology examples",
+          "text": "Java coverage, React interaction checks and RDF/SPARQL fixtures measure different things. SHACL applies when a project uses shapes to validate RDF. Select relevant dimensions rather than requiring every technology."
+        },
+        {
+          "type": "p",
           "label": "Aggregation",
-          "text": "Missing reports mean unknown coverage. Aggregate covered/total units for comparable module metrics; do not average module percentages. Keep Java, frontend, and domain-scenario measures separate."
+          "text": "Missing reports mean unknown coverage. Aggregate covered and total units only for comparable metrics. Keep code execution, user scenarios and domain checks distinct. Do not average unrelated percentages."
         },
         {
           "type": "p",
@@ -2343,13 +2729,18 @@ window.TOPIC_DATA = {
       "sections": [
         {
           "type": "p",
-          "label": "Best initial experiment",
+          "label": "Domain curation example",
           "text": "Check whether a source passage supports a proposed assertion’s scope or ontology mapping, using previously reviewed examples."
         },
         {
           "type": "p",
           "label": "Boundary",
-          "text": "Jev does not establish statutory truth by confidence, perform exact temporal arithmetic, or replace the approved-data process. Its usefulness for your tasks remains unmeasured."
+          "text": "For these proposed domain checks, confidence does not establish statutory truth or replace the approved-data process. Exact temporal arithmetic needs suitable deterministic logic. Fit for a particular domain task remains unmeasured until evaluated."
+        },
+        {
+          "type": "p",
+          "label": "Separate Atlas integration",
+          "text": "The Factory has a distinct JEV pilot for selecting supported development recipes and assessing defined information gaps. Its results do not validate the source-support and ontology tasks in this branch. Read the JEV guide in Help for that integration and its evidence."
         }
       ],
       "refs": [
@@ -2670,7 +3061,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Recommended foundation",
-          "text": "Original sources, approved domain graph, reviewed engineering knowledge, reproducible retrieval indexes, and workflow evidence. Do not create a second automatically generated source of truth."
+          "text": "Begin with authoritative source material and reviewed decisions. Keep derived summaries and workflow evidence distinguishable from those sources. Add retrieval indexes or an approved domain graph when the actual information needs justify them."
         },
         {
           "type": "p",
@@ -2696,7 +3087,7 @@ window.TOPIC_DATA = {
       "sections": [
         {
           "type": "table",
-          "label": "Assets",
+          "label": "Assets to choose when needed",
           "headers": [
             "Asset",
             "Purpose"
@@ -2707,8 +3098,8 @@ window.TOPIC_DATA = {
               "Original documents, versions, passages, and identifiers"
             ],
             [
-              "Approved domain graph",
-              "Curated assertions, scope, relationships, provenance"
+              "Approved domain graph, if needed",
+              "Curated assertions and relationships when graph queries serve the task"
             ],
             [
               "Engineering knowledge",
@@ -2752,7 +3143,12 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Possible relationships",
-          "text": "Requirement → ontology concept → query/service/API/UI component → test → build result. Link reviewed Confluence decisions and Bitbucket source locations."
+          "text": "Requirement → affected component or interface → relevant check → recorded result. Use source locations and decision records that actually exist."
+        },
+        {
+          "type": "p",
+          "label": "Graph application example",
+          "text": "An ontology concept can connect a requirement to a query, service or UI. Confluence decisions and Bitbucket locations can provide source links in that particular toolchain."
         },
         {
           "type": "p",
@@ -2780,16 +3176,16 @@ window.TOPIC_DATA = {
       "id": "retrieval",
       "parent": "knowledge",
       "title": "Hybrid retrieval",
-      "summary": "Use exact search, semantic discovery, and SPARQL according to the information need.",
+      "summary": "Select search and retrieval methods according to the question and available evidence.",
       "sections": [
         {
           "type": "list",
           "label": "Retrieval routes",
           "items": [
-            "Exact identifiers, symbols, filenames, and domain terms.",
-            "Semantic search for conceptual discovery.",
-            "Deterministic SPARQL for known graph relationships.",
-            "Metadata filtering by access, jurisdiction, source version, effective period, and approval status."
+            "Exact search for identifiers, symbols, filenames and precise terms.",
+            "Semantic search where conceptual matching adds useful evidence.",
+            "Structured queries where the data supports them. SPARQL applies to RDF relationships.",
+            "Filter by access and relevant versions. Include jurisdiction, effective period or approval state when the question depends on them."
           ]
         },
         {
@@ -2827,7 +3223,7 @@ window.TOPIC_DATA = {
           "items": [
             "Atomic claim and its status: observed, inferred, proposed, or unresolved.",
             "Exact source identifier, passage/section, and version.",
-            "Jurisdiction, population, effective period, and relevant scheme.",
+            "Scope that affects the claim. This might be a software version and environment, or a jurisdiction, population and effective period for a domain assertion.",
             "Supporting or contradictory evidence.",
             "Uncertainty and missing information."
           ]
@@ -2900,7 +3296,7 @@ window.TOPIC_DATA = {
       "id": "graphrag-option",
       "parent": "knowledge",
       "title": "GraphRAG decision",
-      "summary": "Evaluate a graph-retrieval framework against a simpler baseline and your existing RDF.",
+      "summary": "Compare graph retrieval with a simpler baseline using the questions your project needs to answer.",
       "sections": [
         {
           "type": "p",
@@ -2910,7 +3306,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Project recommendation",
-          "text": "First measure exact/semantic retrieval plus SPARQL over your curated ontology. Do not regenerate approved RDF as unreviewed model relationships merely to adopt GraphRAG."
+          "text": "Measure a simpler retrieval baseline first. If a curated RDF graph already exists, include relevant SPARQL queries in that comparison. Preserve reviewed relationships when evaluating model-extracted alternatives."
         },
         {
           "type": "p",
@@ -2966,7 +3362,7 @@ window.TOPIC_DATA = {
     {
       "id": "candidate-isolation",
       "parent": "knowledge",
-      "title": "Candidate graph isolation",
+      "title": "Candidate isolation in Neptune",
       "summary": "A separate named graph alone is not quarantine in Neptune.",
       "sections": [
         {
@@ -3010,7 +3406,7 @@ window.TOPIC_DATA = {
             "Source entity/document and revision.",
             "Exact supporting passage and retained qualifiers.",
             "Extraction/mapping activity and model/tool version where used.",
-            "Dataset, ontology, shapes, and code revisions.",
+            "Revisions of the inputs that affect the result, such as code, data, schemas, or ontology and shapes where used.",
             "Reviewer/approval record and relevant times."
           ]
         },
@@ -3140,7 +3536,9 @@ window.TOPIC_DATA = {
       "related": [
         "implementation-workflow",
         "jenkins",
-        "cost-per-result"
+        "cost-per-result",
+        "workflow-patterns",
+        "release-operations"
       ],
       "basis": "Recommended practice + inspected example",
       "confidence": "Moderate for adaptation. High for inspected runbook contents"
@@ -3399,7 +3797,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Rollout",
-          "text": "Baseline discovery → read-only pilot → controlled implementation → Jev shadow comparison → measured expansion. The task-and-evidence packet is the first shared deliverable."
+          "text": "Measure the current approach, try a bounded task, inspect outcomes and expand only where evidence supports it. Use shadow evaluation when comparing a new decision component without changing live behavior. A Jev source-support experiment is one optional example."
         }
       ],
       "refs": [
@@ -3583,7 +3981,7 @@ window.TOPIC_DATA = {
             ],
             [
               "Applicability",
-              "Does the claim answer this jurisdiction/time/population question?"
+              "Does the claim answer this question within the required scope and conditions?"
             ]
           ]
         },
@@ -3617,7 +4015,7 @@ window.TOPIC_DATA = {
       "sections": [
         {
           "type": "table",
-          "label": "Stages",
+          "label": "Possible stages for an automation pilot",
           "headers": [
             "Stage",
             "Deliverable",
@@ -3626,35 +4024,40 @@ window.TOPIC_DATA = {
           "rows": [
             [
               "Baseline discovery",
-              "One capability map, existing checks, reviewed examples",
+              "One process, reviewed examples and current effort",
               "Where value is plausible"
             ],
             [
-              "Read-only pilot",
-              "Evidence-backed briefs and debt findings",
-              "Whether retrieval/analysis help"
+              "Bounded trial",
+              "Results and evidence for a limited task",
+              "Whether the approach is useful"
             ],
             [
-              "Controlled implementation",
-              "Scoped PRs with actual checks and packets",
-              "Whether delivery effort improves"
+              "Controlled use",
+              "Limited changes under the agreed checks and authority",
+              "Whether quality and operating effort are acceptable"
             ],
             [
-              "Jev shadow pilot",
-              "Reviewed source/assertion comparison",
-              "Whether semantic checks help"
+              "Optional component comparison",
+              "Shadow results against reviewed examples",
+              "Whether an added decision component helps"
             ],
             [
-              "Expansion",
-              "Versioned workflows and measured routing",
-              "What deserves production support"
+              "Measured expansion",
+              "Defined operating ownership, limits and recovery",
+              "What deserves wider support"
             ]
           ]
         },
         {
           "type": "p",
           "label": "First deliverable",
-          "text": "A versioned task-and-evidence packet usable across all three workflows. Set success criteria with the relevant owners before collecting results."
+          "text": "Record a representative task, its expected result and the evidence needed to judge it. Set acceptance criteria with the relevant owners before collecting results. Select only the stages the trial needs."
+        },
+        {
+          "type": "p",
+          "label": "Optional Jev example",
+          "text": "For a country-data curation study, a Jev shadow comparison can test source-support judgments. It is not a required stage for other workflows or proof of the separate Atlas suggestion pilot."
         },
         {
           "type": "p",
@@ -3667,7 +4070,8 @@ window.TOPIC_DATA = {
         "task-contract",
         "requirements-workflow",
         "jev-shadow",
-        "cost-per-result"
+        "cost-per-result",
+        "release-operations"
       ],
       "basis": "Proposed design",
       "confidence": "Moderate"
@@ -3680,8 +4084,13 @@ window.TOPIC_DATA = {
       "sections": [
         {
           "type": "p",
-          "label": "Proposal",
-          "text": "“I propose three bounded workflows: requirements and debt investigation, verified implementation, and source-backed country-data review. They would share reusable skills, scoped tools, revision-linked evidence, evaluations, and cost controls. We can adapt a focused work and verification cycle and evaluate Jev separately for narrow semantic checks.”"
+          "label": "Adaptable proposal",
+          "text": "Choose one outcome and compare the current approach with a bounded alternative. Identify the people and systems involved, the acceptance evidence, operating limits and unresolved decisions. Use the findings to decide what to implement or test next."
+        },
+        {
+          "type": "p",
+          "label": "Workplace example",
+          "text": "The original proposal considered requirements and debt investigation, verified implementation and source-backed country-data review. These are separable opportunities, not a required three-workflow programme."
         },
         {
           "type": "list",
@@ -3690,7 +4099,7 @@ window.TOPIC_DATA = {
             "Choose one end-to-end capability and task owner for the baseline.",
             "Confirm available clients, models, integrations, and execution environment.",
             "Agree on required evidence, review ownership, and acceptance criteria.",
-            "Define candidate-data isolation and source/applicability rules.",
+            "Define applicable data, source and publication boundaries. A domain curation process may require candidate isolation and source-scope rules.",
             "Select the smallest orchestration that satisfies recovery and state needs."
           ]
         },
@@ -3705,7 +4114,8 @@ window.TOPIC_DATA = {
         "pilot",
         "capability-inventory",
         "task-contract",
-        "candidate-isolation"
+        "candidate-isolation",
+        "architecture-decisions"
       ],
       "basis": "Proposed design",
       "confidence": "Moderate"
@@ -3745,15 +4155,15 @@ window.TOPIC_DATA = {
               "Unknown before repository/pipeline investigation"
             ],
             [
-              "Savings and Jev benefit",
-              "Unknown before baseline and shadow evaluation"
+              "Domain curation savings and Jev benefit",
+              "Unknown for these proposed domain tasks before baseline and shadow evaluation"
             ]
           ]
         },
         {
           "type": "p",
           "label": "Freshness",
-          "text": "Prices, product features, models, and tenant settings can change. Preserve the 2 October 2026 research snapshot and refresh before implementation."
+          "text": "Prices, features, models and tenant settings can change. Check each source and its recorded review date. New general guidance does not refresh older product claims. Verify changing capabilities before implementation."
         },
         {
           "type": "p",
@@ -4000,7 +4410,8 @@ window.TOPIC_DATA = {
         "study-decision",
         "eval-corpus",
         "grader-design",
-        "post-change-checks"
+        "post-change-checks",
+        "workflow-patterns"
       ],
       "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
       "confidence": "Moderate for fit; workplace benefit unknown"
@@ -4054,7 +4465,8 @@ window.TOPIC_DATA = {
         "study-quality",
         "task-contract",
         "event-state",
-        "durable-execution"
+        "durable-execution",
+        "workflow-patterns"
       ],
       "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
       "confidence": "Moderate for fit; workplace benefit unknown"
@@ -4336,7 +4748,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Existing coverage",
-          "text": "The tickets already require process documentation, constraints, effort/cost, API shape and go/no-go. This refinement does not assert that your colleague omitted work covered elsewhere."
+          "text": "The supplied study scope already requires process documentation, constraints, effort and cost, API shape and a go/no-go recommendation. The refinements below make evidence more explicit within that scope."
         },
         {
           "type": "code",
@@ -4357,12 +4769,12 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Complementary contribution",
-          "text": "Help define examples, behaviour, checks and comparison evidence alongside your colleague's hosting/integration/effort study. Agree ownership in the team. This Atlas has not edited Jira or messaged anyone."
+          "text": "Define representative examples, behavior, checks and comparison evidence alongside the hosting and integration study. Agree ownership within the team. These are suggested study activities."
         },
         {
           "type": "p",
           "label": "Evidence basis",
-          "text": "Ticket IDs refer to user-provided screenshots, not fabricated Jira URLs. Wording and division of work are recommendations."
+          "text": "Adapted from supplied study material. Internal ticket identifiers are omitted. The wording and division of work are recommendations, not observed workplace outcomes."
         }
       ],
       "refs": [
@@ -4447,7 +4859,8 @@ window.TOPIC_DATA = {
         "study-quality",
         "study-contract",
         "study-economics",
-        "adverse-audits"
+        "adverse-audits",
+        "workflow-patterns"
       ],
       "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
       "confidence": "Moderate for fit; workplace benefit unknown"

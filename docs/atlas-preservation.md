@@ -8,7 +8,7 @@ The `atlas/` directory was copied from the original Atlas's static assets. Its s
 
 It retains:
 
-1. 105 topics across 10 clusters.
+1. All 105 original topics, with four general guidance topics added on 5 October 2026. There are now 109 topics across the same 10 clusters.
 2. All 55 original source references and confidence qualifiers, with the primary LLM Wiki reference added on 3 October for 56 current sources.
 3. Existing topic identifiers and browser hash navigation.
 4. Reading, 3D map and topic card views.
@@ -42,7 +42,21 @@ The top-level category previously called Talos practices to reuse is now **Verif
 
 Its six child topics explain generic verification practices first. Named Talos examples retain the reviewed commit, source references and limits. The historical source review inspected files but did not execute repository code or verify deployed behavior.
 
-All 105 topic identifiers, 55 source records, parent and related links, and five guided paths are retained. Internal identifiers such as `talos` and `talos-boundaries` remain compatible with existing links.
+All 105 original topic identifiers, original source records, parent and related links, and five guided paths are retained. Internal identifiers such as `talos` and `talos-boundaries` remain compatible with existing links. New topics add relationships without removing those original connections.
+
+## Reusable guidance update
+
+The 5 October 2026 knowledge update adds Reusable workflow patterns, Architecture decisions, Break work into deliverable changes, and Release and operate. The overview leads with reusable guidance and keeps the configuration study available as a worked example.
+
+Architecture, Breakdown and Release and operations now open topics that cover those activities. The existing controller, traceability and pilot topics remain available with their original identifiers. Related reading from the feature recipe uses the new general topics.
+
+Generic instructions now distinguish applicable requirements from example tools, repositories, graph data and domain review. Correction guidance explains candidate results, checks, feedback, limits, approval and stopping outcomes. The document example is a learning case, not a newly supported JEV intent.
+
+This update changes reference content and reading destinations. It does not add configurable branches, correction loops or execution to the Factory.
+
+Local checks confirmed preservation of all original topic IDs, parent links, related links and source associations. The standalone export matched the current topic data and opened reading, search, sources, topic cards and the 3D map without HTTP asset requests in Chrome.
+
+The served reading view was exercised at 1440, 390 and 320 CSS pixels. All six lifecycle destinations, the pattern entry, search, topic cards and theme switching worked without captured page errors or horizontal page overflow. Feature-stage guidance returned to the retained notes. The header theme label was corrected and its normal and hover text contrast checked in both themes. These are bounded implementation observations, not a human comprehension study or a full accessibility assessment.
 
 ## Public example review
 

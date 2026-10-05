@@ -71,6 +71,8 @@ jobs:
         run: npx --no-install playwright install --with-deps chrome
       - name: Check suggestions and exported artifacts
         run: npm run test:browser
+      - name: Check project handoffs and reopening
+        run: npm run test:handoff
       - name: Build the public files
         run: npm run build:static
       - name: Keep the public bundle for review
@@ -91,6 +93,18 @@ jobs:
             local-knowledge/retests/jev-integration/**/*.png
             local-knowledge/retests/artifact-beta/**/*.json
             local-knowledge/retests/artifact-beta/**/*.png
+            local-knowledge/retests/output-choice/**/*.json
+            local-knowledge/retests/output-choice/**/*.png
+            local-knowledge/retests/output-transitions/**/*.json
+            local-knowledge/retests/output-transitions/**/*.png
+            local-knowledge/retests/handoff-ux/**/*.json
+            local-knowledge/retests/handoff-ux/**/*.png
+            local-knowledge/retests/import-recovery/**/*.json
+            local-knowledge/retests/import-recovery/**/*.png
+            local-knowledge/retests/navigation-recovery/**/*.json
+            local-knowledge/retests/navigation-recovery/**/*.png
+            local-knowledge/reviews/process-designer/**/*.json
+            local-knowledge/reviews/process-designer/**/*.png
           if-no-files-found: warn
           retention-days: 7
           include-hidden-files: false

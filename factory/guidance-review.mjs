@@ -14,15 +14,28 @@ export function guidanceSnapshot(config) {
   const add = (type, definition, applicability, limits, sources = []) => {
     records.push({ id: `${type}:${definition.id}`, type, label: definition.label || definition.title || definition.id, version: definition.version || DEFINITION_VERSION, reviewedOn: REVIEW_DATE, sources: [...new Set(sources.filter(Boolean))], applicability, limits, definition: clone(definition) })
   }
-  const stages = new Set(config.workflow.enabledStages)
-  const recipe = CATALOG.recipes.find(item => item.id === config.workflow.recipe)
+  const activeRecipe = config.workflowModel.processes.some(process => process.source === 'recipe')
+  const stages = new Set(activeRecipe ? config.workflow.enabledStages : [])
+  const recipe = activeRecipe && CATALOG.recipes.find(item => item.id === config.workflow.recipe)
+  const customAssignments = config.workflowModel.processes.filter(process => process.source === 'custom').flatMap(process => process.steps.map(step => ({ process, step })))
+  const assignmentLabel = ({ process, step }) => `${process.name || process.id} / ${step.name || step.id} (${process.id}/${step.id})`
   if (recipe) add('recipe', recipe, `Selected workflow: ${recipe.label}.`, 'A local recipe describes intended work. It does not record execution or approval.')
   for (const definition of CATALOG.stages.filter(item => stages.has(item.id))) add('stage', definition, 'Included in the recorded workflow.', 'Inputs, checks and outputs describe the intended step, not completed work.')
-  const usedSkills = new Set([...config.skills, ...[...stages].flatMap(id => config.workflow.bindings[id]?.skills || [])])
-  for (const definition of CATALOG.skills.filter(item => usedSkills.has(item.id))) add('skill', definition, 'Selected directly or assigned to an included workflow step.', 'The source supports the portable skill format. The procedure still needs review and an actual task exercise.', [SOURCES.skills, SOURCES.copilotSkills])
+  const usedSkills = new Set([...config.skills, ...[...stages].flatMap(id => config.workflow.bindings[id]?.skills || []), ...customAssignments.flatMap(({ step }) => step.instructionIds)])
+  for (const definition of CATALOG.skills.filter(item => usedSkills.has(item.id))) {
+    const assignments = customAssignments.filter(({ step }) => step.instructionIds.includes(definition.id))
+    const scope = assignments.length ? ` Custom process instructions: ${assignments.map(assignmentLabel).join(', ')}.` : ''
+    const runtimeLimit = assignments.some(({ process }) => process.kind === 'application') ? ' Application assignments describe intended runtime work. They do not configure or deploy an agent.' : ''
+    add('skill', definition, `Selected directly or assigned to an included workflow step.${scope}${runtimeLimit}`, 'The source supports the portable skill format. The procedure still needs review and an actual task exercise.', [SOURCES.skills, SOURCES.copilotSkills])
+  }
   const assignedRoles = new Set([...stages].filter(id => config.workflow.bindings[id]?.actorType === 'agent').map(id => config.workflow.bindings[id].actorId))
   const selectedRoles = new Set([...config.agents.map(agent => agent.role), ...assignedRoles])
-  for (const definition of CATALOG.roles.filter(item => selectedRoles.has(item.id))) add('role', definition, assignedRoles.has(definition.id) ? 'Assigned to an included step as an agent role.' : 'Retained as a selected profile, with no included stage assignment.', 'Requested tools describe instructions. The host must provide actual access.', [SOURCES.agents])
+  for (const definition of CATALOG.roles.filter(item => selectedRoles.has(item.id))) {
+    const assignments = customAssignments.filter(({ process, step }) => process.kind !== 'application' && step.actor.type === 'agent' && step.actor.id === definition.id && config.agents.some(agent => agent.role === definition.id))
+    const scope = assignments.length ? `Assigned to custom development or manual steps: ${assignments.map(assignmentLabel).join(', ')}. This does not configure a deployed application agent.` : ''
+    const applicability = [assignedRoles.has(definition.id) ? 'Assigned to an included step as an agent role.' : '', scope].filter(Boolean).join(' ') || 'Retained as a selected profile, with no included stage assignment.'
+    add('role', definition, applicability, 'Requested tools describe instructions. The host must provide actual access.', [SOURCES.agents])
+  }
   for (const definition of CATALOG.practices.filter(item => config.practices.includes(item.id))) {
     const applicability = definition.id === 'minimum-change' ? (stages.has('implementation') || stages.has('bug-fix') ? 'Relevant to the included implementation or repair.' : 'Selected reference. Review whether a later implementation needs it.') : definition.id === 'specification-first' ? (stages.has('requirements') && stages.has('implementation') ? 'Connects the included requirement and implementation steps.' : 'Selected reference. The active workflow may cover only part of this pattern.') : definition.application
     add('practice', definition, applicability, definition.limits, [definition.source])

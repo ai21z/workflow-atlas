@@ -1,6 +1,6 @@
 # Quick start
 
-Workflow Atlas helps you plan software work. Choose the steps, add your decisions and download a guide for your team or AI assistant. Your work stays in this tab. Download before closing or reloading.
+Workflow Atlas helps you plan and connect work. Choose the steps, add your decisions and download a guide for your team or AI assistant. Your work stays in this tab. Download before closing or reloading.
 
 For a first try, use a small fictional task. No key is needed to choose a workflow yourself. The [local setup guide](jev/integration.md#owner-setup) explains how to start the app and optionally connect JEV.
 
@@ -10,6 +10,8 @@ Describe the work on the start screen and select **Suggest my workflow** when th
 
 You can also choose **Investigate an idea**, **Build a feature** or **Fix a bug** yourself. An entered description stays with the manual proposal. With no description, each starts a blank workflow with relevant stages and questions. Template roles and practices are editable defaults, they are not findings about your project.
 
+For your own process, choose **Design a connected process**. Name it and choose a sequence, review or bounded correction pattern, then **Open designer**. **A team process** supports work such as document review without requiring a repository or agent. This manual route does not call JEV. [Full process walkthrough](factory-guide.md#connect-a-process).
+
 **Start with the result** asks for a name, the result you want and optional notes about what you already have. Leave unknowns blank or choose **I will fill this in later**. The notes belong to the first active workflow stage. A supplied link is not retrieved or verified.
 
 An investigation starts without repository components. Compare relevant options against the current approach and agree what evidence would support a decision. AI instruction comparisons are optional and apply only when that is the study's subject. Add actual paths and commands when the work needs them.
@@ -18,13 +20,17 @@ Use **Open pack** to continue a supported download. **Browse examples** opens fi
 
 ## 2. Adapt the workflow
 
-Give the project a name and describe the outcome. In **Workflow**, select a stage to edit its owner, skills, inputs and notes in one panel.
+Give the project a name and describe the outcome. For a recipe, select a stage in **Workflow** to edit its owner, skills, inputs and notes in one panel.
+
+For a custom process, use **Map** or **Step list** in the designer. Select a step to name its action and actor, choose inputs and results, and set checks. Under **What happens next?**, choose the destination for each outcome. Correction limits and approval are under **Inputs, checks and other records**. Unknown details can remain unresolved.
+
+Choose **Review changes**, inspect the changed connections and files, then **Apply changes**. The project stays unchanged until you apply. Closing pending edits offers keeping or discarding them. Project Undo can reverse an applied change. Neither applying nor Undo saves the project, so download when ready.
 
 For a feature or investigation, **Project details**, **Brief** reuses that outcome. You do not need to type it twice. **Add a more specific answer, optional** lets you record a separate refinement. Editing the overall outcome keeps that separate answer. Clear the refinement to use the current project outcome again. A bug still needs its own expected behavior, because a goal such as "fix checkout" does not describe what checkout should do.
 
 An owner is the person, agent or system responsible for a stage. A skill is a reusable procedure. An agent profile describes a role and requested tools, it does not provide credentials or an integration.
 
-Use **Add a role or skill** in Workflow to choose an assignment. Select the role or skill, then its stage. Dragging is optional. The stage panel also provides responsibility and skill controls. Undo and redo reverse and reapply project changes.
+For recipe assignments, use **Add a role or skill** in Workflow. Select the role or skill, then its stage. Dragging is optional. The stage panel also provides responsibility and skill controls. For a custom step, expand **Instructions and requested capabilities** in its designer panel. Selected development profiles receive their matching assignments, while application agents remain runtime design choices. No assignment grants tools or permissions.
 
 Open **Project details** when you need to describe components, real commands, boundaries or sources. Leave unknown information unresolved. A technology label does not establish the repository's command or a passing result.
 
@@ -50,6 +56,8 @@ Use **Preview Atlas** for a readable summary of the project's decisions. It refl
 
 Its **Decision brief** shows the intended outcome, supplied approach notes, planned owners and open decisions. Expand **Read all approach notes** to read the supplied notes in full. A filled field does not resolve questions written inside it. Use the edit links to record an approach or review an assignment. Expand **Recorded context and technical details** for commands and sources. Planned order does not show completed work.
 
+With custom processes and no active recipe, the brief instead shows process purposes, their planned entry owners and model findings. Each process has its own starting point. The download preserves the recorded connections and planned evaluation cases. Those cases start as **NOT RUN**.
+
 Use **Review changes** to compare the current decisions with the starting or opened project. Expand changes for before and after values and associated files. Add a reason when it helps the reviewer. **Compare with another Atlas file** changes the comparison baseline without replacing your project.
 
 Expand **Guidance and its limits** for the selected sources, versions and applicability. If an opened pack records different definitions, review the differences before choosing current guidance for a new download. Older packs may not have enough metadata for an exact comparison. Original opened files stay available.
@@ -61,8 +69,10 @@ Choose **Download** or **Review my download**. Every new workflow starts with a 
 | Output | Choose it when |
 | --- | --- |
 | Workflow blueprint | You need a plan and decision records for people to review. Includes relevant templates, with no Copilot profiles or skill folders |
-| One focused skill | You need one selected procedure and its complete project references, with no agent profiles |
-| Full artifact pack | You need selected skills, agent profiles and their workflow records together |
+| One focused skill | You need one procedure, such as investigating a bug, with its project references. No agent profiles |
+| Full artifact pack | You need the selected skills, agent profiles and workflow records together for a larger handoff |
+
+A focused skill covers its named procedure. Bug diagnosis helps investigate a cause, it is not the complete repair workflow. Your other workflow decisions stay in the project so you can choose a different output later.
 
 Every selected ZIP also includes project decisions, installation guidance, validation and a readable Project Atlas. **Files** and the Download inventory show the same selected output. **Change output** opens the chooser when you need something different. Open **Included files and their purpose** to inspect the actual inventory. Reopening a supported pack restores its recorded output choice along with the project, so a blueprint stays a blueprint.
 
@@ -82,7 +92,9 @@ Before using the files, check these five things:
 
 ## 5. Use, download and reopen
 
-Open **How to use this download** for the selected output. A blueprint explains the human handoff. Skills and packs explain file placement, host discovery, a small task, troubleshooting and recording the exercise. The same instructions travel in `INSTALL.md`.
+Open **Read only what you need** to preview the files for your next task. A PM can start with the plan and decision record. For one procedure, start with `SKILL.md` and read its project reference when needed. For a full pack, choose the profile and linked skills relevant to your task.
+
+Open **How to use this download** for the adoption steps. A blueprint explains the human handoff. Skills and packs explain file placement, host discovery, a small task, troubleshooting and recording the exercise. The reading routes and adoption steps travel in `INSTALL.md`.
 
 Atlas has not exercised the files inside Copilot. Format checks do not establish discovery, successful task behavior or better outcomes. Check those in the actual environment and record what happened.
 

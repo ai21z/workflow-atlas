@@ -66,7 +66,7 @@ function semanticChanges(baseline, current, affectedFiles) {
   for (const stageId of enabled) add(`workflow.enabledStages.${stageId}`, stageLabel(stageId), baseline.workflow.enabledStages.includes(stageId), current.workflow.enabledStages.includes(stageId), current.workflow.enabledStages.includes(stageId) ? 'This step is included in the plan. Its actor still needs to perform the work and supply the expected output.' : 'This step is omitted from the plan. Later steps still need its prerequisite output, or a supplied existing input.', [stageId]);
   if (same(sorted(baseline.workflow.enabledStages), sorted(current.workflow.enabledStages))) add('workflow.enabledStages.order', 'Recorded step order', baseline.workflow.enabledStages, current.workflow.enabledStages, 'The saved selection order changed. The recipe topology and generated handoff order stay fixed.', enabled, paths('project.json'));
   const questionLabel = id => CATALOG.recipes.flatMap(recipe => recipe.questions).find(question => question.id === id)?.label || CATALOG.technologyProfiles.flatMap(profile => profile.questions.map((label, index) => ({ id: `technology-${profile.id}-${index}`, label }))).find(question => question.id === id)?.label || id;
-  for (const id of sorted([...Object.keys(baseline.workflow.answers), ...Object.keys(current.workflow.answers)])) add(`workflow.answers.${id}`, questionLabel(id), baseline.workflow.answers[id], current.workflow.answers[id], 'The recorded answer changed. It remains project supplied context and does not establish requirement acceptance.', enabled, paths('WORKFLOW.md', 'project.json', 'VALIDATION.md'));
+  for (const id of sorted([...Object.keys(baseline.workflow.answers), ...Object.keys(current.workflow.answers)])) add(`workflow.answers.${id}`, questionLabel(id), baseline.workflow.answers[id], current.workflow.answers[id], 'The recorded answer changed. It remains project supplied context and does not establish requirement acceptance.', enabled, paths('WORKFLOW.md', 'project.json', 'VALIDATION.md', 'templates/', '.github/skills/'));
   for (const id of sorted([...Object.keys(baseline.workflow.notes), ...Object.keys(current.workflow.notes)])) add(`workflow.notes.${id}`, `${stageLabel(id)} notes`, baseline.workflow.notes[id], current.workflow.notes[id], current.workflow.enabledStages.includes(id) ? 'The supplied instructions for this step changed. Instructions do not establish that work ran.' : 'Saved context for an omitted step changed. It is retained in project settings.', [id]);
   for (const id of sorted([...Object.keys(baseline.workflow.suppliedInputs), ...Object.keys(current.workflow.suppliedInputs)])) add(`workflow.suppliedInputs.${id}`, `Existing ${stageLabel(id)} input`, baseline.workflow.suppliedInputs[id], current.workflow.suppliedInputs[id], 'The recorded location of an existing prerequisite changed. Its presence does not verify that the artifact exists or satisfies the receiving step.', enabled.filter(stageId => CATALOG.stages.find(stage => stage.id === stageId)?.dependsOn.includes(id)));
   for (const id of sorted([...Object.keys(baseline.workflow.bindings), ...Object.keys(current.workflow.bindings)])) {
@@ -86,6 +86,23 @@ function semanticChanges(baseline, current, affectedFiles) {
     for (const id of sorted([...oldRows.keys(), ...newRows.keys()])) add(`${path}.${id}`, label(id, oldRows.get(id), newRows.get(id)), oldRows.get(id), newRows.get(id), description, stageIds(id, oldRows.get(id), newRows.get(id)), typeof filePaths === 'function' ? filePaths(id) : filePaths);
     if (same(sorted([...oldRows.keys()]), sorted([...newRows.keys()]))) add(`${path}.$order`, `${path.endsWith('.technologies') ? 'Technologies' : path === 'components' ? 'Components' : path === 'agents' ? 'Agent profiles' : path === 'runtime.controls' ? 'Runtime controls' : path === 'facts' ? 'Facts' : 'Evidence'} recorded order`, before.map(record => record[key]), after.map(record => record[key]), 'The saved record order changed. The records keep their supplied meaning.', [], paths('project.json', ...(path === 'components' || path.endsWith('.technologies') ? ['WORKFLOW.md', 'PROJECT-FACTS.md', '.github/skills/'] : path === 'facts' ? ['PROJECT-FACTS.md', 'SOURCES.md', '.github/skills/'] : path === 'evidence' ? ['EVIDENCE.md'] : path === 'runtime.controls' ? ['RUNTIME-DESIGN.md'] : [])));
   };
+  const modelPaths = paths('project.json', 'WORKFLOW.md', 'VALIDATION.md', 'manifest.json');
+  const oldProcesses = new Map(baseline.workflowModel.processes.map(process => [process.id, process]));
+  const newProcesses = new Map(current.workflowModel.processes.map(process => [process.id, process]));
+  for (const id of sorted([...oldProcesses.keys(), ...newProcesses.keys()])) {
+    const before = oldProcesses.get(id);
+    const after = newProcesses.get(id);
+    const prefix = `workflowModel.processes.${id}`;
+    const name = after?.name || before?.name || id;
+    if (!before || !after || before.source !== after.source) {
+      add(prefix, `${name} process`, before, after, 'The recorded process definition changed. A recipe reference uses the saved recipe settings. Custom process records describe intended work, not execution.', [], modelPaths);
+      continue;
+    }
+    for (const field of ['kind', 'name', 'purpose', 'pattern', 'entryStepId']) add(`${prefix}.${field}`, `${name} ${field}`, before[field], after[field], 'The process design changed. Declared outcomes do not establish an observed result.', [], modelPaths);
+    if (after.source === 'custom') for (const field of ['steps', 'results', 'checks', 'transitions', 'corrections', 'approvals', 'terminals']) records(`${prefix}.${field}`, before[field], after[field], 'id', recordId => `${name}: ${field} ${recordId}`, 'A planned process record changed. Review its input relationships, routes and stopping conditions. Instructions do not enforce these decisions.', () => [], modelPaths);
+  }
+  add('workflowModel.processes.$order', 'Process reading order', baseline.workflowModel.processes.map(process => process.id), current.workflowModel.processes.map(process => process.id), 'The reading order changed. It does not schedule processes or make one start another.', [], modelPaths);
+  records('workflowModel.evidenceLinks', baseline.workflowModel.evidenceLinks, current.workflowModel.evidenceLinks, 'id', id => `Candidate evidence reference ${id}`, 'The association with supplied evidence changed. Candidate identity and revision must match before applicability can be assessed. Atlas has not executed or verified this evidence.', () => [], modelPaths);
   const oldComponents = new Map(baseline.components.map(component => [component.id, component]));
   const newComponents = new Map(current.components.map(component => [component.id, component]));
   for (const id of sorted([...oldComponents.keys(), ...newComponents.keys()])) {
@@ -249,7 +266,7 @@ export function restoreDecisionReview(text, { current } = {}) {
   restoreShape(supplied);
   const baseline = project(supplied.baseline);
   const recordedCurrent = project(supplied.current);
-  if (!same(baseline, supplied.baseline) || !same(recordedCurrent, supplied.current)) throw new Error('Review settings require an unsupported schema migration. The supplied record was not applied.');
+  // project() accepts only supported, validated migrations. Compare their canonical settings below.
   if (current === undefined) throw new Error('Supply the opened project before restoring a decision review.');
   if (!same(project(current), recordedCurrent)) throw new Error('Decision review current settings do not match the opened project. The supplied record was not applied.');
   const review = createDecisionReview(baseline, recordedCurrent, { reason: supplied.reason, selection: { kind: supplied.output.kind, skillId: supplied.output.skillId } });

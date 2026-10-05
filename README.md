@@ -1,6 +1,6 @@
 # Workflow Atlas
 
-Plan software work. Review the steps. Download a guide for your team or AI assistant.
+Plan the work. Connect the steps. Download a guide for your team or AI assistant.
 
 Workflow Atlas turns your recorded decisions into a workflow blueprint, one focused skill or a full artifact pack. Its Knowledge map explains relevant practices and their sources. You can explore it while keeping your project open.
 
@@ -11,8 +11,8 @@ Your project stays in the current tab. **Download before closing or reloading.**
 ## Try it
 
 1. Run the local server below and open the workspace.
-2. Describe the work, then select **Suggest my workflow** if JEV is configured. Otherwise choose **Investigate an idea**, **Build a feature** or **Fix a bug**.
-3. Review the proposed workflow. Record any answers you want to keep, then create the draft.
+2. Choose **Design a connected process** for a custom process, or choose **Investigate an idea**, **Build a feature** or **Fix a bug**. Configured JEV can suggest one of those three development recipes from your description.
+3. Review the suggestion or starting pattern. Keep the decisions you want in the draft.
 4. Edit its steps and inspect **Files**. Unknown details stay unresolved.
 5. Choose **Download**. Start with a blueprint for a team discussion, or choose a skill or full pack for an AI assistant.
 
@@ -20,17 +20,21 @@ Follow the [quick start](docs/quick-start.md) for the full journey. Read [JEV se
 
 ## Current workspace
 
-The start screen has no active project. JEV can suggest one of three supported starting points, or you can choose one yourself:
+The start screen has no active project. JEV can suggest one of three supported development recipes, or you can choose one yourself:
 
 - **Investigate an idea**, understand the current process and recommend go or no-go.
 - **Build a feature**, plan, implement and review a scoped change.
 - **Fix a bug**, diagnose and repair incorrect behavior.
+
+**Design a connected process** opens a manual pattern chooser without requiring a development recipe, repository or agent. Start with a sequence, review gate or bounded correction. [Connect a process](docs/factory-guide.md#connect-a-process).
 
 Use **Open pack** to continue a supported download or **Browse examples** for explicitly fictional worked projects. Template roles and practices are editable defaults. A blank project leaves the Copilot host and source control unchosen.
 
 **Start with the result** asks for a name, intended outcome and optional existing context. Unknown details can stay blank. The next-step bar helps you return to the brief or review a suggested download, with an explanation and controls to choose a different output.
 
 In **Workflow**, select a stage and edit its owner, skills, inputs, notes and evidence in one panel. Assign people, selected agents or external systems. An existing artifact can satisfy a prerequisite without repeating earlier work. Drag assignments or use the equivalent controls. Undo and redo support project changes.
+
+Custom processes open in the process designer. Select a step in **Map** or **Step list**, name its inputs and outputs, define checks and choose each outcome's destination. **Review changes** shows the effect before **Apply changes** updates the project. Applying is not saving. Download afterward to keep the work.
 
 Use **Files** to inspect outputs, **Project details** for project context and **Preview Atlas** for a readable summary. **Roles and skills** keeps the library available. **Download** brings together the review and export choices, including detailed file comparison when needed.
 
@@ -40,13 +44,13 @@ Preview Atlas starts with a decision brief for the team. Read the intended resul
 
 **Guidance and its limits** shows selected definitions, sources, versions, recorded review dates and scope. New manifests preserve a definition snapshot for later comparison. Older packs expose missing history. A detected definition update can be reviewed before deliberately choosing current guidance for a download. The original opened files remain available. This compares local metadata, it does not check upstream pages again.
 
-Download suggests a blueprint for an investigation or a workflow owned by people, one focused skill for a single selected procedure, or a full pack for broader agent work. Every selected ZIP retains project decisions and a readable Atlas for reopening. **Included files and their purpose** shows its actual contents. **How to use this download** explains the human handoff or selected Copilot host, including placement, discovery, a small task, failures and recording results. The same instructions travel in `INSTALL.md`.
+Download starts with a blueprint for people to review. Choose one focused skill for a selected procedure or a full pack when that handoff needs agent instructions. Every selected ZIP retains project decisions and a readable Atlas for reopening. **Included files and their purpose** shows its actual contents. **How to use this download** explains the human handoff or selected Copilot host, including placement, discovery, a small task, failures and recording results. The same instructions travel in `INSTALL.md`.
 
 Knowledge map and Help remain available from the start screen and editor. The theme control switches between light and dark. The workspace and embedded reference Atlas share the selected theme in this session.
 
 Five reviewed Knowledge topics connect to applicable project choices through **Review for my workflow**. Inspect proposed changes and affected files before **Apply to my workflow**. Reading alone changes nothing. Applied practices remain requirements or guidance, not runtime enforcement, and Undo can reverse the project edit.
 
-The current editor uses reviewed recipe stages and prerequisite relationships. It is not an arbitrary graph builder. Dragging an assignment changes its meaning, it does not create a runtime or silently redraw dependencies.
+Recipe stages keep their reviewed definitions and prerequisites. Custom processes have explicit input relationships, named outcome routes, checks, approval and bounded correction. Editing does not support arbitrary routing expressions, parallel joins or workflow execution. Runtime agent identities do not automatically become Copilot development profiles.
 
 Components retain their own technologies, versions, paths and actual commands. Small Spring Boot, React and RDF/SPARQL profiles add relevant questions and expected evidence. Other technology labels use generic guidance.
 
@@ -127,12 +131,12 @@ The complete pack includes:
 
 | File or directory | Purpose |
 | --- | --- |
-| `WORKFLOW.md` | Selected stages, actors, prerequisites, skills, outputs and expected evidence |
+| `WORKFLOW.md` | Selected processes and stages, actors, inputs, outcome routes, correction limits and expected evidence |
 | `project.json` | Authoritative configuration for importing and editing again |
 | `PROJECT-ATLAS.html` | Self-contained readable project views with embedded configuration for reopening |
 | `PROJECT-FACTS.md` | Claims, provenance status and component context |
 | `EVIDENCE.md` | Expected checks, supplied observations and model record |
-| `manifest.json` | Definition versions, target and file inventory |
+| `manifest.json` | Definition versions, target, file inventory and process or step associations |
 | `DECISION-REVIEW.md`, `decision-review.json` | Optional readable decision comparison and exact baseline with the supplied reason |
 | `INSTALL.md`, `VALIDATION.md`, `SOURCES.md` | Placement, findings, source contributions and limits |
 | `templates/` | Relevant requirement, decision, verification, evaluation and optional backend contract templates |
@@ -190,7 +194,7 @@ These tests establish the behaviors they exercise. They do not execute generated
 
 ## Preserved Atlas
 
-The retained Knowledge Atlas contains 105 topics in 10 clusters and 56 source references. It includes reading, map and card views, a source library, five guided paths, themes and mobile navigation. Its original research snapshot is 2 October 2026. The 3 October review adds the primary LLM Wiki reference. Verification and evidence is the generic category for the reviewed verification practices, with Talos retained as an attributed example source.
+The Knowledge Atlas preserves its original 105 topics and adds four general topics, for 109 topics in 10 clusters and 56 source references. It includes reading, map and card views, a source library, five guided paths, themes and mobile navigation. Its original research snapshot is 2 October 2026. The 3 October review adds the primary LLM Wiki reference. The 5 October scope update adds patterns and general lifecycle guidance. Verification and evidence is the generic category for the reviewed verification practices, with Talos retained as an attributed example source.
 
 The map uses vendored Three.js and OrbitControls, with the original notice in `atlas/vendor/THREE-LICENSE.txt`. Reading remains available without WebGL.
 

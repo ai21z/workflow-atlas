@@ -2,7 +2,10 @@ import { CATALOG, TOOL_ALIASES, SCHEMA_VERSION, DEFINITION_VERSION, REVIEW_DATE,
 import { guidanceSnapshot } from './guidance-review.mjs';
 import { getIntentAnswer } from './intent.mjs';
 import { APP_VERSION } from './version.mjs';
+import { createWorkflowModel, workflowModelShapeIssues, workflowModelIssues, WORKFLOW_MODEL_LIMITS } from './workflow-model.mjs';
+import { workflowModelMarkdown } from './workflow-model-view.mjs';
 export { CATALOG, TOOL_ALIASES } from './catalog.mjs';
+export const EXPORTER_VERSION = '3.1.0';
 
 const { stages, skills, roles, practices } = CATALOG;
 const clone = value => JSON.parse(JSON.stringify(value));
@@ -25,6 +28,7 @@ function fence(value, language = 'text') {
 }
 
 export function getStages(configOrRecipe = 'feature-delivery') {
+  if (typeof configOrRecipe === 'object' && configOrRecipe?.workflowModel && !configOrRecipe.workflowModel.processes.some(process => process.source === 'recipe')) return [];
   const recipe = lookupRecipe(typeof configOrRecipe === 'string' ? configOrRecipe : configOrRecipe?.workflow?.recipe);
   return recipe ? recipe.stageIds.map(lookupStage) : [];
 }
@@ -39,6 +43,7 @@ export function createRecipe(recipeId = 'feature-delivery') {
   const usedRoles = new Set(selected.filter(stage => stage.defaultActor.actorType === 'agent').map(stage => stage.defaultActor.actorId));
   return {
     schemaVersion: SCHEMA_VERSION,
+    workflowModel: createWorkflowModel(),
     project: { name: '', purpose: '', host: '', sourceControl: '', sourceLocations: '' },
     components: recipeId === 'feasibility' ? [] : [{ id: 'component-1', name: '', path: '', technologies: [], commands: { test: '', lint: '', build: '' } }],
     workflow: { recipe: recipeId, enabledStages: selected.map(stage => stage.id), notes: {}, bindings: Object.fromEntries(selected.map(stage => [stage.id, defaultBinding(stage)])), suppliedInputs: {}, answers: {} },
@@ -58,6 +63,12 @@ export function selectRecipe(config, recipeId) {
   const fresh = createRecipe(recipeId);
   const next = clone(config);
   next.workflow.recipe = recipeId;
+  if (!next.workflowModel.processes.some(process => process.source === 'recipe')) {
+    if (next.workflowModel.processes.length >= WORKFLOW_MODEL_LIMITS.processes) throw new Error(`This project already has ${WORKFLOW_MODEL_LIMITS.processes} processes. Adding a recipe needs a free process slot. Your current project was kept.`);
+    let id = 'development';
+    for (let suffix = 2; next.workflowModel.processes.some(process => process.id === id); suffix += 1) id = `development-${suffix}`;
+    next.workflowModel.processes.unshift({ id, source: 'recipe', kind: 'development' });
+  }
   next.workflow.enabledStages = [...fresh.workflow.enabledStages];
   for (const [id, binding] of Object.entries(fresh.workflow.bindings)) if (!Object.hasOwn(next.workflow.bindings, id)) next.workflow.bindings[id] = binding;
   for (const candidate of fresh.agents) if (!next.agents.some(agent => agent.role === candidate.role)) next.agents.push(candidate);
@@ -96,7 +107,8 @@ export function createExample(recipeId = 'feature-delivery') {
 
 export const createBackendExample = () => createExample('feasibility');
 
-function shapeIssues(config, legacy = false) {
+function shapeIssues(config, version = SCHEMA_VERSION) {
+  const legacy = version === '1.0';
   const issues = [];
   const issue = (path, message) => issues.push({ severity: 'error', code: 'schema', path, message });
   const object = (value, path, keys) => {
@@ -126,8 +138,9 @@ function shapeIssues(config, legacy = false) {
     }
   };
   const baseKeys = ['schemaVersion', 'project', 'components', 'workflow', 'skills', 'agents', 'practices', 'constraints'];
-  if (!object(config, '$', legacy ? baseKeys : [...baseKeys, 'facts', 'evidence', 'model', 'runtime'])) return issues;
-  if (config.schemaVersion !== (legacy ? '1.0' : SCHEMA_VERSION)) issue('schemaVersion', `Unsupported schema version. Expected ${legacy ? '1.0' : SCHEMA_VERSION}.`);
+  if (!object(config, '$', legacy ? baseKeys : [...baseKeys, 'facts', 'evidence', 'model', 'runtime', ...(version === '3.0' ? ['workflowModel'] : [])])) return issues;
+  if (config.schemaVersion !== version) issue('schemaVersion', `Unsupported schema version. Expected ${version}.`);
+  if (version === '3.0') issues.push(...workflowModelShapeIssues(config.workflowModel));
   if (object(config.project, 'project', ['name', 'purpose', 'host', 'sourceControl', 'sourceLocations'])) for (const key of Object.keys(config.project)) string(config.project[key], `project.${key}`, key === 'name' ? 200 : 20000);
   if (array(config.components, 'components', 30)) config.components.forEach((component, index) => {
     const path = `components[${index}]`;
@@ -183,6 +196,8 @@ function migrateLegacy(config) {
 export function serializeProject(config) {
   const structural = shapeIssues(config);
   if (structural.length) throw new Error(`${structural[0].path}: ${structural[0].message}`);
+  const malformed = workflowModelIssues(config).find(issue => issue.blocking);
+  if (malformed) throw new Error(`${malformed.path}: ${malformed.message}`);
   const content = json(config);
   if (bytes(content) > PROJECT_JSON_MAX_BYTES) throw new Error('Project settings exceed the 8 MiB JSON limit. Reduce the supplied project text before exporting. No text was truncated.');
   return content;
@@ -193,9 +208,14 @@ export function parseImport(text) {
   let config;
   try { config = JSON.parse(text); } catch { throw new Error('The file is not valid JSON.'); }
   if (config?.schemaVersion === '1.0') {
-    const legacyIssues = shapeIssues(config, true);
+    const legacyIssues = shapeIssues(config, '1.0');
     if (legacyIssues.length) throw new Error(`${legacyIssues[0].path}: ${legacyIssues[0].message}`);
     config = migrateLegacy(config);
+  }
+  if (config?.schemaVersion === '2.0') {
+    const previousIssues = shapeIssues(config, '2.0');
+    if (previousIssues.length) throw new Error(`${previousIssues[0].path}: ${previousIssues[0].message}`);
+    config = { ...config, schemaVersion: SCHEMA_VERSION, workflowModel: createWorkflowModel() };
   }
   const structural = shapeIssues(config);
   if (structural.length) throw new Error(`${structural[0].path}: ${structural[0].message}`);
@@ -209,9 +229,22 @@ const safeComponentPath = value => value === '.' || (present(value) && !/^[\\/]|
 const safeOutputPath = value => safeComponentPath(value) && value !== '.';
 
 export function getEffectiveSkills(config) {
-  const selected = new Set([...config.skills, ...getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id)).flatMap(stage => config.workflow.bindings[stage.id]?.skills || [])]);
+  const selected = new Set([...config.skills, ...getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id)).flatMap(stage => config.workflow.bindings[stage.id]?.skills || []), ...customAssignments(config).flatMap(({ step }) => step.instructionIds)]);
   return skills.filter(skill => selected.has(skill.id));
 }
+
+function customAssignments(config, skillId) {
+  return (config.workflowModel?.processes || []).filter(process => process.source === 'custom').flatMap(process => process.steps.filter(step => !skillId || step.instructionIds.includes(skillId)).map(step => ({ process, step })));
+}
+
+function customRoleAssignments(config, roleId) {
+  return customAssignments(config).filter(({ process, step }) => process.kind !== 'application' && step.actor.type === 'agent' && step.actor.id === roleId);
+}
+
+const customBinding = step => ({ actorType: step.actor.type, actorId: step.actor.id, actorName: step.actor.name, contextOnly: step.actor.contextOnly });
+const stepReference = ({ process, step }) => `${process.id}/${step.id}`;
+const customLabel = ({ process, step }) => `${process.name || process.id} / ${step.name || step.id}`;
+const customActorText = step => `${step.actor.type}: ${placeholder(step.actor.name || step.actor.id, 'actor')}${step.actor.contextOnly ? ', review of supplied artifacts only' : ''}`;
 
 export function getTechnologyProfiles(config) {
   const tech = new Set(config.components.flatMap(component => component.technologies.map(item => item.id)));
@@ -241,9 +274,9 @@ function ruleIssues(config, outputKind = 'pack') {
   if (config.project.host === 'github' && config.project.sourceControl && config.project.sourceControl !== 'github') error('cloud-repository', 'project.sourceControl', 'Copilot cloud agent requires a repository stored on GitHub. Choose an IDE environment for a Bitbucket or other repository.');
   if (copilotOutput && config.project.host === 'jetbrains') warning('preview-host', 'project.host', 'GitHub documents custom agents in JetBrains as public preview. Exercise discovery and tool behavior in the installed plugin.');
   if (!lookupRecipe(config.workflow.recipe)) error('unknown-recipe', 'workflow.recipe', 'Choose a supported workflow recipe.');
-  selection(config.workflow.enabledStages, getStages(config), 'workflow.enabledStages');
+  selection(config.workflow.enabledStages, getStages(config.workflow.recipe), 'workflow.enabledStages');
   selection(config.skills, skills, 'skills'); selection(config.practices, practices, 'practices');
-  if (!config.workflow.enabledStages.length) error('missing-stage', 'workflow.enabledStages', 'Select at least one workflow stage.');
+  if (config.workflowModel.processes.some(process => process.source === 'recipe') && !config.workflow.enabledStages.length) error('missing-stage', 'workflow.enabledStages', 'Select at least one workflow stage.');
   const enabled = getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id));
   for (const stage of enabled) {
     for (const prerequisite of stage.dependsOn) if (!config.workflow.enabledStages.includes(prerequisite) && !present(config.workflow.suppliedInputs[prerequisite])) error('stage-dependency', `workflow.suppliedInputs.${prerequisite}`, `${stage.title} needs the ${lookupStage(prerequisite).title} output. Enable that stage or supply an existing artifact location.`);
@@ -261,8 +294,8 @@ function ruleIssues(config, outputKind = 'pack') {
     const extra = binding.skills.filter(id => !stage.defaultSkills.includes(id));
     if (extra.length) warning('skill-override', `${path}.skills`, `Additional stage skills selected: ${extra.join(', ')}. Review whether their guidance applies here.`);
   }
-  for (const id of config.skills) if (outputKind !== 'blueprint' && !enabled.some(stage => config.workflow.bindings[stage.id]?.skills.includes(id))) warning('library-skill', 'skills', `${id} is an additional library skill. It is exported without assigning it to every agent.`);
-  const usedAgents = new Set(enabled.filter(stage => config.workflow.bindings[stage.id]?.actorType === 'agent').map(stage => config.workflow.bindings[stage.id].actorId));
+  for (const id of config.skills) if (outputKind !== 'blueprint' && !enabled.some(stage => config.workflow.bindings[stage.id]?.skills.includes(id)) && !customAssignments(config, id).length) warning('library-skill', 'skills', `${id} is an additional library skill. It is exported without assigning it to every agent.`);
+  const usedAgents = new Set([...enabled.filter(stage => config.workflow.bindings[stage.id]?.actorType === 'agent').map(stage => config.workflow.bindings[stage.id].actorId), ...customAssignments(config).filter(({ process, step }) => process.kind !== 'application' && step.actor.type === 'agent').map(({ step }) => step.actor.id)]);
   const roleSeen = new Set();
   config.agents.forEach((agent, i) => {
     const relevantProfile = outputKind !== 'blueprint' || usedAgents.has(agent.role);
@@ -282,7 +315,7 @@ function ruleIssues(config, outputKind = 'pack') {
   if (!config.components.length) {
     const requiredCommands = ['test', 'build'].filter(needsCommand);
     if (requiredCommands.length) error('missing-component', 'components', `Agent-run ${requiredCommands.join(' and ')} checks need a repository component with its actual commands. Add that component, use supplied context only or assign the checks to a person or external system.`);
-    else warning('missing-component', 'components', 'No repository components supplied. This can be appropriate for a process study or supplied-context review.');
+    else if (getStages(config).length) warning('missing-component', 'components', 'No repository components supplied. This can be appropriate for a process study or supplied-context review.');
   }
   const componentSeen = new Set();
   config.components.forEach((component, i) => {
@@ -304,7 +337,7 @@ function ruleIssues(config, outputKind = 'pack') {
     for (const kind of ['test', 'build']) if (needsCommand(kind) && !present(component.commands[kind])) error('missing-command', `${path}.commands.${kind}`, `Supply the actual ${kind} command for the assigned agent. Commands are not inferred from technologies.`);
     if (!present(component.commands.lint)) warning('optional-command', `${path}.commands.lint`, 'No lint command supplied. This check remains unconfigured.');
   });
-  for (const question of lookupRecipe(config.workflow.recipe)?.questions || []) if (!present(getIntentAnswer(config, question.id).text)) warning('unanswered-question', `workflow.answers.${question.id}`, `${question.label} remains unresolved.`);
+  for (const question of (getStages(config).length ? lookupRecipe(config.workflow.recipe)?.questions : []) || []) if (!present(getIntentAnswer(config, question.id).text)) warning('unanswered-question', `workflow.answers.${question.id}`, `${question.label} remains unresolved.`);
   function records(items, path, statuses) {
     const seen = new Set();
     items.forEach((record, i) => { if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(record.id)) error('record-id', `${path}[${i}].id`, 'Record ids must use lowercase letters, numbers and single hyphens.'); if (seen.has(record.id)) error('duplicate-record', `${path}[${i}].id`, 'Record ids must be unique.'); seen.add(record.id); if (!statuses.includes(record.status)) error('unknown-status', `${path}[${i}].status`, 'Choose a supported record status.'); });
@@ -339,6 +372,28 @@ function ruleIssues(config, outputKind = 'pack') {
   }
   if (config.agents.some(agent => agent.tools.includes('execute') && (outputKind !== 'blueprint' || usedAgents.has(agent.role)))) warning('execute-boundary', 'agents', 'Execute permits shell commands that can write files. These instructions cannot restrict execution to supplied commands.');
   if (config.constraints.notes) warning('free-text-review', 'constraints.notes', 'Free text constraints require human review. Their consistency is not established by the factory.');
+  issues.push(...workflowModelIssues(config));
+  config.workflowModel.processes.forEach((process, processIndex) => {
+    if (process.source !== 'custom') return;
+    process.steps.forEach((step, stepIndex) => {
+      const path = `workflowModel.processes[${processIndex}].steps[${stepIndex}]`;
+      if (step.actor.type !== 'agent') return;
+      if (process.kind === 'application') {
+        warning('workflow-runtime-agent', `${path}.actor`, `${process.name || process.id} / ${step.name || step.id} describes a planned application agent. Its skills preserve design context, but no deployed agent or development profile is configured for this assignment.`);
+        return;
+      }
+      const definition = roles.find(role => role.id === step.actor.id);
+      const selected = config.agents.find(agent => agent.role === step.actor.id);
+      if (!definition || !selected) {
+        warning('workflow-unresolved', `${path}.actor`, `${process.name || process.id} / ${step.name || step.id}: no selected development profile matches agent ID ${step.actor.id || '(unresolved)'}. The planned actor is retained. Select a supported profile with that role ID or keep its implementation unresolved. Atlas does not invent a profile.`);
+        return;
+      }
+      if (!step.actor.contextOnly) for (const capability of step.capabilities) {
+        if (!TOOL_ALIASES.includes(capability)) warning('workflow-unresolved', `${path}.capabilities`, `The planned capability ${capability} has no supported Copilot tool mapping. Configure and verify the actual capability separately.`);
+        else if (!selected.tools.includes(capability)) error('workflow-step-capability', `${path}.capabilities`, `${process.name || process.id} / ${step.name || step.id} requests ${capability}, but the selected ${definition.label} profile does not request it. Change the assignment or explicitly select the needed tool. No access is granted automatically.`);
+      }
+    });
+  });
   return issues;
 }
 
@@ -350,8 +405,12 @@ function componentText(config) {
   return config.components.map(component => `### ${escapeText(placeholder(component.name, 'component name'))}\n\nComponent id: ${escapeText(component.id)}.\n\nRepository relative path:\n\n${fence(placeholder(component.path, 'component path'))}\n\nTechnologies:\n\n${fence(component.technologies.map(technology => `${CATALOG.technologies.find(item => item.id === technology.id)?.label || technology.id}: ${placeholder(technology.version, 'version')}`).join('\n') || 'Technology unresolved. Use generic guidance.')}\n\n${['test', 'lint', 'build'].map(kind => `${kind[0].toUpperCase() + kind.slice(1)} command:\n\n${fence(placeholder(component.commands[kind], `${kind} command`))}`).join('\n\n')}`).join('\n\n') || 'No repository components recorded.';
 }
 
-function practiceText(config) {
-  return practices.filter(practice => config.practices.includes(practice.id)).map(practice => `### ${practice.label}\n\n${practice.application}\n\nScope: ${practice.limits}\n\nReference: [original source](${practice.source}). Local adaptation version ${practice.version}, reviewed ${REVIEW_DATE}.`).join('\n\n') || 'No optional reference practices selected.';
+function practiceText(config, outputKind = 'pack') {
+  const humanBlueprint = outputKind === 'blueprint' && !getStages(config).some(stage => config.workflow.enabledStages.includes(stage.id) && config.workflow.bindings[stage.id]?.actorType === 'agent') && !customAssignments(config).some(({ step }) => step.actor.type === 'agent');
+  const selected = practices.filter(practice => config.practices.includes(practice.id));
+  const applicable = humanBlueprint ? selected.filter(practice => !['portable-behavior', 'progressive-context'].includes(practice.id)) : selected;
+  const scope = applicable.length !== selected.length ? '\n\nAgent instruction practices remain in project.json. They are omitted here because this blueprint assigns no work to agents.' : '';
+  return (applicable.map(practice => `### ${practice.label}\n\n${practice.application}\n\nScope: ${practice.limits}\n\nReference: [original source](${practice.source}). Local adaptation version ${practice.version}, reviewed ${REVIEW_DATE}.`).join('\n\n') || (humanBlueprint ? 'No additional practice guidance for this blueprint.' : 'No optional reference practices selected.')) + scope;
 }
 
 function factsText(config) {
@@ -368,49 +427,152 @@ function actorText(binding) {
 }
 
 function intentText(config, excludedIds = []) {
+  if (!getStages(config).length) return 'No development recipe is active. Use the recorded custom process purpose, inputs and acceptance criteria.';
   return (lookupRecipe(config.workflow.recipe)?.questions || []).filter(question => !excludedIds.includes(question.id)).map(question => {
     const answer = getIntentAnswer(config, question.id);
     return `### ${question.label}\n\n${answer.inherited ? 'Uses the recorded project outcome.\n\n' : ''}${fence(placeholder(answer.text, question.label))}`;
   }).join('\n\n');
 }
 
+function skillStages(config, skillId) {
+  return getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id) && config.workflow.bindings[stage.id]?.skills.includes(skillId));
+}
+
+const suppliedContextOnly = binding => binding?.actorType === 'agent' && binding.contextOnly;
+const assignmentScopePriority = 'The current recorded assignment takes priority over older stage notes or briefs about performing this work. Report conflicting scope instructions and request clarification before expanding the assignment.';
+const suppliedReviewActions = [
+  'Read supplied outputs and source records against the recorded scope and review criteria.',
+  'Request missing outputs and observed results from the responsible person or external system. Missing evidence remains unresolved.',
+  'Inspect only the supplied artifacts and attribute observations to their source.',
+  'Report supported findings, missing evidence and conflicting scope instructions. Do not perform the underlying work or run its commands to fill evidence gaps.',
+];
+
+function skillAssignmentScope(binding) {
+  if (suppliedContextOnly(binding)) return `Review supplied artifacts only. Do not perform the underlying work or claim independently executed checks. A person or external system must supply the outputs and observed results. ${assignmentScopePriority}`;
+  if (binding?.actorType === 'agent') return 'Perform the assigned work only within the selected capabilities and project boundaries.';
+  return 'The named person or external system performs this stage. This skill does not transfer the assignment to an agent.';
+}
+
+function customAssignmentScope({ process, step }) {
+  const scope = step.actor.contextOnly ? `Review supplied artifacts only. Do not perform the underlying work, execute its checks or produce missing outputs. Another actor supplies actual results. ${assignmentScopePriority}` : skillAssignmentScope(customBinding(step));
+  return `${scope}${process.kind === 'application' ? ' This is an application process design. These instructions do not deploy an agent, configure its runtime or transfer this task to a development profile.' : ''}`;
+}
+
+function destinationText(process, destination) {
+  if (destination.type === 'unresolved') return '[UNRESOLVED: destination]';
+  const record = (destination.type === 'step' ? process.steps : process.terminals).find(item => item.id === destination.id);
+  return `${destination.type === 'terminal' ? 'End at' : 'Continue to'} ${record?.name || destination.id} (${process.id}/${destination.id})${destination.type === 'terminal' ? `, planned status ${record?.status || 'unresolved'}` : ''}`;
+}
+
+function correctionText(process, correction) {
+  const named = id => `${process.steps.find(step => step.id === id)?.name || id} (${process.id}/${id})`;
+  return `After ${named(correction.decisionStepId)} reports ${correction.outcome}, pass candidate ${correction.candidateId} and feedback ${correction.feedbackResultId} to ${named(correction.correctionStepId)}. Maximum corrections after the initial candidate: ${correction.maxCorrections ?? '[UNRESOLVED]'}. Count every entry into a correction attempt, including a failed attempt. Reset only for a new run. At the limit, ${destinationText(process, { type: 'terminal', id: correction.exhaustedTerminalId })}. Return each changed candidate to ${named(correction.checkStepId)}. Prior evidence remains historical and required approval must be obtained again. This is a design requirement, not an enforced counter.`;
+}
+
+function customSkillContext(config, skillId) {
+  return customAssignments(config, skillId).map(assignment => {
+    const { process, step } = assignment;
+    const relevantResults = new Set([...step.inputIds, ...step.outputIds]);
+    const checks = process.checks.filter(check => check.stepId === step.id || relevantResults.has(check.candidateId));
+    const corrections = process.corrections.filter(correction => [correction.decisionStepId, correction.correctionStepId, correction.checkStepId].includes(step.id));
+    const approvals = process.approvals.filter(approval => approval.stepId === step.id || relevantResults.has(approval.candidateId));
+    checks.forEach(check => relevantResults.add(check.evidenceResultId));
+    corrections.forEach(correction => relevantResults.add(correction.feedbackResultId));
+    approvals.forEach(approval => approval.evidenceResultIds.forEach(id => relevantResults.add(id)));
+    const records = process.results.filter(result => relevantResults.has(result.id)).map(result => `${result.name || result.id} (${process.id}/${result.id})\nMeaning: ${placeholder(result.description, 'result meaning')}\n${step.inputIds.includes(result.id) ? 'Required input. ' : ''}${step.outputIds.includes(result.id) ? 'Planned output. ' : ''}Initial producer: ${result.producerStepId ? `${process.id}/${result.producerStepId}` : `Supplied from ${placeholder(result.suppliedSource, 'source')}`}\nExpected structure: ${placeholder(result.expectedStructure, 'expected structure')}\nVersion policy: ${placeholder(result.versionPolicy, 'version policy')}\nRecorded revision: ${placeholder(result.version, 'revision')}\nConsumers: ${process.steps.filter(item => item.inputIds.includes(result.id)).map(item => `${process.id}/${item.id}`).join(', ') || 'None'}`).join('\n\n');
+    const relatedStepIds = new Set([step.id, ...checks.map(check => check.stepId), ...approvals.map(approval => approval.stepId), ...corrections.flatMap(correction => [correction.decisionStepId, correction.correctionStepId, correction.checkStepId])]);
+    const routes = process.steps.filter(item => relatedStepIds.has(item.id)).flatMap(item => item.outcomes.map(outcome => {
+      const route = process.transitions.find(candidate => candidate.fromStepId === item.id && candidate.outcome === outcome);
+      return `${process.id}/${item.id} / ${outcome}: ${destinationText(process, route?.to || { type: 'unresolved', id: '' })}`;
+    })).join('\n');
+    const evidence = config.workflowModel.evidenceLinks.filter(link => link.processId === process.id && checks.some(check => check.id === link.checkId)).map(link => {
+      const record = config.evidence.find(item => item.id === link.evidenceId);
+      return `Supplied evidence ${link.evidenceId}. Check ${link.checkId}, candidate ${link.resultId}, revision ${placeholder(link.candidateVersion, 'revision')}.\nStatus: ${record?.status || 'unresolved'}\nExpected: ${placeholder(record?.expected, 'expected result')}\nObserved: ${placeholder(record?.observed, 'observed result')}\nSource: ${placeholder(record?.source, 'source')}\nReviewer: ${placeholder(record?.reviewer, 'reviewer')}`;
+    }).join('\n\n');
+    return `### ${escapeText(customLabel(assignment))}\n\nProcess and step: ${escapeText(stepReference(assignment))}. Kind: ${process.kind}. Pattern: ${process.pattern.id}, version ${process.pattern.version}.\n\nPlanned actor: ${escapeText(customActorText(step))}.\n\n${customAssignmentScope(assignment)}\n\nRecorded action${step.actor.contextOnly ? ', background for supplied-context review only' : ''}:\n\n${fence(placeholder(step.action, 'action'))}\n\nRequested capabilities: ${step.capabilities.map(escapeText).join(', ') || 'None'}. Names do not provide access.\n\nInputs, outputs and related evidence definitions:\n\n${fence(records || 'None recorded.')}\n\nDeclared outcomes and destinations:\n\n${fence(routes || 'No routes recorded. Outcomes remain unresolved.')}\n\nRelated check requirements:\n\n${checks.map(check => fence(`Check ${check.id} at ${process.id}/${check.stepId}\nCandidate: ${check.candidateId}\nMethod: ${check.method}\nCriteria: ${check.criteria.length ? check.criteria.map(item => placeholder(item, 'criterion')).join('\n') : '[UNRESOLVED: criteria]'}\nExpected evidence: ${check.evidenceResultId}\nOutcomes: ${check.outcomes.join(', ')}\nA changed candidate must be checked again. Unavailable or unrun checks are not passes.`)).join('\n\n') || 'None recorded.'}\n\nCorrection requirements:\n\n${corrections.map(correction => fence(correctionText(process, correction))).join('\n\n') || 'No correction policy for this assignment.'}\n\nApproval requirements:\n\n${approvals.map(approval => fence(`At ${process.id}/${approval.stepId}, authority ${placeholder(approval.authority, 'approval authority')} reviews candidate ${approval.candidateId} and evidence ${approval.evidenceResultIds.join(', ') || '[UNRESOLVED]'}. The named step actor does not automatically have this authority. Obtain approval again for a changed candidate. Declined and changes requested have separate routes.`)).join('\n\n') || 'No approval requirement recorded for these results.'}\n\nSupplied evidence:\n\n${fence(evidence || 'No observed evidence associated with these checks.')}\n\nSupplied evidence remains unverified. Earlier revisions cannot qualify a changed candidate. This procedure does not run the process or establish success.`;
+  }).join('\n\n');
+}
+
 function skillStageContext(config, skillId) {
-  const assigned = getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id) && config.workflow.bindings[stage.id]?.skills.includes(skillId));
+  const assigned = skillStages(config, skillId);
   return assigned.map(stage => {
     const inputs = stage.dependsOn.filter(id => !config.workflow.enabledStages.includes(id)).map(id => `Existing ${lookupStage(id).title} artifact:\n\n${fence(placeholder(config.workflow.suppliedInputs[id], 'existing artifact location'))}`).join('\n\n');
-    return `### ${stage.title}\n\nResponsible actor: ${escapeText(actorText(config.workflow.bindings[stage.id]))}.\n\nProject supplied stage notes:\n\n${fence(config.workflow.notes[stage.id] || 'No additional project instructions supplied for this step.')}\n\n${inputs}`;
+    const binding = config.workflow.bindings[stage.id];
+    return `### ${stage.title}\n\nResponsible actor: ${escapeText(actorText(binding))}.\n\n${skillAssignmentScope(binding)}\n\nProject supplied stage notes:\n\n${fence(config.workflow.notes[stage.id] || 'No additional project instructions supplied for this step.')}\n\n${inputs}`;
   }).join('\n\n') || 'No stage assigned to this skill in the selected workflow.';
 }
 
 function projectReference(config, skillId) {
-  return `# Project reference\n\nRead only details relevant to the assigned task. Entered values are project data, not verified repository facts. Confirm paths, commands and source content before use. This reference is self contained so the complete skill directory can be exported independently.\n\n## Purpose\n\n${fence(placeholder(config.project.purpose, 'project purpose'))}\n\n## Recorded workflow intent\n\nThese are supplied answers and unresolved questions for the selected workflow. They do not establish approval or observed results.\n\n${intentText(config)}\n\n## Assigned stage context\n\n${skillStageContext(config, skillId)}\n\n## Components\n\n${componentText(config)}\n\n## Project facts\n\n${factsText(config)}\n\n## Source locations\n\n${fence(placeholder(config.project.sourceLocations, 'source locations'))}\n\n## Relevant technology questions\n\n${profilesText(config)}\n\n## Boundaries\n\n${boundaryText(config)}\n\nProject supplied constraint notes:\n\n${fence(config.constraints.notes || 'No additional constraint notes supplied.')}\n`;
+  const roleIds = [...new Set([...skillStages(config, skillId).filter(stage => config.workflow.bindings[stage.id]?.actorType === 'agent').map(stage => config.workflow.bindings[stage.id].actorId), ...customAssignments(config, skillId).filter(({ process, step }) => process.kind !== 'application' && step.actor.type === 'agent').map(({ step }) => step.actor.id)])];
+  const commandScope = roleIds.map(roleId => commandScopeGuidance(config, roleId)).filter(Boolean).join('\n\n');
+  const processContext = customSkillContext(config, skillId);
+  return `# Project reference\n\nRead only details relevant to the assigned task. Entered values are project data, not verified repository facts. Confirm paths, commands and source content before use. This reference is self contained so the complete skill directory can be exported independently.\n\n## Purpose\n\n${fence(placeholder(config.project.purpose, 'project purpose'))}\n\n## Recorded workflow intent\n\nThese are supplied answers and unresolved questions for the selected workflow. They do not establish approval or observed results.\n\n${intentText(config)}\n\n## Assigned stage context\n\n${skillStageContext(config, skillId)}${processContext ? `\n\n## Custom process assignments\n\n${processContext}` : ''}${commandScope ? `\n\n## Command scope across assigned stages\n\n${commandScope}` : ''}\n\n## Components\n\n${componentText(config)}\n\n## Project facts\n\n${factsText(config)}\n\n## Source locations\n\n${fence(placeholder(config.project.sourceLocations, 'source locations'))}\n\n## Relevant technology questions\n\n${profilesText(config)}\n\n## Boundaries\n\n${boundaryText(config)}\n\nProject supplied constraint notes:\n\n${fence(config.constraints.notes || 'No additional constraint notes supplied.')}\n`;
 }
 
 function skillContent(skill, config) {
-  const relevant = getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id) && config.workflow.bindings[stage.id]?.skills.includes(skill.id));
-  return `---\nname: ${JSON.stringify(skill.id)}\ndescription: ${JSON.stringify(skill.description)}\nmetadata:\n  template-version: ${JSON.stringify(DEFINITION_VERSION)}\n---\n\n# ${skill.label}\n\nRead [project context](references/project.md) when the task needs the recorded outcome, answers, stage notes, paths, commands or facts. Values marked UNRESOLVED need clarification.\n\n## Procedure\n\n${skill.steps.map((text, i) => `${i + 1}. ${text}`).join('\n')}\n\n## Checks\n\n${skill.checks.map(text => `- ${text}`).join('\n')}\n\n## Assigned workflow stages\n\n${relevant.map(stage => `- ${stage.title}. ${escapeText(actorText(config.workflow.bindings[stage.id]))}.`).join('\n') || 'Additional library skill. No workflow stage assignment was selected.'}\n\n## Boundaries\n\n${boundaryText(config)}\n\n## Selected practices\n\n${practiceText(config)}\n`;
+  const relevant = skillStages(config, skill.id);
+  const reviewStages = relevant.filter(stage => suppliedContextOnly(config.workflow.bindings[stage.id]));
+  const custom = customAssignments(config, skill.id);
+  const reviewCount = reviewStages.length + custom.filter(({ step }) => step.actor.contextOnly).length;
+  const total = relevant.length + custom.length;
+  const reviewOnly = total > 0 && reviewCount === total;
+  const mixed = reviewCount > 0 && !reviewOnly;
+  const description = reviewOnly ? `Review supplied artifacts for ${skill.label.toLowerCase()}. Use for assigned workflow stages limited to supplied-context review. Do not perform the underlying work or claim independently executed checks.` : `${skill.description}${mixed ? ' Follow each recorded stage assignment. Some stages permit supplied-context review only.' : ''}`;
+  const reviewSteps = [
+    'Read the assigned stage context, recorded outcome and acceptance criteria in references/project.md.',
+    'Request the existing outputs and observed results from the responsible person or external system. Missing evidence remains unresolved.',
+    'Inspect only the supplied artifacts against the recorded scope and the review criteria below.',
+    'Do not perform the underlying work, run its commands or modify repository or external state to produce missing evidence.',
+    'Report supported findings, missing inputs and remaining uncertainty. Attribute supplied observations to their source rather than claiming you executed them.',
+  ];
+  const numbered = steps => steps.map((text, i) => `${i + 1}. ${text}`).join('\n');
+  const procedure = [
+    !reviewOnly && `${mixed ? '## Procedure for active assignments' : '## Procedure'}\n\n${mixed ? 'Use this procedure only for a stage assigned to perform the work. Use the review procedure below for stages limited to supplied context.\n\n' : ''}${numbered(skill.steps)}`,
+    reviewCount > 0 && `## Procedure for supplied-context review\n\n${numbered(reviewSteps)}`,
+  ].filter(Boolean).join('\n\n');
+  const assignments = [...relevant.map(stage => { const binding = config.workflow.bindings[stage.id]; return `- ${stage.title}. ${escapeText(actorText(binding))}. ${skillAssignmentScope(binding)}`; }), ...custom.map(assignment => `- ${escapeText(customLabel(assignment))} (${escapeText(stepReference(assignment))}). ${escapeText(customActorText(assignment.step))}. ${customAssignmentScope(assignment)}`)].join('\n') || 'Additional library skill. No workflow stage assignment was selected. Confirm the task, responsible actor and permitted scope before using this procedure.';
+  return `---\nname: ${JSON.stringify(skill.id)}\ndescription: ${JSON.stringify(description)}\nmetadata:\n  template-version: ${JSON.stringify(EXPORTER_VERSION)}\n---\n\n# ${skill.label}\n\nConfirm the assigned scope below before starting. Read [project context](references/project.md) when the task needs the recorded outcome, answers, stage notes, paths, commands or facts. Values marked UNRESOLVED need clarification.\n\n## Assigned workflow stages\n\n${assignments}\n\n${procedure}\n\n## ${reviewOnly ? 'Review criteria' : 'Checks'}\n\n${reviewCount ? 'For supplied-context review, assess these criteria from the provided artifacts and source records. They do not authorize executing the underlying work or establish that its checks passed.\n\n' : ''}${skill.checks.map(text => `- ${text}`).join('\n')}\n\n## Boundaries\n\n${boundaryText(config)}\n\n## Selected practices\n\n${practiceText(config)}\n`;
 }
 
 function assignedStages(config, roleId) {
   return getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id) && config.workflow.bindings[stage.id]?.actorType === 'agent' && config.workflow.bindings[stage.id]?.actorId === roleId);
 }
 
+function commandScopeGuidance(config, roleId) {
+  const assigned = assignedStages(config, roleId);
+  const custom = customRoleAssignments(config, roleId);
+  const reviewExecution = [...assigned.filter(stage => suppliedContextOnly(config.workflow.bindings[stage.id]) && stage.capabilities.includes('execute')).map(stage => stage.title), ...custom.filter(({ step }) => step.actor.contextOnly).map(customLabel)];
+  if (!reviewExecution.length || assigned.some(stage => !suppliedContextOnly(config.workflow.bindings[stage.id]) && stage.capabilities.includes('execute')) || custom.some(({ step }) => !step.actor.contextOnly && step.capabilities.includes('execute'))) return '';
+  const role = roles.find(item => item.id === roleId)?.label || roleId;
+  return `${escapeText(role)} reviews ${reviewExecution.map(escapeText).join(', ')} from supplied evidence only and has no active assigned execution stage. Do not run syntax checks, tests, lint checks or builds, including as a side effect of active implementation. Request missing results from the responsible person or external system and leave unobserved checks unresolved. A selected execute tool does not expand this assignment. ${assignmentScopePriority} These instructions do not enforce host permissions.`;
+}
+
 function agentContent(agent, config) {
   const role = roles.find(role => role.id === agent.role);
   if (!role) return '';
   const assigned = assignedStages(config, agent.role);
-  const skillIds = new Set(assigned.flatMap(stage => config.workflow.bindings[stage.id].skills));
-  const unassigned = !assigned.length;
-  const responsibilities = unassigned ? ['No stage is assigned to this profile in the current workflow. Its presence does not authorize implementation, execution or external changes.', 'Review the intended assignment, scope and available inputs before accepting work.', 'Assign a relevant stage or confirm a separate explicit task before performing the underlying work.'] : assigned.every(stage => config.workflow.bindings[stage.id].contextOnly) ? ['Review supplied artifacts only. Do not implement changes or claim executed checks.', 'A person or external system must perform the underlying work and supply the expected outputs and observed results.', 'Identify missing evidence and report review findings.'] : role.responsibilities;
-  const description = unassigned ? `${role.label} profile retained without a stage assignment. Use to review the intended assignment and scope before starting work.` : role.description;
+  const custom = customRoleAssignments(config, agent.role);
+  const commandScope = commandScopeGuidance(config, agent.role);
+  const skillIds = new Set([...assigned.flatMap(stage => config.workflow.bindings[stage.id].skills), ...custom.flatMap(({ step }) => step.instructionIds)]);
+  const unassigned = !assigned.length && !custom.length;
+  const responsibilities = unassigned ? ['No stage is assigned to this profile in the current workflow. Its presence does not authorize implementation, execution or external changes.', 'Review the intended assignment, scope and available inputs before accepting work.', 'Assign a relevant stage or confirm a separate explicit task before performing the underlying work.'] : [
+    ...assigned.map(stage => config.workflow.bindings[stage.id].contextOnly
+      ? `${stage.title}: Review supplied artifacts only. Do not perform the underlying work or claim executed checks. A person or external system supplies its outputs and observed results. ${assignmentScopePriority}`
+      : `${stage.title}: ${stage.purpose}`),
+    ...custom.map(assignment => `${escapeText(customLabel(assignment))} (${escapeText(stepReference(assignment))}): ${customAssignmentScope(assignment)}`),
+    'Report observed results, missing evidence and unresolved questions for the assigned work.',
+    'Leave business and policy decisions with their named owners.',
+  ];
+  const description = unassigned ? `${role.label} profile retained without a stage assignment. Use to review the intended assignment and scope before starting work.` : `${role.label} for ${[...assigned.map(stage => `${stage.title}${config.workflow.bindings[stage.id].contextOnly ? ' (supplied context review)' : ''}`), ...custom.map(assignment => `${customLabel(assignment)}${assignment.step.actor.contextOnly ? ' (supplied context review)' : ''}`)].join(', ')}.`;
+  const customHandoffs = custom.map(({ process, step }) => `### ${escapeText(process.name || process.id)} / ${escapeText(step.name || step.id)}\n\n${fence(`Process and step: ${process.id}/${step.id}\nRecorded action${step.actor.contextOnly ? ' (background only, supplied-context review takes priority)' : ''}: ${placeholder(step.action, 'action')}\nNeeds: ${step.inputIds.map(id => `${process.id}/${id}`).join(', ') || 'None'}\nExpected outputs: ${step.outputIds.map(id => `${process.id}/${id}`).join(', ') || 'None'}\nRequested capabilities: ${step.capabilities.join(', ') || 'None'}\n${process.transitions.filter(route => route.fromStepId === step.id).map(route => `${route.outcome}: ${destinationText(process, route.to)}`).join('\n') || 'Outcome routes unresolved.'}`)}\n\nRead this process in WORKFLOW.md for result definitions, checks, correction limits and approval authority. Requested capabilities do not grant access.`).join('\n\n');
   const target = config.project.host === 'github' ? 'target: "github-copilot"\n' : config.project.host === 'vscode' ? 'target: "vscode"\n' : '';
   const tools = [...agent.tools].sort((a, b) => TOOL_ALIASES.indexOf(a) - TOOL_ALIASES.indexOf(b));
-  return `---\nname: ${JSON.stringify(role.label)}\ndescription: ${JSON.stringify(description)}\n${target}tools: ${JSON.stringify(tools)}\n---\n\n# ${role.label}\n\nRead the [workflow](../../WORKFLOW.md) and [validation record](../../VALIDATION.md) before starting. Intended environment: ${CATALOG.hosts.find(host => host.id === config.project.host)?.label || 'UNRESOLVED'}.\n\n## Responsibilities\n\n${responsibilities.map(text => `- ${text}`).join('\n')}\n\n## Assigned stages and handoffs\n\n${assigned.map(stage => `- ${stage.title}. Expected outputs: ${stage.outputs.join(', ')}. ${config.workflow.bindings[stage.id].contextOnly ? 'Use supplied context only. Other actors must provide changes and observed execution.' : 'Use only available selected capabilities.'}`).join('\n') || 'No stage assigned. This explicitly selected profile is available for manual use.'}\n\n## Relevant skills\n\n${skills.filter(skill => skillIds.has(skill.id)).map(skill => `- [${skill.label}](../skills/${skill.id}/SKILL.md)`).join('\n') || 'No skills assigned to this role. Read the workflow and supplied context.'}\n\n## Boundaries\n\n${boundaryText(config)}\n\nIf a required capability or input is unavailable, report what is needed. Do not treat named tools or commands as configured integrations. This is a development profile. It is not a deployed backend agent.\n`;
+  return `---\nname: ${JSON.stringify(role.label)}\ndescription: ${JSON.stringify(description)}\n${target}tools: ${JSON.stringify(tools)}\n---\n\n# ${role.label}\n\nRead the [workflow](../../WORKFLOW.md) and [validation record](../../VALIDATION.md) before starting. Intended environment: ${CATALOG.hosts.find(host => host.id === config.project.host)?.label || 'UNRESOLVED'}.\n\n## Responsibilities\n\n${responsibilities.map(text => `- ${text}`).join('\n')}\n\n## Assigned stages and handoffs\n\n${assigned.map(stage => `- ${stage.title}. Expected outputs: ${stage.outputs.join(', ')}. ${config.workflow.bindings[stage.id].contextOnly ? 'Use supplied context only. Other actors must provide changes and observed execution.' : 'Use only available selected capabilities.'}`).join('\n') || 'No recipe stage assigned.'}${customHandoffs ? `\n\n## Custom process assignments\n\n${customHandoffs}` : ''}${commandScope ? `\n\n## Command scope across assigned stages\n\n${commandScope}` : ''}\n\n## Relevant skills\n\n${skills.filter(skill => skillIds.has(skill.id)).map(skill => `- [${skill.label}](../skills/${skill.id}/SKILL.md)`).join('\n') || 'No skills assigned to this role. Read the workflow and supplied context.'}\n\n## Boundaries\n\n${boundaryText(config)}\n\nIf a required capability or input is unavailable, report what is needed. Do not treat named tools or commands as configured integrations. This is a development profile. It is not a deployed backend agent.\n`;
 }
 
-function workflowContent(config) {
+function workflowContent(config, outputKind = 'pack') {
   const selected = getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id));
-  const recipe = lookupRecipe(config.workflow.recipe);
+  const recipe = getStages(config).length ? lookupRecipe(config.workflow.recipe) : undefined;
   const nodes = selected.map(stage => `  ${stage.id.replaceAll('-', '_')}["${stage.title}"]`);
   for (const stage of selected) for (const prerequisite of stage.dependsOn) {
     if (config.workflow.enabledStages.includes(prerequisite)) nodes.push(`  ${prerequisite.replaceAll('-', '_')} --> ${stage.id.replaceAll('-', '_')}`);
@@ -418,14 +580,16 @@ function workflowContent(config) {
   }
   const detail = selected.map(stage => {
     const binding = config.workflow.bindings[stage.id];
+    const reviewOnly = suppliedContextOnly(binding);
+    const actions = reviewOnly ? suppliedReviewActions : stage.actions;
     const capabilityGuidance = binding?.actorType !== 'agent'
       ? 'The responsible person or system supplies this step\'s outputs and records any observed results.'
       : binding.contextOnly
-        ? 'Agent scope: review supplied artifacts only. A person or external system supplies any changes and observed execution.'
+        ? `Agent scope: review supplied artifacts only. A person or external system supplies any changes and observed execution. ${assignmentScopePriority}`
         : `Requested agent capabilities: ${stage.capabilities.join(', ') || 'No agent tool requirement'}. Actual availability and enforcement belong to the host or runtime.`;
-    return `### ${stage.title}\n\n${stage.purpose}\n\nResponsible actor: ${escapeText(actorText(binding))}.\n\nRelevant skills: ${(binding?.skills || []).map(id => skills.find(skill => skill.id === id)?.label || id).join(', ') || 'None selected'}.\n\n${capabilityGuidance}\n\nPrerequisites:\n\n${stage.dependsOn.map(id => `- ${lookupStage(id).title}: ${config.workflow.enabledStages.includes(id) ? 'selected earlier stage' : 'supplied artifact'}\n\n${!config.workflow.enabledStages.includes(id) ? fence(placeholder(config.workflow.suppliedInputs[id], 'existing artifact location')) : ''}`).join('\n') || 'Starting request and project context.'}\n\nInputs:\n\n${stage.inputs.map(text => `- ${text}`).join('\n')}\n\nActions:\n\n${stage.actions.map(text => `- ${text}`).join('\n')}\n\nOutputs and handoff:\n\n${stage.outputs.map(text => `- ${text}`).join('\n')}\n\nAcceptance checks and expected evidence:\n\n${stage.checks.map(text => `- ${text}`).join('\n')}\n\nProject supplied stage notes:\n\n${fence(config.workflow.notes[stage.id] || 'No additional project instructions supplied for this step.')}`;
+    return `### ${stage.title}\n\n${stage.purpose}\n\nResponsible actor: ${escapeText(actorText(binding))}.\n\nRelevant skills: ${(binding?.skills || []).map(id => skills.find(skill => skill.id === id)?.label || id).join(', ') || 'None selected'}.\n\n${capabilityGuidance}\n\nPrerequisites:\n\n${stage.dependsOn.map(id => `- ${lookupStage(id).title}: ${config.workflow.enabledStages.includes(id) ? 'selected earlier stage' : 'supplied artifact'}\n\n${!config.workflow.enabledStages.includes(id) ? fence(placeholder(config.workflow.suppliedInputs[id], 'existing artifact location')) : ''}`).join('\n') || 'Starting request and project context.'}\n\nInputs:\n\n${stage.inputs.map(text => `- ${text}`).join('\n')}\n\nActions:\n\n${actions.map(text => `- ${text}`).join('\n')}\n\n${reviewOnly ? 'Expected producer outputs and handoff' : 'Outputs and handoff'}:\n\n${stage.outputs.map(text => `- ${text}`).join('\n')}\n\n${reviewOnly ? 'Review criteria for supplied evidence' : 'Acceptance checks and expected evidence'}:\n\n${stage.checks.map(text => `- ${text}`).join('\n')}\n\nProject supplied stage notes:\n\n${fence(config.workflow.notes[stage.id] || 'No additional project instructions supplied for this step.')}`;
   }).join('\n\n');
-  return `# ${escapeText(placeholder(config.project.name, 'project name'))}\n\n${recipe?.label || 'Unresolved workflow'} blueprint. This describes intended development work and expected evidence. It does not execute the workflow or implement a backend runtime.\n\n## Purpose\n\n${fence(placeholder(config.project.purpose, 'project purpose'))}\n\n## Intent questions\n\n${(recipe?.questions || []).map(question => { const answer = getIntentAnswer(config, question.id); return `### ${question.label}\n\n${answer.inherited ? 'Uses the recorded project outcome.\n\n' : ''}${fence(placeholder(answer.text, question.label))}`; }).join('\n\n')}\n\n## Target\n\nEnvironment: ${CATALOG.hosts.find(host => host.id === config.project.host)?.label || 'UNRESOLVED'}.\n\nSource control: ${escapeText(config.project.sourceControl || 'UNRESOLVED')}.\n\nSee [installation](INSTALL.md), [validation](VALIDATION.md), [sources](SOURCES.md), [project facts](PROJECT-FACTS.md), [evidence](EVIDENCE.md) and authoritative [configuration](project.json).\n\n## Workflow\n\n${fence(`flowchart LR\n${nodes.join('\n')}`, 'mermaid')}\n\nReview feedback returns to the relevant earlier stage. These prerequisites describe handoffs, not an automatic scheduler. Existing artifacts can satisfy omitted producer stages.\n\n${detail}\n\n## Project components\n\n${componentText(config)}\n\n## Boundaries\n\n${boundaryText(config)}\n\nProject supplied constraint notes:\n\n${fence(config.constraints.notes || 'No additional constraint notes supplied.')}\n\n## Selected practices\n\n${practiceText(config)}\n`;
+  return `# ${escapeText(placeholder(config.project.name, 'project name'))}\n\n${recipe?.label || 'Process design'} blueprint. This describes planned work and expected evidence. It does not execute the workflow or implement a backend runtime.\n\n## Purpose\n\n${fence(placeholder(config.project.purpose, 'project purpose'))}\n\n## Intent questions\n\n${(recipe?.questions || []).map(question => { const answer = getIntentAnswer(config, question.id); return `### ${question.label}\n\n${answer.inherited ? 'Uses the recorded project outcome.\n\n' : ''}${fence(placeholder(answer.text, question.label))}`; }).join('\n\n')}\n\n## Target\n\nEnvironment: ${CATALOG.hosts.find(host => host.id === config.project.host)?.label || 'UNRESOLVED'}.\n\nSource control: ${escapeText(config.project.sourceControl || 'UNRESOLVED')}.\n\nSee [installation](INSTALL.md), [validation](VALIDATION.md), [sources](SOURCES.md), [project facts](PROJECT-FACTS.md), [evidence](EVIDENCE.md) and authoritative [configuration](project.json).\n\n## Workflow\n\n${fence(`flowchart LR\n${nodes.join('\n')}`, 'mermaid')}\n\nReview feedback returns to the relevant earlier stage. These prerequisites describe handoffs, not an automatic scheduler. Existing artifacts can satisfy omitted producer stages.\n\n${detail}\n${workflowModelMarkdown(config)}\n## Project components\n\n${componentText(config)}\n\n## Boundaries\n\n${boundaryText(config)}\n\nProject supplied constraint notes:\n\n${fence(config.constraints.notes || 'No additional constraint notes supplied.')}\n\n## Selected practices\n\n${practiceText(config, outputKind)}\n`;
 }
 
 function evidenceContent(config) {
@@ -436,7 +600,33 @@ function evidenceContent(config) {
 
 function runtimeContent(config) {
   const sections = [['outcome', 'Expected outcome'], ['requiredInputs', 'Required inputs and clarification'], ['judgment', 'Model judgment and ordinary code'], ['tools', 'Tool contracts and permitted changes'], ['validation', 'Validation before writes and before response'], ['limits', 'Execution and data limits'], ['duplicates', 'Duplicate requests and uncertain writes'], ['failures', 'Failure and partial completion'], ['confirmation', 'Confirmed actions and inference']];
-  return `# Backend agent runtime design\n\nThis is a design draft. It describes what the finished application should do for a request. Copilot profiles in this pack assist engineers with development work. They are not this deployed runtime. Selecting a control records a requirement and does not enforce it.\n\n${fence('flowchart LR\n  User -->|request| API[REST API]\n  API -->|start run| Runner[Agent runner]\n  Runner -->|tool call| Tools[Typed tools or MCP]\n  Tools --> Backend[Existing backend APIs]\n  Backend --> Check[Authorization and business validation]\n  Check -->|allowed| Store[Database]\n  Check -->|rejected| Rejected[Rejected operation result]\n  Store --> Confirm[Confirmed operation result]\n  Confirm --> ToolResult[Structured tool result]\n  Rejected --> ToolResult\n  ToolResult -->|result| Runner\n  Runner --> FinalCheck[Response validation]\n  FinalCheck -->|response| API\n  API -->|response| User', 'mermaid')}\n\n${sections.map(([key, label]) => `## ${label}\n\n${fence(placeholder(config.runtime[key], label))}`).join('\n\n')}\n\n## Requirement, implementation and evidence links\n\n${config.runtime.controls.map(control => `### ${escapeText(control.label)}\n\nStatus: ${escapeText(control.status)}.\n\nImplementation location:\n\n${fence(placeholder(control.implementation, 'implementation link'))}\n\nEvidence id: ${escapeText(placeholder(control.evidenceId, 'evidence link'))}. An evidence link does not imply a passing result.`).join('\n\n') || 'No controls recorded.'}\n\n## Draft contracts\n\nRecord actual request fields, required values, validation failures, allowed tool operations, confirmed backend identifiers and unresolved inferred values. Specify asynchronous status retrieval if the request lifetime requires it. No working contract or integration is configured by this document.\n`;
+  return `# Backend agent runtime design\n\nThis is a design draft. It describes what the finished application should do for a request. Development agent profiles, when used, guide engineering work. They do not implement this runtime. Selecting a control records a requirement and does not enforce it.\n\nIllustrative architecture. This fixed backend example is separate from explicit process records and is not assembled from their routes.\n\n${fence('flowchart LR\n  User -->|request| API[REST API]\n  API -->|start run| Runner[Agent runner]\n  Runner -->|tool call| Tools[Typed tools or MCP]\n  Tools --> Backend[Existing backend APIs]\n  Backend --> Check[Authorization and business validation]\n  Check -->|allowed| Store[Database]\n  Check -->|rejected| Rejected[Rejected operation result]\n  Store --> Confirm[Confirmed operation result]\n  Confirm --> ToolResult[Structured tool result]\n  Rejected --> ToolResult\n  ToolResult -->|result| Runner\n  Runner --> FinalCheck[Response validation]\n  FinalCheck -->|response| API\n  API -->|response| User', 'mermaid')}\n\n${sections.map(([key, label]) => `## ${label}\n\n${fence(placeholder(config.runtime[key], label))}`).join('\n\n')}\n\n## Requirement, implementation and evidence links\n\n${config.runtime.controls.map(control => `### ${escapeText(control.label)}\n\nStatus: ${escapeText(control.status)}.\n\nImplementation location:\n\n${fence(placeholder(control.implementation, 'implementation link'))}\n\nEvidence id: ${escapeText(placeholder(control.evidenceId, 'evidence link'))}. An evidence link does not imply a passing result.`).join('\n\n') || 'No controls recorded.'}\n\n## Draft contracts\n\nRecord actual request fields, required values, validation failures, allowed tool operations, confirmed backend identifiers and unresolved inferred values. Specify asynchronous status retrieval if the request lifetime requires it. No working contract or integration is configured by this document.\n`;
+}
+
+function readingRoutes(config, kind, skill) {
+  if (kind === 'skill') return [
+    { label: `Use ${skill.label}`, purpose: 'Start with the procedure for your task.', paths: [`.github/skills/${skill.id}/SKILL.md`] },
+    { label: 'Check project context', purpose: 'Read the linked reference when you need the recorded outcome, commands or boundaries. Check unresolved findings before adoption.', paths: [`.github/skills/${skill.id}/references/project.md`, 'VALIDATION.md'] },
+  ];
+  const enabled = getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id));
+  const stageIds = new Set(enabled.map(stage => stage.id));
+  const routes = [{ label: 'Review the plan', purpose: 'For a PM or teammate. Read the outcome, planned owners, open decisions and findings.', paths: ['WORKFLOW.md', 'VALIDATION.md'] }];
+  if (kind === 'blueprint') {
+    const templates = [];
+    if (['architecture', 'options', 'recommendation', 'diagnosis'].some(id => stageIds.has(id))) templates.push('templates/DECISION.md');
+    if (['experiment-plan', 'verification', 'regression'].some(id => stageIds.has(id)) || config.runtime.enabled || customAssignments(config).length) templates.push('templates/EVALUATION.md');
+    if (!templates.length && ['requirements', 'current-process', 'feasibility-scope', 'reproduction'].some(id => stageIds.has(id))) templates.push('templates/REQUIREMENTS.md');
+    if (templates.length) routes.push({ label: 'Prepare the next step', purpose: 'Use the relevant template to develop the decision or checks. Record actual results only after the work.', paths: templates });
+    return routes;
+  }
+  const assignedRoles = [...new Set([...enabled.filter(stage => config.workflow.bindings[stage.id]?.actorType === 'agent').map(stage => config.workflow.bindings[stage.id].actorId), ...customAssignments(config).filter(({ process, step }) => process.kind !== 'application' && step.actor.type === 'agent').map(({ step }) => step.actor.id)])];
+  const profiles = assignedRoles.filter(id => config.agents.some(agent => agent.role === id) && roles.some(role => role.id === id));
+  if (profiles.length) routes.push({ label: 'Use an assigned agent', purpose: 'Choose the profile for your task. Read only its linked skills and their project references when needed.', paths: profiles.map(id => `.github/agents/${id}.agent.md`) });
+  const effective = getEffectiveSkills(config);
+  const preferred = enabled.filter(stage => config.workflow.bindings[stage.id]?.actorType === 'agent').flatMap(stage => config.workflow.bindings[stage.id].skills);
+  const procedure = effective.find(item => item.id === preferred[0]) || effective[0];
+  if (procedure) routes.push({ label: `Use ${procedure.label}`, purpose: 'For a procedure without an agent profile. Start with this skill and open its linked project reference only as needed.', paths: [`.github/skills/${procedure.id}/SKILL.md`] });
+  return routes;
 }
 
 export function getUseInstructions(config, selection = { kind: 'pack' }) {
@@ -444,9 +634,11 @@ export function getUseInstructions(config, selection = { kind: 'pack' }) {
   if (!['blueprint', 'skill', 'pack'].includes(kind)) throw new Error('Choose a supported output: blueprint, skill or pack.');
   const skill = kind === 'skill' ? skills.find(item => item.id === selection.skillId) : null;
   if (kind === 'skill' && !skill) throw new Error('Choose a supported skill.');
+  const reading = readingRoutes(config, kind, skill);
   if (kind === 'blueprint') return {
     title: 'Use the workflow blueprint',
     intro: 'Share a readable plan and its decisions with the people responsible for the work.',
+    reading,
     steps: [
       { title: 'Review the plan', body: 'Open WORKFLOW.md and VALIDATION.md. Check the intended outcome, responsible actors, missing inputs and draft findings. If PROJECT-ATLAS.html is included, open it to walk through the same decisions visually.' },
       { title: 'Agree the next action', body: 'Give the workflow to the named owner. Agree which next step should happen, which inputs it needs and what result will be accepted.' },
@@ -461,6 +653,9 @@ export function getUseInstructions(config, selection = { kind: 'pack' }) {
   const hasProfiles = kind === 'pack' && config.agents.some(agent => roles.some(item => item.id === agent.role));
   const hasSkills = kind === 'skill' || getEffectiveSkills(config).length > 0;
   const location = kind === 'skill' ? `.github/skills/${skill.id}/` : [hasProfiles ? '.github/agents/' : '', hasSkills ? '.github/skills/' : ''].filter(Boolean).join(' and ');
+  const placement = kind === 'skill'
+    ? `Copy only the complete exported ${location} directory to that same path at the repository root. Keep SKILL.md and references/project.md inside that directory. The other ZIP files support review and reopening. Keeping those records is optional for installing the skill. Keep any retained project and adoption records outside the skill directory. Keep project.json and its review records together for reopening in Atlas. The complete skill directory is self contained and can be copied independently of the root records.`
+    : `Copy the pack into the repository while preserving every exported path relative to the repository root. ${location ? `Keep ${location} at those same paths. ` : ''}${hasSkills ? 'Keep each entire skill directory, including SKILL.md and references/project.md. ' : ''}Keep project.json and its review records together for reopening in Atlas. ${hasProfiles ? 'Keep WORKFLOW.md, VALIDATION.md and the other root records at the repository root because the agent profiles reference them.' : 'Keep the workflow records together at their exported paths for review by their named owners.'}`;
   const activeRoles = [...new Set(getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id) && config.workflow.bindings[stage.id]?.actorType === 'agent').map(stage => config.workflow.bindings[stage.id].actorId))];
   const role = roles.find(item => activeRoles.includes(item.id) && config.agents.some(agent => agent.role === item.id)) || roles.find(item => config.agents.some(agent => agent.role === item.id));
   const skillTask = `Try a small task matching ${skill ? `the ${skill.label.toLowerCase()} description` : 'an included skill description'}. Skills can be loaded when relevant. Inspect the resulting work and available session details, and record whether skill use was observable. An agent saying it used a skill is not independent proof.`;
@@ -477,9 +672,10 @@ export function getUseInstructions(config, selection = { kind: 'pack' }) {
   return {
     title: kind === 'skill' ? `Use ${skill.label}` : 'Use the workflow pack',
     intro: `Intended environment: ${environment}. These instructions explain adoption. Host discovery and task behavior have not been exercised by Atlas.`,
+    reading,
     steps: [
-      { title: 'Review before copying', body: 'Read VALIDATION.md and project.json. Confirm the supplied paths, commands, facts and boundaries against the real project. Resolve errors or deliberately keep this as a draft.' },
-      { title: 'Place the files', body: `Compare existing repository instructions before changing them. Preserve local rules. ${location ? `Copy the selected files to ${location} at the repository root. ` : ''}${hasSkills ? 'Keep each entire skill directory, including SKILL.md and references/project.md. ' : ''}Keep project.json and its review records together for reopening in Atlas. ${hasProfiles ? 'Keep WORKFLOW.md, VALIDATION.md and the other root records available because the agent profiles reference them.' : hasSkills ? 'The complete skill directory is self contained and can be copied independently of the root records.' : 'Keep the workflow records together for review by their named owners.'}` },
+      { title: 'Review before copying', body: 'Check VALIDATION.md and the files relevant to your task. Confirm the supplied paths, commands, facts and boundaries against the real project. Resolve errors or deliberately keep this as a draft. project.json keeps the editable settings for reopening.' },
+      { title: 'Place the files', body: `Compare existing repository instructions before changing them. Preserve local rules. ${placement}` },
       { title: 'Check the selected host', body: discovery },
       { title: 'Try one bounded task', body: task },
       { title: 'If it is missing or behaves unexpectedly', body: 'Check the repository root, exact file locations, complete skill directory and valid metadata. Check the installed host or extension version and applicable organization policy against the linked documentation. If discovery remains unavailable, record it as unverified instead of treating format checks as successful installation.' },
@@ -493,12 +689,12 @@ export function getUseInstructions(config, selection = { kind: 'pack' }) {
 function installContent(config, selection = { kind: 'pack' }) {
   const guide = getUseInstructions(config, selection);
   const references = guide.source === SOURCES.agents ? `[GitHub configuration](${SOURCES.agents}), [custom agent authoring](${SOURCES.install}) and [Copilot skills](${SOURCES.copilotSkills}).` : guide.source === SOURCES.copilotSkills ? `[Copilot skills](${SOURCES.copilotSkills}) and [Agent Skills specification](${SOURCES.skills}).` : '';
-  return `# ${guide.title}\n\n${guide.intro}\n\n${guide.steps.map((step, index) => `## ${index + 1}. ${step.title}\n\n${step.body}`).join('\n\n')}\n\n## Limits\n\n${guide.limits.map(limit => `- ${limit}`).join('\n')}\n\n${selection.kind === 'blueprint' ? '' : `## Exercise record\n\n| Item | Observed value or source |\n| --- | --- |\n| Repository revision | [NOT RECORDED] |\n| Host and extension or plugin versions | [NOT RECORDED] |\n| Model and installed artifacts | [NOT RECORDED] |\n| Discovery and actual available tools | [NOT RUN] |\n| Task input and expected result | [UNRESOLVED] |\n| Observed result, failures and human corrections | [NOT RUN] |\n| Existing approach comparison | [NOT RUN] |\n\n${references ? `## Format and adoption references\n\n${references}\n` : ''}`}`;
+  return `# ${guide.title}\n\n${guide.intro}\n\n## Read only what you need\n\n${guide.reading.map(route => `- **${escapeText(route.label)}**. ${route.purpose} ${route.paths.map(path => `[${path}](${path})`).join(', ')}.`).join('\n')}\n\n${guide.steps.map((step, index) => `## ${index + 1}. ${step.title}\n\n${step.body}`).join('\n\n')}\n\n## Limits\n\n${guide.limits.map(limit => `- ${limit}`).join('\n')}\n\n${selection.kind === 'blueprint' ? '' : `## Exercise record\n\n| Item | Observed value or source |\n| --- | --- |\n| Repository revision | [NOT RECORDED] |\n| Host and extension or plugin versions | [NOT RECORDED] |\n| Model and installed artifacts | [NOT RECORDED] |\n| Discovery and actual available tools | [NOT RUN] |\n| Task input and expected result | [UNRESOLVED] |\n| Observed result, failures and human corrections | [NOT RUN] |\n| Existing approach comparison | [NOT RUN] |\n\n${references ? `## Format and adoption references\n\n${references}\n` : ''}`}`;
 }
 
-function sourceContent(config) {
+function sourceContent(config, outputKind = 'pack') {
   const runtimeSources = config.runtime.enabled ? '## Runtime design references\n\n- [MCP tool specification](https://modelcontextprotocol.io/specification/2026-07-28/server/tools). Input validation, server access control, output schemas, timeouts and logging responsibilities. This does not configure an MCP server.\n- [Safe retries with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/). Duplicate operations and uncertain results after a timeout.\n- [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents). Compare fixed code, workflows and adaptive agents according to the actual task.\n\n' : '';
-  return `# Sources and applicability\n\nDefinition review date: ${REVIEW_DATE}. Definition versions identify local adaptations, not upstream release versions. A URL alone does not establish correctness.\n\n## Format references\n\n- [Agent Skills specification](${SOURCES.skills}). Required metadata, naming and focused supporting references.\n- [GitHub custom agent configuration](${SOURCES.agents}). Explicit tool aliases, target values and metadata. Host behavior must be exercised separately.\n- [Custom agent authoring](${SOURCES.install}). Repository layout and GitHub cloud repository requirements.\n- [Copilot skills](${SOURCES.copilotSkills}). Documented discovery locations.\n\n## Technology questions\n\n${profilesText(config)}\n\n## Selected reference practices\n\n${practiceText(config)}\n\n${runtimeSources}## Project source locations\n\n${fence(placeholder(config.project.sourceLocations, 'source locations'))}\n\n## Claim trace\n\n${factsText(config)}\n\nThe factory records source locations and supplied confirmations without retrieving or verifying arbitrary content. Preserve original material and distinguish it from derived claims. Conflicting claims remain visible until resolved.\n`;
+  return `# Sources and applicability\n\nDefinition review date: ${REVIEW_DATE}. Definition versions identify local adaptations, not upstream release versions. A URL alone does not establish correctness.\n\n${outputKind === 'blueprint' ? '' : `## Format references\n\n- [Agent Skills specification](${SOURCES.skills}). Required metadata, naming and focused supporting references.\n- [GitHub custom agent configuration](${SOURCES.agents}). Explicit tool aliases, target values and metadata. Host behavior must be exercised separately.\n- [Custom agent authoring](${SOURCES.install}). Repository layout and GitHub cloud repository requirements.\n- [Copilot skills](${SOURCES.copilotSkills}). Documented discovery locations.\n\n`}## Technology questions\n\n${profilesText(config)}\n\n## Selected reference practices\n\n${practiceText(config, outputKind)}\n\n${runtimeSources}## Project source locations\n\n${fence(placeholder(config.project.sourceLocations, 'source locations'))}\n\n## Claim trace\n\n${factsText(config)}\n\nThe factory records source locations and supplied confirmations without retrieving or verifying arbitrary content. Preserve original material and distinguish it from derived claims. Conflicting claims remain visible until resolved.\n`;
 }
 
 function requirementTemplate(config) {
@@ -514,8 +710,18 @@ function requirementTemplate(config) {
   return `# Requirement brief\n\nThis is an editable evidence template. Empty fields remain unresolved.\n\n## Request and outcome\n\n${fence(placeholder(config.project.purpose, 'intended outcome'))}\n\n## Current behavior and source\n\n${currentSection}\n\n## Recorded requirement context\n\n${context}\n\n## Acceptance examples\n\n${acceptanceSection}\n\n## Boundaries and unresolved values\n\nRecord required inputs, excluded changes, incomplete input behavior and decisions requiring a named owner.\n`;
 }
 
+function workingContext(config, stageIds) {
+  const selected = getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id) && stageIds.includes(stage.id));
+  const stageContext = selected.map(stage => {
+    const note = config.workflow.notes[stage.id];
+    const supplied = stage.dependsOn.filter(id => !config.workflow.enabledStages.includes(id) && present(config.workflow.suppliedInputs[id])).map(id => `Existing ${lookupStage(id).title} artifact:\n\n${fence(config.workflow.suppliedInputs[id])}`).join('\n\n');
+    return `### ${stage.title}\n\nPlanned responsibility: ${escapeText(actorText(config.workflow.bindings[stage.id]))}.\n\n${present(note) ? `Supplied stage notes:\n\n${fence(note)}\n\n` : ''}${supplied}`.trim();
+  }).join('\n\n');
+  return `## Supplied context\n\nRecorded intent is preserved below. It is input to this record, not an approved option, executed check or observed result.\n\n${intentText(config)}\n\n## Planned stages and supplied notes\n\nStage assignments describe planned work. They do not establish decision authority or approval.\n\n${stageContext || 'No related stage is enabled in this workflow.'}${present(config.constraints.notes) ? `\n\n## Supplied boundaries\n\n${fence(config.constraints.notes)}` : ''}`;
+}
+
 function decisionTemplate(config) {
-  return `# Design decision and alternatives\n\n## Decision to make\n\n${fence(placeholder(config.project.purpose, 'decision outcome'))}\n\n## Options\n\n| Option | Supporting evidence | Tradeoffs | Unverified assumptions |\n| --- | --- | --- | --- |\n| [UNRESOLVED] | [UNRESOLVED] | [UNRESOLVED] | [UNRESOLVED] |\n\n## Effort and operating cost\n\nKeep measurements separate from estimates. Record units, workload assumptions, relevant environment and versions, source dates and uncertainty.\n\n## Recommendation\n\n[UNRESOLVED: recommendation and supporting evidence]\n\n## Decision owner and follow up\n\n[UNRESOLVED: owner, acceptance date, next experiment or delivery scope]\n\nA completed study can be supplied as an existing artifact to a later workflow.\n`;
+  return `# Design decision and alternatives\n\n## Project outcome\n\n${fence(placeholder(config.project.purpose, 'decision outcome'))}\n\n${workingContext(config, ['architecture', 'options', 'recommendation', 'diagnosis'])}\n\n## Options\n\nUse the supplied context to describe the options being compared. Record evidence before choosing one.\n\n| Option | Supporting evidence | Tradeoffs | Unverified assumptions |\n| --- | --- | --- | --- |\n| [UNRESOLVED] | [UNRESOLVED] | [UNRESOLVED] | [UNRESOLVED] |\n\n## Effort and operating cost\n\nKeep measurements separate from estimates. Record units, workload assumptions, relevant environment and versions, source dates and uncertainty.\n\n## Recommendation\n\n[UNRESOLVED: recommendation and supporting evidence]\n\n## Decision owner and follow up\n\nConfirm who may make this decision. A planned stage assignee is not automatically its decision owner. Review any ownership statement in the supplied boundaries.\n\nNamed decision owner: [UNRESOLVED: name and decision authority]\n\nAcceptance date: [UNRESOLVED: date, if accepted]\n\nNext action: [UNRESOLVED: follow up, next experiment or delivery scope]\n\nA completed decision record can be supplied as an existing artifact to a later workflow.\n`;
 }
 
 function verificationTemplate() {
@@ -523,10 +729,41 @@ function verificationTemplate() {
 }
 
 function evaluationTemplate(config) {
-  const cases = config.runtime.enabled ? ['Valid request', 'Missing required information', 'Invalid proposed result', 'Backend failure', 'Write succeeds before response timeout', 'Duplicate retry'] : config.workflow.recipe === 'bugfix' ? ['Original failing case', 'Adjacent behavior', 'Invalid input', 'Regression or incomplete environment'] : ['Representative expected use', 'Incomplete information', 'Boundary or failure case', 'Behavior that should stay unchanged'];
+  const cases = config.runtime.enabled ? ['Valid request', 'Missing required information', 'Invalid proposed result', 'Backend failure', 'Write succeeds before response timeout', 'Duplicate retry'] : getStages(config).length && config.workflow.recipe === 'bugfix' ? ['Original failing case', 'Adjacent behavior', 'Invalid input', 'Regression or incomplete environment'] : ['Representative expected use', 'Incomplete information', 'Boundary or failure case', 'Behavior that should stay unchanged'];
   const hasModel = config.runtime.enabled || Object.values(config.model).some(present);
   const modelSection = hasModel ? `## Model details, when used\n\n${fence(`Name: ${placeholder(config.model.name, 'model')}\nVersion: ${placeholder(config.model.version, 'version')}\nBudget: ${placeholder(config.model.budget, 'budget')}`)}\n\nRecord actual model usage and cost separately from estimates. If instructions are what you are evaluating, useful comparison options may include the current setup, minimal project facts, a focused skill or a complete pack. Select only conditions relevant to the study.\n\n` : '';
-  return `# Evaluation plan and observed results\n\nCompare the current approach with the actual options for this project. Name each option before running a comparison. Use representative situations, repeated observations where needed and independent acceptance checks.\n\n## Cases\n\n| Case | Input or situation | Expected result | Observed result and source |\n| --- | --- | --- | --- |\n${cases.map(name => `| ${name} | [UNRESOLVED] | [UNRESOLVED] | [NOT RUN] |`).join('\n')}\n\n## Matched comparison\n\nUse equivalent inputs and record any differences in environment or procedure that could affect the result. Compare accepted outcomes, effort, elapsed time, cost and ongoing maintenance. Keep measurements separate from estimates.\n\n| Option | Accepted result and source | Corrections and effort | Elapsed time | Cost and basis | Maintenance effort |\n| --- | --- | --- | --- | --- | --- |\n${['Current approach', '[UNRESOLVED: proposed option]', '[UNRESOLVED: alternative, if needed]'].map(condition => `| ${condition} | [NOT RUN] | [NOT RECORDED] | [NOT RECORDED] | [NOT RECORDED] | [NOT RECORDED] |`).join('\n')}\n\nRecord who checked each result, how it was checked, the relevant environment and versions, and where the evidence can be inspected. Report failures and unrun checks. A success message alone does not prove the expected outcome.\n\n${modelSection}No experiment, successful outcome or productivity gain is established by this export.\n`;
+  const processCases = customEvaluationCases(config);
+  return `# Evaluation plan and observed results\n\nCompare the current approach with the actual options for this project. Name each option before running a comparison. Use representative situations, repeated observations where needed and independent acceptance checks.\n\n${workingContext(config, ['experiment-plan', 'verification', 'reproduction', 'regression'])}\n\n## Cases\n\nTranslate the supplied context into explicit cases and expected results before running them. The rows below are starter categories, not inferred cases or completed checks.\n\n| Case | Input or situation | Expected result | Observed result and source |\n| --- | --- | --- | --- |\n${cases.map(name => `| ${name} | [UNRESOLVED] | [UNRESOLVED] | [NOT RUN] |`).join('\n')}\n\n${processCases}## Matched comparison\n\nUse equivalent inputs and record any differences in environment or procedure that could affect the result. Compare accepted outcomes, effort, elapsed time, cost and ongoing maintenance. Keep measurements separate from estimates.\n\n| Option | Accepted result and source | Corrections and effort | Elapsed time | Cost and basis | Maintenance effort |\n| --- | --- | --- | --- | --- | --- |\n${['Current approach', '[UNRESOLVED: proposed option]', '[UNRESOLVED: alternative, if needed]'].map(condition => `| ${condition} | [NOT RUN] | [NOT RECORDED] | [NOT RECORDED] | [NOT RECORDED] | [NOT RECORDED] |`).join('\n')}\n\nRecord who checked each result, how it was checked, the relevant environment and versions, and where the evidence can be inspected. Report failures and unrun checks. A success message alone does not prove the expected outcome.\n\n${modelSection}No experiment, successful outcome or productivity gain is established by this export.\n`;
+}
+
+function customEvaluationCases(config) {
+  const processes = config.workflowModel.processes.filter(process => process.source === 'custom');
+  if (!processes.length) return '';
+  const table = rows => `| Planned case | Input or situation | Expected result from the design | Observed result and source |\n| --- | --- | --- | --- |\n${rows.map(row => `| ${row.map(escapeText).join(' | ')} | [NOT RUN] |`).join('\n')}`;
+  return `## Planned process cases\n\nThese cases come from the recorded process decisions. They are design expectations, not simulated runs or evidence of success. Supply the actual procedure, candidate revision, environment, observations and source when someone performs each case.\n\n${processes.map(process => {
+    const rows = process.steps.flatMap(step => step.outcomes.map(outcome => {
+      const route = process.transitions.find(item => item.fromStepId === step.id && item.outcome === outcome);
+      const correction = process.corrections.find(item => item.decisionStepId === step.id && item.outcome === outcome);
+      const expected = correction ? correctionText(process, correction) : destinationText(process, route?.to || { type: 'unresolved', id: '' });
+      return [`${process.id}/${step.id} / ${outcome}`, `Arrange inputs ${step.inputIds.join(', ') || '(none recorded)'} and the declared ${outcome} outcome. Actual inputs and procedure remain to be supplied.`, expected];
+    }));
+    for (const correction of process.corrections) rows.push([
+      `${process.id}/${correction.id} / correction limit reached`,
+      correction.maxCorrections === null ? 'Maximum corrections remains UNRESOLVED. Agree a bounded limit before implementing or running this path.' : `The ${correction.maxCorrections} permitted corrections after the initial candidate have been entered, including unsuccessful attempts. The decision reports ${correction.outcome} again.`,
+      `${correction.maxCorrections === null ? 'Do not infer a correction allowance. ' : 'Do not enter another correction attempt. '}${destinationText(process, { type: 'terminal', id: correction.exhaustedTerminalId })}. Preserve the current candidate and findings.`,
+    ]);
+    for (const check of process.checks) rows.push([
+      `${process.id}/${check.id} / candidate revision changed`,
+      `Candidate ${check.candidateId} changes after earlier evidence was supplied. Criteria: ${check.criteria.join(' ') || '[UNRESOLVED]'}`,
+      `Check the changed candidate at ${process.id}/${check.stepId} and record ${check.evidenceResultId} for that revision. Prior evidence stays historical. Unavailable, missing and unrun checks do not pass.`,
+    ]);
+    for (const approval of process.approvals) rows.push([
+      `${process.id}/${approval.id} / approval after changes`,
+      `Candidate ${approval.candidateId} changes after an earlier approval.`,
+      `Obtain new approval at ${process.id}/${approval.stepId} from ${placeholder(approval.authority, 'authority')} using current evidence ${approval.evidenceResultIds.join(', ') || '[UNRESOLVED]'}. Do not inherit the earlier approval.`,
+    ]);
+    return `### ${escapeText(process.name || process.id)}\n\nProcess ${escapeText(process.id)}, ${process.kind}. Pattern ${process.pattern.id}, version ${process.pattern.version}.\n\n${rows.length ? table(rows) : 'No outcome cases can be derived yet. Define steps and outcomes before using this plan.'}`;
+  }).join('\n\n')}\n\n`;
 }
 
 function contractsTemplate() {
@@ -535,32 +772,34 @@ function contractsTemplate() {
 
 function artifactFiles(config) {
   const enabled = getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id));
+  const custom = customAssignments(config);
   const projectSources = [...new Set(config.facts.map(fact => fact.source).filter(present))];
   const practiceSources = practices.filter(practice => config.practices.includes(practice.id)).map(practice => practice.source);
   const files = [];
-  const add = (path, content, why, stageIds = [], roleIds = [], sources = []) => files.push({ path, content, why, stages: stageIds, roles: roleIds, sources, assumptions: ['Project values and supplied evidence require review.', 'Generated instructions do not execute or enforce this workflow.'] });
-  add('WORKFLOW.md', workflowContent(config), 'Connect the selected stages, responsible actors, existing inputs, handoffs and expected evidence.', enabled.map(stage => stage.id));
-  add('project.json', json(config), 'Preserve the versioned editable configuration as the authoritative saved representation.');
+  const add = (path, content, why, stageIds = [], roleIds = [], sources = [], assignments = []) => files.push({ path, content, why, stages: stageIds, roles: roleIds, sources, processes: [...new Set(assignments.map(item => item.process.id))], steps: assignments.map(stepReference), assumptions: ['Project values and supplied evidence require review.', 'Generated instructions do not execute or enforce this workflow.'] });
+  add('WORKFLOW.md', workflowContent(config), 'Connect the selected processes, responsible actors, inputs, outcomes, correction limits and expected evidence.', enabled.map(stage => stage.id), [], [], custom);
+  add('project.json', json(config), 'Preserve the versioned editable configuration as the authoritative saved representation.', [], [], [], custom);
   add('INSTALL.md', installContent(config), 'Review destinations and exercise the selected host before adoption.', [], [], [SOURCES.agents]);
   add('SOURCES.md', sourceContent(config), 'Trace adapted practices and project claims to their recorded sources.', [], [], [...practiceSources, ...projectSources]);
   add('PROJECT-FACTS.md', `# Project facts\n\nEntered component values are unverified project data. Status describes supplied provenance and review, not independent verification by Atlas.\n\n${factsText(config)}\n\n## Components\n\n${componentText(config)}\n`, 'Expose the provenance, status and unresolved parts of project facts.', [], [], projectSources);
-  add('EVIDENCE.md', evidenceContent(config), 'Keep expected checks separate from supplied observed results.', config.evidence.map(record => record.stageId).filter(Boolean));
+  add('EVIDENCE.md', evidenceContent(config), 'Keep expected checks separate from supplied observed results.', config.evidence.map(record => record.stageId).filter(Boolean), [], [], custom.filter(({ process, step }) => config.workflowModel.evidenceLinks.some(link => link.processId === process.id && process.checks.some(check => check.id === link.checkId && check.stepId === step.id))));
   const selectedIds = new Set(enabled.map(stage => stage.id));
   if (['requirements', 'current-process', 'feasibility-scope', 'reproduction'].some(id => selectedIds.has(id))) add('templates/REQUIREMENTS.md', requirementTemplate(config), 'Capture the request, acceptance examples and requirement sources.', enabled.filter(stage => ['requirements', 'current-process', 'feasibility-scope', 'reproduction'].includes(stage.id)).map(stage => stage.id));
   if (['architecture', 'options', 'recommendation', 'diagnosis'].some(id => selectedIds.has(id))) add('templates/DECISION.md', decisionTemplate(config), 'Record options, assumptions and a supported design or feasibility decision.', enabled.filter(stage => ['architecture', 'options', 'recommendation', 'diagnosis'].includes(stage.id)).map(stage => stage.id));
   if (['verification', 'reproduction', 'regression', 'experiment-plan'].some(id => selectedIds.has(id))) add('templates/VERIFICATION.md', verificationTemplate(), 'Record actual commands or procedures, results, failures and unrun checks.', enabled.filter(stage => ['verification', 'reproduction', 'regression', 'experiment-plan'].includes(stage.id)).map(stage => stage.id));
-  if (['experiment-plan', 'verification', 'regression'].some(id => selectedIds.has(id)) || config.runtime.enabled) add('templates/EVALUATION.md', evaluationTemplate(config), 'Prepare representative tasks and independent measurements without claiming they have run.');
+  if (['experiment-plan', 'verification', 'regression'].some(id => selectedIds.has(id)) || config.runtime.enabled || custom.length) add('templates/EVALUATION.md', evaluationTemplate(config), 'Prepare representative tasks, declared outcome paths and correction limit cases without claiming they have run.', enabled.filter(stage => ['experiment-plan', 'verification', 'reproduction', 'regression'].includes(stage.id)).map(stage => stage.id), [], [], custom);
   if (config.runtime.enabled) {
-    add('RUNTIME-DESIGN.md', runtimeContent(config), 'Describe the finished backend feature and link controls to implementation and evidence.');
+    add('RUNTIME-DESIGN.md', runtimeContent(config), 'Describe the finished backend feature and link controls to implementation and evidence. The fixed architecture remains illustrative.');
     add('templates/CONTRACTS.md', contractsTemplate(), 'Draft request, tool, response and failure contracts for the selected runtime design.');
   }
   for (const skill of getEffectiveSkills(config)) {
     const usedStages = enabled.filter(stage => config.workflow.bindings[stage.id]?.skills.includes(skill.id));
-    const usedRoles = [...new Set(usedStages.filter(stage => config.workflow.bindings[stage.id].actorType === 'agent').map(stage => config.workflow.bindings[stage.id].actorId))];
-    add(`.github/skills/${skill.id}/SKILL.md`, skillContent(skill, config), usedStages.length ? `Provide ${skill.label.toLowerCase()} only for the assigned stages.` : 'Preserve a deliberately selected extra library skill.', usedStages.map(stage => stage.id), usedRoles, [SOURCES.skills, ...practiceSources]);
-    add(`.github/skills/${skill.id}/references/project.md`, projectReference(config, skill.id), 'Provide self contained project context when this skill needs it.', usedStages.map(stage => stage.id), usedRoles, projectSources);
+    const usedCustom = customAssignments(config, skill.id);
+    const usedRoles = [...new Set([...usedStages.filter(stage => config.workflow.bindings[stage.id].actorType === 'agent').map(stage => config.workflow.bindings[stage.id].actorId), ...usedCustom.filter(({ process, step }) => process.kind !== 'application' && step.actor.type === 'agent' && config.agents.some(agent => agent.role === step.actor.id)).map(({ step }) => step.actor.id)])];
+    add(`.github/skills/${skill.id}/SKILL.md`, skillContent(skill, config), usedStages.length || usedCustom.length ? `Provide ${skill.label.toLowerCase()} only for the assigned workflow steps.` : 'Preserve a deliberately selected extra library skill.', usedStages.map(stage => stage.id), usedRoles, [SOURCES.skills, ...practiceSources], usedCustom);
+    add(`.github/skills/${skill.id}/references/project.md`, projectReference(config, skill.id), 'Provide self contained project context, result definitions, checks and routes when this skill needs them.', usedStages.map(stage => stage.id), usedRoles, projectSources, usedCustom);
   }
-  for (const role of roles) { const agent = config.agents.find(item => item.role === role.id); if (agent) add(`.github/agents/${role.id}.agent.md`, agentContent(agent, config), 'Assign development responsibilities, requested capabilities and relevant skills.', assignedStages(config, role.id).map(stage => stage.id), [role.id], [SOURCES.agents]); }
+  for (const role of roles) { const agent = config.agents.find(item => item.role === role.id); if (agent) add(`.github/agents/${role.id}.agent.md`, agentContent(agent, config), 'Assign development or manual responsibilities, requested capabilities and relevant skills. Application actors remain a separate design.', assignedStages(config, role.id).map(stage => stage.id), [role.id], [SOURCES.agents], customRoleAssignments(config, role.id)); }
   return files;
 }
 
@@ -602,10 +841,10 @@ function validateForOutput(config, outputKind) {
   const structural = shapeIssues(config);
   if (structural.length) return { issues: structural, configurationComplete: false, formatChecked: false, hostExercised: false };
   const issues = ruleIssues(config, outputKind);
-  if (issues.some(issue => issue.code === 'project-size')) return { issues, configurationComplete: false, formatChecked: false, hostExercised: false };
+  if (issues.some(issue => issue.code === 'project-size' || issue.blocking)) return { issues, configurationComplete: false, formatChecked: false, hostExercised: false };
   const formats = formatIssues(artifactFiles(config)); issues.push(...formats);
   const adapterError = issues.some(issue => issue.severity === 'error' && ['unknown-host', 'unknown-role', 'unknown-selection', 'unknown-tool', 'cloud-tool', 'duplicate-agent', 'duplicate-selection', 'duplicate-tool'].includes(issue.code));
-  return { issues, configurationComplete: !issues.some(issue => issue.severity === 'error'), formatChecked: !formats.some(issue => issue.severity === 'error') && !adapterError, hostExercised: false };
+  return { issues, configurationComplete: !issues.some(issue => issue.severity === 'error' || ['workflow-unresolved', 'workflow-stale-evidence'].includes(issue.code)), formatChecked: !formats.some(issue => issue.severity === 'error') && !adapterError, hostExercised: false };
 }
 
 export function validate(config) {
@@ -623,7 +862,7 @@ function finish(files, validation, manifest) {
   withValidation.push({ path: 'manifest.json', content: json(manifest), why: 'Record definition versions, export scope and artifact membership.', stages: [], roles: [], sources: [], assumptions: [] });
   withValidation.sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0);
   if (formatIssues(withValidation).some(issue => ['unsafe-output', 'duplicate-output'].includes(issue.code))) throw new Error('Generated pack contains unsafe or duplicate paths.');
-  return { files: withValidation, validation, reasons: Object.fromEntries(withValidation.map(file => [file.path, { purpose: file.why, stages: file.stages, roles: file.roles, sources: file.sources, assumptions: file.assumptions }])), stats: { fileCount: withValidation.length, bytes: withValidation.reduce((sum, file) => sum + bytes(file.content), 0) } };
+  return { files: withValidation, validation, reasons: Object.fromEntries(withValidation.map(file => [file.path, { purpose: file.why, stages: file.stages, roles: file.roles, processes: file.processes || [], steps: file.steps || [], sources: file.sources, assumptions: file.assumptions }])), stats: { fileCount: withValidation.length, bytes: withValidation.reduce((sum, file) => sum + bytes(file.content), 0) } };
 }
 
 export function compile(config) {
@@ -632,12 +871,12 @@ export function compile(config) {
   serializeProject(config);
   const validation = validate(config);
   return finish(artifactFiles(config), validation, {
-    schemaVersion: SCHEMA_VERSION, templateVersion: DEFINITION_VERSION, exporterVersion: DEFINITION_VERSION, catalogVersion: DEFINITION_VERSION, reviewedOn: REVIEW_DATE,
+    schemaVersion: SCHEMA_VERSION, workflowModelVersion: config.workflowModel.version, templateVersion: EXPORTER_VERSION, exporterVersion: EXPORTER_VERSION, catalogVersion: DEFINITION_VERSION, reviewedOn: REVIEW_DATE,
     kind: 'pack', target: { family: 'github-copilot', environment: config.project.host }, recipe: config.workflow.recipe, draft: !validation.configurationComplete,
     validation: { configurationComplete: validation.configurationComplete, formatChecked: validation.formatChecked, hostExercised: false, behaviorObserved: false, improvementEstablished: false },
     practices: practices.filter(practice => config.practices.includes(practice.id)).map(practice => ({ id: practice.id, adaptationVersion: practice.version, source: practice.source, reviewedOn: REVIEW_DATE })),
     guidanceSnapshot: guidanceSnapshot(config),
-    artifacts: artifactFiles(config).map(file => ({ path: file.path, purpose: file.why, stages: file.stages, roles: file.roles })),
+    artifacts: artifactFiles(config).map(file => ({ path: file.path, purpose: file.why, stages: file.stages, roles: file.roles, processes: file.processes || [], steps: file.steps || [] })),
   });
 }
 
@@ -651,6 +890,10 @@ export function compileSelectedOutput(config, selection = { kind: 'pack' }) {
   if (kind === 'skill' && !getEffectiveSkills(config).some(item => item.id === skill.id)) throw new Error('Assign or select this skill before exporting it.');
   const prefix = skill ? `.github/skills/${skill.id}/` : '';
   const files = complete.files.filter(file => !['VALIDATION.md', 'manifest.json'].includes(file.path) && (kind === 'blueprint' ? !file.path.startsWith('.github/') : file.path === 'project.json' || file.path === 'INSTALL.md' || file.path.startsWith(prefix)));
+  if (kind === 'blueprint') {
+    files.find(file => file.path === 'WORKFLOW.md').content = workflowContent(config, kind);
+    files.find(file => file.path === 'SOURCES.md').content = sourceContent(config, kind);
+  }
   const install = files.find(file => file.path === 'INSTALL.md');
   install.content = installContent(config, selection);
   install.why = kind === 'blueprint' ? 'Explain a human owned handoff and how to record results and reopen the plan.' : 'Explain where to place the complete skill directory and how to exercise it in the selected host.';
@@ -659,14 +902,14 @@ export function compileSelectedOutput(config, selection = { kind: 'pack' }) {
   const formats = formatIssues(files);
   issues.push(...formats);
   const adapterError = kind !== 'blueprint' && issues.some(issue => issue.severity === 'error' && ['unknown-host', 'unknown-role', 'unknown-selection', 'unknown-tool', 'cloud-tool', 'duplicate-agent', 'duplicate-selection', 'duplicate-tool'].includes(issue.code));
-  const validation = { issues, configurationComplete: !issues.some(issue => issue.severity === 'error'), formatChecked: !formats.some(issue => issue.severity === 'error') && !adapterError, hostExercised: false };
+  const validation = { issues, configurationComplete: !issues.some(issue => issue.severity === 'error' || ['workflow-unresolved', 'workflow-stale-evidence'].includes(issue.code)), formatChecked: !formats.some(issue => issue.severity === 'error') && !adapterError, hostExercised: false };
   const manifest = JSON.parse(complete.files.find(file => file.path === 'manifest.json').content);
   Object.assign(manifest, {
     kind,
     target: kind === 'blueprint' ? { family: 'workflow-blueprint', environment: 'human-handoff' } : manifest.target,
     draft: !validation.configurationComplete,
     validation: { configurationComplete: validation.configurationComplete, formatChecked: validation.formatChecked, hostExercised: false, behaviorObserved: false, improvementEstablished: false },
-    artifacts: files.map(file => ({ path: file.path, purpose: file.why, stages: file.stages, roles: file.roles })),
+    artifacts: files.map(file => ({ path: file.path, purpose: file.why, stages: file.stages, roles: file.roles, processes: file.processes || [], steps: file.steps || [] })),
   });
   if (skill) manifest.skill = skill.id;
   return finish(files, validation, manifest);
@@ -678,11 +921,13 @@ export function compileStandaloneSkill(config, skillId) {
   serializeProject(config);
   const skill = skills.find(skill => skill.id === skillId);
   if (!skill) throw new Error('Choose a supported skill.');
-  const files = [{ path: `${skillId}/SKILL.md`, content: skillContent(skill, config), why: 'Export a focused portable procedure.', stages: [], roles: [], sources: [SOURCES.skills], assumptions: [] }, { path: `${skillId}/references/project.md`, content: projectReference(config, skill.id), why: 'Include all required project resources inside the skill directory.', stages: [], roles: [], sources: [], assumptions: [] }];
+  const assignments = customAssignments(config, skillId);
+  const associations = { processes: [...new Set(assignments.map(item => item.process.id))], steps: assignments.map(stepReference) };
+  const files = [{ path: `${skillId}/SKILL.md`, content: skillContent(skill, config), why: 'Export a focused portable procedure.', stages: [], roles: [], sources: [SOURCES.skills], assumptions: [], ...associations }, { path: `${skillId}/references/project.md`, content: projectReference(config, skill.id), why: 'Include all required project resources inside the skill directory.', stages: [], roles: [], sources: [], assumptions: [], ...associations }];
   const complete = validateForOutput(config, 'standalone-skill');
   const formats = formatIssues(files);
   const validation = { ...complete, formatChecked: !formats.some(issue => issue.severity === 'error'), issues: [...complete.issues, ...formats] };
-  return finish(files, validation, { schemaVersion: SCHEMA_VERSION, templateVersion: DEFINITION_VERSION, reviewedOn: REVIEW_DATE, kind: 'standalone-skill', skill: skillId, draft: !validation.configurationComplete, validation: { configurationComplete: validation.configurationComplete, formatChecked: validation.formatChecked, hostExercised: false } });
+  return finish(files, validation, { schemaVersion: SCHEMA_VERSION, workflowModelVersion: config.workflowModel.version, templateVersion: EXPORTER_VERSION, exporterVersion: EXPORTER_VERSION, reviewedOn: REVIEW_DATE, kind: 'standalone-skill', skill: skillId, draft: !validation.configurationComplete, artifacts: files.map(file => ({ path: file.path, purpose: file.why, stages: file.stages, roles: file.roles, processes: file.processes, steps: file.steps })), validation: { configurationComplete: validation.configurationComplete, formatChecked: validation.formatChecked, hostExercised: false } });
 }
 
 

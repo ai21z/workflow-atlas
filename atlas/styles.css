@@ -127,15 +127,15 @@ body[data-theme="light"] #read-map-topic{background:#244e71;color:#fff;border-co
 @media(max-width:380px){body:not([data-embedded="true"]) .brand small{display:none}body:not([data-embedded="true"]) .brand strong{font-size:13px}body:not([data-embedded="true"]) .brand svg{width:22px}body:not([data-embedded="true"]) .topbar{padding:0 10px}body:not([data-embedded="true"]) .brand{gap:6px}.topbar-actions{gap:5px}#mobile-topics{padding:0 7px}.map-current-topic{align-items:flex-start;flex-direction:column;gap:8px}}
 
 /* Theme is a stable, keyboard operated switch. */
-#theme-toggle.theme-switch{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;height:auto;padding:8px 10px;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--ink);font:inherit;font-size:13px;line-height:1.2;white-space:nowrap;cursor:pointer;flex-shrink:0}
-#theme-toggle.theme-switch:hover{background:var(--soft,var(--subtle));border-color:var(--line)}
-.theme-switch-track{display:inline-flex;align-items:center;flex:none;width:42px;height:24px;padding:2px;border:1px solid currentColor;border-radius:99px;background:var(--soft,var(--subtle));box-sizing:border-box}
+#theme-toggle.theme-switch{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;height:auto;padding:8px 10px;border:1px solid transparent;border-radius:9px;background:transparent;color:#d3e4f8;font:inherit;font-size:13px;line-height:1.2;white-space:nowrap;cursor:pointer;flex-shrink:0}
+#theme-toggle.theme-switch:hover{background:#1c2a40;border-color:#678097}
+.theme-switch-track{display:inline-flex;align-items:center;flex:none;width:42px;height:24px;padding:2px;border:1px solid currentColor;border-radius:99px;background:#23374d;box-sizing:border-box}
 .theme-switch-thumb{display:block;width:18px;height:18px;border-radius:50%;background:currentColor;transform:translateX(0);transition:transform 140ms ease}
 .theme-switch[aria-checked=true] .theme-switch-track{background:var(--accent);border-color:var(--accent)}
 .theme-switch[aria-checked=true] .theme-switch-thumb{transform:translateX(18px);background:var(--paper)}
-#theme-toggle:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#theme-toggle:focus-visible{outline:3px solid #8adcf7;outline-offset:3px}
 @media(max-width:420px){.theme-switch-label{display:none}#theme-toggle.theme-switch{padding:8px 6px}}
 @media(prefers-reduced-motion:reduce){.theme-switch-thumb{transition:none}}
 @media(forced-colors:active){.theme-switch-track{background:Canvas;border-color:ButtonText}.theme-switch-thumb{background:ButtonText}.theme-switch[aria-checked=true] .theme-switch-track{background:Highlight;border-color:Highlight}.theme-switch[aria-checked=true] .theme-switch-thumb{background:HighlightText}}
 
-.theme-switch-thumb::after{content:"☾";display:block;color:var(--paper);font-size:14px;line-height:18px;text-align:center}.theme-switch[aria-checked=true] .theme-switch-thumb::after{color:var(--ink)}
+.theme-switch-thumb::after{content:"☾";display:block;color:#10192b;font-size:14px;line-height:18px;text-align:center}.theme-switch[aria-checked=true] .theme-switch-thumb::after{color:var(--ink)}

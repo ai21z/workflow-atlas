@@ -12,6 +12,7 @@ import { attachReviewArtifacts } from './session-output.mjs'
 import { createJevAssistance } from './jev-assistance.mjs'
 import { mountJevView } from './jev-view.mjs'
 import { APP_VERSION } from './version.mjs'
+import { createProcessDesigner } from './process-designer.mjs'
 
 const { CATALOG, TOOL_ALIASES, createRecipe, createExample, selectRecipe, getStages, getEffectiveSkills, compileStandaloneSkill, compile, validate, parseImport, serializeProject } = engine
 const $ = selector => document.querySelector(selector)
@@ -34,7 +35,7 @@ const list = value => Array.isArray(value) ? value : value ? [value] : []
 const formatBytes = count => count < 1024 ? `${count || 0} bytes` : `${(count / 1024).toFixed(1)} KB`
 const named = (items, id) => labelOf(items.find(item => item.id === id) || { id })
 const uid = prefix => `${prefix}-${crypto.randomUUID()}`
-const recipe = () => CATALOG.recipes.find(item => item.id === config.workflow.recipe)
+const recipe = () => getStages(config).length ? CATALOG.recipes.find(item => item.id === config.workflow.recipe) : undefined
 const resolvedChoice = row => Object.hasOwn(choices, row.path) ? choices[row.path] : row.resolution
 const reviewableFiles = files => files.filter(file => !['PROJECT-ATLAS.html', 'manifest.json'].includes(file.path))
 function artifactLabel(path, paths) {
@@ -76,6 +77,9 @@ let baselineFiles = []
 let existingFiles = []
 let comparison = []
 let choices = {}
+let downloadedComparison = null
+let downloadedComparisonChoices = ''
+let comparisonGeneration = ''
 let decisionBaseline = null
 let decisionBaselineLabel = 'Since starting this session'
 let reviewReason = ''
@@ -99,6 +103,23 @@ let assistantAnswerReviews = {}
 const assistantReviewWording = new Map()
 let jevView
 const assistance = createJevAssistance({ onChange: () => jevView?.render() })
+let processDesigner
+function applyProcessConfig(next) {
+  config = next
+  inspectorOpen = false
+  selectedStage = ''
+  workspaceView = 'workflow'
+  changed()
+  clearTimeout(compileTimer)
+  updatePack(false)
+  toast('Process changes applied. Download to keep them.')
+}
+applyProcessConfig.preview = next => {
+  const before = new Map(compile(config).files.map(file => [file.path, file.content]))
+  const after = new Map(compile(next).files.map(file => [file.path, file.content]))
+  return [...new Set([...before.keys(), ...after.keys()])].filter(path => before.get(path) !== after.get(path))
+}
+processDesigner = createProcessDesigner({ getConfig: () => config, onApply: applyProcessConfig, onPendingChange: renderSession, onNotice: toast })
 
 async function createAssistedProject() {
   try {
@@ -175,8 +196,6 @@ function changed(historyKey = '') {
   if (!config) return
   for (const [id, deferred] of Object.entries(deferredAssistantQuestions)) if (deferred.text !== getIntentAnswer(config, id).text) delete deferredAssistantQuestions[id]
   if (pruneAssistantAnswerReviews() && inspectorOpen && currentStep === 'intent') renderStep()
-  comparison = []
-  choices = {}
   const snapshot = JSON.stringify(config)
   if (snapshot !== historyEntries[historyIndex]) {
     const coalesce = historyKey && historyKey === lastHistoryKey && Date.now() - lastHistoryAt < 1200 && historyIndex === historyEntries.length - 1 && historyIndex > 0
@@ -198,6 +217,8 @@ function renderSession() {
   $('#new-project').hidden = !active
   $('#save-state').textContent = dirty ? 'Changes not downloaded' : projectOrigin === 'example' ? 'Fictional example in this session' : 'Session only. Download to keep your work.'
   $('#save-state').classList.toggle('unsaved', dirty)
+  const comparisonNotice = $('#comparison-snapshot-note')
+  if (comparisonNotice) comparisonNotice.hidden = !comparisonIsStale()
   $('#undo').disabled = !active || historyIndex === 0
   $('#redo').disabled = !active || historyIndex >= historyEntries.length - 1
   if (!active) return
@@ -259,8 +280,37 @@ function hasUnrecordedReviewEdits() {
   return [...assistantReviewWording].some(([id, text]) => assistantAnswerReview(id) && text !== assistantAnswerReviews[id].reviewText)
 }
 
+function currentComparisonChoices() {
+  return JSON.stringify(comparison.filter(row => Object.hasOwn(choices, row.path)).map(row => [row.path, choices[row.path]]))
+}
+
+function hasUnkeptFileReview() {
+  const current = currentComparisonChoices()
+  return current !== '[]' && (comparison !== downloadedComparison || current !== downloadedComparisonChoices)
+}
+
+function comparisonGenerationKey() {
+  return JSON.stringify({ config, selection: chosenOutput(), decisionBaseline, reviewReason, guidance: currentGuidanceSelection() })
+}
+
+function comparisonIsStale() {
+  return comparison.length > 0 && comparisonGeneration !== comparisonGenerationKey()
+}
+
+function clearFileComparison() {
+  comparison = []
+  choices = {}
+  comparisonGeneration = ''
+  downloadedComparison = null
+  downloadedComparisonChoices = ''
+}
+
+async function canReplaceFileComparison() {
+  return !hasUnkeptFileReview() || await confirmReplace('This replaces your pending file review choices. Download the reviewed files first to keep them, or keep this file review unchanged.', { title: 'Replace this file review?', keep: 'Keep this file review', replace: 'Replace file review' })
+}
+
 function sessionDirty({ includeAssistance = true } = {}) {
-  return Boolean((includeAssistance && !config && assistance.isDirty()) || hasUnrecordedReviewEdits() || (config && (JSON.stringify(config) !== lastDownloaded || reviewReason !== lastDownloadedReviewReason || baselineNeedsDownload || guidanceChoiceNeedsDownload)))
+  return Boolean(processDesigner?.isPending() || (includeAssistance && !config && assistance.isDirty()) || hasUnrecordedReviewEdits() || hasUnkeptFileReview() || (config && (JSON.stringify(config) !== lastDownloaded || reviewReason !== lastDownloadedReviewReason || baselineNeedsDownload || guidanceChoiceNeedsDownload)))
 }
 
 function currentReview(selection = chosenOutput()) {
@@ -376,11 +426,12 @@ $('#decision-baseline-file').addEventListener('change', async event => {
 function openTaskBrief() {
   if (!config) return
   briefReturnFocus = document.activeElement
-  const firstStage = config.workflow.enabledStages[0]
+  const firstStage = getStages(config).find(stage => config.workflow.enabledStages.includes(stage.id))?.id
   $('#brief-name').value = config.project.name
   $('#brief-purpose').value = config.project.purpose
   $('#brief-context').value = firstStage ? config.workflow.notes[firstStage] || '' : ''
   $('#brief-context').disabled = !firstStage
+  $('#brief-context').closest('label').hidden = !firstStage
   $('#brief-dialog').showModal()
   $('#brief-name').focus()
 }
@@ -389,7 +440,7 @@ function recordTaskBrief() {
   if (!config) return
   config.project.name = $('#brief-name').value
   config.project.purpose = $('#brief-purpose').value
-  const firstStage = config.workflow.enabledStages[0]
+  const firstStage = getStages(config).find(stage => config.workflow.enabledStages.includes(stage.id))?.id
   if (firstStage) config.workflow.notes[firstStage] = $('#brief-context').value
   changed('task-brief')
 }
@@ -410,8 +461,6 @@ $('#brief-form').addEventListener('submit', event => {
 function chosenOutput() {
   const recommendation = recommendOutput(config)
   const selection = outputSelection || {kind:recommendation.kind,skillId:recommendation.skillId}
-  const available = getEffectiveSkills(config)
-  if (selection.kind === 'skill' && !available.some(skill => skill.id === selection.skillId)) return available.length ? {kind:'skill',skillId:available[0].id} : {kind:'blueprint',skillId:null}
   return selection.kind === 'skill' ? selection : {kind:selection.kind,skillId:null}
 }
 
@@ -430,8 +479,13 @@ function renderOutputChoice() {
   const recommendation = recommendOutput(config)
   const selection = chosenOutput()
   const available = getEffectiveSkills(config)
-  const descriptions = {blueprint:'Your workflow and decisions, ready to share.',skill:'Instructions an AI assistant can reuse for one task.',pack:'Your workflow, reusable skills and AI agent instructions.'}
-  $('#download-output').innerHTML = `<div class="output-recommendation"><span class="eyebrow">SUGGESTED START</span><strong>${escape(recommendation.title)}</strong><p>${escape(recommendation.reason)} You can choose another output.</p></div><fieldset class="output-options"><legend>What would help you now?</legend>${['blueprint','skill','pack'].map(kind => `<label class="output-option${selection.kind === kind ? ' is-selected' : ''}"><input type="radio" name="output-kind" data-output-kind="${kind}" value="${kind}" ${selection.kind === kind ? 'checked' : ''} ${kind === 'skill' && !available.length ? 'disabled' : ''}><span><strong>${outputTitle(kind)}</strong><small>${descriptions[kind]}${kind === 'skill' && !available.length ? ' Assign a skill to a stage first.' : ''}</small></span></label>`).join('')}</fieldset>${selection.kind === 'skill' ? `<label class="journey-field" for="output-skill"><span>Choose the procedure</span><select id="output-skill">${available.map(skill => `<option value="${escape(skill.id)}" ${skill.id === selection.skillId ? 'selected' : ''}>${escape(skill.label)}</option>`).join('')}</select></label>` : ''}`
+  const selectedSkill = available.find(skill => skill.id === selection.skillId)
+  const missingSkill = selection.kind === 'skill' && !selectedSkill
+  const descriptions = {blueprint:'Share the plan, decisions and open questions.',skill:'Give an assistant one procedure, such as diagnosis or review.',pack:'Coordinate the workflow with your selected skills and agent profiles.'}
+  const scope = selection.kind === 'skill'
+    ? missingSkill ? 'This procedure is no longer assigned. Choose another procedure or output.' : `${selectedSkill.label} is one procedure. It does not cover the whole ${recipe() ? `${labelOf(recipe()).toLowerCase()} workflow` : 'connected process'}.`
+    : selection.kind === 'blueprint' ? 'A readable plan for people. Agent profiles and skill files are left out.' : 'Use this when you need several procedures or role instructions. Start with the files for your task.'
+  $('#download-output').innerHTML = `<div class="output-recommendation"><span class="eyebrow">${outputSelection ? 'YOUR CHOICE' : 'SUGGESTED START'}</span><strong>${escape(outputSelection ? outputTitle(selection.kind) : recommendation.title)}</strong><p>${outputSelection ? 'Choose the amount of guidance you need now. You can change this at any time.' : escape(recommendation.reason)}</p></div><fieldset class="output-options"><legend>What would help you now?</legend>${['blueprint','skill','pack'].map(kind => `<label class="output-option${selection.kind === kind ? ' is-selected' : ''}"><input type="radio" name="output-kind" data-output-kind="${kind}" value="${kind}" ${selection.kind === kind ? 'checked' : ''} ${kind === 'skill' && !available.length ? 'disabled' : ''}><span><strong>${outputTitle(kind)}</strong><small>${descriptions[kind]}${kind === 'skill' && !available.length ? ' Assign a skill to a stage first.' : ''}</small></span></label>`).join('')}</fieldset>${selection.kind === 'skill' ? `<label class="journey-field" for="output-skill"><span>Choose one procedure</span><select id="output-skill" aria-describedby="output-scope" ${missingSkill ? 'aria-invalid="true"' : ''}>${missingSkill ? `<option value="${escape(selection.skillId)}" selected disabled>${escape(named(CATALOG.skills, selection.skillId))} (no longer assigned)</option>` : ''}${available.map(skill => `<option value="${escape(skill.id)}" ${skill.id === selection.skillId ? 'selected' : ''}>${escape(skill.label)}</option>`).join('')}</select></label>` : ''}<p class="output-scope" id="output-scope">${escape(scope)}</p><p class="hint output-project-note">Every ZIP keeps your full project decisions so you can reopen it and choose a different output later.</p>`
   let failure = ''
   try { downloadPack = packageProject(config, withSessionReview(compileOutput(config, selection))) }
   catch (error) { downloadPack = null; failure = error.message }
@@ -441,8 +495,15 @@ function renderOutputChoice() {
   $('[data-studio-action="download-output"]').disabled = !downloadPack
   $('[data-studio-action="download-atlas"]').disabled = !downloadPack
   if (failure) $('#selected-output-description').textContent = `Generation needs attention. ${failure}`
+  if (!downloadPack) {
+    $('#download-use-guide').innerHTML = '<p class="hint">Choose an available output above to preview its files and use instructions. Your project decisions remain in this session.</p>'
+    return
+  }
   const guide = getUseGuide(config, selection)
-  $('#download-use-guide').innerHTML = `<details class="use-download" id="use-download"><summary>How to use this download</summary><h3 id="use-download-title" tabindex="-1">${escape(guide.title)}</h3><p>${escape(guide.intro)}</p><ol>${guide.steps.map(step => `<li><strong>${escape(step.title)}</strong><p>${escape(step.body)}</p></li>`).join('')}</ol><p class="hint">${escape(Array.isArray(guide.limits) ? guide.limits.join(' ') : guide.limits)}</p>${guide.source ? `<a href="${escape(guide.source)}" target="_blank" rel="noopener noreferrer">Official host guidance ↗</a>` : ''}</details><details class="download-inventory"><summary>Included files and their purpose (${files.length})</summary><ul>${files.map(file => `<li><code>${escape(file.path)}</code><span>${escape(file.why || 'Recorded project artifact.')}</span></li>`).join('')}</ul></details>`
+  const routes = list(guide.reading).map(route => ({...route,paths:list(route.paths).filter(path => files.some(file => file.path === path))})).filter(route => route.paths.length)
+  const routeFiles = routes.flatMap(route => route.paths)
+  const reading = routes.length ? `<details class="download-reading"><summary>Read only what you need</summary><p class="hint">Choose your task. Preview these files before downloading.</p><ul>${routes.map(route => `<li><strong>${escape(route.label)}</strong><p>${escape(route.purpose)}</p><div>${route.paths.map(path => `<button type="button" class="text-button" data-select-file="${escape(path)}" aria-label="Preview ${escape(path)}">${escape(artifactLabel(path, routeFiles))}</button>`).join('')}</div></li>`).join('')}</ul></details>` : ''
+  $('#download-use-guide').innerHTML = `${reading}<details class="use-download" id="use-download"><summary>How to use this download</summary><h3 id="use-download-title" tabindex="-1">${escape(guide.title)}</h3><p>${escape(guide.intro)}</p><ol>${guide.steps.map(step => `<li><strong>${escape(step.title)}</strong><p>${escape(step.body)}</p></li>`).join('')}</ol><p class="hint">${escape(Array.isArray(guide.limits) ? guide.limits.join(' ') : guide.limits)}</p>${guide.source ? `<a href="${escape(guide.source)}" target="_blank" rel="noopener noreferrer">Official host guidance ↗</a>` : ''}</details><details class="download-inventory"><summary>Included files and their purpose (${files.length})</summary><ul>${files.map(file => `<li><code>${escape(file.path)}</code><span>${escape(file.why || 'Recorded project artifact.')}</span></li>`).join('')}</ul></details>`
 }
 
 function renderStudio() {
@@ -471,6 +532,7 @@ function renderStudio() {
     const focusSelector = attributes.map(attribute => `[${attribute.name}="${CSS.escape(attribute.value)}"]`).join('')
     const paletteOpen = Boolean($('#project-content [data-authoring-palette]')?.open)
     $('#project-content').innerHTML = renderProjectView(config, pack, { view: workspaceView, selectedStage, editing: true, authoring: true, paletteOpen })
+    if (workspaceView === 'workflow') $('#project-content').insertAdjacentHTML('afterbegin', processDesigner.launcher(config))
     if (focusSelector) $('#project-content').querySelector(`button${focusSelector}`)?.focus({preventScroll:true})
   }
   $('#inspector').hidden = !inspectorOpen
@@ -553,6 +615,7 @@ function openStage(id) {
 
 function restoreHistory(direction) {
   if (!config) return
+  if (processDesigner.isOpen()) return
   const next = historyIndex + direction
   if (next < 0 || next >= historyEntries.length) return
   clearTimeout(compileTimer)
@@ -565,7 +628,6 @@ function restoreHistory(direction) {
     if (inspectorOpen) history.replaceState(null, '', '#details-intent')
   }
   lastHistoryKey = ''
-  comparison = []; choices = {}
   updatePack(false)
   if (inspectorOpen) renderStep()
   toast(direction < 0 ? 'Change undone.' : 'Change restored.')
@@ -603,7 +665,7 @@ function atlasLink(topic, label) {
 
 function renderIntent() {
   return sectionHead('Describe the outcome', 'These answers guide the instructions. Leave anything you do not know unresolved.') +
-    `<div class="field"><label for="recipe-choice">Starting workflow</label><select id="recipe-choice" data-recipe-select>${options(CATALOG.recipes, config.workflow.recipe)}</select><span class="hint">Changing the recipe keeps existing project records for review.</span></div><div class="field-grid brief-questions">${list(recipe()?.questions).map(getIntentQuestionWording).map(question => {
+    `<div class="field"><label for="recipe-choice">Starting workflow</label><select id="recipe-choice" data-recipe-select>${!recipe() ? '<option value="" selected disabled>No development recipe. Custom processes only.</option>' : ''}${options(CATALOG.recipes, recipe() ? config.workflow.recipe : '')}</select><span class="hint">Choosing a development recipe keeps your custom processes and project records for review.</span></div><div class="field-grid brief-questions">${list(recipe()?.questions).map(getIntentQuestionWording).map(question => {
       const answer = getIntentAnswer(config, question.id)
       const review = assistantAnswerReview(question.id)
       if (review) {
@@ -697,12 +759,14 @@ function renderRuntime() {
 
 function renderArtifacts() {
   const effective = getEffectiveSkills(config).map(skill => skill.id)
-  return sectionHead('Give each role focused instructions', 'Stage assignments determine the relevant skills. Additional skills can be exported deliberately.', 4) +
+  return sectionHead('Give each role focused instructions', 'Step assignments determine the relevant skills. Additional skills can be exported deliberately.', 4) +
     `<div class="section-subhead"><h3>Copilot agent profiles</h3><span>Enable the roles you actually need.</span></div>${CATALOG.roles.map(role => {
       const agent = config.agents.find(item => item.role === role.id)
       const assigned = getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id) && config.workflow.bindings[stage.id]?.actorType === 'agent' && config.workflow.bindings[stage.id].actorId === role.id)
-      const skills = [...new Set(assigned.flatMap(stage => config.workflow.bindings[stage.id].skills))]
-      return `<div class="agent-card"><label class="selection"><input type="checkbox" data-role="${role.id}" ${agent ? 'checked' : ''}><span><strong>${escape(labelOf(role))}</strong><small>${escape(role.description)}</small></span></label>${agent ? `<p class="role-use">Used by ${assigned.length ? assigned.map(stage => escape(labelOf(stage))).join(', ') : 'no selected stage'}. ${skills.length ? `Skills: ${skills.map(id => escape(named(CATALOG.skills, id))).join(', ')}.` : 'No stage skills assigned.'}</p><fieldset class="tools"><legend>Requested host tools</legend>${TOOL_ALIASES.map(tool => `<label class="tool-toggle"><input type="checkbox" data-tool="${tool}" data-role-id="${role.id}" ${agent.tools.includes(tool) ? 'checked' : ''}>${tool}</label>`).join('')}</fieldset><p class="hint">An empty list is valid for supplied-context work. Tool access is checked against the assigned stages.</p>` : ''}</div>`
+      const custom = config.workflowModel.processes.filter(process => process.source === 'custom' && process.kind !== 'application').flatMap(process => process.steps.filter(step => step.actor.type === 'agent' && step.actor.id === role.id).map(step => ({ ...step, label: `${process.name || process.id} / ${step.name || step.id}` })))
+      const skills = [...new Set([...assigned.flatMap(stage => config.workflow.bindings[stage.id].skills), ...custom.flatMap(step => step.instructionIds)])]
+      const assignments = [...assigned.map(stage => labelOf(stage)), ...custom.map(step => step.label)]
+      return `<div class="agent-card"><label class="selection"><input type="checkbox" data-role="${role.id}" ${agent ? 'checked' : ''}><span><strong>${escape(labelOf(role))}</strong><small>${escape(role.description)}</small></span></label>${agent ? `<p class="role-use">Used by ${assignments.length ? assignments.map(escape).join(', ') : 'no selected step'}. ${skills.length ? `Skills: ${skills.map(id => escape(named(CATALOG.skills, id))).join(', ')}.` : 'No step skills assigned.'}</p><fieldset class="tools"><legend>Requested host tools</legend>${TOOL_ALIASES.map(tool => `<label class="tool-toggle"><input type="checkbox" data-tool="${tool}" data-role-id="${role.id}" ${agent.tools.includes(tool) ? 'checked' : ''}>${tool}</label>`).join('')}</fieldset><p class="hint">An empty list is valid for supplied-context work. Tool requests are checked against the assigned work. Application actors are separate from these development profiles.</p>` : ''}</div>`
     }).join('')}
     <div class="section-subhead"><h3>Portable skills</h3><span>${effective.length} included through assignments or your choices.</span></div><div class="selection-grid">${CATALOG.skills.map(skill => `<div class="skill-option"><label class="selection"><input type="checkbox" data-skill="${skill.id}" ${config.skills.includes(skill.id) ? 'checked' : ''}><span><strong>${escape(labelOf(skill))}</strong><small>${escape(skill.description)}</small><small>${effective.includes(skill.id) ? 'Included in this pack' : 'Not included'} · Checkbox adds an extra export</small></span></label>${effective.includes(skill.id) ? `<button type="button" class="text-button" data-action="export-skill" data-skill-id="${skill.id}">Download standalone skill ↓</button>` : ''}</div>`).join('')}</div>
     <p class="hint">Tool lists request host capabilities. ${atlasLink('agent-roles', 'Read about roles')}</p>`
@@ -731,7 +795,7 @@ function renderEvidence() {
     : evidenceRecord(record, index)).join('')
   return sectionHead('Keep knowledge and proof distinct', 'Record sources, assumptions and actual observations. Missing information stays visible in the export.', 5) +
     `<div class="info-strip"><span class="info-icon">i</span><span>A recorded requirement is not an implemented control. A recorded result is a supplied claim until its source is reviewed. ${atlasLink('provenance', 'Explore provenance')}</span></div><div class="section-subhead"><h3>Project facts</h3><span>${config.facts.length} records</span></div>${config.facts.map(factRecord).join('')}${!config.facts.length ? '<p class="empty-help">Add only facts that matter to this workflow. Sources and uncertainties belong with the claim.</p>' : ''}<button type="button" class="add-component" data-action="add-fact">+ Add a fact or open question</button><div class="section-subhead"><h3>Acceptance and observed evidence</h3><span>${config.evidence.length} checks</span></div>${records}${!config.evidence.length ? '<p class="empty-help">Start with expected outcomes. Add observed results when the work has been exercised.</p>' : ''}<button type="button" class="add-component" data-action="add-evidence">+ Add an acceptance check</button>
-    <details class="card model-card" data-detail="model"><summary>Model selection and evaluation plan</summary><p class="hint">The pack includes comparison templates for the existing setup, minimal verified facts, a focused skill and the complete pack. It does not run model evaluations.</p><div class="field-grid">${field('Chosen model or unresolved choice', 'model.name', config.model.name, 'Model name, or leave unresolved')}${field('Model version', 'model.version', config.model.version)}${field('Budget and limits', 'model.budget', config.model.budget, 'Units, time period and assumptions', '', 'textarea', true)}${field('Selection rationale and observations', 'model.notes', config.model.notes, 'Task quality, human corrections, latency and measured expenditure', 'No universal model ranking or token saving is assumed.', 'textarea', true)}</div>${atlasLink('evaluation', 'Explore evaluation')}</details>`
+    <details class="card model-card" data-detail="model"><summary>Model selection and evaluation plan</summary><p class="hint">Record a model if this workflow uses one. Evaluation stages and runtime drafts include a template for comparing relevant options. Atlas does not run evaluations.</p><div class="field-grid">${field('Chosen model or unresolved choice', 'model.name', config.model.name, 'Model name, or leave unresolved')}${field('Model version', 'model.version', config.model.version)}${field('Budget and limits', 'model.budget', config.model.budget, 'Units, time period and assumptions', '', 'textarea', true)}${field('Selection rationale and observations', 'model.notes', config.model.notes, 'Task quality, human corrections, latency and measured expenditure', 'No universal model ranking or token saving is assumed.', 'textarea', true)}</div>${atlasLink('evaluation', 'Explore evaluation')}</details>`
 }
 
 function issueStep(path) {
@@ -756,14 +820,14 @@ function prioritizedIssues(issues) {
 }
 
 function renderComparison() {
-  return `<details class="card" data-detail="maintenance"><summary>Regenerate without losing local edits</summary><p class="hint">Compare a generated baseline, your edited pack and this new generation. Files remain in the browser. Conflicts need an explicit choice.</p><div class="inline-actions"><button type="button" class="secondary" data-action="save-snapshot">Save generated snapshot ↓</button><button type="button" class="secondary" data-action="load-baseline">Baseline folder ↑</button><button type="button" class="secondary" data-action="load-baseline-json">Baseline snapshot JSON ↑</button><button type="button" class="secondary" data-action="load-existing">Edited pack folder ↑</button><button type="button" class="secondary" data-action="load-existing-json">Edited files JSON ↑</button></div><p class="hint">Baseline: ${baselineFiles.length} files. Edited pack: ${existingFiles.length} files. Folder selection reads only the files you choose. Without a baseline, differing files require your decision.</p>${existingFiles.length ? `<button type="button" class="secondary" data-action="compare-pack">Compare with current generation</button>` : ''}${comparison.length ? `<div class="comparison-list">${comparison.map((row, index) => `<details class="comparison-row"><summary><span>${escape(row.path)}</span><span class="record-state">${escape(row.status.replaceAll('-', ' '))}</span></summary><div class="field"><label for="comparison-${index}">Exported version</label><select id="comparison-${index}" data-resolution="${escape(row.path)}"><option value="" ${!(resolvedChoice(row)) ? 'selected' : ''}>Resolve this conflict</option>${options([{ id: 'generated', label: 'New generated file' }, { id: 'existing', label: 'Keep my edited file' }, { id: 'remove', label: 'Remove from export' }], resolvedChoice(row))}</select></div><div class="diff-columns"><div><strong>Existing</strong><pre>${escape(row.existing ?? '(File absent)')}</pre></div><div><strong>New generation</strong><pre>${escape(row.generated ?? '(File absent)')}</pre></div></div></details>`).join('')}</div><p class="hint">Edited files are not revalidated. The inventory and readable Atlas are rebuilt from the retained project and file contents. A comparison record accompanies the export.</p><button type="button" class="primary" data-action="export-reconciled">Export reviewed file set ↓</button>` : ''}</details>`
+  return `<details class="card" data-detail="maintenance"><summary>Regenerate without losing local edits</summary><p class="hint">Compare a generated baseline, your edited pack and this new generation. Files remain in the browser. Conflicts need an explicit choice.</p><div class="inline-actions"><button type="button" class="secondary" data-action="save-snapshot">Save generated snapshot ↓</button><button type="button" class="secondary" data-action="load-baseline">Baseline folder ↑</button><button type="button" class="secondary" data-action="load-baseline-json">Baseline snapshot JSON ↑</button><button type="button" class="secondary" data-action="load-existing">Edited pack folder ↑</button><button type="button" class="secondary" data-action="load-existing-json">Edited files JSON ↑</button></div><p class="hint">Baseline: ${baselineFiles.length} files. Edited pack: ${existingFiles.length} files. Folder selection reads only the files you choose. Without a baseline, differing files require your decision.</p>${existingFiles.length ? `<button type="button" class="secondary" data-action="compare-pack">Compare with current generation</button>` : ''}${comparison.length ? `<p id="comparison-snapshot-note" class="issue warning" role="status" ${comparisonIsStale() ? "" : "hidden"}>Your project or output changed after this comparison. These files and choices are kept as an earlier snapshot. Compare with current generation to review your latest changes, or export these reviewed files and keep later project edits separately.</p><div class="comparison-list">${comparison.map((row, index) => `<details class="comparison-row"><summary><span>${escape(row.path)}</span><span class="record-state">${escape(row.status.replaceAll('-', ' '))}</span></summary><div class="field"><label for="comparison-${index}">Exported version</label><select id="comparison-${index}" data-resolution="${escape(row.path)}"><option value="" ${!(resolvedChoice(row)) ? 'selected' : ''}>Resolve this conflict</option>${options([{ id: 'generated', label: 'New generated file' }, { id: 'existing', label: 'Keep my edited file' }, { id: 'remove', label: 'Remove from export' }], resolvedChoice(row))}</select></div><div class="diff-columns"><div><strong>Existing</strong><pre>${escape(row.existing ?? '(File absent)')}</pre></div><div><strong>New generation</strong><pre>${escape(row.generated ?? '(File absent)')}</pre></div></div></details>`).join('')}</div><p class="hint">These choices apply to the files captured when this comparison was created. Edited files are not revalidated. The inventory and readable Atlas are rebuilt from the retained project and file contents. A comparison record accompanies the export.</p><button type="button" class="primary" data-action="export-reconciled">Export reviewed file set ↓</button>` : ''}</details>`
 }
 
 function renderReview() {
   const validation = { ...pack.validation, issues: prioritizedIssues(pack.validation.issues) }
   return sectionHead('Review the decisions and the files', 'Compare what changed, inspect the guidance and preserve your file edits.', 6) + (packagingFailure ? `<div class="issue error" role="alert"><strong>The download could not be prepared.</strong><p>${escape(packagingFailure)}</p><p>Project JSON can keep current settings. It does not keep comparison notes or supplied files.</p></div>` : '') + renderDecisionChanges() + renderGuidance() +
     `<div class="status-grid">${statusCard('Configuration', validation.configurationComplete, validation.configurationComplete ? 'Known required settings and rules satisfied.' : 'Required settings or rules need attention.')}${statusCard('File formats', validation.formatChecked && !packagingFailure, packagingFailure ? 'Portable output could not be prepared. Base generation checks do not establish a usable download.' : validation.formatChecked ? 'Generated structure checked.' : 'Generated structure needs attention.', Boolean(packagingFailure))}${statusCard('Host and behavior', false, 'No host execution or task improvement observed here.', true)}</div>${validation.issues.length ? `<div class="issue-list">${validation.issues.map(issue => `<div class="issue ${escape(issue.severity)}"><strong>${issue.severity === 'error' ? 'Needs attention' : 'Review note'}</strong> · ${escape(issue.message)}<button type="button" data-goto="${issueStep(issue.path)}" data-issue-path="${escape(issue.path)}">Open ${(steps.find(step => step.id === issueStep(issue.path))?.label || 'Stage details').toLowerCase()} →</button></div>`).join('')}</div>` : packagingFailure ? '<p class="hint">Resolve the output preparation failure before adopting a generated download.</p>' : '<div class="empty-state">The configuration and format checks passed. Inspect the files, exercise them in the intended host and record actual outcomes separately.</div>'}
-    <div class="card review-card"><div class="card-title"><h3>Pack at a glance</h3><span class="label-tag">SCHEMA ${escape(config.schemaVersion)}</span></div><div class="review-summary"><dl><dt>Project</dt><dd>${escape(config.project.name || 'Unresolved')}</dd><dt>Intention</dt><dd>${escape(labelOf(recipe()))}</dd><dt>Environment</dt><dd>${escape(named(CATALOG.hosts, config.project.host) || 'Not chosen')}</dd><dt>Components</dt><dd>${config.components.length}</dd><dt>Stages</dt><dd>${config.workflow.enabledStages.length} selected</dd><dt>Planned skills / roles</dt><dd>${getEffectiveSkills(config).length} skills, ${config.agents.length} profiles</dd><dt>Evidence</dt><dd>${config.facts.length} facts, ${config.evidence.length} check records</dd><dt>Output</dt><dd>${pack.files.length} files, ${formatBytes(pack.stats.bytes)}</dd></dl></div></div><div class="card"><div class="card-title"><h3>Keep your source configuration</h3></div><p class="hint">JSON settings preserve decisions and supplied records. Generated files are reviewable outputs. Save a snapshot before editing an exported pack.</p><div class="inline-actions"><button type="button" class="secondary" data-action="export-config">Save settings .json ↓</button><button type="button" class="secondary" data-action="import-config">Import settings ↑</button></div></div>${renderComparison()}<div class="info-strip"><span class="info-icon">i</span><span>Start with <strong>INSTALL.md</strong>. Host discovery and useful task behavior need separate evidence. User-supplied observations do not become independently verified by exporting them.</span></div>`
+    <div class="card review-card"><div class="card-title"><h3>Pack at a glance</h3><span class="label-tag">SCHEMA ${escape(config.schemaVersion)}</span></div><div class="review-summary"><dl><dt>Project</dt><dd>${escape(config.project.name || 'Unresolved')}</dd><dt>Intention</dt><dd>${escape(labelOf(recipe()) || 'Custom process design')}</dd><dt>Environment</dt><dd>${escape(named(CATALOG.hosts, config.project.host) || 'Not chosen')}</dd><dt>Components</dt><dd>${config.components.length}</dd><dt>Planned work</dt><dd>${getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id)).length} recipe stages, ${config.workflowModel.processes.filter(process => process.source === 'custom').reduce((count, process) => count + process.steps.length, 0)} custom steps</dd><dt>Planned skills / roles</dt><dd>${getEffectiveSkills(config).length} skills, ${config.agents.length} profiles</dd><dt>Evidence</dt><dd>${config.facts.length} facts, ${config.evidence.length} check records</dd><dt>Output</dt><dd>${pack.files.length} files, ${formatBytes(pack.stats.bytes)}</dd></dl></div></div><div class="card"><div class="card-title"><h3>Keep your source configuration</h3></div><p class="hint">JSON settings preserve decisions and supplied records. Generated files are reviewable outputs. Save a snapshot before editing an exported pack.</p><div class="inline-actions"><button type="button" class="secondary" data-action="export-config">Save settings .json ↓</button><button type="button" class="secondary" data-action="import-config">Import settings ↑</button></div></div>${renderComparison()}<div class="info-strip"><span class="info-icon">i</span><span>Start with <strong>INSTALL.md</strong>. Host discovery and useful task behavior need separate evidence. User-supplied observations do not become independently verified by exporting them.</span></div>`
 }
 
 function openDownload() {
@@ -896,7 +960,8 @@ function updatePreview() {
   $('#preview-path').textContent = file.path
   $('#file-preview').textContent = file.content
   const metadata = file.metadata || file
-  const used = [...list(metadata.stages).map(id => named(CATALOG.stages, id)), ...list(metadata.roles).map(id => named(CATALOG.roles, id))]
+  const processes = config.workflowModel.processes.filter(process => process.source === 'custom')
+  const used = [...list(metadata.stages).map(id => named(CATALOG.stages, id)), ...list(metadata.roles).map(id => named(CATALOG.roles, id)), ...list(metadata.processes).map(id => processes.find(process => process.id === id)?.name || id), ...list(metadata.steps).map(reference => { const [processId, stepId] = reference.split('/'); return processes.find(process => process.id === processId)?.steps.find(step => step.id === stepId)?.name || reference })]
   $('#file-context').innerHTML = `<p>${escape(metadata.why || 'This file supports review or installation of the selected pack.')}</p>${used.length ? `<p><strong>Used by</strong> ${escape(used.join(', '))}</p>` : ''}${list(metadata.sources).length ? `<p><strong>Sources</strong> ${list(metadata.sources).map(source => escape(typeof source === 'string' ? source : source.url || source.title || source.id)).join(', ')}</p>` : ''}${list(metadata.assumptions).length ? `<p><strong>Review</strong> ${list(metadata.assumptions).map(assumption => escape(assumption)).join(' ')}</p>` : ''}`
   $('#file-tree').querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.file === selectedFile)))
 }
@@ -931,6 +996,7 @@ function updatePack(refreshReview = true) {
   $('#pack-size').textContent = `${formatBytes(pack.stats.bytes)} of text · no model calls`
   $('#export-pack').textContent = `Download ${outputTitle(chosenOutput().kind).toLowerCase()}`
   $('#export-pack').disabled = !pack.files.length
+  $('#download-atlas').disabled = !pack.files.length
   $('#copy-file').disabled = !pack.files.length
   renderNav()
   renderStudio()
@@ -1017,18 +1083,24 @@ function exportPack() {
   } catch (error) { toast(`Export failed. ${error.message}`) }
 }
 
-function confirmReplace(description) {
+function confirmReplace(description, wording = {}) {
   const dialog = $('#confirm-dialog')
+  $('#confirm-title').textContent = wording.title || 'Replace this session?'
+  $('#confirm-dialog [value="cancel"]').textContent = wording.keep || 'Keep this session'
+  $('#confirm-dialog [value="replace"]').textContent = wording.replace || 'Replace project'
   $('#confirm-description').textContent = description
   $('#download-before-replace').hidden = !config
+  $('#download-before-replace').textContent = hasUnkeptFileReview() ? 'Download reviewed files' : 'Download current project'
   dialog.returnValue = 'cancel'
   dialog.showModal()
   return new Promise(resolve => dialog.addEventListener('close', () => resolve(dialog.returnValue === 'replace'), { once: true }))
 }
 
 async function replaceConfig(next, message, origin = 'example', { consumeAssistance = false, applyGuard = () => true } = {}) {
-  if (sessionDirty({ includeAssistance: !consumeAssistance }) && !await confirmReplace(hasUnrecordedReviewEdits() ? 'You have wording that is not recorded. Choose Use this answer to include it in your files, or replace this session.' : config ? 'There are decisions or review notes you have not downloaded. Download your current project to keep them, or replace this session.' : 'Your description has not been downloaded. Keep this session to use it, or replace it with the selected pack.')) return false
+  if (processDesigner.isPending()) { toast('Apply or discard your process edits before opening another project.'); return false }
+  if (sessionDirty({ includeAssistance: !consumeAssistance }) && !await confirmReplace(hasUnrecordedReviewEdits() ? 'You have wording that is not recorded. Choose Use this answer to include it in your files, or replace this session.' : hasUnkeptFileReview() ? 'Your file review choices have not been downloaded. Download the reviewed files to keep them. Any separate project edits also need their own project download before replacing this session.' : config ? 'There are decisions or review notes you have not downloaded. Download your current project to keep them, or replace this session.' : 'Your description has not been downloaded. Keep this session to use it, or replace it with the selected pack.')) return false
   if (!applyGuard()) { toast('The description changed. Review the current draft before creating it.'); return false }
+  if (processDesigner.isOpen()) processDesigner.reset()
   clearTimeout(compileTimer)
   if (!consumeAssistance) { assistance.reset(); jevView?.clearReviewWording() }
   deferredAssistantQuestions = {}
@@ -1039,8 +1111,7 @@ async function replaceConfig(next, message, origin = 'example', { consumeAssista
   outputSelection = null
   downloadPack = null
   pendingPractice = null
-  comparison = []
-  choices = {}
+  clearFileComparison()
   baselineFiles = []; existingFiles = []; importedFiles = []; generationAtOpen = null
   decisionBaseline = config ? JSON.parse(JSON.stringify(config)) : null
   decisionBaselineLabel = origin === 'imported' ? 'Since opening this pack' : 'Since starting this session'
@@ -1090,6 +1161,13 @@ function addEvidence(stageId = '') {
 }
 
 function removeRecord(collection, index) {
+  if (collection === 'evidence') {
+    const id = config.evidence[index]?.id
+    if (config.workflowModel.evidenceLinks.some(link => link.evidenceId === id) || config.runtime.controls.some(control => control.evidenceId === id)) {
+      toast('This evidence is linked to a process or runtime control. Keep the record, or review and change its associations before removing it.')
+      return
+    }
+  }
   config[collection].splice(index, 1)
   changed()
   renderStep()
@@ -1130,6 +1208,7 @@ document.addEventListener('input', event => {
 document.addEventListener('change', event => {
   const control = event.target
   if (!config) return
+  if (control.hasAttribute('data-pe-active')) { processDesigner.choose(control.value); renderStudio(); $('[data-pe-active]')?.focus(); return }
   if (control.hasAttribute('data-import-fact') || control.hasAttribute('data-import-component')) {
     if (!candidateImport) return
     const fact = control.hasAttribute('data-import-fact')
@@ -1140,7 +1219,9 @@ document.addEventListener('change', event => {
     return
   }
   if (control.hasAttribute('data-recipe-select')) {
-    config = selectRecipe(config, control.value)
+    if (!control.value) return
+    try { config = selectRecipe(config, control.value) }
+    catch (error) { control.value = config.workflow.recipe; toast(error.message); return }
     changed(); clearTimeout(compileTimer); updatePack(false); renderStep(); $('[data-recipe-select]').focus()
     toast('Workflow changed. Existing settings and records are retained for review.')
     return
@@ -1179,12 +1260,25 @@ document.addEventListener('change', event => {
     agent.tools = TOOL_ALIASES.filter(tool => tool === control.dataset.tool ? control.checked : agent.tools.includes(tool))
   } else if (control.hasAttribute('data-practice')) {
     config.practices = CATALOG.practices.filter(practice => practice.id === control.dataset.practice ? control.checked : config.practices.includes(practice.id)).map(practice => practice.id)
-  } else if (control.hasAttribute('data-resolution')) { choices[control.dataset.resolution] = control.value; return }
+  } else if (control.hasAttribute('data-resolution')) { choices[control.dataset.resolution] = control.value; renderSession(); return }
   else return
   changed()
 })
 
 document.addEventListener('click', async event => {
+  const processOpen = event.target.closest('[data-pe-open]')
+  if (processOpen && config) { processDesigner.open(processOpen.dataset.peOpen, processOpen.dataset.peStep || ''); return }
+  if (event.target.closest('[data-pe-new]') && config) { processDesigner.open(); return }
+  if (event.target.closest('[data-start-process]')) {
+    const next = createRecipe('feasibility')
+    next.workflowModel.processes = []
+    next.agents = []
+    next.skills = []
+    next.practices = []
+    next.components = []
+    if (await replaceConfig(next, '', 'blank')) processDesigner.open()
+    return
+  }
   const evidenceEdit = event.target.closest('[data-edit-evidence]')
   if (evidenceEdit && config) {
     const index = Number(evidenceEdit.dataset.editEvidence)
@@ -1196,6 +1290,16 @@ document.addEventListener('click', async event => {
   if (go) {
     go.closest('dialog')?.close()
     const path = go.dataset.issuePath?.replace(/\[(\d+)\]/g, '.$1')
+    const processPath = path?.match(/^workflowModel\.processes\.(\d+)(?:\.(steps|results|checks|transitions|corrections|approvals|terminals)\.(\d+))?/)
+    if (processPath) {
+      const process = config.workflowModel.processes[Number(processPath[1])]
+      if (process?.source === 'custom') {
+        const collection = processPath[2] || 'steps'
+        const recordId = process[collection][Number(processPath[3] || 0)]?.id || ''
+        processDesigner.open(process.id, collection === 'steps' ? recordId : '', { collection, recordId })
+        return
+      }
+    }
     const evidenceIndex = path?.match(/^evidence\.(\d+)/)?.[1]
     const prerequisite = path?.match(/^workflow\.suppliedInputs\.([^.]+)/)?.[1]
     const dependent = prerequisite && getStages(config).find(stage => config.workflow.enabledStages.includes(stage.id) && stage.dependsOn.includes(prerequisite))
@@ -1257,9 +1361,11 @@ document.addEventListener('click', async event => {
       try {
         updatePack(false)
         const content = JSON.stringify({files:reviewableFiles(pack.files).map(({path,content}) => ({path,content}))}, null, 2)
-        baselineFiles = parseFileBundle(content)
+        const nextBaseline = parseFileBundle(content)
+        if (!await canReplaceFileComparison()) break
         download(`${filename()}.generated-snapshot.json`, content, 'application/json')
-        comparison = []; renderStep()
+        baselineFiles = nextBaseline
+        clearFileComparison(); renderStep(); renderSession()
       } catch (error) { toast(`Snapshot download failed. ${error.message}`) }
       break
     case 'load-baseline': $('#baseline-files').click(); break
@@ -1267,20 +1373,35 @@ document.addEventListener('click', async event => {
     case 'load-baseline-json': $('#baseline-json').click(); break
     case 'load-existing-json': $('#existing-json').click(); break
     case 'compare-pack':
-      try { updatePack(false); comparison = compareFiles(reviewableFiles(baselineFiles), reviewableFiles(existingFiles), reviewableFiles(pack.files).map(({ path, content }) => ({ path, content }))); choices = {}; renderStep() }
+      try {
+        updatePack(false)
+        const next = compareFiles(reviewableFiles(baselineFiles), reviewableFiles(existingFiles), reviewableFiles(pack.files).map(({ path, content }) => ({ path, content })))
+        if (!await canReplaceFileComparison()) break
+        clearFileComparison()
+        comparison = next
+        comparisonGeneration = comparisonGenerationKey()
+        renderStep(); renderSession()
+      }
       catch (error) { toast(`Comparison failed. ${error.message}`) }
       break
-    case 'export-reconciled':
-      try {
-        const files = resolveComparison(comparison, choices)
-        const record = { description: 'Reviewed file set. Edited files were not revalidated. The inventory and readable Atlas were rebuilt from the retained project and file contents.', files: files.map(item => item.path), decisions: comparison.map(row => ({ path: row.path, status: row.status, choice: resolvedChoice(row) })) }
-        const reviewed = packageReviewedFiles(files, record)
-        download(`${filename()}-reviewed-files.zip`, zipFiles(reviewed.files), 'application/zip')
-        toast(reviewed.config ? 'Reviewed files downloaded. The Atlas reflects the retained project and these exact file contents. Edited file behavior remains unverified.' : 'Reviewed files downloaded without a Project Atlas because project.json was removed.')
-      } catch (error) { toast(`Resolve comparison findings first. ${error.message}`) }
-      break
+    case 'export-reconciled': exportReviewedFiles(); break
   }
 })
+
+function exportReviewedFiles() {
+  try {
+    const files = resolveComparison(comparison, choices)
+    const stale = comparisonIsStale()
+    const record = { description: 'Reviewed file set from the retained comparison snapshot. Later project changes are not included. Edited files were not revalidated. The inventory and readable Atlas were rebuilt from the retained project and file contents.', files: files.map(item => item.path), decisions: comparison.map(row => ({ path: row.path, status: row.status, choice: resolvedChoice(row) })) }
+    const reviewed = packageReviewedFiles(files, record)
+    download(`${filename()}-reviewed-files.zip`, zipFiles(reviewed.files), 'application/zip')
+    downloadedComparison = comparison
+    downloadedComparisonChoices = currentComparisonChoices()
+    renderSession()
+    if ($('#confirm-dialog').open) $('#download-before-replace').textContent = 'Download current project'
+    toast((reviewed.config ? 'Reviewed files downloaded. The Atlas reflects the retained project and these exact file contents. Edited file behavior remains unverified.' : 'Reviewed files downloaded without a Project Atlas because project.json was removed.') + (stale ? ' These are the earlier comparison files. Keep later project edits in a separate download.' : ''))
+  } catch (error) { toast(`Resolve comparison findings first. ${error.message}`) }
+}
 
 async function openProjectFiles(event) {
   if (!event.target.files.length) return
@@ -1356,10 +1477,12 @@ async function readFolder(event, kind) {
       entries.push({ path, content })
     }
     const safe = parseFileBundle(JSON.stringify({ files: entries }))
+    if (!await canReplaceFileComparison()) return
     if (kind === 'baseline') baselineFiles = safe
     else existingFiles = safe
-    comparison = []
+    clearFileComparison()
     goTo('review', false)
+    renderSession()
     toast(`${kind === 'baseline' ? 'Baseline' : 'Edited pack'} loaded for comparison. No files were written.`)
   } catch (error) { toast(`Folder rejected. ${error.message}`) }
   finally { event.target.value = '' }
@@ -1373,10 +1496,12 @@ async function readSnapshot(event, kind) {
     if (!file) return
     if (file.size > 64 * 1024 * 1024) throw new Error('File bundle JSON exceeds 64 MB.')
     const files = parseFileBundle(await file.text())
+    if (!await canReplaceFileComparison()) return
     if (kind === 'baseline') baselineFiles = files
     else existingFiles = files
-    comparison = []
+    clearFileComparison()
     goTo('review', false)
+    renderSession()
     toast(`${kind === 'baseline' ? 'Baseline' : 'Edited files'} loaded. Your draft is unchanged.`)
   } catch (error) { toast(`Snapshot rejected. ${error.message}`) }
   finally { event.target.value = '' }
@@ -1417,7 +1542,7 @@ function openKnowledge(topic = 'overview', view = 'read', push = true) {
     knowledgeReturnFocus = document.activeElement
     knowledgeReturnSelector = knowledgeReturnFocus.id ? `#${CSS.escape(knowledgeReturnFocus.id)}` : null
     knowledgeScroll = window.scrollY
-    knowledgeReturnHash = config ? location.hash : '#start'
+    knowledgeReturnHash = config ? (location.hash === '#knowledge' ? history.state?.returnHash || '#workflow' : location.hash) : '#start'
   }
   knowledgeOpen = true
   $('#knowledge-workspace').hidden = false
@@ -1425,8 +1550,10 @@ function openKnowledge(topic = 'overview', view = 'read', push = true) {
   $('.studio-header').hidden = true
   $('#studio-layout').hidden = true
   $('#start-screen').hidden = true
-  $('#knowledge-frame').src = `../atlas/?embedded=1&view=${view === 'explore' ? 'explore' : 'read'}&theme=${theme}#${encodeURIComponent(topic)}`
-  if (push) history.pushState({atlasKnowledge:true}, '', '#knowledge')
+  const knowledgeView = view === 'explore' ? 'explore' : 'read'
+  // Replace the embedded document so its blank placeholder does not become a Back destination.
+  $('#knowledge-frame').contentWindow.location.replace(new URL(`../atlas/?embedded=1&view=${knowledgeView}&theme=${theme}#${encodeURIComponent(topic)}`, location.href).href)
+  if (push) history.pushState({atlasKnowledge:true,topic,view:knowledgeView,returnHash:knowledgeReturnHash}, '', '#knowledge')
   syncEditorAccess()
   $('#knowledge-frame').focus()
 }
@@ -1436,7 +1563,7 @@ function closeKnowledge(updateHistory = true) {
   knowledgeOpen = false
   $('#knowledge-workspace').hidden = true
   $('.studio-header').hidden = false
-  $('#knowledge-frame').src = 'about:blank'
+  $('#knowledge-frame').contentWindow.location.replace('about:blank')
   $('#start-screen').hidden = Boolean(config)
   $('#studio-layout').hidden = !config
   syncEditorAccess()
@@ -1460,11 +1587,17 @@ function previewPractice(actionId, topicId) {
   if (!action || action.id !== actionId || action.alreadyApplied) return
   try {
     const next = applyPracticeAction(config, actionId)
-    const beforeFiles = new Map(compileOutput(config, chosenOutput()).files.map(file => [file.path,file.content]))
-    const afterFiles = new Map(compileOutput(next, chosenOutput()).files.map(file => [file.path,file.content]))
-    const changes = [...new Set([...beforeFiles.keys(),...afterFiles.keys()])].filter(path => beforeFiles.get(path) !== afterFiles.get(path)).map(path => ({path,kind:!beforeFiles.has(path) ? 'Added' : !afterFiles.has(path) ? 'Removed' : 'Updated'}))
+    const selection = chosenOutput()
+    const missingProcedure = selection.kind === 'skill' && !getEffectiveSkills(config).some(skill => skill.id === selection.skillId)
+    let filePreview = '<p class="hint practice-output-note">File preview is unavailable because the selected procedure is no longer assigned. You can apply this practice to the workflow. Choose an available output before downloading.</p>'
+    if (!missingProcedure) {
+      const beforeFiles = new Map(compileOutput(config, selection).files.map(file => [file.path,file.content]))
+      const afterFiles = new Map(compileOutput(next, selection).files.map(file => [file.path,file.content]))
+      const changes = [...new Set([...beforeFiles.keys(),...afterFiles.keys()])].filter(path => beforeFiles.get(path) !== afterFiles.get(path)).map(path => ({path,kind:!beforeFiles.has(path) ? 'Added' : !afterFiles.has(path) ? 'Removed' : 'Updated'}))
+      filePreview = `<details class="download-inventory"><summary>Affected generated files (${changes.length})</summary><ul>${changes.map(change => `<li><code>${escape(change.path)}</code><span>${change.kind}</span></li>`).join('')}</ul></details>`
+    }
     pendingPractice = {actionId,topicId,projectState:JSON.stringify(config)}
-    $('#practice-preview').innerHTML = `<p class="eyebrow">FOR ${escape(config.project.name || 'YOUR WORKFLOW')}</p><h3>${escape(action.title)}</h3><p>${escape(action.reason)}</p><ul class="practice-changes">${action.changes.map(change => `<li>${escape(change)}</li>`).join('')}</ul><p class="hint">This records intended guidance. It does not run tools, grant permissions or verify a result.</p><details class="download-inventory"><summary>Affected generated files (${changes.length})</summary><ul>${changes.map(change => `<li><code>${escape(change.path)}</code><span>${change.kind}</span></li>`).join('')}</ul></details><p><a href="${escape(action.source)}" target="_blank" rel="noopener noreferrer">Read the source behind this practice ↗</a></p>`
+    $('#practice-preview').innerHTML = `<p class="eyebrow">FOR ${escape(config.project.name || 'YOUR WORKFLOW')}</p><h3>${escape(action.title)}</h3><p>${escape(action.reason)}</p><ul class="practice-changes">${action.changes.map(change => `<li>${escape(change)}</li>`).join('')}</ul><p class="hint">This records intended guidance. It does not run tools, grant permissions or verify a result.</p>${filePreview}<p><a href="${escape(action.source)}" target="_blank" rel="noopener noreferrer">Read the source behind this practice ↗</a></p>`
     $('#practice-dialog').showModal()
     $('#practice-title').focus()
   } catch (error) { toast(`Practice review could not be prepared. ${error.message} Your workflow is unchanged.`) }
@@ -1574,7 +1707,7 @@ document.addEventListener('click', async event => {
   const editor = event.target.closest('[data-open-editor]')
   if (editor) { goTo(editor.dataset.openEditor); return }
   const artifact = event.target.closest('[data-select-file]')
-  if (artifact) { selectedFile = artifact.dataset.selectFile; updatePreview(); showView('artifacts'); return }
+  if (artifact) { artifact.closest('dialog')?.close(); selectedFile = artifact.dataset.selectFile; updatePreview(); showView('artifacts'); return }
   const knowledge = event.target.closest('[data-reference-topic]')
   if (knowledge) { openKnowledge(knowledge.dataset.referenceTopic); return }
   const map = event.target.closest('[data-reference-map]')
@@ -1650,7 +1783,7 @@ $('#undo').addEventListener('click', () => restoreHistory(-1))
 $('#redo').addEventListener('click', () => restoreHistory(1))
 $('#download-project').addEventListener('click', openDownload)
 $('#download-atlas').addEventListener('click', downloadAtlas)
-$('#download-before-replace').addEventListener('click', exportPack)
+$('#download-before-replace').addEventListener('click', () => hasUnkeptFileReview() ? exportReviewedFiles() : exportPack())
 function filterArtifacts() {
   const query = $('#artifact-search').value.toLowerCase()
   let count = 0
@@ -1678,7 +1811,7 @@ document.addEventListener('keydown', event => {
 window.addEventListener('beforeunload', event => { if (sessionDirty()) { event.preventDefault(); event.returnValue = '' } })
 function applyRoute() {
   const id = location.hash.slice(1)
-  if (id === 'knowledge') { if (!knowledgeOpen) openKnowledge('overview', 'explore', false); return }
+  if (id === 'knowledge') { if (!knowledgeOpen) openKnowledge(typeof history.state?.topic === 'string' ? history.state.topic : 'overview', history.state?.view || 'explore', false); return }
   if (knowledgeOpen) { closeKnowledge(false); if (location.hash === knowledgeReturnHash) return }
   if (!config) { history.replaceState(null, '', '#start'); renderStudio(); return }
   if (id.startsWith('stage-')) { openStage(id.slice(6)); return }

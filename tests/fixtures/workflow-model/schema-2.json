@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "2.0",
+  "project": {
+    "name": "Saved schema 2 project",
+    "purpose": "",
+    "host": "",
+    "sourceControl": "",
+    "sourceLocations": ""
+  },
+  "components": [
+    {
+      "id": "component-1",
+      "name": "",
+      "path": "",
+      "technologies": [],
+      "commands": {
+        "test": "",
+        "lint": "",
+        "build": ""
+      }
+    }
+  ],
+  "workflow": {
+    "recipe": "bugfix",
+    "enabledStages": [
+      "reproduction",
+      "diagnosis",
+      "bug-fix",
+      "regression",
+      "bug-review"
+    ],
+    "notes": {
+      "diagnosis": "Preserve this note. A retry mentioned here is not a configured loop."
+    },
+    "bindings": {
+      "reproduction": {
+        "actorType": "agent",
+        "actorId": "implementer",
+        "actorName": "",
+        "skills": [
+          "bug-diagnosis"
+        ],
+        "contextOnly": false
+      },
+      "diagnosis": {
+        "actorType": "agent",
+        "actorId": "analyst",
+        "actorName": "",
+        "skills": [
+          "bug-diagnosis",
+          "impact-analysis"
+        ],
+        "contextOnly": false
+      },
+      "bug-fix": {
+        "actorType": "agent",
+        "actorId": "implementer",
+        "actorName": "",
+        "skills": [
+          "implementation"
+        ],
+        "contextOnly": false
+      },
+      "regression": {
+        "actorType": "agent",
+        "actorId": "implementer",
+        "actorName": "",
+        "skills": [
+          "verification"
+        ],
+        "contextOnly": false
+      },
+      "bug-review": {
+        "actorType": "agent",
+        "actorId": "reviewer",
+        "actorName": "",
+        "skills": [
+          "knowledge-maintenance"
+        ],
+        "contextOnly": false
+      }
+    },
+    "suppliedInputs": {
+      "reproduction": "Supplied reproduction record"
+    },
+    "answers": {
+      "observed": "An optional filter is lost."
+    }
+  },
+  "skills": [],
+  "agents": [
+    {
+      "role": "analyst",
+      "tools": [
+        "read",
+        "search"
+      ]
+    },
+    {
+      "role": "implementer",
+      "tools": [
+        "read",
+        "search",
+        "edit",
+        "execute"
+      ]
+    },
+    {
+      "role": "reviewer",
+      "tools": [
+        "read",
+        "search"
+      ]
+    }
+  ],
+  "practices": [
+    "portable-behavior",
+    "progressive-context"
+  ],
+  "constraints": {
+    "approvalRequired": true,
+    "readOnly": false,
+    "notes": ""
+  },
+  "facts": [],
+  "evidence": [],
+  "model": {
+    "name": "",
+    "version": "",
+    "budget": "",
+    "notes": ""
+  },
+  "runtime": {
+    "enabled": true,
+    "outcome": "",
+    "requiredInputs": "",
+    "judgment": "",
+    "tools": "",
+    "validation": "",
+    "limits": "Budget still undecided",
+    "duplicates": "",
+    "failures": "",
+    "confirmation": "",
+    "controls": []
+  }
+}

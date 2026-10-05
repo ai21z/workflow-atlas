@@ -15,7 +15,7 @@
   "scripts": {
     "start": "node tools/serve.mjs",
     "test": "node --test tests/*.test.mjs",
-    "test:browser": "node tests/browser-jev.cjs && node tests/browser-artifacts.cjs",
+    "test:browser": "node tests/browser-jev.cjs && node tests/browser-artifacts.cjs && node tests/browser-output-choice.cjs && node tests/browser-output-transitions.cjs && node tests/browser-import-recovery.cjs && node tests/browser-navigation-recovery.cjs && node tests/browser-process-designer.cjs",
     "test:handoff": "node tests/browser-handoff.cjs",
     "build:docs": "node tools/build-docs-guide.mjs",
     "check:docs": "node tools/check-docs.mjs",

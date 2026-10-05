@@ -9,7 +9,7 @@ try { playwright = require('playwright') }
 catch { playwright = require(path.resolve(path.dirname(process.execPath), '../node_modules/playwright')) }
 
 const root = path.resolve(__dirname, '..')
-const base = process.env.ATLAS_TEST_URL || 'http://127.0.0.1:8780/factory/'
+let base = process.env.ATLAS_TEST_URL || null
 const output = path.join(root, 'local-knowledge/retests/handoff-ux', new Date().toISOString().replace(/[:.]/g, '-'))
 const evidence = {
   startedAt: new Date().toISOString(), base,
@@ -23,7 +23,18 @@ const changedWanted = 'Let customers save, reopen and name their search filters.
 const finalWanted = 'Let customers save, name and share their search filters.'
 const refined = 'Account owners can share a named saved filter with one colleague.'
 const acceptance = 'Given a named filter, when I save and reopen it, all supplied criteria remain.\nBoundary: an empty name prompts for a name.\nLiteral example: ``` and <filter> must stay as supplied.'
-let browser, context, page, initialZip, updatedZip, zipApi
+let browser, context, page, initialZip, updatedZip, zipApi, server
+
+async function closeResources() {
+  const currentBrowser = browser
+  const currentServer = server
+  browser = null
+  server = null
+  await Promise.all([
+    currentBrowser?.close(),
+    currentServer?.listening ? new Promise((resolve, reject) => currentServer.close(error => error ? reject(error) : resolve())) : undefined,
+  ])
+}
 
 async function persist() {
   evidence.finishedAt = new Date().toISOString()
@@ -63,7 +74,9 @@ async function fresh(viewport = { width: 1440, height: 1000 }) {
   page = await context.newPage()
   page.setDefaultTimeout(8000)
   page.on('pageerror', error => evidence.errors.push({ kind: 'pageerror', message: error.message }))
-  page.on('console', message => { if (message.type() === 'error') evidence.errors.push({ kind: 'console', message: message.text() }) })
+  page.on('console', message => { if (message.type() === 'error') evidence.errors.push({ kind: 'console', message: message.text(), location: message.location() }) })
+  page.on('response', response => { if (response.status() >= 400) evidence.errors.push({ kind: 'http', url: response.url(), status: response.status() }) })
+  page.on('requestfailed', request => evidence.errors.push({ kind: 'request', url: request.url(), failure: request.failure()?.errorText || 'Request failed' }))
   await page.goto(base)
   await page.locator('#start-screen').waitFor({ state: 'visible' })
 }
@@ -146,12 +159,20 @@ async function setTheme(theme) {
 
 async function main() {
   await fs.mkdir(output, { recursive: true })
-  zipApi = await import(pathToFileURL(path.join(root, 'factory/zip.mjs')).href)
-  browser = await playwright.chromium.launch({ channel: 'chrome', headless: true })
-  evidence.browser = browser.version()
-  evidence.driverSha256 = sha(await fs.readFile(__filename))
-  evidence.sourcesBefore = await sourceHashes()
   try {
+    if (!base) {
+      const { createAtlasServer } = await import(pathToFileURL(path.join(root, 'tools/serve.mjs')).href)
+      server = await createAtlasServer({ rootDir: root, getApiKey: () => undefined, transport: () => { throw new Error('Unexpected provider call in handoff test') } })
+      await new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve) })
+      base = `http://127.0.0.1:${server.address().port}/factory/`
+      evidence.serverMode = 'Isolated application server without credentials or provider calls'
+    } else evidence.serverMode = 'Explicit ATLAS_TEST_URL override'
+    evidence.base = base
+    zipApi = await import(pathToFileURL(path.join(root, 'factory/zip.mjs')).href)
+    browser = await playwright.chromium.launch({ channel: 'chrome', headless: true })
+    evidence.browser = browser.version()
+    evidence.driverSha256 = sha(await fs.readFile(__filename))
+    evidence.sourcesBefore = await sourceHashes()
     await check('01-first-use', async () => {
       await fresh()
       await start()
@@ -397,8 +418,8 @@ async function main() {
       return { unchangedSourceFiles: evidence.sourcesAfter.length }
     })
   } finally {
-    await persist()
-    await browser.close()
+    try { await persist() }
+    finally { await closeResources() }
   }
   process.stdout.write(`Evidence: ${output}\n`)
   if (evidence.checks.some(check => check.status !== 'Pass')) process.exitCode = 1
@@ -407,7 +428,7 @@ async function main() {
 main().catch(async error => {
   evidence.fatalError = error.stack || String(error)
   await persist().catch(() => {})
-  await browser?.close().catch(() => {})
+  await closeResources().catch(() => {})
   process.stderr.write(String(error) + '\n')
   process.exitCode = 1
 })

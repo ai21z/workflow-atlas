@@ -11,10 +11,12 @@ const definitions = [
   { id: 'accessibility', title: 'Accessibility review', group: 'Use Atlas', description: 'Read observed behavior, review limits and remaining checks.' },
   { id: 'product-vision', title: 'Product vision', group: 'Project reference', description: 'Understand the project purpose and agreed direction.' },
   { id: 'requirements', title: 'Requirements', group: 'Project reference', description: 'Read the accepted scope and intended behavior.' },
+  { id: 'workflow-design-spec', title: 'Workflow design specification', group: 'Project reference', description: 'Review the proposed steps, outcome routes, correction loops and connected exports.' },
   { id: 'reference-practices', title: 'Reference practices', group: 'Project reference', description: 'Inspect primary sources and what their practices contribute.' },
   { id: 'backlog', title: 'Delivery backlog', group: 'Project reference', description: 'Understand remaining work and proof of value.' },
   { id: 'atlas-preservation', title: 'Atlas preservation', group: 'Project reference', description: 'Review the retained Knowledge Atlas and migration boundaries.' },
   { id: 'extension-contract', title: 'Extension contract', group: 'Extend Atlas', description: 'Understand schema, shared definitions and export adapters.' },
+  { id: 'workflow-model', title: 'Workflow model', group: 'Extend Atlas', description: 'Read process records, bounded correction rules and migration behavior.' },
   ...JEV_DEFINITIONS.map((page) => ({
     ...page,
     id: `jev-${page.id}`,

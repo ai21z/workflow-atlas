@@ -40,6 +40,8 @@
   "docs/reader.js",
   "docs/reference-practices.md",
   "docs/requirements.md",
+  "docs/workflow-design-spec.md",
+  "docs/workflow-model.md",
   "factory/app.mjs",
   "factory/catalog.mjs",
   "factory/core.mjs",
@@ -56,6 +58,9 @@
   "factory/journey.mjs",
   "factory/maintenance.mjs",
   "factory/portable.mjs",
+  "factory/process-designer.mjs",
+  "factory/process-diagram.mjs",
+  "factory/process-editor.mjs",
   "factory/practice-actions.mjs",
   "factory/project-view.css",
   "factory/project-view.mjs",
@@ -64,5 +69,8 @@
   "factory/styles.css",
   "factory/usability.css",
   "factory/version.mjs",
+  "factory/workflow-fixtures.mjs",
+  "factory/workflow-model.mjs",
+  "factory/workflow-model-view.mjs",
   "factory/zip.mjs"
 ]

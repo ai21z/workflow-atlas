@@ -1,6 +1,7 @@
 import { CATALOG, getStages, getEffectiveSkills } from './core.mjs';
 import { renderDecisionBrief } from './decision-brief.mjs';
 import { getIntentAnswer, getIntentQuestionWording } from './intent.mjs';
+import { renderWorkflowModel, WORKFLOW_MODEL_STYLES } from './workflow-model-view.mjs';
 
 const escape = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const has = value => typeof value === 'string' && value.trim().length > 0;
@@ -18,7 +19,7 @@ const heading = (eyebrow, title, description, extra = '', level = 2) => {
 };
 const roleOf = id => CATALOG.roles.find(role => role.id === id);
 const skillOf = id => CATALOG.skills.find(skill => skill.id === id);
-const recipeOf = config => CATALOG.recipes.find(recipe => recipe.id === config.workflow.recipe);
+const recipeOf = config => getStages(config).length ? CATALOG.recipes.find(recipe => recipe.id === config.workflow.recipe) : undefined;
 const enabledStages = config => getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id));
 function actorFor(config, stage) {
   const binding = config.workflow.bindings[stage.id] || {};
@@ -28,6 +29,12 @@ function actorFor(config, stage) {
 function actorChip(config, stage) {
   const actor = actorFor(config, stage);
   return `<span class="pv-actor pv-actor-${escape(actor.type)}">${icon(actor.type === 'agent' ? 'spark' : actor.type === 'external' ? 'system' : 'person')}<span>${escape(actor.name)}</span>${actor.contextOnly ? '<small>context only</small>' : ''}</span>`;
+}
+const processKindLabel = kind => ({ manual: 'A team process', development: 'How we build it', application: 'How it works when used' })[kind] || 'Process';
+function processActorChip(step) {
+  const actor = step.actor;
+  const name = actor.name || (actor.type === 'agent' ? roleOf(actor.id)?.label || actor.id : actor.id) || (actor.type === 'external' ? 'System still to name' : actor.type === 'agent' ? 'Agent role still to choose' : 'Person still to name');
+  return `<span class="pv-actor pv-actor-${escape(actor.type)}">${icon(actor.type === 'agent' ? 'spark' : actor.type === 'external' ? 'system' : 'person')}<span>${escape(name)}</span>${actor.contextOnly ? '<small>context only</small>' : ''}</span>`;
 }
 function stageFiles(pack, id) {
   return (pack?.files || []).filter(file => file.stages?.includes(id) && !['VALIDATION.md', 'manifest.json'].includes(file.path));
@@ -77,6 +84,10 @@ function knowledgeEntry() {
 function overview(config, pack) {
   const stages = enabledStages(config);
   const recipe = recipeOf(config);
+  const customOnly = !recipe;
+  const processes = config.workflowModel.processes.filter(process => process.source === 'custom');
+  const processSteps = processes.flatMap(process => process.steps.map(step => ({ process, step })));
+  const count = customOnly ? processSteps.length : stages.length;
   const effectiveSkills = getEffectiveSkills(config);
   const unanswered = (recipe?.questions || []).filter(question => !has(getIntentAnswer(config, question.id).text));
   const components = config.components.filter(component => has(component.name) || component.technologies.length);
@@ -87,22 +98,22 @@ function overview(config, pack) {
     <h1>${escape(config.project.name || 'Your project workflow')}</h1>
   </section>
   ${renderDecisionBrief(config, { editable: true })}
-  <div class="pv-starting-points">${knowledgeEntry()}<section class="pv-project-entry"><p class="pv-eyebrow">Your choices in this session</p><h2>Current project workflow</h2><p>Review ${stages.length} selected ${stages.length === 1 ? 'stage' : 'stages'}, their owners and expected outputs. Select a stage to adapt its instructions.</p><div class="pv-entry-actions">${action('data-project-view', 'workflow', 'Explore project workflow')}${action('data-open-editor', 'project', 'Edit project details')}</div><p class="pv-footnote">Then inspect Files and download your project to keep it.</p></section></div>
+  <div class="pv-starting-points">${knowledgeEntry()}<section class="pv-project-entry"><p class="pv-eyebrow">Your choices in this session</p><h2>Current project workflow</h2><p>${customOnly ? count ? `Review ${count} planned ${count === 1 ? 'step' : 'steps'} across ${processes.length} ${processes.length === 1 ? 'process' : 'processes'}. Open a process to edit its owners, inputs and outcome routes.` : 'Design a process to connect the work, its checks and what happens next.' : `Review ${stages.length} selected ${stages.length === 1 ? 'stage' : 'stages'}, their owners and expected outputs. Select a stage to adapt its instructions.`}</p><div class="pv-entry-actions">${action('data-project-view', 'workflow', 'Explore project workflow')}${action('data-open-editor', 'project', 'Edit project details')}</div><p class="pv-footnote">Then inspect Files and download your project to keep it.</p></section></div>
   <details class="pv-overview-detail"><summary>More project detail</summary><div class="pv-overview-detail-body">
-  <div class="pv-metrics"><div><strong>${stages.length}</strong><span>workflow stages</span></div><div><strong>${effectiveSkills.length}</strong><span>reusable skills</span></div><div><strong>${fileCount}</strong><span>files in the pack</span></div><div><strong>${(config.evidence || []).length}</strong><span>evidence records</span></div></div>
-  <section class="pv-section">${heading('The journey', recipe?.label || 'Your workflow', recipe?.description || '', action('data-open-editor', 'intent', 'Change recipe'))}
-    <div class="pv-journey" aria-label="Included workflow stages">${stages.map((stage, index) => `<button type="button" data-select-stage="${escape(stage.id)}"><span>${String(index + 1).padStart(2, '0')}</span><strong>${escape(stage.title)}</strong>${icon('arrow')}</button>`).join('')}</div>
-    ${!stages.length ? '<p class="pv-empty-note">Choose the stages that belong in this project.</p>' : ''}
+  <div class="pv-metrics"><div><strong>${count}</strong><span>${customOnly ? 'planned process steps' : 'workflow stages'}</span></div><div><strong>${effectiveSkills.length}</strong><span>reusable skills</span></div><div><strong>${fileCount}</strong><span>files in the pack</span></div><div><strong>${(config.evidence || []).length}</strong><span>evidence records</span></div></div>
+  <section class="pv-section">${heading(customOnly ? 'The process design' : 'The journey', recipe?.label || 'Processes and connections', customOnly ? 'Open a process to follow its outcome routes. The list does not imply execution order.' : recipe?.description || '', customOnly ? action('data-project-view', 'workflow', 'Edit processes') : action('data-open-editor', 'intent', 'Change recipe'))}
+    <div class="pv-journey" aria-label="${customOnly ? 'Planned processes' : 'Included workflow stages'}">${customOnly ? processes.map(process => `<button type="button" data-pe-open="${escape(process.id)}"><span>${escape(processKindLabel(process.kind))}</span><strong>${escape(process.name || process.id)}</strong>${icon('arrow')}</button>`).join('') : stages.map((stage, index) => `<button type="button" data-select-stage="${escape(stage.id)}"><span>${String(index + 1).padStart(2, '0')}</span><strong>${escape(stage.title)}</strong>${icon('arrow')}</button>`).join('')}</div>
+    ${customOnly ? !processes.length ? '<p class="pv-empty-note">No process designed yet. Open Workflow to add one.</p>' : '' : !stages.length ? '<p class="pv-empty-note">Choose the stages that belong in this project.</p>' : ''}
   </section>
   <div class="pv-two-col">
-    <section class="pv-panel">${heading('Intent', 'The decisions that shape the work', '', action('data-open-editor', 'intent', 'Edit'))}<div class="pv-decision-list">${(recipe?.questions || []).map(getIntentQuestionWording).map(question => { const answer = getIntentAnswer(config, question.id); return `<article><h3>${escape(question.label)}</h3>${copy(answer.text, 'An open question. Add your answer when the outcome is understood.')}${answer.inherited ? '<p class="pv-footnote">Uses your project outcome.</p>' : ''}</article>`; }).join('')}</div>${unanswered.length ? `<p class="pv-footnote">${unanswered.length} ${unanswered.length === 1 ? 'question remains' : 'questions remain'} open. You can download an unfinished project.</p>` : ''}</section>
+    <section class="pv-panel">${heading('Intent', 'The decisions that shape the work', '', customOnly ? action('data-project-view', 'workflow', 'Edit process purposes') : action('data-open-editor', 'intent', 'Edit'))}<div class="pv-decision-list">${customOnly ? processes.map(process => `<article><h3>${escape(process.name || process.id)}</h3>${copy(process.purpose, 'The purpose of this process is still to decide.')}<p class="pv-footnote">${escape(processKindLabel(process.kind))}. ${escape(label(process.pattern.id))} pattern. Planned work, not observed execution.</p></article>`).join('') || '<p class="pv-empty-note">Add a process and describe what it should achieve.</p>' : (recipe?.questions || []).map(getIntentQuestionWording).map(question => { const answer = getIntentAnswer(config, question.id); return `<article><h3>${escape(question.label)}</h3>${copy(answer.text, 'An open question. Add your answer when the outcome is understood.')}${answer.inherited ? '<p class="pv-footnote">Uses your project outcome.</p>' : ''}</article>`; }).join('')}</div>${unanswered.length ? `<p class="pv-footnote">${unanswered.length} ${unanswered.length === 1 ? 'question remains' : 'questions remain'} open. You can download an unfinished project.</p>` : ''}</section>
     <section class="pv-panel">${heading('Project context', 'Where this workflow belongs', '', action('data-open-editor', 'project', 'Edit'))}
-      <div class="pv-components">${components.length ? components.map(component => `<article><div class="pv-component-title">${icon('layers')}<h3>${escape(component.name || 'Unnamed component')}</h3></div><p class="pv-path">${escape(component.path || 'Repository path still to confirm')}</p><div class="pv-tech-list">${component.technologies.map(technology => `<span>${escape(CATALOG.technologies.find(item => item.id === technology.id)?.label || technology.id)}${technology.version ? ` <small>${escape(technology.version)}</small>` : ''}</span>`).join('')}</div></article>`).join('') : '<p class="pv-empty-note">Add the components and technologies relevant to this workflow.</p>'}</div>
+      <div class="pv-components">${components.length ? components.map(component => `<article><div class="pv-component-title">${icon('layers')}<h3>${escape(component.name || 'Unnamed component')}</h3></div><p class="pv-path">${escape(component.path || 'Repository path still to confirm')}</p><div class="pv-tech-list">${component.technologies.map(technology => `<span>${escape(CATALOG.technologies.find(item => item.id === technology.id)?.label || technology.id)}${technology.version ? ` <small>${escape(technology.version)}</small>` : ''}</span>`).join('')}</div></article>`).join('') : `<p class="pv-empty-note">${customOnly ? 'No software components recorded. Add them only if this process needs them.' : 'Add the components and technologies relevant to this workflow.'}</p>`}</div>
       <div class="pv-context-row"><span>Instruction target</span><strong>${escape(CATALOG.hosts.find(host => host.id === config.project.host)?.label || config.project.host || 'Not chosen')}</strong></div><div class="pv-context-row"><span>Source control</span><strong>${escape(config.project.sourceControl || 'Not chosen')}</strong></div>
     </section>
   </div>
   <div class="pv-two-col">
-    <section class="pv-panel">${heading('Responsibilities', 'People, agents and systems', '', action('data-open-editor', 'artifacts', 'Review roles'))}<div class="pv-ownership">${stages.map(stage => `<div><button type="button" data-select-stage="${escape(stage.id)}">${escape(stage.title)}</button>${actorChip(config, stage)}</div>`).join('')}</div></section>
+    <section class="pv-panel">${heading('Responsibilities', 'People, agents and systems', '', customOnly ? action('data-project-view', 'workflow', 'Review assignments') : action('data-open-editor', 'artifacts', 'Review roles'))}<div class="pv-ownership">${customOnly ? processSteps.map(({ process, step }) => `<div><button type="button" data-pe-open="${escape(process.id)}" data-pe-step="${escape(step.id)}" aria-label="Edit ${escape(step.name || step.id)} in ${escape(process.name || process.id)}">${escape(step.name || step.id)}</button>${processActorChip(step)}</div>`).join('') || '<p class="pv-empty-note">No process steps yet.</p>' : stages.map(stage => `<div><button type="button" data-select-stage="${escape(stage.id)}">${escape(stage.title)}</button>${actorChip(config, stage)}</div>`).join('')}</div>${customOnly ? '<p class="pv-footnote">Assignments describe planned responsibilities. Application actors need their own implementation and permissions.</p>' : ''}</section>
     <section class="pv-panel pv-handoff-panel">${heading('Portable handoff', 'The explanation travels with the work', 'Review the generated instructions and the decisions behind them.')}<div class="pv-output-list">${(pack?.files || []).filter(file => ['WORKFLOW.md', 'PROJECT-FACTS.md', 'EVIDENCE.md', 'RUNTIME-DESIGN.md'].includes(file.path)).map(fileLink).join('')}</div>${action('data-open-editor', 'review', 'Review all files')}<p class="pv-footnote">Agent profiles describe intended behavior. Your host and backend must provide the capabilities and enforce the boundaries.</p></section>
   </div></div></details>`;
 }
@@ -162,6 +173,7 @@ function authoringStageCard(config, pack, stage, index, selected, nextStage) {
 function authoringWorkflow(config, pack, selected, paletteOpen) {
   const stages = getStages(config);
   const recipe = recipeOf(config);
+  if (!stages.length) return '';
   return `<header class="pv-authoring-heading"><div><h2>${escape(recipe?.label || 'Your workflow')}</h2><p>Select a stage to adapt its responsibility and instructions.</p></div></header>
     ${authoringPalette(config, paletteOpen)}
     <div class="pv-stage-grid" aria-label="Workflow stages in recipe order">${stages.map((stage, index) => authoringStageCard(config, pack, stage, index, selected, stages[index + 1])).join('')}</div>
@@ -172,6 +184,7 @@ function authoringWorkflow(config, pack, selected, paletteOpen) {
 function workflow(config, pack, selected, editing) {
   const stages = enabledStages(config);
   const recipe = recipeOf(config);
+  if (!recipe && config.workflowModel.processes.some(process => process.source === 'custom')) return heading('Planned work', 'Read your process', 'Review the recorded steps, checks and outcome routes below.', '', 1);
   const selectedStage = stages.find(stage => stage.id === selected);
   return `${heading('The work, made visible', recipe?.label || 'Your workflow', editing ? 'Select a stage to change its details. Assign actors and skills directly on the workflow.' : 'Follow the handoffs. Open a stage to see its decisions, responsibilities and expected outputs.', action('data-open-editor', 'workflow', editing ? 'Configure stages' : 'Edit workflow'), 1)}
     ${editing ? palette(config) : ''}
@@ -218,5 +231,5 @@ export function renderProjectView(config, pack, { view = 'overview', selectedSta
   else if (perspective === 'architecture') content = architecture(config, pack);
   else if (perspective === 'evidence') content = evidenceView(config, pack);
   else content = overview(config, pack);
-  return `<div class="project-view${authoring ? ' pv-authoring' : ''}" data-current-view="${perspective}">${authoring ? '' : perspectives(perspective, config.runtime.enabled)}${content}</div>`;
+  return `<div class="project-view${authoring ? ' pv-authoring' : ''}" data-current-view="${perspective}"><style>${WORKFLOW_MODEL_STYLES}</style>${authoring ? '' : perspectives(perspective, config.runtime.enabled)}${content}${perspective === 'workflow' && !authoring ? renderWorkflowModel(config) : ''}</div>`;
 }

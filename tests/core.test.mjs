@@ -307,7 +307,7 @@ test('schema parser rejects unsupported or lossy imports before the caller repla
   }
   const unknownNested = fixture(); unknownNested.components[0].commands.deploy = 'publish';
   assert.throws(() => parseImport(JSON.stringify(unknownNested)), /Unknown field/);
-  const unsupported = fixture(); unsupported.schemaVersion = '3.0';
+  const unsupported = fixture(); unsupported.schemaVersion = '99.0';
   assert.throws(() => parseImport(JSON.stringify(unsupported)), /Unsupported schema version/);
   const invalidType = fixture(); invalidType.constraints.readOnly = 'yes';
   assert.throws(() => parseImport(JSON.stringify(invalidType)), /Expected true or false/);
@@ -401,7 +401,7 @@ test('compiler regeneration is deterministic, importable and does not mutate its
 });
 
 test('catalog source records identify local adaptation and primary references', () => {
-  assert.equal(CATALOG.schemaVersion, '2.0');
+  assert.equal(CATALOG.schemaVersion, '3.0');
   assert.equal(Object.isFrozen(CATALOG.roles[0].defaultTools), true);
   for (const practice of CATALOG.practices) {
     assert.ok(practice.source.startsWith('https://'));
@@ -520,7 +520,7 @@ test('legacy migration preserves facts, notes, commands, explicit tools and extr
   legacy.skills = ['impact-analysis', 'verification'];
   legacy.agents = [{ role: 'analyst', tools: [] }];
   const migrated = parseImport(JSON.stringify(legacy));
-  assert.equal(migrated.schemaVersion, '2.0');
+  assert.equal(migrated.schemaVersion, '3.0');
   for (const key of ['project', 'components', 'skills', 'agents', 'practices', 'constraints']) assert.deepEqual(migrated[key], legacy[key]);
   assert.deepEqual(migrated.workflow.notes, legacy.workflow.notes);
   assert.deepEqual(migrated.workflow.enabledStages, ['requirements']);
@@ -651,4 +651,49 @@ test('retained unassigned roles guide review without implying implementation in 
   assert.doesNotMatch(profile, /Follow the delivery plan and existing conventions/);
   assert.doesNotMatch(profile, /verification\/SKILL.md/);
   assert.equal(file(pack, '.github/skills/implementation/SKILL.md'), undefined);
+});
+
+test('an architecture-only Analyst does not take the human requirement owners work', () => {
+  const config = createRecipe('feature-delivery');
+  const profile = file(compile(config), '.github/agents/analyst.agent.md');
+  const responsibilities = profile.split('## Responsibilities\n')[1].split('\n## Assigned stages')[0];
+  assert.equal(config.workflow.bindings.requirements.actorType, 'human');
+  assert.equal(config.workflow.bindings.architecture.actorId, 'analyst');
+  assert.doesNotMatch(responsibilities, /Produce the requirement brief/);
+  assert.match(responsibilities, /Architecture and impact: Choose a proportionate approach/);
+});
+
+test('every role follows its one assigned stage across all recipes without inheriting other work', () => {
+  for (const recipe of CATALOG.recipes) for (const role of CATALOG.roles) for (const selected of getStages(recipe.id)) {
+    const config = createRecipe(recipe.id);
+    config.agents = [{ role: role.id, tools: [...TOOL_ALIASES] }];
+    for (const [index, binding] of Object.values(config.workflow.bindings).entries()) Object.assign(binding, { actorType: index % 2 ? 'external' : 'human', actorId: '', actorName: index % 2 ? 'Existing system' : 'Project owner' });
+    Object.assign(config.workflow.bindings[selected.id], { actorType: 'agent', actorId: role.id, actorName: '' });
+    const profile = file(compile(config), `.github/agents/${role.id}.agent.md`);
+    const responsibilities = profile.split('## Responsibilities\n')[1].split('\n## Assigned stages')[0];
+    assert.ok(responsibilities.includes(`${selected.title}: ${selected.purpose}`), `${recipe.id}/${role.id}/${selected.id}`);
+    const description = JSON.parse(profile.match(/^description: (.+)$/m)[1]);
+    assert.ok(description.includes(selected.title));
+    for (const omitted of getStages(recipe.id).filter(stage => stage.id !== selected.id)) assert.ok(!responsibilities.includes(omitted.purpose), `Unassigned ${omitted.id} work leaked into ${role.id}`);
+    Object.assign(config.workflow.bindings[selected.id], { actorType: 'human', actorId: '', actorName: 'Project owner' });
+    const unassigned = file(compile(config), `.github/agents/${role.id}.agent.md`);
+    assert.match(unassigned, /profile retained without a stage assignment/);
+    assert.doesNotMatch(unassigned, /Expected outputs:/);
+  }
+});
+
+test('mixed active and context-only assignments keep each profile responsibility scoped', () => {
+  const config = createRecipe('feature-delivery');
+  config.workflow.bindings.verification.contextOnly = true;
+  let profile = file(compile(config), '.github/agents/implementer.agent.md');
+  let responsibilities = profile.split('## Responsibilities\n')[1].split('\n## Assigned stages')[0];
+  assert.match(responsibilities, /Development: Implement/);
+  assert.match(responsibilities, /Tests and review: Review supplied artifacts only/);
+  assert.match(responsibilities, /Do not perform the underlying work or claim executed checks/);
+  assert.ok(JSON.parse(profile.match(/^description: (.+)$/m)[1]).includes('Tests and review (supplied context review)'));
+  config.workflow.bindings.implementation.contextOnly = true;
+  profile = file(compile(config), '.github/agents/implementer.agent.md');
+  responsibilities = profile.split('## Responsibilities\n')[1].split('\n## Assigned stages')[0];
+  assert.match(responsibilities, /Development: Review supplied artifacts only/);
+  assert.doesNotMatch(responsibilities, /Development: Implement/);
 });

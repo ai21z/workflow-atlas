@@ -1,10 +1,12 @@
-import { CATALOG, PROJECT_JSON_MAX_BYTES, compileSelectedOutput, getEffectiveSkills, getUseInstructions } from './core.mjs';
+import { CATALOG, PROJECT_JSON_MAX_BYTES, compileSelectedOutput, getEffectiveSkills, getUseInstructions, getStages } from './core.mjs';
 
 // Output selection belongs to the current session. Project decisions remain in project.json.
 export function recommendOutput(config) {
   return {
     kind: 'blueprint', skillId: null, title: 'Workflow blueprint',
-    reason: config.workflow.recipe === 'feasibility'
+    reason: !getStages(config).length
+      ? 'Start with a readable process, its connections and planned checks. Choose a skill or full pack when you need the assigned instructions.'
+      : config.workflow.recipe === 'feasibility'
       ? 'Start with a readable plan, evidence and a decision record. Add agent instructions only when you need them.'
       : 'Start with a readable workflow and its decisions. Choose a skill or a full pack when you need instructions for an agent.',
   };
@@ -22,7 +24,7 @@ export function getOpenedOutputSelection(config, files) {
   let manifest;
   try { manifest = JSON.parse(records[0].content); }
   catch { return null; }
-  if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest) || manifest.schemaVersion !== CATALOG.schemaVersion || !['blueprint', 'skill', 'pack'].includes(manifest.kind)) return null;
+  if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest) || !['2.0', CATALOG.schemaVersion].includes(manifest.schemaVersion) || !['blueprint', 'skill', 'pack'].includes(manifest.kind)) return null;
   const selection = { kind: manifest.kind, skillId: null };
   if (manifest.kind === 'skill') {
     if (typeof manifest.skill !== 'string' || !getEffectiveSkills(config).some(skill => skill.id === manifest.skill)) return null;

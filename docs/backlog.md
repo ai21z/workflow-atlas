@@ -1,6 +1,22 @@
 # Delivery backlog
 
-Updated 3 October 2026.
+Updated 5 October 2026. Earlier dated audits below retain their original scope.
+
+## Next workflow design milestone
+
+The [workflow design specification](workflow-design-spec.md), added on 5 October 2026, defines the milestone for knowledge scope, connected steps, conditional outcomes, bounded corrections and consistent exports. Its three fictional cases cover backend generation, bug repair and document review. They are model fixtures with automated checks, not completed human trials or workflow executions.
+
+The ordered slices cover knowledge corrections, versioned model and migration, editor, exports and reopening, then structural and human walkthroughs. Their local implementation status is below. General writing remains outside the current JEV contract. Manual process authoring is available without JEV. Execution and broader JEV suggestions are separate work.
+
+The dated delivery and audit records below describe earlier work. They do not establish completion of this milestone.
+
+The first knowledge slice is implemented locally on 5 October 2026. Four general topics cover workflow patterns, architecture decisions, work breakdown and release and operations. The overview and related reading use the appropriate destinations. Original topics and sources remain, with workplace assumptions made conditional.
+
+The second slice adds the [versioned workflow model](workflow-model.md), migration from project schemas 1.0 and 2.0, three fictional fixtures, structural checks and readable process summaries. Explicit processes survive the supported project import and download formats.
+
+The third and fourth slices add a visual process designer and process-aware exports. Start from a sequence, review or bounded correction pattern. Edit through the map or step list, review changed connections and files, then apply the draft as one project change. Download remains explicit. Custom skills carry their required context, matching selected development profiles receive responsibilities, and evaluation cases remain planned and unrun. Application actors do not become deployed agents or development profiles.
+
+The next work is an independent human walkthrough and representative consumer-host exercise. Ask readers to explain an input, passing and failing destinations, the correction limit, the required evidence and the intended download. Record confusion and corrections. Automated structural checks do not establish comprehension, host behavior or productivity. No workflow runner or broader JEV proposal contract is included.
 
 ## Current local delivery
 
@@ -72,7 +88,7 @@ Add domain guidance where a real case needs it. Technical debt, migrations and a
 
 Acceptance: each addition has distinct intent, relevant questions, sources, limits and representative cases. Technology selection alone does not imply repository compatibility.
 
-Arbitrary user-defined stage graphs and independent editing of the stage definition fields remain future work. Current recipe selections, notes, prerequisites and assignments are editable. Any future graph editor needs explicit edge semantics, validation and equally usable non-drag controls.
+Custom processes now have editable steps and named outcome routes, with input relationships kept separate. Shared recipe definitions remain catalog content. Parallel joins, arbitrary routing expressions and unsupported cycles remain outside the current model. Extend those semantics only when a representative case and equally usable non-drag controls are defined.
 
 ## Optional upstream adapters
 

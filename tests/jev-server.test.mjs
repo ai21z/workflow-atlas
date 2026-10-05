@@ -5,7 +5,7 @@ import { mkdtemp, mkdir, writeFile, symlink, rm } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { MODEL } from '../factory/jev-contract.mjs'
-import { createAtlasServer, parseSuggestionInput, MAX_BODY_BYTES, MAX_INPUT_TEXT_BYTES, MAX_SUGGESTIONS_PER_WINDOW, SUGGESTION_WINDOW_MS } from '../tools/serve.mjs'
+import { createAtlasServer, parseSuggestionInput, MAX_BODY_BYTES, MAX_INPUT_TEXT_BYTES, MAX_SUGGESTIONS_PER_WINDOW, SUGGESTION_WINDOW_MS, BODY_DEADLINE_MS } from '../tools/serve.mjs'
 import { JevError } from '../tools/jev-transport.mjs'
 
 function payloadFor(input) {
@@ -194,6 +194,76 @@ test('invalid JSON and declared or streamed oversized bodies are rejected before
   assert.equal((await rawRequest(address, '/api/jev/suggest', { method: 'POST', headers: { ...headers, 'Content-Length': String(MAX_BODY_BYTES + 1) } })).status, 413)
   assert.equal((await rawRequest(address, '/api/jev/suggest', { method: 'POST', headers, chunks: ['x'.repeat(MAX_BODY_BYTES / 2), 'x'.repeat(MAX_BODY_BYTES / 2 + 1)] })).status, 413)
   assert.equal(calls, 0)
+})
+
+test('split Unicode request bytes preserve the exact brief and malformed UTF8 never reaches inference', async t => {
+  const briefs = []
+  const { address, post } = await setup(t, { transport: async request => {
+    briefs.push(request.state.userBrief)
+    return { payload: payloadFor(request), metadata: { attempts: 1, providerElapsedMs: 5 } }
+  } })
+  const headers = { 'Content-Type': 'application/json', 'X-Atlas-Request': 'jev', Origin: address }
+  const brief = 'Preserve Ελληνικά, 日本語 and 😀 exactly.'
+  const bytes = Buffer.from(JSON.stringify(input({ userBrief: brief })))
+  const response = await rawRequest(address, '/api/jev/suggest', { method: 'POST', headers, chunks: [...bytes].map(byte => Buffer.from([byte])) })
+  assert.equal(response.status, 200)
+  assert.deepEqual(briefs, [brief])
+  const malformed = Buffer.concat([Buffer.from('{"requestId":"test-1","userBrief":"'), Buffer.from([0xc3, 0x28]), Buffer.from('","suppliedProjectAnswers":{}}')])
+  const rejected = await rawRequest(address, '/api/jev/suggest', { method: 'POST', headers, chunks: [malformed] })
+  assert.equal(rejected.status, 400)
+  assert.equal(JSON.parse(rejected.body).error.code, 'invalid_json')
+  assert.deepEqual(briefs, [brief])
+  const tooManyBytes = await post(input({ userBrief: '界'.repeat(Math.floor(MAX_INPUT_TEXT_BYTES / 3) + 1) }))
+  assert.equal(tooManyBytes.status, 413)
+  assert.equal((await tooManyBytes.json()).error.code, 'input_too_large')
+  assert.deepEqual(briefs, [brief])
+  assert.equal((await post()).status, 200)
+  assert.equal(briefs.length, 2)
+})
+
+test('incomplete request bodies time out and release both slots while manual editing stays available', { timeout: BODY_DEADLINE_MS + 10_000 }, async t => {
+  let calls = 0
+  const { address, server, post } = await setup(t, { transport: async request => {
+    calls += 1
+    return { payload: payloadFor(request), metadata: { attempts: 1, providerElapsedMs: 5 } }
+  } })
+  const url = new URL(address)
+  let arrived = 0
+  let resolveReady
+  const ready = new Promise(resolve => { resolveReady = resolve })
+  const observe = req => { if (req.headers['x-test-incomplete'] === 'yes' && ++arrived === 2) resolveReady() }
+  server.on('request', observe)
+  t.after(() => server.off('request', observe))
+  const requests = []
+  const incomplete = () => new Promise((resolve, reject) => {
+    const req = http.request({ hostname: url.hostname, port: url.port, path: '/api/jev/suggest', method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': 'jev', Origin: address, 'X-Test-Incomplete': 'yes' } }, res => {
+      const chunks = []
+      res.on('data', chunk => chunks.push(chunk))
+      res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, body: Buffer.concat(chunks).toString() }))
+      res.on('error', reject)
+    })
+    requests.push(req)
+    req.once('error', reject)
+    req.write('{"userBrief":"unfinished synthetic request')
+  })
+  t.after(() => requests.forEach(req => req.destroy()))
+  const pending = Promise.all([incomplete(), incomplete()])
+  await ready
+  const busy = await post()
+  assert.equal(busy.status, 503)
+  assert.equal((await busy.json()).error.code, 'local_busy')
+  assert.equal((await fetch(`${address}/factory/`)).status, 200)
+  assert.equal((await fetch(`${address}/api/jev/status`)).status, 200)
+  assert.equal(calls, 0)
+  for (const response of await pending) {
+    assert.equal(response.status, 408)
+    assert.equal(response.headers.connection, 'close')
+    assert.equal(JSON.parse(response.body).error.code, 'body_timed_out')
+    assert.doesNotMatch(response.body, /unfinished synthetic request/)
+  }
+  assert.equal(calls, 0)
+  assert.equal((await post()).status, 200)
+  assert.equal(calls, 1)
 })
 
 test('unconfigured transport and unexpected exceptions return safe errors without echoing content', async t => {

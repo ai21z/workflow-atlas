@@ -1,6 +1,6 @@
 # Extension contract
 
-Schema: `2.0`. Catalog definition version: `2.0.1`. Contract documentation updated on 5 October 2026. Source review dates remain in their individual definition records.
+Project schema: `3.0`. Workflow model: `1.0`. Catalog definition version: `2.0.1`. Exporter: `3.1.0`. Contract documentation updated on 5 October 2026. Source review dates remain in their individual definition records. See the [workflow model](workflow-model.md) for explicit process records and current editing limits.
 
 The date above records this contract revision. The catalog source review remains 2 October 2026. Editing interface or metadata code does not establish a new upstream source review.
 
@@ -14,6 +14,12 @@ User documentation has a shared reader at `docs/index.html`, with the existing J
 | --- | --- |
 | `factory/catalog.mjs` | Recipes, stage definitions, skills, roles, practices, technology profiles, hosts, status choices and source references |
 | `factory/core.mjs` | Configuration fixtures, migration, semantic and structural validation, deterministic generation and standalone skill generation |
+| `factory/workflow-model.mjs` | Versioned process records, recipe projections, bounded correction semantics and model validation |
+| `factory/workflow-model-view.mjs` | Shared reading projection for explicit processes in the app, Markdown and portable HTML |
+| `factory/workflow-fixtures.mjs` | Fictional backend, bug repair and manual document process cases |
+| `factory/process-editor.mjs` | Pattern drafts, stable record IDs, change impact and atomic validation of process edits |
+| `factory/process-designer.mjs` | Session-only draft editor, labelled connection controls, map or list selection, review and apply |
+| `factory/process-diagram.mjs` | Diagram projection with distinct outcome and produced-input connections |
 | `factory/maintenance.mjs` | Review candidates from supplied files and three-way comparison of text file snapshots |
 | `factory/zip.mjs` | Archive path validation, deterministic UTF8 ZIP32 packaging and bounded stored or DEFLATE ZIP reading |
 | `factory/portable.mjs` | Project file reopening, readable project HTML and complete portable pack assembly |
@@ -33,8 +39,8 @@ User documentation has a shared reader at `docs/index.html`, with the existing J
 | `createRecipe(recipeId)` | Fresh configuration for `feasibility`, `bugfix` or `feature-delivery` |
 | `selectRecipe(configuration, recipeId)` | Returns a cloned configuration with the chosen recipe. Existing project data and recorded settings are retained |
 | `createExample(recipeId)` | Synthetic editable example for the chosen recipe |
-| `getStages(configurationOrRecipe)` | The recipe's stage definitions |
-| `getEffectiveSkills(configuration)` | Skills bound to enabled stages plus explicit extra library skills |
+| `getStages(configurationOrRecipe)` | The recipe's stage definitions, or no active recipe stages when the project has no recipe process reference |
+| `getEffectiveSkills(configuration)` | Skills bound to enabled recipe stages or custom process steps, plus explicit extra library skills |
 | `getTechnologyProfiles(configuration)` | Generic guidance and relevant specific profiles |
 | `parseImport(text)` | Structural checks, supported-version migration and rejection of unsupported references |
 | `validate(configuration)` | Structural and semantic findings plus separate completeness, format and host statuses |
@@ -52,6 +58,7 @@ Decision review is an optional companion record, not a new project schema. It ke
 - `project`: name, purpose, host, source control and source locations.
 - `components`: identifiers, paths, technologies, versions and actual test, lint and build commands.
 - `workflow`: recipe, enabled stages, notes, actor and skill bindings, supplied prerequisite artifacts and intent answers.
+- `workflowModel`: versioned recipe reference or custom processes, with results, checks, routes, correction policies, approvals and candidate evidence associations.
 - `skills`: explicit additional library skills.
 - `agents`: selected role profiles and their requested tool aliases.
 - `practices` and `constraints`: relevant guidance and project boundaries.
@@ -60,9 +67,9 @@ Decision review is an optional companion record, not a new project schema. It ke
 - `model`: recorded name, version, budget and notes.
 - `runtime`: optional backend design answers and links from requirements to implementation and evidence.
 
-Stage definitions supply purpose, inputs, actions, outputs, checks, prerequisite stage identifiers, default skills, actor and capabilities. The author edits selections, assignments, supplied inputs, intent and technology answers, and notes. The visual editor changes the same fields through stage inspection and actor or skill assignment. Arbitrary stage definition editing and user-defined recipe graphs remain future work.
+Recipe stage definitions supply purpose, inputs, actions, outputs, checks, prerequisite identifiers, default skills, actor and capabilities. The recipe inspector edits selections, assignments, supplied inputs, answers and notes. The process designer edits custom records under `workflowModel`. It does not rewrite shared catalog definitions or copy the recipe into a competing graph.
 
-Human and external actors use explicit names. Agent actors identify an exported role. A context-only assignment leaves repository changes and observed execution with other actors. Its warning remains visible.
+Recipe human and external actors use explicit names. Recipe agent actors identify an exported role. A custom development or manual agent assignment reaches a profile only when its actor ID matches a selected supported role. An unknown or unselected role remains a planned identity with an unresolved mapping finding. Application actors remain runtime design choices even when their IDs match development role names. A context-only assignment leaves underlying changes and observed execution with other actors.
 
 A prerequisite can be satisfied by an enabled producer stage or a location in `workflow.suppliedInputs`. A location records an intended input. It does not establish file existence.
 
@@ -75,6 +82,10 @@ Workflow and Files are the primary authoring views. Project details groups Brief
 Stage selection opens its editing panel directly, without a separate editing mode. Keep one editing location for each decision. Evidence records with `stageId` can appear at the associated stage. Unscoped facts, provenance, model and budget fields remain accessible as project-level records. Do not infer associations absent from configuration.
 
 Actor and skill drag operations change explicit assignments. Click controls provide the same capability. Diagram placement does not change prerequisites or imply runtime execution. Undo and redo retain project revisions in memory during the session.
+
+The process designer has a separate draft while open. Editing it does not mutate the active project. Review computes changed records, relationships and generated files. Apply validates the whole proposed project and changes it as one project revision, with Undo available afterward. A changed underlying project invalidates the pending review. The draft remains visible rather than overwriting newer work. Closing a changed draft asks whether to keep editing or discard it.
+
+Custom routes use named outcomes and selected destinations. Labels, selectors and the step list provide editing without dragging. Removing a referenced record requires explicit reference handling. Invalid references and unsupported structures block Apply. Missing criteria, unnamed actors and unresolved limits can remain draft findings. Instruction generation still reports its own actor, tool and output findings.
 
 Keep assignments, Project details, Roles and skills, undo, redo and downloads usable at narrow widths. Where a contextual panel becomes modal, preserve named-dialog and focus behavior. Help uses the actual control labels. Download integrates short actionable review while retaining detailed file comparison.
 
@@ -99,7 +110,7 @@ Light and dark theme changes synchronize between the workspace and embedded Atla
 | `PORTABLE_LIMITS` | Bounded input limits for archive size, entries, individual text files and total selected content |
 | `renderProjectView(configuration, pack, options)` | Presents a selected project perspective without creating an independent project model |
 
-The readable HTML embeds snapshot version `1.0` and configuration schema `2.0`. Import reads its project payload as text, it does not execute the selected HTML or instructions.
+The readable HTML embeds snapshot version `1.0` and configuration schema `3.0`. Import reads its project payload as text, it does not execute the selected HTML or instructions. Supported older configurations migrate before comparison.
 
 ZIP input supports ordinary ZIP32 archives with stored or DEFLATE entries. The current limits are 32 MiB per archive, 4096 entries, 8 MiB per selected text artifact and 32 MiB total selected text. Encryption, split archives, symbolic links and ZIP64 are unsupported. The embedded configuration must also satisfy the core JSON bound.
 
@@ -115,7 +126,7 @@ Configuration remains authoritative. Supplied generated files are retained separ
 
 ## Migration and import
 
-Version `1.0` drafts migrate to `2.0` after their original shape passes checks. Existing project values, components, selected skills, agents, tools, practices, constraints, enabled stages and notes are retained.
+Version `1.0` and `2.0` drafts migrate to `3.0` after their original shape passes checks. Existing project values, components, selected skills, agents, tools, practices, constraints, enabled stages and notes are retained. Version 2 facts, evidence, model and runtime notes also remain unchanged. Migration adds a recipe process reference and does not infer routes, approvals or correction limits.
 
 Legacy selected skills remain explicit library selections. New stage bindings use appropriate recipe defaults where possible. An absent role becomes a named human assignment requiring review. Migration does not create source confirmation, observed execution or evaluation results.
 
@@ -123,15 +134,15 @@ Malformed JSON, unsupported schema fields and unsupported identifiers leave the 
 
 ## Compiler output
 
-The compiler returns files with `path`, `content`, `why`, `stages`, `roles`, `sources` and `assumptions`. It also returns validation findings and text size statistics.
+The compiler returns files with `path`, `content`, `why`, `stages`, `roles`, `sources` and `assumptions`. Process-aware files also expose `processes` and `steps`. Process IDs use their recorded values. Step references use `processId/stepId` to avoid collisions with recipe stage IDs or another process. Consumers must tolerate absent process associations on older files and optional companion outputs. The compiler also returns validation findings and text size statistics.
 
 The metadata explains an artifact's contribution. It does not authenticate a source or imply that the described task was executed.
 
-The complete pack contains configuration, workflow, project facts, evidence, installation, sources, validation and manifest records. Relevant stages add requirement, decision, verification and evaluation templates. The optional backend design adds `RUNTIME-DESIGN.md` and `templates/CONTRACTS.md`.
+The complete pack contains configuration, workflow, project facts, evidence, installation, sources, validation and manifest records. Relevant stages add requirement, decision, verification and evaluation templates. Custom steps also produce an evaluation template with planned outcome cases, exhaustion cases and checks or approval after candidate changes. Every derived case starts as `NOT RUN`. The optional backend design adds `RUNTIME-DESIGN.md` and `templates/CONTRACTS.md`. Its fixed architecture remains illustrative.
 
-Agents link only the skills bound to their assigned stages. Extra library skills are exported without automatically binding them to every role.
+Agents link only skills bound to their assigned recipe stages or matching custom development and manual steps. Extra library skills are exported without automatically binding them to every role. Existing selected tool lists remain unchanged. Unknown capabilities or missing requested tools remain findings. Generating a profile does not grant those tools or configure a service.
 
-Skills contain `SKILL.md` and `references/project.md`. Their references do not depend on root pack records. Standalone output places the directory under the skill identifier, with a separate manifest and validation report.
+Skills contain `SKILL.md` and `references/project.md`. Custom assignments include the relevant result definitions, connected checks and routes, correction limits, approval requirements and supplied evidence with its recorded revision. Scope is retained for people, systems and supplied-context reviewers. Application skills describe planned runtime work without assigning it to a development profile. The references do not depend on root pack records. Standalone output places the directory under the skill identifier, with a separate manifest and validation report.
 
 The complete project download also includes `PROJECT-ATLAS.html`. It presents the recorded decisions and carries the supported project configuration needed to reopen them. Keep this project artifact distinct from the standalone full Knowledge Atlas export.
 

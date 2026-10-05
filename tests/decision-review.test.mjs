@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createExample, createRecipe, parseImport, serializeProject } from '../factory/core.mjs';
+import { createExample, createRecipe, parseImport, serializeProject, compileSelectedOutput } from '../factory/core.mjs';
 import { DECISION_REVIEW_MAX_BYTES, createDecisionReview, exportDecisionReview, parseDecisionReview, restoreDecisionReview } from '../factory/decision-review.mjs';
 
 const clone = value => JSON.parse(JSON.stringify(value));
@@ -275,3 +275,51 @@ test('restoration rejects unsafe derived records, unsupported envelopes, migrati
   assert.throws(() => restoreDecisionReview('import("javascript:alert(1)")', { current }), /not valid JSON/);
   assert.throws(() => restoreDecisionReview(' '.repeat(DECISION_REVIEW_MAX_BYTES + 1), { current }), /no larger than 8 MiB/);
 });
+
+test('evaluation stage notes associate their changed evaluation artifact with the recorded decision', () => {
+  const baseline = createRecipe('feasibility')
+  for (const binding of Object.values(baseline.workflow.bindings)) Object.assign(binding, { actorType: 'human', actorId: '', actorName: 'Study owner' })
+  const current = structuredClone(baseline)
+  current.workflow.notes['experiment-plan'] = 'Include conflicting references before deciding whether to build.'
+  const output = compileSelectedOutput(current, { kind: 'blueprint' })
+  assert.ok(file(output.files, 'templates/EVALUATION.md').content.includes(current.workflow.notes['experiment-plan']))
+  const review = createDecisionReview(baseline, current, { selection: { kind: 'blueprint' } })
+  assert.ok(review.affectedFiles.some(file => file.path === 'templates/EVALUATION.md'))
+  const change = review.changes.find(item => item.path === 'workflow.notes.experiment-plan')
+  assert.ok(change.affectedFiles.includes('templates/EVALUATION.md'), 'The evaluation note change omits the evaluation artifact it updates')
+})
+
+test('recorded acceptance changes associate the working templates and self-contained references they update', () => {
+  const baseline = createRecipe('feature-delivery')
+  const current = structuredClone(baseline)
+  current.workflow.answers.acceptance = 'Empty results produce a header-only CSV. Keep the displayed column order.'
+  const review = createDecisionReview(baseline, current, { selection: { kind: 'blueprint' } })
+  const change = review.changes.find(item => item.path === 'workflow.answers.acceptance')
+  for (const path of ['templates/REQUIREMENTS.md', 'templates/DECISION.md', 'templates/EVALUATION.md', '.github/skills/implementation/references/project.md']) {
+    assert.ok(review.affectedFiles.some(file => file.path === path))
+    assert.ok(change.affectedFiles.includes(path), `The acceptance answer change omits ${path}`)
+  }
+  assert.ok(!change.affectedFiles.includes('templates/VERIFICATION.md'))
+  assert.ok(!review.output.currentFiles.some(item => item.path.startsWith('.github/')))
+  assert.match(review.scope, /do not isolate causal effects when several decisions change together/)
+})
+
+test('older file associations restore exact decisions and selected output with refreshed summaries', () => {
+  const baseline = createRecipe('feature-delivery')
+  const current = structuredClone(baseline)
+  current.workflow.answers.acceptance = 'Preserve all visible rows in the CSV.'
+  for (const selection of [{ kind: 'blueprint' }, { kind: 'pack' }, { kind: 'skill', skillId: 'requirement-refinement' }]) {
+    const fresh = createDecisionReview(baseline, current, { reason: 'Clarify export acceptance.', selection })
+    const older = structuredClone(fresh)
+    older.changes.find(item => item.path === 'workflow.answers.acceptance').affectedFiles = ['VALIDATION.md', 'WORKFLOW.md', 'project.json']
+    const restored = restoreDecisionReview(JSON.stringify(older), { current })
+    assert.deepEqual(restored.review, fresh)
+    assert.deepEqual(restored.review.baseline, baseline)
+    assert.deepEqual(restored.review.current, current)
+    assert.equal(restored.review.output.kind, selection.kind)
+    assert.equal(restored.warnings.length, 1)
+    assert.match(restored.warnings[0], /replaced by fresh generation/)
+    const json = file(exportDecisionReview(restored.review), 'decision-review.json').content
+    assert.deepEqual(parseDecisionReview(json, { current }), fresh)
+  }
+})

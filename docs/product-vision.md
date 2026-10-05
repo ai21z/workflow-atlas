@@ -59,6 +59,8 @@ The versioned JSON configuration is the authoring source of truth. Readable Mark
 
 The current visual editor changes selections and assignments within reviewed recipes. Their stage topology is fixed. Arbitrary nodes, edge drawing, branching conditions and a general executable graph are outside the current implementation.
 
+The [workflow design specification](workflow-design-spec.md) proposes the next milestone: explicit inputs and results, outcome routes and bounded correction paths, with consistent diagrams and exports. It is a design specification, not implemented behavior. Execution remains a later phase.
+
 An Atlas pack retains the configuration needed to reopen its decisions. An arbitrary repository can supply facts for review, but it cannot reliably supply every original decision or relationship. Externally edited generated files remain differences to review.
 
 ## Development and runtime workflows

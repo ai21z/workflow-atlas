@@ -1,5 +1,6 @@
 import { CATALOG, getStages } from './core.mjs'
 import { getIntentAnswer, getIntentQuestionWording } from './intent.mjs'
+import { workflowModelIssues } from './workflow-model.mjs'
 
 const has = value => typeof value === 'string' && value.trim().length > 0
 const escape = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]))
@@ -18,6 +19,23 @@ function plannedAssignment(config, stage) {
 }
 
 export function getDecisionBrief(config) {
+  if (!getStages(config).length) {
+    const processes = config.workflowModel.processes.filter(process => process.source === 'custom')
+    const outcome = has(config.project.purpose) ? config.project.purpose : ''
+    const unresolved = workflowModelIssues(config).map(issue => ({ path: issue.path, label: issue.message }))
+    if (!outcome) unresolved.unshift({ path: 'project.purpose', label: 'The result this work should produce' })
+    if (!processes.length) unresolved.push({ path: 'workflowModel.processes', label: 'A process and its starting pattern' })
+    return {
+      outcome: { text: outcome, source: outcome ? 'Project outcome' : '' },
+      approach: { records: processes.filter(process => has(process.purpose)).map(process => ({ processId: process.id, stageId: '', title: process.name || process.id, text: process.purpose, included: true })), editStageId: '', editProcessId: processes[0]?.id || '' },
+      planned: processes.flatMap(process => {
+        const step = process.steps.find(item => item.id === process.entryStepId)
+        if (!step) return []
+        return [{ processId: process.id, processName: process.name || process.id, stepId: step.id, stageId: '', title: step.name || step.id, owner: step.actor.name || step.actor.id || 'Owner still to name', ownerSuffix: '', type: step.actor.type, contextOnly: step.actor.contextOnly }]
+      }),
+      unresolved,
+    }
+  }
   const recipe = CATALOG.recipes.find(item => item.id === config.workflow.recipe)
   const stages = getStages(config)
   const planned = stages.filter(stage => config.workflow.enabledStages.includes(stage.id))
@@ -49,6 +67,16 @@ export function getDecisionBrief(config) {
 const edit = (attribute, value, text) => `<button type="button" class="db-edit" ${attribute}="${escape(value)}">${escape(text)} →</button>`
 
 export function renderDecisionBrief(config, { editable = false, id = 'decision-brief' } = {}) {
+  if (config.workflowModel && !config.workflowModel.processes.some(process => process.source === 'recipe')) {
+    const brief = getDecisionBrief(config)
+    const processes = config.workflowModel.processes.filter(process => process.source === 'custom')
+    return `<section class="decision-brief" aria-labelledby="${escape(id)}-title" data-decision-brief><header class="db-heading"><div><p class="db-eyebrow">The decisions, in plain words</p><h2 id="${escape(id)}-title">Your process design</h2><p>Read the intended result, the planned work and what still needs a decision.</p></div></header><div class="db-grid">
+      <article class="db-card"><h3>What do we want?</h3><p class="db-answer${brief.outcome.text ? '' : ' db-open'}">${escape(brief.outcome.text ? short(brief.outcome.text) : 'The intended result is still to decide.')}</p>${editable ? edit('data-open-editor', 'project', 'Edit the outcome') : ''}<p class="db-note">Supplied intent, not an observed result.</p></article>
+      <article class="db-card"><h3>Which process?</h3>${processes.length ? processes.map(process => `<div class="db-record"><strong>${escape(process.name || process.id)}</strong><p class="db-preserve">${escape(short(process.purpose || 'Purpose still to decide.'))}</p>${editable ? edit('data-pe-open', process.id, 'Edit this process') : ''}</div>`).join('') : `<p class="db-open">Choose a pattern to start the design.</p>${editable ? edit('data-pe-new', '', 'Design a process') : ''}`}<p class="db-note">Open Workflow for inputs, outcome routes and correction limits.</p></article>
+      <article class="db-card"><h3>Who starts each process?</h3>${brief.planned.length ? `<ul class="db-planned">${brief.planned.map(step => `<li><span class="db-step-label">${escape(step.processName)}</span><strong>${escape(step.title)}</strong><span>${escape(step.owner)}${step.contextOnly ? ', supplied context only' : ''}</span></li>`).join('')}</ul>` : '<p class="db-open">The first step or owner is still to choose.</p>'}<p class="db-note">These are planned entry points, not progress. Processes do not automatically start one another.</p></article>
+      <article class="db-card"><h3>What is still open?</h3>${brief.unresolved.length ? `<ul class="db-open-list">${brief.unresolved.slice(0, 3).map(item => `<li>${escape(item.label)}</li>`).join('')}</ul>${brief.unresolved.length > 3 ? `<details><summary>${brief.unresolved.length - 3} more findings</summary><ul>${brief.unresolved.slice(3).map(item => `<li>${escape(item.label)}</li>`).join('')}</ul></details>` : ''}` : '<p class="db-answer">No empty outcome or process rule findings.</p>'}<p class="db-note">Written criteria and supplied facts still need review. A structural check does not establish successful work.</p></article>
+    </div>${brief.outcome.text.length > 280 || brief.approach.records.some(record => record.text.length > 280) ? `<details class="db-details"><summary>Full recorded outcome and process purposes</summary><div class="db-detail-body"><p class="db-preserve">${escape(brief.outcome.text)}</p>${brief.approach.records.map(record => `<article><h4>${escape(record.title)}</h4><p class="db-preserve">${escape(record.text)}</p></article>`).join('')}</div></details>` : ''}<p class="db-note">${editable ? 'Use the process designer to edit connections. Review and apply changes, then download to keep them.' : 'This snapshot is read only. Reopen its project in Workflow Atlas to edit the connections.'} Atlas does not run the process.</p></section>`
+  }
   const brief = getDecisionBrief(config)
   const recipe = CATALOG.recipes.find(item => item.id === config.workflow.recipe)
   const first = brief.approach.records[0]
