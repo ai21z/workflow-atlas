@@ -1,0 +1,45 @@
+{
+  "id": "durable-execution",
+  "title": "Durable execution",
+  "summary": "Introduce persistent orchestration when jobs must recover or wait across long periods.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Evaluate when needed",
+      "items": [
+        "A process must survive runner/service restarts.",
+        "Approval or external data can arrive days later.",
+        "A workflow must resume without repeating external writes.",
+        "Long tasks need persistent checkpoints and inspectable progress."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Technology option",
+      "text": "Temporal provides durable workflow guidance for AI applications. This is a candidate to evaluate against requirements, not a mandatory addition to the stack."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Failure recovery and resumption are tested with real side effects and recorded state. An in-memory chat history is not durable orchestration."
+    }
+  ],
+  "refs": [
+    "temporal"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "jacoco-counters",
+  "title": "JaCoCo limitations",
+  "summary": "Coverage records execution, not whether a test established the right behavior.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Verified definition",
+      "text": "JaCoCo counters include instructions, lines, and branches for constructs such as if/switch. Exception handling is not included in its branch counter."
+    },
+    {
+      "type": "p",
+      "label": "Implication",
+      "text": "High coverage can coexist with weak assertions or missing semantic scenarios. Review test outcomes and important paths, and consider focused mutation tests where justified."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Coverage reports identify the tested revision and scope. They complement requirement and domain verification rather than replace it."
+    }
+  ],
+  "refs": [
+    "jacoco"
+  ],
+  "basis": "Documented metric limitation",
+  "confidence": "High",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "maintenance"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

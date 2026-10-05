@@ -1,12 +1,13 @@
 import { CATALOG, createRecipe } from './core.mjs'
 import { getIntentAnswer, getIntentQuestionWording } from './intent.mjs'
-import { MODEL, PROMPT_VERSION, CONTRACT_VERSION, DEFINITION_DIGEST, SUPPORTED_PRACTICES, ANSWER_IDS, makeRequest, validateResponse, decide } from './jev-contract.mjs'
+import { MODEL, PROMPT_VERSION, CONTRACT_VERSION, DEFINITION_DIGEST, SUPPORTED_RECIPES, SUPPORTED_PRACTICES, PRIORITIES, ANSWER_IDS, makeRequest, validateResponse, decide } from './jev-contract.mjs'
 
 const clone = value => JSON.parse(JSON.stringify(value))
 const plain = value => value !== null && typeof value === 'object' && !Array.isArray(value) && Object.getPrototypeOf(value) === Object.prototype
 const present = value => typeof value === 'string' && value.trim().length > 0
 const recipeFor = id => CATALOG.recipes.find(recipe => recipe.id === id)
 const answerIds = new Set(ANSWER_IDS)
+const projectAnswerIds = new Set([...ANSWER_IDS, ...CATALOG.recipes.flatMap(recipe => recipe.questions.map(question => question.id))])
 const practiceIds = new Set(SUPPORTED_PRACTICES)
 let controllerIdentity = 0
 
@@ -15,7 +16,7 @@ function assertText(value) {
 }
 
 function assertAnswer(id) {
-  if (!answerIds.has(id)) throw new Error('Choose a supported workflow question.')
+  if (!projectAnswerIds.has(id)) throw new Error('Choose a supported workflow question.')
 }
 
 // Suggestion applicability and map visibility serve different contexts. The caller
@@ -48,7 +49,9 @@ export function composeAssistedProject(draft, recipeId) {
 }
 
 export function buildAssistancePayload(draft, requestId, recipeId = draft.manualRecipe) {
-  const payload = { requestId, userBrief: draft.userBrief, suppliedProjectAnswers: clone(draft.suppliedProjectAnswers) }
+  // New catalogue questions remain manual until a reviewed inference profile supports them.
+  const suppliedProjectAnswers = Object.fromEntries(Object.entries(clone(draft.suppliedProjectAnswers)).filter(([id]) => answerIds.has(id)))
+  const payload = { requestId, userBrief: draft.userBrief, suppliedProjectAnswers }
   // A shortened goal is an explicit user edit. Supply it only for the active
   // recipe's equivalent outcome slot, without duplicating canonical answers.
   const outcome = { 'feature-delivery': 'user-need', feasibility: 'desired-outcome' }[recipeId]
@@ -66,12 +69,14 @@ function validateEnvelope(envelope, payload) {
   const { decision, metadata } = envelope
   if (metadata.model !== MODEL || metadata.promptVersion !== PROMPT_VERSION || metadata.contractVersion !== CONTRACT_VERSION || metadata.definitionDigest !== DEFINITION_DIGEST) return 'different decision contract'
   if (!plain(decision.allCoverage)) return 'missing recipe coverage'
-  if (Object.keys(decision.allCoverage).sort().join('|') !== CATALOG.recipes.map(recipe => recipe.id).sort().join('|')) return 'unexpected recipe coverage'
+  // Inference coverage belongs to the frozen profile, independently of catalogue growth.
+  if (Object.keys(decision.allCoverage).sort().join('|') !== [...SUPPORTED_RECIPES].sort().join('|')) return 'unexpected recipe coverage'
   const answers = { intent: decision.intent }
-  for (const recipe of CATALOG.recipes) {
-    const coverage = decision.allCoverage[recipe.id]
-    if (!plain(coverage) || Object.keys(coverage).sort().join('|') !== recipe.questions.map(question => question.id).sort().join('|')) return 'unexpected question coverage'
-    for (const question of recipe.questions) answers[`coverage:${recipe.id}:${question.id}`] = coverage[question.id]
+  for (const recipeId of SUPPORTED_RECIPES) {
+    const coverage = decision.allCoverage[recipeId]
+    const questions = PRIORITIES[recipeId]
+    if (!plain(coverage) || Object.keys(coverage).sort().join('|') !== [...questions].sort().join('|')) return 'unexpected question coverage'
+    for (const questionId of questions) answers[`coverage:${recipeId}:${questionId}`] = coverage[questionId]
   }
   if (payload.practiceId) {
     answers.practice = decision.rawPractice

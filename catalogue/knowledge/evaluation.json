@@ -1,0 +1,35 @@
+{
+  "id": "evaluation",
+  "title": "Evaluations & rollout",
+  "summary": "Measure real outcomes before expanding automation or claiming savings.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Baseline",
+      "text": "Use representative historical tasks with reviewed expected outcomes. Evaluate retrieval, analysis, execution, and resulting state, not whether the agent sounds confident."
+    },
+    {
+      "type": "p",
+      "label": "Rollout",
+      "text": "Measure the current approach, try a bounded task, inspect outcomes and expand only where evidence supports it. Use shadow evaluation when comparing a new decision component without changing live behavior. A Jev source-support experiment is one optional example."
+    }
+  ],
+  "refs": [
+    "evals"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "evaluation"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

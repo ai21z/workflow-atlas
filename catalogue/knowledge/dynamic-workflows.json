@@ -1,0 +1,46 @@
+{
+  "id": "dynamic-workflows",
+  "title": "Copilot Dynamic Workflows",
+  "summary": "A recently introduced, code-defined orchestration option to evaluate for the pilot.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Verified capability",
+      "text": "The 1 October 2026 announcement covers Copilot CLI, the Copilot app, and SDK. Workflows can mix deterministic steps, agents, tools, structured results, and review checkpoints. Status: public preview."
+    },
+    {
+      "type": "p",
+      "label": "Scope",
+      "text": "Do not assume the same feature is available directly in IntelliJ’s interface. Check the actual client and enterprise policy before selecting it."
+    },
+    {
+      "type": "p",
+      "label": "Limits and permissions",
+      "text": "Documented credit limits are approximate because usage is reported after it occurs. Extension code can run outside subagent permission prompts; runner credentials and sandbox controls still matter."
+    },
+    {
+      "type": "p",
+      "label": "Decision",
+      "text": "Try a small, versioned workflow with fixed inputs and recorded outputs. Compare its maintainability and recovery behavior with existing Jenkins/Atlassian automation."
+    }
+  ],
+  "refs": [
+    "dynamic",
+    "dynamicdocs"
+  ],
+  "basis": "Documented capability + proposed evaluation",
+  "confidence": "High for capability; unknown for tenant fit",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

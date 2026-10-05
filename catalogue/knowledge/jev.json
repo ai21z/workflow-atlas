@@ -1,0 +1,41 @@
+{
+  "id": "jev",
+  "title": "Jev decision support",
+  "summary": "Evaluate narrow semantic judgments between evidence collection and domain curation.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Domain curation example",
+      "text": "Check whether a source passage supports a proposed assertion’s scope or ontology mapping, using previously reviewed examples."
+    },
+    {
+      "type": "p",
+      "label": "Boundary",
+      "text": "For these proposed domain checks, confidence does not establish statutory truth or replace the approved-data process. Exact temporal arithmetic needs suitable deterministic logic. Fit for a particular domain task remains unmeasured until evaluated."
+    },
+    {
+      "type": "p",
+      "label": "Separate Atlas integration",
+      "text": "The Factory has a distinct JEV pilot for selecting supported development recipes and assessing defined information gaps. Its results do not validate the source-support and ontology tasks in this branch. Read the JEV guide in Help for that integration and its evidence."
+    }
+  ],
+  "refs": [
+    "jevlimits",
+    "jevconfidence"
+  ],
+  "basis": "Proposed experiment",
+  "confidence": "Unknown task suitability",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "model-decisions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

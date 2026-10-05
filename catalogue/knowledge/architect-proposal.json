@@ -1,0 +1,49 @@
+{
+  "id": "architect-proposal",
+  "title": "Architect discussion",
+  "summary": "A concrete proposal with separable decisions and evidence to collect.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Adaptable proposal",
+      "text": "Choose one outcome and compare the current approach with a bounded alternative. Identify the people and systems involved, the acceptance evidence, operating limits and unresolved decisions. Use the findings to decide what to implement or test next."
+    },
+    {
+      "type": "p",
+      "label": "Workplace example",
+      "text": "The original proposal considered requirements and debt investigation, verified implementation and source-backed country-data review. These are separable opportunities, not a required three-workflow programme."
+    },
+    {
+      "type": "list",
+      "label": "Decisions to resolve",
+      "items": [
+        "Choose one end-to-end capability and task owner for the baseline.",
+        "Confirm available clients, models, integrations, and execution environment.",
+        "Agree on required evidence, review ownership, and acceptance criteria.",
+        "Define applicable data, source and publication boundaries. A domain curation process may require candidate isolation and source-scope rules.",
+        "Select the smallest orchestration that satisfies recovery and state needs."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Reviewable next result",
+      "text": "A capability map, sample evidence packet, evaluation cases, and measured small pilot that informs the next scope decision."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "evaluation"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

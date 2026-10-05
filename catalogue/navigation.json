@@ -1,0 +1,232 @@
+{
+  "domains": [
+    {
+      "id": "workflow-design",
+      "title": "Workflows"
+    },
+    {
+      "id": "engineering-tools",
+      "title": "Toolchain"
+    },
+    {
+      "id": "models",
+      "title": "Models & cost"
+    },
+    {
+      "id": "instructions",
+      "title": "Skills & roles"
+    },
+    {
+      "id": "requirements",
+      "title": "Requirements"
+    },
+    {
+      "id": "maintenance",
+      "title": "Debt & coverage"
+    },
+    {
+      "id": "model-decisions",
+      "title": "Jev"
+    },
+    {
+      "id": "knowledge",
+      "title": "Knowledge"
+    },
+    {
+      "id": "verification",
+      "title": "Verification & evidence"
+    },
+    {
+      "id": "evaluation",
+      "title": "Evaluation"
+    },
+    {
+      "id": "information-retrieval",
+      "title": "Information retrieval"
+    }
+  ],
+  "clusters": [
+    {
+      "id": "workflows",
+      "short": "Workflows",
+      "color": "#77dfff",
+      "position": [
+        -82,
+        49,
+        4
+      ]
+    },
+    {
+      "id": "toolchain",
+      "short": "Toolchain",
+      "color": "#8aaeff",
+      "position": [
+        -109,
+        -4,
+        -9
+      ]
+    },
+    {
+      "id": "economy",
+      "short": "Models & cost",
+      "color": "#ffbf75",
+      "position": [
+        -74,
+        -49,
+        9
+      ]
+    },
+    {
+      "id": "skills",
+      "short": "Skills & roles",
+      "color": "#b7a1ff",
+      "position": [
+        -35,
+        14,
+        51
+      ]
+    },
+    {
+      "id": "requirements",
+      "short": "Requirements",
+      "color": "#68ddbd",
+      "position": [
+        -37,
+        63,
+        -42
+      ]
+    },
+    {
+      "id": "debt",
+      "short": "Debt & coverage",
+      "color": "#ff8fa8",
+      "position": [
+        82,
+        49,
+        4
+      ]
+    },
+    {
+      "id": "jev",
+      "short": "Jev",
+      "color": "#f0c96d",
+      "position": [
+        109,
+        -4,
+        -9
+      ]
+    },
+    {
+      "id": "knowledge",
+      "short": "Knowledge",
+      "color": "#78d5ed",
+      "position": [
+        74,
+        -49,
+        9
+      ]
+    },
+    {
+      "id": "talos",
+      "short": "Verification & evidence",
+      "color": "#c5b8ff",
+      "position": [
+        35,
+        14,
+        51
+      ]
+    },
+    {
+      "id": "evaluation",
+      "short": "Evaluation",
+      "color": "#8bd8a4",
+      "position": [
+        37,
+        63,
+        -42
+      ]
+    }
+  ],
+  "collections": [
+    {
+      "id": "study",
+      "title": "Configuration service study",
+      "nodeIds": [
+        "construct-study",
+        "study-baseline",
+        "study-quality",
+        "study-contract",
+        "study-runtime",
+        "study-economics",
+        "study-experiment",
+        "study-decision",
+        "study-ticket-wording",
+        "study-scenarios"
+      ]
+    },
+    {
+      "id": "architect",
+      "title": "Architect briefing",
+      "nodeIds": [
+        "overview",
+        "architecture",
+        "requirements-workflow",
+        "implementation-workflow",
+        "curation-workflow",
+        "task-contract",
+        "toolchain",
+        "pilot"
+      ]
+    },
+    {
+      "id": "engineering",
+      "title": "Engineering delivery",
+      "nodeIds": [
+        "requirement-status",
+        "traceability",
+        "impact-skill",
+        "implementation-workflow",
+        "verification-loops",
+        "post-change-checks",
+        "qa-packet",
+        "eval-metrics"
+      ]
+    },
+    {
+      "id": "curation",
+      "title": "Country-data curation",
+      "nodeIds": [
+        "applicability",
+        "temporal-scope",
+        "wikidata-statements",
+        "jev-support",
+        "candidate-isolation",
+        "provenance",
+        "jev-shadow"
+      ]
+    },
+    {
+      "id": "cost",
+      "title": "Cost control",
+      "nodeIds": [
+        "routing",
+        "model-prices",
+        "context-selection",
+        "eager-skills",
+        "revision-cache",
+        "budgets",
+        "cost-per-result"
+      ]
+    },
+    {
+      "id": "retrieval",
+      "title": "Retrieve and check information",
+      "nodeIds": [
+        "information-retrieval",
+        "retrieval-options",
+        "retrieve-and-validate",
+        "retrieval-example"
+      ]
+    }
+  ]
+}

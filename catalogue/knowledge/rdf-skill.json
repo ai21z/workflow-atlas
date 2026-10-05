@@ -1,0 +1,47 @@
+{
+  "id": "rdf-skill",
+  "title": "RDF/SPARQL skill",
+  "summary": "Verify graph structure and query behavior using versioned fixtures and the right engine.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Inputs",
+      "text": "TTL change, ontology/shapes version, graph fixtures, SPARQL queries, expected outputs, and target environment."
+    },
+    {
+      "type": "list",
+      "label": "Procedure",
+      "items": [
+        "Validate applicable structural constraints.",
+        "Exercise positive, negative, scope, missing-data, and temporal scenarios.",
+        "Check API-visible semantics and named-graph selection.",
+        "Use measured Neptune execution plans for performance findings."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Report engine, dataset, query, expected result, actual result, and limitations. Structural validity does not establish source truth."
+    }
+  ],
+  "refs": [
+    "shacl",
+    "explain",
+    "neptune"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "instructions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

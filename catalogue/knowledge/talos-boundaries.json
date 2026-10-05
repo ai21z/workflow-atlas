@@ -1,0 +1,46 @@
+{
+  "id": "talos-boundaries",
+  "title": "What not to copy blindly",
+  "summary": "Source examples need adaptation and do not prove checks were executed.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Recommended practice",
+      "text": "Check the assumptions, environment, and evidence behind a source before adapting its procedures. A document or test definition can describe a gate without proving that the gate ran successfully."
+    },
+    {
+      "type": "p",
+      "label": "Example source: Talos limitations",
+      "text": "Some Talos contract tests check required text in documents/scripts. They help prevent omissions but do not prove the gates executed successfully. The README describes local traces as not tamper-evident."
+    },
+    {
+      "type": "p",
+      "label": "Adaptation boundary",
+      "text": "The reviewed Talos work-cycle-docs directory contains maintained runbooks and templates, not a ready-made conventional Copilot skills package. Adapt selected procedures after reviewing local installer, PTY, and version conventions."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Use actual check outputs and appropriate evidence retention. If adapting a local procedure into a hosted runtime, review authentication, application access, event processing, idempotency, and job recovery separately."
+    }
+  ],
+  "refs": [
+    "talosdocs",
+    "talosreadme"
+  ],
+  "basis": "Recommended practice + inspected limitations",
+  "confidence": "High for inspected limitations. Project fit needs review",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "verification"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

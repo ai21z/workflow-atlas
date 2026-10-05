@@ -1,0 +1,40 @@
+{
+  "id": "temporal-scope",
+  "title": "Temporal semantics",
+  "summary": "Publication date, effective date, observation time, and approval time serve different purposes.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Proposed representation",
+      "text": "Keep when a source was published separate from when a rule applies, when your system retrieved it, and when a reviewed assertion became approved. Use source and dataset versions to reproduce past answers."
+    },
+    {
+      "type": "p",
+      "label": "Exact operations",
+      "text": "Parse and compare dates in deterministic code. Treat missing date components explicitly rather than letting a model guess."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Historical and current queries use the intended applicability window. A later publication or retrieval does not automatically supersede an earlier effective period."
+    }
+  ],
+  "refs": [
+    "jevlimits"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "requirements"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

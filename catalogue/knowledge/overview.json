@@ -1,0 +1,80 @@
+{
+  "id": "overview",
+  "title": "Project overview",
+  "summary": "Understand a workflow, choose relevant practices and see how steps, outputs and checks connect.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Start with the outcome",
+      "text": "Name the result, who needs it and what would make it acceptable. Then identify the steps, responsible people or systems, inputs and evidence. Use a model only where its contribution is useful."
+    },
+    {
+      "type": "table",
+      "label": "Three examples to adapt",
+      "headers": [
+        "Example workflow",
+        "Result"
+      ],
+      "rows": [
+        [
+          "Investigate requirements or debt",
+          "A supported brief, decision or actionable finding"
+        ],
+        [
+          "Implement and verify a change",
+          "A reviewable change with evidence for the relevant revision"
+        ],
+        [
+          "Curate domain data",
+          "A candidate assertion with source support, scope and uncertainty"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Examples are optional",
+      "text": "The map includes issue tracking, documentation, source control, CI, services and graph data. Named technologies illustrate particular environments. Choose the practices that match your task."
+    },
+    {
+      "type": "p",
+      "label": "How to use this map",
+      "text": "Read a general topic, follow a relevant example and compare its assumptions with your project. The map groups related knowledge. Its lines do not schedule work or pass data between running agents."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas currently does",
+      "text": "The Factory records workflow decisions and exports instructions and evidence templates. The process editor can describe supported steps, outcome routes and bounded correction loops. These are design records. Atlas does not execute workflows."
+    },
+    {
+      "type": "p",
+      "label": "What remains unknown",
+      "text": "This map has not audited your repository or process. Establish actual requirements, coverage, model fit, integration effort and benefits with project evidence."
+    },
+    {
+      "type": "p",
+      "label": "Worked feasibility study",
+      "text": "The reference-to-configuration example assesses whether an engineer-assisted process should become a governed service. It illustrates a study, with no claim of measured savings or a deployed integration."
+    },
+    {
+      "type": "p",
+      "label": "Explore by kind",
+      "text": "Use the topic type filter to find concepts, practices, technologies or examples. Follow Retrieve and check information for a short path from an outcome to written workflow checks."
+    }
+  ],
+  "refs": [],
+  "basis": "Research synthesis",
+  "confidence": "High for documented facts; moderate for fit",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

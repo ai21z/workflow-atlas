@@ -1,0 +1,51 @@
+{
+  "id": "retries",
+  "title": "Retries & stopping rules",
+  "summary": "Distinguish repeating an operation from correcting a result, and define when each must stop.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Retry or correction",
+      "text": "A retry repeats an operation after a failure such as a connection problem. A correction uses findings to change an unacceptable result. An uncertain write outcome needs confirmation or reconciliation before another write."
+    },
+    {
+      "type": "list",
+      "label": "Proposed controls",
+      "items": [
+        "Bound attempts, wall-clock time, tool calls, model calls, and spend.",
+        "Record why an attempt failed and what changed before retrying.",
+        "Stop repeated diagnosis that produces no new evidence.",
+        "Handle unavailable sources and permission denial as explicit outcomes.",
+        "Deduplicate external writes before retries."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "A bounded correction loop",
+      "text": "Specify which step receives the candidate and findings, what counts as an attempt and where the process stops. For example, two corrections after the initial candidate is a clear counting rule, not a recommended default. Recheck the revised result."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "A run can end with a useful partial finding rather than fabricate completion. The reviewer can inspect attempted actions and remaining blockers."
+    }
+  ],
+  "refs": [
+    "talosbudget"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

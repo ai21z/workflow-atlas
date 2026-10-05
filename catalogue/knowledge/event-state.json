@@ -1,0 +1,38 @@
+{
+  "id": "event-state",
+  "title": "State & duplicate events",
+  "summary": "Represent work explicitly so retries and duplicate deliveries do not create repeated actions.",
+  "sections": [
+    {
+      "type": "code",
+      "label": "Example states",
+      "text": "Received → Evidence collected → Analyzed → Proposed → Verified → Ready for review → Accepted\nAlternative outcomes: Needs information, Failed, Unsupported, Cancelled"
+    },
+    {
+      "type": "p",
+      "label": "Implementation proposal",
+      "text": "Store task/run identity, triggering event identity, completed steps, input versions, artifacts, and terminal status. Use idempotency for externally visible writes and suppress self-triggering automation loops."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Replaying the same event does not create another ticket or PR. A retry reuses valid completed work and clearly identifies which input changed."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "budgets",
+  "title": "Budgets & limits",
+  "summary": "Bound work and measure consumption before scaling a workflow.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Budget dimensions",
+      "items": [
+        "Model calls and token/output allowances supported by the runtime.",
+        "Tool calls, repair attempts, and wall-clock time.",
+        "Workflow spend, concurrent agents, and total agent launches.",
+        "Runner and connector consumption as separate cost components."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Documented limits",
+      "text": "GitHub states that budget exhaustion does not automatically fall back to a cheaper model. Dynamic Workflow credit limits are approximate, so usage already underway can overshoot the stated threshold."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Run a small scope, inspect actual usage, and size limits from evidence. Stop launching more work when the remaining budget cannot support a useful next stage."
+    },
+    {
+      "type": "p",
+      "label": "SDK session soft cap",
+      "text": "Copilot SDK checks limits after responses return; a response can overshoot before another call is blocked. Connector, runtime and review costs need separate accounting."
+    }
+  ],
+  "refs": [
+    "billing",
+    "dynamicdocs",
+    "sdk-session-limits"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "models"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

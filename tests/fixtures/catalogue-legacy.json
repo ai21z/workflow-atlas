@@ -1,0 +1,2023 @@
+{
+  "sourceRevision": "11ba46ccaee507e48794b7f1726e1b7301430e44",
+  "topics": [
+    {
+      "id": "overview",
+      "parent": null,
+      "refs": [],
+      "related": [
+        "task-contract",
+        "pilot",
+        "confidence-summary",
+        "construct-study",
+        "workflow-patterns",
+        "architecture-decisions",
+        "work-breakdown",
+        "release-operations"
+      ],
+      "contentHash": "f4f310e47558d41a6bf5b09b192c546cc6acf8d30934a711eef2926cb15514e0"
+    },
+    {
+      "id": "workflows",
+      "parent": "overview",
+      "refs": [
+        "temporal"
+      ],
+      "related": [
+        "skills",
+        "task-contract",
+        "pilot",
+        "construct-study",
+        "study-contract",
+        "workflow-patterns",
+        "architecture-decisions"
+      ],
+      "contentHash": "10e0ed263189c2bcfd2f057cb18720eb0808740b05d78051e71f6e10ed20b6ba"
+    },
+    {
+      "id": "workflow-patterns",
+      "parent": "workflows",
+      "refs": [
+        "simple-agents",
+        "evals"
+      ],
+      "related": [
+        "task-contract",
+        "retries",
+        "architecture",
+        "study-contract",
+        "study-quality",
+        "verification-loops",
+        "post-change-checks"
+      ],
+      "contentHash": "c704bc6c527221870eac8b398a8fe653b674631adede08547136f3d90c36e19e"
+    },
+    {
+      "id": "architecture-decisions",
+      "parent": "workflows",
+      "refs": [],
+      "related": [
+        "requirements-workflow",
+        "impact-skill",
+        "architecture",
+        "study-contract",
+        "durable-execution",
+        "work-breakdown"
+      ],
+      "contentHash": "8ef1cecb3814077893c2f1acb595c612095e1286cf997c26c62083e2cdeaafc1"
+    },
+    {
+      "id": "work-breakdown",
+      "parent": "workflows",
+      "refs": [],
+      "related": [
+        "architecture-decisions",
+        "requirements-workflow",
+        "traceability",
+        "decomposition",
+        "implementation-workflow"
+      ],
+      "contentHash": "3b1d51f3d22d4ee7b5df4fd88df570af28ec82400d0dce38c296770ae40fb3f4"
+    },
+    {
+      "id": "release-operations",
+      "parent": "workflows",
+      "refs": [],
+      "related": [
+        "verification-loops",
+        "qa-packet",
+        "pilot",
+        "workflow-patterns",
+        "eval-metrics",
+        "study-contract"
+      ],
+      "contentHash": "2a06c1360a0062e1bcf2bd51c0258e025af38c63f78c3f077101e46c59ebc515"
+    },
+    {
+      "id": "requirements-workflow",
+      "parent": "workflows",
+      "refs": [],
+      "related": [
+        "requirement-status",
+        "traceability",
+        "task-contract",
+        "requirements-skill"
+      ],
+      "contentHash": "8ce120a7f35e43bb0b74fcdb5773b42e0cba93a4632e2638271abc75f771a2e0"
+    },
+    {
+      "id": "implementation-workflow",
+      "parent": "workflows",
+      "refs": [
+        "taloscycle"
+      ],
+      "related": [
+        "post-change-checks",
+        "jenkins",
+        "bitbucket",
+        "qa-packet",
+        "workflow-patterns",
+        "work-breakdown",
+        "release-operations"
+      ],
+      "contentHash": "81994f1b116466fef5018fd9e49224746b857b927d9fab7abeb6143af67058e6"
+    },
+    {
+      "id": "curation-workflow",
+      "parent": "workflows",
+      "refs": [
+        "shacl",
+        "neptune"
+      ],
+      "related": [
+        "jev-support",
+        "candidate-isolation",
+        "answer-contract",
+        "applicability"
+      ],
+      "contentHash": "0f3e828c002b021b4a30aab2006893531299691dbd9e22d4559f47aa629346c0"
+    },
+    {
+      "id": "architecture",
+      "parent": "workflows",
+      "refs": [
+        "skillspec"
+      ],
+      "related": [
+        "task-contract",
+        "agent-roles",
+        "durable-execution",
+        "skill-definition",
+        "architecture-decisions",
+        "workflow-patterns"
+      ],
+      "contentHash": "7cb5e85aeb1b4375672d6792b57dd3575b78c835598f062a94dc244b6ebbd1e3"
+    },
+    {
+      "id": "task-contract",
+      "parent": "workflows",
+      "refs": [],
+      "related": [
+        "qa-packet",
+        "finding-contract",
+        "answer-contract",
+        "budgets",
+        "permissions",
+        "workflow-patterns"
+      ],
+      "contentHash": "a447143b5da55f50d2c40f43a04eef59a05828556ecf8d1d6274e73ccb973fde"
+    },
+    {
+      "id": "deterministic-control",
+      "parent": "workflows",
+      "refs": [
+        "jevlimits"
+      ],
+      "related": [
+        "jev-limitations",
+        "permissions",
+        "event-state"
+      ],
+      "contentHash": "86fcc0a9fac5d51bd5807558dd7a0c1acb76f8cadddaee63c9408537db211ca3"
+    },
+    {
+      "id": "event-state",
+      "parent": "workflows",
+      "refs": [],
+      "related": [
+        "retries",
+        "durable-execution",
+        "rovo",
+        "task-contract"
+      ],
+      "contentHash": "eaace3d6b200f66b88ab90c8e83d84ecb248c547d0ea513687f0fd6388dff00e"
+    },
+    {
+      "id": "parallelism",
+      "parent": "workflows",
+      "refs": [],
+      "related": [
+        "agent-roles",
+        "handoffs",
+        "cost-per-result"
+      ],
+      "contentHash": "cbeae5933b65704af4fec41bcd6704c350aa9111ea5e3adaa3e6f76072a9533c"
+    },
+    {
+      "id": "durable-execution",
+      "parent": "workflows",
+      "refs": [
+        "temporal"
+      ],
+      "related": [
+        "architecture",
+        "event-state",
+        "dynamic-workflows"
+      ],
+      "contentHash": "c658b64212c9fb856cddd1787c1325872c2ce455daba866ccd42a85aa4b757f6"
+    },
+    {
+      "id": "dynamic-workflows",
+      "parent": "workflows",
+      "refs": [
+        "dynamic",
+        "dynamicdocs"
+      ],
+      "related": [
+        "intellij",
+        "budgets",
+        "permissions",
+        "durable-execution"
+      ],
+      "contentHash": "8d30e276ab5bdee9cb84952d5ca6813eedf9431f603019886f4f3e68ea8fb4af"
+    },
+    {
+      "id": "retries",
+      "parent": "workflows",
+      "refs": [
+        "talosbudget"
+      ],
+      "related": [
+        "budgets",
+        "verdicts",
+        "event-state",
+        "workflow-patterns"
+      ],
+      "contentHash": "de5da1a6aaf040971f887a01bcb3e5f5989ad183bb4446147a8f4f1c32a4954c"
+    },
+    {
+      "id": "toolchain",
+      "parent": "overview",
+      "refs": [],
+      "related": [
+        "architecture",
+        "capability-inventory",
+        "permissions"
+      ],
+      "contentHash": "c836ab3a186a810cd9f111c291cf5dd9cc52058065f2469214840bf71136a7a5"
+    },
+    {
+      "id": "jira",
+      "parent": "toolchain",
+      "refs": [],
+      "related": [
+        "requirements-workflow",
+        "finding-contract",
+        "requirement-status",
+        "rovo"
+      ],
+      "contentHash": "397654fff480b4a70ec577bcadd463363023d36a708aaa3f52e73b8cddb52237"
+    },
+    {
+      "id": "confluence",
+      "parent": "toolchain",
+      "refs": [],
+      "related": [
+        "llm-wiki",
+        "engineering-knowledge",
+        "answer-contract",
+        "rovo"
+      ],
+      "contentHash": "f48c5445e1314055fe96eeecc074bcffcc5873493ac44ce868737b24f29aa934"
+    },
+    {
+      "id": "bitbucket",
+      "parent": "toolchain",
+      "refs": [
+        "cloud"
+      ],
+      "related": [
+        "implementation-workflow",
+        "intellij",
+        "post-change-checks"
+      ],
+      "contentHash": "1e7f8dbe69969241fe3ce8ea9a91c76390a7928e9681a5e7cfd38a3303db0f99"
+    },
+    {
+      "id": "intellij",
+      "parent": "toolchain",
+      "refs": [
+        "jetbrains",
+        "sdk"
+      ],
+      "related": [
+        "model-inheritance",
+        "capability-inventory",
+        "bitbucket"
+      ],
+      "contentHash": "7699052d1df809c50bc286e988f4c6e69d637b6ee493348cf5ece4c4c654c632"
+    },
+    {
+      "id": "jenkins",
+      "parent": "toolchain",
+      "refs": [],
+      "related": [
+        "ci-skill",
+        "coverage",
+        "sonar-debt",
+        "verification-loops"
+      ],
+      "contentHash": "554c08f8bbec32479b515878a3cdd6c583b43fb0fb9cb3851f848404113ecadd"
+    },
+    {
+      "id": "rovo",
+      "parent": "toolchain",
+      "refs": [
+        "rovo",
+        "rovotier",
+        "rovocredits"
+      ],
+      "related": [
+        "jira",
+        "confluence",
+        "billing-boundaries",
+        "permissions"
+      ],
+      "contentHash": "4ec163ddcaa30b8314707980678640f2050b568a9e3cc89409cf48c16eaa1a9c"
+    },
+    {
+      "id": "neptune-stack",
+      "parent": "toolchain",
+      "refs": [
+        "shacl",
+        "explain",
+        "neptune"
+      ],
+      "related": [
+        "query-performance",
+        "candidate-isolation",
+        "rdf-skill",
+        "provenance"
+      ],
+      "contentHash": "13b887e6a1fe591c8f34c2226adeee9d53f7879ee595729e1dcb79700008df12"
+    },
+    {
+      "id": "permissions",
+      "parent": "toolchain",
+      "refs": [
+        "rovo",
+        "dynamicdocs"
+      ],
+      "related": [
+        "task-contract",
+        "retrieval",
+        "candidate-isolation",
+        "deterministic-control"
+      ],
+      "contentHash": "e06df4b7331e5beb41a2cfbabb7451c6a575bd7f56453018920168784140abe8"
+    },
+    {
+      "id": "capability-inventory",
+      "parent": "toolchain",
+      "refs": [
+        "models",
+        "jetbrains",
+        "sdk"
+      ],
+      "related": [
+        "dynamic-workflows",
+        "model-inheritance",
+        "billing-boundaries"
+      ],
+      "contentHash": "966ba01114a262a74a52ee7f81c0eaeac50cc54c4e0f66c4027d106b230bd9eb"
+    },
+    {
+      "id": "economy",
+      "parent": "overview",
+      "refs": [
+        "billing"
+      ],
+      "related": [
+        "routing",
+        "cost-per-result",
+        "model-prices",
+        "eval-metrics"
+      ],
+      "contentHash": "f3f39a8ed5a81e7d554ea045590c18765d2cab53b3babd426865b12f4b2745cc"
+    },
+    {
+      "id": "model-prices",
+      "parent": "economy",
+      "refs": [
+        "prices",
+        "models"
+      ],
+      "related": [
+        "routing",
+        "cost-per-result",
+        "capability-inventory"
+      ],
+      "contentHash": "bdbfb80a4e2dd0266fd1c0d25dfe5bdaed10d9611430fe80cf557f16e1474d6c"
+    },
+    {
+      "id": "routing",
+      "parent": "economy",
+      "refs": [],
+      "related": [
+        "model-prices",
+        "model-inheritance",
+        "jev-judgments",
+        "eval-corpus"
+      ],
+      "contentHash": "3b381fa8328e0223cc170d66643cab89a2a2605a0e6603ef8efcbc630f79f6a9"
+    },
+    {
+      "id": "cost-per-result",
+      "parent": "economy",
+      "refs": [],
+      "related": [
+        "eval-metrics",
+        "routing",
+        "billing-boundaries",
+        "confidence-summary",
+        "study-economics"
+      ],
+      "contentHash": "fa655e6dd2b8bc4b6a417e5449f23acc51371ff1cf96f11b06264f24184d6e52"
+    },
+    {
+      "id": "context-selection",
+      "parent": "economy",
+      "refs": [
+        "context"
+      ],
+      "related": [
+        "retrieval",
+        "handoffs",
+        "eager-skills"
+      ],
+      "contentHash": "5382050c7c49a3d8ef72bbae912f7562d7dce61eb6df606bacbb57ea0acd5e9d"
+    },
+    {
+      "id": "revision-cache",
+      "parent": "economy",
+      "refs": [],
+      "related": [
+        "post-change-checks",
+        "provenance",
+        "task-contract"
+      ],
+      "contentHash": "f84010d48c5e0d8c9fe1cd93501ecc218e38904693e8835264cb352cb2d19a87"
+    },
+    {
+      "id": "handoffs",
+      "parent": "economy",
+      "refs": [],
+      "related": [
+        "parallelism",
+        "task-contract",
+        "answer-contract"
+      ],
+      "contentHash": "c3f7577f1346e3041dcaf023f00bd099cf6d998b53457935a602d5fa0791252e"
+    },
+    {
+      "id": "budgets",
+      "parent": "economy",
+      "refs": [
+        "billing",
+        "dynamicdocs",
+        "sdk-session-limits"
+      ],
+      "related": [
+        "retries",
+        "cost-per-result",
+        "dynamic-workflows",
+        "study-runtime"
+      ],
+      "contentHash": "a565825742da4a9524d5f7e7303dcb0a911ba4395328204a5ce4f6bb012c4254"
+    },
+    {
+      "id": "model-inheritance",
+      "parent": "economy",
+      "refs": [
+        "sdk",
+        "jetbrains"
+      ],
+      "related": [
+        "capability-inventory",
+        "routing",
+        "intellij"
+      ],
+      "contentHash": "4bfaec4c7b03de484a03729722fc200cc3076570021f67c17b9c8ef07e57b301"
+    },
+    {
+      "id": "billing-boundaries",
+      "parent": "economy",
+      "refs": [
+        "billing",
+        "rovocredits",
+        "sdk-server-auth"
+      ],
+      "related": [
+        "cost-per-result",
+        "permissions",
+        "rovo",
+        "study-economics",
+        "study-runtime"
+      ],
+      "contentHash": "e27038f8e7c75247421502db387060849c183d0668309869a4e0662e00957aab"
+    },
+    {
+      "id": "skills",
+      "parent": "overview",
+      "refs": [
+        "anthropicskills"
+      ],
+      "related": [
+        "skill-definition",
+        "agent-roles",
+        "eager-skills"
+      ],
+      "contentHash": "23b33e26ee16bfb866ff4bac352df778b432823de8c1adbd0aeafdfe3286fe51"
+    },
+    {
+      "id": "skill-definition",
+      "parent": "skills",
+      "refs": [
+        "skillspec",
+        "anthropicskills"
+      ],
+      "related": [
+        "architecture",
+        "task-contract",
+        "eager-skills",
+        "study-runtime"
+      ],
+      "contentHash": "9be647b7585c8db9b5dbafaee121c75578acfd1686b56001300f5321e57d8eed"
+    },
+    {
+      "id": "requirements-skill",
+      "parent": "skills",
+      "refs": [],
+      "related": [
+        "requirements-workflow",
+        "requirement-status",
+        "traceability"
+      ],
+      "contentHash": "39389570a7a4cd554fe5a1d2aa8b75d735fdb05945fcfa627cf71be0e7b93a57"
+    },
+    {
+      "id": "impact-skill",
+      "parent": "skills",
+      "refs": [],
+      "related": [
+        "traceability",
+        "decomposition",
+        "neptune-stack",
+        "architecture-decisions",
+        "work-breakdown"
+      ],
+      "contentHash": "cb46f1e0cd2e9b2189a08dc6344c990d0a37142a54999ab13d9cd704be12ab01"
+    },
+    {
+      "id": "ci-skill",
+      "parent": "skills",
+      "refs": [],
+      "related": [
+        "jenkins",
+        "retries",
+        "finding-contract"
+      ],
+      "contentHash": "39c92290dd9c842794d33291944e13f8198675b08e0bb3d3e5a23585ba5589f9"
+    },
+    {
+      "id": "rdf-skill",
+      "parent": "skills",
+      "refs": [
+        "shacl",
+        "explain",
+        "neptune"
+      ],
+      "related": [
+        "coverage",
+        "candidate-isolation",
+        "query-performance"
+      ],
+      "contentHash": "862d9464d1591750284df40baf910e95c8852778d5c15c6fcf11e6f1e81b907c"
+    },
+    {
+      "id": "source-skill",
+      "parent": "skills",
+      "refs": [],
+      "related": [
+        "jev-support",
+        "applicability",
+        "answer-contract",
+        "provenance"
+      ],
+      "contentHash": "062cb59534bb45b96e3969518b653eb85a5ece35d8cf382296d1d92b2e55008d"
+    },
+    {
+      "id": "packet-skill",
+      "parent": "skills",
+      "refs": [
+        "talospacket"
+      ],
+      "related": [
+        "qa-packet",
+        "verdicts",
+        "post-change-checks"
+      ],
+      "contentHash": "12c32ad4317e97b73aeaee45c3acb2a604d16f7f5336727d218ba5be4810e088"
+    },
+    {
+      "id": "agent-roles",
+      "parent": "skills",
+      "refs": [],
+      "related": [
+        "routing",
+        "parallelism",
+        "deterministic-control"
+      ],
+      "contentHash": "4371976ee7b7dadec7e2094a0cb27ca2ac4b78844d490ffdbf832b46ff57e109"
+    },
+    {
+      "id": "eager-skills",
+      "parent": "skills",
+      "refs": [
+        "skillspec",
+        "sdk"
+      ],
+      "related": [
+        "context-selection",
+        "skill-definition",
+        "agent-roles"
+      ],
+      "contentHash": "0367051c2b022c5f3a89867296c0348f7c574f5be15d1f6949a88fbfb4cb9711"
+    },
+    {
+      "id": "requirements",
+      "parent": "overview",
+      "refs": [
+        "traceability"
+      ],
+      "related": [
+        "requirement-status",
+        "traceability",
+        "requirements-workflow"
+      ],
+      "contentHash": "d049fef5058196c924094b6e7f9af65a6e834d3a2ec1b5bf1a284f7ccd4009be"
+    },
+    {
+      "id": "requirement-status",
+      "parent": "requirements",
+      "refs": [],
+      "related": [
+        "jira",
+        "discovery",
+        "answer-contract"
+      ],
+      "contentHash": "fdf8f67b5b58d8a4b4592ca846d960ae407c4bccbc32bebb419d06eb3820220a"
+    },
+    {
+      "id": "traceability",
+      "parent": "requirements",
+      "refs": [
+        "traceability"
+      ],
+      "related": [
+        "impact-skill",
+        "coverage",
+        "engineering-knowledge",
+        "work-breakdown"
+      ],
+      "contentHash": "77b043263a98dc23aa43b6e6b6ba33e928ad74585f2b5c60894455c95e3a2788"
+    },
+    {
+      "id": "applicability",
+      "parent": "requirements",
+      "refs": [],
+      "related": [
+        "temporal-scope",
+        "holiday-example",
+        "wikidata-statements",
+        "jev-support"
+      ],
+      "contentHash": "9635bcb0c6ffb7edc0115183b3920befeb3a78e14f49ca57df358a8f712b3ae7"
+    },
+    {
+      "id": "temporal-scope",
+      "parent": "requirements",
+      "refs": [
+        "jevlimits"
+      ],
+      "related": [
+        "jev-limitations",
+        "provenance",
+        "applicability"
+      ],
+      "contentHash": "62fe461a0a9dd9fc80345db19e33cf8e98d2fab5d3607881528a8fd13cb5d706"
+    },
+    {
+      "id": "holiday-example",
+      "parent": "requirements",
+      "refs": [],
+      "related": [
+        "coverage",
+        "jev-support",
+        "traceability",
+        "applicability"
+      ],
+      "contentHash": "af524e5de6f48218e320e9e93ede623db8ffbdc4a5b2d7236817f3785822ec0f"
+    },
+    {
+      "id": "discovery",
+      "parent": "requirements",
+      "refs": [],
+      "related": [
+        "requirements-workflow",
+        "pilot",
+        "requirement-status",
+        "finding-contract"
+      ],
+      "contentHash": "4f686e69719c3d108f99c38fe63ef7ede1b5a6fa24e4d6bb04e19b509fd1b8ee"
+    },
+    {
+      "id": "debt",
+      "parent": "overview",
+      "refs": [],
+      "related": [
+        "debt-categories",
+        "finding-contract",
+        "coverage",
+        "prioritization"
+      ],
+      "contentHash": "06884b3b6fdaef1b10a98fcce6194028006e3584433d95e4513c22212d3cf4fd"
+    },
+    {
+      "id": "debt-categories",
+      "parent": "debt",
+      "refs": [],
+      "related": [
+        "finding-contract",
+        "sonar-debt",
+        "query-performance"
+      ],
+      "contentHash": "2c7cc78768c97c8fb68b06e2e501470fec28b10ef42586496dc6e9ec4dcdfd5b"
+    },
+    {
+      "id": "finding-contract",
+      "parent": "debt",
+      "refs": [
+        "talosfinding"
+      ],
+      "related": [
+        "verdicts",
+        "prioritization",
+        "jira"
+      ],
+      "contentHash": "ba01a11734df2c69c36f8fa25fcf1d181097c3ba03b1b872c58488b9954ab1f7"
+    },
+    {
+      "id": "prioritization",
+      "parent": "debt",
+      "refs": [],
+      "related": [
+        "sonar-debt",
+        "decomposition",
+        "finding-contract"
+      ],
+      "contentHash": "9530bfcaef753db8db90ee9949ca2c5774747745a254ad919fc5dd429093b716"
+    },
+    {
+      "id": "decomposition",
+      "parent": "debt",
+      "refs": [],
+      "related": [
+        "impact-skill",
+        "implementation-workflow",
+        "traceability",
+        "work-breakdown"
+      ],
+      "contentHash": "d0d5144d7b5adc2e7fba53e963ac03f29a98a386c6731d08b2957441bd8827ba"
+    },
+    {
+      "id": "coverage",
+      "parent": "debt",
+      "refs": [
+        "jacoco",
+        "shacl"
+      ],
+      "related": [
+        "jacoco-counters",
+        "holiday-example",
+        "eval-metrics"
+      ],
+      "contentHash": "bb843c540112b0d2dc7251fcea2a66be48a87c495dc43d55ae84eabb15788838"
+    },
+    {
+      "id": "jacoco-counters",
+      "parent": "debt",
+      "refs": [
+        "jacoco"
+      ],
+      "related": [
+        "coverage",
+        "mutation-testing"
+      ],
+      "contentHash": "462ccf734d58d02e27a9aa9b6ed084e957aa1ca8cfe0322918e3ae64653f34fe"
+    },
+    {
+      "id": "sonar-debt",
+      "parent": "debt",
+      "refs": [
+        "sonar",
+        "newcode"
+      ],
+      "related": [
+        "debt-categories",
+        "prioritization",
+        "jenkins"
+      ],
+      "contentHash": "385a3e027f3eee4e507e318161761a89b1c53af49dbb3bf55e58507dd427c072"
+    },
+    {
+      "id": "mutation-testing",
+      "parent": "debt",
+      "refs": [
+        "mutation"
+      ],
+      "related": [
+        "jacoco-counters",
+        "verification-loops",
+        "cost-per-result"
+      ],
+      "contentHash": "fbad45f0635e40417abd14780cb8ddc23586e248af3259f512654c2ba45c3135"
+    },
+    {
+      "id": "query-performance",
+      "parent": "debt",
+      "refs": [
+        "explain"
+      ],
+      "related": [
+        "rdf-skill",
+        "neptune-stack",
+        "finding-contract"
+      ],
+      "contentHash": "3ab7b8636d545c9fe5b07df52cadccc6f7331c30c67f9fbc80e0b5c292381d30"
+    },
+    {
+      "id": "jev",
+      "parent": "overview",
+      "refs": [
+        "jevlimits",
+        "jevconfidence"
+      ],
+      "related": [
+        "jev-support",
+        "jev-shadow",
+        "jev-limitations"
+      ],
+      "contentHash": "577652a4baf6a78f6c4dc638e22c485e8d368ffd9b52942ca368b76febe5f3a0"
+    },
+    {
+      "id": "jev-judgments",
+      "parent": "jev",
+      "refs": [
+        "jevlimits"
+      ],
+      "related": [
+        "deterministic-control",
+        "jev-support",
+        "jev-mapping"
+      ],
+      "contentHash": "7ac4e75965b03ec1efa41f9dcaf6cdfcc17ff528de34b6f3f64676c3e8ac5154"
+    },
+    {
+      "id": "jev-support",
+      "parent": "jev",
+      "refs": [
+        "jevcitation"
+      ],
+      "related": [
+        "source-skill",
+        "holiday-example",
+        "answer-contract",
+        "jev-shadow"
+      ],
+      "contentHash": "55d5f74ce4b8bda858d0c7b1bf4f1e42555b737c65a0bc43e356fc58f9a5f498"
+    },
+    {
+      "id": "jev-mapping",
+      "parent": "jev",
+      "refs": [
+        "jevlimits"
+      ],
+      "related": [
+        "applicability",
+        "retrieval",
+        "jev-judgments"
+      ],
+      "contentHash": "4a6c06a28da6244d1f40deba086131e6c485b296e04db2026c4cee4a7a423357"
+    },
+    {
+      "id": "jev-limitations",
+      "parent": "jev",
+      "refs": [
+        "jevlimits"
+      ],
+      "related": [
+        "deterministic-control",
+        "jev-confidence",
+        "temporal-scope"
+      ],
+      "contentHash": "ab733358ed15c818fdb170e388cf4c8e52c99b1090fd63d3dcde69d5ddaf80a3"
+    },
+    {
+      "id": "jev-confidence",
+      "parent": "jev",
+      "refs": [
+        "jevconfidence",
+        "jevlimits"
+      ],
+      "related": [
+        "jev-shadow",
+        "eval-metrics",
+        "answer-contract"
+      ],
+      "contentHash": "817736876d8f1659efdcfec552b6dd712690c305963c75d2efdbe2346679a185"
+    },
+    {
+      "id": "jev-clustering",
+      "parent": "jev",
+      "refs": [],
+      "related": [
+        "jev-mapping",
+        "applicability",
+        "retrieval"
+      ],
+      "contentHash": "894a712c20da4830f7c2f05f48235fb155407b0e3df6c4a58748faefac552ec5"
+    },
+    {
+      "id": "jev-shadow",
+      "parent": "jev",
+      "refs": [],
+      "related": [
+        "eval-corpus",
+        "jev-languages",
+        "routing",
+        "pilot"
+      ],
+      "contentHash": "dba967372f36497cdecf7fe75f352e96dcb1529bca9f8a7ab63510631c3455c7"
+    },
+    {
+      "id": "jev-languages",
+      "parent": "jev",
+      "refs": [
+        "jevmodels"
+      ],
+      "related": [
+        "jev-shadow",
+        "eval-corpus",
+        "applicability"
+      ],
+      "contentHash": "a419697f2d1c83f6b4dced3321eaec54cf23f398bcee1365f2838b3b8199e7a8"
+    },
+    {
+      "id": "knowledge",
+      "parent": "overview",
+      "refs": [],
+      "related": [
+        "knowledge-assets",
+        "answer-contract",
+        "retrieval",
+        "candidate-isolation"
+      ],
+      "contentHash": "155083272fe83c53eb1f34f1cf7b6b798f1198a1e7ae40c8c9bdc60eee33257c"
+    },
+    {
+      "id": "knowledge-assets",
+      "parent": "knowledge",
+      "refs": [],
+      "related": [
+        "engineering-knowledge",
+        "llm-wiki",
+        "provenance"
+      ],
+      "contentHash": "785ce0eaf53f785b96987033ef5cde803e0f5d0d4b88cb916ea0b84297ee685f"
+    },
+    {
+      "id": "engineering-knowledge",
+      "parent": "knowledge",
+      "refs": [
+        "traceability"
+      ],
+      "related": [
+        "traceability",
+        "confluence",
+        "graphrag-option"
+      ],
+      "contentHash": "d1b966ad00a1dbcb64fa3955cc42482bd89cecf6f786ff6ca13d266f6a174de8"
+    },
+    {
+      "id": "retrieval",
+      "parent": "knowledge",
+      "refs": [
+        "ragchecker"
+      ],
+      "related": [
+        "retrieval-diagnosis",
+        "permissions",
+        "context-selection",
+        "jev-mapping"
+      ],
+      "contentHash": "7b96a53da44ae7f7540ba8cf1a81df491ed28ec91c360a09fced97f356365dfd"
+    },
+    {
+      "id": "answer-contract",
+      "parent": "knowledge",
+      "refs": [],
+      "related": [
+        "jev-support",
+        "source-conflicts",
+        "provenance",
+        "eval-metrics"
+      ],
+      "contentHash": "d726e7d9f62f34fe0de9872d6ac343764440e2662cb3cf71daec966340a0a3b9"
+    },
+    {
+      "id": "llm-wiki",
+      "parent": "knowledge",
+      "refs": [
+        "llmwiki"
+      ],
+      "related": [
+        "confluence",
+        "knowledge-assets",
+        "answer-contract"
+      ],
+      "contentHash": "fe165613af52908c1dadf2ed1319359e2ddf73a33f7911f41ce528ac7ebb1b9b"
+    },
+    {
+      "id": "graphrag-option",
+      "parent": "knowledge",
+      "refs": [
+        "graphrag"
+      ],
+      "related": [
+        "retrieval",
+        "engineering-knowledge",
+        "cost-per-result"
+      ],
+      "contentHash": "fa1c4ee2cfc40ace8bc3bf9b4a43b39cf8abea915d9a09788bfd5011b1ad8b6f"
+    },
+    {
+      "id": "wikidata-statements",
+      "parent": "knowledge",
+      "refs": [
+        "wikibase",
+        "wikisources"
+      ],
+      "related": [
+        "applicability",
+        "provenance",
+        "curation-workflow"
+      ],
+      "contentHash": "09e4ebbbc8015121a13221b12ce8b2bbde56bbbb926ec7e27ec21bf43489e24b"
+    },
+    {
+      "id": "candidate-isolation",
+      "parent": "knowledge",
+      "refs": [
+        "neptune"
+      ],
+      "related": [
+        "curation-workflow",
+        "neptune-stack",
+        "rdf-skill",
+        "permissions"
+      ],
+      "contentHash": "5ac93e3d208e537805ed3b28f292bb96de3acd5965484f24ea345ef47e75c0f3"
+    },
+    {
+      "id": "provenance",
+      "parent": "knowledge",
+      "refs": [
+        "prov"
+      ],
+      "related": [
+        "temporal-scope",
+        "revision-cache",
+        "qa-packet"
+      ],
+      "contentHash": "310637cec6a7729d8aa79c6eedca74a078e08c89a6839ab31dcae6407ffd188a"
+    },
+    {
+      "id": "source-conflicts",
+      "parent": "knowledge",
+      "refs": [],
+      "related": [
+        "answer-contract",
+        "jev-confidence",
+        "requirement-status",
+        "applicability"
+      ],
+      "contentHash": "4da6fa379441bb70412b8ba621d0ae00fa1fd79c1494f2f46747929e32f27c2b"
+    },
+    {
+      "id": "talos",
+      "parent": "overview",
+      "refs": [
+        "taloscycle",
+        "talosreadme"
+      ],
+      "related": [
+        "verification-loops",
+        "qa-packet",
+        "talos-boundaries"
+      ],
+      "contentHash": "e9d5ac838d987af1ab6f22634b5052cbe6e55376e7f6937f4855fea63d0ae89a"
+    },
+    {
+      "id": "verification-loops",
+      "parent": "talos",
+      "refs": [
+        "taloscycle"
+      ],
+      "related": [
+        "implementation-workflow",
+        "jenkins",
+        "cost-per-result",
+        "workflow-patterns",
+        "release-operations"
+      ],
+      "contentHash": "a6fcc6286bab6b96b49d126b1c843143cb0af43a6e33aab1e31f645d6f95e55a"
+    },
+    {
+      "id": "post-change-checks",
+      "parent": "talos",
+      "refs": [
+        "talosverify"
+      ],
+      "related": [
+        "revision-cache",
+        "task-contract",
+        "qa-packet"
+      ],
+      "contentHash": "dbe8e419c8dcfbc49cbee19e2c95d9e35ede44e2d12ab91dda696d7ae901de8d"
+    },
+    {
+      "id": "verdicts",
+      "parent": "talos",
+      "refs": [
+        "talosverdict"
+      ],
+      "related": [
+        "finding-contract",
+        "retries",
+        "jenkins"
+      ],
+      "contentHash": "3ec8c2e39a44eea9b72e92f401292199f60ef0132e0576c9ef48440178f05e83"
+    },
+    {
+      "id": "qa-packet",
+      "parent": "talos",
+      "refs": [
+        "talospacket"
+      ],
+      "related": [
+        "task-contract",
+        "packet-skill",
+        "answer-contract",
+        "eval-metrics"
+      ],
+      "contentHash": "43765bcab9167da94f9e3708b77d6c85330af4f8237ee6f8923c80a92fe3c454"
+    },
+    {
+      "id": "adverse-audits",
+      "parent": "talos",
+      "refs": [
+        "talosmanual",
+        "talosbudget"
+      ],
+      "related": [
+        "eval-corpus",
+        "candidate-isolation",
+        "retries"
+      ],
+      "contentHash": "68be728a7f4fe545bc07295dac4a697d5bf949cd6d961a44efc7a5110320ad37"
+    },
+    {
+      "id": "talos-boundaries",
+      "parent": "talos",
+      "refs": [
+        "talosdocs",
+        "talosreadme"
+      ],
+      "related": [
+        "skill-definition",
+        "durable-execution",
+        "permissions"
+      ],
+      "contentHash": "914bd75fdf9d36278d5a00a1de7d7c9b49c04873eb390b78aa9ad5b241cda047"
+    },
+    {
+      "id": "evaluation",
+      "parent": "overview",
+      "refs": [
+        "evals"
+      ],
+      "related": [
+        "eval-corpus",
+        "eval-metrics",
+        "pilot",
+        "architect-proposal"
+      ],
+      "contentHash": "634f1264f1a840d6590d25e8ed3e76cb16d44f0d7c1e346ec5475e8b74e4721d"
+    },
+    {
+      "id": "eval-corpus",
+      "parent": "evaluation",
+      "refs": [
+        "evals"
+      ],
+      "related": [
+        "adverse-audits",
+        "jev-shadow",
+        "routing",
+        "study-quality"
+      ],
+      "contentHash": "d0874ca75ba1db208705d7e1994fcdf844f54b7703469ca7aa6a28ce40103eea"
+    },
+    {
+      "id": "eval-metrics",
+      "parent": "evaluation",
+      "refs": [],
+      "related": [
+        "cost-per-result",
+        "jev-languages",
+        "grader-design"
+      ],
+      "contentHash": "b2c761f600bae8bea356447c82ace82436f7ac1843780a7d7c1429d6a3436afa"
+    },
+    {
+      "id": "grader-design",
+      "parent": "evaluation",
+      "refs": [
+        "evals"
+      ],
+      "related": [
+        "qa-packet",
+        "post-change-checks",
+        "routing"
+      ],
+      "contentHash": "6c1a535a1ef61710be13e30de847ad608a640f1b21839723f7cb5ab1953ff7f8"
+    },
+    {
+      "id": "retrieval-diagnosis",
+      "parent": "evaluation",
+      "refs": [
+        "ragchecker"
+      ],
+      "related": [
+        "retrieval",
+        "answer-contract",
+        "context-selection"
+      ],
+      "contentHash": "e258dc2caf2628028412675afda571fff952d8bfee05f4b17bb21e8ac9463038"
+    },
+    {
+      "id": "pilot",
+      "parent": "evaluation",
+      "refs": [],
+      "related": [
+        "task-contract",
+        "requirements-workflow",
+        "jev-shadow",
+        "cost-per-result",
+        "release-operations"
+      ],
+      "contentHash": "f233e97681d751be1fe0edeca6a904cee88b79dcefb8300fe6fc5126fc31070a"
+    },
+    {
+      "id": "architect-proposal",
+      "parent": "evaluation",
+      "refs": [],
+      "related": [
+        "pilot",
+        "capability-inventory",
+        "task-contract",
+        "candidate-isolation",
+        "architecture-decisions"
+      ],
+      "contentHash": "2d02331d48f0d61a38c016526aa8400318fb7078780e3011db640c6247576a28"
+    },
+    {
+      "id": "confidence-summary",
+      "parent": "evaluation",
+      "refs": [],
+      "related": [
+        "model-prices",
+        "discovery",
+        "jev-shadow",
+        "construct-study",
+        "study-decision"
+      ],
+      "contentHash": "4a5bebe4b61d7ded8af476b543e3fd9eb4a826d3e27e929d725087ff16ac00d2"
+    },
+    {
+      "id": "construct-study",
+      "parent": "workflows",
+      "refs": [
+        "gov-discovery",
+        "simple-agents",
+        "nist-core"
+      ],
+      "related": [
+        "study-baseline",
+        "study-quality",
+        "study-contract",
+        "study-runtime",
+        "study-economics",
+        "study-experiment",
+        "study-decision",
+        "study-ticket-wording",
+        "study-scenarios",
+        "task-contract"
+      ],
+      "contentHash": "cf5bd0f611a29da7e482cbe13ea3575469f3d23b94ecb5e2df3a3a37587bdcbc"
+    },
+    {
+      "id": "study-baseline",
+      "parent": "construct-study",
+      "refs": [
+        "gov-discovery",
+        "evals"
+      ],
+      "related": [
+        "construct-study",
+        "study-quality",
+        "study-economics",
+        "capability-inventory",
+        "skill-definition"
+      ],
+      "contentHash": "8712580839a8fd86e0d1b40a84f6a71303c02fad7da20afe3ba370465d3a8190"
+    },
+    {
+      "id": "study-quality",
+      "parent": "construct-study",
+      "refs": [
+        "structured-output",
+        "evals",
+        "eval-best-practice",
+        "dataset-splits"
+      ],
+      "related": [
+        "study-baseline",
+        "study-decision",
+        "eval-corpus",
+        "grader-design",
+        "post-change-checks",
+        "workflow-patterns"
+      ],
+      "contentHash": "1b2e6c5e4530ed4332724130cbdc46694854c78d2457623b446a23038c42188c"
+    },
+    {
+      "id": "study-contract",
+      "parent": "construct-study",
+      "refs": [
+        "async-request-reply",
+        "skillspec",
+        "nist-core"
+      ],
+      "related": [
+        "study-runtime",
+        "study-quality",
+        "task-contract",
+        "event-state",
+        "durable-execution",
+        "workflow-patterns"
+      ],
+      "contentHash": "08c13cc93434010708da3230501e30cc4309f3e9467ca363d0f2b02ba74da7fe"
+    },
+    {
+      "id": "study-runtime",
+      "parent": "construct-study",
+      "refs": [
+        "skillspec",
+        "sdk-server-auth",
+        "sdk-session-limits",
+        "prompt-injection",
+        "nist-core"
+      ],
+      "related": [
+        "study-contract",
+        "study-economics",
+        "permissions",
+        "budgets",
+        "architecture"
+      ],
+      "contentHash": "132bd1975a59e4ee246a934003444354be3bc6d893bf753b97e3bf83ffe105ef"
+    },
+    {
+      "id": "study-economics",
+      "parent": "construct-study",
+      "refs": [
+        "agentic-costs",
+        "agentic-economics",
+        "sdk-server-auth",
+        "sdk-usage",
+        "billing"
+      ],
+      "related": [
+        "cost-per-result",
+        "study-baseline",
+        "study-quality",
+        "study-decision",
+        "billing-boundaries"
+      ],
+      "contentHash": "2562933a3c8465439256ce5f36a0b7764cb4e91c5114c303dd950d9e6674b6f0"
+    },
+    {
+      "id": "study-experiment",
+      "parent": "construct-study",
+      "refs": [
+        "simple-agents",
+        "gov-discovery"
+      ],
+      "related": [
+        "study-baseline",
+        "study-quality",
+        "study-runtime",
+        "study-decision",
+        "routing"
+      ],
+      "contentHash": "47f32fa1cd2f6a3896fd7331f3ad068b2d2f150439299da265493c0635faa7ab"
+    },
+    {
+      "id": "study-decision",
+      "parent": "construct-study",
+      "refs": [
+        "gov-discovery",
+        "nist-core",
+        "agentic-economics"
+      ],
+      "related": [
+        "study-quality",
+        "study-economics",
+        "study-experiment",
+        "study-ticket-wording",
+        "confidence-summary"
+      ],
+      "contentHash": "ed5510d924cb562c98689097af71ade98a153d9b5665a5f7b2277fdacbeed2b0"
+    },
+    {
+      "id": "study-ticket-wording",
+      "parent": "construct-study",
+      "refs": [
+        "gov-discovery",
+        "evals"
+      ],
+      "related": [
+        "construct-study",
+        "study-quality",
+        "study-decision",
+        "study-scenarios"
+      ],
+      "contentHash": "0ffa875ff2155a6e03e7de7e8f5159e6c5bdfe1861b5005a9513ddef569c4b93"
+    },
+    {
+      "id": "study-scenarios",
+      "parent": "construct-study",
+      "refs": [
+        "structured-output",
+        "evals",
+        "sdk-session-limits"
+      ],
+      "related": [
+        "study-quality",
+        "study-contract",
+        "study-economics",
+        "adverse-audits",
+        "workflow-patterns"
+      ],
+      "contentHash": "55dd712f3547e8bebedad8671578e3621edbff4dfd009df7f1086ebbe181d341"
+    }
+  ],
+  "sources": {
+    "skillspec": [
+      "Agent Skills specification",
+      "https://agentskills.io/specification"
+    ],
+    "anthropicskills": [
+      "Anthropic: engineering Agent Skills",
+      "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills"
+    ],
+    "context": [
+      "Anthropic: effective context engineering",
+      "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+    ],
+    "dynamic": [
+      "GitHub: Dynamic Workflows announcement, 1 October 2026",
+      "https://github.blog/changelog/2026-10-01-dynamic-workflows-in-copilot-cli-and-the-copilot-app/"
+    ],
+    "dynamicdocs": [
+      "GitHub: Dynamic Workflows behavior and limits",
+      "https://docs.github.com/en/copilot/concepts/agents/dynamic-workflows"
+    ],
+    "temporal": [
+      "Temporal: durable AI workflows",
+      "https://docs.temporal.io/ai"
+    ],
+    "cloud": [
+      "GitHub: cloud-agent repository limitations",
+      "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent"
+    ],
+    "sdk": [
+      "GitHub: SDK agents, model overrides, eager skills",
+      "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/custom-agents"
+    ],
+    "jetbrains": [
+      "GitHub: JetBrains update, 8 September 2026",
+      "https://github.blog/changelog/2026-09-08-enterprise-managed-sandbox-in-copilot-for-jetbrains/"
+    ],
+    "billing": [
+      "GitHub: Copilot Business billing",
+      "https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/billing"
+    ],
+    "prices": [
+      "GitHub: Copilot model pricing",
+      "https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing"
+    ],
+    "models": [
+      "GitHub: model availability",
+      "https://docs.github.com/en/copilot/reference/ai-models/supported-models"
+    ],
+    "rovo": [
+      "Atlassian: configure Use agent automation",
+      "https://support.atlassian.com/cloud-automation/docs/tips-to-configure-the-action-use-rovo-agent/"
+    ],
+    "rovocredits": [
+      "Atlassian: Rovo credit rules",
+      "https://support.atlassian.com/rovo/docs/rovo-usage-limits/"
+    ],
+    "rovotier": [
+      "Atlassian: Rovo reasoning tiers",
+      "https://support.atlassian.com/studio/docs/set-a-reasoning-tier-for-a-rovo-agent/"
+    ],
+    "traceability": [
+      "NASA: bidirectional traceability",
+      "https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695427/SWE-052%2B-%2BBidirectional%2BTraceability"
+    ],
+    "sonar": [
+      "Sonar: metric definitions",
+      "https://docs.sonarsource.com/sonarqube-server/user-guide/code-metrics/metrics-definition"
+    ],
+    "newcode": [
+      "Sonar: new-code approach",
+      "https://docs.sonarsource.com/sonarqube-cloud/standards/about-new-code"
+    ],
+    "jacoco": [
+      "JaCoCo: coverage counters",
+      "https://www.jacoco.org/jacoco/trunk/doc/counters.html"
+    ],
+    "mutation": [
+      "Google: practical mutation testing at scale",
+      "https://research.google/pubs/practical-mutation-testing-at-scale-a-view-from-google/"
+    ],
+    "shacl": [
+      "W3C: SHACL specification",
+      "https://www.w3.org/TR/shacl/"
+    ],
+    "explain": [
+      "AWS: Neptune SPARQL explain",
+      "https://docs.aws.amazon.com/neptune/latest/userguide/sparql-explain.html"
+    ],
+    "neptune": [
+      "AWS: Neptune SPARQL and graph behavior",
+      "https://docs.aws.amazon.com/neptune/latest/userguide/feature-sparql-compliance.html"
+    ],
+    "jevlimits": [
+      "TypeSafe: Jev 1.13 limitations",
+      "https://docs.typesafe.ai/model-jaggedness/jev-1.13"
+    ],
+    "jevconfidence": [
+      "TypeSafe: confidence semantics",
+      "https://docs.typesafe.ai/confidence"
+    ],
+    "jevmodels": [
+      "TypeSafe: Jev models",
+      "https://docs.typesafe.ai/models"
+    ],
+    "jevcitation": [
+      "TypeSafe: citation-check cookbook",
+      "https://docs.typesafe.ai/cookbooks/citation_check"
+    ],
+    "wikibase": [
+      "Wikibase: full-statement RDF format",
+      "https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format"
+    ],
+    "wikisources": [
+      "Wikidata: sourcing guidance",
+      "https://www.wikidata.org/wiki/Help:Sources"
+    ],
+    "graphrag": [
+      "Microsoft: GraphRAG query strategies",
+      "https://microsoft.github.io/graphrag/query/overview/"
+    ],
+    "prov": [
+      "W3C: PROV-O provenance ontology",
+      "https://www.w3.org/TR/prov-o/"
+    ],
+    "evals": [
+      "Anthropic: evaluating AI agents",
+      "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
+    ],
+    "ragchecker": [
+      "Amazon Science: RAGChecker",
+      "https://github.com/amazon-science/RAGChecker"
+    ],
+    "taloscycle": [
+      "Talos: work-test cycle at reviewed commit",
+      "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/work-test-cycle.md"
+    ],
+    "talosverify": [
+      "Talos: command-verification evidence tests",
+      "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/src/test/java/dev/talos/runtime/verification/CommandVerificationEvidenceTest.java"
+    ],
+    "talosfinding": [
+      "Talos: audit-finding template",
+      "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/templates/audit-finding.md"
+    ],
+    "talosverdict": [
+      "Talos: summary and verdict template",
+      "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/templates/talosbench-summary-template.md"
+    ],
+    "talospacket": [
+      "Talos: QA packet",
+      "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/templates/qa-packet.md"
+    ],
+    "talosmanual": [
+      "Talos: adverse-case manual QA",
+      "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/runbooks/manual-qa.md"
+    ],
+    "talosdocs": [
+      "Talos: documentation contract test",
+      "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/src/test/java/dev/talos/docs/ReleaseQaGateContractTest.java"
+    ],
+    "talosbudget": [
+      "Talos: LLM call-budget tests",
+      "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/src/test/java/dev/talos/core/llm/LlmCallBudgetTest.java"
+    ],
+    "talosreadme": [
+      "Talos: README at reviewed commit",
+      "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/README.md"
+    ],
+    "simple-agents": [
+      "Anthropic: composable architectures (tooling caveat noted)",
+      "https://www.anthropic.com/engineering/building-effective-agents"
+    ],
+    "gov-discovery": [
+      "GOV.UK: discovery scope and next-phase decisions",
+      "https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works"
+    ],
+    "nist-core": [
+      "NIST AI RMF 1.0 Core (revision in progress)",
+      "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/"
+    ],
+    "sdk-server-auth": [
+      "GitHub: Copilot SDK server-to-server authentication",
+      "https://docs.github.com/en/copilot/how-tos/copilot-sdk/auth/server-to-server-tokens"
+    ],
+    "sdk-session-limits": [
+      "GitHub: Copilot SDK session soft limits",
+      "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/session-limits"
+    ],
+    "sdk-usage": [
+      "GitHub: Copilot SDK usage and billing telemetry",
+      "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/usage-and-billing"
+    ],
+    "structured-output": [
+      "OpenAI: structured outputs and remaining semantic errors",
+      "https://developers.openai.com/api/docs/guides/structured-outputs"
+    ],
+    "eval-best-practice": [
+      "OpenAI: evaluation design and held-out testing",
+      "https://developers.openai.com/api/docs/guides/evaluation-best-practices"
+    ],
+    "async-request-reply": [
+      "Microsoft: asynchronous request-reply pattern",
+      "https://learn.microsoft.com/en-us/azure/architecture/patterns/asynchronous-request-reply"
+    ],
+    "agentic-costs": [
+      "AWS: assessing agentic workflow costs",
+      "https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-economics/assessing-costs.html"
+    ],
+    "agentic-economics": [
+      "AWS: agentic AI economics and investment choices",
+      "https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-economics/understanding.html"
+    ],
+    "dataset-splits": [
+      "Google: separate development, validation and test data",
+      "https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets"
+    ],
+    "prompt-injection": [
+      "OWASP: prompt injection in imported/retrieved content",
+      "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+    ],
+    "llmwiki": [
+      "Andrej Karpathy: LLM Wiki idea file, live gist reviewed 3 October 2026",
+      "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
+    ]
+  },
+  "definitions": {
+    "stages": [
+      {
+        "id": "requirements",
+        "hash": "69df454017f8d70568c920960f56ac126faf12ceea09fb5bd66635fbcef484cf"
+      },
+      {
+        "id": "architecture",
+        "hash": "6109a5521e24b86f13bc7027008c2a643e5cb5c6eaf3712263860cf5cf6f53da"
+      },
+      {
+        "id": "breakdown",
+        "hash": "e61b8ed6e1c40e918c1cf719beb529192cc7c1634ccf13d488ee8d3302b64ea4"
+      },
+      {
+        "id": "implementation",
+        "hash": "3c69528ee5e27dc065cd591c650d45dfd9c6c72fd23139ca2456af73810fb201"
+      },
+      {
+        "id": "verification",
+        "hash": "aeb6d42e5df628659f78fd01a44650785f3c2c507071d36a40883e815a1b2087"
+      },
+      {
+        "id": "release",
+        "hash": "d30d88f54206e5e663250d6188b8c6c415017c94dc56329b43614cb995af3f86"
+      },
+      {
+        "id": "operations",
+        "hash": "ed6e4fe0332c2ceb1f214b04203092481ff868aa8c51b5e024a7f03667d22bde"
+      },
+      {
+        "id": "current-process",
+        "hash": "32e5b97d8b59a0d1c5837d601008521ed136f70894f5a53fa2666f6da31a9cd7"
+      },
+      {
+        "id": "feasibility-scope",
+        "hash": "0060bf81bb858e77ce48017febe889153c224f7623e0f88f83ff94781130606a"
+      },
+      {
+        "id": "options",
+        "hash": "0d254854471f2b1aa3634fc3d111fb54dc84325e67f18bdb8951b1c74fb062fc"
+      },
+      {
+        "id": "experiment-plan",
+        "hash": "1a959635f6d89c34f88424ef3897deb2416312773358174c4d33be8840363991"
+      },
+      {
+        "id": "recommendation",
+        "hash": "0ff830fb79d5e8960ea4696db4f2968e7faa2d57a32c95c8245564d3068031ec"
+      },
+      {
+        "id": "reproduction",
+        "hash": "10ff92e81f0bc853b67e2becf5353aad9d5c5da4d1b0ab56d6ce77fa4fb0ef4c"
+      },
+      {
+        "id": "diagnosis",
+        "hash": "173f3393a63d8c82a847694ece053b1b0135532f0ec5bd48d20a599e7c899d9b"
+      },
+      {
+        "id": "bug-fix",
+        "hash": "c9c71235d0e3d5264493057ffa16a563f844290fa70546a8703210e691202ec5"
+      },
+      {
+        "id": "regression",
+        "hash": "f6a3bfab31d0f58ce294a28e126231fd028fa6edea27256ac1dd77c65c5e5199"
+      },
+      {
+        "id": "bug-review",
+        "hash": "b2a9e1d56f3ded4961437a4a90f62ec3bf8db26156fd70ae4d29a0ba375289bb"
+      }
+    ],
+    "skills": [
+      {
+        "id": "impact-analysis",
+        "hash": "9e01f852826cc6424968377004c5e114ef9c19e0680fa9b07bd4a69fc1f97897"
+      },
+      {
+        "id": "verification",
+        "hash": "90e0532337c533a7470196fbb00642b9ec998ea62e6ed895ccdcfd27181f38b1"
+      },
+      {
+        "id": "requirement-refinement",
+        "hash": "6c2525be101edd00dd092e34cde80ee105014ac96693dd8e98f167df4136cb18"
+      },
+      {
+        "id": "knowledge-maintenance",
+        "hash": "d20004f01ee7e2333a7a7faef0137be350f6a192db006051524d8a9bebacb5dc"
+      },
+      {
+        "id": "feasibility-analysis",
+        "hash": "cf58689debeb33814acaa15495c371e9602acd7149b335540dd34b1be511c796"
+      },
+      {
+        "id": "evaluation-planning",
+        "hash": "bc4e286a381be120d686221b91e23f5bf6c3926c6643908de39435f6acf5cc76"
+      },
+      {
+        "id": "bug-diagnosis",
+        "hash": "52674849499ee17da3f33b543c8a927b256b1d2e4cedea924e26f7c2a54d00f4"
+      },
+      {
+        "id": "implementation",
+        "hash": "038bba5f7d77996b8ee115391f06db2dcfdda1e8633a6437ab1e01ec37563ce0"
+      },
+      {
+        "id": "delivery-planning",
+        "hash": "877620227c92cf6d49d3e8f753c804c0928ae221cd9c21ceaae48b6cc73e9962"
+      }
+    ],
+    "roles": [
+      {
+        "id": "analyst",
+        "hash": "1ff250b96c5f24635fc75efbbf9cbc68b6a51d77e8d5ca7d3519d6d2151dc8d7"
+      },
+      {
+        "id": "implementer",
+        "hash": "878a160e8ad35cc071779f48eb8c649a2054a023dfe99ee8a4ae97a7b663b8f5"
+      },
+      {
+        "id": "reviewer",
+        "hash": "58cb5b8cf3e75b3f8c4fc512d9706e1c1e23599a270535e1e2831118a0a8d99c"
+      },
+      {
+        "id": "knowledge-curator",
+        "hash": "494456a2acc85e7d109fcf91d6ae1d46990c51ea5eb9bddd5a92a8887b435374"
+      }
+    ],
+    "practices": [
+      {
+        "id": "portable-behavior",
+        "hash": "54a59b7ccbaf62ea431ca097ffdfa588a9396b8dc9b6a090c0b7b17aa73dc706"
+      },
+      {
+        "id": "minimum-change",
+        "hash": "e54ce0144ea4aed679c7281b2e7ffb4a3e56df41a6ff0f8e5aebbe766ecb917b"
+      },
+      {
+        "id": "evidence-wiki",
+        "hash": "09d97b477407128bf4966927f52702c4615617119cce9a292884895bbabd2a6f"
+      },
+      {
+        "id": "specification-first",
+        "hash": "3a84a91b3fe42604b185952787c43eae6cfa744700de1812f312edc5a6c366f5"
+      },
+      {
+        "id": "progressive-context",
+        "hash": "0d91c90303a5ab061463233e88505962fce0874295278c9c04227c14aef88eca"
+      }
+    ],
+    "recipes": [
+      {
+        "id": "feasibility",
+        "hash": "46b47f42e052a05775a90e34ebde981de3171f85c45136eff2e12001e9a97427"
+      },
+      {
+        "id": "bugfix",
+        "hash": "675b43bf647b5c837fc0ed24c471afb7f4beb47b94ef3043127610c0d8eed821"
+      },
+      {
+        "id": "feature-delivery",
+        "hash": "fc59961cf434bece462d81f4c44e212daadce0654fb1bb52b4afe47f4ce18db6"
+      }
+    ],
+    "technologyProfiles": [
+      {
+        "id": "generic",
+        "hash": "5472d660a09c579610bdb5bc668390f2886cdd8b5cf3062afc7b0fda4890f212"
+      },
+      {
+        "id": "spring-boot",
+        "hash": "41f13ede49693250ebbe586d8d6d97413aeece5179d3fdf9616e9c6d5f88e876"
+      },
+      {
+        "id": "react",
+        "hash": "5786f941daff56a81dacbc6715d8d4550e0c0170be2a4ed9265585b0446e97d2"
+      },
+      {
+        "id": "graph-data",
+        "hash": "84d92931065406d953318d6de61c2112a4690b6b90e1cfd86b49b1d7be5be334"
+      }
+    ],
+    "runtimeControls": [
+      {
+        "id": "before-write",
+        "hash": "751a2170832005346a00bb8d9cba138d4bdb143f92d624d3a40bc259b8552e69"
+      },
+      {
+        "id": "bounded-execution",
+        "hash": "8e2c8afaa2e57e1c166eb4655263dd8e2dcc35c7d9f6dc189ee185b4f205875b"
+      },
+      {
+        "id": "duplicate-writes",
+        "hash": "c0f69f2d77bf4c126a428f125117ca79b4486d5e32ce97a0cc6a21d37e103a65"
+      },
+      {
+        "id": "confirmed-result",
+        "hash": "a2fc9f36644fe4b7156c914445e086292141cd1559545d98ecb61920b1e40873"
+      },
+      {
+        "id": "failure-trace",
+        "hash": "bd74d3aec69ad1fa0ccf56068a87f2e7aaacf03ca1cfcd71b8def9495704d9b7"
+      }
+    ],
+    "technologies": [
+      {
+        "id": "react",
+        "hash": "5787489d82c8149c873fa6f95647d2869e624b339141117b75ffd40cf57df293"
+      },
+      {
+        "id": "typescript",
+        "hash": "3f9a6eafc4b91d75ecdf3e1868e231c45ee0f243d7f93f89a5e01c7354f81bfa"
+      },
+      {
+        "id": "javascript",
+        "hash": "78bf536b7876648547667df89c51a0498086e557e26bbb99fcb809ecec264b37"
+      },
+      {
+        "id": "java",
+        "hash": "ada5838a8afa2da77b6221ce4a268fbc56bf05dde105dfefa005340aafb1086a"
+      },
+      {
+        "id": "spring-boot",
+        "hash": "99096a4b4b96517744f3a73a9e373cabefbb50b52aa61f3a377552abea8ad63d"
+      },
+      {
+        "id": "python",
+        "hash": "c7c435145233a42a861793a84e543eaae0bcb87bd817fd863a4b0a6610c64560"
+      },
+      {
+        "id": "nodejs",
+        "hash": "422d6bedc71f01c4cf91795ff9aa77a4d0bb7e459745ec762c10e418ef3d5ab9"
+      },
+      {
+        "id": "go",
+        "hash": "d2fffb4deac1af080e6cf4df29b0d6009e3be27335541f0307f38d200355dcf2"
+      },
+      {
+        "id": "rust",
+        "hash": "e5b31e9423b8ededf424feb672ac1e2f5a6e84e13c4f8c5ab9e56825ca2f6e94"
+      },
+      {
+        "id": "dotnet",
+        "hash": "9d2b8f45de0a520c1c628cb18ba206297967cd58a19f9fd18b0e9fad5b3566b8"
+      },
+      {
+        "id": "kotlin",
+        "hash": "6d39755a1c1250c732b1e0c69b9fff1e96992a8d0c6aa4de29211194f2cda4b8"
+      },
+      {
+        "id": "vue",
+        "hash": "40688c4ea0801ab0c8f364d2d3a24d5a6a408c54fb6f2b0038032ae9c9364fc7"
+      },
+      {
+        "id": "angular",
+        "hash": "aaf5edf65f7669654ae5d802a6ac0c030a9ba98b2432ac5e93811fe95cd1a0f8"
+      },
+      {
+        "id": "sparql",
+        "hash": "6ae28f74c07ec151837a2a2db51efe02ceb784cf5201ca2d9307ce00a725a16e"
+      },
+      {
+        "id": "rdf",
+        "hash": "63b8ee9e250069b82f1533a65fb9b37f44b9a68720fcc73bc40425eb8a14e7be"
+      },
+      {
+        "id": "neptune",
+        "hash": "e121f11ec8a1d095ee6a469193a07e449b834b09f69038e649f640c88f5b660c"
+      },
+      {
+        "id": "graphql",
+        "hash": "1ee15db749405f58b4eb20e3a852a5e53cb1751b744bf9ac797ba0376495529f"
+      },
+      {
+        "id": "postgresql",
+        "hash": "6df316c826dd4bf3b2540fb5a6f2f18726176bb169cc4413002fabd338017483"
+      },
+      {
+        "id": "docker",
+        "hash": "7624ed2858cf4d6be135d633fcdb9205538713ebb311e175ff11b4e33a39e94b"
+      },
+      {
+        "id": "aws",
+        "hash": "5f36d6f39879c0fdc6db445b00e024383935fb6976fd20131eecacca93c8053b"
+      }
+    ],
+    "hosts": [
+      {
+        "id": "jetbrains",
+        "hash": "24d1138dbbf624c14666c789e99ad0a246200e00e6b73e8a8bfdf2b23d54e894"
+      },
+      {
+        "id": "vscode",
+        "hash": "7fb3262315976affa570426c38e2892eb213e54f7f1379339a7c6cd68850be7a"
+      },
+      {
+        "id": "github",
+        "hash": "66e2f910227953c0a17cb9c331f4025762b67c5cd606f50595871ab9ac64f30e"
+      }
+    ]
+  }
+}

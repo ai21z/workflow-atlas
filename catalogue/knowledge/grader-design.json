@@ -1,0 +1,45 @@
+{
+  "id": "grader-design",
+  "title": "Grading & regression",
+  "summary": "Judge actual artifacts and outcomes with the right evidence.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Grading approach",
+      "items": [
+        "Deterministic checks for exact state, schemas, identifiers, and test outcomes.",
+        "Human judgments for intended behavior and domain support.",
+        "Model graders only where calibrated against reviewed references.",
+        "Traces and resulting state to verify actions and diagnose failures."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Regression policy",
+      "text": "Re-run relevant evaluations when model, prompt, skill, retrieval, or workflow logic changes. Repeat selected cases when variability is consequential."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The system’s success declaration is never the sole grade. Reviewers can locate the evidence used to accept or reject a result."
+    }
+  ],
+  "refs": [
+    "evals"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "evaluation"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

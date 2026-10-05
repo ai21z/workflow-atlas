@@ -1,0 +1,38 @@
+{
+  "id": "source-conflicts",
+  "title": "Conflicts & insufficient evidence",
+  "summary": "Preserve disagreement and missing information rather than force one answer.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Proposed procedure",
+      "text": "Compare source authority under the project’s reviewed rules, applicability, version, and effective period. Separate conflicting assertions from simple wording differences."
+    },
+    {
+      "type": "p",
+      "label": "Model role",
+      "text": "Models can highlight relevant passages or suggest the nature of a conflict. Their agreement cannot substitute for independent source support."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The answer or review packet identifies the competing evidence and unresolved decision. The approved process determines whether one source supersedes another."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "knowledge"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

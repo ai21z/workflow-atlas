@@ -8,12 +8,12 @@ The `atlas/` directory was copied from the original Atlas's static assets. Its s
 
 It retains:
 
-1. All 105 original topics, with four general guidance topics added on 5 October 2026. There are now 109 topics across the same 10 clusters.
-2. All 55 original source references and confidence qualifiers, with the primary LLM Wiki reference added on 3 October for 56 current sources.
+1. All 105 original topics and the four later general guidance topics. The catalogue retains those 109 topics and adds eight retrieval topics, for 117 across the same 10 clusters.
+2. All 55 original source references and confidence qualifiers, plus the later LLM Wiki reference. The combined catalogue now has 72 source records, including factory references and the retrieval sources.
 3. Existing topic identifiers and browser hash navigation.
 4. Reading, 3D map and topic card views.
 5. Source library search and links back to topics.
-6. Five guided paths, including the reference-to-configuration feasibility study.
+6. All five earlier guided paths, including the reference-to-configuration feasibility study, plus Retrieve and check information.
 7. Light and dark reading themes.
 8. Mobile topic browsing and keyboard navigation.
 9. The vendored graph library and its original MIT notice.
@@ -67,3 +67,11 @@ The case explains proposed study work. It is not evidence of a deployed integrat
 Existing topic identifiers, including `construct-study`, remain stable so saved links still work. Public Talos repository references remain attributed where they contributed a reviewed practice.
 
 The Atlas content is included in the public static site. Reading it does not execute workflows or change project decisions.
+
+## Catalogue migration
+
+Catalogue version `2.1.0` moves authored content into `catalogue/` JSON records. `atlas/data.js` and `factory/catalog.mjs` are generated from those records. Existing topic IDs, browsing connections, source associations and collections remain the compatibility baseline. Source records, typed relationships and action mappings have shared validation. The [catalogue guide](catalogue.md) documents the source files and build commands.
+
+Topics now declare their kind, applicability, limits, aliases and source-review scope. Those fields help reading and search. Metadata marked `legacy` records the migration of earlier material, not a new factual review. The new retrieval topics illustrate capability, practice, technology and example records without claiming complete technology coverage.
+
+The catalogue migration changes authoring and generated reference data. User projects remain in memory with explicit download and upload. Reading topics, searching by type and following a collection do not change a project. A supported practice action still requires review before applying its proposed project edit. JEV's frozen inference profile and its retained evidence remain separate from catalogue growth.

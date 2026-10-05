@@ -1,0 +1,45 @@
+{
+  "id": "task-contract",
+  "title": "Task & evidence contract",
+  "summary": "Make the expected outcome, inputs, permissions, verification, and limits explicit.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Required fields",
+      "items": [
+        "Task identity, owner, desired outcome and exclusions.",
+        "Relevant input and source versions. Include repository and dependency revisions when the task changes or inspects code.",
+        "Allowed actions and affected systems.",
+        "Acceptance criteria, required checks and expected evidence.",
+        "Applicable time, correction, tool-call or spending limits, with units and a stopping outcome.",
+        "Expected outputs and conditions requiring clarification or assistance."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Completion record",
+      "text": "Keep observed facts, inferences, unresolved questions, executed checks and exceptions distinct. A relevant change requires a review of which earlier checks or approvals still apply. Preserve the earlier evidence as history."
+    },
+    {
+      "type": "p",
+      "label": "Reusable across workflows",
+      "text": "The same structure can describe a code investigation, document review or data curation task. Each adds its own acceptance criteria. A repository, model call or automated write is not required for every task."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

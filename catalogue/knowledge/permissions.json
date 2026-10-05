@@ -1,0 +1,47 @@
+{
+  "id": "permissions",
+  "title": "Identity & scoped access",
+  "summary": "Enforce allowed actions in credentials and runtime controls.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Two meanings of tokens",
+      "text": "Scoped application tokens authorize API actions. Model tokens measure inference input/output; AI credits are a billing unit. These controls solve different problems."
+    },
+    {
+      "type": "list",
+      "label": "Proposed controls",
+      "items": [
+        "Scope tools and credentials to the assigned task and environment.",
+        "Record the identity performing each action, such as a requesting user or a service account. Check the configured actor for tools such as Rovo.",
+        "Filter retrieval by access rights before generating output.",
+        "Constrain both model-invoked tools and direct workflow code.",
+        "Keep code review, data approval, and publication rules executable and attributable."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "An agent cannot exceed its assigned access by following a prompt. Output does not expose evidence inaccessible to the intended reader."
+    }
+  ],
+  "refs": [
+    "rovo",
+    "dynamicdocs"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

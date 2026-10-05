@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createRecipe, createExample, compile, parseImport } from '../factory/core.mjs';
+import { CATALOG, createRecipe, createExample, compile, parseImport } from '../factory/core.mjs';
 import { PRACTICE_TOPIC_IDS, getPracticeAction, applyPracticeAction } from '../factory/practice-actions.mjs';
+import { guidanceSnapshot } from '../factory/guidance-review.mjs';
 
-test('the Knowledge bridge exposes only five curated topic actions with primary references', () => {
-  assert.equal(PRACTICE_TOPIC_IDS.length, 5);
+test('the Knowledge bridge exposes six curated topic actions with primary references', () => {
+  assert.equal(PRACTICE_TOPIC_IDS.length, 6);
   const config = createExample('feature-delivery');
   config.runtime.enabled = true;
   for (const topicId of PRACTICE_TOPIC_IDS) {
@@ -39,12 +40,75 @@ test('reference practice selection changes one decision and survives pack export
 test('context and knowledge actions never add skills, roles, facts or evidence', () => {
   const config = createRecipe('feasibility');
   config.practices = [];
-  for (const topicId of ['context-selection', 'llm-wiki']) {
+  for (const topicId of ['context-selection', 'llm-wiki', 'retrieve-and-validate']) {
     const action = getPracticeAction(topicId, config);
     const result = applyPracticeAction(config, action.id);
     const expected = structuredClone(config);
     expected.practices.push(action.id.slice('practice:'.length));
     assert.deepEqual(result, expected);
+  }
+});
+
+test('validated retrieval adds guidance without changing supplied facts or evidence and round trips through a pack', () => {
+  const config = createExample('feature-delivery');
+  config.facts.push({ id: 'supplied-fact', claim: 'The supplied source describes the current workflow.', status: 'inferred', source: 'Team supplied source', revision: 'revision-1', reviewer: '', notes: 'The applicability is unresolved.' });
+  config.evidence.push({ id: 'unrun-check', stageId: '', check: 'Validate retrieved evidence', expected: 'Evidence supports the scoped claim', observed: '', status: 'not-run', method: 'user-recorded', source: 'Team supplied procedure', reviewer: '' });
+  const before = structuredClone(config);
+  const action = getPracticeAction('retrieve-and-validate', config);
+  assert.equal(action.id, 'practice:validated-retrieval');
+  assert.equal(action.alreadyApplied, false);
+  const result = applyPracticeAction(config, action.id);
+  assert.deepEqual(result, { ...before, practices: [...before.practices, 'validated-retrieval'] });
+  assert.deepEqual(config, before);
+  const pack = compile(result);
+  const workflow = pack.files.find(file => file.path === 'WORKFLOW.md').content;
+  const definition = CATALOG.practices.find(practice => practice.id === 'validated-retrieval');
+  assert.ok(workflow.includes(definition.application));
+  assert.match(workflow, /retriev/i);
+  assert.match(workflow, /validat/i);
+  for (const filename of ['WORKFLOW.md', 'SOURCES.md']) {
+    const text = pack.files.find(file => file.path === filename).content;
+    assert.ok(text.includes('Local adaptation version 2.1.0, reviewed 2026-10-05.'));
+    assert.ok(text.includes('Local adaptation version 2.0.1, reviewed 2026-10-02.'));
+  }
+  const manifest = JSON.parse(pack.files.find(file => file.path === 'manifest.json').content);
+  assert.equal(manifest.practices.find(practice => practice.id === 'validated-retrieval').reviewedOn, '2026-10-05');
+  assert.equal(manifest.practices.find(practice => practice.id === 'portable-behavior').reviewedOn, '2026-10-02');
+  const reopened = parseImport(pack.files.find(file => file.path === 'project.json').content);
+  assert.deepEqual(reopened, result);
+  assert.deepEqual(reopened.facts, before.facts);
+  assert.deepEqual(reopened.evidence, before.evidence);
+  assert.equal(getPracticeAction('retrieve-and-validate', reopened).alreadyApplied, true);
+  assert.deepEqual(applyPracticeAction(reopened, action.id), reopened);
+});
+
+test('guidance keeps each definition revision and review scope when the catalogue grows', () => {
+  const config = createExample('feasibility');
+  config.practices.push('validated-retrieval');
+  const snapshot = guidanceSnapshot(config);
+  for (const [recordId, metadataId] of [
+    ['recipe:feasibility', 'recipe:feasibility'],
+    ['technology:generic', 'profile:generic'],
+    ['runtime:before-write', 'control:before-write'],
+    ['practice:validated-retrieval', 'practice:validated-retrieval'],
+  ]) {
+    const record = snapshot.records.find(item => item.id === recordId);
+    const metadata = CATALOG.definitionMetadata[metadataId];
+    assert.equal(record.version, record.definition.version || metadata.revision);
+    assert.equal(record.reviewedOn, record.definition.reviewedOn || metadata.reviewedOn || snapshot.reviewedOn);
+  }
+  const skill = snapshot.records.find(record => record.id === 'skill:feasibility-analysis');
+  assert.equal(skill.version, '2.0.2');
+  assert.equal(snapshot.records.find(record => record.id === 'recipe:feasibility').version, '2.0.1');
+});
+
+test('guidance does not treat retained recipe settings as active stages', () => {
+  const config = createExample('feature-delivery');
+  config.practices.push('minimum-change', 'specification-first');
+  config.workflowModel.processes = [];
+  const snapshot = guidanceSnapshot(config);
+  for (const id of ['practice:minimum-change', 'practice:specification-first']) {
+    assert.match(snapshot.records.find(record => record.id === id).applicability, /^Selected reference\./);
   }
 });
 

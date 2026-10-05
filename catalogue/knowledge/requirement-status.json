@@ -1,0 +1,54 @@
+{
+  "id": "requirement-status",
+  "title": "Requirement status",
+  "summary": "Label authority and uncertainty instead of treating all statements as requirements.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Four statuses",
+      "headers": [
+        "Status",
+        "Meaning"
+      ],
+      "rows": [
+        [
+          "Confirmed",
+          "Supported by an approved decision or appropriate source"
+        ],
+        [
+          "Observed",
+          "Demonstrated by implementation or execution"
+        ],
+        [
+          "Proposed",
+          "Suggested improvement awaiting a decision"
+        ],
+        [
+          "Unresolved",
+          "Missing, ambiguous, or contradictory evidence"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "A brief or generated Jira ticket identifies the status of each substantive claim. Unsupported assumptions do not silently become acceptance criteria."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "requirements"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

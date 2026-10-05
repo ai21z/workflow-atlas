@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { createRecipe, compileSelectedOutput, compileStandaloneSkill } from '../factory/core.mjs'
 import { guidanceSnapshot, reviewGuidance } from '../factory/guidance-review.mjs'
+import { DEFINITION_VERSION } from '../factory/catalog.mjs'
 
 const file = (pack, path) => pack.files.find(entry => entry.path === path)?.content
 
@@ -50,7 +51,7 @@ test('feasibility guidance revisions are reviewable without broad catalog or sch
   const files = [{ path: 'manifest.json', content: JSON.stringify({ guidanceSnapshot: previous }) }]
   const report = reviewGuidance(config, files)
   assert.equal(current.version, '2.0.2')
-  assert.equal(snapshot.catalogVersion, '2.0.1')
+  assert.equal(snapshot.catalogVersion, DEFINITION_VERSION)
   assert.deepEqual(report.changes.map(change => change.id), ['skill:feasibility-analysis'])
   assert.deepEqual(report.changes[0].fields, ['version', 'definition'])
   assert.equal(report.needsAdoption, true)

@@ -1,0 +1,74 @@
+{
+  "id": "debt-categories",
+  "title": "Debt investigation categories",
+  "summary": "Look beyond code smells to data, contracts, pipelines, decisions, and agent behavior.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Evidence and possible remedies",
+      "headers": [
+        "Category",
+        "Evidence",
+        "Possible remedy"
+      ],
+      "rows": [
+        [
+          "Structure",
+          "Cycles, coupling, repeated change patterns",
+          "Clarify interface or dependency"
+        ],
+        [
+          "Verification",
+          "Flakes, absent assertions/scenarios",
+          "Repair or add meaningful checks"
+        ],
+        [
+          "Data/ontology",
+          "Lost scope/provenance, inconsistent representation",
+          "Preserve semantics and migrate"
+        ],
+        [
+          "Queries",
+          "Measured latency and plans",
+          "Change query/access pattern"
+        ],
+        [
+          "CI/release",
+          "Stale or nonreproducible evidence",
+          "Revision-linked execution"
+        ],
+        [
+          "Docs/requirements",
+          "Conflicting decisions, missing links",
+          "Resolve decision and traceability"
+        ],
+        [
+          "Agent workflows",
+          "Repeated calls, unsupported summaries",
+          "Improve retrieval/contracts/stops"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Classification",
+      "text": "A wrong requirement or data defect is not automatically technical debt. Classify the finding by actual cause and ownership."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "maintenance"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

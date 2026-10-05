@@ -1,0 +1,40 @@
+{
+  "id": "jev-shadow",
+  "title": "Shadow-mode evaluation",
+  "summary": "Compare Jev with reviewed outcomes and simpler credible alternatives.",
+  "sections": [
+    {
+      "type": "steps",
+      "label": "Experiment",
+      "items": [
+        "Select a narrow task such as holiday scope-support checking.",
+        "Build reviewed positive, negative, ambiguous, and conflicting examples.",
+        "Run Jev without changing publication behavior.",
+        "Compare existing rules, a constrained utility LLM, and the current reviewer process.",
+        "Measure missed errors, false alarms, review effort, cost, and language differences.",
+        "Decide whether benefits justify integration and which cases need escalation."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Improvement is demonstrated on held-out cases. The model and question versions are recorded and changes trigger re-evaluation."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "model-decisions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

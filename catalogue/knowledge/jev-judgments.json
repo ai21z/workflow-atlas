@@ -1,0 +1,60 @@
+{
+  "id": "jev-judgments",
+  "title": "Bounded judgment tasks",
+  "summary": "Supply a precise question and a small, explicit answer space.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Candidate tasks",
+      "headers": [
+        "Task",
+        "Example decision"
+      ],
+      "rows": [
+        [
+          "Passage relevance",
+          "Relevant / irrelevant / unclear"
+        ],
+        [
+          "Ontology mapping",
+          "One supplied concept / none / uncertain"
+        ],
+        [
+          "Scope support",
+          "Supported / contradicted / insufficient"
+        ],
+        [
+          "Source-change classification",
+          "Substantive / editorial / unclear"
+        ],
+        [
+          "Workflow routing",
+          "One allowed investigation / escalation"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Define boundary cases and include insufficient evidence or none-of-these. The controller owns permissible actions and combines the result with deterministic checks."
+    }
+  ],
+  "refs": [
+    "jevlimits"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "model-decisions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

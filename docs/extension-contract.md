@@ -1,8 +1,8 @@
 # Extension contract
 
-Project schema: `3.0`. Workflow model: `1.0`. Catalog definition version: `2.0.1`. Exporter: `3.1.0`. Contract documentation updated on 5 October 2026. Source review dates remain in their individual definition records. See the [workflow model](workflow-model.md) for explicit process records and current editing limits.
+Project schema: `3.0`. Workflow model: `1.0`. Catalogue content version: `2.1.0`. Catalogue authoring schema: `1.0`. Exporter: `3.1.0`. Contract documentation updated on 5 October 2026. Source review dates remain in their individual records. See the [workflow model](workflow-model.md) for explicit process records and current editing limits.
 
-The date above records this contract revision. The catalog source review remains 2 October 2026. Editing interface or metadata code does not establish a new upstream source review.
+The date above records this contract revision. The inherited global definition review date remains 2 October 2026. Individual definitions and source claims may record a later review. Migrating content into the catalogue or editing metadata does not establish a new upstream source review.
 
 The workspace separates configuration, reviewed definitions, project views, validation, output formatting and file maintenance. Keep project facts in configuration and host syntax in adapters. The interface reads the same catalog as the compiler.
 
@@ -12,7 +12,12 @@ User documentation has a shared reader at `docs/index.html`, with the existing J
 
 | Module | Responsibility |
 | --- | --- |
-| `factory/catalog.mjs` | Recipes, stage definitions, skills, roles, practices, technology profiles, hosts, status choices and source references |
+| `catalogue/` | Authored JSON topics, typed definitions, sources, relationships, actions, navigation and schema |
+| `tools/build-catalogue.mjs` | Schema and reference checks, deterministic generation and stale projection checks |
+| `atlas/data.js` | Generated reading, search, source, map and collection data |
+| `factory/catalog.mjs` | Generated recipes, stages, skills, roles, practices, technology profiles, hosts, choices and definition metadata |
+| `factory/catalogue-rules.mjs` | Shared applicability predicates for curated actions and generated practice guidance |
+| `factory/practice-actions.mjs` | Reviewable project changes from generated action definitions, guarded by supported configuration |
 | `factory/core.mjs` | Configuration fixtures, migration, semantic and structural validation, deterministic generation and standalone skill generation |
 | `factory/workflow-model.mjs` | Versioned process records, recipe projections, bounded correction semantics and model validation |
 | `factory/workflow-model-view.mjs` | Shared reading projection for explicit processes in the app, Markdown and portable HTML |
@@ -50,6 +55,8 @@ User documentation has a shared reader at `docs/index.html`, with the existing J
 Use the fixtures rather than duplicating schema defaults in another module. The schema is strict. Unknown fields are rejected because this version cannot preserve them reliably.
 
 Decision review is an optional companion record, not a new project schema. It keeps exact baseline, current configuration, reason and output scope. Restoration requires the current configuration to match the opened project and regenerates derived summaries. The selected definition snapshot lives in the manifest. Guidance comparison reads supplied metadata and current local definitions, without source retrieval or an execution claim. Imported artifact contents remain separate from configuration and fresh generation.
+
+Definition snapshots keep each selected definition's own version and review date where supplied, then its catalogue metadata, then the global fallback. Snapshot technology records map to catalogue `profile` definitions, and runtime records map to `control` definitions. Updating the catalogue release does not rewrite the version of unchanged guidance. Supported snapshot version `1.0` retains its existing record types.
 
 ## Authoritative configuration
 
@@ -178,6 +185,8 @@ File snapshots are bounded to 4096 entries, 8 MiB per text file and 32 MiB aggre
 
 ## Adding definitions
 
+Edit `catalogue/definitions.json` and its source, relation, topic or action records. Run `npm run build:catalogue` and `npm run check:catalogue`. `factory/catalog.mjs` and `atlas/data.js` are generated projections. The [catalogue guide](catalogue.md) lists the exact files, schema, predicates and authoring steps. Ajv validates at build time and is not loaded by the browser.
+
 A new recipe needs a distinct purpose, questions, stages, required inputs, expected outputs, actor defaults and acceptance checks. Give new identifiers stable meaning.
 
 A technology profile needs actual questions, expected evidence, primary sources and limits. Preserve unknown versions and commands rather than guessing them.
@@ -187,6 +196,8 @@ A skill needs a focused trigger, procedure, result and checks. Include every req
 A practice needs its exact contribution, applicability and source limits. A source link is not permission to install or execute upstream content. Preserve required notices when files are actually reused.
 
 A target adapter needs documented paths, fields, tools and installation behavior. Preserve unsupported settings as findings. Check the [Copilot configuration reference](https://docs.github.com/en/copilot/reference/custom-agents-configuration) before changing its adapter. A model recorded in evidence is separate from host model configuration.
+
+Catalogue availability does not imply JEV support. The frozen v8 inference definitions, supported IDs and digest remain independent of live catalogue additions. New questions can be recorded manually but are excluded from inference requests until a reviewed profile supports them. Response coverage is validated against that frozen profile, not every live catalogue recipe.
 
 ## Validation boundaries
 

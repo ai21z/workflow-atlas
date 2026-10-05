@@ -1,0 +1,44 @@
+[
+  {
+    "topicId": "context-selection",
+    "practiceId": "progressive-context",
+    "title": "Load relevant context when needed",
+    "reason": "Keep reusable instructions focused and put project detail in linked references. This selects the existing context practice without claiming a measured cost saving.",
+    "eligibility": "always"
+  },
+  {
+    "topicId": "implementation-workflow",
+    "practiceId": "minimum-change",
+    "title": "Prefer the smallest necessary change",
+    "reason": "This workflow includes a change stage. Record the existing reuse and scope practice while keeping required verification and accessibility checks.",
+    "eligibility": "change-stage"
+  },
+  {
+    "topicId": "requirements-workflow",
+    "practiceId": "specification-first",
+    "title": "Connect requirements to implementation",
+    "reason": "This workflow includes requirements and implementation. Record the existing traceability practice. It does not install or run Spec Kit.",
+    "eligibility": "requirements-and-change"
+  },
+  {
+    "topicId": "llm-wiki",
+    "practiceId": "evidence-wiki",
+    "title": "Keep source backed project knowledge",
+    "reason": "Record the existing source, summary and correction practice. It does not create a wiki service, verify supplied facts or add a knowledge agent.",
+    "eligibility": "always"
+  },
+  {
+    "topicId": "study-contract",
+    "runtimeControlId": "before-write",
+    "title": "Record validation before writes",
+    "reason": "For a feasibility study or an existing runtime design, record a requirement to validate permitted changes before persistence. The backend still needs actual authorization and business rules.",
+    "eligibility": "runtime-design"
+  },
+  {
+    "topicId": "retrieve-and-validate",
+    "practiceId": "validated-retrieval",
+    "title": "Add retrieval checks",
+    "reason": "Record written checks for the approved interface, inputs and returned information. This adds a selected practice to the workflow and source record. It does not change steps, roles, tools or evidence.",
+    "eligibility": "always"
+  }
+]

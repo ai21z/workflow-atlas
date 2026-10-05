@@ -1,0 +1,41 @@
+{
+  "id": "wikidata-statements",
+  "title": "Wikidata qualifiers",
+  "summary": "Preserve full statements when qualifiers, references, rank, and version matter.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Verified representation",
+      "text": "The wdt: “truthy” RDF representation provides best-ranked values without full qualifiers and references. Full statements expose those details. “Truthy” does not mean independently verified factual truth."
+    },
+    {
+      "type": "p",
+      "label": "Import design",
+      "text": "Retain needed scope, dates, rank, references, and entity/source revision. Follow underlying sources; an imported-Wikimedia reference or label match alone does not establish a country assertion."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "A flattened import does not silently broaden applicability or lose the evidence needed for curation."
+    }
+  ],
+  "refs": [
+    "wikibase",
+    "wikisources"
+  ],
+  "basis": "Documented representation caveat",
+  "confidence": "High",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "knowledge"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

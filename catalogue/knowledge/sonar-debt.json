@@ -1,0 +1,41 @@
+{
+  "id": "sonar-debt",
+  "title": "Sonar debt limitations",
+  "summary": "Rule remediation costs are useful input, not a complete project-debt measure.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Verified definition",
+      "text": "Sonar’s technical-debt metric uses remediation costs associated with detected rules. It does not measure every architectural, data, requirements, or workflow problem."
+    },
+    {
+      "type": "p",
+      "label": "Proposed practice",
+      "text": "Use rule findings as evidence to investigate. Protect new code through appropriate quality gates and improve existing debt incrementally. Do not equate a displayed remediation estimate with a calibrated delivery estimate."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Prioritized findings have actual impact, owner, evidence, and verification beyond the rule label."
+    }
+  ],
+  "refs": [
+    "sonar",
+    "newcode"
+  ],
+  "basis": "Documented metric + proposed use",
+  "confidence": "High for definition",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "maintenance"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

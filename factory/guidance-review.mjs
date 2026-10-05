@@ -1,4 +1,5 @@
 import { CATALOG, DEFINITION_VERSION, REVIEW_DATE, SOURCES } from './catalog.mjs'
+import { practiceApplicable } from './catalogue-rules.mjs'
 
 const clone = value => JSON.parse(JSON.stringify(value))
 const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value
@@ -12,7 +13,9 @@ const adoptionNeeded = changes => changes.some(change => change.before !== null 
 export function guidanceSnapshot(config) {
   const records = []
   const add = (type, definition, applicability, limits, sources = []) => {
-    records.push({ id: `${type}:${definition.id}`, type, label: definition.label || definition.title || definition.id, version: definition.version || DEFINITION_VERSION, reviewedOn: REVIEW_DATE, sources: [...new Set(sources.filter(Boolean))], applicability, limits, definition: clone(definition) })
+    const metadataType = { technology: 'profile', runtime: 'control' }[type] || type
+    const metadata = CATALOG.definitionMetadata?.[`${metadataType}:${definition.id}`]
+    records.push({ id: `${type}:${definition.id}`, type, label: definition.label || definition.title || definition.id, version: definition.version || metadata?.revision || DEFINITION_VERSION, reviewedOn: definition.reviewedOn || metadata?.reviewedOn || REVIEW_DATE, sources: [...new Set(sources.filter(Boolean))], applicability, limits, definition: clone(definition) })
   }
   const activeRecipe = config.workflowModel.processes.some(process => process.source === 'recipe')
   const stages = new Set(activeRecipe ? config.workflow.enabledStages : [])
@@ -36,8 +39,10 @@ export function guidanceSnapshot(config) {
     const applicability = [assignedRoles.has(definition.id) ? 'Assigned to an included step as an agent role.' : '', scope].filter(Boolean).join(' ') || 'Retained as a selected profile, with no included stage assignment.'
     add('role', definition, applicability, 'Requested tools describe instructions. The host must provide actual access.', [SOURCES.agents])
   }
+  const practiceContext = { ...config, workflow: { ...config.workflow, enabledStages: [...stages] } }
   for (const definition of CATALOG.practices.filter(item => config.practices.includes(item.id))) {
-    const applicability = definition.id === 'minimum-change' ? (stages.has('implementation') || stages.has('bug-fix') ? 'Relevant to the included implementation or repair.' : 'Selected reference. Review whether a later implementation needs it.') : definition.id === 'specification-first' ? (stages.has('requirements') && stages.has('implementation') ? 'Connects the included requirement and implementation steps.' : 'Selected reference. The active workflow may cover only part of this pattern.') : definition.application
+    const applies = practiceApplicable(definition.id, practiceContext)
+    const applicability = definition.id === 'minimum-change' ? (applies ? 'Relevant to the included implementation or repair.' : 'Selected reference. Review whether a later implementation needs it.') : definition.id === 'specification-first' ? (applies ? 'Connects the included requirement and implementation steps.' : 'Selected reference. The active workflow may cover only part of this pattern.') : definition.application
     add('practice', definition, applicability, definition.limits, [definition.source])
   }
   const technologies = new Set(config.components.flatMap(component => component.technologies.map(item => item.id)))
@@ -91,7 +96,7 @@ export function renderGuidanceDetails(snapshot) {
     } catch {}
     return escape(source)
   }
-  return `<details class="card"><summary>Guidance versions and scope (${snapshot.records.length})</summary><p>Supplied catalog ${escape(snapshot.catalogVersion)}. Recorded review ${escape(snapshot.reviewedOn)}. Intended environment ${escape(snapshot.environment || 'not chosen')}. These are metadata records, not a new source check or proof of compatibility.</p>${snapshot.records.map(record => `<article class="source-card"><h3>${escape(record.label)}</h3><p class="muted">${escape(record.type)}. Version ${escape(record.version)}. Recorded review ${escape(record.reviewedOn)}.</p><p>${escape(record.applicability)}</p><p>${escape(record.limits)}</p>${record.sources.length ? `<ul>${record.sources.map(source => `<li>${sourceLink(source)}</li>`).join('')}</ul>` : '<p class="muted">Local definition with no separate source reference.</p>'}</article>`).join('')}</details>`
+  return `<details class="card"><summary>Guidance versions and scope (${snapshot.records.length})</summary><p>Supplied catalog ${escape(snapshot.catalogVersion)}. Baseline review record ${escape(snapshot.reviewedOn)}. Individual definition dates appear below. Intended environment ${escape(snapshot.environment || 'not chosen')}. These are metadata records, not a new source check or proof of compatibility.</p>${snapshot.records.map(record => `<article class="source-card"><h3>${escape(record.label)}</h3><p class="muted">${escape(record.type)}. Version ${escape(record.version)}. Recorded review ${escape(record.reviewedOn)}.</p><p>${escape(record.applicability)}</p><p>${escape(record.limits)}</p>${record.sources.length ? `<ul>${record.sources.map(source => `<li>${sourceLink(source)}</li>`).join('')}</ul>` : '<p class="muted">Local definition with no separate source reference.</p>'}</article>`).join('')}</details>`
 }
 
 export function reviewGuidance(config, files = []) {

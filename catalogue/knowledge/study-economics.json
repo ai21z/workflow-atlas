@@ -1,0 +1,76 @@
+{
+  "id": "study-economics",
+  "title": "Cost per accepted artifact",
+  "summary": "Account for all attempts and remaining human work, with estimates labeled.",
+  "sections": [
+    {
+      "type": "code",
+      "label": "Defined comparison",
+      "text": "For one workload and reporting window:\ncost per accepted artifact =\n(model + tools/connectors + runner + validation + review/repair cost across ALL attempts)\n/ accepted artifacts\nWith zero accepted artifacts, report no accepted outcome; do not divide by zero."
+    },
+    {
+      "type": "p",
+      "label": "Denominator",
+      "text": "Acceptance means meeting agreed usability criteria. Count the accepted task/artifact once; repairs are not extra successes. Include failed/rejected attempts in cost. Separate first-pass and repaired acceptance."
+    },
+    {
+      "type": "table",
+      "label": "Evidence labels",
+      "headers": [
+        "Measured",
+        "Estimated/unknown"
+      ],
+      "rows": [
+        [
+          "Observed usage and engineer effort",
+          "Future demand, bursts and task mix"
+        ],
+        [
+          "Observed completion/repair time",
+          "Hosting, support and maintenance effort"
+        ],
+        [
+          "Billable units and current rates",
+          "Rate/cache changes and policy feasibility"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Explicit units",
+      "text": "Keep engineer minutes separate unless an agreed cost conversion exists. Separate build effort, recurring maintenance and per-run cost; avoid double-counting."
+    },
+    {
+      "type": "p",
+      "label": "Runtime/billing evidence",
+      "text": "An IDE subscription alone does not establish backend access. Verify organization enablement, billing owner and task/report correlation. GitHub documents the SDK usage cost field as a request multiplier rather than currency."
+    },
+    {
+      "type": "p",
+      "label": "Forecast",
+      "text": "Use volume assumptions and ranges that show what changes the recommendation. Measurements and estimates can coexist. A cheaper model helps only when total accepted-outcome evidence supports it."
+    }
+  ],
+  "refs": [
+    "agentic-costs",
+    "agentic-economics",
+    "sdk-server-auth",
+    "sdk-usage",
+    "billing"
+  ],
+  "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+  "confidence": "Moderate for fit; workplace benefit unknown",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

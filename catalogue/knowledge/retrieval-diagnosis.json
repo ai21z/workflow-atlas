@@ -1,0 +1,61 @@
+{
+  "id": "retrieval-diagnosis",
+  "title": "Retrieval vs generation",
+  "summary": "An unsupported answer can fail at different stages requiring different fixes.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Diagnosis",
+      "headers": [
+        "Stage",
+        "Question"
+      ],
+      "rows": [
+        [
+          "Retrieval",
+          "Was the needed permitted evidence found?"
+        ],
+        [
+          "Selection",
+          "Was the relevant passage/version/scope selected?"
+        ],
+        [
+          "Generation",
+          "Does the answer accurately use and support itself with that evidence?"
+        ],
+        [
+          "Applicability",
+          "Does the claim answer this question within the required scope and conditions?"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Research example",
+      "text": "RAGChecker separates retrieval and generation diagnosis with claim-level evaluation. Use the principle even if you do not adopt that implementation."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Fix missing evidence or wrong selection before assuming a larger model will resolve every unsupported answer."
+    }
+  ],
+  "refs": [
+    "ragchecker"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "evaluation"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

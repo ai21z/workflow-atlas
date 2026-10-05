@@ -1,0 +1,62 @@
+{
+  "id": "knowledge-assets",
+  "title": "Knowledge assets",
+  "summary": "Separate source material, approved assertions, indexes, summaries, and execution state.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Assets to choose when needed",
+      "headers": [
+        "Asset",
+        "Purpose"
+      ],
+      "rows": [
+        [
+          "Source corpus",
+          "Original documents, versions, passages, and identifiers"
+        ],
+        [
+          "Approved domain graph, if needed",
+          "Curated assertions and relationships when graph queries serve the task"
+        ],
+        [
+          "Engineering knowledge",
+          "Reviewed requirements, decisions, code/test links"
+        ],
+        [
+          "Retrieval index",
+          "Reproducible search over permitted evidence"
+        ],
+        [
+          "Generated summaries",
+          "Source-linked navigation with review status"
+        ],
+        [
+          "Workflow state",
+          "Progress, checkpoints, budgets, run artifacts"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Every derived asset can identify its source and version. Execution state does not accidentally become shared domain authority."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "knowledge"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

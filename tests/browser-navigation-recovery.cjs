@@ -123,7 +123,7 @@ async function run() {
     await openKnowledge()
     const frame = page.frameLocator('#knowledge-frame')
     await frame.getByRole('searchbox', { name: 'Search all topics', exact: true }).fill('Requirements investigation')
-    await frame.getByRole('button', { name: 'Requirements investigation. Read topic', exact: true }).press('Enter')
+    await frame.getByRole('button', { name: 'Requirements investigation. Practice. Read topic', exact: true }).press('Enter')
     await frame.getByRole('heading', { name: 'Requirements investigation', exact: true }).waitFor({ state: 'visible' })
     await history('goBack')
     await frame.getByRole('heading', { name: 'Requirements & traceability', exact: true }).waitFor({ state: 'visible', timeout: 3000 })

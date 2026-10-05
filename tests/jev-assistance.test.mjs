@@ -1,8 +1,12 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import { copyFile, mkdtemp, readdir, rm, writeFile } from 'node:fs/promises'
+import os from 'node:os'
+import path from 'node:path'
+import { pathToFileURL } from 'node:url'
 import { createJevAssistance, composeAssistedProject, addSuggestedPractice, buildAssistancePayload } from '../factory/jev-assistance.mjs'
 import { MODEL, PROMPT_VERSION, CONTRACT_VERSION, DEFINITION_DIGEST, makeRequest, decide, allCoverage } from '../factory/jev-contract.mjs'
-import { compile, parseImport, serializeProject, createRecipe } from '../factory/core.mjs'
+import { CATALOG, compile, parseImport, serializeProject, createRecipe } from '../factory/core.mjs'
 import { getIntentAnswer } from '../factory/intent.mjs'
 
 function choice(question, selected) {
@@ -33,6 +37,85 @@ function delayed() {
   const controller = createJevAssistance({ fetchImpl: (url, options) => new Promise(resolve => calls.push({ options, body: JSON.parse(options.body), resolve })) })
   return { controller, calls }
 }
+
+async function expandedCatalogAssistance(t) {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'atlas-jev-catalog-test-'))
+  t.after(async () => {
+    assert.equal(path.dirname(path.resolve(directory)), path.resolve(os.tmpdir()))
+    assert.ok(path.basename(directory).startsWith('atlas-jev-catalog-test-'))
+    await rm(directory, { recursive: true, force: true })
+  })
+  const factory = new URL('../factory/', import.meta.url)
+  const modules = (await readdir(factory)).filter(name => name.endsWith('.mjs') && name !== 'catalog.mjs')
+  await Promise.all(modules.map(name => copyFile(new URL(name, factory), path.join(directory, name))))
+  const catalog = structuredClone(CATALOG)
+  const feature = catalog.recipes.find(recipe => recipe.id === 'feature-delivery')
+  feature.questions.push({ id: 'delivery-owner', label: 'Who owns delivery?', hint: 'Name the owner.' })
+  catalog.recipes.push({ ...structuredClone(feature), id: 'manual-only', label: 'Manual workflow', questions: [{ id: 'manual-details', label: 'What should be recorded?', hint: 'Record the manual plan.' }] })
+  await writeFile(path.join(directory, 'catalog.mjs'), `export * from ${JSON.stringify(new URL('catalog.mjs', factory).href)}\nexport const CATALOG = ${JSON.stringify(catalog)}\n`)
+  return import(pathToFileURL(path.join(directory, 'jev-assistance.mjs')).href)
+}
+
+test('catalogue additions preserve frozen responses and keep additional answers outside inference', async t => {
+  const { createJevAssistance: createExpandedAssistance } = await expandedCatalogAssistance(t)
+  const calls = []
+  const controller = createExpandedAssistance({ fetchImpl: async (_url, options) => {
+    const body = JSON.parse(options.body)
+    calls.push(body)
+    return response(envelope(body, coveredFeature))
+  } })
+  controller.updateBrief('Add saved searches.')
+  await controller.suggest()
+  assert.equal(controller.getState().error, null)
+  assert.equal(controller.getState().proposal.recipeId, 'feature-delivery')
+  assert.equal(controller.getState().nextQuestion.id, 'delivery-owner')
+  assert.equal(controller.getState().nextQuestion.assessment, 'unreviewed')
+  controller.confirmAnswer('delivery-owner', 'The release owner.')
+  await controller.suggest()
+  assert.deepEqual(calls.at(-1).suppliedProjectAnswers, {})
+  assert.equal(controller.getState().error, null)
+  assert.equal(controller.composeProject().config.workflow.answers['delivery-owner'], 'The release owner.')
+  assert.throws(() => controller.confirmAnswer('invented-question', 'An unsupported answer.'), /supported workflow question/)
+})
+
+test('a catalogue recipe outside the inference profile stays manually selectable and answerable', async t => {
+  const { createJevAssistance: createExpandedAssistance } = await expandedCatalogAssistance(t)
+  let calls = 0
+  const controller = createExpandedAssistance({ fetchImpl: async () => { calls += 1; throw new Error('Manual authoring must not request inference.') } })
+  controller.updateBrief('Describe a manually chosen workflow.')
+  controller.chooseRecipe('manual-only')
+  assert.equal(controller.getState().status, 'manual')
+  assert.equal(controller.getState().proposal.intent, null)
+  assert.equal(controller.getState().nextQuestion.assessment, 'unreviewed')
+  controller.setAnswer('manual-details', 'The supplied manual plan.')
+  controller.confirmAnswer('manual-details', controller.getState().pendingAnswers['manual-details'])
+  const { config } = controller.composeProject()
+  assert.equal(config.workflow.recipe, 'manual-only')
+  assert.equal(config.workflow.answers['manual-details'], 'The supplied manual plan.')
+  assert.equal(calls, 0)
+})
+
+test('catalogue membership does not authorize additional inference recipe or question IDs', async t => {
+  const { createJevAssistance: createExpandedAssistance } = await expandedCatalogAssistance(t)
+  const corruptions = [
+    value => { value.decision.allCoverage['manual-only'] = {} },
+    value => { value.decision.allCoverage['feature-delivery']['delivery-owner'] = structuredClone(value.decision.allCoverage['feature-delivery'].acceptance) },
+    value => { delete value.decision.allCoverage['feature-delivery'].acceptance },
+    value => { value.decision.intent.choice = 'manual-only' },
+  ]
+  for (const corrupt of corruptions) {
+    const controller = createExpandedAssistance({ fetchImpl: async (_url, options) => {
+      const value = envelope(JSON.parse(options.body))
+      corrupt(value)
+      return response(value)
+    } })
+    controller.updateBrief('Keep this description.')
+    await controller.suggest()
+    assert.equal(controller.getState().proposal, null)
+    assert.equal(controller.getState().error.code, 'invalid_response')
+    assert.equal(controller.getState().draft.userBrief, 'Keep this description.')
+  }
+})
 
 test('assistance only calls on explicit submit and supplies the exact bounded context shape', async () => {
   const { controller, calls } = instant()

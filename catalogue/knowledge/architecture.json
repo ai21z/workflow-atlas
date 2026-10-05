@@ -1,0 +1,68 @@
+{
+  "id": "architecture",
+  "title": "Controller & harness",
+  "summary": "The missing layer above skills and agents provides execution state and enforceable controls.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Responsibilities",
+      "headers": [
+        "Component",
+        "Job"
+      ],
+      "rows": [
+        [
+          "Instructions",
+          "Persistent project conventions"
+        ],
+        [
+          "Skills",
+          "Reusable procedures and resources"
+        ],
+        [
+          "Agent definitions",
+          "Role, model, and selected tools"
+        ],
+        [
+          "Workflow controller",
+          "Stages, dependencies, conditions, handoffs"
+        ],
+        [
+          "Harness",
+          "Environment, credentials, execution, budgets, observations"
+        ],
+        [
+          "Knowledge layer",
+          "Retrievable project/domain evidence"
+        ],
+        [
+          "Evaluation layer",
+          "Measures actual performance"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Design boundary",
+      "text": "A prompt can describe a rule. The runtime must enforce permissions, state changes, and budget controls. A skill does not create durable execution or prove successful completion."
+    }
+  ],
+  "refs": [
+    "skillspec"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "retrieval",
+  "title": "Hybrid retrieval",
+  "summary": "Select search and retrieval methods according to the question and available evidence.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Retrieval routes",
+      "items": [
+        "Exact search for identifiers, symbols, filenames and precise terms.",
+        "Semantic search where conceptual matching adds useful evidence.",
+        "Structured queries where the data supports them. SPARQL applies to RDF relationships.",
+        "Filter by access and relevant versions. Include jurisdiction, effective period or approval state when the question depends on them."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Proposed sequence",
+      "text": "Retrieve a bounded candidate set, verify relevance/applicability, and provide source passages with identifiers. Add reranking only if it measurably helps."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The needed evidence is retrieved, permitted, current for the question, and accessible for verification. Measure retrieval separately from answer generation."
+    }
+  ],
+  "refs": [
+    "ragchecker"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "knowledge"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -1,12 +1,7 @@
 import { CATALOG } from './catalog.mjs';
+import { actionApplicable } from './catalogue-rules.mjs';
 
-const definitions = Object.freeze([
-  { topicId: 'context-selection', practiceId: 'progressive-context', title: 'Load relevant context when needed', reason: 'Keep reusable instructions focused and put project detail in linked references. This selects the existing context practice without claiming a measured cost saving.' },
-  { topicId: 'implementation-workflow', practiceId: 'minimum-change', title: 'Prefer the smallest necessary change', reason: 'This workflow includes a change stage. Record the existing reuse and scope practice while keeping required verification and accessibility checks.' },
-  { topicId: 'requirements-workflow', practiceId: 'specification-first', title: 'Connect requirements to implementation', reason: 'This workflow includes requirements and implementation. Record the existing traceability practice. It does not install or run Spec Kit.' },
-  { topicId: 'llm-wiki', practiceId: 'evidence-wiki', title: 'Keep source backed project knowledge', reason: 'Record the existing source, summary and correction practice. It does not create a wiki service, verify supplied facts or add a knowledge agent.' },
-  { topicId: 'study-contract', runtimeControlId: 'before-write', title: 'Record validation before writes', reason: 'For a feasibility study or an existing runtime design, record a requirement to validate permitted changes before persistence. The backend still needs actual authorization and business rules.' },
-]);
+const definitions = CATALOG.practiceActions;
 
 export const PRACTICE_TOPIC_IDS = Object.freeze(definitions.map(definition => definition.topicId));
 
@@ -23,12 +18,7 @@ function supportedConfig(config) {
 }
 
 function applicable(definition, config) {
-  if (!supportedConfig(config)) return false;
-  const stages = config.workflow.enabledStages;
-  if (definition.practiceId === 'minimum-change') return stages.includes('implementation') || stages.includes('bug-fix');
-  if (definition.practiceId === 'specification-first') return stages.includes('requirements') && stages.includes('implementation');
-  if (definition.runtimeControlId) return config.workflow.recipe === 'feasibility' || config.runtime.enabled;
-  return true;
+  return supportedConfig(config) && actionApplicable(definition, config);
 }
 
 export function getPracticeAction(topicId, config) {

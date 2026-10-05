@@ -1,0 +1,72 @@
+{
+  "id": "confidence-summary",
+  "title": "Confidence & unknowns",
+  "summary": "Separate verified facts from proposed fit and unmeasured workplace outcomes.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Confidence",
+      "headers": [
+        "Area",
+        "Assessment"
+      ],
+      "rows": [
+        [
+          "Published capabilities",
+          "High for inspected documentation; tenant availability must be checked"
+        ],
+        [
+          "Verification source example",
+          "High for inspected Talos files at the recorded commit. Code was not executed, and adaptation remains proposed"
+        ],
+        [
+          "Proposed architecture fit",
+          "Moderate until workplace constraints and evidence are audited"
+        ],
+        [
+          "Best model for each task",
+          "Unknown before a project-specific benchmark"
+        ],
+        [
+          "Actual debt and coverage",
+          "Unknown before repository/pipeline investigation"
+        ],
+        [
+          "Domain curation savings and Jev benefit",
+          "Unknown for these proposed domain tasks before baseline and shadow evaluation"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Freshness",
+      "text": "Prices, features, models and tenant settings can change. Check each source and its recorded review date. New general guidance does not refresh older product claims. Verify changing capabilities before implementation."
+    },
+    {
+      "type": "p",
+      "label": "Unresolved context",
+      "text": "Country-data and holiday scenarios in this map are illustrative examples, not verified current rules or country data."
+    },
+    {
+      "type": "p",
+      "label": "reference-to-configuration unknowns",
+      "text": "The supplied example establishes study scope, not output quality, portability, access policy or savings. The case-study branch separates recommendations from the supplied scenario."
+    }
+  ],
+  "refs": [],
+  "basis": "Research limits",
+  "confidence": "Explicit by area",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "evaluation"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

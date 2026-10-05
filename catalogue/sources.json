@@ -1,0 +1,650 @@
+[
+  {
+    "id": "skillspec",
+    "title": "Agent Skills specification",
+    "url": "https://agentskills.io/specification",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "anthropicskills",
+    "title": "Anthropic: engineering Agent Skills",
+    "url": "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "context",
+    "title": "Anthropic: effective context engineering",
+    "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "dynamic",
+    "title": "GitHub: Dynamic Workflows announcement, 1 October 2026",
+    "url": "https://github.blog/changelog/2026-10-01-dynamic-workflows-in-copilot-cli-and-the-copilot-app/",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "dynamicdocs",
+    "title": "GitHub: Dynamic Workflows behavior and limits",
+    "url": "https://docs.github.com/en/copilot/concepts/agents/dynamic-workflows",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "temporal",
+    "title": "Temporal: durable AI workflows",
+    "url": "https://docs.temporal.io/ai",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "cloud",
+    "title": "GitHub: cloud-agent repository limitations",
+    "url": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "sdk",
+    "title": "GitHub: SDK agents, model overrides, eager skills",
+    "url": "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/custom-agents",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "jetbrains",
+    "title": "GitHub: JetBrains update, 8 September 2026",
+    "url": "https://github.blog/changelog/2026-09-08-enterprise-managed-sandbox-in-copilot-for-jetbrains/",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "billing",
+    "title": "GitHub: Copilot Business billing",
+    "url": "https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/billing",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "prices",
+    "title": "GitHub: Copilot model pricing",
+    "url": "https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "models",
+    "title": "GitHub: model availability",
+    "url": "https://docs.github.com/en/copilot/reference/ai-models/supported-models",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "rovo",
+    "title": "Atlassian: configure Use agent automation",
+    "url": "https://support.atlassian.com/cloud-automation/docs/tips-to-configure-the-action-use-rovo-agent/",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "rovocredits",
+    "title": "Atlassian: Rovo credit rules",
+    "url": "https://support.atlassian.com/rovo/docs/rovo-usage-limits/",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "rovotier",
+    "title": "Atlassian: Rovo reasoning tiers",
+    "url": "https://support.atlassian.com/studio/docs/set-a-reasoning-tier-for-a-rovo-agent/",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "traceability",
+    "title": "NASA: bidirectional traceability",
+    "url": "https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695427/SWE-052%2B-%2BBidirectional%2BTraceability",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "sonar",
+    "title": "Sonar: metric definitions",
+    "url": "https://docs.sonarsource.com/sonarqube-server/user-guide/code-metrics/metrics-definition",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "newcode",
+    "title": "Sonar: new-code approach",
+    "url": "https://docs.sonarsource.com/sonarqube-cloud/standards/about-new-code",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "jacoco",
+    "title": "JaCoCo: coverage counters",
+    "url": "https://www.jacoco.org/jacoco/trunk/doc/counters.html",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "mutation",
+    "title": "Google: practical mutation testing at scale",
+    "url": "https://research.google/pubs/practical-mutation-testing-at-scale-a-view-from-google/",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "shacl",
+    "title": "W3C: SHACL specification",
+    "url": "https://www.w3.org/TR/shacl/",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "explain",
+    "title": "AWS: Neptune SPARQL explain",
+    "url": "https://docs.aws.amazon.com/neptune/latest/userguide/sparql-explain.html",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "neptune",
+    "title": "AWS: Neptune SPARQL and graph behavior",
+    "url": "https://docs.aws.amazon.com/neptune/latest/userguide/feature-sparql-compliance.html",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "jevlimits",
+    "title": "TypeSafe: Jev 1.13 limitations",
+    "url": "https://docs.typesafe.ai/model-jaggedness/jev-1.13",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "jevconfidence",
+    "title": "TypeSafe: confidence semantics",
+    "url": "https://docs.typesafe.ai/confidence",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "jevmodels",
+    "title": "TypeSafe: Jev models",
+    "url": "https://docs.typesafe.ai/models",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "jevcitation",
+    "title": "TypeSafe: citation-check cookbook",
+    "url": "https://docs.typesafe.ai/cookbooks/citation_check",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "wikibase",
+    "title": "Wikibase: full-statement RDF format",
+    "url": "https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "wikisources",
+    "title": "Wikidata: sourcing guidance",
+    "url": "https://www.wikidata.org/wiki/Help:Sources",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "graphrag",
+    "title": "Microsoft: GraphRAG query strategies",
+    "url": "https://microsoft.github.io/graphrag/query/overview/",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "prov",
+    "title": "W3C: PROV-O provenance ontology",
+    "url": "https://www.w3.org/TR/prov-o/",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "evals",
+    "title": "Anthropic: evaluating AI agents",
+    "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "ragchecker",
+    "title": "Amazon Science: RAGChecker",
+    "url": "https://github.com/amazon-science/RAGChecker",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "taloscycle",
+    "title": "Talos: work-test cycle at reviewed commit",
+    "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/work-test-cycle.md",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "talosverify",
+    "title": "Talos: command-verification evidence tests",
+    "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/src/test/java/dev/talos/runtime/verification/CommandVerificationEvidenceTest.java",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "talosfinding",
+    "title": "Talos: audit-finding template",
+    "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/templates/audit-finding.md",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "talosverdict",
+    "title": "Talos: summary and verdict template",
+    "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/templates/talosbench-summary-template.md",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "talospacket",
+    "title": "Talos: QA packet",
+    "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/templates/qa-packet.md",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "talosmanual",
+    "title": "Talos: adverse-case manual QA",
+    "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/runbooks/manual-qa.md",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "talosdocs",
+    "title": "Talos: documentation contract test",
+    "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/src/test/java/dev/talos/docs/ReleaseQaGateContractTest.java",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "talosbudget",
+    "title": "Talos: LLM call-budget tests",
+    "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/src/test/java/dev/talos/core/llm/LlmCallBudgetTest.java",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "talosreadme",
+    "title": "Talos: README at reviewed commit",
+    "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/README.md",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "simple-agents",
+    "title": "Anthropic: composable architectures (tooling caveat noted)",
+    "url": "https://www.anthropic.com/engineering/building-effective-agents",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "gov-discovery",
+    "title": "GOV.UK: discovery scope and next-phase decisions",
+    "url": "https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "nist-core",
+    "title": "NIST AI RMF 1.0 Core (revision in progress)",
+    "url": "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "sdk-server-auth",
+    "title": "GitHub: Copilot SDK server-to-server authentication",
+    "url": "https://docs.github.com/en/copilot/how-tos/copilot-sdk/auth/server-to-server-tokens",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "sdk-session-limits",
+    "title": "GitHub: Copilot SDK session soft limits",
+    "url": "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/session-limits",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "sdk-usage",
+    "title": "GitHub: Copilot SDK usage and billing telemetry",
+    "url": "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/usage-and-billing",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "structured-output",
+    "title": "OpenAI: structured outputs and remaining semantic errors",
+    "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "eval-best-practice",
+    "title": "OpenAI: evaluation design and held-out testing",
+    "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "async-request-reply",
+    "title": "Microsoft: asynchronous request-reply pattern",
+    "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/asynchronous-request-reply",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "agentic-costs",
+    "title": "AWS: assessing agentic workflow costs",
+    "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-economics/assessing-costs.html",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "agentic-economics",
+    "title": "AWS: agentic AI economics and investment choices",
+    "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-economics/understanding.html",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "dataset-splits",
+    "title": "Google: separate development, validation and test data",
+    "url": "https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "prompt-injection",
+    "title": "OWASP: prompt injection in imported/retrieved content",
+    "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "llmwiki",
+    "title": "Andrej Karpathy: LLM Wiki idea file, live gist reviewed 3 October 2026",
+    "url": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+  },
+  {
+    "id": "reference-57",
+    "title": "github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/docs/agent-portability.md",
+    "url": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/docs/agent-portability.md",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+  },
+  {
+    "id": "reference-58",
+    "title": "github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/README.md",
+    "url": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/README.md#how-it-works",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+  },
+  {
+    "id": "reference-59",
+    "title": "github.com/github/spec-kit/blob/4a339209c877a1b68e7a790b2b2269a2b68e461f/README.md",
+    "url": "https://github.com/github/spec-kit/blob/4a339209c877a1b68e7a790b2b2269a2b68e461f/README.md#spec-driven-development",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+  },
+  {
+    "id": "reference-60",
+    "title": "docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html",
+    "url": "https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+  },
+  {
+    "id": "reference-61",
+    "title": "docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html",
+    "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+  },
+  {
+    "id": "reference-62",
+    "title": "react.dev/learn/thinking-in-react",
+    "url": "https://react.dev/learn/thinking-in-react",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+  },
+  {
+    "id": "reference-63",
+    "title": "playwright.dev/docs/accessibility-testing",
+    "url": "https://playwright.dev/docs/accessibility-testing",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+  },
+  {
+    "id": "reference-64",
+    "title": "www.w3.org/TR/sparql11-query/",
+    "url": "https://www.w3.org/TR/sparql11-query/",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+  },
+  {
+    "id": "reference-65",
+    "title": "docs.github.com/en/copilot/reference/custom-agents-configuration",
+    "url": "https://docs.github.com/en/copilot/reference/custom-agents-configuration",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+  },
+  {
+    "id": "reference-66",
+    "title": "docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents",
+    "url": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+  },
+  {
+    "id": "reference-67",
+    "title": "docs.github.com/en/copilot/concepts/agents/about-agent-skills",
+    "url": "https://docs.github.com/en/copilot/concepts/agents/about-agent-skills",
+    "revision": "",
+    "reviewedOn": "",
+    "status": "legacy",
+    "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+  },
+  {
+    "id": "input-validation",
+    "title": "OWASP Input Validation Cheat Sheet",
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html",
+    "revision": "",
+    "reviewedOn": "2026-10-05",
+    "status": "reviewed",
+    "contribution": "Distinguishes structural and business validation from authorization. Supports the validation principle, not every step of the Atlas example."
+  },
+  {
+    "id": "postgresql-tutorial",
+    "title": "PostgreSQL tutorial",
+    "url": "https://www.postgresql.org/docs/current/tutorial.html",
+    "revision": "",
+    "reviewedOn": "2026-10-05",
+    "status": "reviewed",
+    "contribution": "Introduces relational data and SQL. Does not establish project compatibility or performance."
+  },
+  {
+    "id": "jena-fuseki",
+    "title": "Apache Jena Fuseki documentation",
+    "url": "https://jena.apache.org/documentation/fuseki2/",
+    "revision": "",
+    "reviewedOn": "2026-10-05",
+    "status": "reviewed",
+    "contribution": "Documents Fuseki as a SPARQL server with query and update protocols."
+  },
+  {
+    "id": "neo4j-start",
+    "title": "Neo4j getting started",
+    "url": "https://neo4j.com/docs/getting-started/",
+    "revision": "",
+    "reviewedOn": "2026-10-05",
+    "status": "reviewed",
+    "contribution": "Describes the property graph model and Cypher. Does not establish equivalence to RDF and SPARQL."
+  },
+  {
+    "id": "neptune-sparql-access",
+    "title": "Amazon Neptune SPARQL access",
+    "url": "https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-sparql.html",
+    "revision": "",
+    "reviewedOn": "2026-10-05",
+    "status": "reviewed",
+    "contribution": "Documents SPARQL access to RDF data and points to engine-specific compliance details."
+  }
+]

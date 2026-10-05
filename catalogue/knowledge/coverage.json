@@ -1,0 +1,79 @@
+{
+  "id": "coverage",
+  "title": "Coverage dimensions",
+  "summary": "Choose checks for the consequences of a change. Execution percentages describe only part of that evidence.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Possible dimensions",
+      "headers": [
+        "Area",
+        "Question"
+      ],
+      "rows": [
+        [
+          "Code execution",
+          "Which instructions or branches ran, and what did the assertions check?"
+        ],
+        [
+          "User experience",
+          "Which relevant states, interactions and failure cases were exercised?"
+        ],
+        [
+          "Interfaces",
+          "Do the affected producer and consumer contracts agree?"
+        ],
+        [
+          "Data",
+          "Do representative inputs produce the expected meaning and results?"
+        ],
+        [
+          "Structural constraints",
+          "Do applicable schemas or validation rules hold?"
+        ],
+        [
+          "Source support",
+          "Are meaning, scope and applicability preserved?"
+        ],
+        [
+          "Requirements",
+          "Do the accepted requirements have meaningful verification?"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Technology examples",
+      "text": "Java coverage, React interaction checks and RDF/SPARQL fixtures measure different things. SHACL applies when a project uses shapes to validate RDF. Select relevant dimensions rather than requiring every technology."
+    },
+    {
+      "type": "p",
+      "label": "Aggregation",
+      "text": "Missing reports mean unknown coverage. Aggregate covered and total units only for comparable metrics. Keep code execution, user scenarios and domain checks distinct. Do not average unrelated percentages."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The verification plan covers consequences and meaningful scenarios rather than a universal percentage target."
+    }
+  ],
+  "refs": [
+    "jacoco",
+    "shacl"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "maintenance"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

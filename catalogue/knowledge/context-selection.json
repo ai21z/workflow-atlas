@@ -1,0 +1,41 @@
+{
+  "id": "context-selection",
+  "title": "Relevant context",
+  "summary": "Retrieve high-signal evidence when needed instead of loading the whole project.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Proposed practice",
+      "items": [
+        "Begin with a compact task brief and affected module map.",
+        "Retrieve relevant source passages, decisions, symbols, files, and tests.",
+        "Return compact tool output with identifiers for follow-up reads.",
+        "Preserve applicability, negative evidence, and unresolved requirements.",
+        "Compact long sessions using explicit checkpoints and artifact links."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The context contains enough evidence for the decision without unrelated repository/wiki material. Smaller context is useful only when necessary meaning remains intact."
+    }
+  ],
+  "refs": [
+    "context"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "practice",
+    "domains": [
+      "models"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

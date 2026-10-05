@@ -1,0 +1,38 @@
+{
+  "id": "toolchain",
+  "title": "Tools and integrations",
+  "summary": "Assign existing systems concrete responsibilities and verify actual integration boundaries.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Start with responsibilities",
+      "text": "Identify where requests, decisions, source files, checks and operational records live today. Keep existing systems when they meet the need. Add an integration only when a workflow requires a supported action."
+    },
+    {
+      "type": "p",
+      "label": "Example toolchain",
+      "text": "One workplace example uses Jira for requests, Confluence for reviewed decisions, Bitbucket for source control, IntelliJ/Copilot for local work, Jenkins/Sonar for checks, Rovo for configured Atlassian tasks and Neptune for graph data. These are possible assignments, not required products."
+    },
+    {
+      "type": "p",
+      "label": "Integration check",
+      "text": "Inventory client/plugin versions, active harnesses, models, organization policies, tools, credentials, and supported write actions before implementation."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

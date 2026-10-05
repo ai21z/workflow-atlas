@@ -1,0 +1,63 @@
+{
+  "id": "information-retrieval",
+  "title": "Retrieve information",
+  "summary": "Find existing information through a suitable interface, then check that it answers the request.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Start with the result",
+      "text": "Describe what information is needed, its source and the permitted scope. Reuse an approved API when it already supplies the required operation."
+    },
+    {
+      "type": "p",
+      "label": "Choose the approach",
+      "text": "Structured filters may be enough for ordinary application code. Consider a model step only when interpretation or variable decisions provide a useful contribution."
+    },
+    {
+      "type": "p",
+      "label": "Know what a check establishes",
+      "text": "OWASP distinguishes checking input structure and business meaning from checking whether the caller has permission. A valid value alone does not establish access."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas can add",
+      "text": "Open Retrieve and validate, then review Add retrieval checks from your active Factory project. This adds written guidance to selected practices. It does not add an API connection."
+    },
+    {
+      "type": "p",
+      "label": "Coverage",
+      "text": "The technology entries below illustrate relational and graph approaches. This is a growing selection, not an exhaustive list or a ranking."
+    }
+  ],
+  "refs": [
+    "input-validation"
+  ],
+  "basis": "Source references and Atlas guidance",
+  "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+  "catalog": {
+    "kind": "capability",
+    "domains": [
+      "information-retrieval"
+    ],
+    "aliases": [
+      "lookup",
+      "fetch data",
+      "query data",
+      "database retrieval"
+    ],
+    "revision": "1",
+    "applicability": "Use when designing how existing information is retrieved and checked.",
+    "limits": "This is design guidance. It does not connect to a service or prove that a result is correct.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-05",
+    "claims": [
+      {
+        "sectionLabel": "Know what a check establishes",
+        "text": "Input validation and authorization establish different properties.",
+        "sourceRefs": [
+          "input-validation"
+        ]
+      }
+    ]
+  }
+}

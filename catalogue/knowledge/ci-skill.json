@@ -1,0 +1,43 @@
+{
+  "id": "ci-skill",
+  "title": "Jenkins diagnosis skill",
+  "summary": "Investigate the first actionable failure with build and revision context.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Inputs",
+      "text": "Jenkins run identity, candidate revision, failed stage, relevant logs/reports, environment, and recent changes."
+    },
+    {
+      "type": "p",
+      "label": "Procedure",
+      "text": "Locate the first actionable error; distinguish implementation, fixture, environment, access, and infrastructure causes; inspect relevant source; propose the smallest supported next step."
+    },
+    {
+      "type": "p",
+      "label": "Output",
+      "text": "Finding, evidence, cause confidence, verification performed, and next action."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "A proposed cause is supported by the actual failure. Repeated retries stop when no new evidence appears."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "instructions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

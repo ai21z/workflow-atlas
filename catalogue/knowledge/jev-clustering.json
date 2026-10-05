@@ -1,0 +1,43 @@
+{
+  "id": "jev-clustering",
+  "title": "Clustering & reconciliation",
+  "summary": "Define what is being grouped and why before selecting an AI component.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Possible objectives",
+      "items": [
+        "Duplicate or near-duplicate candidate assertions.",
+        "Terminology reconciliation across sources.",
+        "Source-change grouping.",
+        "Reusable template structures for investigation."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Jev’s possible role",
+      "text": "It can judge bounded retrieved candidate pairs or categories. This is not a general embedding or clustering engine. Use separate retrieval/analytics where they fit the defined objective."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Grouping has an evaluated downstream purpose and preserves jurisdiction, time, and scheme distinctions. Similar wording does not establish interchangeable statutory meaning."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed exploration",
+  "confidence": "Unknown",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "model-decisions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

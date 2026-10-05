@@ -26,6 +26,8 @@ Use generic practice names for workflow topics. Keep named repositories in expli
 
 Project facts, proposed practices, decisions, expected checks and supplied observations remain separate. A downloadable project Atlas explains the recorded configuration, it does not independently verify the sources or execute the described workflow.
 
+The public catalogue now keeps source records in `catalogue/sources.json` and claim-to-source links in each topic's `catalog.claims`. A claim identifies the section it concerns and the references that support it. Existing material marked `legacy` retains its earlier wording and references without asserting a new claim-level review. A `reviewed` record applies to its stated contribution, not every recommendation in the topic. See [catalogue authoring](catalogue.md).
+
 ## Projects worth learning from
 
 The revisions identify inspected snapshots. They are source revisions, not Atlas definition versions or records of upstream execution.
@@ -55,7 +57,7 @@ Limit: the source is a conceptual gist, not a finished enterprise knowledge serv
 
 ## Technology profiles
 
-These sources support questions and expected evidence. They do not identify a repository's setup.
+These sources support questions and expected evidence. They do not identify a repository's setup. The current catalogue has 22 technology choices and four profiles: the three specialist profiles below and a generic profile. Selecting a technology is not a claim of specialist coverage or an installed integration.
 
 | Profile | Primary source | Contribution | Limits |
 | --- | --- | --- | --- |
@@ -64,6 +66,20 @@ These sources support questions and expected evidence. They do not identify a re
 | RDF and SPARQL | [SHACL recommendation](https://www.w3.org/TR/2017/REC-shacl-20170720/) | Distinguish RDF syntax, graph selection, shape conformance and validation results. Record relevant data, shapes and processor | Recommendation dated 20 July 2017. Conformance depends on supplied shapes and does not establish domain truth. Atlas does not execute queries, validate RDF or assume a database has a SHACL processor |
 
 Other technologies use a generic profile until specific guidance is reviewed. No profile supplies a guessed repository command.
+
+## Retrieval example and source scope
+
+The eight-topic retrieval slice connects a capability, a practice, technology examples and a fictional use case. Its source records mark the following contributions reviewed on 5 October 2026. They do not establish performance, project compatibility, credentials or a working connection.
+
+| Source record | Recorded contribution | Scope limit |
+| --- | --- | --- |
+| [OWASP Input Validation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html), `input-validation` | Structural and business validation, with authorization treated separately | Supports the validation principle. The full retrieval sequence and example are Atlas guidance |
+| [PostgreSQL tutorial](https://www.postgresql.org/docs/current/tutorial.html), `postgresql-tutorial` | Relational data and SQL | Does not establish a project's version, query correctness or performance |
+| [Amazon Neptune SPARQL access](https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-sparql.html), `neptune-sparql-access` | SPARQL access to RDF data and a pointer to compliance details | Engine-specific behavior needs its own check |
+| [Apache Jena Fuseki documentation](https://jena.apache.org/documentation/fuseki2/), `jena-fuseki` | SPARQL query and update protocols | Does not configure a server or grant write access |
+| [Neo4j getting started](https://neo4j.com/docs/getting-started/), `neo4j-start` | Property graphs and Cypher | Does not establish equivalence to RDF and SPARQL |
+
+**Add retrieval checks** selects the `validated-retrieval` practice after project review. Its generated guidance asks for an approved interface, scoped inputs, expected results, normal and failure cases, and separate observations. It preserves project steps, actors, tools, facts and evidence. Later writes require their own permissions and confirmation. The fictional example is marked `needs-review`, with no source-backed claim of a completed implementation.
 
 ## Backend agent feasibility case
 

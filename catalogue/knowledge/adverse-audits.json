@@ -1,0 +1,53 @@
+{
+  "id": "adverse-audits",
+  "title": "Adverse-case audits",
+  "summary": "Compare claims with traces, tool results, approvals, and final changes.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Recommended practice",
+      "text": "Exercise failure and uncertainty cases, then compare the reported outcome with traces, tool results, approvals, and the actual resulting state. Use cases that challenge the assumptions of your workflow."
+    },
+    {
+      "type": "list",
+      "label": "Example cases to adapt",
+      "items": [
+        "Stale decision or source document.",
+        "Duplicate event and self-triggering update.",
+        "Similar or wrong module names, or a stale dependency revision.",
+        "Unavailable source or environment, and denied access.",
+        "Repeated pipeline failure with no new evidence.",
+        "Unreviewed candidate data entering a serving environment."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The run reports the right failure class and actual resulting state, with bounded cost and no fabricated completion."
+    },
+    {
+      "type": "p",
+      "label": "Example source: Talos QA material",
+      "text": "The inspected Talos manual QA runbook describes fresh workspaces, confusing filenames, protected markers, approval lanes, traces, and final diffs. Its budget test definitions cover timeouts and stalled or repetitive streams. The runbook and test definitions were inspected, not executed."
+    }
+  ],
+  "refs": [
+    "talosmanual",
+    "talosbudget"
+  ],
+  "basis": "Proposed design + inspected example",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "verification"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

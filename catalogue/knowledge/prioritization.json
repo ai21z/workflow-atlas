@@ -1,0 +1,44 @@
+{
+  "id": "prioritization",
+  "title": "Prioritize & deduplicate",
+  "summary": "Rank consequences and change exposure rather than precise-looking guessed scores.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Assessment dimensions",
+      "items": [
+        "Consequence for users or domain correctness.",
+        "Exposure and recurrence.",
+        "Frequency of changes in the affected area.",
+        "Dependencies and remediation effort.",
+        "Evidence strength and remaining uncertainty."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Ticket discipline",
+      "text": "Cluster duplicate findings, inspect root causes, and have an owner triage before creating many tickets. One root cause may explain several warnings."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Priority explains why this outcome is worth addressing now. Estimates disclose uncertainty and do not pretend Sonar costs equal delivery effort."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "maintenance"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -47,6 +47,8 @@ jobs:
         run: npm run check:version -- --tag "$ATLAS_VERSION_TAG"
       - name: Check the generated guides
         run: npm run check:docs
+      - name: Check catalogue records and generated views
+        run: npm run check:catalogue
       - name: Run unit and integration checks
         run: npm test
 
@@ -73,6 +75,8 @@ jobs:
         run: npm run test:browser
       - name: Check project handoffs and reopening
         run: npm run test:handoff
+      - name: Check catalogue navigation and offline reading
+        run: npm run test:catalogue-browser
       - name: Check the static site under the Pages path
         run: npm run test:static-browser
       - name: Build the public files
@@ -115,6 +119,7 @@ jobs:
             local-knowledge/reviews/process-designer/**/*.png
             local-knowledge/retests/static-pages/**/*.json
             local-knowledge/retests/static-pages/**/*.png
+            exports/browser-qa-catalogue/*.png
           if-no-files-found: warn
           retention-days: 7
           include-hidden-files: false

@@ -1,0 +1,98 @@
+{
+  "id": "study-quality",
+  "title": "Evaluate usable outputs",
+  "summary": "Separate first-pass usability, repaired acceptance and errors that validation misses.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Different checks",
+      "headers": [
+        "Check",
+        "What it establishes"
+      ],
+      "rows": [
+        [
+          "Mechanical validity",
+          "Parsing, schema, supported components and compatibility."
+        ],
+        [
+          "Meaning/behaviour",
+          "The artifact represents the requirements and works on agreed examples."
+        ],
+        [
+          "Interaction",
+          "Incomplete/unsupported inputs produce intended clarification or failure."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Schema validity is insufficient",
+      "text": "OpenAI documents remaining mistakes in structured outputs. A schema-valid mapping or value can still be wrong; domain checks evaluate a different property."
+    },
+    {
+      "type": "list",
+      "label": "Initial case design",
+      "items": [
+        "Reuse existing reviewed examples and manual checks.",
+        "Keep representative workload cases separate from diagnostic cases selected to expose failures.",
+        "Include incomplete, conflicting and unsupported inputs with expected behaviour.",
+        "Allow equivalent correct artifacts rather than requiring one exact byte sequence.",
+        "Reserve untouched comparison examples where evidence permits; group related reference families/revisions to reduce leakage.",
+        "Repeat selected cases when variability could change the decision."
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Separate outcomes",
+      "headers": [
+        "Outcome",
+        "Meaning"
+      ],
+      "rows": [
+        [
+          "First-pass usable",
+          "Accepted before human or repair-loop correction."
+        ],
+        [
+          "Usable after repair",
+          "Include attempts, latency and engineer correction effort."
+        ],
+        [
+          "Rejected/unresolved",
+          "No usable output under the trial policy."
+        ],
+        [
+          "Incorrect but passed checks",
+          "Independent review found a validation gap; classify consequence."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Criteria and limitations",
+      "text": "Product/domain and technical owners define usability and unacceptable errors. The generator's success claim is insufficient. Model grading is optional and needs reviewed calibration. State sample counts/coverage; a small chosen set does not guarantee production reliability. No arbitrary acceptance percentage or sample size is supplied here."
+    }
+  ],
+  "refs": [
+    "structured-output",
+    "evals",
+    "eval-best-practice",
+    "dataset-splits"
+  ],
+  "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+  "confidence": "Moderate for fit; workplace benefit unknown",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

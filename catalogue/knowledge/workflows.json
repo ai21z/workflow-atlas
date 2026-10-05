@@ -1,0 +1,45 @@
+{
+  "id": "workflows",
+  "title": "Workflows & orchestration",
+  "summary": "Use explicit stages and acceptance criteria, with models performing analysis inside the process.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Recommended architecture",
+      "text": "Start with one bounded outcome. Identify the steps, their inputs and outputs, who performs them and what happens after each check. Share useful instructions and controls where their assumptions fit."
+    },
+    {
+      "type": "p",
+      "label": "Control and judgment",
+      "text": "For an automated process, code enforces state transitions, permissions and limits. Models can investigate ambiguity, propose results and explain findings. A manual process can use the same explicit steps and checks with people responsible for them."
+    },
+    {
+      "type": "p",
+      "label": "Platform choice",
+      "text": "Check whether existing automation and CI can meet the need. Atlassian Automation and Jenkins are examples. Evaluate durable execution when restart recovery, long waits or reliable resumption of external actions justify it."
+    },
+    {
+      "type": "p",
+      "label": "Apply proportionately",
+      "text": "Distinguish the work of developing a capability from what the finished application does for each request. A study may end in a decision package. It does not require building an execution platform."
+    }
+  ],
+  "refs": [
+    "temporal"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

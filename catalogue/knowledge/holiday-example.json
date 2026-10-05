@@ -1,0 +1,44 @@
+{
+  "id": "holiday-example",
+  "title": "Holiday example",
+  "summary": "Hypothetical acceptance scenarios expose scope mistakes that formatting checks miss.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Hypothetical requirement",
+      "text": "A holiday applying only to a specified region retains that region through source ingestion, RDF storage, API output, and frontend presentation. This is an illustrative scenario, not a finding about your data."
+    },
+    {
+      "type": "list",
+      "label": "Acceptance scenarios",
+      "items": [
+        "A matching-region query returns the applicable assertion.",
+        "A different-region query does not broaden it into a national assertion.",
+        "Unspecified scope remains explicit rather than defaulted.",
+        "Missing or conflicting support is surfaced for review.",
+        "Relevant effective-period and source-version changes are exercised."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Verification",
+      "text": "Check the whole semantic path, not only that a valid date and label are present."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "requirements"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

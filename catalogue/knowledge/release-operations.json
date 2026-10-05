@@ -1,0 +1,60 @@
+{
+  "id": "release-operations",
+  "title": "Release and operate",
+  "summary": "Plan how a checked change reaches its users, how its behavior is observed and how problems are handled.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "When this applies",
+      "text": "Use this guidance when a software or data change is moving into an operating environment. A feasibility study may instead end with a recommendation. Piloting a new automation is a separate adoption decision."
+    },
+    {
+      "type": "steps",
+      "label": "Prepare the release",
+      "items": [
+        "Identify the candidate revision and required acceptance evidence, including unresolved checks.",
+        "Confirm the release owner, decision authority and existing deployment process.",
+        "Review relevant interface, configuration and data changes and their compatibility requirements.",
+        "Define how exposure, observation and recovery will work for this change.",
+        "After deployment, inspect relevant service and user behavior and record the actual result.",
+        "Hand over operating ownership, support information and remaining follow-up work."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Recovery is a design decision",
+      "text": "Choose an applicable recovery path, such as rollback, disabling a feature or a forward correction. A data migration or external action may not be reversible. Establish the recovery procedure and its constraints before relying on it."
+    },
+    {
+      "type": "p",
+      "label": "An AI feature needs both checks",
+      "text": "Evaluate the service and its failure paths before release. Where required, also validate individual generated results during use. A successful pre-release evaluation does not make every later result correct."
+    },
+    {
+      "type": "p",
+      "label": "Example to adapt",
+      "text": "A configuration generator can retain a checked draft until its application is explicitly authorized. An ordinary web feature may use the existing release pipeline. Neither example requires a particular CI product."
+    },
+    {
+      "type": "p",
+      "label": "Useful result",
+      "text": "A release plan and, after execution, evidence of the deployed candidate, observed behavior and operating owner. A passing check or a generated plan alone does not establish deployment."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed practice",
+  "confidence": "Moderate. Release procedures are project specific",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

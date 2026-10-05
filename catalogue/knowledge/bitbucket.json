@@ -1,0 +1,40 @@
+{
+  "id": "bitbucket",
+  "title": "Bitbucket",
+  "summary": "Versioned code, TTL, SPARQL, tests, and reviewable changes.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Recommended use",
+      "text": "Keep relevant procedures and verification scripts near the code/data they describe. Link findings and PR evidence to exact revisions, including submodule revisions."
+    },
+    {
+      "type": "p",
+      "label": "Verified constraint",
+      "text": "GitHub Copilot cloud agent currently works with GitHub-hosted repositories. A Bitbucket checkout used in IntelliJ is a different execution route; do not assume GitHub’s cloud PR automation applies."
+    },
+    {
+      "type": "p",
+      "label": "Implementation path",
+      "text": "Use supervised IDE work or an approved runner that can operate on Bitbucket and your established pipelines. Repository migration is not a prerequisite of this proposal."
+    }
+  ],
+  "refs": [
+    "cloud"
+  ],
+  "basis": "Documented constraint + proposed use",
+  "confidence": "High",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

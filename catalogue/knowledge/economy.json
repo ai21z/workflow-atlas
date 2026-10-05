@@ -1,0 +1,35 @@
+{
+  "id": "economy",
+  "title": "Models & token economy",
+  "summary": "Optimize accepted outcomes, context quality, and repeated work before elaborate routing.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Operating principle",
+      "text": "A lower token price can still create higher total cost if review and correction increase. Compare quality, cost, elapsed time, and review effort on the same representative tasks."
+    },
+    {
+      "type": "p",
+      "label": "Starting strategy",
+      "text": "Use code for exact work, a utility model for checkable bounded tasks, a main model for normal engineering, and stronger models when task difficulty or measured failure warrants it."
+    }
+  ],
+  "refs": [
+    "billing"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "models"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

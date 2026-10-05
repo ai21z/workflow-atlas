@@ -1,0 +1,40 @@
+{
+  "id": "skills",
+  "title": "Skills & agent roles",
+  "summary": "Package repeatable procedures around real tasks and executable supporting tools.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Starting package",
+      "text": "Choose procedures that repeat in the actual work, such as requirements investigation, impact analysis, verification or review preparation. Add specialized skills only when their tasks are present."
+    },
+    {
+      "type": "p",
+      "label": "Author from evidence",
+      "text": "Create a skill when a useful procedure repeats or an observed failure reveals missing guidance. A large persona catalog does not substitute for working tools and acceptance criteria."
+    },
+    {
+      "type": "p",
+      "label": "Specialized examples",
+      "text": "Jenkins diagnosis, RDF/SPARQL verification and country-source review illustrate particular environments. They are not a required starter package."
+    }
+  ],
+  "refs": [
+    "anthropicskills"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "instructions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -52,11 +52,11 @@ Download starts with a blueprint for people to review. Choose one focused skill 
 
 Knowledge map and Help remain available from the start screen and editor. The theme control switches between light and dark. The workspace and embedded reference Atlas share the selected theme in this session.
 
-Five reviewed Knowledge topics connect to applicable project choices through **Review for my workflow**. Inspect proposed changes and affected files before **Apply to my workflow**. Reading alone changes nothing. Applied practices remain requirements or guidance, not runtime enforcement, and Undo can reverse the project edit.
+Six curated Knowledge topics connect to applicable project choices through **Review for my workflow**, including **Add retrieval checks**. Inspect proposed changes and affected files before **Apply to my workflow**. Reading alone changes nothing. Applied practices remain requirements or guidance, not runtime enforcement, and Undo can reverse the project edit.
 
 Recipe stages keep their reviewed definitions and prerequisites. Custom processes have explicit input relationships, named outcome routes, checks, approval and bounded correction. Editing does not support arbitrary routing expressions, parallel joins or workflow execution. Runtime agent identities do not automatically become Copilot development profiles.
 
-Components retain their own technologies, versions, paths and actual commands. Small Spring Boot, React and RDF/SPARQL profiles add relevant questions and expected evidence. Other technology labels use generic guidance.
+Components retain their own technologies, versions, paths and actual commands. The catalogue contains 22 technology choices and four profiles: generic, Spring Boot, React and RDF/SPARQL. The specialist profiles add relevant questions and expected evidence. Other technology labels use generic guidance. Selecting a label does not install or verify an integration.
 
 Project facts carry sources and status. Evidence records separate expected checks from supplied observations. Model and budget records retain the user's values without ranking models or promising savings.
 
@@ -84,14 +84,15 @@ Follow the [quick start](docs/quick-start.md) to choose a starting point, adapt 
 
 ## Prepare a static beta
 
-Build the documentation, then create a separate public bundle:
+After installing development dependencies, check the generated catalogue, build the documentation and create a separate public bundle:
 
 ```text
+npm run check:catalogue
 node tools/build-docs-guide.mjs
 node tools/build-static.mjs
 ```
 
-The second command prints a new `dist/public-<suffix>/` directory. Publish only that directory's contents. The explicit asset list excludes the local server, credentials, tests and private research. The build checks common credential patterns and exact occurrences of `TYPESAFE_API_KEY` when that value is set in the build process environment. These checks cannot identify every possible secret. Review the files before publishing. It keeps earlier bundles unchanged.
+The last command prints a new `dist/public-<suffix>/` directory. Publish only that directory's contents. The explicit asset list excludes the local server, credentials, tests and private research. The build checks common credential patterns and exact occurrences of `TYPESAFE_API_KEY` when that value is set in the build process environment. These checks cannot identify every possible secret. Review the files before publishing. It keeps earlier bundles unchanged.
 
 A static host provides manual editing, the Knowledge map and downloads. It has no JEV endpoint. To use suggestions, run the local app with your own key using the [setup guide](docs/jev/integration.md). Sharing the beta does not include an owner's credential or hosted inference service. Building the bundle does not publish it.
 
@@ -106,6 +107,12 @@ After editing documentation Markdown, rebuild both bundled readers:
 ```text
 node tools/build-docs-guide.mjs
 ```
+
+## Maintain the catalogue
+
+Edit topics, definitions, sources, typed relationships, actions and collections under `catalogue/`. Run `npm run build:catalogue` to validate them and regenerate `atlas/data.js` and `factory/catalog.mjs`. Run `npm run check:catalogue` to verify that the checked-in projections match. The [catalogue guide](docs/catalogue.md) gives the source files, authoring steps and validation limits.
+
+Catalogue content `2.1.0` uses authoring schema `1.0`; project configuration stays schema `3.0`. Ajv is a build-time dependency. The hosted app serves generated static data and stores no projects. Migrating old source metadata does not constitute a new factual review. JEV continues to use its separately frozen inference definitions.
 
 ## JEV decision pilot
 
@@ -168,11 +175,12 @@ See the [factory guide](docs/factory-guide.md) for the authoring path and [exten
 
 ## Checks
 
-For development checks, install the locked test dependency and run the suite:
+For development checks, install the locked development dependencies and run the suite:
 
 ```text
 npm ci --ignore-scripts
 npm run check:version
+npm run check:catalogue
 npm run check:docs
 npm test
 npx playwright install chrome
@@ -192,13 +200,13 @@ node tools/export-atlas.cjs
 node tests/offline-atlas.cjs
 ```
 
-Playwright is a development test dependency. The app itself has no runtime package dependency. The offline browser check uses an available `playwright` installation or `PLAYWRIGHT_MODULE`. Test results and screenshots go to ignored export directories.
+Playwright is a development test dependency and Ajv validates catalogue sources during builds. The app itself has no runtime package dependency. The offline browser check uses an available `playwright` installation or `PLAYWRIGHT_MODULE`. Test results and screenshots go to ignored export directories.
 
 These tests establish the behaviors they exercise. They do not execute generated packs inside Copilot or demonstrate productivity gains.
 
 ## Preserved Atlas
 
-The Knowledge Atlas preserves its original 105 topics and adds four general topics, for 109 topics in 10 clusters and 56 source references. It includes reading, map and card views, a source library, five guided paths, themes and mobile navigation. Its original research snapshot is 2 October 2026. The 3 October review adds the primary LLM Wiki reference. The 5 October scope update adds patterns and general lifecycle guidance. Verification and evidence is the generic category for the reviewed verification practices, with Talos retained as an attributed example source.
+The Knowledge Atlas retains all 109 earlier topics, including the 105 original topics and four general guidance additions. Eight retrieval topics bring the catalogue to 117 topics in 10 clusters, with 72 source records and six guided paths. Reading, map and card views, source browsing, themes and mobile navigation remain available. Search includes aliases and subject areas, with a Topic type filter. The original research snapshot is 2 October 2026. Later review dates apply to their recorded source contributions. Verification and evidence keeps Talos as an attributed example source.
 
 The map uses vendored Three.js and OrbitControls, with the original notice in `atlas/vendor/THREE-LICENSE.txt`. Reading remains available without WebGL.
 
@@ -213,6 +221,7 @@ The full reference export is `exports/Workflow Atlas.html`. It contains offline 
 | [Product vision](docs/product-vision.md) | Purpose, abstraction and intended user value |
 | [Requirements](docs/requirements.md) | Accepted scope and explicit acceptance checks |
 | [Reference practices](docs/reference-practices.md) | Primary sources, reviewed revisions, contributions and limits |
+| [Catalogue authoring](docs/catalogue.md) | JSON sources, typed relationships, generated projections and review scope |
 | [Delivery backlog](docs/backlog.md) | Real-project evaluation and remaining work |
 | [Atlas preservation](docs/atlas-preservation.md) | Baseline and public-example review |
 | [Accessibility review](docs/accessibility.md) | Primary guidance, inspected behavior and open checks |

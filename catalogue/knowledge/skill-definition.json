@@ -1,0 +1,48 @@
+{
+  "id": "skill-definition",
+  "title": "Skill contract",
+  "summary": "A skill packages a procedure; the host supplies execution and enforcement.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Include",
+      "items": [
+        "Trigger and the problem it addresses.",
+        "Required inputs and evidence.",
+        "Procedure with clear decision points.",
+        "Expected output and acceptance checks.",
+        "Failure/escalation conditions.",
+        "Supporting scripts, examples, and referenced resources."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Scope",
+      "text": "Keep persistent repository instructions concise. Place specialized procedures in targeted skills. Exact repetitive logic belongs in scripts or tools."
+    },
+    {
+      "type": "p",
+      "label": "Limit",
+      "text": "A skill does not enforce permissions, persist a job, or prove that its instructions were followed successfully."
+    }
+  ],
+  "refs": [
+    "skillspec",
+    "anthropicskills"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "instructions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

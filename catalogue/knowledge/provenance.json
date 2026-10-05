@@ -1,0 +1,46 @@
+{
+  "id": "provenance",
+  "title": "Provenance & versions",
+  "summary": "Record what an assertion or analysis was derived from and how it became approved.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Useful provenance",
+      "items": [
+        "Source entity/document and revision.",
+        "Exact supporting passage and retained qualifiers.",
+        "Extraction/mapping activity and model/tool version where used.",
+        "Revisions of the inputs that affect the result, such as code, data, schemas, or ontology and shapes where used.",
+        "Reviewer/approval record and relevant times."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Established vocabulary",
+      "text": "W3C PROV-O provides entities, activities, agents, derivation, and attribution concepts. Apply the principles to existing mechanisms; an ontology rewrite is not a prerequisite."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "A past answer or finding can be reproduced from its input versions and process evidence."
+    }
+  ],
+  "refs": [
+    "prov"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "practice",
+    "domains": [
+      "knowledge"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "id": "construct-study",
+  "title": "Reference-to-configuration feasibility study",
+  "summary": "Assess an existing engineer-assisted reference-to-configuration process as a governed backend capability.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Evidence basis",
+      "text": "Adapted from a supplied feasibility example reviewed on 2 October 2026. Internal names and ticket identifiers are omitted. No private system, repository, runtime or execution result was inspected. This is a study example, not evidence of a deployed service."
+    },
+    {
+      "type": "p",
+      "label": "Actual scope",
+      "text": "Users describe or import references in reference-to-configuration. Engineers currently run local Agents/Skills and hand-produce a pipeline/configuration. The study assesses a backend API/workflow for Phase 2 planning. Its baseline already uses AI; it is not a non-AI manual process."
+    },
+    {
+      "type": "table",
+      "label": "Already covered by the tickets",
+      "headers": [
+        "Existing deliverable",
+        "Purpose"
+      ],
+      "rows": [
+        [
+          "End-to-end process map",
+          "Tools, inputs, outputs and engineer involvement"
+        ],
+        [
+          "Feasibility/constraints",
+          "Credible technical approach and dependencies"
+        ],
+        [
+          "Effort and runtime cost",
+          "Build effort, compute, model calls and orchestration"
+        ],
+        [
+          "API/workflow recommendation",
+          "Sync/async, hosting and integration options"
+        ],
+        [
+          "Go/no-go",
+          "A reasoned next-phase recommendation"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Our contribution",
+      "text": "Make output usability, engineer interventions, baseline measurements and initial comparison evidence explicit within these existing deliverables. Our broad development workflow helps the team build the capability; this product workflow generates a user's artifact."
+    },
+    {
+      "type": "p",
+      "label": "Study-sized boundary",
+      "text": "A decision package, plus an assumption-resolving experiment if needed. Full production implementation, polished UX, automatic activation, a new enterprise platform, Jev and a knowledge graph are not established requirements."
+    },
+    {
+      "type": "p",
+      "label": "Unknowns",
+      "text": "Reference formats, pipeline semantics, the existing ingestion integration and backend implementation remain unverified. A platform label alone does not establish a hosting architecture. Value, savings and model fit remain unknown."
+    }
+  ],
+  "refs": [
+    "gov-discovery",
+    "simple-agents",
+    "nist-core"
+  ],
+  "basis": "User-provided ticket scope + explicitly labeled recommendations",
+  "confidence": "High for visible scope; moderate for recommendations; outcomes unknown",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

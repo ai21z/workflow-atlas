@@ -1,0 +1,43 @@
+{
+  "id": "requirements-skill",
+  "title": "Requirements skill",
+  "summary": "Produce a traceable brief with supported behavior and open questions.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Inputs",
+      "text": "The request, reviewed decisions, relevant source material, affected implementation versions where available and existing acceptance evidence."
+    },
+    {
+      "type": "p",
+      "label": "Procedure",
+      "text": "Establish intended behavior; classify evidence and uncertainty; trace affected components; derive acceptance scenarios; identify missing decisions."
+    },
+    {
+      "type": "p",
+      "label": "Output",
+      "text": "A brief with scope, sources, requirement status, dependencies, scenarios, owner, and unresolved questions."
+    },
+    {
+      "type": "p",
+      "label": "Failure condition",
+      "text": "Missing authority or conflicting requirements must remain unresolved; the skill must not invent a decision."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "instructions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

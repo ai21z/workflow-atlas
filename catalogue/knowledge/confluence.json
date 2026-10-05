@@ -1,0 +1,38 @@
+{
+  "id": "confluence",
+  "title": "Confluence",
+  "summary": "Reviewed architecture, requirements, decisions, runbooks, and explanations.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Useful automation",
+      "items": [
+        "Draft documentation from accepted changes and linked evidence.",
+        "Detect conflicts or stale references between documents and implementation.",
+        "Prepare architecture decision material with alternatives and unresolved constraints.",
+        "Maintain source anchors, owner, review status, and last verification date."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Generated prose becomes reviewed project knowledge through the normal ownership process. A summary is a navigation aid; its citations must lead back to underlying evidence."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "id": "study-ticket-wording",
+  "title": "Refine ticket acceptance wording",
+  "summary": "Make evidence explicit while retaining the time-boxed feasibility scope.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Existing coverage",
+      "text": "The supplied study scope already requires process documentation, constraints, effort and cost, API shape and a go/no-go recommendation. The refinements below make evidence more explicit within that scope."
+    },
+    {
+      "type": "code",
+      "label": "Paste-ready refinement",
+      "text": "The feasibility report includes representative input/output examples with agreed usability criteria, evidence of current engineer-assisted effort and required interventions, and an initial evaluation of the proposed approach. It distinguishes measured results from estimates, documents incomplete/unsupported-input behaviour and the generation/application boundary, and provides a go, conditional-go or no-go recommendation with explicit assumptions, owners and a costed next phase."
+    },
+    {
+      "type": "list",
+      "label": "Supporting detail",
+      "items": [
+        "Reuse checked cases and execution evidence.",
+        "Separate first-pass and repaired acceptance.",
+        "State access and operating ownership constraints.",
+        "Experiment to resolve a material assumption.",
+        "Document coverage limits and unknown benefits."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Complementary contribution",
+      "text": "Define representative examples, behavior, checks and comparison evidence alongside the hosting and integration study. Agree ownership within the team. These are suggested study activities."
+    },
+    {
+      "type": "p",
+      "label": "Evidence basis",
+      "text": "Adapted from supplied study material. Internal ticket identifiers are omitted. The wording and division of work are recommendations, not observed workplace outcomes."
+    }
+  ],
+  "refs": [
+    "gov-discovery",
+    "evals"
+  ],
+  "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+  "confidence": "Moderate for fit; workplace benefit unknown",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

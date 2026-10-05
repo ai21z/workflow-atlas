@@ -1,0 +1,44 @@
+{
+  "id": "answer-contract",
+  "title": "Evidence-based answer",
+  "summary": "Require support for each substantive claim rather than a list of impressive links.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Claim record",
+      "items": [
+        "Atomic claim and its status: observed, inferred, proposed, or unresolved.",
+        "Exact source identifier, passage/section, and version.",
+        "Scope that affects the claim. This might be a software version and environment, or a jurisdiction, population and effective period for a domain assertion.",
+        "Supporting or contradictory evidence.",
+        "Uncertainty and missing information."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Verification layers",
+      "text": "A working link proves availability, not support. A relevant passage may still fail to support the claim. A supported claim may still be inapplicable to the requested scope."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The reader can reproduce the evidential basis. Missing support leads to a useful uncertainty statement rather than a fabricated answer."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "knowledge"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

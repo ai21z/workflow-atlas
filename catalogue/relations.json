@@ -1,0 +1,3592 @@
+[
+  {
+    "from": "topic:overview",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:overview",
+    "type": "related-reading",
+    "to": "topic:pilot",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:overview",
+    "type": "related-reading",
+    "to": "topic:confidence-summary",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:overview",
+    "type": "related-reading",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:overview",
+    "type": "related-reading",
+    "to": "topic:workflow-patterns",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:overview",
+    "type": "related-reading",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:overview",
+    "type": "related-reading",
+    "to": "topic:work-breakdown",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:overview",
+    "type": "related-reading",
+    "to": "topic:release-operations",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflows",
+    "type": "browse-under",
+    "to": "topic:overview",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflows",
+    "type": "related-reading",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflows",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflows",
+    "type": "related-reading",
+    "to": "topic:pilot",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflows",
+    "type": "related-reading",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflows",
+    "type": "related-reading",
+    "to": "topic:study-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflows",
+    "type": "related-reading",
+    "to": "topic:workflow-patterns",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflows",
+    "type": "related-reading",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflow-patterns",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflow-patterns",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflow-patterns",
+    "type": "related-reading",
+    "to": "topic:retries",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflow-patterns",
+    "type": "related-reading",
+    "to": "topic:architecture",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflow-patterns",
+    "type": "related-reading",
+    "to": "topic:study-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflow-patterns",
+    "type": "related-reading",
+    "to": "topic:study-quality",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflow-patterns",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:workflow-patterns",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture-decisions",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture-decisions",
+    "type": "related-reading",
+    "to": "topic:requirements-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture-decisions",
+    "type": "related-reading",
+    "to": "topic:impact-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture-decisions",
+    "type": "related-reading",
+    "to": "topic:architecture",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture-decisions",
+    "type": "related-reading",
+    "to": "topic:study-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture-decisions",
+    "type": "related-reading",
+    "to": "topic:durable-execution",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture-decisions",
+    "type": "related-reading",
+    "to": "topic:work-breakdown",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:work-breakdown",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:work-breakdown",
+    "type": "related-reading",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:work-breakdown",
+    "type": "related-reading",
+    "to": "topic:requirements-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:work-breakdown",
+    "type": "related-reading",
+    "to": "topic:traceability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:work-breakdown",
+    "type": "related-reading",
+    "to": "topic:decomposition",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:work-breakdown",
+    "type": "related-reading",
+    "to": "topic:implementation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:release-operations",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:release-operations",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:release-operations",
+    "type": "related-reading",
+    "to": "topic:qa-packet",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:release-operations",
+    "type": "related-reading",
+    "to": "topic:pilot",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:release-operations",
+    "type": "related-reading",
+    "to": "topic:workflow-patterns",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:release-operations",
+    "type": "related-reading",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:release-operations",
+    "type": "related-reading",
+    "to": "topic:study-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements-workflow",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements-workflow",
+    "type": "related-reading",
+    "to": "topic:requirement-status",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements-workflow",
+    "type": "related-reading",
+    "to": "topic:traceability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements-workflow",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements-workflow",
+    "type": "related-reading",
+    "to": "topic:requirements-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "related-reading",
+    "to": "topic:jenkins",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "related-reading",
+    "to": "topic:bitbucket",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "related-reading",
+    "to": "topic:qa-packet",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "related-reading",
+    "to": "topic:workflow-patterns",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "related-reading",
+    "to": "topic:work-breakdown",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "related-reading",
+    "to": "topic:release-operations",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:curation-workflow",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:curation-workflow",
+    "type": "related-reading",
+    "to": "topic:jev-support",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:curation-workflow",
+    "type": "related-reading",
+    "to": "topic:candidate-isolation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:curation-workflow",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:curation-workflow",
+    "type": "related-reading",
+    "to": "topic:applicability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture",
+    "type": "related-reading",
+    "to": "topic:agent-roles",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture",
+    "type": "related-reading",
+    "to": "topic:durable-execution",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture",
+    "type": "related-reading",
+    "to": "topic:skill-definition",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture",
+    "type": "related-reading",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture",
+    "type": "related-reading",
+    "to": "topic:workflow-patterns",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:task-contract",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:task-contract",
+    "type": "related-reading",
+    "to": "topic:qa-packet",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:task-contract",
+    "type": "related-reading",
+    "to": "topic:finding-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:task-contract",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:task-contract",
+    "type": "related-reading",
+    "to": "topic:budgets",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:task-contract",
+    "type": "related-reading",
+    "to": "topic:permissions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:task-contract",
+    "type": "related-reading",
+    "to": "topic:workflow-patterns",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:deterministic-control",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:deterministic-control",
+    "type": "related-reading",
+    "to": "topic:jev-limitations",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:deterministic-control",
+    "type": "related-reading",
+    "to": "topic:permissions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:deterministic-control",
+    "type": "related-reading",
+    "to": "topic:event-state",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:event-state",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:event-state",
+    "type": "related-reading",
+    "to": "topic:retries",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:event-state",
+    "type": "related-reading",
+    "to": "topic:durable-execution",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:event-state",
+    "type": "related-reading",
+    "to": "topic:rovo",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:event-state",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:parallelism",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:parallelism",
+    "type": "related-reading",
+    "to": "topic:agent-roles",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:parallelism",
+    "type": "related-reading",
+    "to": "topic:handoffs",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:parallelism",
+    "type": "related-reading",
+    "to": "topic:cost-per-result",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:durable-execution",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:durable-execution",
+    "type": "related-reading",
+    "to": "topic:architecture",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:durable-execution",
+    "type": "related-reading",
+    "to": "topic:event-state",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:durable-execution",
+    "type": "related-reading",
+    "to": "topic:dynamic-workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:dynamic-workflows",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:dynamic-workflows",
+    "type": "related-reading",
+    "to": "topic:intellij",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:dynamic-workflows",
+    "type": "related-reading",
+    "to": "topic:budgets",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:dynamic-workflows",
+    "type": "related-reading",
+    "to": "topic:permissions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:dynamic-workflows",
+    "type": "related-reading",
+    "to": "topic:durable-execution",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retries",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retries",
+    "type": "related-reading",
+    "to": "topic:budgets",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retries",
+    "type": "related-reading",
+    "to": "topic:verdicts",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retries",
+    "type": "related-reading",
+    "to": "topic:event-state",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retries",
+    "type": "related-reading",
+    "to": "topic:workflow-patterns",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:toolchain",
+    "type": "browse-under",
+    "to": "topic:overview",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:toolchain",
+    "type": "related-reading",
+    "to": "topic:architecture",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:toolchain",
+    "type": "related-reading",
+    "to": "topic:capability-inventory",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:toolchain",
+    "type": "related-reading",
+    "to": "topic:permissions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jira",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jira",
+    "type": "related-reading",
+    "to": "topic:requirements-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jira",
+    "type": "related-reading",
+    "to": "topic:finding-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jira",
+    "type": "related-reading",
+    "to": "topic:requirement-status",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jira",
+    "type": "related-reading",
+    "to": "topic:rovo",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:confluence",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:confluence",
+    "type": "related-reading",
+    "to": "topic:llm-wiki",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:confluence",
+    "type": "related-reading",
+    "to": "topic:engineering-knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:confluence",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:confluence",
+    "type": "related-reading",
+    "to": "topic:rovo",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bitbucket",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bitbucket",
+    "type": "related-reading",
+    "to": "topic:implementation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bitbucket",
+    "type": "related-reading",
+    "to": "topic:intellij",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bitbucket",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:intellij",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:intellij",
+    "type": "related-reading",
+    "to": "topic:model-inheritance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:intellij",
+    "type": "related-reading",
+    "to": "topic:capability-inventory",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:intellij",
+    "type": "related-reading",
+    "to": "topic:bitbucket",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jenkins",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jenkins",
+    "type": "related-reading",
+    "to": "topic:ci-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jenkins",
+    "type": "related-reading",
+    "to": "topic:coverage",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jenkins",
+    "type": "related-reading",
+    "to": "topic:sonar-debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jenkins",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:rovo",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:rovo",
+    "type": "related-reading",
+    "to": "topic:jira",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:rovo",
+    "type": "related-reading",
+    "to": "topic:confluence",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:rovo",
+    "type": "related-reading",
+    "to": "topic:billing-boundaries",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:rovo",
+    "type": "related-reading",
+    "to": "topic:permissions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:neptune-stack",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:neptune-stack",
+    "type": "related-reading",
+    "to": "topic:query-performance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:neptune-stack",
+    "type": "related-reading",
+    "to": "topic:candidate-isolation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:neptune-stack",
+    "type": "related-reading",
+    "to": "topic:rdf-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:neptune-stack",
+    "type": "related-reading",
+    "to": "topic:provenance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:permissions",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:permissions",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:permissions",
+    "type": "related-reading",
+    "to": "topic:retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:permissions",
+    "type": "related-reading",
+    "to": "topic:candidate-isolation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:permissions",
+    "type": "related-reading",
+    "to": "topic:deterministic-control",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:capability-inventory",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:capability-inventory",
+    "type": "related-reading",
+    "to": "topic:dynamic-workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:capability-inventory",
+    "type": "related-reading",
+    "to": "topic:model-inheritance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:capability-inventory",
+    "type": "related-reading",
+    "to": "topic:billing-boundaries",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:economy",
+    "type": "browse-under",
+    "to": "topic:overview",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:economy",
+    "type": "related-reading",
+    "to": "topic:routing",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:economy",
+    "type": "related-reading",
+    "to": "topic:cost-per-result",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:economy",
+    "type": "related-reading",
+    "to": "topic:model-prices",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:economy",
+    "type": "related-reading",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:model-prices",
+    "type": "browse-under",
+    "to": "topic:economy",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:model-prices",
+    "type": "related-reading",
+    "to": "topic:routing",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:model-prices",
+    "type": "related-reading",
+    "to": "topic:cost-per-result",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:model-prices",
+    "type": "related-reading",
+    "to": "topic:capability-inventory",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:routing",
+    "type": "browse-under",
+    "to": "topic:economy",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:routing",
+    "type": "related-reading",
+    "to": "topic:model-prices",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:routing",
+    "type": "related-reading",
+    "to": "topic:model-inheritance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:routing",
+    "type": "related-reading",
+    "to": "topic:jev-judgments",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:routing",
+    "type": "related-reading",
+    "to": "topic:eval-corpus",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:cost-per-result",
+    "type": "browse-under",
+    "to": "topic:economy",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:cost-per-result",
+    "type": "related-reading",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:cost-per-result",
+    "type": "related-reading",
+    "to": "topic:routing",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:cost-per-result",
+    "type": "related-reading",
+    "to": "topic:billing-boundaries",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:cost-per-result",
+    "type": "related-reading",
+    "to": "topic:confidence-summary",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:cost-per-result",
+    "type": "related-reading",
+    "to": "topic:study-economics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:context-selection",
+    "type": "browse-under",
+    "to": "topic:economy",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:context-selection",
+    "type": "related-reading",
+    "to": "topic:retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:context-selection",
+    "type": "related-reading",
+    "to": "topic:handoffs",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:context-selection",
+    "type": "related-reading",
+    "to": "topic:eager-skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:revision-cache",
+    "type": "browse-under",
+    "to": "topic:economy",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:revision-cache",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:revision-cache",
+    "type": "related-reading",
+    "to": "topic:provenance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:revision-cache",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:handoffs",
+    "type": "browse-under",
+    "to": "topic:economy",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:handoffs",
+    "type": "related-reading",
+    "to": "topic:parallelism",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:handoffs",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:handoffs",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:budgets",
+    "type": "browse-under",
+    "to": "topic:economy",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:budgets",
+    "type": "related-reading",
+    "to": "topic:retries",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:budgets",
+    "type": "related-reading",
+    "to": "topic:cost-per-result",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:budgets",
+    "type": "related-reading",
+    "to": "topic:dynamic-workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:budgets",
+    "type": "related-reading",
+    "to": "topic:study-runtime",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:model-inheritance",
+    "type": "browse-under",
+    "to": "topic:economy",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:model-inheritance",
+    "type": "related-reading",
+    "to": "topic:capability-inventory",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:model-inheritance",
+    "type": "related-reading",
+    "to": "topic:routing",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:model-inheritance",
+    "type": "related-reading",
+    "to": "topic:intellij",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:billing-boundaries",
+    "type": "browse-under",
+    "to": "topic:economy",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:billing-boundaries",
+    "type": "related-reading",
+    "to": "topic:cost-per-result",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:billing-boundaries",
+    "type": "related-reading",
+    "to": "topic:permissions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:billing-boundaries",
+    "type": "related-reading",
+    "to": "topic:rovo",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:billing-boundaries",
+    "type": "related-reading",
+    "to": "topic:study-economics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:billing-boundaries",
+    "type": "related-reading",
+    "to": "topic:study-runtime",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:skills",
+    "type": "browse-under",
+    "to": "topic:overview",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:skills",
+    "type": "related-reading",
+    "to": "topic:skill-definition",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:skills",
+    "type": "related-reading",
+    "to": "topic:agent-roles",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:skills",
+    "type": "related-reading",
+    "to": "topic:eager-skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:skill-definition",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:skill-definition",
+    "type": "related-reading",
+    "to": "topic:architecture",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:skill-definition",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:skill-definition",
+    "type": "related-reading",
+    "to": "topic:eager-skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:skill-definition",
+    "type": "related-reading",
+    "to": "topic:study-runtime",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements-skill",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements-skill",
+    "type": "related-reading",
+    "to": "topic:requirements-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements-skill",
+    "type": "related-reading",
+    "to": "topic:requirement-status",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements-skill",
+    "type": "related-reading",
+    "to": "topic:traceability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:impact-skill",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:impact-skill",
+    "type": "related-reading",
+    "to": "topic:traceability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:impact-skill",
+    "type": "related-reading",
+    "to": "topic:decomposition",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:impact-skill",
+    "type": "related-reading",
+    "to": "topic:neptune-stack",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:impact-skill",
+    "type": "related-reading",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:impact-skill",
+    "type": "related-reading",
+    "to": "topic:work-breakdown",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:ci-skill",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:ci-skill",
+    "type": "related-reading",
+    "to": "topic:jenkins",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:ci-skill",
+    "type": "related-reading",
+    "to": "topic:retries",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:ci-skill",
+    "type": "related-reading",
+    "to": "topic:finding-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:rdf-skill",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:rdf-skill",
+    "type": "related-reading",
+    "to": "topic:coverage",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:rdf-skill",
+    "type": "related-reading",
+    "to": "topic:candidate-isolation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:rdf-skill",
+    "type": "related-reading",
+    "to": "topic:query-performance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-skill",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-skill",
+    "type": "related-reading",
+    "to": "topic:jev-support",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-skill",
+    "type": "related-reading",
+    "to": "topic:applicability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-skill",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-skill",
+    "type": "related-reading",
+    "to": "topic:provenance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:packet-skill",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:packet-skill",
+    "type": "related-reading",
+    "to": "topic:qa-packet",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:packet-skill",
+    "type": "related-reading",
+    "to": "topic:verdicts",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:packet-skill",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:agent-roles",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:agent-roles",
+    "type": "related-reading",
+    "to": "topic:routing",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:agent-roles",
+    "type": "related-reading",
+    "to": "topic:parallelism",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:agent-roles",
+    "type": "related-reading",
+    "to": "topic:deterministic-control",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eager-skills",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eager-skills",
+    "type": "related-reading",
+    "to": "topic:context-selection",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eager-skills",
+    "type": "related-reading",
+    "to": "topic:skill-definition",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eager-skills",
+    "type": "related-reading",
+    "to": "topic:agent-roles",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements",
+    "type": "browse-under",
+    "to": "topic:overview",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements",
+    "type": "related-reading",
+    "to": "topic:requirement-status",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements",
+    "type": "related-reading",
+    "to": "topic:traceability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements",
+    "type": "related-reading",
+    "to": "topic:requirements-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirement-status",
+    "type": "browse-under",
+    "to": "topic:requirements",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirement-status",
+    "type": "related-reading",
+    "to": "topic:jira",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirement-status",
+    "type": "related-reading",
+    "to": "topic:discovery",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirement-status",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:traceability",
+    "type": "browse-under",
+    "to": "topic:requirements",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:traceability",
+    "type": "related-reading",
+    "to": "topic:impact-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:traceability",
+    "type": "related-reading",
+    "to": "topic:coverage",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:traceability",
+    "type": "related-reading",
+    "to": "topic:engineering-knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:traceability",
+    "type": "related-reading",
+    "to": "topic:work-breakdown",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:applicability",
+    "type": "browse-under",
+    "to": "topic:requirements",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:applicability",
+    "type": "related-reading",
+    "to": "topic:temporal-scope",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:applicability",
+    "type": "related-reading",
+    "to": "topic:holiday-example",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:applicability",
+    "type": "related-reading",
+    "to": "topic:wikidata-statements",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:applicability",
+    "type": "related-reading",
+    "to": "topic:jev-support",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:temporal-scope",
+    "type": "browse-under",
+    "to": "topic:requirements",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:temporal-scope",
+    "type": "related-reading",
+    "to": "topic:jev-limitations",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:temporal-scope",
+    "type": "related-reading",
+    "to": "topic:provenance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:temporal-scope",
+    "type": "related-reading",
+    "to": "topic:applicability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:holiday-example",
+    "type": "browse-under",
+    "to": "topic:requirements",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:holiday-example",
+    "type": "related-reading",
+    "to": "topic:coverage",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:holiday-example",
+    "type": "related-reading",
+    "to": "topic:jev-support",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:holiday-example",
+    "type": "related-reading",
+    "to": "topic:traceability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:holiday-example",
+    "type": "related-reading",
+    "to": "topic:applicability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:discovery",
+    "type": "browse-under",
+    "to": "topic:requirements",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:discovery",
+    "type": "related-reading",
+    "to": "topic:requirements-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:discovery",
+    "type": "related-reading",
+    "to": "topic:pilot",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:discovery",
+    "type": "related-reading",
+    "to": "topic:requirement-status",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:discovery",
+    "type": "related-reading",
+    "to": "topic:finding-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:debt",
+    "type": "browse-under",
+    "to": "topic:overview",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:debt",
+    "type": "related-reading",
+    "to": "topic:debt-categories",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:debt",
+    "type": "related-reading",
+    "to": "topic:finding-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:debt",
+    "type": "related-reading",
+    "to": "topic:coverage",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:debt",
+    "type": "related-reading",
+    "to": "topic:prioritization",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:debt-categories",
+    "type": "browse-under",
+    "to": "topic:debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:debt-categories",
+    "type": "related-reading",
+    "to": "topic:finding-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:debt-categories",
+    "type": "related-reading",
+    "to": "topic:sonar-debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:debt-categories",
+    "type": "related-reading",
+    "to": "topic:query-performance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:finding-contract",
+    "type": "browse-under",
+    "to": "topic:debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:finding-contract",
+    "type": "related-reading",
+    "to": "topic:verdicts",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:finding-contract",
+    "type": "related-reading",
+    "to": "topic:prioritization",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:finding-contract",
+    "type": "related-reading",
+    "to": "topic:jira",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:prioritization",
+    "type": "browse-under",
+    "to": "topic:debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:prioritization",
+    "type": "related-reading",
+    "to": "topic:sonar-debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:prioritization",
+    "type": "related-reading",
+    "to": "topic:decomposition",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:prioritization",
+    "type": "related-reading",
+    "to": "topic:finding-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decomposition",
+    "type": "browse-under",
+    "to": "topic:debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decomposition",
+    "type": "related-reading",
+    "to": "topic:impact-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decomposition",
+    "type": "related-reading",
+    "to": "topic:implementation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decomposition",
+    "type": "related-reading",
+    "to": "topic:traceability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decomposition",
+    "type": "related-reading",
+    "to": "topic:work-breakdown",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:coverage",
+    "type": "browse-under",
+    "to": "topic:debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:coverage",
+    "type": "related-reading",
+    "to": "topic:jacoco-counters",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:coverage",
+    "type": "related-reading",
+    "to": "topic:holiday-example",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:coverage",
+    "type": "related-reading",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jacoco-counters",
+    "type": "browse-under",
+    "to": "topic:debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jacoco-counters",
+    "type": "related-reading",
+    "to": "topic:coverage",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jacoco-counters",
+    "type": "related-reading",
+    "to": "topic:mutation-testing",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:sonar-debt",
+    "type": "browse-under",
+    "to": "topic:debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:sonar-debt",
+    "type": "related-reading",
+    "to": "topic:debt-categories",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:sonar-debt",
+    "type": "related-reading",
+    "to": "topic:prioritization",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:sonar-debt",
+    "type": "related-reading",
+    "to": "topic:jenkins",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:mutation-testing",
+    "type": "browse-under",
+    "to": "topic:debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:mutation-testing",
+    "type": "related-reading",
+    "to": "topic:jacoco-counters",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:mutation-testing",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:mutation-testing",
+    "type": "related-reading",
+    "to": "topic:cost-per-result",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:query-performance",
+    "type": "browse-under",
+    "to": "topic:debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:query-performance",
+    "type": "related-reading",
+    "to": "topic:rdf-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:query-performance",
+    "type": "related-reading",
+    "to": "topic:neptune-stack",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:query-performance",
+    "type": "related-reading",
+    "to": "topic:finding-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev",
+    "type": "browse-under",
+    "to": "topic:overview",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev",
+    "type": "related-reading",
+    "to": "topic:jev-support",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev",
+    "type": "related-reading",
+    "to": "topic:jev-shadow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev",
+    "type": "related-reading",
+    "to": "topic:jev-limitations",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-judgments",
+    "type": "browse-under",
+    "to": "topic:jev",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-judgments",
+    "type": "related-reading",
+    "to": "topic:deterministic-control",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-judgments",
+    "type": "related-reading",
+    "to": "topic:jev-support",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-judgments",
+    "type": "related-reading",
+    "to": "topic:jev-mapping",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-support",
+    "type": "browse-under",
+    "to": "topic:jev",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-support",
+    "type": "related-reading",
+    "to": "topic:source-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-support",
+    "type": "related-reading",
+    "to": "topic:holiday-example",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-support",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-support",
+    "type": "related-reading",
+    "to": "topic:jev-shadow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-mapping",
+    "type": "browse-under",
+    "to": "topic:jev",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-mapping",
+    "type": "related-reading",
+    "to": "topic:applicability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-mapping",
+    "type": "related-reading",
+    "to": "topic:retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-mapping",
+    "type": "related-reading",
+    "to": "topic:jev-judgments",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-limitations",
+    "type": "browse-under",
+    "to": "topic:jev",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-limitations",
+    "type": "related-reading",
+    "to": "topic:deterministic-control",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-limitations",
+    "type": "related-reading",
+    "to": "topic:jev-confidence",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-limitations",
+    "type": "related-reading",
+    "to": "topic:temporal-scope",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-confidence",
+    "type": "browse-under",
+    "to": "topic:jev",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-confidence",
+    "type": "related-reading",
+    "to": "topic:jev-shadow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-confidence",
+    "type": "related-reading",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-confidence",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-clustering",
+    "type": "browse-under",
+    "to": "topic:jev",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-clustering",
+    "type": "related-reading",
+    "to": "topic:jev-mapping",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-clustering",
+    "type": "related-reading",
+    "to": "topic:applicability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-clustering",
+    "type": "related-reading",
+    "to": "topic:retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-shadow",
+    "type": "browse-under",
+    "to": "topic:jev",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-shadow",
+    "type": "related-reading",
+    "to": "topic:eval-corpus",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-shadow",
+    "type": "related-reading",
+    "to": "topic:jev-languages",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-shadow",
+    "type": "related-reading",
+    "to": "topic:routing",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-shadow",
+    "type": "related-reading",
+    "to": "topic:pilot",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-languages",
+    "type": "browse-under",
+    "to": "topic:jev",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-languages",
+    "type": "related-reading",
+    "to": "topic:jev-shadow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-languages",
+    "type": "related-reading",
+    "to": "topic:eval-corpus",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-languages",
+    "type": "related-reading",
+    "to": "topic:applicability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:knowledge",
+    "type": "browse-under",
+    "to": "topic:overview",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:knowledge",
+    "type": "related-reading",
+    "to": "topic:knowledge-assets",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:knowledge",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:knowledge",
+    "type": "related-reading",
+    "to": "topic:retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:knowledge",
+    "type": "related-reading",
+    "to": "topic:candidate-isolation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:knowledge-assets",
+    "type": "browse-under",
+    "to": "topic:knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:knowledge-assets",
+    "type": "related-reading",
+    "to": "topic:engineering-knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:knowledge-assets",
+    "type": "related-reading",
+    "to": "topic:llm-wiki",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:knowledge-assets",
+    "type": "related-reading",
+    "to": "topic:provenance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:engineering-knowledge",
+    "type": "browse-under",
+    "to": "topic:knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:engineering-knowledge",
+    "type": "related-reading",
+    "to": "topic:traceability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:engineering-knowledge",
+    "type": "related-reading",
+    "to": "topic:confluence",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:engineering-knowledge",
+    "type": "related-reading",
+    "to": "topic:graphrag-option",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval",
+    "type": "browse-under",
+    "to": "topic:knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval",
+    "type": "related-reading",
+    "to": "topic:retrieval-diagnosis",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval",
+    "type": "related-reading",
+    "to": "topic:permissions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval",
+    "type": "related-reading",
+    "to": "topic:context-selection",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval",
+    "type": "related-reading",
+    "to": "topic:jev-mapping",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:answer-contract",
+    "type": "browse-under",
+    "to": "topic:knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:answer-contract",
+    "type": "related-reading",
+    "to": "topic:jev-support",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:answer-contract",
+    "type": "related-reading",
+    "to": "topic:source-conflicts",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:answer-contract",
+    "type": "related-reading",
+    "to": "topic:provenance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:answer-contract",
+    "type": "related-reading",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:llm-wiki",
+    "type": "browse-under",
+    "to": "topic:knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:llm-wiki",
+    "type": "related-reading",
+    "to": "topic:confluence",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:llm-wiki",
+    "type": "related-reading",
+    "to": "topic:knowledge-assets",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:llm-wiki",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:graphrag-option",
+    "type": "browse-under",
+    "to": "topic:knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:graphrag-option",
+    "type": "related-reading",
+    "to": "topic:retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:graphrag-option",
+    "type": "related-reading",
+    "to": "topic:engineering-knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:graphrag-option",
+    "type": "related-reading",
+    "to": "topic:cost-per-result",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:wikidata-statements",
+    "type": "browse-under",
+    "to": "topic:knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:wikidata-statements",
+    "type": "related-reading",
+    "to": "topic:applicability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:wikidata-statements",
+    "type": "related-reading",
+    "to": "topic:provenance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:wikidata-statements",
+    "type": "related-reading",
+    "to": "topic:curation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:candidate-isolation",
+    "type": "browse-under",
+    "to": "topic:knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:candidate-isolation",
+    "type": "related-reading",
+    "to": "topic:curation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:candidate-isolation",
+    "type": "related-reading",
+    "to": "topic:neptune-stack",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:candidate-isolation",
+    "type": "related-reading",
+    "to": "topic:rdf-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:candidate-isolation",
+    "type": "related-reading",
+    "to": "topic:permissions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:provenance",
+    "type": "browse-under",
+    "to": "topic:knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:provenance",
+    "type": "related-reading",
+    "to": "topic:temporal-scope",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:provenance",
+    "type": "related-reading",
+    "to": "topic:revision-cache",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:provenance",
+    "type": "related-reading",
+    "to": "topic:qa-packet",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-conflicts",
+    "type": "browse-under",
+    "to": "topic:knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-conflicts",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-conflicts",
+    "type": "related-reading",
+    "to": "topic:jev-confidence",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-conflicts",
+    "type": "related-reading",
+    "to": "topic:requirement-status",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-conflicts",
+    "type": "related-reading",
+    "to": "topic:applicability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:talos",
+    "type": "browse-under",
+    "to": "topic:overview",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:talos",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:talos",
+    "type": "related-reading",
+    "to": "topic:qa-packet",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:talos",
+    "type": "related-reading",
+    "to": "topic:talos-boundaries",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verification-loops",
+    "type": "browse-under",
+    "to": "topic:talos",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verification-loops",
+    "type": "related-reading",
+    "to": "topic:implementation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verification-loops",
+    "type": "related-reading",
+    "to": "topic:jenkins",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verification-loops",
+    "type": "related-reading",
+    "to": "topic:cost-per-result",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verification-loops",
+    "type": "related-reading",
+    "to": "topic:workflow-patterns",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verification-loops",
+    "type": "related-reading",
+    "to": "topic:release-operations",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:post-change-checks",
+    "type": "browse-under",
+    "to": "topic:talos",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:post-change-checks",
+    "type": "related-reading",
+    "to": "topic:revision-cache",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:post-change-checks",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:post-change-checks",
+    "type": "related-reading",
+    "to": "topic:qa-packet",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verdicts",
+    "type": "browse-under",
+    "to": "topic:talos",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verdicts",
+    "type": "related-reading",
+    "to": "topic:finding-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verdicts",
+    "type": "related-reading",
+    "to": "topic:retries",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verdicts",
+    "type": "related-reading",
+    "to": "topic:jenkins",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:qa-packet",
+    "type": "browse-under",
+    "to": "topic:talos",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:qa-packet",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:qa-packet",
+    "type": "related-reading",
+    "to": "topic:packet-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:qa-packet",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:qa-packet",
+    "type": "related-reading",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:adverse-audits",
+    "type": "browse-under",
+    "to": "topic:talos",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:adverse-audits",
+    "type": "related-reading",
+    "to": "topic:eval-corpus",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:adverse-audits",
+    "type": "related-reading",
+    "to": "topic:candidate-isolation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:adverse-audits",
+    "type": "related-reading",
+    "to": "topic:retries",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:talos-boundaries",
+    "type": "browse-under",
+    "to": "topic:talos",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:talos-boundaries",
+    "type": "related-reading",
+    "to": "topic:skill-definition",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:talos-boundaries",
+    "type": "related-reading",
+    "to": "topic:durable-execution",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:talos-boundaries",
+    "type": "related-reading",
+    "to": "topic:permissions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation",
+    "type": "browse-under",
+    "to": "topic:overview",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation",
+    "type": "related-reading",
+    "to": "topic:eval-corpus",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation",
+    "type": "related-reading",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation",
+    "type": "related-reading",
+    "to": "topic:pilot",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation",
+    "type": "related-reading",
+    "to": "topic:architect-proposal",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-corpus",
+    "type": "browse-under",
+    "to": "topic:evaluation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-corpus",
+    "type": "related-reading",
+    "to": "topic:adverse-audits",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-corpus",
+    "type": "related-reading",
+    "to": "topic:jev-shadow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-corpus",
+    "type": "related-reading",
+    "to": "topic:routing",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-corpus",
+    "type": "related-reading",
+    "to": "topic:study-quality",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-metrics",
+    "type": "browse-under",
+    "to": "topic:evaluation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-metrics",
+    "type": "related-reading",
+    "to": "topic:cost-per-result",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-metrics",
+    "type": "related-reading",
+    "to": "topic:jev-languages",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-metrics",
+    "type": "related-reading",
+    "to": "topic:grader-design",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:grader-design",
+    "type": "browse-under",
+    "to": "topic:evaluation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:grader-design",
+    "type": "related-reading",
+    "to": "topic:qa-packet",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:grader-design",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:grader-design",
+    "type": "related-reading",
+    "to": "topic:routing",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval-diagnosis",
+    "type": "browse-under",
+    "to": "topic:evaluation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval-diagnosis",
+    "type": "related-reading",
+    "to": "topic:retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval-diagnosis",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval-diagnosis",
+    "type": "related-reading",
+    "to": "topic:context-selection",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:pilot",
+    "type": "browse-under",
+    "to": "topic:evaluation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:pilot",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:pilot",
+    "type": "related-reading",
+    "to": "topic:requirements-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:pilot",
+    "type": "related-reading",
+    "to": "topic:jev-shadow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:pilot",
+    "type": "related-reading",
+    "to": "topic:cost-per-result",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:pilot",
+    "type": "related-reading",
+    "to": "topic:release-operations",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architect-proposal",
+    "type": "browse-under",
+    "to": "topic:evaluation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architect-proposal",
+    "type": "related-reading",
+    "to": "topic:pilot",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architect-proposal",
+    "type": "related-reading",
+    "to": "topic:capability-inventory",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architect-proposal",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architect-proposal",
+    "type": "related-reading",
+    "to": "topic:candidate-isolation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architect-proposal",
+    "type": "related-reading",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:confidence-summary",
+    "type": "browse-under",
+    "to": "topic:evaluation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:confidence-summary",
+    "type": "related-reading",
+    "to": "topic:model-prices",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:confidence-summary",
+    "type": "related-reading",
+    "to": "topic:discovery",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:confidence-summary",
+    "type": "related-reading",
+    "to": "topic:jev-shadow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:confidence-summary",
+    "type": "related-reading",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:confidence-summary",
+    "type": "related-reading",
+    "to": "topic:study-decision",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:construct-study",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:construct-study",
+    "type": "related-reading",
+    "to": "topic:study-baseline",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:construct-study",
+    "type": "related-reading",
+    "to": "topic:study-quality",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:construct-study",
+    "type": "related-reading",
+    "to": "topic:study-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:construct-study",
+    "type": "related-reading",
+    "to": "topic:study-runtime",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:construct-study",
+    "type": "related-reading",
+    "to": "topic:study-economics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:construct-study",
+    "type": "related-reading",
+    "to": "topic:study-experiment",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:construct-study",
+    "type": "related-reading",
+    "to": "topic:study-decision",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:construct-study",
+    "type": "related-reading",
+    "to": "topic:study-ticket-wording",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:construct-study",
+    "type": "related-reading",
+    "to": "topic:study-scenarios",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:construct-study",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-baseline",
+    "type": "browse-under",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-baseline",
+    "type": "related-reading",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-baseline",
+    "type": "related-reading",
+    "to": "topic:study-quality",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-baseline",
+    "type": "related-reading",
+    "to": "topic:study-economics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-baseline",
+    "type": "related-reading",
+    "to": "topic:capability-inventory",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-baseline",
+    "type": "related-reading",
+    "to": "topic:skill-definition",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-quality",
+    "type": "browse-under",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-quality",
+    "type": "related-reading",
+    "to": "topic:study-baseline",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-quality",
+    "type": "related-reading",
+    "to": "topic:study-decision",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-quality",
+    "type": "related-reading",
+    "to": "topic:eval-corpus",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-quality",
+    "type": "related-reading",
+    "to": "topic:grader-design",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-quality",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-quality",
+    "type": "related-reading",
+    "to": "topic:workflow-patterns",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-contract",
+    "type": "browse-under",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-contract",
+    "type": "related-reading",
+    "to": "topic:study-runtime",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-contract",
+    "type": "related-reading",
+    "to": "topic:study-quality",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-contract",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-contract",
+    "type": "related-reading",
+    "to": "topic:event-state",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-contract",
+    "type": "related-reading",
+    "to": "topic:durable-execution",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-contract",
+    "type": "related-reading",
+    "to": "topic:workflow-patterns",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-runtime",
+    "type": "browse-under",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-runtime",
+    "type": "related-reading",
+    "to": "topic:study-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-runtime",
+    "type": "related-reading",
+    "to": "topic:study-economics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-runtime",
+    "type": "related-reading",
+    "to": "topic:permissions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-runtime",
+    "type": "related-reading",
+    "to": "topic:budgets",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-runtime",
+    "type": "related-reading",
+    "to": "topic:architecture",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-economics",
+    "type": "browse-under",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-economics",
+    "type": "related-reading",
+    "to": "topic:cost-per-result",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-economics",
+    "type": "related-reading",
+    "to": "topic:study-baseline",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-economics",
+    "type": "related-reading",
+    "to": "topic:study-quality",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-economics",
+    "type": "related-reading",
+    "to": "topic:study-decision",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-economics",
+    "type": "related-reading",
+    "to": "topic:billing-boundaries",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-experiment",
+    "type": "browse-under",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-experiment",
+    "type": "related-reading",
+    "to": "topic:study-baseline",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-experiment",
+    "type": "related-reading",
+    "to": "topic:study-quality",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-experiment",
+    "type": "related-reading",
+    "to": "topic:study-runtime",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-experiment",
+    "type": "related-reading",
+    "to": "topic:study-decision",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-experiment",
+    "type": "related-reading",
+    "to": "topic:routing",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-decision",
+    "type": "browse-under",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-decision",
+    "type": "related-reading",
+    "to": "topic:study-quality",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-decision",
+    "type": "related-reading",
+    "to": "topic:study-economics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-decision",
+    "type": "related-reading",
+    "to": "topic:study-experiment",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-decision",
+    "type": "related-reading",
+    "to": "topic:study-ticket-wording",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-decision",
+    "type": "related-reading",
+    "to": "topic:confidence-summary",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-ticket-wording",
+    "type": "browse-under",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-ticket-wording",
+    "type": "related-reading",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-ticket-wording",
+    "type": "related-reading",
+    "to": "topic:study-quality",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-ticket-wording",
+    "type": "related-reading",
+    "to": "topic:study-decision",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-ticket-wording",
+    "type": "related-reading",
+    "to": "topic:study-scenarios",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-scenarios",
+    "type": "browse-under",
+    "to": "topic:construct-study",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-scenarios",
+    "type": "related-reading",
+    "to": "topic:study-quality",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-scenarios",
+    "type": "related-reading",
+    "to": "topic:study-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-scenarios",
+    "type": "related-reading",
+    "to": "topic:study-economics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-scenarios",
+    "type": "related-reading",
+    "to": "topic:adverse-audits",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-scenarios",
+    "type": "related-reading",
+    "to": "topic:workflow-patterns",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:requirements",
+    "type": "explained-by",
+    "to": "topic:requirements",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:architecture",
+    "type": "explained-by",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:breakdown",
+    "type": "explained-by",
+    "to": "topic:work-breakdown",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:implementation",
+    "type": "explained-by",
+    "to": "topic:implementation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:verification",
+    "type": "explained-by",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:release",
+    "type": "explained-by",
+    "to": "topic:release-operations",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:operations",
+    "type": "explained-by",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:current-process",
+    "type": "explained-by",
+    "to": "topic:study-baseline",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:feasibility-scope",
+    "type": "explained-by",
+    "to": "topic:study-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:options",
+    "type": "explained-by",
+    "to": "topic:study-runtime",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:experiment-plan",
+    "type": "explained-by",
+    "to": "topic:study-experiment",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:recommendation",
+    "type": "explained-by",
+    "to": "topic:study-decision",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:reproduction",
+    "type": "explained-by",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:diagnosis",
+    "type": "explained-by",
+    "to": "topic:finding-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:bug-fix",
+    "type": "explained-by",
+    "to": "topic:implementation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:regression",
+    "type": "explained-by",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "stage:bug-review",
+    "type": "explained-by",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:context-selection",
+    "type": "uses-definition",
+    "to": "practice:progressive-context",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "uses-definition",
+    "to": "practice:minimum-change",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements-workflow",
+    "type": "uses-definition",
+    "to": "practice:specification-first",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:llm-wiki",
+    "type": "uses-definition",
+    "to": "practice:evidence-wiki",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-contract",
+    "type": "uses-definition",
+    "to": "control:before-write",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:information-retrieval",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:information-retrieval",
+    "type": "related-reading",
+    "to": "topic:retrieve-and-validate",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:information-retrieval",
+    "type": "related-reading",
+    "to": "topic:retrieval-example",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:information-retrieval",
+    "type": "related-reading",
+    "to": "topic:retrieval-options",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieve-and-validate",
+    "type": "browse-under",
+    "to": "topic:information-retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieve-and-validate",
+    "type": "related-reading",
+    "to": "topic:information-retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieve-and-validate",
+    "type": "related-reading",
+    "to": "topic:retrieval-example",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval-options",
+    "type": "browse-under",
+    "to": "topic:information-retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval-options",
+    "type": "related-reading",
+    "to": "topic:postgresql-data",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval-options",
+    "type": "related-reading",
+    "to": "topic:amazon-neptune",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval-options",
+    "type": "related-reading",
+    "to": "topic:apache-jena-fuseki",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval-options",
+    "type": "related-reading",
+    "to": "topic:neo4j-data",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:postgresql-data",
+    "type": "browse-under",
+    "to": "topic:retrieval-options",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:postgresql-data",
+    "type": "related-reading",
+    "to": "topic:retrieval-options",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:postgresql-data",
+    "type": "related-reading",
+    "to": "topic:retrieve-and-validate",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:postgresql-data",
+    "type": "uses-definition",
+    "to": "technology:postgresql",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:postgresql",
+    "type": "provides-capability",
+    "to": "topic:information-retrieval",
+    "sourceRefs": [
+      "postgresql-tutorial"
+    ]
+  },
+  {
+    "from": "topic:amazon-neptune",
+    "type": "browse-under",
+    "to": "topic:retrieval-options",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:amazon-neptune",
+    "type": "related-reading",
+    "to": "topic:retrieval-options",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:amazon-neptune",
+    "type": "related-reading",
+    "to": "topic:retrieve-and-validate",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:amazon-neptune",
+    "type": "uses-definition",
+    "to": "technology:neptune",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:neptune",
+    "type": "provides-capability",
+    "to": "topic:information-retrieval",
+    "sourceRefs": [
+      "neptune-sparql-access"
+    ]
+  },
+  {
+    "from": "topic:apache-jena-fuseki",
+    "type": "browse-under",
+    "to": "topic:retrieval-options",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:apache-jena-fuseki",
+    "type": "related-reading",
+    "to": "topic:retrieval-options",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:apache-jena-fuseki",
+    "type": "related-reading",
+    "to": "topic:retrieve-and-validate",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:apache-jena-fuseki",
+    "type": "uses-definition",
+    "to": "technology:jena-fuseki",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:jena-fuseki",
+    "type": "provides-capability",
+    "to": "topic:information-retrieval",
+    "sourceRefs": [
+      "jena-fuseki"
+    ]
+  },
+  {
+    "from": "topic:neo4j-data",
+    "type": "browse-under",
+    "to": "topic:retrieval-options",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:neo4j-data",
+    "type": "related-reading",
+    "to": "topic:retrieval-options",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:neo4j-data",
+    "type": "related-reading",
+    "to": "topic:retrieve-and-validate",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:neo4j-data",
+    "type": "uses-definition",
+    "to": "technology:neo4j",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:neo4j",
+    "type": "provides-capability",
+    "to": "topic:information-retrieval",
+    "sourceRefs": [
+      "neo4j-start"
+    ]
+  },
+  {
+    "from": "topic:retrieval-example",
+    "type": "browse-under",
+    "to": "topic:information-retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval-example",
+    "type": "illustrates",
+    "to": "topic:information-retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieval-example",
+    "type": "illustrates",
+    "to": "topic:retrieve-and-validate",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieve-and-validate",
+    "type": "uses-definition",
+    "to": "practice:validated-retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:overview",
+    "type": "related-reading",
+    "to": "topic:information-retrieval",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:toolchain",
+    "type": "related-reading",
+    "to": "topic:retrieval-options",
+    "sourceRefs": []
+  }
+]

@@ -1,0 +1,74 @@
+{
+  "id": "pilot",
+  "title": "Pilot sequence",
+  "summary": "Expand through concrete reviewable deliverables and measured acceptance.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Possible stages for an automation pilot",
+      "headers": [
+        "Stage",
+        "Deliverable",
+        "Decision"
+      ],
+      "rows": [
+        [
+          "Baseline discovery",
+          "One process, reviewed examples and current effort",
+          "Where value is plausible"
+        ],
+        [
+          "Bounded trial",
+          "Results and evidence for a limited task",
+          "Whether the approach is useful"
+        ],
+        [
+          "Controlled use",
+          "Limited changes under the agreed checks and authority",
+          "Whether quality and operating effort are acceptable"
+        ],
+        [
+          "Optional component comparison",
+          "Shadow results against reviewed examples",
+          "Whether an added decision component helps"
+        ],
+        [
+          "Measured expansion",
+          "Defined operating ownership, limits and recovery",
+          "What deserves wider support"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "First deliverable",
+      "text": "Record a representative task, its expected result and the evidence needed to judge it. Set acceptance criteria with the relevant owners before collecting results. Select only the stages the trial needs."
+    },
+    {
+      "type": "p",
+      "label": "Optional Jev example",
+      "text": "For a country-data curation study, a Jev shadow comparison can test source-support judgments. It is not a required stage for other workflows or proof of the separate Atlas suggestion pilot."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Expand only where quality and accepted-result economics improve. Select durable infrastructure from demonstrated execution requirements."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "evaluation"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

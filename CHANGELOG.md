@@ -4,6 +4,11 @@ Release notes describe application changes. Project schema and guidance versions
 
 ## Unreleased
 
+- Generate Knowledge Atlas data and factory definitions from one versioned JSON catalogue, with schema, reference and stale-output checks.
+- Retain the 109 earlier topics and add eight retrieval topics, a guided collection and a reviewable retrieval-check practice. The catalogue contains 117 topics and 72 source records.
+- Add topic kinds, aliases, applicability and source-claim metadata, with type filtering and broader search. Retain legacy review status without claiming a new source review.
+- Keep per-definition revisions and review dates in exported guidance while catalogue content advances to 2.1.0. Project schema remains 3.0.
+- Validate JEV responses against its frozen recipe and question set. New catalogue questions stay manually answerable and are excluded from inference requests.
 - Publish the checked static beta to GitHub Pages, with local JEV setup kept separate from the hosted workspace.
 - Keep hosted descriptions and imports in the browser and verify editing, navigation, downloads and reopening under the Pages path.
 - Design connected processes in a full screen map or step list, review changes before applying, and restore them with Undo.

@@ -1,0 +1,60 @@
+{
+  "id": "deterministic-control",
+  "title": "Code vs model decisions",
+  "summary": "Assign exact calculations and enforceable rules to deterministic components.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Division of work",
+      "headers": [
+        "Deterministic component",
+        "Model-assisted task"
+      ],
+      "rows": [
+        [
+          "Compare dates and compute rates",
+          "Extract possible values from unstructured passages"
+        ],
+        [
+          "Enforce access and publication state",
+          "Flag ambiguity and recommend routing"
+        ],
+        [
+          "Check commit/run identity",
+          "Investigate a failed pipeline"
+        ],
+        [
+          "Validate schema and shapes",
+          "Suggest ontology mapping"
+        ],
+        [
+          "Deduplicate known event IDs",
+          "Assess semantic similarity of bounded candidates"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Models cannot turn an unsupported claim into approved data by expressing certainty. Every resulting action remains constrained by the controller’s rules."
+    }
+  ],
+  "refs": [
+    "jevlimits"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

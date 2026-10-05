@@ -1,0 +1,39 @@
+{
+  "id": "handoffs",
+  "title": "Compact agent handoffs",
+  "summary": "Pass structured findings and evidence identifiers rather than entire conversations.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Handoff fields",
+      "items": [
+        "Task and input revision identity.",
+        "Confirmed observations and exact source locations.",
+        "Inferences labeled separately from facts.",
+        "Actions executed, resulting artifacts, and verification results.",
+        "Unresolved questions, constraints, and next required decision."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The receiving agent can retrieve underlying evidence and continue without inheriting irrelevant conversation or silently losing constraints."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "models"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

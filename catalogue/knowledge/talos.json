@@ -1,0 +1,46 @@
+{
+  "id": "talos",
+  "title": "Verification and evidence",
+  "summary": "Match checks and evidence to the change being reviewed, with clear outcomes and project specific gates.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Recommended practice",
+      "text": "Use focused checks while developing and broader checks when reviewing a release candidate. Record the state checked, the actual results, unresolved findings, and checks that were not run."
+    },
+    {
+      "type": "p",
+      "label": "Concepts to adapt",
+      "text": "Two verification loops, post-change evidence, structured findings, distinct verdicts, QA packets, adverse-case audits, and budget stopping behavior."
+    },
+    {
+      "type": "p",
+      "label": "Project adaptation",
+      "text": "Choose checks that fit your services, interfaces, data, and deployment process. Separate evidence for a particular change from evaluations of workflow quality, cost, and rollout outcomes."
+    },
+    {
+      "type": "p",
+      "label": "Example source: Talos work-test cycle",
+      "text": "The historical source review inspected work-cycle-docs and selected supporting code, scripts, and test definitions in Talos at commit 970385bedac11a6bf0eecbe951aa815735d73a1b on chore/cleanup-before-release. Repository code was not executed. Test pass status and deployed behavior were not verified. Talos is an example source, not a dependency of Workflow Atlas."
+    }
+  ],
+  "refs": [
+    "taloscycle",
+    "talosreadme"
+  ],
+  "basis": "Recommended practice + inspected example",
+  "confidence": "Moderate for adaptation. High for inspected contents, execution unverified",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "verification"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

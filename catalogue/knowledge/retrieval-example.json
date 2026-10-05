@@ -1,0 +1,57 @@
+{
+  "id": "retrieval-example",
+  "title": "Example: find matching topics",
+  "summary": "A fictional case showing how a request becomes a checked result.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "The request",
+      "text": "A user selects a subject area and wants the matching topics already held by an application."
+    },
+    {
+      "type": "steps",
+      "label": "Suggested design",
+      "items": [
+        "Validate the selected subject and caller access.",
+        "Call the approved topic retrieval operation.",
+        "Check the returned scope and required fields.",
+        "Display the results, an empty state or a clear failure.",
+        "If the input is free text, assess whether a bounded interpretation step is useful before the same operation."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance example",
+      "text": "Given a fixture with two matching topics and one outside the requested subject, expect exactly the two permitted topics. Record a separate example for no matches and unavailable service."
+    },
+    {
+      "type": "p",
+      "label": "Use this in Atlas",
+      "text": "Create a feature or feasibility draft. Record the real outcome and acceptance examples. In the knowledge map, open Retrieve and validate and review Add retrieval checks. Use the process editor when explicit steps and outcomes help explain the design."
+    },
+    {
+      "type": "p",
+      "label": "Limits",
+      "text": "This is an illustrative design. No endpoint, test result, company policy or database schema has been verified. A model or MCP server is optional and requires its own justification."
+    }
+  ],
+  "refs": [],
+  "basis": "Illustrative example",
+  "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "information-retrieval"
+    ],
+    "aliases": [
+      "topic list",
+      "subject areas"
+    ],
+    "revision": "1",
+    "applicability": "Use when designing how existing information is retrieved and checked.",
+    "limits": "Fictional example, not evidence of a working integration.",
+    "sourceStatus": "needs-review",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

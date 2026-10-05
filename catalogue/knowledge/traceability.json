@@ -1,0 +1,45 @@
+{
+  "id": "traceability",
+  "title": "End-to-end traceability",
+  "summary": "Connect a requirement to affected components, meaningful checks and delivery evidence.",
+  "sections": [
+    {
+      "type": "code",
+      "label": "Trace chain",
+      "text": "Source or reviewed decision\n → required behavior\n → affected components and interfaces\n → meaningful checks\n → evidence for the delivered revision"
+    },
+    {
+      "type": "code",
+      "label": "Example for a graph application",
+      "text": "Requirement\n → ontology concepts and TTL\n → SPARQL behavior\n → Spring service and REST contract\n → React behavior\n → verification"
+    },
+    {
+      "type": "p",
+      "label": "Bidirectional links",
+      "text": "From a requirement, find its implementation and checks. From a changed query, API, or test, identify the requirement and source decision it serves."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Relevant components and verification have revision-linked evidence. The map can expose missing links without guessing that every missing link is a defect."
+    }
+  ],
+  "refs": [
+    "traceability"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "requirements"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

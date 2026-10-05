@@ -1,0 +1,48 @@
+{
+  "id": "impact-skill",
+  "title": "Change-impact skill",
+  "summary": "Trace the parts of a system affected by a proposed change and identify what needs verification.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Inputs",
+      "text": "The proposed outcome, known component and data dependencies, relevant versions, consumer contracts and existing checks."
+    },
+    {
+      "type": "p",
+      "label": "Graph application example",
+      "text": "For an RDF application, the inputs may include ontology concepts, TTL and query locations, service revisions and API consumers. These are one implementation of the general dependency investigation."
+    },
+    {
+      "type": "p",
+      "label": "Procedure",
+      "text": "Follow known relationships and actual references. Identify direct effects, migrations, consumer contracts, and test scenarios. Label indirect impacts as hypotheses until checked."
+    },
+    {
+      "type": "p",
+      "label": "Output",
+      "text": "Affected component map, dependency order, suggested verification, and evidence for each impact."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "A claimed impact links to a source relationship, code reference, contract, or executed observation."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "instructions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

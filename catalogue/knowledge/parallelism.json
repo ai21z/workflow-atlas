@@ -1,0 +1,38 @@
+{
+  "id": "parallelism",
+  "title": "Parallel investigations",
+  "summary": "Delegate independent work when it improves speed or evidence quality.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Example split",
+      "text": "One investigator traces React behavior while another checks SPARQL fixtures. They return structured findings with versions and source locations."
+    },
+    {
+      "type": "p",
+      "label": "Merge discipline",
+      "text": "One owner combines findings, resolves contradictions, and controls the implementation. Avoid concurrent independent edits of the same files."
+    },
+    {
+      "type": "p",
+      "label": "Cost discipline",
+      "text": "Add an agent for a separable task or justified review perspective. Agent count and model agreement are not quality metrics."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

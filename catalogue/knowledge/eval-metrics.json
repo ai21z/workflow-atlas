@@ -1,0 +1,64 @@
+{
+  "id": "eval-metrics",
+  "title": "Workflow-specific metrics",
+  "summary": "Measure usefulness, correctness, review effort, latency, and accepted-result cost.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Measures",
+      "headers": [
+        "Workflow",
+        "Quality",
+        "Economics"
+      ],
+      "rows": [
+        [
+          "Ticket refinement",
+          "Supported requirements; useful questions; invented facts",
+          "Review/edit time; accepted-brief cost"
+        ],
+        [
+          "Debt investigation",
+          "Actionable findings; duplicates; false positives",
+          "Investigation effort; accepted-finding cost"
+        ],
+        [
+          "Implementation",
+          "Behavior; required checks; rework",
+          "Accepted-change cost; elapsed time"
+        ],
+        [
+          "Source review",
+          "Missed errors; false alarms; scope preserved",
+          "Reviewer effort; reviewed-record cost"
+        ],
+        [
+          "Knowledge answers",
+          "Needed evidence; supported claims; abstention",
+          "Accepted-answer cost; latency"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Include failures and retries in spend. Report important subsets separately so one strong average does not conceal weak tasks or languages."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "evaluation"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

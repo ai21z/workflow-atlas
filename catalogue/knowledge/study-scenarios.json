@@ -1,0 +1,80 @@
+{
+  "id": "study-scenarios",
+  "title": "Walk through study scenarios",
+  "summary": "Hypothetical cases explain proposed behaviour without claiming workplace results.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Illustrative cases",
+      "headers": [
+        "Input/event",
+        "Evidence to decide"
+      ],
+      "rows": [
+        [
+          "Complete supported reference",
+          "Artifact, checks, first-pass usability, latency and effort."
+        ],
+        [
+          "Required detail missing",
+          "Clarification/incomplete outcome without invented domain choices."
+        ],
+        [
+          "Reference/request conflict",
+          "Conflict surfaced; agreed policy determines response."
+        ],
+        [
+          "Valid format, wrong meaning",
+          "Domain check detects error despite parsing."
+        ],
+        [
+          "Timeout/exhausted budget",
+          "Explicit outcome/recovery and actual cost recorded."
+        ],
+        [
+          "Retry saving an artifact",
+          "Repeated request avoids unintended duplicate effects."
+        ],
+        [
+          "Person corrects a draft",
+          "Repaired acceptance and effort rather than first-pass success."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "ELI15",
+      "text": "An assistant drafts a configuration. The study asks if the draft is useful, which checks find mistakes, when a person must help, and whether the complete process improves time or cost."
+    },
+    {
+      "type": "p",
+      "label": "No implied activation",
+      "text": "Cases stop at the generated result unless application/execution is separately specified. They do not assume production deployment, a Jenkins pipeline or a country-policy change."
+    },
+    {
+      "type": "p",
+      "label": "Adapt to actual formats",
+      "text": "Convert relevant cases into reviewed checks. Separate diagnostic failures from the sample estimating routine performance."
+    }
+  ],
+  "refs": [
+    "structured-output",
+    "evals",
+    "sdk-session-limits"
+  ],
+  "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+  "confidence": "Moderate for fit; workplace benefit unknown",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

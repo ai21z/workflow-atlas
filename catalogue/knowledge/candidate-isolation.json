@@ -1,0 +1,40 @@
+{
+  "id": "candidate-isolation",
+  "title": "Candidate isolation in Neptune",
+  "summary": "A separate named graph alone is not quarantine in Neptune.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Verified behavior",
+      "text": "Neptune’s default SPARQL graph is the union of named graphs. An unscoped serving query can therefore encounter candidate assertions."
+    },
+    {
+      "type": "p",
+      "label": "Design options",
+      "text": "Use a separate candidate store/environment, or enforce and test explicit approved datasets throughout serving queries. Audit every relevant serving path rather than assuming a candidate graph label prevents exposure."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Candidate-only assertions do not appear through ordinary REST/UI serving before the approved publication process. Include a regression scenario for this boundary."
+    }
+  ],
+  "refs": [
+    "neptune"
+  ],
+  "basis": "Documented engine behavior + required design check",
+  "confidence": "High",
+  "catalog": {
+    "kind": "practice",
+    "domains": [
+      "knowledge"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

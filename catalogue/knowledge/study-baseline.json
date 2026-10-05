@@ -1,0 +1,58 @@
+{
+  "id": "study-baseline",
+  "title": "Map the engineer-assisted baseline",
+  "summary": "Observe the existing AI-assisted process and the decisions engineers make around it.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Follow existing cases",
+      "text": "Trace a supported reference through agent/tool execution, corrections, checks and artifact acceptance. Separate waiting time, active engineer work, execution and review."
+    },
+    {
+      "type": "list",
+      "label": "Record each step",
+      "items": [
+        "Inputs/outputs and supporting tools or scripts.",
+        "Context, files and versions supplied by the engineer.",
+        "Missing-information and unsupported-case decisions.",
+        "Corrections and the checks establishing usability.",
+        "Dependencies, permissions, credential categories and workstation state.",
+        "Observed time/cost, with gaps labeled rather than guessed."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Hypothesis to investigate",
+      "text": "Engineers may supply hidden interpretation or repair between visible steps. The screenshots do not establish that this work exists or is undocumented."
+    },
+    {
+      "type": "p",
+      "label": "Fair comparison",
+      "text": "Use the same supported task class and usability criteria. Include the current process's model usage and engineer effort. A simpler automated alternative may still use limited model assistance."
+    },
+    {
+      "type": "p",
+      "label": "Study output",
+      "text": "A concise process map and case evidence table. Reuse checked examples or traces where available; a new observability platform is not required."
+    }
+  ],
+  "refs": [
+    "gov-discovery",
+    "evals"
+  ],
+  "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+  "confidence": "Moderate for fit; workplace benefit unknown",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

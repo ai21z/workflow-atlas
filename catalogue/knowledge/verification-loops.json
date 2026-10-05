@@ -1,0 +1,45 @@
+{
+  "id": "verification-loops",
+  "title": "Two verification loops",
+  "summary": "Focused development checks and candidate release gates serve different purposes.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Recommended practice",
+      "text": "Use quick checks for the change in progress and broader gates for the candidate being reviewed. Define what each loop must prove before choosing its checks."
+    },
+    {
+      "type": "p",
+      "label": "Project adaptation",
+      "text": "Use relevant unit, integration, query, and interface checks while developing. Apply your project's established CI, quality, and release gates at the appropriate milestone. Jenkins and Sonar are examples."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Do not run every expensive gate after every edit, and do not treat one focused check as sufficient release evidence."
+    },
+    {
+      "type": "p",
+      "label": "Example source: Talos work-test cycle",
+      "text": "The inspected Talos runbook describes a focused inner loop for small changes and a heavier Release QA Gate for candidate evidence tied to the exact SHA. This is a finding about the reviewed contents, not a verified execution result."
+    }
+  ],
+  "refs": [
+    "taloscycle"
+  ],
+  "basis": "Recommended practice + inspected example",
+  "confidence": "Moderate for adaptation. High for inspected runbook contents",
+  "catalog": {
+    "kind": "practice",
+    "domains": [
+      "verification"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -16,6 +16,7 @@ const definitions = [
   { id: 'backlog', title: 'Delivery backlog', group: 'Project reference', description: 'Understand remaining work and proof of value.' },
   { id: 'atlas-preservation', title: 'Atlas preservation', group: 'Project reference', description: 'Review the retained Knowledge Atlas and migration boundaries.' },
   { id: 'extension-contract', title: 'Extension contract', group: 'Extend Atlas', description: 'Understand schema, shared definitions and export adapters.' },
+  { id: 'catalogue', title: 'Knowledge catalogue', group: 'Extend Atlas', description: 'Understand topic types, source scope and how to maintain shared catalogue records.' },
   { id: 'workflow-model', title: 'Workflow model', group: 'Extend Atlas', description: 'Read process records, bounded correction rules and migration behavior.' },
   ...JEV_DEFINITIONS.map((page) => ({
     ...page,

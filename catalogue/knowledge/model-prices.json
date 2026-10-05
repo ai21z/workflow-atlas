@@ -1,0 +1,90 @@
+{
+  "id": "model-prices",
+  "title": "Model candidates & prices",
+  "summary": "Published Copilot pricing snapshot; candidate choices require project-specific evaluation.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "USD per 1 million ordinary tokens · 2 October 2026",
+      "headers": [
+        "Candidate",
+        "Input",
+        "Output",
+        "Initial benchmark role"
+      ],
+      "rows": [
+        [
+          "GPT-6 Luna",
+          "$0.10",
+          "$0.50",
+          "Bounded utility work"
+        ],
+        [
+          "Claude Haiku 4.5",
+          "$1",
+          "$5",
+          "Alternative utility worker"
+        ],
+        [
+          "GPT-5.3-Codex",
+          "$1.75",
+          "$14",
+          "Coding baseline"
+        ],
+        [
+          "Claude Sonnet 5.5",
+          "$2",
+          "$10",
+          "Routine implementation"
+        ],
+        [
+          "GPT-6.1 Sol",
+          "$2",
+          "$10",
+          "Alternative implementation"
+        ],
+        [
+          "Claude Opus 5.5",
+          "$4",
+          "$20",
+          "Difficult interpretation/review"
+        ],
+        [
+          "GPT-6 Astra",
+          "$10",
+          "$50",
+          "Measured escalation"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Pricing scope",
+      "text": "Copilot rates, not universal vendor API prices. Cache reads/writes and applicable long-context tiers are excluded from this table. Model availability depends on client and organization policy. Refresh before estimating spend."
+    },
+    {
+      "type": "p",
+      "label": "Not a ranking",
+      "text": "These are starting candidates, not measured recommendations for your tasks. RDF, Java, React, source-language and review work are example benchmark areas. Evaluate the tasks your project actually needs."
+    }
+  ],
+  "refs": [
+    "prices",
+    "models"
+  ],
+  "basis": "Documented pricing + proposed benchmarks",
+  "confidence": "High for snapshot; unknown for task performance",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "models"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

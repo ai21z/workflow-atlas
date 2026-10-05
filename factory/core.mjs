@@ -8,6 +8,7 @@ export { CATALOG, TOOL_ALIASES } from './catalog.mjs';
 export const EXPORTER_VERSION = '3.1.0';
 
 const { stages, skills, roles, practices } = CATALOG;
+const practiceReviewDate = practice => practice.reviewedOn || CATALOG.definitionMetadata[`practice:${practice.id}`]?.reviewedOn || REVIEW_DATE;
 const clone = value => JSON.parse(JSON.stringify(value));
 const plainObject = value => value !== null && typeof value === 'object' && !Array.isArray(value) && Object.getPrototypeOf(value) === Object.prototype;
 const encoder = new TextEncoder();
@@ -410,7 +411,7 @@ function practiceText(config, outputKind = 'pack') {
   const selected = practices.filter(practice => config.practices.includes(practice.id));
   const applicable = humanBlueprint ? selected.filter(practice => !['portable-behavior', 'progressive-context'].includes(practice.id)) : selected;
   const scope = applicable.length !== selected.length ? '\n\nAgent instruction practices remain in project.json. They are omitted here because this blueprint assigns no work to agents.' : '';
-  return (applicable.map(practice => `### ${practice.label}\n\n${practice.application}\n\nScope: ${practice.limits}\n\nReference: [original source](${practice.source}). Local adaptation version ${practice.version}, reviewed ${REVIEW_DATE}.`).join('\n\n') || (humanBlueprint ? 'No additional practice guidance for this blueprint.' : 'No optional reference practices selected.')) + scope;
+  return (applicable.map(practice => `### ${practice.label}\n\n${practice.application}\n\nScope: ${practice.limits}\n\nReference: [original source](${practice.source}). Local adaptation version ${practice.version}, reviewed ${practiceReviewDate(practice)}.`).join('\n\n') || (humanBlueprint ? 'No additional practice guidance for this blueprint.' : 'No optional reference practices selected.')) + scope;
 }
 
 function factsText(config) {
@@ -694,7 +695,7 @@ function installContent(config, selection = { kind: 'pack' }) {
 
 function sourceContent(config, outputKind = 'pack') {
   const runtimeSources = config.runtime.enabled ? '## Runtime design references\n\n- [MCP tool specification](https://modelcontextprotocol.io/specification/2026-07-28/server/tools). Input validation, server access control, output schemas, timeouts and logging responsibilities. This does not configure an MCP server.\n- [Safe retries with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/). Duplicate operations and uncertain results after a timeout.\n- [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents). Compare fixed code, workflows and adaptive agents according to the actual task.\n\n' : '';
-  return `# Sources and applicability\n\nDefinition review date: ${REVIEW_DATE}. Definition versions identify local adaptations, not upstream release versions. A URL alone does not establish correctness.\n\n${outputKind === 'blueprint' ? '' : `## Format references\n\n- [Agent Skills specification](${SOURCES.skills}). Required metadata, naming and focused supporting references.\n- [GitHub custom agent configuration](${SOURCES.agents}). Explicit tool aliases, target values and metadata. Host behavior must be exercised separately.\n- [Custom agent authoring](${SOURCES.install}). Repository layout and GitHub cloud repository requirements.\n- [Copilot skills](${SOURCES.copilotSkills}). Documented discovery locations.\n\n`}## Technology questions\n\n${profilesText(config)}\n\n## Selected reference practices\n\n${practiceText(config, outputKind)}\n\n${runtimeSources}## Project source locations\n\n${fence(placeholder(config.project.sourceLocations, 'source locations'))}\n\n## Claim trace\n\n${factsText(config)}\n\nThe factory records source locations and supplied confirmations without retrieving or verifying arbitrary content. Preserve original material and distinguish it from derived claims. Conflicting claims remain visible until resolved.\n`;
+  return `# Sources and applicability\n\nBaseline definition review record: ${REVIEW_DATE}. Individual definition records may have later dates. Definition versions identify local adaptations, not upstream release versions. A URL alone does not establish correctness.\n\n${outputKind === 'blueprint' ? '' : `## Format references\n\n- [Agent Skills specification](${SOURCES.skills}). Required metadata, naming and focused supporting references.\n- [GitHub custom agent configuration](${SOURCES.agents}). Explicit tool aliases, target values and metadata. Host behavior must be exercised separately.\n- [Custom agent authoring](${SOURCES.install}). Repository layout and GitHub cloud repository requirements.\n- [Copilot skills](${SOURCES.copilotSkills}). Documented discovery locations.\n\n`}## Technology questions\n\n${profilesText(config)}\n\n## Selected reference practices\n\n${practiceText(config, outputKind)}\n\n${runtimeSources}## Project source locations\n\n${fence(placeholder(config.project.sourceLocations, 'source locations'))}\n\n## Claim trace\n\n${factsText(config)}\n\nThe factory records source locations and supplied confirmations without retrieving or verifying arbitrary content. Preserve original material and distinguish it from derived claims. Conflicting claims remain visible until resolved.\n`;
 }
 
 function requirementTemplate(config) {
@@ -874,7 +875,7 @@ export function compile(config) {
     schemaVersion: SCHEMA_VERSION, workflowModelVersion: config.workflowModel.version, templateVersion: EXPORTER_VERSION, exporterVersion: EXPORTER_VERSION, catalogVersion: DEFINITION_VERSION, reviewedOn: REVIEW_DATE,
     kind: 'pack', target: { family: 'github-copilot', environment: config.project.host }, recipe: config.workflow.recipe, draft: !validation.configurationComplete,
     validation: { configurationComplete: validation.configurationComplete, formatChecked: validation.formatChecked, hostExercised: false, behaviorObserved: false, improvementEstablished: false },
-    practices: practices.filter(practice => config.practices.includes(practice.id)).map(practice => ({ id: practice.id, adaptationVersion: practice.version, source: practice.source, reviewedOn: REVIEW_DATE })),
+    practices: practices.filter(practice => config.practices.includes(practice.id)).map(practice => ({ id: practice.id, adaptationVersion: practice.version, source: practice.source, reviewedOn: practiceReviewDate(practice) })),
     guidanceSnapshot: guidanceSnapshot(config),
     artifacts: artifactFiles(config).map(file => ({ path: file.path, purpose: file.why, stages: file.stages, roles: file.roles, processes: file.processes || [], steps: file.steps || [] })),
   });

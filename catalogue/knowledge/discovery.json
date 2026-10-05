@@ -1,0 +1,45 @@
+{
+  "id": "discovery",
+  "title": "Discovery procedure",
+  "summary": "Investigate one bounded capability deeply enough to establish a useful baseline.",
+  "sections": [
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Select a concrete user/domain scenario and identify its owner.",
+        "Read the request and reviewed decisions at known versions.",
+        "Follow the relevant data, components, interfaces and user behavior using actual evidence.",
+        "Inspect existing tests and recent pipeline evidence.",
+        "Classify requirements and unresolved assumptions.",
+        "Prepare acceptance scenarios, impact, and a reviewed implementation brief."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Example to adapt",
+      "text": "In a graph-backed web application, the investigation may cross TTL, SPARQL, a service, an API and a UI. A document or process study uses its own sources and handoffs."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The investigation produces a concrete decision or implementable task. The discovered facts are distinguishable from suggestions and remaining unknowns."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "requirements"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

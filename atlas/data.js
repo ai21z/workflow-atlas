@@ -1,8 +1,8 @@
+// Compiled from catalogue/. Edit source records and run npm run build:catalogue.
 window.TOPIC_DATA = {
   "nodes": [
     {
       "id": "overview",
-      "parent": null,
       "title": "Project overview",
       "summary": "Understand a workflow, choose relevant practices and see how steps, outputs and checks connect.",
       "sections": [
@@ -46,7 +46,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "What Atlas currently does",
-          "text": "The Factory records decisions in supported development recipes and exports instructions and evidence templates. Configurable outcome branches and correction loops are planned. Reading these patterns does not add them to your project or execute them."
+          "text": "The Factory records workflow decisions and exports instructions and evidence templates. The process editor can describe supported steps, outcome routes and bounded correction loops. These are design records. Atlas does not execute workflows."
         },
         {
           "type": "p",
@@ -57,9 +57,32 @@ window.TOPIC_DATA = {
           "type": "p",
           "label": "Worked feasibility study",
           "text": "The reference-to-configuration example assesses whether an engineer-assisted process should become a governed service. It illustrates a study, with no claim of measured savings or a deployed integration."
+        },
+        {
+          "type": "p",
+          "label": "Explore by kind",
+          "text": "Use the topic type filter to find concepts, practices, technologies or examples. Follow Retrieve and check information for a short path from an outcome to written workflow checks."
         }
       ],
       "refs": [],
+      "basis": "Research synthesis",
+      "confidence": "High for documented facts; moderate for fit",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": null,
       "related": [
         "task-contract",
         "pilot",
@@ -68,14 +91,12 @@ window.TOPIC_DATA = {
         "workflow-patterns",
         "architecture-decisions",
         "work-breakdown",
-        "release-operations"
-      ],
-      "basis": "Research synthesis",
-      "confidence": "High for documented facts; moderate for fit"
+        "release-operations",
+        "information-retrieval"
+      ]
     },
     {
       "id": "workflows",
-      "parent": "overview",
       "title": "Workflows & orchestration",
       "summary": "Use explicit stages and acceptance criteria, with models performing analysis inside the process.",
       "sections": [
@@ -103,6 +124,24 @@ window.TOPIC_DATA = {
       "refs": [
         "temporal"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "overview",
       "related": [
         "skills",
         "task-contract",
@@ -111,13 +150,10 @@ window.TOPIC_DATA = {
         "study-contract",
         "workflow-patterns",
         "architecture-decisions"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "workflow-patterns",
-      "parent": "workflows",
       "title": "Reusable workflow patterns",
       "summary": "Connect steps, results and checks. Decide what happens when a result passes, needs correction or cannot continue.",
       "sections": [
@@ -232,7 +268,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Current Atlas boundary",
-          "text": "This topic teaches a design pattern. The Factory currently uses fixed development recipes and exports files. Editable outcome routes and correction loops are planned, not implemented. General document workflows are outside the current JEV recipe suggestions."
+          "text": "The Factory supports development recipes and custom process design, including supported outcome routes and bounded correction loops. These designs reach the exported workflow. Atlas does not execute them. General document workflows remain outside the current JEV recipe suggestions."
         },
         {
           "type": "p",
@@ -244,6 +280,24 @@ window.TOPIC_DATA = {
         "simple-agents",
         "evals"
       ],
+      "basis": "Documented patterns + proposed adaptation",
+      "confidence": "Moderate for fit. No workflow execution established",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
       "related": [
         "task-contract",
         "retries",
@@ -252,13 +306,10 @@ window.TOPIC_DATA = {
         "study-quality",
         "verification-loops",
         "post-change-checks"
-      ],
-      "basis": "Documented patterns + proposed adaptation",
-      "confidence": "Moderate for fit. No workflow execution established"
+      ]
     },
     {
       "id": "architecture-decisions",
-      "parent": "workflows",
       "title": "Architecture decisions",
       "summary": "Choose a proportionate design from the required behavior, existing systems and evidence.",
       "sections": [
@@ -295,6 +346,26 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed practice",
+      "confidence": "Moderate. Project constraints require investigation",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": [
+          "stage:architecture"
+        ]
+      },
+      "parent": "workflows",
       "related": [
         "requirements-workflow",
         "impact-skill",
@@ -302,13 +373,10 @@ window.TOPIC_DATA = {
         "study-contract",
         "durable-execution",
         "work-breakdown"
-      ],
-      "basis": "Proposed practice",
-      "confidence": "Moderate. Project constraints require investigation"
+      ]
     },
     {
       "id": "work-breakdown",
-      "parent": "workflows",
       "title": "Break work into deliverable changes",
       "summary": "Turn an agreed outcome into reviewable pieces with clear acceptance, owners and dependencies.",
       "sections": [
@@ -363,19 +431,36 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed practice with fictional example",
+      "confidence": "Moderate. Granularity depends on the project",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": [
+          "stage:breakdown"
+        ]
+      },
+      "parent": "workflows",
       "related": [
         "architecture-decisions",
         "requirements-workflow",
         "traceability",
         "decomposition",
         "implementation-workflow"
-      ],
-      "basis": "Proposed practice with fictional example",
-      "confidence": "Moderate. Granularity depends on the project"
+      ]
     },
     {
       "id": "release-operations",
-      "parent": "workflows",
       "title": "Release and operate",
       "summary": "Plan how a checked change reaches its users, how its behavior is observed and how problems are handled.",
       "sections": [
@@ -418,6 +503,26 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed practice",
+      "confidence": "Moderate. Release procedures are project specific",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": [
+          "stage:release"
+        ]
+      },
+      "parent": "workflows",
       "related": [
         "verification-loops",
         "qa-packet",
@@ -425,13 +530,10 @@ window.TOPIC_DATA = {
         "workflow-patterns",
         "eval-metrics",
         "study-contract"
-      ],
-      "basis": "Proposed practice",
-      "confidence": "Moderate. Release procedures are project specific"
+      ]
     },
     {
       "id": "requirements-workflow",
-      "parent": "workflows",
       "title": "Requirements investigation",
       "summary": "Turn a request into a traceable brief before generating implementation tickets.",
       "sections": [
@@ -463,18 +565,35 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "practice",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "selectable",
+        "definitionRefs": [
+          "practice:specification-first"
+        ]
+      },
+      "parent": "workflows",
       "related": [
         "requirement-status",
         "traceability",
         "task-contract",
         "requirements-skill"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "implementation-workflow",
-      "parent": "workflows",
       "title": "Verified implementation",
       "summary": "Implement a scoped change and prepare a PR supported by actual execution evidence.",
       "sections": [
@@ -509,6 +628,28 @@ window.TOPIC_DATA = {
       "refs": [
         "taloscycle"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "practice",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "selectable",
+        "definitionRefs": [
+          "practice:minimum-change",
+          "stage:implementation",
+          "stage:bug-fix"
+        ]
+      },
+      "parent": "workflows",
       "related": [
         "post-change-checks",
         "jenkins",
@@ -517,13 +658,10 @@ window.TOPIC_DATA = {
         "workflow-patterns",
         "work-breakdown",
         "release-operations"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "curation-workflow",
-      "parent": "workflows",
       "title": "Country-data curation",
       "summary": "Compare proposed assertions with source evidence before they become approved domain data.",
       "sections": [
@@ -549,18 +687,33 @@ window.TOPIC_DATA = {
         "shacl",
         "neptune"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
       "related": [
         "jev-support",
         "candidate-isolation",
         "answer-contract",
         "applicability"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "architecture",
-      "parent": "workflows",
       "title": "Controller & harness",
       "summary": "The missing layer above skills and agents provides execution state and enforceable controls.",
       "sections": [
@@ -611,6 +764,24 @@ window.TOPIC_DATA = {
       "refs": [
         "skillspec"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
       "related": [
         "task-contract",
         "agent-roles",
@@ -618,13 +789,10 @@ window.TOPIC_DATA = {
         "skill-definition",
         "architecture-decisions",
         "workflow-patterns"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "task-contract",
-      "parent": "workflows",
       "title": "Task & evidence contract",
       "summary": "Make the expected outcome, inputs, permissions, verification, and limits explicit.",
       "sections": [
@@ -652,6 +820,24 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
       "related": [
         "qa-packet",
         "finding-contract",
@@ -659,13 +845,10 @@ window.TOPIC_DATA = {
         "budgets",
         "permissions",
         "workflow-patterns"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "deterministic-control",
-      "parent": "workflows",
       "title": "Code vs model decisions",
       "summary": "Assign exact calculations and enforceable rules to deterministic components.",
       "sections": [
@@ -708,17 +891,32 @@ window.TOPIC_DATA = {
       "refs": [
         "jevlimits"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
       "related": [
         "jev-limitations",
         "permissions",
         "event-state"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "event-state",
-      "parent": "workflows",
       "title": "State & duplicate events",
       "summary": "Represent work explicitly so retries and duplicate deliveries do not create repeated actions.",
       "sections": [
@@ -739,18 +937,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
       "related": [
         "retries",
         "durable-execution",
         "rovo",
         "task-contract"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "parallelism",
-      "parent": "workflows",
       "title": "Parallel investigations",
       "summary": "Delegate independent work when it improves speed or evidence quality.",
       "sections": [
@@ -771,17 +984,32 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
       "related": [
         "agent-roles",
         "handoffs",
         "cost-per-result"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "durable-execution",
-      "parent": "workflows",
       "title": "Durable execution",
       "summary": "Introduce persistent orchestration when jobs must recover or wait across long periods.",
       "sections": [
@@ -809,17 +1037,32 @@ window.TOPIC_DATA = {
       "refs": [
         "temporal"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
       "related": [
         "architecture",
         "event-state",
         "dynamic-workflows"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "dynamic-workflows",
-      "parent": "workflows",
       "title": "Copilot Dynamic Workflows",
       "summary": "A recently introduced, code-defined orchestration option to evaluate for the pilot.",
       "sections": [
@@ -848,18 +1091,33 @@ window.TOPIC_DATA = {
         "dynamic",
         "dynamicdocs"
       ],
+      "basis": "Documented capability + proposed evaluation",
+      "confidence": "High for capability; unknown for tenant fit",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
       "related": [
         "intellij",
         "budgets",
         "permissions",
         "durable-execution"
-      ],
-      "basis": "Documented capability + proposed evaluation",
-      "confidence": "High for capability; unknown for tenant fit"
+      ]
     },
     {
       "id": "retries",
-      "parent": "workflows",
       "title": "Retries & stopping rules",
       "summary": "Distinguish repeating an operation from correcting a result, and define when each must stop.",
       "sections": [
@@ -893,18 +1151,33 @@ window.TOPIC_DATA = {
       "refs": [
         "talosbudget"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
       "related": [
         "budgets",
         "verdicts",
         "event-state",
         "workflow-patterns"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "toolchain",
-      "parent": "overview",
       "title": "Tools and integrations",
       "summary": "Assign existing systems concrete responsibilities and verify actual integration boundaries.",
       "sections": [
@@ -925,17 +1198,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "overview",
       "related": [
         "architecture",
         "capability-inventory",
-        "permissions"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+        "permissions",
+        "retrieval-options"
+      ]
     },
     {
       "id": "jira",
-      "parent": "toolchain",
       "title": "Jira",
       "summary": "Task contracts, acceptance criteria, ownership, and reviewed findings.",
       "sections": [
@@ -956,18 +1245,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "toolchain",
       "related": [
         "requirements-workflow",
         "finding-contract",
         "requirement-status",
         "rovo"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "confluence",
-      "parent": "toolchain",
       "title": "Confluence",
       "summary": "Reviewed architecture, requirements, decisions, runbooks, and explanations.",
       "sections": [
@@ -988,18 +1292,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "toolchain",
       "related": [
         "llm-wiki",
         "engineering-knowledge",
         "answer-contract",
         "rovo"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "bitbucket",
-      "parent": "toolchain",
       "title": "Bitbucket",
       "summary": "Versioned code, TTL, SPARQL, tests, and reviewable changes.",
       "sections": [
@@ -1022,17 +1341,32 @@ window.TOPIC_DATA = {
       "refs": [
         "cloud"
       ],
+      "basis": "Documented constraint + proposed use",
+      "confidence": "High",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "toolchain",
       "related": [
         "implementation-workflow",
         "intellij",
         "post-change-checks"
-      ],
-      "basis": "Documented constraint + proposed use",
-      "confidence": "High"
+      ]
     },
     {
       "id": "intellij",
-      "parent": "toolchain",
       "title": "IntelliJ & Copilot",
       "summary": "A supervised entry point for repository investigation and implementation.",
       "sections": [
@@ -1056,17 +1390,32 @@ window.TOPIC_DATA = {
         "jetbrains",
         "sdk"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "toolchain",
       "related": [
         "model-inheritance",
         "capability-inventory",
         "bitbucket"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "jenkins",
-      "parent": "toolchain",
       "title": "Jenkins & Sonar",
       "summary": "Executed tests and quality evidence attached to the actual candidate.",
       "sections": [
@@ -1087,18 +1436,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "toolchain",
       "related": [
         "ci-skill",
         "coverage",
         "sonar-debt",
         "verification-loops"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "rovo",
-      "parent": "toolchain",
       "title": "Rovo Cloud",
       "summary": "Use Atlassian context and configured automation actions for bounded tasks.",
       "sections": [
@@ -1123,18 +1487,33 @@ window.TOPIC_DATA = {
         "rovotier",
         "rovocredits"
       ],
+      "basis": "Documented capability + proposed use",
+      "confidence": "High for docs; unknown for tenant configuration",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "toolchain",
       "related": [
         "jira",
         "confluence",
         "billing-boundaries",
         "permissions"
-      ],
-      "basis": "Documented capability + proposed use",
-      "confidence": "High for docs; unknown for tenant configuration"
+      ]
     },
     {
       "id": "neptune-stack",
-      "parent": "toolchain",
       "title": "RDF4J & Neptune",
       "summary": "Preserve ontology semantics and verify graph behavior in the actual serving environment.",
       "sections": [
@@ -1159,18 +1538,33 @@ window.TOPIC_DATA = {
         "explain",
         "neptune"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "An RDF4J and Neptune environment example. It is not the default database architecture for every workflow.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "toolchain",
       "related": [
         "query-performance",
         "candidate-isolation",
         "rdf-skill",
         "provenance"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "permissions",
-      "parent": "toolchain",
       "title": "Identity & scoped access",
       "summary": "Enforce allowed actions in credentials and runtime controls.",
       "sections": [
@@ -1200,18 +1594,33 @@ window.TOPIC_DATA = {
         "rovo",
         "dynamicdocs"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "toolchain",
       "related": [
         "task-contract",
         "retrieval",
         "candidate-isolation",
         "deterministic-control"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "capability-inventory",
-      "parent": "toolchain",
       "title": "Capability inventory",
       "summary": "Check what your organization can actually run before choosing the architecture.",
       "sections": [
@@ -1243,17 +1652,32 @@ window.TOPIC_DATA = {
         "jetbrains",
         "sdk"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "toolchain",
       "related": [
         "dynamic-workflows",
         "model-inheritance",
         "billing-boundaries"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "economy",
-      "parent": "overview",
       "title": "Models & token economy",
       "summary": "Optimize accepted outcomes, context quality, and repeated work before elaborate routing.",
       "sections": [
@@ -1271,18 +1695,33 @@ window.TOPIC_DATA = {
       "refs": [
         "billing"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "models"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "overview",
       "related": [
         "routing",
         "cost-per-result",
         "model-prices",
         "eval-metrics"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "model-prices",
-      "parent": "economy",
       "title": "Model candidates & prices",
       "summary": "Published Copilot pricing snapshot; candidate choices require project-specific evaluation.",
       "sections": [
@@ -1355,17 +1794,32 @@ window.TOPIC_DATA = {
         "prices",
         "models"
       ],
+      "basis": "Documented pricing + proposed benchmarks",
+      "confidence": "High for snapshot; unknown for task performance",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "models"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "economy",
       "related": [
         "routing",
         "cost-per-result",
         "capability-inventory"
-      ],
-      "basis": "Documented pricing + proposed benchmarks",
-      "confidence": "High for snapshot; unknown for task performance"
+      ]
     },
     {
       "id": "routing",
-      "parent": "economy",
       "title": "Task-based model routing",
       "summary": "Choose the least expensive route that satisfies the task’s measured acceptance criteria.",
       "sections": [
@@ -1392,18 +1846,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "models"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "economy",
       "related": [
         "model-prices",
         "model-inheritance",
         "jev-judgments",
         "eval-corpus"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "cost-per-result",
-      "parent": "economy",
       "title": "Cost per accepted result",
       "summary": "Include rejected runs, retries, and human correction when measuring value.",
       "sections": [
@@ -1434,19 +1903,34 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "models"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "economy",
       "related": [
         "eval-metrics",
         "routing",
         "billing-boundaries",
         "confidence-summary",
         "study-economics"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "context-selection",
-      "parent": "economy",
       "title": "Relevant context",
       "summary": "Retrieve high-signal evidence when needed instead of loading the whole project.",
       "sections": [
@@ -1470,17 +1954,34 @@ window.TOPIC_DATA = {
       "refs": [
         "context"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "practice",
+        "domains": [
+          "models"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "selectable",
+        "definitionRefs": [
+          "practice:progressive-context"
+        ]
+      },
+      "parent": "economy",
       "related": [
         "retrieval",
         "handoffs",
         "eager-skills"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "revision-cache",
-      "parent": "economy",
       "title": "Revision-keyed reuse",
       "summary": "Reuse analysis only while its source inputs remain valid.",
       "sections": [
@@ -1501,17 +2002,32 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "models"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "economy",
       "related": [
         "post-change-checks",
         "provenance",
         "task-contract"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "handoffs",
-      "parent": "economy",
       "title": "Compact agent handoffs",
       "summary": "Pass structured findings and evidence identifiers rather than entire conversations.",
       "sections": [
@@ -1533,17 +2049,32 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "models"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "economy",
       "related": [
         "parallelism",
         "task-contract",
         "answer-contract"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "budgets",
-      "parent": "economy",
       "title": "Budgets & limits",
       "summary": "Bound work and measure consumption before scaling a workflow.",
       "sections": [
@@ -1578,18 +2109,33 @@ window.TOPIC_DATA = {
         "dynamicdocs",
         "sdk-session-limits"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "models"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "economy",
       "related": [
         "retries",
         "cost-per-result",
         "dynamic-workflows",
         "study-runtime"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "model-inheritance",
-      "parent": "economy",
       "title": "Subagent model routing",
       "summary": "Effective model selection varies between SDK, IDE, and other harnesses.",
       "sections": [
@@ -1613,17 +2159,32 @@ window.TOPIC_DATA = {
         "sdk",
         "jetbrains"
       ],
+      "basis": "Documented harness-specific behavior",
+      "confidence": "High",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "models"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "economy",
       "related": [
         "capability-inventory",
         "routing",
         "intellij"
-      ],
-      "basis": "Documented harness-specific behavior",
-      "confidence": "High"
+      ]
     },
     {
       "id": "billing-boundaries",
-      "parent": "economy",
       "title": "Copilot & Rovo billing",
       "summary": "A cross-platform workflow can consume more than one allowance.",
       "sections": [
@@ -1653,19 +2214,34 @@ window.TOPIC_DATA = {
         "rovocredits",
         "sdk-server-auth"
       ],
+      "basis": "Documented billing behavior",
+      "confidence": "High for docs; unknown for actual consumption",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "models"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "economy",
       "related": [
         "cost-per-result",
         "permissions",
         "rovo",
         "study-economics",
         "study-runtime"
-      ],
-      "basis": "Documented billing behavior",
-      "confidence": "High for docs; unknown for actual consumption"
+      ]
     },
     {
       "id": "skills",
-      "parent": "overview",
       "title": "Skills & agent roles",
       "summary": "Package repeatable procedures around real tasks and executable supporting tools.",
       "sections": [
@@ -1688,17 +2264,32 @@ window.TOPIC_DATA = {
       "refs": [
         "anthropicskills"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "instructions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "overview",
       "related": [
         "skill-definition",
         "agent-roles",
         "eager-skills"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "skill-definition",
-      "parent": "skills",
       "title": "Skill contract",
       "summary": "A skill packages a procedure; the host supplies execution and enforcement.",
       "sections": [
@@ -1729,18 +2320,33 @@ window.TOPIC_DATA = {
         "skillspec",
         "anthropicskills"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "instructions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "skills",
       "related": [
         "architecture",
         "task-contract",
         "eager-skills",
         "study-runtime"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "requirements-skill",
-      "parent": "skills",
       "title": "Requirements skill",
       "summary": "Produce a traceable brief with supported behavior and open questions.",
       "sections": [
@@ -1766,17 +2372,32 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "procedure",
+        "domains": [
+          "instructions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "skills",
       "related": [
         "requirements-workflow",
         "requirement-status",
         "traceability"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "impact-skill",
-      "parent": "skills",
       "title": "Change-impact skill",
       "summary": "Trace the parts of a system affected by a proposed change and identify what needs verification.",
       "sections": [
@@ -1807,19 +2428,34 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "procedure",
+        "domains": [
+          "instructions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "skills",
       "related": [
         "traceability",
         "decomposition",
         "neptune-stack",
         "architecture-decisions",
         "work-breakdown"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "ci-skill",
-      "parent": "skills",
       "title": "Jenkins diagnosis skill",
       "summary": "Investigate the first actionable failure with build and revision context.",
       "sections": [
@@ -1845,17 +2481,32 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "procedure",
+        "domains": [
+          "instructions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "skills",
       "related": [
         "jenkins",
         "retries",
         "finding-contract"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "rdf-skill",
-      "parent": "skills",
       "title": "RDF/SPARQL skill",
       "summary": "Verify graph structure and query behavior using versioned fixtures and the right engine.",
       "sections": [
@@ -1885,17 +2536,32 @@ window.TOPIC_DATA = {
         "explain",
         "neptune"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "procedure",
+        "domains": [
+          "instructions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "skills",
       "related": [
         "coverage",
         "candidate-isolation",
         "query-performance"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "source-skill",
-      "parent": "skills",
       "title": "Country-source skill",
       "summary": "Prepare a source-evidence packet for a proposed domain assertion.",
       "sections": [
@@ -1921,18 +2587,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "procedure",
+        "domains": [
+          "instructions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "skills",
       "related": [
         "jev-support",
         "applicability",
         "answer-contract",
         "provenance"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "packet-skill",
-      "parent": "skills",
       "title": "Review-packet skill",
       "summary": "Assemble a concise review result that points to actual artifacts.",
       "sections": [
@@ -1955,17 +2636,32 @@ window.TOPIC_DATA = {
       "refs": [
         "talospacket"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "procedure",
+        "domains": [
+          "instructions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "skills",
       "related": [
         "qa-packet",
         "verdicts",
         "post-change-checks"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "agent-roles",
-      "parent": "skills",
       "title": "Bounded agent roles",
       "summary": "Give each role a task, evidence inputs, permitted tools, and output contract.",
       "sections": [
@@ -2007,17 +2703,32 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "instructions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "skills",
       "related": [
         "routing",
         "parallelism",
         "deterministic-control"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "eager-skills",
-      "parent": "skills",
       "title": "Skill-loading cost",
       "summary": "Progressive disclosure is not universal across every agent configuration.",
       "sections": [
@@ -2041,17 +2752,32 @@ window.TOPIC_DATA = {
         "skillspec",
         "sdk"
       ],
+      "basis": "Documented runtime distinction",
+      "confidence": "High",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "instructions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "skills",
       "related": [
         "context-selection",
         "skill-definition",
         "agent-roles"
-      ],
-      "basis": "Documented runtime distinction",
-      "confidence": "High"
+      ]
     },
     {
       "id": "requirements",
-      "parent": "overview",
       "title": "Requirements & traceability",
       "summary": "Discover intended behavior before generating tickets or changing code.",
       "sections": [
@@ -2069,17 +2795,34 @@ window.TOPIC_DATA = {
       "refs": [
         "traceability"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "requirements"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": [
+          "stage:requirements"
+        ]
+      },
+      "parent": "overview",
       "related": [
         "requirement-status",
         "traceability",
         "requirements-workflow"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "requirement-status",
-      "parent": "requirements",
       "title": "Requirement status",
       "summary": "Label authority and uncertainty instead of treating all statements as requirements.",
       "sections": [
@@ -2116,17 +2859,32 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "requirements"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "requirements",
       "related": [
         "jira",
         "discovery",
         "answer-contract"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "traceability",
-      "parent": "requirements",
       "title": "End-to-end traceability",
       "summary": "Connect a requirement to affected components, meaningful checks and delivery evidence.",
       "sections": [
@@ -2154,18 +2912,33 @@ window.TOPIC_DATA = {
       "refs": [
         "traceability"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "requirements"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "requirements",
       "related": [
         "impact-skill",
         "coverage",
         "engineering-knowledge",
         "work-breakdown"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "applicability",
-      "parent": "requirements",
       "title": "Scope & applicability",
       "summary": "Country-baseline assertions must preserve who, where, when, and which scheme they concern.",
       "sections": [
@@ -2193,18 +2966,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "requirements"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "requirements",
       "related": [
         "temporal-scope",
         "holiday-example",
         "wikidata-statements",
         "jev-support"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "temporal-scope",
-      "parent": "requirements",
       "title": "Temporal semantics",
       "summary": "Publication date, effective date, observation time, and approval time serve different purposes.",
       "sections": [
@@ -2227,17 +3015,32 @@ window.TOPIC_DATA = {
       "refs": [
         "jevlimits"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "requirements"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "requirements",
       "related": [
         "jev-limitations",
         "provenance",
         "applicability"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "holiday-example",
-      "parent": "requirements",
       "title": "Holiday example",
       "summary": "Hypothetical acceptance scenarios expose scope mistakes that formatting checks miss.",
       "sections": [
@@ -2264,18 +3067,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "requirements"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "requirements",
       "related": [
         "coverage",
         "jev-support",
         "traceability",
         "applicability"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "discovery",
-      "parent": "requirements",
       "title": "Discovery procedure",
       "summary": "Investigate one bounded capability deeply enough to establish a useful baseline.",
       "sections": [
@@ -2303,18 +3121,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "requirements"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "requirements",
       "related": [
         "requirements-workflow",
         "pilot",
         "requirement-status",
         "finding-contract"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "debt",
-      "parent": "overview",
       "title": "Debt & coverage",
       "summary": "Use evidence-backed findings and multiple verification dimensions.",
       "sections": [
@@ -2330,18 +3163,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed audit plan",
+      "confidence": "Unknown actual debt",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "maintenance"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "overview",
       "related": [
         "debt-categories",
         "finding-contract",
         "coverage",
         "prioritization"
-      ],
-      "basis": "Proposed audit plan",
-      "confidence": "Unknown actual debt"
+      ]
     },
     {
       "id": "debt-categories",
-      "parent": "debt",
       "title": "Debt investigation categories",
       "summary": "Look beyond code smells to data, contracts, pipelines, decisions, and agent behavior.",
       "sections": [
@@ -2398,17 +3246,32 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "maintenance"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "debt",
       "related": [
         "finding-contract",
         "sonar-debt",
         "query-performance"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "finding-contract",
-      "parent": "debt",
       "title": "Finding contract",
       "summary": "Record enough evidence for someone else to confirm and act on the issue.",
       "sections": [
@@ -2433,17 +3296,34 @@ window.TOPIC_DATA = {
       "refs": [
         "talosfinding"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "maintenance"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": [
+          "stage:diagnosis"
+        ]
+      },
+      "parent": "debt",
       "related": [
         "verdicts",
         "prioritization",
         "jira"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "prioritization",
-      "parent": "debt",
       "title": "Prioritize & deduplicate",
       "summary": "Rank consequences and change exposure rather than precise-looking guessed scores.",
       "sections": [
@@ -2470,17 +3350,32 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "maintenance"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "debt",
       "related": [
         "sonar-debt",
         "decomposition",
         "finding-contract"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "decomposition",
-      "parent": "debt",
       "title": "Break down remediation",
       "summary": "Create independently reviewable outcomes in dependency order.",
       "sections": [
@@ -2508,18 +3403,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "maintenance"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "debt",
       "related": [
         "impact-skill",
         "implementation-workflow",
         "traceability",
         "work-breakdown"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "coverage",
-      "parent": "debt",
       "title": "Coverage dimensions",
       "summary": "Choose checks for the consequences of a change. Execution percentages describe only part of that evidence.",
       "sections": [
@@ -2581,17 +3491,32 @@ window.TOPIC_DATA = {
         "jacoco",
         "shacl"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "maintenance"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "debt",
       "related": [
         "jacoco-counters",
         "holiday-example",
         "eval-metrics"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "jacoco-counters",
-      "parent": "debt",
       "title": "JaCoCo limitations",
       "summary": "Coverage records execution, not whether a test established the right behavior.",
       "sections": [
@@ -2614,16 +3539,31 @@ window.TOPIC_DATA = {
       "refs": [
         "jacoco"
       ],
+      "basis": "Documented metric limitation",
+      "confidence": "High",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "maintenance"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "debt",
       "related": [
         "coverage",
         "mutation-testing"
-      ],
-      "basis": "Documented metric limitation",
-      "confidence": "High"
+      ]
     },
     {
       "id": "sonar-debt",
-      "parent": "debt",
       "title": "Sonar debt limitations",
       "summary": "Rule remediation costs are useful input, not a complete project-debt measure.",
       "sections": [
@@ -2647,17 +3587,32 @@ window.TOPIC_DATA = {
         "sonar",
         "newcode"
       ],
+      "basis": "Documented metric + proposed use",
+      "confidence": "High for definition",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "maintenance"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "debt",
       "related": [
         "debt-categories",
         "prioritization",
         "jenkins"
-      ],
-      "basis": "Documented metric + proposed use",
-      "confidence": "High for definition"
+      ]
     },
     {
       "id": "mutation-testing",
-      "parent": "debt",
       "title": "Targeted mutation testing",
       "summary": "Assess whether important changed-code assertions detect meaningful faults.",
       "sections": [
@@ -2680,17 +3635,32 @@ window.TOPIC_DATA = {
       "refs": [
         "mutation"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "maintenance"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "debt",
       "related": [
         "jacoco-counters",
         "verification-loops",
         "cost-per-result"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "query-performance",
-      "parent": "debt",
       "title": "SPARQL performance",
       "summary": "A query-performance finding needs measured behavior and execution evidence.",
       "sections": [
@@ -2713,17 +3683,32 @@ window.TOPIC_DATA = {
       "refs": [
         "explain"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "maintenance"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "debt",
       "related": [
         "rdf-skill",
         "neptune-stack",
         "finding-contract"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "jev",
-      "parent": "overview",
       "title": "Jev decision support",
       "summary": "Evaluate narrow semantic judgments between evidence collection and domain curation.",
       "sections": [
@@ -2747,17 +3732,32 @@ window.TOPIC_DATA = {
         "jevlimits",
         "jevconfidence"
       ],
+      "basis": "Proposed experiment",
+      "confidence": "Unknown task suitability",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "model-decisions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "overview",
       "related": [
         "jev-support",
         "jev-shadow",
         "jev-limitations"
-      ],
-      "basis": "Proposed experiment",
-      "confidence": "Unknown task suitability"
+      ]
     },
     {
       "id": "jev-judgments",
-      "parent": "jev",
       "title": "Bounded judgment tasks",
       "summary": "Supply a precise question and a small, explicit answer space.",
       "sections": [
@@ -2800,17 +3800,32 @@ window.TOPIC_DATA = {
       "refs": [
         "jevlimits"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "model-decisions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "jev",
       "related": [
         "deterministic-control",
         "jev-support",
         "jev-mapping"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "jev-support",
-      "parent": "jev",
       "title": "Evidence-support check",
       "summary": "Test semantic support with original passages, the candidate assertion, and definitions.",
       "sections": [
@@ -2833,18 +3848,33 @@ window.TOPIC_DATA = {
       "refs": [
         "jevcitation"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "model-decisions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "jev",
       "related": [
         "source-skill",
         "holiday-example",
         "answer-contract",
         "jev-shadow"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "jev-mapping",
-      "parent": "jev",
       "title": "Ontology mapping",
       "summary": "Compare source terminology against supplied concepts and explicit definitions.",
       "sections": [
@@ -2867,17 +3897,32 @@ window.TOPIC_DATA = {
       "refs": [
         "jevlimits"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "model-decisions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "jev",
       "related": [
         "applicability",
         "retrieval",
         "jev-judgments"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "jev-limitations",
-      "parent": "jev",
       "title": "Jev limitations",
       "summary": "Keep precision and enforceable rules outside semantic judgment.",
       "sections": [
@@ -2907,17 +3952,32 @@ window.TOPIC_DATA = {
       "refs": [
         "jevlimits"
       ],
+      "basis": "Documented limitations",
+      "confidence": "High",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "model-decisions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "jev",
       "related": [
         "deterministic-control",
         "jev-confidence",
         "temporal-scope"
-      ],
-      "basis": "Documented limitations",
-      "confidence": "High"
+      ]
     },
     {
       "id": "jev-confidence",
-      "parent": "jev",
       "title": "Confidence ≠ correctness",
       "summary": "Distribution-derived confidence is not a guarantee about an individual domain assertion.",
       "sections": [
@@ -2941,17 +4001,32 @@ window.TOPIC_DATA = {
         "jevconfidence",
         "jevlimits"
       ],
+      "basis": "Documented semantics + evaluation guidance",
+      "confidence": "High for semantics; unknown threshold",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "model-decisions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "jev",
       "related": [
         "jev-shadow",
         "eval-metrics",
         "answer-contract"
-      ],
-      "basis": "Documented semantics + evaluation guidance",
-      "confidence": "High for semantics; unknown threshold"
+      ]
     },
     {
       "id": "jev-clustering",
-      "parent": "jev",
       "title": "Clustering & reconciliation",
       "summary": "Define what is being grouped and why before selecting an AI component.",
       "sections": [
@@ -2977,17 +4052,32 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed exploration",
+      "confidence": "Unknown",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "model-decisions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "jev",
       "related": [
         "jev-mapping",
         "applicability",
         "retrieval"
-      ],
-      "basis": "Proposed exploration",
-      "confidence": "Unknown"
+      ]
     },
     {
       "id": "jev-shadow",
-      "parent": "jev",
       "title": "Shadow-mode evaluation",
       "summary": "Compare Jev with reviewed outcomes and simpler credible alternatives.",
       "sections": [
@@ -3010,18 +4100,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "model-decisions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "jev",
       "related": [
         "eval-corpus",
         "jev-languages",
         "routing",
         "pilot"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "jev-languages",
-      "parent": "jev",
       "title": "Language & domain evaluation",
       "summary": "Measure source-language performance instead of assuming English results transfer.",
       "sections": [
@@ -3044,17 +4149,32 @@ window.TOPIC_DATA = {
       "refs": [
         "jevmodels"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "model-decisions"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "jev",
       "related": [
         "jev-shadow",
         "eval-corpus",
         "applicability"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "knowledge",
-      "parent": "overview",
       "title": "Evidence & knowledge",
       "summary": "Build source-backed retrieval over existing authoritative assets and clearly derived summaries.",
       "sections": [
@@ -3070,18 +4190,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "knowledge"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "overview",
       "related": [
         "knowledge-assets",
         "answer-contract",
         "retrieval",
         "candidate-isolation"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "knowledge-assets",
-      "parent": "knowledge",
       "title": "Knowledge assets",
       "summary": "Separate source material, approved assertions, indexes, summaries, and execution state.",
       "sections": [
@@ -3126,17 +4261,32 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "knowledge"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "knowledge",
       "related": [
         "engineering-knowledge",
         "llm-wiki",
         "provenance"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "engineering-knowledge",
-      "parent": "knowledge",
       "title": "Engineering knowledge",
       "summary": "Represent useful requirement, code, test, and build relationships without inventing them.",
       "sections": [
@@ -3164,17 +4314,32 @@ window.TOPIC_DATA = {
       "refs": [
         "traceability"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "knowledge"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "knowledge",
       "related": [
         "traceability",
         "confluence",
         "graphrag-option"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "retrieval",
-      "parent": "knowledge",
       "title": "Hybrid retrieval",
       "summary": "Select search and retrieval methods according to the question and available evidence.",
       "sections": [
@@ -3202,18 +4367,33 @@ window.TOPIC_DATA = {
       "refs": [
         "ragchecker"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "knowledge"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "knowledge",
       "related": [
         "retrieval-diagnosis",
         "permissions",
         "context-selection",
         "jev-mapping"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "answer-contract",
-      "parent": "knowledge",
       "title": "Evidence-based answer",
       "summary": "Require support for each substantive claim rather than a list of impressive links.",
       "sections": [
@@ -3240,18 +4420,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "knowledge"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "knowledge",
       "related": [
         "jev-support",
         "source-conflicts",
         "provenance",
         "eval-metrics"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "llm-wiki",
-      "parent": "knowledge",
       "title": "LLM wiki boundary",
       "summary": "Generated summaries can aid navigation when sources and review state stay visible.",
       "sections": [
@@ -3284,17 +4479,34 @@ window.TOPIC_DATA = {
       "refs": [
         "llmwiki"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "practice",
+        "domains": [
+          "knowledge"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "selectable",
+        "definitionRefs": [
+          "practice:evidence-wiki"
+        ]
+      },
+      "parent": "knowledge",
       "related": [
         "confluence",
         "knowledge-assets",
         "answer-contract"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "graphrag-option",
-      "parent": "knowledge",
       "title": "GraphRAG decision",
       "summary": "Compare graph retrieval with a simpler baseline using the questions your project needs to answer.",
       "sections": [
@@ -3317,17 +4529,32 @@ window.TOPIC_DATA = {
       "refs": [
         "graphrag"
       ],
+      "basis": "Documented option + proposed comparison",
+      "confidence": "Unknown winner",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "knowledge"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "knowledge",
       "related": [
         "retrieval",
         "engineering-knowledge",
         "cost-per-result"
-      ],
-      "basis": "Documented option + proposed comparison",
-      "confidence": "Unknown winner"
+      ]
     },
     {
       "id": "wikidata-statements",
-      "parent": "knowledge",
       "title": "Wikidata qualifiers",
       "summary": "Preserve full statements when qualifiers, references, rank, and version matter.",
       "sections": [
@@ -3351,17 +4578,32 @@ window.TOPIC_DATA = {
         "wikibase",
         "wikisources"
       ],
+      "basis": "Documented representation caveat",
+      "confidence": "High",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "knowledge"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "knowledge",
       "related": [
         "applicability",
         "provenance",
         "curation-workflow"
-      ],
-      "basis": "Documented representation caveat",
-      "confidence": "High"
+      ]
     },
     {
       "id": "candidate-isolation",
-      "parent": "knowledge",
       "title": "Candidate isolation in Neptune",
       "summary": "A separate named graph alone is not quarantine in Neptune.",
       "sections": [
@@ -3384,18 +4626,33 @@ window.TOPIC_DATA = {
       "refs": [
         "neptune"
       ],
+      "basis": "Documented engine behavior + required design check",
+      "confidence": "High",
+      "catalog": {
+        "kind": "practice",
+        "domains": [
+          "knowledge"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "knowledge",
       "related": [
         "curation-workflow",
         "neptune-stack",
         "rdf-skill",
         "permissions"
-      ],
-      "basis": "Documented engine behavior + required design check",
-      "confidence": "High"
+      ]
     },
     {
       "id": "provenance",
-      "parent": "knowledge",
       "title": "Provenance & versions",
       "summary": "Record what an assertion or analysis was derived from and how it became approved.",
       "sections": [
@@ -3424,17 +4681,32 @@ window.TOPIC_DATA = {
       "refs": [
         "prov"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "practice",
+        "domains": [
+          "knowledge"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "knowledge",
       "related": [
         "temporal-scope",
         "revision-cache",
         "qa-packet"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "source-conflicts",
-      "parent": "knowledge",
       "title": "Conflicts & insufficient evidence",
       "summary": "Preserve disagreement and missing information rather than force one answer.",
       "sections": [
@@ -3455,18 +4727,33 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "knowledge"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "knowledge",
       "related": [
         "answer-contract",
         "jev-confidence",
         "requirement-status",
         "applicability"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "talos",
-      "parent": "overview",
       "title": "Verification and evidence",
       "summary": "Match checks and evidence to the change being reviewed, with clear outcomes and project specific gates.",
       "sections": [
@@ -3495,17 +4782,32 @@ window.TOPIC_DATA = {
         "taloscycle",
         "talosreadme"
       ],
+      "basis": "Recommended practice + inspected example",
+      "confidence": "Moderate for adaptation. High for inspected contents, execution unverified",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "verification"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "overview",
       "related": [
         "verification-loops",
         "qa-packet",
         "talos-boundaries"
-      ],
-      "basis": "Recommended practice + inspected example",
-      "confidence": "Moderate for adaptation. High for inspected contents, execution unverified"
+      ]
     },
     {
       "id": "verification-loops",
-      "parent": "talos",
       "title": "Two verification loops",
       "summary": "Focused development checks and candidate release gates serve different purposes.",
       "sections": [
@@ -3533,19 +4835,38 @@ window.TOPIC_DATA = {
       "refs": [
         "taloscycle"
       ],
+      "basis": "Recommended practice + inspected example",
+      "confidence": "Moderate for adaptation. High for inspected runbook contents",
+      "catalog": {
+        "kind": "practice",
+        "domains": [
+          "verification"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": [
+          "stage:verification",
+          "stage:reproduction",
+          "stage:regression"
+        ]
+      },
+      "parent": "talos",
       "related": [
         "implementation-workflow",
         "jenkins",
         "cost-per-result",
         "workflow-patterns",
         "release-operations"
-      ],
-      "basis": "Recommended practice + inspected example",
-      "confidence": "Moderate for adaptation. High for inspected runbook contents"
+      ]
     },
     {
       "id": "post-change-checks",
-      "parent": "talos",
       "title": "Checks after the change",
       "summary": "Verification must describe the final relevant state.",
       "sections": [
@@ -3573,17 +4894,34 @@ window.TOPIC_DATA = {
       "refs": [
         "talosverify"
       ],
+      "basis": "Recommended practice + inspected test definitions",
+      "confidence": "High for test contents. Execution unverified, adaptation proposed",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "verification"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": [
+          "stage:bug-review"
+        ]
+      },
+      "parent": "talos",
       "related": [
         "revision-cache",
         "task-contract",
         "qa-packet"
-      ],
-      "basis": "Recommended practice + inspected test definitions",
-      "confidence": "High for test contents. Execution unverified, adaptation proposed"
+      ]
     },
     {
       "id": "verdicts",
-      "parent": "talos",
       "title": "Distinct result verdicts",
       "summary": "Failed, skipped, unavailable, denied, and invalid-audit outcomes must remain distinguishable.",
       "sections": [
@@ -3644,17 +4982,32 @@ window.TOPIC_DATA = {
       "refs": [
         "talosverdict"
       ],
+      "basis": "Inspected vocabulary + proposed use",
+      "confidence": "High for inspected vocabulary. Moderate for project adaptation",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "verification"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "talos",
       "related": [
         "finding-contract",
         "retries",
         "jenkins"
-      ],
-      "basis": "Inspected vocabulary + proposed use",
-      "confidence": "High for inspected vocabulary. Moderate for project adaptation"
+      ]
     },
     {
       "id": "qa-packet",
-      "parent": "talos",
       "title": "Revision-linked QA packet",
       "summary": "Prepare a reviewable machine-readable record of task, candidate, checks, and exclusions.",
       "sections": [
@@ -3689,18 +5042,33 @@ window.TOPIC_DATA = {
       "refs": [
         "talospacket"
       ],
+      "basis": "Proposed design + inspected example",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "verification"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "talos",
       "related": [
         "task-contract",
         "packet-skill",
         "answer-contract",
         "eval-metrics"
-      ],
-      "basis": "Proposed design + inspected example",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "adverse-audits",
-      "parent": "talos",
       "title": "Adverse-case audits",
       "summary": "Compare claims with traces, tool results, approvals, and final changes.",
       "sections": [
@@ -3736,17 +5104,32 @@ window.TOPIC_DATA = {
         "talosmanual",
         "talosbudget"
       ],
+      "basis": "Proposed design + inspected example",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "verification"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "talos",
       "related": [
         "eval-corpus",
         "candidate-isolation",
         "retries"
-      ],
-      "basis": "Proposed design + inspected example",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "talos-boundaries",
-      "parent": "talos",
       "title": "What not to copy blindly",
       "summary": "Source examples need adaptation and do not prove checks were executed.",
       "sections": [
@@ -3775,17 +5158,32 @@ window.TOPIC_DATA = {
         "talosdocs",
         "talosreadme"
       ],
+      "basis": "Recommended practice + inspected limitations",
+      "confidence": "High for inspected limitations. Project fit needs review",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "verification"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "talos",
       "related": [
         "skill-definition",
         "durable-execution",
         "permissions"
-      ],
-      "basis": "Recommended practice + inspected limitations",
-      "confidence": "High for inspected limitations. Project fit needs review"
+      ]
     },
     {
       "id": "evaluation",
-      "parent": "overview",
       "title": "Evaluations & rollout",
       "summary": "Measure real outcomes before expanding automation or claiming savings.",
       "sections": [
@@ -3803,18 +5201,33 @@ window.TOPIC_DATA = {
       "refs": [
         "evals"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "evaluation"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "overview",
       "related": [
         "eval-corpus",
         "eval-metrics",
         "pilot",
         "architect-proposal"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "eval-corpus",
-      "parent": "evaluation",
       "title": "Representative evaluation set",
       "summary": "Cover routine tasks and failures that matter to your actual project.",
       "sections": [
@@ -3849,18 +5262,33 @@ window.TOPIC_DATA = {
       "refs": [
         "evals"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "evaluation"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "evaluation",
       "related": [
         "adverse-audits",
         "jev-shadow",
         "routing",
         "study-quality"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "eval-metrics",
-      "parent": "evaluation",
       "title": "Workflow-specific metrics",
       "summary": "Measure usefulness, correctness, review effort, latency, and accepted-result cost.",
       "sections": [
@@ -3907,17 +5335,34 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "evaluation"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": [
+          "stage:operations"
+        ]
+      },
+      "parent": "evaluation",
       "related": [
         "cost-per-result",
         "jev-languages",
         "grader-design"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "grader-design",
-      "parent": "evaluation",
       "title": "Grading & regression",
       "summary": "Judge actual artifacts and outcomes with the right evidence.",
       "sections": [
@@ -3945,17 +5390,32 @@ window.TOPIC_DATA = {
       "refs": [
         "evals"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "evaluation"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "evaluation",
       "related": [
         "qa-packet",
         "post-change-checks",
         "routing"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "retrieval-diagnosis",
-      "parent": "evaluation",
       "title": "Retrieval vs generation",
       "summary": "An unsupported answer can fail at different stages requiring different fixes.",
       "sections": [
@@ -3999,17 +5459,32 @@ window.TOPIC_DATA = {
       "refs": [
         "ragchecker"
       ],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "evaluation"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "evaluation",
       "related": [
         "retrieval",
         "answer-contract",
         "context-selection"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "pilot",
-      "parent": "evaluation",
       "title": "Pilot sequence",
       "summary": "Expand through concrete reviewable deliverables and measured acceptance.",
       "sections": [
@@ -4066,19 +5541,34 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "evaluation"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "evaluation",
       "related": [
         "task-contract",
         "requirements-workflow",
         "jev-shadow",
         "cost-per-result",
         "release-operations"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "architect-proposal",
-      "parent": "evaluation",
       "title": "Architect discussion",
       "summary": "A concrete proposal with separable decisions and evidence to collect.",
       "sections": [
@@ -4110,19 +5600,34 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Proposed design",
+      "confidence": "Moderate",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "evaluation"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "evaluation",
       "related": [
         "pilot",
         "capability-inventory",
         "task-contract",
         "candidate-isolation",
         "architecture-decisions"
-      ],
-      "basis": "Proposed design",
-      "confidence": "Moderate"
+      ]
     },
     {
       "id": "confidence-summary",
-      "parent": "evaluation",
       "title": "Confidence & unknowns",
       "summary": "Separate verified facts from proposed fit and unmeasured workplace outcomes.",
       "sections": [
@@ -4177,19 +5682,34 @@ window.TOPIC_DATA = {
         }
       ],
       "refs": [],
+      "basis": "Research limits",
+      "confidence": "Explicit by area",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "evaluation"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "evaluation",
       "related": [
         "model-prices",
         "discovery",
         "jev-shadow",
         "construct-study",
         "study-decision"
-      ],
-      "basis": "Research limits",
-      "confidence": "Explicit by area"
+      ]
     },
     {
       "id": "construct-study",
-      "parent": "workflows",
       "title": "Reference-to-configuration feasibility study",
       "summary": "Assess an existing engineer-assisted reference-to-configuration process as a governed backend capability.",
       "sections": [
@@ -4254,6 +5774,24 @@ window.TOPIC_DATA = {
         "simple-agents",
         "nist-core"
       ],
+      "basis": "User-provided ticket scope + explicitly labeled recommendations",
+      "confidence": "High for visible scope; moderate for recommendations; outcomes unknown",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
       "related": [
         "study-baseline",
         "study-quality",
@@ -4265,13 +5803,10 @@ window.TOPIC_DATA = {
         "study-ticket-wording",
         "study-scenarios",
         "task-contract"
-      ],
-      "basis": "User-provided ticket scope + explicitly labeled recommendations",
-      "confidence": "High for visible scope; moderate for recommendations; outcomes unknown"
+      ]
     },
     {
       "id": "study-baseline",
-      "parent": "construct-study",
       "title": "Map the engineer-assisted baseline",
       "summary": "Observe the existing AI-assisted process and the decisions engineers make around it.",
       "sections": [
@@ -4312,19 +5847,36 @@ window.TOPIC_DATA = {
         "gov-discovery",
         "evals"
       ],
+      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+      "confidence": "Moderate for fit; workplace benefit unknown",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": [
+          "stage:current-process"
+        ]
+      },
+      "parent": "construct-study",
       "related": [
         "construct-study",
         "study-quality",
         "study-economics",
         "capability-inventory",
         "skill-definition"
-      ],
-      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
-      "confidence": "Moderate for fit; workplace benefit unknown"
+      ]
     },
     {
       "id": "study-quality",
-      "parent": "construct-study",
       "title": "Evaluate usable outputs",
       "summary": "Separate first-pass usability, repaired acceptance and errors that validation misses.",
       "sections": [
@@ -4405,6 +5957,24 @@ window.TOPIC_DATA = {
         "eval-best-practice",
         "dataset-splits"
       ],
+      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+      "confidence": "Moderate for fit; workplace benefit unknown",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "construct-study",
       "related": [
         "study-baseline",
         "study-decision",
@@ -4412,13 +5982,10 @@ window.TOPIC_DATA = {
         "grader-design",
         "post-change-checks",
         "workflow-patterns"
-      ],
-      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
-      "confidence": "Moderate for fit; workplace benefit unknown"
+      ]
     },
     {
       "id": "study-contract",
-      "parent": "construct-study",
       "title": "Define the service contract",
       "summary": "Specify inputs, results and failure behaviour without prematurely selecting a platform.",
       "sections": [
@@ -4460,6 +6027,27 @@ window.TOPIC_DATA = {
         "skillspec",
         "nist-core"
       ],
+      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+      "confidence": "Moderate for fit; workplace benefit unknown",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "selectable",
+        "definitionRefs": [
+          "control:before-write",
+          "stage:feasibility-scope"
+        ]
+      },
+      "parent": "construct-study",
       "related": [
         "study-runtime",
         "study-quality",
@@ -4467,13 +6055,10 @@ window.TOPIC_DATA = {
         "event-state",
         "durable-execution",
         "workflow-patterns"
-      ],
-      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
-      "confidence": "Moderate for fit; workplace benefit unknown"
+      ]
     },
     {
       "id": "study-runtime",
-      "parent": "construct-study",
       "title": "Assess backend execution",
       "summary": "Check runtime identity, dependencies, limits and ownership.",
       "sections": [
@@ -4521,19 +6106,36 @@ window.TOPIC_DATA = {
         "prompt-injection",
         "nist-core"
       ],
+      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+      "confidence": "Moderate for fit; workplace benefit unknown",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": [
+          "stage:options"
+        ]
+      },
+      "parent": "construct-study",
       "related": [
         "study-contract",
         "study-economics",
         "permissions",
         "budgets",
         "architecture"
-      ],
-      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
-      "confidence": "Moderate for fit; workplace benefit unknown"
+      ]
     },
     {
       "id": "study-economics",
-      "parent": "construct-study",
       "title": "Cost per accepted artifact",
       "summary": "Account for all attempts and remaining human work, with estimates labeled.",
       "sections": [
@@ -4592,19 +6194,34 @@ window.TOPIC_DATA = {
         "sdk-usage",
         "billing"
       ],
+      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+      "confidence": "Moderate for fit; workplace benefit unknown",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "construct-study",
       "related": [
         "cost-per-result",
         "study-baseline",
         "study-quality",
         "study-decision",
         "billing-boundaries"
-      ],
-      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
-      "confidence": "Moderate for fit; workplace benefit unknown"
+      ]
     },
     {
       "id": "study-experiment",
-      "parent": "construct-study",
       "title": "Resolve material assumptions",
       "summary": "Run small experiments only when their evidence can change the decision.",
       "sections": [
@@ -4659,19 +6276,36 @@ window.TOPIC_DATA = {
         "simple-agents",
         "gov-discovery"
       ],
+      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+      "confidence": "Moderate for fit; workplace benefit unknown",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": [
+          "stage:experiment-plan"
+        ]
+      },
+      "parent": "construct-study",
       "related": [
         "study-baseline",
         "study-quality",
         "study-runtime",
         "study-decision",
         "routing"
-      ],
-      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
-      "confidence": "Moderate for fit; workplace benefit unknown"
+      ]
     },
     {
       "id": "study-decision",
-      "parent": "construct-study",
       "title": "Make the next-phase decision",
       "summary": "Go, conditional go or no-go is a study recommendation, not production certification.",
       "sections": [
@@ -4729,19 +6363,36 @@ window.TOPIC_DATA = {
         "nist-core",
         "agentic-economics"
       ],
+      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+      "confidence": "Moderate for fit; workplace benefit unknown",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": [
+          "stage:recommendation"
+        ]
+      },
+      "parent": "construct-study",
       "related": [
         "study-quality",
         "study-economics",
         "study-experiment",
         "study-ticket-wording",
         "confidence-summary"
-      ],
-      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
-      "confidence": "Moderate for fit; workplace benefit unknown"
+      ]
     },
     {
       "id": "study-ticket-wording",
-      "parent": "construct-study",
       "title": "Refine ticket acceptance wording",
       "summary": "Make evidence explicit while retaining the time-boxed feasibility scope.",
       "sections": [
@@ -4781,18 +6432,33 @@ window.TOPIC_DATA = {
         "gov-discovery",
         "evals"
       ],
+      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+      "confidence": "Moderate for fit; workplace benefit unknown",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "construct-study",
       "related": [
         "construct-study",
         "study-quality",
         "study-decision",
         "study-scenarios"
-      ],
-      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
-      "confidence": "Moderate for fit; workplace benefit unknown"
+      ]
     },
     {
       "id": "study-scenarios",
-      "parent": "construct-study",
       "title": "Walk through study scenarios",
       "summary": "Hypothetical cases explain proposed behaviour without claiming workplace results.",
       "sections": [
@@ -4855,15 +6521,565 @@ window.TOPIC_DATA = {
         "evals",
         "sdk-session-limits"
       ],
+      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+      "confidence": "Moderate for fit; workplace benefit unknown",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "workflow-design"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Illustrative context. Compare its assumptions with your own work.",
+        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "construct-study",
       "related": [
         "study-quality",
         "study-contract",
         "study-economics",
         "adverse-audits",
         "workflow-patterns"
+      ]
+    },
+    {
+      "id": "information-retrieval",
+      "title": "Retrieve information",
+      "summary": "Find existing information through a suitable interface, then check that it answers the request.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Start with the result",
+          "text": "Describe what information is needed, its source and the permitted scope. Reuse an approved API when it already supplies the required operation."
+        },
+        {
+          "type": "p",
+          "label": "Choose the approach",
+          "text": "Structured filters may be enough for ordinary application code. Consider a model step only when interpretation or variable decisions provide a useful contribution."
+        },
+        {
+          "type": "p",
+          "label": "Know what a check establishes",
+          "text": "OWASP distinguishes checking input structure and business meaning from checking whether the caller has permission. A valid value alone does not establish access."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas can add",
+          "text": "Open Retrieve and validate, then review Add retrieval checks from your active Factory project. This adds written guidance to selected practices. It does not add an API connection."
+        },
+        {
+          "type": "p",
+          "label": "Coverage",
+          "text": "The technology entries below illustrate relational and graph approaches. This is a growing selection, not an exhaustive list or a ranking."
+        }
       ],
-      "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
-      "confidence": "Moderate for fit; workplace benefit unknown"
+      "refs": [
+        "input-validation"
+      ],
+      "basis": "Source references and Atlas guidance",
+      "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+      "catalog": {
+        "kind": "capability",
+        "domains": [
+          "information-retrieval"
+        ],
+        "aliases": [
+          "lookup",
+          "fetch data",
+          "query data",
+          "database retrieval"
+        ],
+        "revision": "1",
+        "applicability": "Use when designing how existing information is retrieved and checked.",
+        "limits": "This is design guidance. It does not connect to a service or prove that a result is correct.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-05",
+        "claims": [
+          {
+            "sectionLabel": "Know what a check establishes",
+            "text": "Input validation and authorization establish different properties.",
+            "sourceRefs": [
+              "input-validation"
+            ]
+          }
+        ],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "toolchain",
+      "related": [
+        "retrieve-and-validate",
+        "retrieval-example",
+        "retrieval-options"
+      ]
+    },
+    {
+      "id": "retrieve-and-validate",
+      "title": "Retrieve and validate",
+      "summary": "Agree the request, retrieve within its scope and check the returned information before using it.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Validation principle",
+          "text": "OWASP recommends validating accepted structure and business rules. Access checks remain separate."
+        },
+        {
+          "type": "list",
+          "label": "Apply it to your workflow",
+          "items": [
+            "Name the approved interface and required inputs.",
+            "Define expected results, permitted scope and resource limits.",
+            "Check normal, empty, invalid and unavailable cases.",
+            "Record observed results separately from expectations.",
+            "If later steps write data, define their authorization and confirmation separately."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "What changes",
+          "text": "Review Add retrieval checks to select this practice. WORKFLOW.md and SOURCES.md will record the guidance and its source. Existing steps, roles, tools, facts and evidence stay as recorded."
+        },
+        {
+          "type": "p",
+          "label": "What still needs work",
+          "text": "Your team supplies the real interface, credentials, commands, fixtures and acceptance decisions. The downloaded instructions do not enforce these checks."
+        }
+      ],
+      "refs": [
+        "input-validation"
+      ],
+      "basis": "Source references and Atlas guidance",
+      "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+      "catalog": {
+        "kind": "practice",
+        "domains": [
+          "information-retrieval"
+        ],
+        "aliases": [
+          "retrieval checks",
+          "read validation"
+        ],
+        "revision": "1",
+        "applicability": "Use when designing how existing information is retrieved and checked.",
+        "limits": "This is design guidance. It does not connect to a service or prove that a result is correct.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-05",
+        "claims": [
+          {
+            "sectionLabel": "Validation principle",
+            "text": "Validation should check structure and business rules separately from authorization.",
+            "sourceRefs": [
+              "input-validation"
+            ]
+          }
+        ],
+        "guidance": "selectable",
+        "definitionRefs": [
+          "practice:validated-retrieval"
+        ]
+      },
+      "parent": "information-retrieval",
+      "related": [
+        "information-retrieval",
+        "retrieval-example"
+      ]
+    },
+    {
+      "id": "retrieval-options",
+      "title": "Choose a retrieval approach",
+      "summary": "Start from existing interfaces and the data model before comparing products.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Use what is already available",
+          "text": "If an approved API returns the required information, record its contract and validation needs first. A database replacement is a separate architecture decision."
+        },
+        {
+          "type": "table",
+          "label": "Examples by data model",
+          "headers": [
+            "Approach",
+            "Example",
+            "Question to resolve"
+          ],
+          "rows": [
+            [
+              "Relational data and SQL",
+              "PostgreSQL",
+              "Which tables, joins and expected rows answer the request?"
+            ],
+            [
+              "RDF and SPARQL",
+              "Amazon Neptune or Apache Jena Fuseki",
+              "Which graph scope and RDF query behavior apply?"
+            ],
+            [
+              "Property graph and Cypher",
+              "Neo4j",
+              "Which nodes, relationships and patterns answer the request?"
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Different families",
+          "text": "These entries illustrate different models and interfaces. They do not establish drop-in compatibility, pricing, performance or availability in your environment."
+        },
+        {
+          "type": "p",
+          "label": "Your existing tool",
+          "text": "In Factory, record your component technology and its version. A custom technology is allowed when it is absent from the list. Generic guidance remains available without a specialist compatibility claim."
+        }
+      ],
+      "refs": [
+        "postgresql-tutorial",
+        "neptune-sparql-access",
+        "jena-fuseki",
+        "neo4j-start"
+      ],
+      "basis": "Source references and Atlas guidance",
+      "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+      "catalog": {
+        "kind": "concept",
+        "domains": [
+          "information-retrieval"
+        ],
+        "aliases": [],
+        "revision": "1",
+        "applicability": "Use when designing how existing information is retrieved and checked.",
+        "limits": "This is design guidance. It does not connect to a service or prove that a result is correct.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-05",
+        "claims": [
+          {
+            "sectionLabel": "Examples by data model",
+            "text": "The named examples document SQL, SPARQL or Cypher in the respective data models.",
+            "sourceRefs": [
+              "postgresql-tutorial",
+              "neptune-sparql-access",
+              "jena-fuseki",
+              "neo4j-start"
+            ]
+          }
+        ],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "information-retrieval",
+      "related": [
+        "postgresql-data",
+        "amazon-neptune",
+        "apache-jena-fuseki",
+        "neo4j-data"
+      ]
+    },
+    {
+      "id": "postgresql-data",
+      "title": "PostgreSQL",
+      "summary": "A relational database option using SQL.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Documented role",
+          "text": "The PostgreSQL tutorial introduces relational data and SQL queries."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas provides",
+          "text": "Selecting PostgreSQL records the technology and version. Atlas currently adds generic component questions, not a PostgreSQL connection or a specialist query generator."
+        },
+        {
+          "type": "p",
+          "label": "Check in your environment",
+          "text": "Confirm the actual version, supported interface, permissions, data model and expected query results. Compare alternatives using your constraints."
+        }
+      ],
+      "refs": [
+        "postgresql-tutorial"
+      ],
+      "basis": "Source references and Atlas guidance",
+      "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "information-retrieval"
+        ],
+        "aliases": [
+          "postgres",
+          "sql database"
+        ],
+        "revision": "1",
+        "applicability": "A technology example to assess against your existing data model and access requirements.",
+        "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-05",
+        "claims": [
+          {
+            "sectionLabel": "Documented role",
+            "text": "The PostgreSQL tutorial introduces relational data and SQL queries.",
+            "sourceRefs": [
+              "postgresql-tutorial"
+            ]
+          }
+        ],
+        "guidance": "reading",
+        "definitionRefs": [
+          "technology:postgresql"
+        ]
+      },
+      "parent": "retrieval-options",
+      "related": [
+        "retrieval-options",
+        "retrieve-and-validate"
+      ]
+    },
+    {
+      "id": "amazon-neptune",
+      "title": "Amazon Neptune",
+      "summary": "An example of querying RDF data through SPARQL in a managed graph database.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Documented role",
+          "text": "Amazon Neptune documents SPARQL access to RDF data. Engine-specific behavior must be checked against its compliance documentation."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas provides",
+          "text": "Selecting Neptune includes the existing RDF and SPARQL review questions. These do not configure database access or verify engine-specific behavior."
+        },
+        {
+          "type": "p",
+          "label": "Check in your environment",
+          "text": "Confirm the actual version, supported interface, permissions, data model and expected query results. Compare alternatives using your constraints."
+        }
+      ],
+      "refs": [
+        "neptune-sparql-access"
+      ],
+      "basis": "Source references and Atlas guidance",
+      "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "information-retrieval"
+        ],
+        "aliases": [
+          "aws neptune"
+        ],
+        "revision": "1",
+        "applicability": "A technology example to assess against your existing data model and access requirements.",
+        "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-05",
+        "claims": [
+          {
+            "sectionLabel": "Documented role",
+            "text": "Amazon Neptune documents SPARQL access to RDF data. Engine-specific behavior must be checked against its compliance documentation.",
+            "sourceRefs": [
+              "neptune-sparql-access"
+            ]
+          }
+        ],
+        "guidance": "reading",
+        "definitionRefs": [
+          "technology:neptune"
+        ]
+      },
+      "parent": "retrieval-options",
+      "related": [
+        "retrieval-options",
+        "retrieve-and-validate"
+      ]
+    },
+    {
+      "id": "apache-jena-fuseki",
+      "title": "Apache Jena Fuseki",
+      "summary": "A SPARQL server for querying RDF data.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Documented role",
+          "text": "Fuseki supports SPARQL query and update protocols and can run as a server or within an application."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas provides",
+          "text": "Selecting Fuseki records the technology and version. Select RDF or SPARQL as well when their existing review questions apply. Atlas does not install or configure a server."
+        },
+        {
+          "type": "p",
+          "label": "Check in your environment",
+          "text": "Confirm the actual version, supported interface, permissions, data model and expected query results. Compare alternatives using your constraints."
+        }
+      ],
+      "refs": [
+        "jena-fuseki"
+      ],
+      "basis": "Source references and Atlas guidance",
+      "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "information-retrieval"
+        ],
+        "aliases": [
+          "fuseki",
+          "jena"
+        ],
+        "revision": "1",
+        "applicability": "A technology example to assess against your existing data model and access requirements.",
+        "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-05",
+        "claims": [
+          {
+            "sectionLabel": "Documented role",
+            "text": "Fuseki supports SPARQL query and update protocols and can run as a server or within an application.",
+            "sourceRefs": [
+              "jena-fuseki"
+            ]
+          }
+        ],
+        "guidance": "reading",
+        "definitionRefs": [
+          "technology:jena-fuseki"
+        ]
+      },
+      "parent": "retrieval-options",
+      "related": [
+        "retrieval-options",
+        "retrieve-and-validate"
+      ]
+    },
+    {
+      "id": "neo4j-data",
+      "title": "Neo4j",
+      "summary": "A property graph database option with Cypher queries.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Documented role",
+          "text": "Neo4j describes a property graph model and its Cypher query language."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas provides",
+          "text": "Selecting Neo4j records the technology and version. Atlas currently adds generic component questions. The RDF and SPARQL profile is not applied merely because this is a graph database."
+        },
+        {
+          "type": "p",
+          "label": "Check in your environment",
+          "text": "Confirm the actual version, supported interface, permissions, data model and expected query results. Compare alternatives using your constraints."
+        }
+      ],
+      "refs": [
+        "neo4j-start"
+      ],
+      "basis": "Source references and Atlas guidance",
+      "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "information-retrieval"
+        ],
+        "aliases": [
+          "cypher",
+          "property graph database"
+        ],
+        "revision": "1",
+        "applicability": "A technology example to assess against your existing data model and access requirements.",
+        "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-05",
+        "claims": [
+          {
+            "sectionLabel": "Documented role",
+            "text": "Neo4j describes a property graph model and its Cypher query language.",
+            "sourceRefs": [
+              "neo4j-start"
+            ]
+          }
+        ],
+        "guidance": "reading",
+        "definitionRefs": [
+          "technology:neo4j"
+        ]
+      },
+      "parent": "retrieval-options",
+      "related": [
+        "retrieval-options",
+        "retrieve-and-validate"
+      ]
+    },
+    {
+      "id": "retrieval-example",
+      "title": "Example: find matching topics",
+      "summary": "A fictional case showing how a request becomes a checked result.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "The request",
+          "text": "A user selects a subject area and wants the matching topics already held by an application."
+        },
+        {
+          "type": "steps",
+          "label": "Suggested design",
+          "items": [
+            "Validate the selected subject and caller access.",
+            "Call the approved topic retrieval operation.",
+            "Check the returned scope and required fields.",
+            "Display the results, an empty state or a clear failure.",
+            "If the input is free text, assess whether a bounded interpretation step is useful before the same operation."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Acceptance example",
+          "text": "Given a fixture with two matching topics and one outside the requested subject, expect exactly the two permitted topics. Record a separate example for no matches and unavailable service."
+        },
+        {
+          "type": "p",
+          "label": "Use this in Atlas",
+          "text": "Create a feature or feasibility draft. Record the real outcome and acceptance examples. In the knowledge map, open Retrieve and validate and review Add retrieval checks. Use the process editor when explicit steps and outcomes help explain the design."
+        },
+        {
+          "type": "p",
+          "label": "Limits",
+          "text": "This is an illustrative design. No endpoint, test result, company policy or database schema has been verified. A model or MCP server is optional and requires its own justification."
+        }
+      ],
+      "refs": [],
+      "basis": "Illustrative example",
+      "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+      "catalog": {
+        "kind": "example",
+        "domains": [
+          "information-retrieval"
+        ],
+        "aliases": [
+          "topic list",
+          "subject areas"
+        ],
+        "revision": "1",
+        "applicability": "Use when designing how existing information is retrieved and checked.",
+        "limits": "Fictional example, not evidence of a working integration.",
+        "sourceStatus": "needs-review",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "information-retrieval",
+      "related": [
+        "information-retrieval",
+        "retrieve-and-validate"
+      ]
     }
   ],
   "sources": {
@@ -5090,6 +7306,4546 @@ window.TOPIC_DATA = {
     "llmwiki": [
       "Andrej Karpathy: LLM Wiki idea file, live gist reviewed 3 October 2026",
       "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
+    ],
+    "reference-57": [
+      "github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/docs/agent-portability.md",
+      "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/docs/agent-portability.md"
+    ],
+    "reference-58": [
+      "github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/README.md",
+      "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/README.md#how-it-works"
+    ],
+    "reference-59": [
+      "github.com/github/spec-kit/blob/4a339209c877a1b68e7a790b2b2269a2b68e461f/README.md",
+      "https://github.com/github/spec-kit/blob/4a339209c877a1b68e7a790b2b2269a2b68e461f/README.md#spec-driven-development"
+    ],
+    "reference-60": [
+      "docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html",
+      "https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html"
+    ],
+    "reference-61": [
+      "docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html",
+      "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html"
+    ],
+    "reference-62": [
+      "react.dev/learn/thinking-in-react",
+      "https://react.dev/learn/thinking-in-react"
+    ],
+    "reference-63": [
+      "playwright.dev/docs/accessibility-testing",
+      "https://playwright.dev/docs/accessibility-testing"
+    ],
+    "reference-64": [
+      "www.w3.org/TR/sparql11-query/",
+      "https://www.w3.org/TR/sparql11-query/"
+    ],
+    "reference-65": [
+      "docs.github.com/en/copilot/reference/custom-agents-configuration",
+      "https://docs.github.com/en/copilot/reference/custom-agents-configuration"
+    ],
+    "reference-66": [
+      "docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents",
+      "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents"
+    ],
+    "reference-67": [
+      "docs.github.com/en/copilot/concepts/agents/about-agent-skills",
+      "https://docs.github.com/en/copilot/concepts/agents/about-agent-skills"
+    ],
+    "input-validation": [
+      "OWASP Input Validation Cheat Sheet",
+      "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+    ],
+    "postgresql-tutorial": [
+      "PostgreSQL tutorial",
+      "https://www.postgresql.org/docs/current/tutorial.html"
+    ],
+    "jena-fuseki": [
+      "Apache Jena Fuseki documentation",
+      "https://jena.apache.org/documentation/fuseki2/"
+    ],
+    "neo4j-start": [
+      "Neo4j getting started",
+      "https://neo4j.com/docs/getting-started/"
+    ],
+    "neptune-sparql-access": [
+      "Amazon Neptune SPARQL access",
+      "https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-sparql.html"
+    ]
+  },
+  "catalog": {
+    "schemaVersion": "1.0",
+    "version": "2.1.0",
+    "domains": [
+      {
+        "id": "workflow-design",
+        "title": "Workflows"
+      },
+      {
+        "id": "engineering-tools",
+        "title": "Toolchain"
+      },
+      {
+        "id": "models",
+        "title": "Models & cost"
+      },
+      {
+        "id": "instructions",
+        "title": "Skills & roles"
+      },
+      {
+        "id": "requirements",
+        "title": "Requirements"
+      },
+      {
+        "id": "maintenance",
+        "title": "Debt & coverage"
+      },
+      {
+        "id": "model-decisions",
+        "title": "Jev"
+      },
+      {
+        "id": "knowledge",
+        "title": "Knowledge"
+      },
+      {
+        "id": "verification",
+        "title": "Verification & evidence"
+      },
+      {
+        "id": "evaluation",
+        "title": "Evaluation"
+      },
+      {
+        "id": "information-retrieval",
+        "title": "Information retrieval"
+      }
+    ],
+    "clusters": [
+      {
+        "id": "workflows",
+        "short": "Workflows",
+        "color": "#77dfff",
+        "position": [
+          -82,
+          49,
+          4
+        ]
+      },
+      {
+        "id": "toolchain",
+        "short": "Toolchain",
+        "color": "#8aaeff",
+        "position": [
+          -109,
+          -4,
+          -9
+        ]
+      },
+      {
+        "id": "economy",
+        "short": "Models & cost",
+        "color": "#ffbf75",
+        "position": [
+          -74,
+          -49,
+          9
+        ]
+      },
+      {
+        "id": "skills",
+        "short": "Skills & roles",
+        "color": "#b7a1ff",
+        "position": [
+          -35,
+          14,
+          51
+        ]
+      },
+      {
+        "id": "requirements",
+        "short": "Requirements",
+        "color": "#68ddbd",
+        "position": [
+          -37,
+          63,
+          -42
+        ]
+      },
+      {
+        "id": "debt",
+        "short": "Debt & coverage",
+        "color": "#ff8fa8",
+        "position": [
+          82,
+          49,
+          4
+        ]
+      },
+      {
+        "id": "jev",
+        "short": "Jev",
+        "color": "#f0c96d",
+        "position": [
+          109,
+          -4,
+          -9
+        ]
+      },
+      {
+        "id": "knowledge",
+        "short": "Knowledge",
+        "color": "#78d5ed",
+        "position": [
+          74,
+          -49,
+          9
+        ]
+      },
+      {
+        "id": "talos",
+        "short": "Verification & evidence",
+        "color": "#c5b8ff",
+        "position": [
+          35,
+          14,
+          51
+        ]
+      },
+      {
+        "id": "evaluation",
+        "short": "Evaluation",
+        "color": "#8bd8a4",
+        "position": [
+          37,
+          63,
+          -42
+        ]
+      }
+    ],
+    "collections": [
+      {
+        "id": "study",
+        "title": "Configuration service study",
+        "nodeIds": [
+          "construct-study",
+          "study-baseline",
+          "study-quality",
+          "study-contract",
+          "study-runtime",
+          "study-economics",
+          "study-experiment",
+          "study-decision",
+          "study-ticket-wording",
+          "study-scenarios"
+        ]
+      },
+      {
+        "id": "architect",
+        "title": "Architect briefing",
+        "nodeIds": [
+          "overview",
+          "architecture",
+          "requirements-workflow",
+          "implementation-workflow",
+          "curation-workflow",
+          "task-contract",
+          "toolchain",
+          "pilot"
+        ]
+      },
+      {
+        "id": "engineering",
+        "title": "Engineering delivery",
+        "nodeIds": [
+          "requirement-status",
+          "traceability",
+          "impact-skill",
+          "implementation-workflow",
+          "verification-loops",
+          "post-change-checks",
+          "qa-packet",
+          "eval-metrics"
+        ]
+      },
+      {
+        "id": "curation",
+        "title": "Country-data curation",
+        "nodeIds": [
+          "applicability",
+          "temporal-scope",
+          "wikidata-statements",
+          "jev-support",
+          "candidate-isolation",
+          "provenance",
+          "jev-shadow"
+        ]
+      },
+      {
+        "id": "cost",
+        "title": "Cost control",
+        "nodeIds": [
+          "routing",
+          "model-prices",
+          "context-selection",
+          "eager-skills",
+          "revision-cache",
+          "budgets",
+          "cost-per-result"
+        ]
+      },
+      {
+        "id": "retrieval",
+        "title": "Retrieve and check information",
+        "nodeIds": [
+          "information-retrieval",
+          "retrieval-options",
+          "retrieve-and-validate",
+          "retrieval-example"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "skillspec",
+        "title": "Agent Skills specification",
+        "url": "https://agentskills.io/specification",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "anthropicskills",
+        "title": "Anthropic: engineering Agent Skills",
+        "url": "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "context",
+        "title": "Anthropic: effective context engineering",
+        "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "dynamic",
+        "title": "GitHub: Dynamic Workflows announcement, 1 October 2026",
+        "url": "https://github.blog/changelog/2026-10-01-dynamic-workflows-in-copilot-cli-and-the-copilot-app/",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "dynamicdocs",
+        "title": "GitHub: Dynamic Workflows behavior and limits",
+        "url": "https://docs.github.com/en/copilot/concepts/agents/dynamic-workflows",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "temporal",
+        "title": "Temporal: durable AI workflows",
+        "url": "https://docs.temporal.io/ai",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "cloud",
+        "title": "GitHub: cloud-agent repository limitations",
+        "url": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "sdk",
+        "title": "GitHub: SDK agents, model overrides, eager skills",
+        "url": "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/custom-agents",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "jetbrains",
+        "title": "GitHub: JetBrains update, 8 September 2026",
+        "url": "https://github.blog/changelog/2026-09-08-enterprise-managed-sandbox-in-copilot-for-jetbrains/",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "billing",
+        "title": "GitHub: Copilot Business billing",
+        "url": "https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/billing",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "prices",
+        "title": "GitHub: Copilot model pricing",
+        "url": "https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "models",
+        "title": "GitHub: model availability",
+        "url": "https://docs.github.com/en/copilot/reference/ai-models/supported-models",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "rovo",
+        "title": "Atlassian: configure Use agent automation",
+        "url": "https://support.atlassian.com/cloud-automation/docs/tips-to-configure-the-action-use-rovo-agent/",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "rovocredits",
+        "title": "Atlassian: Rovo credit rules",
+        "url": "https://support.atlassian.com/rovo/docs/rovo-usage-limits/",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "rovotier",
+        "title": "Atlassian: Rovo reasoning tiers",
+        "url": "https://support.atlassian.com/studio/docs/set-a-reasoning-tier-for-a-rovo-agent/",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "traceability",
+        "title": "NASA: bidirectional traceability",
+        "url": "https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695427/SWE-052%2B-%2BBidirectional%2BTraceability",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "sonar",
+        "title": "Sonar: metric definitions",
+        "url": "https://docs.sonarsource.com/sonarqube-server/user-guide/code-metrics/metrics-definition",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "newcode",
+        "title": "Sonar: new-code approach",
+        "url": "https://docs.sonarsource.com/sonarqube-cloud/standards/about-new-code",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "jacoco",
+        "title": "JaCoCo: coverage counters",
+        "url": "https://www.jacoco.org/jacoco/trunk/doc/counters.html",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "mutation",
+        "title": "Google: practical mutation testing at scale",
+        "url": "https://research.google/pubs/practical-mutation-testing-at-scale-a-view-from-google/",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "shacl",
+        "title": "W3C: SHACL specification",
+        "url": "https://www.w3.org/TR/shacl/",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "explain",
+        "title": "AWS: Neptune SPARQL explain",
+        "url": "https://docs.aws.amazon.com/neptune/latest/userguide/sparql-explain.html",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "neptune",
+        "title": "AWS: Neptune SPARQL and graph behavior",
+        "url": "https://docs.aws.amazon.com/neptune/latest/userguide/feature-sparql-compliance.html",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "jevlimits",
+        "title": "TypeSafe: Jev 1.13 limitations",
+        "url": "https://docs.typesafe.ai/model-jaggedness/jev-1.13",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "jevconfidence",
+        "title": "TypeSafe: confidence semantics",
+        "url": "https://docs.typesafe.ai/confidence",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "jevmodels",
+        "title": "TypeSafe: Jev models",
+        "url": "https://docs.typesafe.ai/models",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "jevcitation",
+        "title": "TypeSafe: citation-check cookbook",
+        "url": "https://docs.typesafe.ai/cookbooks/citation_check",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "wikibase",
+        "title": "Wikibase: full-statement RDF format",
+        "url": "https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "wikisources",
+        "title": "Wikidata: sourcing guidance",
+        "url": "https://www.wikidata.org/wiki/Help:Sources",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "graphrag",
+        "title": "Microsoft: GraphRAG query strategies",
+        "url": "https://microsoft.github.io/graphrag/query/overview/",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "prov",
+        "title": "W3C: PROV-O provenance ontology",
+        "url": "https://www.w3.org/TR/prov-o/",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "evals",
+        "title": "Anthropic: evaluating AI agents",
+        "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "ragchecker",
+        "title": "Amazon Science: RAGChecker",
+        "url": "https://github.com/amazon-science/RAGChecker",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "taloscycle",
+        "title": "Talos: work-test cycle at reviewed commit",
+        "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/work-test-cycle.md",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "talosverify",
+        "title": "Talos: command-verification evidence tests",
+        "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/src/test/java/dev/talos/runtime/verification/CommandVerificationEvidenceTest.java",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "talosfinding",
+        "title": "Talos: audit-finding template",
+        "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/templates/audit-finding.md",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "talosverdict",
+        "title": "Talos: summary and verdict template",
+        "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/templates/talosbench-summary-template.md",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "talospacket",
+        "title": "Talos: QA packet",
+        "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/templates/qa-packet.md",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "talosmanual",
+        "title": "Talos: adverse-case manual QA",
+        "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/work-cycle-docs/runbooks/manual-qa.md",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "talosdocs",
+        "title": "Talos: documentation contract test",
+        "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/src/test/java/dev/talos/docs/ReleaseQaGateContractTest.java",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "talosbudget",
+        "title": "Talos: LLM call-budget tests",
+        "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/src/test/java/dev/talos/core/llm/LlmCallBudgetTest.java",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "talosreadme",
+        "title": "Talos: README at reviewed commit",
+        "url": "https://github.com/ai21z/talos-assistant/blob/970385bedac11a6bf0eecbe951aa815735d73a1b/README.md",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "simple-agents",
+        "title": "Anthropic: composable architectures (tooling caveat noted)",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "gov-discovery",
+        "title": "GOV.UK: discovery scope and next-phase decisions",
+        "url": "https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "nist-core",
+        "title": "NIST AI RMF 1.0 Core (revision in progress)",
+        "url": "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "sdk-server-auth",
+        "title": "GitHub: Copilot SDK server-to-server authentication",
+        "url": "https://docs.github.com/en/copilot/how-tos/copilot-sdk/auth/server-to-server-tokens",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "sdk-session-limits",
+        "title": "GitHub: Copilot SDK session soft limits",
+        "url": "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/session-limits",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "sdk-usage",
+        "title": "GitHub: Copilot SDK usage and billing telemetry",
+        "url": "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/usage-and-billing",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "structured-output",
+        "title": "OpenAI: structured outputs and remaining semantic errors",
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "eval-best-practice",
+        "title": "OpenAI: evaluation design and held-out testing",
+        "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "async-request-reply",
+        "title": "Microsoft: asynchronous request-reply pattern",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/asynchronous-request-reply",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "agentic-costs",
+        "title": "AWS: assessing agentic workflow costs",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-economics/assessing-costs.html",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "agentic-economics",
+        "title": "AWS: agentic AI economics and investment choices",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-economics/understanding.html",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "dataset-splits",
+        "title": "Google: separate development, validation and test data",
+        "url": "https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "prompt-injection",
+        "title": "OWASP: prompt injection in imported/retrieved content",
+        "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "llmwiki",
+        "title": "Andrej Karpathy: LLM Wiki idea file, live gist reviewed 3 October 2026",
+        "url": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained source reference. Claim-level review has not been recorded in the catalogue."
+      },
+      {
+        "id": "reference-57",
+        "title": "github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/docs/agent-portability.md",
+        "url": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/docs/agent-portability.md",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+      },
+      {
+        "id": "reference-58",
+        "title": "github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/README.md",
+        "url": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/README.md#how-it-works",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+      },
+      {
+        "id": "reference-59",
+        "title": "github.com/github/spec-kit/blob/4a339209c877a1b68e7a790b2b2269a2b68e461f/README.md",
+        "url": "https://github.com/github/spec-kit/blob/4a339209c877a1b68e7a790b2b2269a2b68e461f/README.md#spec-driven-development",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+      },
+      {
+        "id": "reference-60",
+        "title": "docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html",
+        "url": "https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+      },
+      {
+        "id": "reference-61",
+        "title": "docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html",
+        "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+      },
+      {
+        "id": "reference-62",
+        "title": "react.dev/learn/thinking-in-react",
+        "url": "https://react.dev/learn/thinking-in-react",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+      },
+      {
+        "id": "reference-63",
+        "title": "playwright.dev/docs/accessibility-testing",
+        "url": "https://playwright.dev/docs/accessibility-testing",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+      },
+      {
+        "id": "reference-64",
+        "title": "www.w3.org/TR/sparql11-query/",
+        "url": "https://www.w3.org/TR/sparql11-query/",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+      },
+      {
+        "id": "reference-65",
+        "title": "docs.github.com/en/copilot/reference/custom-agents-configuration",
+        "url": "https://docs.github.com/en/copilot/reference/custom-agents-configuration",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+      },
+      {
+        "id": "reference-66",
+        "title": "docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents",
+        "url": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+      },
+      {
+        "id": "reference-67",
+        "title": "docs.github.com/en/copilot/concepts/agents/about-agent-skills",
+        "url": "https://docs.github.com/en/copilot/concepts/agents/about-agent-skills",
+        "revision": "",
+        "reviewedOn": "",
+        "status": "legacy",
+        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+      },
+      {
+        "id": "input-validation",
+        "title": "OWASP Input Validation Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html",
+        "revision": "",
+        "reviewedOn": "2026-10-05",
+        "status": "reviewed",
+        "contribution": "Distinguishes structural and business validation from authorization. Supports the validation principle, not every step of the Atlas example."
+      },
+      {
+        "id": "postgresql-tutorial",
+        "title": "PostgreSQL tutorial",
+        "url": "https://www.postgresql.org/docs/current/tutorial.html",
+        "revision": "",
+        "reviewedOn": "2026-10-05",
+        "status": "reviewed",
+        "contribution": "Introduces relational data and SQL. Does not establish project compatibility or performance."
+      },
+      {
+        "id": "jena-fuseki",
+        "title": "Apache Jena Fuseki documentation",
+        "url": "https://jena.apache.org/documentation/fuseki2/",
+        "revision": "",
+        "reviewedOn": "2026-10-05",
+        "status": "reviewed",
+        "contribution": "Documents Fuseki as a SPARQL server with query and update protocols."
+      },
+      {
+        "id": "neo4j-start",
+        "title": "Neo4j getting started",
+        "url": "https://neo4j.com/docs/getting-started/",
+        "revision": "",
+        "reviewedOn": "2026-10-05",
+        "status": "reviewed",
+        "contribution": "Describes the property graph model and Cypher. Does not establish equivalence to RDF and SPARQL."
+      },
+      {
+        "id": "neptune-sparql-access",
+        "title": "Amazon Neptune SPARQL access",
+        "url": "https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-sparql.html",
+        "revision": "",
+        "reviewedOn": "2026-10-05",
+        "status": "reviewed",
+        "contribution": "Documents SPARQL access to RDF data and points to engine-specific compliance details."
+      }
+    ],
+    "relations": [
+      {
+        "from": "topic:overview",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:overview",
+        "type": "related-reading",
+        "to": "topic:pilot",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:overview",
+        "type": "related-reading",
+        "to": "topic:confidence-summary",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:overview",
+        "type": "related-reading",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:overview",
+        "type": "related-reading",
+        "to": "topic:workflow-patterns",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:overview",
+        "type": "related-reading",
+        "to": "topic:architecture-decisions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:overview",
+        "type": "related-reading",
+        "to": "topic:work-breakdown",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:overview",
+        "type": "related-reading",
+        "to": "topic:release-operations",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflows",
+        "type": "browse-under",
+        "to": "topic:overview",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflows",
+        "type": "related-reading",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflows",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflows",
+        "type": "related-reading",
+        "to": "topic:pilot",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflows",
+        "type": "related-reading",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflows",
+        "type": "related-reading",
+        "to": "topic:study-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflows",
+        "type": "related-reading",
+        "to": "topic:workflow-patterns",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflows",
+        "type": "related-reading",
+        "to": "topic:architecture-decisions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflow-patterns",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflow-patterns",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflow-patterns",
+        "type": "related-reading",
+        "to": "topic:retries",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflow-patterns",
+        "type": "related-reading",
+        "to": "topic:architecture",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflow-patterns",
+        "type": "related-reading",
+        "to": "topic:study-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflow-patterns",
+        "type": "related-reading",
+        "to": "topic:study-quality",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflow-patterns",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:workflow-patterns",
+        "type": "related-reading",
+        "to": "topic:post-change-checks",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture-decisions",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture-decisions",
+        "type": "related-reading",
+        "to": "topic:requirements-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture-decisions",
+        "type": "related-reading",
+        "to": "topic:impact-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture-decisions",
+        "type": "related-reading",
+        "to": "topic:architecture",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture-decisions",
+        "type": "related-reading",
+        "to": "topic:study-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture-decisions",
+        "type": "related-reading",
+        "to": "topic:durable-execution",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture-decisions",
+        "type": "related-reading",
+        "to": "topic:work-breakdown",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:work-breakdown",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:work-breakdown",
+        "type": "related-reading",
+        "to": "topic:architecture-decisions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:work-breakdown",
+        "type": "related-reading",
+        "to": "topic:requirements-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:work-breakdown",
+        "type": "related-reading",
+        "to": "topic:traceability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:work-breakdown",
+        "type": "related-reading",
+        "to": "topic:decomposition",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:work-breakdown",
+        "type": "related-reading",
+        "to": "topic:implementation-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:release-operations",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:release-operations",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:release-operations",
+        "type": "related-reading",
+        "to": "topic:qa-packet",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:release-operations",
+        "type": "related-reading",
+        "to": "topic:pilot",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:release-operations",
+        "type": "related-reading",
+        "to": "topic:workflow-patterns",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:release-operations",
+        "type": "related-reading",
+        "to": "topic:eval-metrics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:release-operations",
+        "type": "related-reading",
+        "to": "topic:study-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements-workflow",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements-workflow",
+        "type": "related-reading",
+        "to": "topic:requirement-status",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements-workflow",
+        "type": "related-reading",
+        "to": "topic:traceability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements-workflow",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements-workflow",
+        "type": "related-reading",
+        "to": "topic:requirements-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:implementation-workflow",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:implementation-workflow",
+        "type": "related-reading",
+        "to": "topic:post-change-checks",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:implementation-workflow",
+        "type": "related-reading",
+        "to": "topic:jenkins",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:implementation-workflow",
+        "type": "related-reading",
+        "to": "topic:bitbucket",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:implementation-workflow",
+        "type": "related-reading",
+        "to": "topic:qa-packet",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:implementation-workflow",
+        "type": "related-reading",
+        "to": "topic:workflow-patterns",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:implementation-workflow",
+        "type": "related-reading",
+        "to": "topic:work-breakdown",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:implementation-workflow",
+        "type": "related-reading",
+        "to": "topic:release-operations",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:curation-workflow",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:curation-workflow",
+        "type": "related-reading",
+        "to": "topic:jev-support",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:curation-workflow",
+        "type": "related-reading",
+        "to": "topic:candidate-isolation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:curation-workflow",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:curation-workflow",
+        "type": "related-reading",
+        "to": "topic:applicability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture",
+        "type": "related-reading",
+        "to": "topic:agent-roles",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture",
+        "type": "related-reading",
+        "to": "topic:durable-execution",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture",
+        "type": "related-reading",
+        "to": "topic:skill-definition",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture",
+        "type": "related-reading",
+        "to": "topic:architecture-decisions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architecture",
+        "type": "related-reading",
+        "to": "topic:workflow-patterns",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:task-contract",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:task-contract",
+        "type": "related-reading",
+        "to": "topic:qa-packet",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:task-contract",
+        "type": "related-reading",
+        "to": "topic:finding-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:task-contract",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:task-contract",
+        "type": "related-reading",
+        "to": "topic:budgets",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:task-contract",
+        "type": "related-reading",
+        "to": "topic:permissions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:task-contract",
+        "type": "related-reading",
+        "to": "topic:workflow-patterns",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:deterministic-control",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:deterministic-control",
+        "type": "related-reading",
+        "to": "topic:jev-limitations",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:deterministic-control",
+        "type": "related-reading",
+        "to": "topic:permissions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:deterministic-control",
+        "type": "related-reading",
+        "to": "topic:event-state",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:event-state",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:event-state",
+        "type": "related-reading",
+        "to": "topic:retries",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:event-state",
+        "type": "related-reading",
+        "to": "topic:durable-execution",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:event-state",
+        "type": "related-reading",
+        "to": "topic:rovo",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:event-state",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:parallelism",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:parallelism",
+        "type": "related-reading",
+        "to": "topic:agent-roles",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:parallelism",
+        "type": "related-reading",
+        "to": "topic:handoffs",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:parallelism",
+        "type": "related-reading",
+        "to": "topic:cost-per-result",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:durable-execution",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:durable-execution",
+        "type": "related-reading",
+        "to": "topic:architecture",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:durable-execution",
+        "type": "related-reading",
+        "to": "topic:event-state",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:durable-execution",
+        "type": "related-reading",
+        "to": "topic:dynamic-workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:dynamic-workflows",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:dynamic-workflows",
+        "type": "related-reading",
+        "to": "topic:intellij",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:dynamic-workflows",
+        "type": "related-reading",
+        "to": "topic:budgets",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:dynamic-workflows",
+        "type": "related-reading",
+        "to": "topic:permissions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:dynamic-workflows",
+        "type": "related-reading",
+        "to": "topic:durable-execution",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retries",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retries",
+        "type": "related-reading",
+        "to": "topic:budgets",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retries",
+        "type": "related-reading",
+        "to": "topic:verdicts",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retries",
+        "type": "related-reading",
+        "to": "topic:event-state",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retries",
+        "type": "related-reading",
+        "to": "topic:workflow-patterns",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "browse-under",
+        "to": "topic:overview",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "related-reading",
+        "to": "topic:architecture",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "related-reading",
+        "to": "topic:capability-inventory",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "related-reading",
+        "to": "topic:permissions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jira",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jira",
+        "type": "related-reading",
+        "to": "topic:requirements-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jira",
+        "type": "related-reading",
+        "to": "topic:finding-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jira",
+        "type": "related-reading",
+        "to": "topic:requirement-status",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jira",
+        "type": "related-reading",
+        "to": "topic:rovo",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:confluence",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:confluence",
+        "type": "related-reading",
+        "to": "topic:llm-wiki",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:confluence",
+        "type": "related-reading",
+        "to": "topic:engineering-knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:confluence",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:confluence",
+        "type": "related-reading",
+        "to": "topic:rovo",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:bitbucket",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:bitbucket",
+        "type": "related-reading",
+        "to": "topic:implementation-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:bitbucket",
+        "type": "related-reading",
+        "to": "topic:intellij",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:bitbucket",
+        "type": "related-reading",
+        "to": "topic:post-change-checks",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:intellij",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:intellij",
+        "type": "related-reading",
+        "to": "topic:model-inheritance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:intellij",
+        "type": "related-reading",
+        "to": "topic:capability-inventory",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:intellij",
+        "type": "related-reading",
+        "to": "topic:bitbucket",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jenkins",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jenkins",
+        "type": "related-reading",
+        "to": "topic:ci-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jenkins",
+        "type": "related-reading",
+        "to": "topic:coverage",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jenkins",
+        "type": "related-reading",
+        "to": "topic:sonar-debt",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jenkins",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:rovo",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:rovo",
+        "type": "related-reading",
+        "to": "topic:jira",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:rovo",
+        "type": "related-reading",
+        "to": "topic:confluence",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:rovo",
+        "type": "related-reading",
+        "to": "topic:billing-boundaries",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:rovo",
+        "type": "related-reading",
+        "to": "topic:permissions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:neptune-stack",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:neptune-stack",
+        "type": "related-reading",
+        "to": "topic:query-performance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:neptune-stack",
+        "type": "related-reading",
+        "to": "topic:candidate-isolation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:neptune-stack",
+        "type": "related-reading",
+        "to": "topic:rdf-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:neptune-stack",
+        "type": "related-reading",
+        "to": "topic:provenance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:permissions",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:permissions",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:permissions",
+        "type": "related-reading",
+        "to": "topic:retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:permissions",
+        "type": "related-reading",
+        "to": "topic:candidate-isolation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:permissions",
+        "type": "related-reading",
+        "to": "topic:deterministic-control",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:capability-inventory",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:capability-inventory",
+        "type": "related-reading",
+        "to": "topic:dynamic-workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:capability-inventory",
+        "type": "related-reading",
+        "to": "topic:model-inheritance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:capability-inventory",
+        "type": "related-reading",
+        "to": "topic:billing-boundaries",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:economy",
+        "type": "browse-under",
+        "to": "topic:overview",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:economy",
+        "type": "related-reading",
+        "to": "topic:routing",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:economy",
+        "type": "related-reading",
+        "to": "topic:cost-per-result",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:economy",
+        "type": "related-reading",
+        "to": "topic:model-prices",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:economy",
+        "type": "related-reading",
+        "to": "topic:eval-metrics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:model-prices",
+        "type": "browse-under",
+        "to": "topic:economy",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:model-prices",
+        "type": "related-reading",
+        "to": "topic:routing",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:model-prices",
+        "type": "related-reading",
+        "to": "topic:cost-per-result",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:model-prices",
+        "type": "related-reading",
+        "to": "topic:capability-inventory",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:routing",
+        "type": "browse-under",
+        "to": "topic:economy",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:routing",
+        "type": "related-reading",
+        "to": "topic:model-prices",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:routing",
+        "type": "related-reading",
+        "to": "topic:model-inheritance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:routing",
+        "type": "related-reading",
+        "to": "topic:jev-judgments",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:routing",
+        "type": "related-reading",
+        "to": "topic:eval-corpus",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:cost-per-result",
+        "type": "browse-under",
+        "to": "topic:economy",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:cost-per-result",
+        "type": "related-reading",
+        "to": "topic:eval-metrics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:cost-per-result",
+        "type": "related-reading",
+        "to": "topic:routing",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:cost-per-result",
+        "type": "related-reading",
+        "to": "topic:billing-boundaries",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:cost-per-result",
+        "type": "related-reading",
+        "to": "topic:confidence-summary",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:cost-per-result",
+        "type": "related-reading",
+        "to": "topic:study-economics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:context-selection",
+        "type": "browse-under",
+        "to": "topic:economy",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:context-selection",
+        "type": "related-reading",
+        "to": "topic:retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:context-selection",
+        "type": "related-reading",
+        "to": "topic:handoffs",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:context-selection",
+        "type": "related-reading",
+        "to": "topic:eager-skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:revision-cache",
+        "type": "browse-under",
+        "to": "topic:economy",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:revision-cache",
+        "type": "related-reading",
+        "to": "topic:post-change-checks",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:revision-cache",
+        "type": "related-reading",
+        "to": "topic:provenance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:revision-cache",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:handoffs",
+        "type": "browse-under",
+        "to": "topic:economy",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:handoffs",
+        "type": "related-reading",
+        "to": "topic:parallelism",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:handoffs",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:handoffs",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:budgets",
+        "type": "browse-under",
+        "to": "topic:economy",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:budgets",
+        "type": "related-reading",
+        "to": "topic:retries",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:budgets",
+        "type": "related-reading",
+        "to": "topic:cost-per-result",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:budgets",
+        "type": "related-reading",
+        "to": "topic:dynamic-workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:budgets",
+        "type": "related-reading",
+        "to": "topic:study-runtime",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:model-inheritance",
+        "type": "browse-under",
+        "to": "topic:economy",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:model-inheritance",
+        "type": "related-reading",
+        "to": "topic:capability-inventory",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:model-inheritance",
+        "type": "related-reading",
+        "to": "topic:routing",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:model-inheritance",
+        "type": "related-reading",
+        "to": "topic:intellij",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:billing-boundaries",
+        "type": "browse-under",
+        "to": "topic:economy",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:billing-boundaries",
+        "type": "related-reading",
+        "to": "topic:cost-per-result",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:billing-boundaries",
+        "type": "related-reading",
+        "to": "topic:permissions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:billing-boundaries",
+        "type": "related-reading",
+        "to": "topic:rovo",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:billing-boundaries",
+        "type": "related-reading",
+        "to": "topic:study-economics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:billing-boundaries",
+        "type": "related-reading",
+        "to": "topic:study-runtime",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:skills",
+        "type": "browse-under",
+        "to": "topic:overview",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:skills",
+        "type": "related-reading",
+        "to": "topic:skill-definition",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:skills",
+        "type": "related-reading",
+        "to": "topic:agent-roles",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:skills",
+        "type": "related-reading",
+        "to": "topic:eager-skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:skill-definition",
+        "type": "browse-under",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:skill-definition",
+        "type": "related-reading",
+        "to": "topic:architecture",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:skill-definition",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:skill-definition",
+        "type": "related-reading",
+        "to": "topic:eager-skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:skill-definition",
+        "type": "related-reading",
+        "to": "topic:study-runtime",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements-skill",
+        "type": "browse-under",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements-skill",
+        "type": "related-reading",
+        "to": "topic:requirements-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements-skill",
+        "type": "related-reading",
+        "to": "topic:requirement-status",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements-skill",
+        "type": "related-reading",
+        "to": "topic:traceability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:impact-skill",
+        "type": "browse-under",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:impact-skill",
+        "type": "related-reading",
+        "to": "topic:traceability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:impact-skill",
+        "type": "related-reading",
+        "to": "topic:decomposition",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:impact-skill",
+        "type": "related-reading",
+        "to": "topic:neptune-stack",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:impact-skill",
+        "type": "related-reading",
+        "to": "topic:architecture-decisions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:impact-skill",
+        "type": "related-reading",
+        "to": "topic:work-breakdown",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:ci-skill",
+        "type": "browse-under",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:ci-skill",
+        "type": "related-reading",
+        "to": "topic:jenkins",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:ci-skill",
+        "type": "related-reading",
+        "to": "topic:retries",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:ci-skill",
+        "type": "related-reading",
+        "to": "topic:finding-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:rdf-skill",
+        "type": "browse-under",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:rdf-skill",
+        "type": "related-reading",
+        "to": "topic:coverage",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:rdf-skill",
+        "type": "related-reading",
+        "to": "topic:candidate-isolation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:rdf-skill",
+        "type": "related-reading",
+        "to": "topic:query-performance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-skill",
+        "type": "browse-under",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-skill",
+        "type": "related-reading",
+        "to": "topic:jev-support",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-skill",
+        "type": "related-reading",
+        "to": "topic:applicability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-skill",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-skill",
+        "type": "related-reading",
+        "to": "topic:provenance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:packet-skill",
+        "type": "browse-under",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:packet-skill",
+        "type": "related-reading",
+        "to": "topic:qa-packet",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:packet-skill",
+        "type": "related-reading",
+        "to": "topic:verdicts",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:packet-skill",
+        "type": "related-reading",
+        "to": "topic:post-change-checks",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:agent-roles",
+        "type": "browse-under",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:agent-roles",
+        "type": "related-reading",
+        "to": "topic:routing",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:agent-roles",
+        "type": "related-reading",
+        "to": "topic:parallelism",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:agent-roles",
+        "type": "related-reading",
+        "to": "topic:deterministic-control",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eager-skills",
+        "type": "browse-under",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eager-skills",
+        "type": "related-reading",
+        "to": "topic:context-selection",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eager-skills",
+        "type": "related-reading",
+        "to": "topic:skill-definition",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eager-skills",
+        "type": "related-reading",
+        "to": "topic:agent-roles",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements",
+        "type": "browse-under",
+        "to": "topic:overview",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements",
+        "type": "related-reading",
+        "to": "topic:requirement-status",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements",
+        "type": "related-reading",
+        "to": "topic:traceability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements",
+        "type": "related-reading",
+        "to": "topic:requirements-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirement-status",
+        "type": "browse-under",
+        "to": "topic:requirements",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirement-status",
+        "type": "related-reading",
+        "to": "topic:jira",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirement-status",
+        "type": "related-reading",
+        "to": "topic:discovery",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirement-status",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:traceability",
+        "type": "browse-under",
+        "to": "topic:requirements",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:traceability",
+        "type": "related-reading",
+        "to": "topic:impact-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:traceability",
+        "type": "related-reading",
+        "to": "topic:coverage",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:traceability",
+        "type": "related-reading",
+        "to": "topic:engineering-knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:traceability",
+        "type": "related-reading",
+        "to": "topic:work-breakdown",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:applicability",
+        "type": "browse-under",
+        "to": "topic:requirements",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:applicability",
+        "type": "related-reading",
+        "to": "topic:temporal-scope",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:applicability",
+        "type": "related-reading",
+        "to": "topic:holiday-example",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:applicability",
+        "type": "related-reading",
+        "to": "topic:wikidata-statements",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:applicability",
+        "type": "related-reading",
+        "to": "topic:jev-support",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:temporal-scope",
+        "type": "browse-under",
+        "to": "topic:requirements",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:temporal-scope",
+        "type": "related-reading",
+        "to": "topic:jev-limitations",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:temporal-scope",
+        "type": "related-reading",
+        "to": "topic:provenance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:temporal-scope",
+        "type": "related-reading",
+        "to": "topic:applicability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:holiday-example",
+        "type": "browse-under",
+        "to": "topic:requirements",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:holiday-example",
+        "type": "related-reading",
+        "to": "topic:coverage",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:holiday-example",
+        "type": "related-reading",
+        "to": "topic:jev-support",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:holiday-example",
+        "type": "related-reading",
+        "to": "topic:traceability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:holiday-example",
+        "type": "related-reading",
+        "to": "topic:applicability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:discovery",
+        "type": "browse-under",
+        "to": "topic:requirements",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:discovery",
+        "type": "related-reading",
+        "to": "topic:requirements-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:discovery",
+        "type": "related-reading",
+        "to": "topic:pilot",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:discovery",
+        "type": "related-reading",
+        "to": "topic:requirement-status",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:discovery",
+        "type": "related-reading",
+        "to": "topic:finding-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:debt",
+        "type": "browse-under",
+        "to": "topic:overview",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:debt",
+        "type": "related-reading",
+        "to": "topic:debt-categories",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:debt",
+        "type": "related-reading",
+        "to": "topic:finding-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:debt",
+        "type": "related-reading",
+        "to": "topic:coverage",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:debt",
+        "type": "related-reading",
+        "to": "topic:prioritization",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:debt-categories",
+        "type": "browse-under",
+        "to": "topic:debt",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:debt-categories",
+        "type": "related-reading",
+        "to": "topic:finding-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:debt-categories",
+        "type": "related-reading",
+        "to": "topic:sonar-debt",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:debt-categories",
+        "type": "related-reading",
+        "to": "topic:query-performance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:finding-contract",
+        "type": "browse-under",
+        "to": "topic:debt",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:finding-contract",
+        "type": "related-reading",
+        "to": "topic:verdicts",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:finding-contract",
+        "type": "related-reading",
+        "to": "topic:prioritization",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:finding-contract",
+        "type": "related-reading",
+        "to": "topic:jira",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:prioritization",
+        "type": "browse-under",
+        "to": "topic:debt",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:prioritization",
+        "type": "related-reading",
+        "to": "topic:sonar-debt",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:prioritization",
+        "type": "related-reading",
+        "to": "topic:decomposition",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:prioritization",
+        "type": "related-reading",
+        "to": "topic:finding-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:decomposition",
+        "type": "browse-under",
+        "to": "topic:debt",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:decomposition",
+        "type": "related-reading",
+        "to": "topic:impact-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:decomposition",
+        "type": "related-reading",
+        "to": "topic:implementation-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:decomposition",
+        "type": "related-reading",
+        "to": "topic:traceability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:decomposition",
+        "type": "related-reading",
+        "to": "topic:work-breakdown",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:coverage",
+        "type": "browse-under",
+        "to": "topic:debt",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:coverage",
+        "type": "related-reading",
+        "to": "topic:jacoco-counters",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:coverage",
+        "type": "related-reading",
+        "to": "topic:holiday-example",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:coverage",
+        "type": "related-reading",
+        "to": "topic:eval-metrics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jacoco-counters",
+        "type": "browse-under",
+        "to": "topic:debt",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jacoco-counters",
+        "type": "related-reading",
+        "to": "topic:coverage",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jacoco-counters",
+        "type": "related-reading",
+        "to": "topic:mutation-testing",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:sonar-debt",
+        "type": "browse-under",
+        "to": "topic:debt",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:sonar-debt",
+        "type": "related-reading",
+        "to": "topic:debt-categories",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:sonar-debt",
+        "type": "related-reading",
+        "to": "topic:prioritization",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:sonar-debt",
+        "type": "related-reading",
+        "to": "topic:jenkins",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:mutation-testing",
+        "type": "browse-under",
+        "to": "topic:debt",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:mutation-testing",
+        "type": "related-reading",
+        "to": "topic:jacoco-counters",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:mutation-testing",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:mutation-testing",
+        "type": "related-reading",
+        "to": "topic:cost-per-result",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:query-performance",
+        "type": "browse-under",
+        "to": "topic:debt",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:query-performance",
+        "type": "related-reading",
+        "to": "topic:rdf-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:query-performance",
+        "type": "related-reading",
+        "to": "topic:neptune-stack",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:query-performance",
+        "type": "related-reading",
+        "to": "topic:finding-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev",
+        "type": "browse-under",
+        "to": "topic:overview",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev",
+        "type": "related-reading",
+        "to": "topic:jev-support",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev",
+        "type": "related-reading",
+        "to": "topic:jev-shadow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev",
+        "type": "related-reading",
+        "to": "topic:jev-limitations",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-judgments",
+        "type": "browse-under",
+        "to": "topic:jev",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-judgments",
+        "type": "related-reading",
+        "to": "topic:deterministic-control",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-judgments",
+        "type": "related-reading",
+        "to": "topic:jev-support",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-judgments",
+        "type": "related-reading",
+        "to": "topic:jev-mapping",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-support",
+        "type": "browse-under",
+        "to": "topic:jev",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-support",
+        "type": "related-reading",
+        "to": "topic:source-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-support",
+        "type": "related-reading",
+        "to": "topic:holiday-example",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-support",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-support",
+        "type": "related-reading",
+        "to": "topic:jev-shadow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-mapping",
+        "type": "browse-under",
+        "to": "topic:jev",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-mapping",
+        "type": "related-reading",
+        "to": "topic:applicability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-mapping",
+        "type": "related-reading",
+        "to": "topic:retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-mapping",
+        "type": "related-reading",
+        "to": "topic:jev-judgments",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-limitations",
+        "type": "browse-under",
+        "to": "topic:jev",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-limitations",
+        "type": "related-reading",
+        "to": "topic:deterministic-control",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-limitations",
+        "type": "related-reading",
+        "to": "topic:jev-confidence",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-limitations",
+        "type": "related-reading",
+        "to": "topic:temporal-scope",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-confidence",
+        "type": "browse-under",
+        "to": "topic:jev",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-confidence",
+        "type": "related-reading",
+        "to": "topic:jev-shadow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-confidence",
+        "type": "related-reading",
+        "to": "topic:eval-metrics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-confidence",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-clustering",
+        "type": "browse-under",
+        "to": "topic:jev",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-clustering",
+        "type": "related-reading",
+        "to": "topic:jev-mapping",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-clustering",
+        "type": "related-reading",
+        "to": "topic:applicability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-clustering",
+        "type": "related-reading",
+        "to": "topic:retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-shadow",
+        "type": "browse-under",
+        "to": "topic:jev",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-shadow",
+        "type": "related-reading",
+        "to": "topic:eval-corpus",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-shadow",
+        "type": "related-reading",
+        "to": "topic:jev-languages",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-shadow",
+        "type": "related-reading",
+        "to": "topic:routing",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-shadow",
+        "type": "related-reading",
+        "to": "topic:pilot",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-languages",
+        "type": "browse-under",
+        "to": "topic:jev",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-languages",
+        "type": "related-reading",
+        "to": "topic:jev-shadow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-languages",
+        "type": "related-reading",
+        "to": "topic:eval-corpus",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:jev-languages",
+        "type": "related-reading",
+        "to": "topic:applicability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:knowledge",
+        "type": "browse-under",
+        "to": "topic:overview",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:knowledge",
+        "type": "related-reading",
+        "to": "topic:knowledge-assets",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:knowledge",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:knowledge",
+        "type": "related-reading",
+        "to": "topic:retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:knowledge",
+        "type": "related-reading",
+        "to": "topic:candidate-isolation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:knowledge-assets",
+        "type": "browse-under",
+        "to": "topic:knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:knowledge-assets",
+        "type": "related-reading",
+        "to": "topic:engineering-knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:knowledge-assets",
+        "type": "related-reading",
+        "to": "topic:llm-wiki",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:knowledge-assets",
+        "type": "related-reading",
+        "to": "topic:provenance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:engineering-knowledge",
+        "type": "browse-under",
+        "to": "topic:knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:engineering-knowledge",
+        "type": "related-reading",
+        "to": "topic:traceability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:engineering-knowledge",
+        "type": "related-reading",
+        "to": "topic:confluence",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:engineering-knowledge",
+        "type": "related-reading",
+        "to": "topic:graphrag-option",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval",
+        "type": "browse-under",
+        "to": "topic:knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval",
+        "type": "related-reading",
+        "to": "topic:retrieval-diagnosis",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval",
+        "type": "related-reading",
+        "to": "topic:permissions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval",
+        "type": "related-reading",
+        "to": "topic:context-selection",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval",
+        "type": "related-reading",
+        "to": "topic:jev-mapping",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:answer-contract",
+        "type": "browse-under",
+        "to": "topic:knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:answer-contract",
+        "type": "related-reading",
+        "to": "topic:jev-support",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:answer-contract",
+        "type": "related-reading",
+        "to": "topic:source-conflicts",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:answer-contract",
+        "type": "related-reading",
+        "to": "topic:provenance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:answer-contract",
+        "type": "related-reading",
+        "to": "topic:eval-metrics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:llm-wiki",
+        "type": "browse-under",
+        "to": "topic:knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:llm-wiki",
+        "type": "related-reading",
+        "to": "topic:confluence",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:llm-wiki",
+        "type": "related-reading",
+        "to": "topic:knowledge-assets",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:llm-wiki",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:graphrag-option",
+        "type": "browse-under",
+        "to": "topic:knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:graphrag-option",
+        "type": "related-reading",
+        "to": "topic:retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:graphrag-option",
+        "type": "related-reading",
+        "to": "topic:engineering-knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:graphrag-option",
+        "type": "related-reading",
+        "to": "topic:cost-per-result",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:wikidata-statements",
+        "type": "browse-under",
+        "to": "topic:knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:wikidata-statements",
+        "type": "related-reading",
+        "to": "topic:applicability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:wikidata-statements",
+        "type": "related-reading",
+        "to": "topic:provenance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:wikidata-statements",
+        "type": "related-reading",
+        "to": "topic:curation-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:candidate-isolation",
+        "type": "browse-under",
+        "to": "topic:knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:candidate-isolation",
+        "type": "related-reading",
+        "to": "topic:curation-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:candidate-isolation",
+        "type": "related-reading",
+        "to": "topic:neptune-stack",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:candidate-isolation",
+        "type": "related-reading",
+        "to": "topic:rdf-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:candidate-isolation",
+        "type": "related-reading",
+        "to": "topic:permissions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:provenance",
+        "type": "browse-under",
+        "to": "topic:knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:provenance",
+        "type": "related-reading",
+        "to": "topic:temporal-scope",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:provenance",
+        "type": "related-reading",
+        "to": "topic:revision-cache",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:provenance",
+        "type": "related-reading",
+        "to": "topic:qa-packet",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-conflicts",
+        "type": "browse-under",
+        "to": "topic:knowledge",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-conflicts",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-conflicts",
+        "type": "related-reading",
+        "to": "topic:jev-confidence",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-conflicts",
+        "type": "related-reading",
+        "to": "topic:requirement-status",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-conflicts",
+        "type": "related-reading",
+        "to": "topic:applicability",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:talos",
+        "type": "browse-under",
+        "to": "topic:overview",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:talos",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:talos",
+        "type": "related-reading",
+        "to": "topic:qa-packet",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:talos",
+        "type": "related-reading",
+        "to": "topic:talos-boundaries",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:verification-loops",
+        "type": "browse-under",
+        "to": "topic:talos",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:verification-loops",
+        "type": "related-reading",
+        "to": "topic:implementation-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:verification-loops",
+        "type": "related-reading",
+        "to": "topic:jenkins",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:verification-loops",
+        "type": "related-reading",
+        "to": "topic:cost-per-result",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:verification-loops",
+        "type": "related-reading",
+        "to": "topic:workflow-patterns",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:verification-loops",
+        "type": "related-reading",
+        "to": "topic:release-operations",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:post-change-checks",
+        "type": "browse-under",
+        "to": "topic:talos",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:post-change-checks",
+        "type": "related-reading",
+        "to": "topic:revision-cache",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:post-change-checks",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:post-change-checks",
+        "type": "related-reading",
+        "to": "topic:qa-packet",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:verdicts",
+        "type": "browse-under",
+        "to": "topic:talos",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:verdicts",
+        "type": "related-reading",
+        "to": "topic:finding-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:verdicts",
+        "type": "related-reading",
+        "to": "topic:retries",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:verdicts",
+        "type": "related-reading",
+        "to": "topic:jenkins",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:qa-packet",
+        "type": "browse-under",
+        "to": "topic:talos",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:qa-packet",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:qa-packet",
+        "type": "related-reading",
+        "to": "topic:packet-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:qa-packet",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:qa-packet",
+        "type": "related-reading",
+        "to": "topic:eval-metrics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:adverse-audits",
+        "type": "browse-under",
+        "to": "topic:talos",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:adverse-audits",
+        "type": "related-reading",
+        "to": "topic:eval-corpus",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:adverse-audits",
+        "type": "related-reading",
+        "to": "topic:candidate-isolation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:adverse-audits",
+        "type": "related-reading",
+        "to": "topic:retries",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:talos-boundaries",
+        "type": "browse-under",
+        "to": "topic:talos",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:talos-boundaries",
+        "type": "related-reading",
+        "to": "topic:skill-definition",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:talos-boundaries",
+        "type": "related-reading",
+        "to": "topic:durable-execution",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:talos-boundaries",
+        "type": "related-reading",
+        "to": "topic:permissions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:evaluation",
+        "type": "browse-under",
+        "to": "topic:overview",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:evaluation",
+        "type": "related-reading",
+        "to": "topic:eval-corpus",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:evaluation",
+        "type": "related-reading",
+        "to": "topic:eval-metrics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:evaluation",
+        "type": "related-reading",
+        "to": "topic:pilot",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:evaluation",
+        "type": "related-reading",
+        "to": "topic:architect-proposal",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eval-corpus",
+        "type": "browse-under",
+        "to": "topic:evaluation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eval-corpus",
+        "type": "related-reading",
+        "to": "topic:adverse-audits",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eval-corpus",
+        "type": "related-reading",
+        "to": "topic:jev-shadow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eval-corpus",
+        "type": "related-reading",
+        "to": "topic:routing",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eval-corpus",
+        "type": "related-reading",
+        "to": "topic:study-quality",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eval-metrics",
+        "type": "browse-under",
+        "to": "topic:evaluation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eval-metrics",
+        "type": "related-reading",
+        "to": "topic:cost-per-result",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eval-metrics",
+        "type": "related-reading",
+        "to": "topic:jev-languages",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:eval-metrics",
+        "type": "related-reading",
+        "to": "topic:grader-design",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:grader-design",
+        "type": "browse-under",
+        "to": "topic:evaluation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:grader-design",
+        "type": "related-reading",
+        "to": "topic:qa-packet",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:grader-design",
+        "type": "related-reading",
+        "to": "topic:post-change-checks",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:grader-design",
+        "type": "related-reading",
+        "to": "topic:routing",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval-diagnosis",
+        "type": "browse-under",
+        "to": "topic:evaluation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval-diagnosis",
+        "type": "related-reading",
+        "to": "topic:retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval-diagnosis",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval-diagnosis",
+        "type": "related-reading",
+        "to": "topic:context-selection",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:pilot",
+        "type": "browse-under",
+        "to": "topic:evaluation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:pilot",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:pilot",
+        "type": "related-reading",
+        "to": "topic:requirements-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:pilot",
+        "type": "related-reading",
+        "to": "topic:jev-shadow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:pilot",
+        "type": "related-reading",
+        "to": "topic:cost-per-result",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:pilot",
+        "type": "related-reading",
+        "to": "topic:release-operations",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architect-proposal",
+        "type": "browse-under",
+        "to": "topic:evaluation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architect-proposal",
+        "type": "related-reading",
+        "to": "topic:pilot",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architect-proposal",
+        "type": "related-reading",
+        "to": "topic:capability-inventory",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architect-proposal",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architect-proposal",
+        "type": "related-reading",
+        "to": "topic:candidate-isolation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:architect-proposal",
+        "type": "related-reading",
+        "to": "topic:architecture-decisions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:confidence-summary",
+        "type": "browse-under",
+        "to": "topic:evaluation",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:confidence-summary",
+        "type": "related-reading",
+        "to": "topic:model-prices",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:confidence-summary",
+        "type": "related-reading",
+        "to": "topic:discovery",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:confidence-summary",
+        "type": "related-reading",
+        "to": "topic:jev-shadow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:confidence-summary",
+        "type": "related-reading",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:confidence-summary",
+        "type": "related-reading",
+        "to": "topic:study-decision",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:construct-study",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:construct-study",
+        "type": "related-reading",
+        "to": "topic:study-baseline",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:construct-study",
+        "type": "related-reading",
+        "to": "topic:study-quality",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:construct-study",
+        "type": "related-reading",
+        "to": "topic:study-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:construct-study",
+        "type": "related-reading",
+        "to": "topic:study-runtime",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:construct-study",
+        "type": "related-reading",
+        "to": "topic:study-economics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:construct-study",
+        "type": "related-reading",
+        "to": "topic:study-experiment",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:construct-study",
+        "type": "related-reading",
+        "to": "topic:study-decision",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:construct-study",
+        "type": "related-reading",
+        "to": "topic:study-ticket-wording",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:construct-study",
+        "type": "related-reading",
+        "to": "topic:study-scenarios",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:construct-study",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-baseline",
+        "type": "browse-under",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-baseline",
+        "type": "related-reading",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-baseline",
+        "type": "related-reading",
+        "to": "topic:study-quality",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-baseline",
+        "type": "related-reading",
+        "to": "topic:study-economics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-baseline",
+        "type": "related-reading",
+        "to": "topic:capability-inventory",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-baseline",
+        "type": "related-reading",
+        "to": "topic:skill-definition",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-quality",
+        "type": "browse-under",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-quality",
+        "type": "related-reading",
+        "to": "topic:study-baseline",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-quality",
+        "type": "related-reading",
+        "to": "topic:study-decision",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-quality",
+        "type": "related-reading",
+        "to": "topic:eval-corpus",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-quality",
+        "type": "related-reading",
+        "to": "topic:grader-design",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-quality",
+        "type": "related-reading",
+        "to": "topic:post-change-checks",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-quality",
+        "type": "related-reading",
+        "to": "topic:workflow-patterns",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-contract",
+        "type": "browse-under",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-contract",
+        "type": "related-reading",
+        "to": "topic:study-runtime",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-contract",
+        "type": "related-reading",
+        "to": "topic:study-quality",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-contract",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-contract",
+        "type": "related-reading",
+        "to": "topic:event-state",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-contract",
+        "type": "related-reading",
+        "to": "topic:durable-execution",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-contract",
+        "type": "related-reading",
+        "to": "topic:workflow-patterns",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-runtime",
+        "type": "browse-under",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-runtime",
+        "type": "related-reading",
+        "to": "topic:study-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-runtime",
+        "type": "related-reading",
+        "to": "topic:study-economics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-runtime",
+        "type": "related-reading",
+        "to": "topic:permissions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-runtime",
+        "type": "related-reading",
+        "to": "topic:budgets",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-runtime",
+        "type": "related-reading",
+        "to": "topic:architecture",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-economics",
+        "type": "browse-under",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-economics",
+        "type": "related-reading",
+        "to": "topic:cost-per-result",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-economics",
+        "type": "related-reading",
+        "to": "topic:study-baseline",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-economics",
+        "type": "related-reading",
+        "to": "topic:study-quality",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-economics",
+        "type": "related-reading",
+        "to": "topic:study-decision",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-economics",
+        "type": "related-reading",
+        "to": "topic:billing-boundaries",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-experiment",
+        "type": "browse-under",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-experiment",
+        "type": "related-reading",
+        "to": "topic:study-baseline",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-experiment",
+        "type": "related-reading",
+        "to": "topic:study-quality",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-experiment",
+        "type": "related-reading",
+        "to": "topic:study-runtime",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-experiment",
+        "type": "related-reading",
+        "to": "topic:study-decision",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-experiment",
+        "type": "related-reading",
+        "to": "topic:routing",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-decision",
+        "type": "browse-under",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-decision",
+        "type": "related-reading",
+        "to": "topic:study-quality",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-decision",
+        "type": "related-reading",
+        "to": "topic:study-economics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-decision",
+        "type": "related-reading",
+        "to": "topic:study-experiment",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-decision",
+        "type": "related-reading",
+        "to": "topic:study-ticket-wording",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-decision",
+        "type": "related-reading",
+        "to": "topic:confidence-summary",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-ticket-wording",
+        "type": "browse-under",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-ticket-wording",
+        "type": "related-reading",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-ticket-wording",
+        "type": "related-reading",
+        "to": "topic:study-quality",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-ticket-wording",
+        "type": "related-reading",
+        "to": "topic:study-decision",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-ticket-wording",
+        "type": "related-reading",
+        "to": "topic:study-scenarios",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-scenarios",
+        "type": "browse-under",
+        "to": "topic:construct-study",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-scenarios",
+        "type": "related-reading",
+        "to": "topic:study-quality",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-scenarios",
+        "type": "related-reading",
+        "to": "topic:study-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-scenarios",
+        "type": "related-reading",
+        "to": "topic:study-economics",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-scenarios",
+        "type": "related-reading",
+        "to": "topic:adverse-audits",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-scenarios",
+        "type": "related-reading",
+        "to": "topic:workflow-patterns",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:requirements",
+        "type": "explained-by",
+        "to": "topic:requirements",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:architecture",
+        "type": "explained-by",
+        "to": "topic:architecture-decisions",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:breakdown",
+        "type": "explained-by",
+        "to": "topic:work-breakdown",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:implementation",
+        "type": "explained-by",
+        "to": "topic:implementation-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:verification",
+        "type": "explained-by",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:release",
+        "type": "explained-by",
+        "to": "topic:release-operations",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:operations",
+        "type": "explained-by",
+        "to": "topic:eval-metrics",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:current-process",
+        "type": "explained-by",
+        "to": "topic:study-baseline",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:feasibility-scope",
+        "type": "explained-by",
+        "to": "topic:study-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:options",
+        "type": "explained-by",
+        "to": "topic:study-runtime",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:experiment-plan",
+        "type": "explained-by",
+        "to": "topic:study-experiment",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:recommendation",
+        "type": "explained-by",
+        "to": "topic:study-decision",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:reproduction",
+        "type": "explained-by",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:diagnosis",
+        "type": "explained-by",
+        "to": "topic:finding-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:bug-fix",
+        "type": "explained-by",
+        "to": "topic:implementation-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:regression",
+        "type": "explained-by",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "stage:bug-review",
+        "type": "explained-by",
+        "to": "topic:post-change-checks",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:context-selection",
+        "type": "uses-definition",
+        "to": "practice:progressive-context",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:implementation-workflow",
+        "type": "uses-definition",
+        "to": "practice:minimum-change",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:requirements-workflow",
+        "type": "uses-definition",
+        "to": "practice:specification-first",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:llm-wiki",
+        "type": "uses-definition",
+        "to": "practice:evidence-wiki",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:study-contract",
+        "type": "uses-definition",
+        "to": "control:before-write",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:information-retrieval",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:information-retrieval",
+        "type": "related-reading",
+        "to": "topic:retrieve-and-validate",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:information-retrieval",
+        "type": "related-reading",
+        "to": "topic:retrieval-example",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:information-retrieval",
+        "type": "related-reading",
+        "to": "topic:retrieval-options",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieve-and-validate",
+        "type": "browse-under",
+        "to": "topic:information-retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieve-and-validate",
+        "type": "related-reading",
+        "to": "topic:information-retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieve-and-validate",
+        "type": "related-reading",
+        "to": "topic:retrieval-example",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval-options",
+        "type": "browse-under",
+        "to": "topic:information-retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval-options",
+        "type": "related-reading",
+        "to": "topic:postgresql-data",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval-options",
+        "type": "related-reading",
+        "to": "topic:amazon-neptune",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval-options",
+        "type": "related-reading",
+        "to": "topic:apache-jena-fuseki",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval-options",
+        "type": "related-reading",
+        "to": "topic:neo4j-data",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:postgresql-data",
+        "type": "browse-under",
+        "to": "topic:retrieval-options",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:postgresql-data",
+        "type": "related-reading",
+        "to": "topic:retrieval-options",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:postgresql-data",
+        "type": "related-reading",
+        "to": "topic:retrieve-and-validate",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:postgresql-data",
+        "type": "uses-definition",
+        "to": "technology:postgresql",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:postgresql",
+        "type": "provides-capability",
+        "to": "topic:information-retrieval",
+        "sourceRefs": [
+          "postgresql-tutorial"
+        ]
+      },
+      {
+        "from": "topic:amazon-neptune",
+        "type": "browse-under",
+        "to": "topic:retrieval-options",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:amazon-neptune",
+        "type": "related-reading",
+        "to": "topic:retrieval-options",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:amazon-neptune",
+        "type": "related-reading",
+        "to": "topic:retrieve-and-validate",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:amazon-neptune",
+        "type": "uses-definition",
+        "to": "technology:neptune",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:neptune",
+        "type": "provides-capability",
+        "to": "topic:information-retrieval",
+        "sourceRefs": [
+          "neptune-sparql-access"
+        ]
+      },
+      {
+        "from": "topic:apache-jena-fuseki",
+        "type": "browse-under",
+        "to": "topic:retrieval-options",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:apache-jena-fuseki",
+        "type": "related-reading",
+        "to": "topic:retrieval-options",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:apache-jena-fuseki",
+        "type": "related-reading",
+        "to": "topic:retrieve-and-validate",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:apache-jena-fuseki",
+        "type": "uses-definition",
+        "to": "technology:jena-fuseki",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:jena-fuseki",
+        "type": "provides-capability",
+        "to": "topic:information-retrieval",
+        "sourceRefs": [
+          "jena-fuseki"
+        ]
+      },
+      {
+        "from": "topic:neo4j-data",
+        "type": "browse-under",
+        "to": "topic:retrieval-options",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:neo4j-data",
+        "type": "related-reading",
+        "to": "topic:retrieval-options",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:neo4j-data",
+        "type": "related-reading",
+        "to": "topic:retrieve-and-validate",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:neo4j-data",
+        "type": "uses-definition",
+        "to": "technology:neo4j",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:neo4j",
+        "type": "provides-capability",
+        "to": "topic:information-retrieval",
+        "sourceRefs": [
+          "neo4j-start"
+        ]
+      },
+      {
+        "from": "topic:retrieval-example",
+        "type": "browse-under",
+        "to": "topic:information-retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval-example",
+        "type": "illustrates",
+        "to": "topic:information-retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieval-example",
+        "type": "illustrates",
+        "to": "topic:retrieve-and-validate",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:retrieve-and-validate",
+        "type": "uses-definition",
+        "to": "practice:validated-retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:overview",
+        "type": "related-reading",
+        "to": "topic:information-retrieval",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "related-reading",
+        "to": "topic:retrieval-options",
+        "sourceRefs": []
+      }
     ]
   }
 };

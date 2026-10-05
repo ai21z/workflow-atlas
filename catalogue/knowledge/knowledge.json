@@ -1,0 +1,33 @@
+{
+  "id": "knowledge",
+  "title": "Evidence & knowledge",
+  "summary": "Build source-backed retrieval over existing authoritative assets and clearly derived summaries.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Recommended foundation",
+      "text": "Begin with authoritative source material and reviewed decisions. Keep derived summaries and workflow evidence distinguishable from those sources. Add retrieval indexes or an approved domain graph when the actual information needs justify them."
+    },
+    {
+      "type": "p",
+      "label": "Correctness",
+      "text": "Retrieval relevance, citation validity, semantic support, and applicability are different checks. A generated wiki or another graph framework does not solve them automatically."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "knowledge"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

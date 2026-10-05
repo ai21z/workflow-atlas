@@ -1,0 +1,49 @@
+{
+  "id": "requirements-workflow",
+  "title": "Requirements investigation",
+  "summary": "Turn a request into a traceable brief before generating implementation tickets.",
+  "sections": [
+    {
+      "type": "steps",
+      "label": "Sequence",
+      "items": [
+        "Read the request and relevant reviewed decisions from the sources your team uses.",
+        "Inspect pinned code/data revisions and existing verification.",
+        "Separate confirmed requirements, observed behavior, proposals, and unresolved questions.",
+        "Identify the affected data, components, interfaces and tests. Include only the parts that exist in this project.",
+        "Prepare acceptance scenarios and evidence links."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Worked example",
+      "text": "In the reference-to-configuration case, the request is in Jira, reviewed decisions are in Confluence, and impact may include an ontology, SPARQL queries, services and a user interface. These illustrate the workflow. They are not required tools for other projects."
+    },
+    {
+      "type": "p",
+      "label": "Output",
+      "text": "A reviewed implementation brief: desired outcome, scope, source versions, affected components, acceptance criteria, uncertainties, and owner."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Every asserted requirement has supporting evidence or is explicitly proposed. Missing context remains visible rather than guessed."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "practice",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

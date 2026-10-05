@@ -1,0 +1,48 @@
+{
+  "id": "cost-per-result",
+  "title": "Cost per accepted result",
+  "summary": "Include rejected runs, retries, and human correction when measuring value.",
+  "sections": [
+    {
+      "type": "code",
+      "label": "Metric",
+      "text": "Cost per accepted result =\n(total inference + connectors + runner + review/rework cost across all attempts)\n÷ accepted results"
+    },
+    {
+      "type": "list",
+      "label": "Record per run",
+      "items": [
+        "Task class, input versions, model/version, and supported reasoning configuration.",
+        "Input, output, cache usage, tool calls, retries, and runner time where observable.",
+        "Accepted/rejected/partial outcome, reviewer edits, and downstream defects.",
+        "Elapsed time and human review effort alongside cost."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Interpretation",
+      "text": "Token savings without acceptable quality are not a successful optimization. Do not claim a savings percentage before measuring the baseline."
+    },
+    {
+      "type": "p",
+      "label": "Denominator and evidence",
+      "text": "Use all-attempt cost for one workload/window divided by accepted task artifacts counted once. Report zero accepted outcomes explicitly. Separate first-pass/repaired acceptance and observations/forecasts. Workplace savings are unmeasured."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "models"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

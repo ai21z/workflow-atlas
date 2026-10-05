@@ -1,0 +1,47 @@
+{
+  "id": "billing-boundaries",
+  "title": "Copilot & Rovo billing",
+  "summary": "A cross-platform workflow can consume more than one allowance.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Copilot Business",
+      "text": "Current billing uses model-priced input/output/cache tokens converted into AI credits; 1 credit equals $0.01. Included Business credits are pooled at the billing entity. Additional usage and administrative budgets affect availability."
+    },
+    {
+      "type": "p",
+      "label": "Rovo",
+      "text": "Some enriched Teamwork Graph context supplied to external AI clients consumes Rovo credits as well as external inference usage. Inspect your tenant’s current rules and reports."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Use measured reports from each relevant system. Do not equate an Atlassian API token, a model token, and an AI credit, or reuse a legacy request-multiplier estimate blindly."
+    },
+    {
+      "type": "p",
+      "label": "Production model access",
+      "text": "A documented SDK server-to-server route exists. Check organization enablement, permissions, runtime support and billing attribution; IDE access does not establish this organization's eligibility."
+    }
+  ],
+  "refs": [
+    "billing",
+    "rovocredits",
+    "sdk-server-auth"
+  ],
+  "basis": "Documented billing behavior",
+  "confidence": "High for docs; unknown for actual consumption",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "models"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

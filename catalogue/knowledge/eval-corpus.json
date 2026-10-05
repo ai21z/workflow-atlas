@@ -1,0 +1,52 @@
+{
+  "id": "eval-corpus",
+  "title": "Representative evaluation set",
+  "summary": "Cover routine tasks and failures that matter to your actual project.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Cases",
+      "items": [
+        "Ordinary positive outcomes and hard negative examples.",
+        "Ambiguous requirements and contradictory sources.",
+        "Missing evidence, unavailable tools, and permission denial.",
+        "Stale commits/documents/datasets and duplicate events.",
+        "Relevant source languages and domain boundary cases.",
+        "Correct abstention or escalation, not only successful completion."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Held-out design",
+      "text": "Keep related document families and revisions together when separating development and evaluation material; near-duplicates can inflate results."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Each case has expected evidence and a reviewed outcome. The set represents important task classes rather than an arbitrary demonstration count."
+    },
+    {
+      "type": "p",
+      "label": "Workload sample versus probes",
+      "text": "Separate representative workload examples from diagnostic error probes. Report results separately; a small chosen set cannot guarantee production reliability."
+    }
+  ],
+  "refs": [
+    "evals"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "evaluation"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

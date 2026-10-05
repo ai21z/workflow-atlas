@@ -1,0 +1,42 @@
+{
+  "id": "neptune-stack",
+  "title": "RDF4J & Neptune",
+  "summary": "Preserve ontology semantics and verify graph behavior in the actual serving environment.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Proposed role",
+      "text": "Use deterministic SPARQL for known relations, versioned TTL and graph fixtures for reproducibility, and applicable SHACL constraints for structural validation."
+    },
+    {
+      "type": "p",
+      "label": "Environment fidelity",
+      "text": "RDF4J/local fixtures can support focused checks; they do not by themselves establish equivalent behavior and performance in Neptune. Record the tested engine/environment."
+    },
+    {
+      "type": "p",
+      "label": "Critical checks",
+      "text": "Measure query plans and latency, preserve provenance and scope, and verify candidate isolation because Neptune’s default graph unions named graphs."
+    }
+  ],
+  "refs": [
+    "shacl",
+    "explain",
+    "neptune"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "An RDF4J and Neptune environment example. It is not the default database architecture for every workflow.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

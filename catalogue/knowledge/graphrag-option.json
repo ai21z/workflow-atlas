@@ -1,0 +1,40 @@
+{
+  "id": "graphrag-option",
+  "title": "GraphRAG decision",
+  "summary": "Compare graph retrieval with a simpler baseline using the questions your project needs to answer.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Documented options",
+      "text": "Microsoft GraphRAG offers local graph/text retrieval and global community-summary search. Global search can be resource intensive."
+    },
+    {
+      "type": "p",
+      "label": "Project recommendation",
+      "text": "Measure a simpler retrieval baseline first. If a curated RDF graph already exists, include relevant SPARQL queries in that comparison. Preserve reviewed relationships when evaluating model-extracted alternatives."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The alternative improves needed-evidence retrieval or answer quality enough to justify indexing cost, maintenance, and version handling."
+    }
+  ],
+  "refs": [
+    "graphrag"
+  ],
+  "basis": "Documented option + proposed comparison",
+  "confidence": "Unknown winner",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "knowledge"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "curation-workflow",
+  "title": "Country-data curation",
+  "summary": "Compare proposed assertions with source evidence before they become approved domain data.",
+  "sections": [
+    {
+      "type": "steps",
+      "label": "Sequence",
+      "items": [
+        "Capture original source version and relevant passages.",
+        "Construct candidate assertions preserving jurisdiction, population, classification scheme, and temporal scope.",
+        "Run deterministic parsing, datatype, shape, and temporal checks.",
+        "Optionally apply narrow Jev support/mapping judgments.",
+        "Prepare conflicts and uncertainty for domain review.",
+        "Publish through the existing approved-data process."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The resulting assertion preserves the source’s meaning and applicability, and its derivation is recorded. Candidate data does not leak into ordinary serving queries."
+    }
+  ],
+  "refs": [
+    "shacl",
+    "neptune"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

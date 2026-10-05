@@ -1,0 +1,41 @@
+{
+  "id": "jev-confidence",
+  "title": "Confidence ≠ correctness",
+  "summary": "Distribution-derived confidence is not a guarantee about an individual domain assertion.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Verified meaning",
+      "text": "TypeSafe’s confidence measure reflects the shape of the answer distribution. Treat calibration as something to evaluate over relevant examples, not a certificate attached to one result."
+    },
+    {
+      "type": "p",
+      "label": "Threshold practice",
+      "text": "Choice and Score confidence thresholds need task-specific evaluation; Noul does not return confidence. Tune routing separately for the exact question, primitive, language, and task. Do not multiply separate outputs as if their errors were independent."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Routing thresholds achieve acceptable measured missed-error/false-alarm behavior. Two agreeing models remain two judgments, not independent source evidence."
+    }
+  ],
+  "refs": [
+    "jevconfidence",
+    "jevlimits"
+  ],
+  "basis": "Documented semantics + evaluation guidance",
+  "confidence": "High for semantics; unknown threshold",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "model-decisions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

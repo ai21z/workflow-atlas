@@ -1,0 +1,43 @@
+{
+  "id": "source-skill",
+  "title": "Country-source skill",
+  "summary": "Prepare a source-evidence packet for a proposed domain assertion.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Inputs",
+      "text": "Original source passage, source/version identifier, candidate assertion, and relevant ontology definitions."
+    },
+    {
+      "type": "list",
+      "label": "Procedure",
+      "items": [
+        "Preserve jurisdiction, population, classification scheme, and effective period.",
+        "Distinguish publication, effective, retrieval, and approval dates.",
+        "Check quoted evidence and surface contradictory or missing support.",
+        "Optionally apply an evaluated bounded Jev judgment."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Output",
+      "text": "Candidate assertion, derivation, evidence passages, conflicts, uncertainty, and reviewer finding. No unsupported publication default."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "instructions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

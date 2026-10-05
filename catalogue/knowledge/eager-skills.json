@@ -1,0 +1,41 @@
+{
+  "id": "eager-skills",
+  "title": "Skill-loading cost",
+  "summary": "Progressive disclosure is not universal across every agent configuration.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Verified behavior",
+      "text": "The Agent Skills specification describes progressive loading. Copilot SDK skills explicitly assigned to a custom agent are eagerly injected in full at startup; children do not automatically inherit all parent skills."
+    },
+    {
+      "type": "p",
+      "label": "Proposed practice",
+      "text": "Assign only needed skills to each role. Inspect actual prompt/context usage and keep supporting resources separate where the runtime loads them on demand."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The agent has enough procedural guidance without every project runbook appearing in every session."
+    }
+  ],
+  "refs": [
+    "skillspec",
+    "sdk"
+  ],
+  "basis": "Documented runtime distinction",
+  "confidence": "High",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "instructions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

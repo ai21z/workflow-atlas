@@ -1,0 +1,51 @@
+{
+  "id": "postgresql-data",
+  "title": "PostgreSQL",
+  "summary": "A relational database option using SQL.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Documented role",
+      "text": "The PostgreSQL tutorial introduces relational data and SQL queries."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas provides",
+      "text": "Selecting PostgreSQL records the technology and version. Atlas currently adds generic component questions, not a PostgreSQL connection or a specialist query generator."
+    },
+    {
+      "type": "p",
+      "label": "Check in your environment",
+      "text": "Confirm the actual version, supported interface, permissions, data model and expected query results. Compare alternatives using your constraints."
+    }
+  ],
+  "refs": [
+    "postgresql-tutorial"
+  ],
+  "basis": "Source references and Atlas guidance",
+  "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "information-retrieval"
+    ],
+    "aliases": [
+      "postgres",
+      "sql database"
+    ],
+    "revision": "1",
+    "applicability": "A technology example to assess against your existing data model and access requirements.",
+    "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-05",
+    "claims": [
+      {
+        "sectionLabel": "Documented role",
+        "text": "The PostgreSQL tutorial introduces relational data and SQL queries.",
+        "sourceRefs": [
+          "postgresql-tutorial"
+        ]
+      }
+    ]
+  }
+}

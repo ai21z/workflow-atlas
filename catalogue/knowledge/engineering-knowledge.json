@@ -1,0 +1,45 @@
+{
+  "id": "engineering-knowledge",
+  "title": "Engineering knowledge",
+  "summary": "Represent useful requirement, code, test, and build relationships without inventing them.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Possible relationships",
+      "text": "Requirement → affected component or interface → relevant check → recorded result. Use source locations and decision records that actually exist."
+    },
+    {
+      "type": "p",
+      "label": "Graph application example",
+      "text": "An ontology concept can connect a requirement to a query, service or UI. Confluence decisions and Bitbucket locations can provide source links in that particular toolchain."
+    },
+    {
+      "type": "p",
+      "label": "Implementation choice",
+      "text": "Begin with a traceability table or existing metadata. Add a development knowledge graph only if actual queries and maintenance needs justify it."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Relationships have provenance and versions. Model-extracted suggestions remain distinguishable from confirmed dependencies."
+    }
+  ],
+  "refs": [
+    "traceability"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "knowledge"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

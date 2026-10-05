@@ -1,0 +1,65 @@
+{
+  "id": "study-runtime",
+  "title": "Assess backend execution",
+  "summary": "Check runtime identity, dependencies, limits and ownership.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Recipes need a host",
+      "text": "Skills package instructions, scripts and examples. The runtime supplies tools, context, dependencies, persistence and enforcement; SKILL.md alone is not a service or permission boundary."
+    },
+    {
+      "type": "p",
+      "label": "Copilot route to assess",
+      "text": "GitHub documents server-to-server SDK authentication. Outside GitHub Actions, its route uses a GitHub App, organization enablement and installation tokens; the current permission check requires All repositories access. Eligibility and compatibility with company policy are unknown."
+    },
+    {
+      "type": "p",
+      "label": "Separate identities",
+      "text": "Model authentication does not grant Jira, Bitbucket, Jenkins or Neptune permissions. Check each application's supported identity/scopes and credential ownership. Keep private tokens out of study artifacts."
+    },
+    {
+      "type": "p",
+      "label": "Soft budget boundary",
+      "text": "SDK session limits are checked after model responses return. A response can exceed the cap before the next call is blocked. Connectors, runner work and review have separate costs."
+    },
+    {
+      "type": "list",
+      "label": "Study findings",
+      "items": [
+        "Allowed operations and imported-content/action boundaries.",
+        "Caller/tenant isolation, artifact storage and evidence retention.",
+        "Tool, repair, time and concurrency limits and exhaustion outcomes.",
+        "Retries and duplicate-effect handling for side effects.",
+        "Owners for operating cost, incidents, artifact acceptance and evaluation."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Imported material",
+      "text": "Treat references as task data rather than authority to change permissions or execute instructions. Match controls to real tool capabilities; a new security platform is not automatically required."
+    }
+  ],
+  "refs": [
+    "skillspec",
+    "sdk-server-auth",
+    "sdk-session-limits",
+    "prompt-injection",
+    "nist-core"
+  ],
+  "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+  "confidence": "Moderate for fit; workplace benefit unknown",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

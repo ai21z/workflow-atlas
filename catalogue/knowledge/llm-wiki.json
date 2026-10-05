@@ -1,0 +1,50 @@
+{
+  "id": "llm-wiki",
+  "title": "LLM wiki boundary",
+  "summary": "Generated summaries can aid navigation when sources and review state stay visible.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Reference pattern",
+      "text": "Andrej Karpathy's LLM Wiki idea file describes keeping original sources separate from maintained derived pages, with ingest, query and maintenance conventions. The live gist was read on 3 October 2026. It is a concept, not a deployed service or proof of correctness. The metadata and approval boundaries below are proposed Atlas practices."
+    },
+    {
+      "type": "list",
+      "label": "Required metadata",
+      "items": [
+        "Underlying source anchors and versions.",
+        "Owner and reviewed/unreviewed status.",
+        "Last verification date.",
+        "Known conflicts and remaining uncertainty."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Avoid recursive authority",
+      "text": "A generated page does not establish a fact because another generated page cites it. Follow links back to original evidence and reviewed decisions."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The wiki helps locate and explain knowledge while authoritative source material and approval remain identifiable."
+    }
+  ],
+  "refs": [
+    "llmwiki"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "practice",
+    "domains": [
+      "knowledge"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "post-change-checks",
+  "title": "Checks after the change",
+  "summary": "Verification must describe the final relevant state.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Recommended practice",
+      "text": "Record checks for the final relevant code or data state. Repeat affected checks after a subsequent change, and keep command success distinct from verification of the resulting content."
+    },
+    {
+      "type": "p",
+      "label": "Project adaptation",
+      "text": "Identify the candidate revision, dependency revisions, pipeline run, tested fixture or environment, and applicable quality results. For the workplace example, these include the Bitbucket commit, submodules, Jenkins run, and tested graph."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The completion packet points to actual evidence for the candidate being reviewed, not a stale local success."
+    },
+    {
+      "type": "p",
+      "label": "Example source: Talos verification tests",
+      "text": "The inspected Talos test definitions require rejection of checks from before the last mutation, failed verification commands, build-only profiles, and ambiguous summaries. They also cover failed file readback despite command success. These test definitions were inspected, not executed."
+    }
+  ],
+  "refs": [
+    "talosverify"
+  ],
+  "basis": "Recommended practice + inspected test definitions",
+  "confidence": "High for test contents. Execution unverified, adaptation proposed",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "verification"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

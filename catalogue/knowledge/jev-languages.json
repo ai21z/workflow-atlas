@@ -1,0 +1,40 @@
+{
+  "id": "jev-languages",
+  "title": "Language & domain evaluation",
+  "summary": "Measure source-language performance instead of assuming English results transfer.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Documented context",
+      "text": "TypeSafe’s model guidance describes English as its strongest setting. Your official sources may use other languages and domain-specific terminology."
+    },
+    {
+      "type": "p",
+      "label": "Proposed practice",
+      "text": "Retain original passages, record translation use, and stratify reviewed examples by language and task. Inspect whether translations preserve qualifiers, conditions, and effective dates."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Performance and escalation rules are justified for the languages actually used. A high aggregate result does not conceal a weak language subset."
+    }
+  ],
+  "refs": [
+    "jevmodels"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "model-decisions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "model-inheritance",
+  "title": "Subagent model routing",
+  "summary": "Effective model selection varies between SDK, IDE, and other harnesses.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Verified distinctions",
+      "text": "Copilot SDK supports per-agent model and reasoningEffort overrides. JetBrains’ September update supports selecting the session model used by built-in subagents. This does not imply arbitrary independent routing for every child in every client."
+    },
+    {
+      "type": "p",
+      "label": "Configuration practice",
+      "text": "Verify the effective model in the actual run. Confirm supported effort settings rather than assuming they are available everywhere or inherited across different models."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The intended route and observed route agree, and their cost/performance are measured."
+    }
+  ],
+  "refs": [
+    "sdk",
+    "jetbrains"
+  ],
+  "basis": "Documented harness-specific behavior",
+  "confidence": "High",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "models"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

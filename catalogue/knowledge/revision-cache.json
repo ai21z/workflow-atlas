@@ -1,0 +1,38 @@
+{
+  "id": "revision-cache",
+  "title": "Revision-keyed reuse",
+  "summary": "Reuse analysis only while its source inputs remain valid.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Cache proposal",
+      "text": "Key repository analysis by commit and relevant submodule revisions; source analysis by document/entity version; graph results by dataset and ontology/shape versions."
+    },
+    {
+      "type": "p",
+      "label": "Invalidation",
+      "text": "A changed input, schema, prompt, or evaluation policy can invalidate a derived result. Preserve source anchors so the reviewer can identify what the cache describes."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "A reused result is attributable to the current task inputs. Old passing checks never masquerade as verification of a changed candidate."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "models"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

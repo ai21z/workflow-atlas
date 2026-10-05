@@ -1,0 +1,45 @@
+{
+  "id": "applicability",
+  "title": "Scope & applicability",
+  "summary": "Country-baseline assertions must preserve who, where, when, and which scheme they concern.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Fields to establish",
+      "items": [
+        "Jurisdiction and subnational region where relevant.",
+        "Population or sector covered.",
+        "Effective period and applicable version.",
+        "Source authority and exact supporting passage.",
+        "Classification scheme, issuer, and version where relevant.",
+        "Expected API and UI semantics."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Unknown terminology",
+      "text": "Confirm project-specific terminology with its owner before designing a schema or integration around it. Do not silently expand an unfamiliar acronym."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Information narrowed by a source qualifier remains narrow through ingestion, graph representation, serving, and documentation."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "requirements"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

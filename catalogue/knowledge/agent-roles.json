@@ -1,0 +1,59 @@
+{
+  "id": "agent-roles",
+  "title": "Bounded agent roles",
+  "summary": "Give each role a task, evidence inputs, permitted tools, and output contract.",
+  "sections": [
+    {
+      "type": "table",
+      "label": "Suggested initial roles",
+      "headers": [
+        "Role",
+        "Responsibility"
+      ],
+      "rows": [
+        [
+          "Investigator",
+          "Read evidence, trace behavior, produce supported findings"
+        ],
+        [
+          "Implementer",
+          "Make one scoped change and perform focused checks"
+        ],
+        [
+          "Reviewer",
+          "Inspect the result against requirements and evidence"
+        ],
+        [
+          "Documentation writer",
+          "Draft explanations from accepted changes and sources"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Model assignment",
+      "text": "Choose models from measured task performance. A reviewer is not automatically the most expensive model, and an architect persona alone is not a verification mechanism."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Roles have distinct useful work. The controller decides permissible actions and acceptance, not a majority vote between agents."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "instructions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

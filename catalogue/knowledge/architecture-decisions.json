@@ -1,0 +1,54 @@
+{
+  "id": "architecture-decisions",
+  "title": "Architecture decisions",
+  "summary": "Choose a proportionate design from the required behavior, existing systems and evidence.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Start with the decision",
+      "text": "Describe the outcome and constraints that the design must satisfy. Identify which decision is needed now and who can accept it. Leave missing business or operating requirements explicit."
+    },
+    {
+      "type": "steps",
+      "label": "Compare workable approaches",
+      "items": [
+        "Read the agreed behavior, relevant constraints and evidence about the current system.",
+        "Map affected components, interfaces, data ownership and external dependencies.",
+        "Compare retaining the current approach with proportionate changes. State tradeoffs in quality, effort, cost and recovery.",
+        "Investigate the uncertainty most likely to change the choice, using a small experiment where useful.",
+        "Record the selected approach, reasons, alternatives, owner and unresolved questions."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "When an agent is part of the design",
+      "text": "Separate the model task from application controls. Define its input, output, permitted tools, checks and failure outcomes. Controller and harness guidance explains this particular architecture concern."
+    },
+    {
+      "type": "p",
+      "label": "Example decision",
+      "text": "A configuration service might compare extending an existing API with a separate generation job. Request duration, recovery, user feedback and access requirements inform the choice. This example does not establish which approach your project needs."
+    },
+    {
+      "type": "p",
+      "label": "Useful result",
+      "text": "A decision record and component or interface sketch that another developer can explain and challenge. A list of fashionable tools is not enough to establish architectural fit."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed practice",
+  "confidence": "Moderate. Project constraints require investigation",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

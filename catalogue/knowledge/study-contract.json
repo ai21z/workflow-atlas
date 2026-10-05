@@ -1,0 +1,59 @@
+{
+  "id": "study-contract",
+  "title": "Define the service contract",
+  "summary": "Specify inputs, results and failure behaviour without prematurely selecting a platform.",
+  "sections": [
+    {
+      "type": "list",
+      "label": "Questions to resolve",
+      "items": [
+        "Supported reference/task classes and unsupported-input response.",
+        "Output schema/version, supported components and compatibility.",
+        "Generation, saving, application and execution as separate actions.",
+        "Progress, clarification, preview and failure information visible to the user.",
+        "Repeated submissions, retry, cancellation and partial completion.",
+        "Caller/tenant permissions, job state and artifact storage."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Sync versus async",
+      "text": "Base the choice on observed duration/variance, caller timeouts, clarification and recovery needs. Asynchronous request-reply with a job/status resource is a candidate pattern, not an established requirement."
+    },
+    {
+      "type": "p",
+      "label": "Minimal UX during study",
+      "text": "Full experience design may stay deferred. A lightweight sketch of clarification, preview and failure behaviour can still inform feasibility and effort."
+    },
+    {
+      "type": "code",
+      "label": "Illustrative proposed flow",
+      "text": "Reference -> input checks -> bounded generation -> candidate validation\nusable -> artifact + validation evidence\nincomplete -> clarification\nunsupported / failed / limits reached -> explicit outcome or assistance\nApplication/execution is separately specified."
+    },
+    {
+      "type": "p",
+      "label": "Candidate evidence",
+      "text": "Identify input/reference version, candidate artifact, workflow/skill/model versions and checks. This evidence design does not require exposing every implementation detail in product UI."
+    }
+  ],
+  "refs": [
+    "async-request-reply",
+    "skillspec",
+    "nist-core"
+  ],
+  "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+  "confidence": "Moderate for fit; workplace benefit unknown",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

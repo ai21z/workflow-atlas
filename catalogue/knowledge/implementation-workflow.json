@@ -1,0 +1,52 @@
+{
+  "id": "implementation-workflow",
+  "title": "Verified implementation",
+  "summary": "Implement a scoped change and prepare a PR supported by actual execution evidence.",
+  "sections": [
+    {
+      "type": "steps",
+      "label": "Sequence",
+      "items": [
+        "Confirm the task contract and relevant repository revision, including submodules where used.",
+        "Inspect affected source and tests.",
+        "Make the smallest coherent change.",
+        "Run focused verification after the relevant edits.",
+        "Review the diff and use broader checks at the established gate.",
+        "Prepare the pull request or review submission with its evidence packet."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Evidence identifies the resulting revision, actual commands or pipeline runs, results, exclusions, and unresolved concerns. The model’s statement “tests pass” is not verification."
+    },
+    {
+      "type": "p",
+      "label": "Scope control",
+      "text": "New requirements or unrelated refactors become explicit proposals; they do not silently enlarge the change."
+    },
+    {
+      "type": "p",
+      "label": "Example toolchain",
+      "text": "A team using Bitbucket can attach the review to a pull request and link Jenkins results. Use the equivalent review and verification records for your environment."
+    }
+  ],
+  "refs": [
+    "taloscycle"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "practice",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

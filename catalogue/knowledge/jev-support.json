@@ -1,0 +1,40 @@
+{
+  "id": "jev-support",
+  "title": "Evidence-support check",
+  "summary": "Test semantic support with original passages, the candidate assertion, and definitions.",
+  "sections": [
+    {
+      "type": "code",
+      "label": "Proposed pattern",
+      "text": "Original source passage\n+ proposed assertion\n+ relevant ontology definitions\n→ supported / contradicted / insufficient evidence\n→ evidence-linked reviewer finding"
+    },
+    {
+      "type": "p",
+      "label": "Hypothetical scope error",
+      "text": "A source establishes a banking-sector closure while a candidate record represents a holiday for all employees. A structurally valid record can still misstate the source. This is an example, not an audited workplace defect."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Measure missed scope errors and false alarms on reviewed examples. Quote/source existence checks and semantic-support judgments are separate components; neither alone proves applicability."
+    }
+  ],
+  "refs": [
+    "jevcitation"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "model-decisions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

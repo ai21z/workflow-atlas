@@ -1,0 +1,50 @@
+{
+  "id": "amazon-neptune",
+  "title": "Amazon Neptune",
+  "summary": "An example of querying RDF data through SPARQL in a managed graph database.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Documented role",
+      "text": "Amazon Neptune documents SPARQL access to RDF data. Engine-specific behavior must be checked against its compliance documentation."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas provides",
+      "text": "Selecting Neptune includes the existing RDF and SPARQL review questions. These do not configure database access or verify engine-specific behavior."
+    },
+    {
+      "type": "p",
+      "label": "Check in your environment",
+      "text": "Confirm the actual version, supported interface, permissions, data model and expected query results. Compare alternatives using your constraints."
+    }
+  ],
+  "refs": [
+    "neptune-sparql-access"
+  ],
+  "basis": "Source references and Atlas guidance",
+  "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "information-retrieval"
+    ],
+    "aliases": [
+      "aws neptune"
+    ],
+    "revision": "1",
+    "applicability": "A technology example to assess against your existing data model and access requirements.",
+    "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-05",
+    "claims": [
+      {
+        "sectionLabel": "Documented role",
+        "text": "Amazon Neptune documents SPARQL access to RDF data. Engine-specific behavior must be checked against its compliance documentation.",
+        "sourceRefs": [
+          "neptune-sparql-access"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "id": "verdicts",
+  "title": "Distinct result verdicts",
+  "summary": "Failed, skipped, unavailable, denied, and invalid-audit outcomes must remain distinguishable.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Recommended practice",
+      "text": "Keep success, failure, partial verification, unavailable environments, denied access, invalid audits, and unrun checks distinct. Choose labels that fit your project and define the evidence required for each outcome."
+    },
+    {
+      "type": "p",
+      "label": "Example source: Talos verdict template",
+      "text": "The inspected Talos summary template provides the following verdict vocabulary. The explanations show a proposed use for your project, not a mandatory standard or observed test results."
+    },
+    {
+      "type": "table",
+      "label": "Example verdict vocabulary",
+      "headers": [
+        "Verdict",
+        "How to use the distinction"
+      ],
+      "rows": [
+        [
+          "PASS",
+          "Required applicable evidence supports the outcome"
+        ],
+        [
+          "FAIL",
+          "Observed behavior violates the expected invariant"
+        ],
+        [
+          "PARTIAL",
+          "Only part of the intended scope was verified"
+        ],
+        [
+          "UNSUPPORTED",
+          "The operation/environment cannot support the check"
+        ],
+        [
+          "POLICY_DENIED",
+          "An enforced policy prevented execution"
+        ],
+        [
+          "AUDIT_DESIGN",
+          "The fixture or audit design is invalid"
+        ],
+        [
+          "NOT_RUN",
+          "The check was not executed"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Project example",
+      "text": "Missing Neptune access is not a failed query. A skipped integration test is not a pass. A broken fixture is not necessarily an implementation defect."
+    }
+  ],
+  "refs": [
+    "talosverdict"
+  ],
+  "basis": "Inspected vocabulary + proposed use",
+  "confidence": "High for inspected vocabulary. Moderate for project adaptation",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "verification"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

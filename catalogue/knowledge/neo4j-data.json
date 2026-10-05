@@ -1,0 +1,51 @@
+{
+  "id": "neo4j-data",
+  "title": "Neo4j",
+  "summary": "A property graph database option with Cypher queries.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Documented role",
+      "text": "Neo4j describes a property graph model and its Cypher query language."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas provides",
+      "text": "Selecting Neo4j records the technology and version. Atlas currently adds generic component questions. The RDF and SPARQL profile is not applied merely because this is a graph database."
+    },
+    {
+      "type": "p",
+      "label": "Check in your environment",
+      "text": "Confirm the actual version, supported interface, permissions, data model and expected query results. Compare alternatives using your constraints."
+    }
+  ],
+  "refs": [
+    "neo4j-start"
+  ],
+  "basis": "Source references and Atlas guidance",
+  "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "information-retrieval"
+    ],
+    "aliases": [
+      "cypher",
+      "property graph database"
+    ],
+    "revision": "1",
+    "applicability": "A technology example to assess against your existing data model and access requirements.",
+    "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-05",
+    "claims": [
+      {
+        "sectionLabel": "Documented role",
+        "text": "Neo4j describes a property graph model and its Cypher query language.",
+        "sourceRefs": [
+          "neo4j-start"
+        ]
+      }
+    ]
+  }
+}

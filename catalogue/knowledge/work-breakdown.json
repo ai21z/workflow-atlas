@@ -1,0 +1,72 @@
+{
+  "id": "work-breakdown",
+  "title": "Break work into deliverable changes",
+  "summary": "Turn an agreed outcome into reviewable pieces with clear acceptance, owners and dependencies.",
+  "sections": [
+    {
+      "type": "steps",
+      "label": "Plan the pieces",
+      "items": [
+        "Start with the outcome, selected approach and remaining uncertainty.",
+        "Choose a small useful result that can be reviewed and checked.",
+        "Describe the work, acceptance examples and responsible actor for each piece.",
+        "Identify required inputs and dependent work. An existing artifact can satisfy an input.",
+        "Separate investigation of an unresolved decision from implementation that depends on it.",
+        "Keep integration and end-to-end acceptance visible across the pieces."
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Example feature slices",
+      "headers": [
+        "Piece",
+        "Observable result"
+      ],
+      "rows": [
+        [
+          "Save and reopen a basic search",
+          "A supported set of criteria survives reopening."
+        ],
+        [
+          "Handle invalid and failed saves",
+          "The user receives the agreed recovery behavior."
+        ],
+        [
+          "Add naming, if required",
+          "A named search behaves according to its acceptance examples."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Adapt the granularity",
+      "text": "A slice may need coordinated UI, service and data changes. Do not claim that every technical subtask is independently releasable. For a bug or debt finding, use the remediation guidance to plan a coherent correction."
+    },
+    {
+      "type": "p",
+      "label": "Breakdown and traceability",
+      "text": "Breakdown decides which work pieces exist and their order. Traceability explains how those pieces, requirements and checks relate. Use both where they help."
+    },
+    {
+      "type": "p",
+      "label": "Useful result",
+      "text": "Each work item contributes to the outcome, has checkable acceptance and names its prerequisites. Unknown estimates and decisions remain visible."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed practice with fictional example",
+  "confidence": "Moderate. Granularity depends on the project",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

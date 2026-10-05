@@ -1,0 +1,44 @@
+{
+  "id": "routing",
+  "title": "Task-based model routing",
+  "summary": "Choose the least expensive route that satisfies the task’s measured acceptance criteria.",
+  "sections": [
+    {
+      "type": "steps",
+      "label": "Proposed routing policy",
+      "items": [
+        "Use deterministic code for structured parsing, calculations, dates, permissions, schema checks, and execution.",
+        "Use a utility model for bounded tasks with readily checkable outputs.",
+        "Use a main implementation model for normal repository analysis and changes.",
+        "Route difficult or consequential interpretation directly to a stronger model when justified.",
+        "Escalate on a defined condition: contradictory evidence, unresolved diagnosis, or failed verification."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Avoid repeated work",
+      "text": "Do not pass every task through every model tier. A second model needs a specific purpose, such as a different investigation or independently checking a difficult finding."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Routing is backed by held-out task results, cost, latency, and review effort rather than model reputation alone."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "models"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

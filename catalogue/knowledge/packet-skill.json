@@ -1,0 +1,40 @@
+{
+  "id": "packet-skill",
+  "title": "Review-packet skill",
+  "summary": "Assemble a concise review result that points to actual artifacts.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Inputs",
+      "text": "Task contract, final revision, diff, commands/pipeline reports, findings, source versions, and exclusions."
+    },
+    {
+      "type": "p",
+      "label": "Output",
+      "text": "Concrete behavior change, scope, verification, evidence links, unresolved issues, and appropriate verdict."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "Descriptions reflect the final change. Actual executed results are distinguishable from intended checks, and skipped/unsupported checks remain visible."
+    }
+  ],
+  "refs": [
+    "talospacket"
+  ],
+  "basis": "Proposed design",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "instructions"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

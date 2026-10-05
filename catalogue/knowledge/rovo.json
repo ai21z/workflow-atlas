@@ -1,0 +1,42 @@
+{
+  "id": "rovo",
+  "title": "Rovo Cloud",
+  "summary": "Use Atlassian context and configured automation actions for bounded tasks.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Verified write behavior",
+      "text": "Current Use agent documentation supports direct writes via “Let this agent take actions”, off by default. It also supports agentResponse passed to explicit downstream actions."
+    },
+    {
+      "type": "p",
+      "label": "Initial design",
+      "text": "Use a specified Jira or Confluence action after the analysis when you want a tightly defined mutation. Inspect action traces and actor identity."
+    },
+    {
+      "type": "p",
+      "label": "Reasoning and cost",
+      "text": "Rovo offers Quick and Think deeper tiers; available selections and limits vary. Match the tier to the task and measure credit consumption. Rovo Cloud is the relevant product here, not Rovo CLI."
+    }
+  ],
+  "refs": [
+    "rovo",
+    "rovotier",
+    "rovocredits"
+  ],
+  "basis": "Documented capability + proposed use",
+  "confidence": "High for docs; unknown for tenant configuration",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

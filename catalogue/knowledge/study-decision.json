@@ -1,0 +1,75 @@
+{
+  "id": "study-decision",
+  "title": "Make the next-phase decision",
+  "summary": "Go, conditional go or no-go is a study recommendation, not production certification.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Agree criteria first",
+      "text": "Domain/product and technical owners define usable behaviour, unacceptable errors, access constraints and the cost/time improvement justifying investment before interpreting results. This Atlas invents no percentages."
+    },
+    {
+      "type": "table",
+      "label": "Recommended decisions",
+      "headers": [
+        "Decision",
+        "Required explanation"
+      ],
+      "rows": [
+        [
+          "Go to scoped next phase",
+          "Initial evidence supports defined useful tasks, credible runtime/access, plausible economics and ownership; state limitations."
+        ],
+        [
+          "Conditional go",
+          "Name the unresolved assumption, owner, condition, experiment, effort and result reversing the decision."
+        ],
+        [
+          "No-go",
+          "Explain the hard constraint, unacceptable quality or weak economics; assess narrower assisted alternatives."
+        ]
+      ]
+    },
+    {
+      "type": "list",
+      "label": "Decision package",
+      "items": [
+        "Recommendation and supported input/task scope.",
+        "Evidence for examples, outcomes, observations and estimates.",
+        "Alternatives retained/rejected and why.",
+        "Measured facts, assumptions, unknowns and their consequences.",
+        "Effort/cost, dependencies, owners and phased next scope."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Different success measures",
+      "text": "Acceptance into Phase 2 planning is the ticket's planning outcome. Future feature success needs quality and user-value measures. A supported no-go can be a successful study."
+    },
+    {
+      "type": "p",
+      "label": "Source status",
+      "text": "GOV.UK discovery and NIST inform this framework; they are not binding company procedures. NIST's cited Core is AI RMF 1.0, with a revision in progress."
+    }
+  ],
+  "refs": [
+    "gov-discovery",
+    "nist-core",
+    "agentic-economics"
+  ],
+  "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+  "confidence": "Moderate for fit; workplace benefit unknown",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "retrieve-and-validate",
+  "title": "Retrieve and validate",
+  "summary": "Agree the request, retrieve within its scope and check the returned information before using it.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Validation principle",
+      "text": "OWASP recommends validating accepted structure and business rules. Access checks remain separate."
+    },
+    {
+      "type": "list",
+      "label": "Apply it to your workflow",
+      "items": [
+        "Name the approved interface and required inputs.",
+        "Define expected results, permitted scope and resource limits.",
+        "Check normal, empty, invalid and unavailable cases.",
+        "Record observed results separately from expectations.",
+        "If later steps write data, define their authorization and confirmation separately."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "What changes",
+      "text": "Review Add retrieval checks to select this practice. WORKFLOW.md and SOURCES.md will record the guidance and its source. Existing steps, roles, tools, facts and evidence stay as recorded."
+    },
+    {
+      "type": "p",
+      "label": "What still needs work",
+      "text": "Your team supplies the real interface, credentials, commands, fixtures and acceptance decisions. The downloaded instructions do not enforce these checks."
+    }
+  ],
+  "refs": [
+    "input-validation"
+  ],
+  "basis": "Source references and Atlas guidance",
+  "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+  "catalog": {
+    "kind": "practice",
+    "domains": [
+      "information-retrieval"
+    ],
+    "aliases": [
+      "retrieval checks",
+      "read validation"
+    ],
+    "revision": "1",
+    "applicability": "Use when designing how existing information is retrieved and checked.",
+    "limits": "This is design guidance. It does not connect to a service or prove that a result is correct.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-05",
+    "claims": [
+      {
+        "sectionLabel": "Validation principle",
+        "text": "Validation should check structure and business rules separately from authorization.",
+        "sourceRefs": [
+          "input-validation"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "id": "retrieval-options",
+  "title": "Choose a retrieval approach",
+  "summary": "Start from existing interfaces and the data model before comparing products.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use what is already available",
+      "text": "If an approved API returns the required information, record its contract and validation needs first. A database replacement is a separate architecture decision."
+    },
+    {
+      "type": "table",
+      "label": "Examples by data model",
+      "headers": [
+        "Approach",
+        "Example",
+        "Question to resolve"
+      ],
+      "rows": [
+        [
+          "Relational data and SQL",
+          "PostgreSQL",
+          "Which tables, joins and expected rows answer the request?"
+        ],
+        [
+          "RDF and SPARQL",
+          "Amazon Neptune or Apache Jena Fuseki",
+          "Which graph scope and RDF query behavior apply?"
+        ],
+        [
+          "Property graph and Cypher",
+          "Neo4j",
+          "Which nodes, relationships and patterns answer the request?"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Different families",
+      "text": "These entries illustrate different models and interfaces. They do not establish drop-in compatibility, pricing, performance or availability in your environment."
+    },
+    {
+      "type": "p",
+      "label": "Your existing tool",
+      "text": "In Factory, record your component technology and its version. A custom technology is allowed when it is absent from the list. Generic guidance remains available without a specialist compatibility claim."
+    }
+  ],
+  "refs": [
+    "postgresql-tutorial",
+    "neptune-sparql-access",
+    "jena-fuseki",
+    "neo4j-start"
+  ],
+  "basis": "Source references and Atlas guidance",
+  "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "information-retrieval"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use when designing how existing information is retrieved and checked.",
+    "limits": "This is design guidance. It does not connect to a service or prove that a result is correct.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-05",
+    "claims": [
+      {
+        "sectionLabel": "Examples by data model",
+        "text": "The named examples document SQL, SPARQL or Cypher in the respective data models.",
+        "sourceRefs": [
+          "postgresql-tutorial",
+          "neptune-sparql-access",
+          "jena-fuseki",
+          "neo4j-start"
+        ]
+      }
+    ]
+  }
+}

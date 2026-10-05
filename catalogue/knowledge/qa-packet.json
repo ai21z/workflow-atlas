@@ -1,0 +1,52 @@
+{
+  "id": "qa-packet",
+  "title": "Revision-linked QA packet",
+  "summary": "Prepare a reviewable machine-readable record of task, candidate, checks, and exclusions.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Recommended practice",
+      "text": "Make the review handoff describe one identifiable candidate and its actual evidence. Include unresolved findings and unrun checks so that a reviewer can assess the limits of the result."
+    },
+    {
+      "type": "list",
+      "label": "Suggested project packet fields",
+      "items": [
+        "Task, owner, candidate code or data revision, and dependency revisions where relevant.",
+        "Applicable schema, ontology, shapes, dataset, source, and environment versions.",
+        "Executed commands and pipeline runs with actual results and report links.",
+        "Relevant API, interface, or query fixtures and expected outcomes.",
+        "Findings, unresolved issues, exclusions, and verdict.",
+        "Model/workflow versions and cost observations where relevant."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Acceptance",
+      "text": "The packet agrees with the candidate and executed checks. It can support an issue brief, pull request, or data review without falsely claiming unrun gates."
+    },
+    {
+      "type": "p",
+      "label": "Example source: Talos QA packet",
+      "text": "This proposed handoff adapts the inspected Talos QA packet template. Select fields that fit your project. The existence of a template does not establish that its checks were executed."
+    }
+  ],
+  "refs": [
+    "talospacket"
+  ],
+  "basis": "Proposed design + inspected example",
+  "confidence": "Moderate",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "verification"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

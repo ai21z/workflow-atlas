@@ -1,0 +1,72 @@
+{
+  "id": "study-experiment",
+  "title": "Resolve material assumptions",
+  "summary": "Run small experiments only when their evidence can change the decision.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Compare options proportionately",
+      "text": "Shortlist the existing engineer-assisted process, credible simpler automation and bounded agent options. The study need not build three prototypes."
+    },
+    {
+      "type": "table",
+      "label": "Candidate experiments",
+      "headers": [
+        "Uncertainty",
+        "Proportionate evidence"
+      ],
+      "rows": [
+        [
+          "Workstation-specific state",
+          "Small isolated replay with dependencies recorded."
+        ],
+        [
+          "Usability before correction",
+          "Reviewed cases, independent checks and intervention logs."
+        ],
+        [
+          "Approved model/tool access",
+          "Configuration review or narrow connectivity demonstration."
+        ],
+        [
+          "Async requirement",
+          "Duration/variance evidence and caller constraints."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Experiment contract",
+      "text": "Name the assumption, owner, timebox, expected evidence and decision it could change. Prioritize consequential uncertainty."
+    },
+    {
+      "type": "p",
+      "label": "Conditional completion",
+      "text": "The study can finish with a named uncertainty and costed next experiment. A feasibility ticket is not a requirement to build production."
+    },
+    {
+      "type": "p",
+      "label": "Architecture guidance",
+      "text": "Anthropic recommends added complexity when it improves outcomes; its older article explicitly notes tooling changes. This guidance does not establish a winning model, agent count or engine here."
+    }
+  ],
+  "refs": [
+    "simple-agents",
+    "gov-discovery"
+  ],
+  "basis": "Ticket-scoped recommendation; not an implemented workplace capability",
+  "confidence": "Moderate for fit; workplace benefit unknown",
+  "catalog": {
+    "kind": "example",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

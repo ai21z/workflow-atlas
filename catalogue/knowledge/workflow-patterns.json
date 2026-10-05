@@ -1,0 +1,144 @@
+{
+  "id": "workflow-patterns",
+  "title": "Reusable workflow patterns",
+  "summary": "Connect steps, results and checks. Decide what happens when a result passes, needs correction or cannot continue.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Start with five questions",
+      "text": "What happens here, who does it, what does it need, what does it produce and how do we know the result is acceptable? A person, ordinary code, an agent or an existing system can perform a step."
+    },
+    {
+      "type": "table",
+      "label": "Choose a pattern",
+      "headers": [
+        "Pattern",
+        "Use it when"
+      ],
+      "rows": [
+        [
+          "Sequence",
+          "A known step produces an input for the next one."
+        ],
+        [
+          "Review gate",
+          "A check or authorized review determines whether work can continue."
+        ],
+        [
+          "Bounded correction",
+          "Useful feedback can improve a result and the process has a clear stopping rule."
+        ]
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Three different connections",
+      "headers": [
+        "Connection",
+        "Meaning"
+      ],
+      "rows": [
+        [
+          "Input",
+          "The check needs this candidate and these criteria."
+        ],
+        [
+          "Outcome route",
+          "A repairable finding sends work to the correction step."
+        ],
+        [
+          "Instruction",
+          "The assigned skill describes how that step should be carried out."
+        ]
+      ]
+    },
+    {
+      "type": "code",
+      "label": "Example correction flow",
+      "text": "Produce or supply a candidate\n → Check the candidate\n   Pass → approval if required → deliver\n   Repairable → limit allows → correct → check again\n   Missing input → ask for clarification\n   Blocked or limit reached → stop with findings"
+    },
+    {
+      "type": "list",
+      "label": "Define the loop",
+      "items": [
+        "Return the relevant candidate and specific findings to the correction step.",
+        "Record an attempt limit and its counting rule. Add time or spending limits with units when needed.",
+        "Keep unknown, unavailable and unrun checks separate from a pass.",
+        "Check the revised candidate. Preserve earlier evidence as history rather than approving the new version automatically.",
+        "If approval is needed, name its authority and the candidate it concerns. Changed work may need approval again.",
+        "Define what happens when correction cannot help, input is missing or the limit is reached."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Approval outcomes",
+      "text": "Approval concerns the checked candidate. Declined approval stops or follows its explicit route. Requested changes may enter the bounded correction path. A revision must go through the relevant checks and any required approval again."
+    },
+    {
+      "type": "p",
+      "label": "Retry or correction",
+      "text": "A transport retry repeats an operation. A correction changes a candidate using feedback and then checks it again. If a timeout may have followed a write, establish the resulting state before repeating that action."
+    },
+    {
+      "type": "p",
+      "label": "Choose the right check",
+      "text": "Use applicable schema checks, tests, evidence review or human judgment. Model grading needs evaluation against reviewed examples. The generator saying it succeeded is not enough. Passing a format check does not establish that the result meets the intended meaning."
+    },
+    {
+      "type": "table",
+      "label": "The same structure in different work",
+      "headers": [
+        "Case",
+        "Result and feedback"
+      ],
+      "rows": [
+        [
+          "Backend generation",
+          "A candidate configuration and validation findings."
+        ],
+        [
+          "Bug repair",
+          "A proposed change and regression evidence."
+        ],
+        [
+          "Document review",
+          "A draft and requested changes against the brief."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Development and application behavior",
+      "text": "How a team builds and releases a generator is different from what the generator does on each request. Link the development evaluation to the application behavior it tests. Do not mix those steps into one unexplained process."
+    },
+    {
+      "type": "p",
+      "label": "Current Atlas boundary",
+      "text": "The Factory supports development recipes and custom process design, including supported outcome routes and bounded correction loops. These designs reach the exported workflow. Atlas does not execute them. General document workflows remain outside the current JEV recipe suggestions."
+    },
+    {
+      "type": "p",
+      "label": "Source and adaptation",
+      "text": "Anthropic describes chains with programmatic gates and an evaluator-optimizer loop using model feedback. The broader person, code and agent examples here are proposed Atlas adaptations. A runtime must implement and enforce the designed behavior."
+    }
+  ],
+  "refs": [
+    "simple-agents",
+    "evals"
+  ],
+  "basis": "Documented patterns + proposed adaptation",
+  "confidence": "Moderate for fit. No workflow execution established",
+  "catalog": {
+    "kind": "concept",
+    "domains": [
+      "workflow-design"
+    ],
+    "aliases": [],
+    "revision": "1",
+    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "sourceStatus": "legacy",
+    "reviewedOn": "",
+    "claims": []
+  }
+}
