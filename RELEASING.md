@@ -37,7 +37,7 @@ The repository `.npmrc` disables automatic Git commits and tags. npm updates the
 
 3. Run the local checks above. Review the actual generated artifacts and the printed static bundle.
 4. Commit the reviewed change with a short message, such as `Prepare the next beta`.
-5. Push the reviewed branch when ready and wait for its CI checks. The CI workflow checks pushed branches, pull requests and version tags. It never deploys or publishes a release.
+5. Push the reviewed branch when ready and wait for its CI checks. The CI workflow checks pushed branches, pull requests and version tags. A successful `main` run also publishes the static site to GitHub Pages. Other branches, pull requests and tags do not deploy. No GitHub release is created automatically.
 
 ## Tag a checked commit
 
@@ -53,7 +53,17 @@ Use the same version in all three commands. Tag CI rejects a mismatch with the a
 
 Create the GitHub release from that existing tag under my account. Copy the relevant changelog entry, mark beta versions as prereleases, and review the assets before publishing. There is no release bot, automatic version commit or automatic tag author.
 
-Only the allowlisted static bundle is a public website asset. It contains manual editing and artifact generation, without a JEV service. Never attach local research, environment files or a directory containing credentials. CI artifacts are build outputs for review, not a published release or deployment.
+Only the allowlisted static bundle is a public website asset. It contains manual editing and artifact generation, without a JEV service. Never attach local research, environment files or a directory containing credentials. The Pages job publishes the exact bundle produced after successful checks. Other CI artifacts are retained for review and are not website content.
+
+## GitHub Pages
+
+The public beta is at <https://ai21z.github.io/workflow-atlas/>. Repository Settings, Pages uses **GitHub Actions** as the source. The `github-pages` environment records deployments. Only successful runs for `main` in this repository may publish, including a manual workflow dispatch on `main`.
+
+The build marks the workspace as static. Its UI makes no JEV status or inference requests. Manual descriptions, editing, selected file imports and downloads stay in the browser. GitHub Pages cannot run the local Node server. JEV still requires local setup with a private key.
+
+The deployment uses pinned GitHub actions and a reviewed file allowlist, with credential pattern checks. It never publishes the repository directory itself. The browser check serves the build under `/workflow-atlas/` and exercises navigation, export and reopening before publication.
+
+To recover from a bad deployment, revert the affected change on `main` and let the checks publish the corrected bundle. Leave published tags unchanged. The `Check and publish Atlas` workflow can also be dispatched on `main` to republish its current checked contents.
 
 ## Authorship
 

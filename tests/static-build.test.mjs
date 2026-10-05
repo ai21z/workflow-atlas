@@ -9,7 +9,7 @@ async function fixture(t) {
   const rootDir = await mkdtemp(path.join(os.tmpdir(), 'workflow-atlas-static-test-'))
   for (const relative of PUBLIC_ASSETS) {
     await mkdir(path.dirname(path.join(rootDir, relative)), { recursive: true })
-    await writeFile(path.join(rootDir, relative), `Public fixture: ${relative}`)
+    await writeFile(path.join(rootDir, relative), `${relative === 'factory/index.html' ? '<html lang="en">' : ''}Public fixture: ${relative}`)
   }
   t.after(async () => {
     const target = path.resolve(rootDir)
@@ -37,11 +37,19 @@ test('static bundle contains exactly the reviewed inventory and licenses, exclud
   assert.equal(first.files, PUBLIC_ASSETS.length)
   for (const relative of actual) {
     const text = await readFile(path.join(first.output, relative), 'utf8')
-    assert.equal(text, `Public fixture: ${relative}`)
+    assert.equal(text, `${relative === 'factory/index.html' ? '<html lang="en" data-atlas-hosting="static">' : ''}Public fixture: ${relative}`)
     assert.ok(!text.includes('SYNTHETIC-PRIVATE-CANARY'))
   }
   assert.ok(actual.includes('LICENSE'))
   assert.ok(actual.includes('atlas/vendor/THREE-LICENSE.txt'))
+  assert.equal(await readFile(path.join(rootDir, 'factory/index.html'), 'utf8'), '<html lang="en">Public fixture: factory/index.html')
+})
+
+test('static build fails closed if the workspace hosting marker cannot be applied', async t => {
+  const rootDir = await fixture(t)
+  await writeFile(path.join(rootDir, 'factory/index.html'), '<html><body>Changed shell</body></html>')
+  await assert.rejects(buildStatic({ rootDir }), /hosting marker needs review/)
+  assert.ok(!(await readdir(rootDir)).includes('dist'))
 })
 
 test('unlisted public files and sensitive file types stop a build before output', async t => {

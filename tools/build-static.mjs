@@ -1,4 +1,4 @@
-import { lstat, readdir, readFile, realpath, mkdir, mkdtemp, writeFile } from 'node:fs/promises'
+import { lstat, readdir, readFile, realpath, mkdir, mkdtemp, writeFile, appendFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
@@ -73,7 +73,12 @@ export async function buildStatic({ rootDir = repository, knownSecrets = [proces
   const assets = []
   const findings = []
   for (const relative of PUBLIC_ASSETS) {
-    const bytes = await readPublicAsset(resolvedRoot, relative)
+    let bytes = await readPublicAsset(resolvedRoot, relative)
+    if (relative === 'factory/index.html') {
+      const html = bytes.toString('utf8')
+      if (!html.includes('<html lang="en">')) throw new Error('The workspace hosting marker needs review before publishing.')
+      bytes = Buffer.from(html.replace('<html lang="en">', '<html lang="en" data-atlas-hosting="static">'), 'utf8')
+    }
     let count = 0
     if (relative === 'LICENSE' || textExtensions.has(path.extname(relative))) {
       count += credentialFindingCount(bytes.toString('utf8'))
@@ -109,6 +114,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   try {
     if (process.argv.length > 2) throw new Error('Usage: node tools/build-static.mjs')
     const result = await buildStatic()
+    if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, `path=${path.relative(repository, result.output).split(path.sep).join('/')}\n`)
     process.stdout.write(`Static beta bundle: ${result.output}\n${result.files} allowlisted files. Credential findings: ${result.credentialFindings}.\n`)
     process.stdout.write('Static workflow editing and downloads only. No JEV backend or credentials are included. Review this bundle before publishing.\n')
   } catch (error) {

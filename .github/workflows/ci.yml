@@ -1,4 +1,4 @@
-name: Check Atlas
+name: Check and publish Atlas
 
 on:
   push:
@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: atlas-ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 env:
   TYPESAFE_API_KEY: ''
@@ -73,16 +73,24 @@ jobs:
         run: npm run test:browser
       - name: Check project handoffs and reopening
         run: npm run test:handoff
+      - name: Check the static site under the Pages path
+        run: npm run test:static-browser
       - name: Build the public files
+        id: public
         run: npm run build:static
       - name: Keep the public bundle for review
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: workflow-atlas-public-${{ github.sha }}
-          path: dist/public-*/
+          path: ${{ steps.public.outputs.path }}/
           if-no-files-found: error
           retention-days: 14
           include-hidden-files: false
+      - name: Prepare the checked site for GitHub Pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && github.repository == 'ai21z/workflow-atlas'
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: ${{ steps.public.outputs.path }}
       - name: Keep browser check results
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -105,6 +113,30 @@ jobs:
             local-knowledge/retests/navigation-recovery/**/*.png
             local-knowledge/reviews/process-designer/**/*.json
             local-knowledge/reviews/process-designer/**/*.png
+            local-knowledge/retests/static-pages/**/*.json
+            local-knowledge/retests/static-pages/**/*.png
           if-no-files-found: warn
           retention-days: 7
           include-hidden-files: false
+
+  deploy-pages:
+    name: Publish GitHub Pages
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && github.repository == 'ai21z/workflow-atlas'
+    needs: browser-and-build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      - name: Publish the checked static bundle
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

@@ -4,6 +4,8 @@ Release notes describe application changes. Project schema and guidance versions
 
 ## Unreleased
 
+- Publish the checked static beta to GitHub Pages, with local JEV setup kept separate from the hosted workspace.
+- Keep hosted descriptions and imports in the browser and verify editing, navigation, downloads and reopening under the Pages path.
 - Design connected processes in a full screen map or step list, review changes before applying, and restore them with Undo.
 - Carry custom assignments into skills, selected agent profiles and planned evaluation cases, with process and step links in file metadata.
 - Keep manual process previews and downloads independent of inactive development recipes.

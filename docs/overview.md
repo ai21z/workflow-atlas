@@ -4,6 +4,12 @@ Describe a small task, review a starting workflow and download the files you nee
 
 Start manually without an API key, or connect your own JEV account on a local server. Atlas creates editable instructions. It does not execute the work for you.
 
+## Use the hosted beta
+
+Open [Workflow Atlas online](https://ai21z.github.io/workflow-atlas/). Choose a workflow, edit its steps, explore the Knowledge map and download your files. Open pack reads a selected download in your browser to continue later.
+
+The hosted app does not upload project content or offer AI suggestions. Keep your work by downloading before closing or reloading. For suggestions, follow the [local JEV setup](jev/integration.md). GitHub Pages logs visitor IP addresses for security, as explained in [GitHub's hosting documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection).
+
 ## Start with your task
 
 - **First visit.** Follow the [quick start](quick-start.md) from choosing a workflow to reopening a download.

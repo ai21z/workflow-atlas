@@ -114,7 +114,9 @@ node tools/build-static.mjs
 
 The build prints a new `dist/public-<suffix>/` directory. Review and publish only that directory's contents. Its explicit asset list excludes the local server, credentials and private research. It checks common credential patterns and exact occurrences of the key when `TYPESAFE_API_KEY` is set in the build process environment. These are additional checks, not proof that every possible secret is absent. Do not share an owner's entire working directory.
 
-The static bundle has no JEV API. Someone who wants suggestions runs the local app with their own key, or uses a facilitated session on the owner's machine. Hosted JEV assistance needs a separate server design for access, usage limits and credential ownership. The current server is not that service. Preparing a bundle does not deploy it.
+The [hosted beta on GitHub Pages](https://ai21z.github.io/workflow-atlas/) provides the manual workspace, Knowledge map, guides and downloads. Its static workspace makes no JEV status or inference requests. Descriptions and selected imports stay in the browser. GitHub Pages logs visitor IP addresses for security, as described in [GitHub's hosting documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection).
+
+The static bundle has no JEV API. Someone who wants suggestions runs the local app with their own key, or uses a facilitated session on the owner's machine. Hosted JEV assistance needs a separate server design for access, usage limits and credential ownership. The current server is not that service. Building locally does not deploy it. Successful checks on the repository's `main` branch publish the allowlisted bundle through GitHub Actions.
 
 ## Recovery
 

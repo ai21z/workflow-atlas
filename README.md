@@ -10,7 +10,11 @@ Your project stays in the current tab. **Download before closing or reloading.**
 
 ## Try it
 
-1. Run the local server below and open the workspace.
+Open [Workflow Atlas online](https://ai21z.github.io/workflow-atlas/). The hosted beta includes the workspace, Knowledge map, guides, imports and downloads. JEV suggestions require the local setup below.
+
+Project content stays in your tab and is not uploaded by the hosted app. Download to keep it. GitHub Pages records visitor IP addresses for security, as described in [GitHub's hosting documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection).
+
+1. Open the hosted workspace, or run the local server below.
 2. Choose **Design a connected process** for a custom process, or choose **Investigate an idea**, **Build a feature** or **Fix a bug**. Configured JEV can suggest one of those three development recipes from your description.
 3. Review the suggestion or starting pattern. Keep the decisions you want in the draft.
 4. Edit its steps and inspect **Files**. Unknown details stay unresolved.
@@ -175,7 +179,7 @@ npx playwright install chrome
 npm run test:browser
 ```
 
-GitHub Actions runs version, generated documentation and unit checks on Node.js 22 and 24. Its browser job exercises controlled JEV cases and offline artifacts in Chrome, then builds the public bundle. It uses no JEV credentials and does not deploy, publish or create commits. Hosted results become available after a push.
+GitHub Actions runs version, generated documentation and unit checks on Node.js 22 and 24. Its browser job exercises controlled JEV cases, offline artifacts and the static site under the Pages path. Successful checks on `main` publish only the allowlisted static bundle to GitHub Pages. Branches, pull requests and tags are checked without publishing. The workflow uses no JEV credentials and creates no commits, tags or releases.
 
 App versions appear on the start screen and in generated `manifest.json` files. Read [versions and releases](RELEASING.md) for explicit version updates, tags and release steps. [Changelog](CHANGELOG.md) records what each version contains. Project schema and guidance versions are independent from the app version.
 
