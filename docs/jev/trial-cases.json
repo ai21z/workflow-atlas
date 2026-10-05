@@ -1,0 +1,79 @@
+{
+  "protocolId": "atlas-guided-trial-5",
+  "promptModule": "local-knowledge/jev-pilot/optimization/questions-v8.mjs",
+  "name": "Identical Atlas and JEV guided trial",
+  "labelStatus": "Authored fictional acceptance targets, not participant labels or independent human validation",
+  "project": {
+    "name": "Support request status filter",
+    "purpose": "Let support staff show only Open requests or all requests in the existing request list.",
+    "context": "Scope is the existing request list screen only. Reuse the existing screen. Do not create or maintain a project wiki. No repository commands or implementation results have been supplied.",
+    "affected": "Only the existing request list screen changes.",
+    "owner": "Product reviewer",
+    "requirementsNotes": "Scope is the existing request list screen only. Reuse the existing screen. Do not create or maintain a project wiki. No repository commands or implementation results have been supplied. Agree the filter examples before implementation. No checks have been run.",
+    "acceptance": "Open shows only requests marked Open. All shows every request. If there are no Open requests, show an empty list and a clear message. The filter does not change request data."
+  },
+  "cases": [
+    {
+      "id": "F01",
+      "title": "A feature with acceptance still missing",
+      "brief": "Build a status filter so support staff can show only Open requests or all requests. Scope is the existing request list screen only. Reuse the existing screen and make the smallest necessary change. Do not create or maintain a project wiki.",
+      "projectAnswers": {},
+      "practice": { "id": "specification-first" },
+      "expected": { "intent": "feature-delivery", "nextQuestion": "acceptance", "practice": "relevant", "coverage": { "user-need": "answered", "acceptance": "missing", "affected": "answered" } },
+      "why": "The requested behavior and affected screen are supplied. Agreed acceptance examples are absent. Connecting acceptance to implementation applies to this feature."
+    },
+    {
+      "id": "F02",
+      "title": "The same feature after acceptance is supplied",
+      "brief": "Build a status filter so support staff can show only Open requests or all requests. Scope is the existing request list screen only. Reuse the existing screen and make the smallest necessary change. Do not create or maintain a project wiki.",
+      "projectAnswers": { "acceptance": "Open shows only requests marked Open. All shows every request. If there are no Open requests, show an empty list and a clear message. The filter does not change request data." },
+      "practice": { "id": "specification-first" },
+      "expected": { "intent": "feature-delivery", "nextQuestion": "none-needed", "practice": "relevant", "coverage": { "user-need": "answered", "acceptance": "answered", "affected": "answered" } },
+      "why": "All three feature questions are answered across the brief and supplied answer. The model must not request acceptance again. This does not mean implementation is ready or already verified."
+    },
+    {
+      "id": "F03",
+      "title": "Respect the explicit no-wiki boundary",
+      "brief": "Build a status filter so support staff can show only Open requests or all requests. Scope is the existing request list screen only. Reuse the existing screen and make the smallest necessary change. Do not create or maintain a project wiki.",
+      "projectAnswers": {},
+      "practice": { "id": "evidence-wiki" },
+      "expected": { "intent": "feature-delivery", "nextQuestion": "acceptance", "practice": "not-relevant", "coverage": { "user-need": "answered", "acceptance": "missing", "affected": "answered" } },
+      "why": "The user expressly excludes maintained wiki work. A generally useful practice must not override that boundary."
+    },
+    {
+      "id": "B01",
+      "title": "Repair a reported existing bug",
+      "brief": "Repair the existing status filter in the support request list. Expected behavior: selecting Open must hide all Closed requests. Actual behavior in the fictional test build: open the request list containing one Open and one Closed request, select Open, and both requests remain visible. Scope and observed impact are limited to support staff using this request list screen. Inspect and reuse the existing code. The cause is not yet known. Do not add a maintained wiki.",
+      "projectAnswers": {},
+      "practice": { "id": "minimum-change" },
+      "expected": { "intent": "bugfix", "nextQuestion": "none-needed", "practice": "relevant", "coverage": { "expected": "answered", "observed": "answered", "impact": "answered" } },
+      "why": "This reports existing behavior that violates an expectation. Expected, observed and impact information are present. A known root cause is not required to classify a bug investigation."
+    },
+    {
+      "id": "S01",
+      "title": "Study viability before choosing construction",
+      "brief": "Investigate whether a software status filter is feasible before choosing any implementation. Today support staff manually read the existing request list to find Open requests. The study must decide go or no-go for changing only this screen, with a one-week engineering budget and Product reviewer as decision owner. We have not defined what improvement would count as success. Inspect what the existing screen could reuse.",
+      "projectAnswers": {},
+      "practice": { "id": "minimum-change" },
+      "expected": { "intent": "feasibility", "nextQuestion": "desired-outcome", "practice": "relevant", "coverage": { "current-work": "answered", "desired-outcome": "missing", "decision-boundary": "answered" } },
+      "why": "The immediate activity is a go or no-go study. Current work and decision boundaries are known, but a success improvement has not been defined. Inspecting reusable software is explicitly requested."
+    },
+    {
+      "id": "U01",
+      "title": "Keep an unclear intention unclear",
+      "brief": "We want to improve support work. We have not chosen whether to investigate viability, repair existing incorrect behavior or build new behavior. No immediate activity has priority.",
+      "projectAnswers": {},
+      "expected": { "intent": "unclear", "nextQuestion": null, "practice": null, "coverage": {} },
+      "why": "There is no selected immediate activity. Do not force a recipe. The current code returns no recipe-specific next question here, it does not produce a general clarification sentence."
+    },
+    {
+      "id": "C01",
+      "title": "Preserve a conflict in acceptance",
+      "brief": "Build a status filter so support staff can show only Open requests or all requests. Scope is the existing request list screen only. Reuse the existing screen and make the smallest necessary change. Do not create or maintain a project wiki.",
+      "projectAnswers": { "acceptance": "Two reviewers disagree. Reviewer A requires Open to hide Closed requests. Reviewer B requires Closed requests to stay visible when Open is selected. No decision has been made." },
+      "practice": { "id": "specification-first" },
+      "expected": { "intent": "feature-delivery", "nextQuestion": "acceptance", "practice": "relevant", "coverage": { "user-need": "answered", "acceptance": "conflicting", "affected": "answered" } },
+      "why": "The feature is clear but the acceptance rules contradict each other. The conflict must remain unresolved rather than being treated as complete or silently choosing a reviewer."
+    }
+  ]
+}

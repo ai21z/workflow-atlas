@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Readable Workflow Atlas guides for starting a task, reviewing decisions, using downloads, extending the project and evaluating the JEV pilot.">
+  <title>Atlas guides · Workflow Atlas</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310192b'/%3E%3Cpath d='M9 10h14M9 16h10M9 22h14' stroke='%238adcf7' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="reader.css">
+  <script defer src="content.js"></script>
+  <script defer src="reader.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#guide-main">Skip to the guide</a>
+  <header class="site-header">
+    <a class="brand" href="#overview" aria-label="Atlas guides, start here"><span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i></span><span><strong>Atlas guides</strong><small>Workflow Atlas</small></span></a>
+    <div class="header-actions">
+      <a class="workspace-link" href="../factory/">Open Atlas <span aria-hidden="true">↗</span></a>
+      <button type="button" id="theme-toggle" class="theme-switch" role="switch" aria-label="Dark mode" aria-checked="false"><span class="theme-switch-label">Dark mode</span><span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-thumb"></span></span></button>
+      <button id="menu-toggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="guide-sidebar">Guide menu <span aria-hidden="true">☰</span></button>
+    </div>
+  </header>
+  <div class="guide-shell">
+    <aside id="guide-sidebar" class="sidebar" aria-label="Guide navigation">
+      <div class="sidebar-intro"><span class="overline">Learn, create, review</span><p>Find the next useful step.</p></div>
+      <label class="search" for="guide-search"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" aria-label="Search guide pages and topics" placeholder="Find a page or topic" autocomplete="off"><kbd aria-hidden="true">/</kbd></label>
+      <p id="search-status" class="search-status" role="status" aria-live="polite"></p>
+      <nav id="guide-nav" aria-label="Atlas documentation pages">
+        <div class="nav-group"><p>Use Atlas</p><a href="#overview" aria-current="page">Start here</a><a href="#quick-start">Quick start</a><a href="#factory-guide">Workspace guide</a></div>
+        <div class="nav-group"><p>JEV pilot</p><a href="#jev-overview">Understand JEV</a><a href="#jev-usage">Use JEV</a><a href="#jev-metrics">Evidence and metrics</a></div>
+      </nav>
+      <div class="sidebar-footer"><a href="../atlas/">Explore the Knowledge Atlas <span aria-hidden="true">↗</span></a><p>Bundled guides. No account needed.</p></div>
+    </aside>
+    <div class="content-layout">
+      <main id="guide-main" class="reader" tabindex="-1">
+        <div class="reader-meta"><nav id="breadcrumbs" aria-label="Breadcrumb"><a href="#overview">Atlas guides</a><span aria-hidden="true">/</span><span>Start here</span></nav><a id="source-link" href="overview.md" download>Download Markdown <span aria-hidden="true">↓</span></a></div>
+        <article id="guide-article" aria-labelledby="page-title">
+          <header class="intro"><p class="overline">Start here</p><h1 id="page-title">Use Atlas with a clear next step.</h1><p class="lede">Choose a small task, record your decisions and download the files you need.</p></header>
+          <p>In the <a href="../factory/">Atlas workspace</a>, choose Investigate an idea, Build a feature or Fix a bug. Adapt the stages, inspect the generated files and download before closing or reloading.</p>
+          <p>The <a href="../atlas/">Knowledge Atlas</a> explains concepts and sources. Preview Atlas inside the workspace presents your own decisions.</p>
+          <noscript><aside class="callout"><p>Enable JavaScript for guide navigation, search and diagrams. The introduction above remains readable. Markdown downloads are available as source files.</p></aside><ul><li><a href="quick-start.md" download>Download quick start Markdown</a></li><li><a href="factory-guide.md" download>Download workspace guide Markdown</a></li><li><a href="jev/overview.md" download>Download JEV introduction Markdown</a></li></ul></noscript>
+        </article>
+        <nav id="page-pagination" class="page-pagination" aria-label="Continue reading"></nav>
+        <footer class="reader-footer"><span>Workflow Atlas · Guides</span><a href="../factory/">Back to the workspace <span aria-hidden="true">↗</span></a></footer>
+      </main>
+      <aside id="page-outline" class="page-outline" aria-label="On this page"><details id="outline-details" open><summary class="outline-summary">On this page</summary><nav id="page-toc" aria-label="Section links"></nav><div class="outline-note"><p>Start with a small task. Inspect the files before using them.</p><a href="#quick-start">Follow the quick start <span aria-hidden="true">→</span></a></div></details></aside>
+    </div>
+  </div>
+  <dialog id="diagram-dialog" class="diagram-dialog" aria-labelledby="diagram-dialog-title">
+    <div class="dialog-header"><div><span class="overline">Expanded diagram</span><h2 id="diagram-dialog-title">Diagram</h2></div><div class="dialog-actions"><button id="dialog-fit" type="button" aria-pressed="false">Fit width</button><button id="dialog-close" type="button" aria-label="Close expanded diagram">Close <span aria-hidden="true">×</span></button></div></div>
+    <div id="dialog-description" class="dialog-description"></div>
+    <div id="dialog-viewport" class="diagram-viewport" tabindex="0" role="region" aria-label="Expanded diagram"></div>
+  </dialog>
+  <div id="guide-announcement" class="sr-only" aria-live="polite"></div>
+</body>
+</html>

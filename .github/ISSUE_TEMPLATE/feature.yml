@@ -1,0 +1,44 @@
+name: Suggest an improvement
+description: Explain a task that Atlas could make easier or more useful.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The beta plans workflows and exports files. It does not execute workflows or connect your accounts. JEV suggestions need local setup.
+
+        Ideas beyond this scope are welcome. Explain the outcome before choosing an implementation. Issues are public. Use fictional or sanitized examples and never include keys or private data.
+  - type: input
+    id: version
+    attributes:
+      label: App version or commit
+      description: Enter the release version, commit SHA or unknown.
+      placeholder: Version or commit
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: What are you trying to achieve?
+      description: Who needs this and what useful result should they receive? Include a fictional or sanitized example.
+      placeholder: As a product manager, I want to...
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What happens today?
+      description: Describe the current steps, limitation or workaround. Say if you have not tried this in Atlas yet.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What should improve?
+      description: Describe the intended experience and how you would tell the improvement works. Include any decisions or files that must stay intact.
+    validations:
+      required: true
+  - type: textarea
+    id: approach
+    attributes:
+      label: Possible approach
+      description: Optional. Suggest an interface, example or integration. Link relevant documentation and explain its use. Keep unknown details explicit.

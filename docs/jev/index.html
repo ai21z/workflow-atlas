@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="A practical guide to JEV judgments, deterministic project policy, measured evidence, and a manual evaluation alongside Workflow Atlas.">
+  <title>JEV guide · Workflow Atlas</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310192b'/%3E%3Cpath d='M9 10h14M9 16h10M9 22h14' stroke='%238adcf7' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../reader.css">
+  <script defer src="content.js"></script>
+  <script defer src="../reader.js"></script>
+</head>
+<body class="jev-guide">
+  <a class="skip-link" href="#guide-main">Skip to the guide</a>
+  <header class="site-header">
+    <a class="brand" href="#overview" aria-label="JEV guide, start here"><span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i></span><span><strong>JEV guide</strong><small>Workflow Atlas</small></span></a>
+    <div class="header-actions">
+      <a class="all-guides-link" href="../">All guides</a>
+      <a class="workspace-link" href="../../factory/">Open Atlas <span aria-hidden="true">↗</span></a>
+      <button type="button" id="theme-toggle" class="theme-switch" role="switch" aria-label="Dark mode" aria-checked="false"><span class="theme-switch-label">Dark mode</span><span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-thumb"></span></span></button>
+      <button id="menu-toggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="guide-sidebar">Guide menu <span aria-hidden="true">☰</span></button>
+    </div>
+  </header>
+  <div class="guide-shell">
+    <aside id="guide-sidebar" class="sidebar" aria-label="Guide navigation">
+      <div class="sidebar-intro"><span class="overline">Read, understand, evaluate</span><p>Judgment, policy, and evidence.</p></div>
+      <label class="search" for="guide-search"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" aria-label="Search guide pages and topics" placeholder="Find a page or topic" autocomplete="off"><kbd aria-hidden="true">/</kbd></label>
+      <p id="search-status" class="search-status" role="status" aria-live="polite"></p>
+      <nav id="guide-nav" aria-label="JEV documentation pages">
+        <div class="nav-group"><p>Learn</p><a href="#overview" aria-current="page">Start here</a><a href="#usage">Use JEV</a></div>
+        <div class="nav-group"><p>Understand</p><a href="#architecture">How it works</a><a href="#metrics">Evidence and metrics</a></div>
+        <div class="nav-group"><p>Evaluate</p><a href="#trial">People trial</a><a href="#session-record">Trial record template</a><a href="#reference">Technical reference</a><a href="#history">Decision history</a></div>
+      </nav>
+      <div class="sidebar-footer"><a href="../">Browse all Atlas guides <span aria-hidden="true">→</span></a><p>Bundled pages. No network needed.</p></div>
+    </aside>
+    <div class="content-layout">
+      <main id="guide-main" class="reader" tabindex="-1">
+        <div class="reader-meta"><nav id="breadcrumbs" aria-label="Breadcrumb"><a href="#overview">JEV guide</a><span aria-hidden="true">/</span><span>Start here</span></nav><a id="source-link" href="overview.md" download>Download Markdown <span aria-hidden="true">↓</span></a></div>
+        <article id="guide-article" aria-labelledby="page-title">
+          <header class="intro"><p class="overline">Start here</p><h1 id="page-title">Understand JEV before using it.</h1><p class="lede">This guide explains JEV judgments, the code policy that checks them, the available evidence, and a manual evaluation alongside Workflow Atlas.</p></header>
+          <p>The guide documents a proposal and its evaluation. Use the sources and measured results to understand what has been established.</p>
+          <p><a href="overview.md" download>Download the overview as Markdown</a> or <a href="../../factory/">open the Atlas workspace</a>.</p>
+          <noscript><aside class="callout"><p>JavaScript is disabled. Download the complete guide as Markdown using the links below.</p></aside><ul><li><a href="overview.md" download>Download introduction</a></li><li><a href="usage.md" download>Download usage guide</a></li><li><a href="architecture.md" download>Download architecture guide</a></li><li><a href="metrics.md" download>Download evidence and metrics</a></li><li><a href="trial.md" download>Download people trial</a></li><li><a href="session-record.md" download>Download trial record template</a></li><li><a href="reference.md" download>Download technical reference</a></li><li><a href="history.md" download>Download decision history</a></li></ul></noscript>
+        </article>
+        <nav id="page-pagination" class="page-pagination" aria-label="Continue reading"></nav>
+        <footer class="reader-footer"><span>Workflow Atlas · JEV guide</span><a href="../../factory/">Back to the workspace <span aria-hidden="true">↗</span></a></footer>
+      </main>
+      <aside id="page-outline" class="page-outline" aria-label="On this page"><details id="outline-details" open><summary class="outline-summary">On this page</summary><nav id="page-toc" aria-label="Section links"></nav><div class="outline-note"><p>Start with the explanation. Check the evidence before making a decision.</p><a href="#trial">Follow the manual trial <span aria-hidden="true">→</span></a></div></details></aside>
+    </div>
+  </div>
+  <dialog id="diagram-dialog" class="diagram-dialog" aria-labelledby="diagram-dialog-title">
+    <div class="dialog-header"><div><span class="overline">Expanded diagram</span><h2 id="diagram-dialog-title">Diagram</h2></div><div class="dialog-actions"><button id="dialog-fit" type="button" aria-pressed="false">Fit width</button><button id="dialog-close" type="button" aria-label="Close expanded diagram">Close <span aria-hidden="true">×</span></button></div></div>
+    <div id="dialog-description" class="dialog-description"></div>
+    <div id="dialog-viewport" class="diagram-viewport" tabindex="0" role="region" aria-label="Expanded diagram"></div>
+  </dialog>
+  <div id="guide-announcement" class="sr-only" aria-live="polite"></div>
+</body>
+</html>

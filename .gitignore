@@ -1,0 +1,13 @@
+node_modules/
+/local-knowledge/
+coverage/
+dist/
+.cache/
+.env
+.env.*
+!.env.example
+.private/
+exports/
+*.log
+*.zip
+*.tar.gz

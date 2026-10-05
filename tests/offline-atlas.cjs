@@ -1,0 +1,44 @@
+const assert = require('node:assert/strict')
+const fs = require('node:fs/promises')
+const path = require('node:path')
+const { pathToFileURL } = require('node:url')
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright')
+
+async function run() {
+  const root = path.resolve(__dirname, '..')
+  const output = path.join(root, 'exports', 'browser-qa-v2')
+  await fs.mkdir(output, { recursive: true })
+  const browser = await chromium.launch({ headless: true, args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] })
+  try {
+    const context = await browser.newContext({ offline: true, viewport: { width: 1440, height: 1000 } })
+    const page = await context.newPage()
+    const errors = []
+    const remote = []
+    page.on('pageerror', error => errors.push(error.message))
+    page.on('request', request => { if (/^https?:/.test(request.url())) remote.push(request.url()) })
+    await page.goto(pathToFileURL(path.join(root, 'exports', 'Workflow Atlas.html')).href)
+    await page.locator('#reader-title').waitFor()
+    assert.match(await page.locator('#reader-title').innerText(), /Agentic|overview|project/i)
+    const original = await page.evaluate(() => window.ATLAS_STATE)
+    assert.equal(original.topics, 105)
+    assert.equal(original.sources, 56)
+    await page.locator('[data-mode="sources"]').click()
+    assert.ok(await page.locator('.source-card').count() > 0)
+    await page.locator('[data-mode="explore"]').click()
+    await page.locator('[data-view="2d"]').click()
+    assert.ok(await page.locator('#flat-map button').count() > 0)
+    await page.locator('[data-view="3d"]').click()
+    await page.locator('body[data-graph="ready"]').waitFor({ timeout: 15000 })
+    assert.equal(await page.locator('#scene-canvas canvas').count(), 1)
+    await page.screenshot({ path: path.join(output, 'atlas-offline-3d.png'), fullPage: true })
+    await page.locator('[data-mode="read"]').click()
+    await page.locator('#topic-search').fill('requirements')
+    assert.ok(await page.locator('#topic-nav button').count() > 0)
+    assert.deepEqual(errors, [])
+    assert.deepEqual(remote, [], 'The offline export needs no HTTP assets')
+    const result = { topics: original.topics, sources: original.sources, reading: true, sourcesView: true, topicCards: true, webgl: true, remoteRequests: remote, errors }
+    await fs.writeFile(path.join(output, 'offline-results.json'), JSON.stringify(result, null, 2) + '\n')
+    console.log('PASS offline Atlas reading, sources, search, topic cards and 3D with no HTTP assets')
+  } finally { await browser.close() }
+}
+run().catch(error => { console.error(error); process.exitCode = 1 })

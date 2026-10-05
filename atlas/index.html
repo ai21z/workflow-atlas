@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Evidence-led agentic engineering: a focused reference-to-configuration feasibility study, practical delivery paths, and an interactive topic map.">
+  <title>Workflow Atlas · Agentic project strategy</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310192c'/%3E%3Cpath d='M8 10L23 8L20 23L8 10M8 10L9 24L20 23' stroke='%238adcf7' fill='none'/%3E%3Cg fill='%238adcf7'%3E%3Ccircle cx='8' cy='10' r='3'/%3E%3Ccircle cx='23' cy='8' r='3'/%3E%3Ccircle cx='20' cy='23' r='3'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+  <script defer src="data.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body data-mode="read">
+  <a class="skip-link" href="#reader">Skip to topic details</a>
+  <header class="topbar">
+    <button id="knowledge-back" type="button" hidden>← Back to workspace</button>
+    <a class="brand" href="#overview" aria-label="Workflow Atlas overview"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 9L24 7L21 24L7 9M7 9L8 25L21 24"/><circle cx="7" cy="9" r="3"/><circle cx="24" cy="7" r="3"/><circle cx="21" cy="24" r="3"/></svg><span><strong>Workflow Atlas</strong><small>Agentic project strategy</small></span></a>
+    <nav class="mode-nav" aria-label="Atlas views"><button type="button" data-mode="read" aria-pressed="true">Read</button><button type="button" data-mode="explore" aria-pressed="false">Explore <span class="desktop-label">the map</span></button><button type="button" data-mode="sources" aria-pressed="false">Sources</button></nav>
+    <div class="topbar-actions"><a data-factory-link href="../factory/" style="font-size:12px;color:inherit;text-underline-offset:4px;white-space:nowrap">Build a pack ↗</a><span id="atlas-count"></span><button type="button" id="theme-toggle" class="theme-switch" role="switch" aria-label="Dark mode" aria-checked="false"><span class="theme-switch-label">Dark mode</span><span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-thumb"></span></span></button><button type="button" id="mobile-topics" aria-haspopup="dialog" aria-controls="topics-dialog">Search topics</button></div>
+  </header>
+  <main class="workspace">
+    <aside class="sidebar" aria-label="Topic navigation">
+      <button class="nav-home" type="button" data-topic="overview">⌂ &nbsp; Atlas overview</button>
+      <button class="nav-study" type="button" data-topic="construct-study"><small>WORKED CASE STUDY</small><strong>Configuration service</strong><span>Feasibility example ↗</span></button>
+      <label class="search-wrap" for="topic-search"><span aria-hidden="true">⌕</span><input id="topic-search" type="search" autocomplete="off" placeholder="Search all topics…"><kbd aria-hidden="true">/</kbd><span class="sr-only">Search all topics</span></label>
+      <div class="sidebar-heading"><span id="nav-heading">Topic clusters</span><span id="nav-count"></span></div>
+      <nav class="topic-nav" id="topic-nav" aria-label="Categories and topics"></nav>
+      <div class="sidebar-footer"><i></i><span>Evidence-led research<br><small>Reviewed 02 Oct 2026</small></span></div>
+    </aside>
+    <div class="main-area">
+      <div class="tour-bar" id="tour-bar" hidden><div><span class="overline" id="tour-name"></span><strong id="tour-step"></strong></div><div class="tour-controls"><button type="button" id="tour-previous">Previous</button><button type="button" id="tour-next">Next</button><button type="button" id="tour-exit" aria-label="Exit guided tour">×</button></div></div>
+      <section class="landscape" id="landscape" aria-label="Interactive topic map" hidden>
+        <div class="map-toolbar"><div><span class="overline" id="map-eyebrow"></span><h2 id="map-title"></h2><p class="map-intro">Choose a node to explore, then Read topic. Search results open guidance directly.</p><div class="map-current-topic"><span id="map-current-title"></span><button type="button" id="read-map-topic">Read topic →</button></div></div><div class="map-tools"><div class="view-switch" role="group" aria-label="Map view"><button type="button" data-view="3d" aria-pressed="false">3D map</button><button type="button" data-view="2d" aria-pressed="true">Topic cards</button></div><button type="button" id="map-focus" aria-expanded="true" aria-controls="reading-layout">Focus map ↗</button></div></div>
+        <div class="graph-stage" id="graph-stage"><div id="scene-canvas" aria-hidden="true"></div><div id="scene-labels" role="group" aria-label="Visible topic buttons in the 3D map" aria-describedby="map-hint"></div><div id="flat-map" aria-label="Topics in this view"></div><div id="map-loading" role="status" hidden>Opening the landscape…</div><div id="hover-caption" hidden></div></div>
+        <div class="map-bottom"><div class="map-actions"><button type="button" id="overview-button">All clusters</button><button type="button" id="rotate-left" aria-label="Rotate map left">↶</button><button type="button" id="rotate-right" aria-label="Rotate map right">↷</button><button type="button" id="zoom-out" aria-label="Zoom out">−</button><button type="button" id="zoom-in" aria-label="Zoom in">+</button><button type="button" id="map-rotation">Start rotation</button></div><span id="map-hint"></span></div>
+        <div class="map-selection"><div><small>SELECTED TOPIC</small><strong id="map-selection-title"></strong><p id="map-selection-summary"></p><span id="map-selection-evidence"></span></div><button type="button" id="read-selection">Read topic →</button></div>
+        <details class="map-index"><summary>Browse all 105 topics as a list</summary><div id="map-topic-list"></div></details>
+        <p class="map-legend"><span class="legend-line" aria-hidden="true"></span> Solid lines group topics. <span class="legend-line related" aria-hidden="true"></span> Dashed lines connect related topics. These connections do not represent executed workflows or verified evidence.</p>
+      </section>
+      <section class="source-library" id="source-library" aria-label="Source library" hidden>
+        <div class="library-header"><span class="overline">Follow the evidence</span><h1 tabindex="-1" id="source-title">The source library</h1><p>Open an original source, then see where it is used. Source type describes its format; it is not a quality rating.</p></div>
+        <div class="source-tools"><label for="source-search" class="search-wrap"><span aria-hidden="true">⌕</span><input id="source-search" type="search" placeholder="Search titles or publishers…"><span class="sr-only">Search sources</span></label><label for="source-filter" class="sr-only">Filter sources by type</label><select id="source-filter"><option value="all">All source types</option><option value="guidance">Documentation & guidance</option><option value="standards">Standards & frameworks</option><option value="research">Research</option><option value="code">Code repositories</option><option value="video">Videos</option></select><span id="source-count" role="status"></span></div><div id="source-cards" class="source-cards"></div>
+      </section>
+      <div class="reading-layout" id="reading-layout">
+        <article class="reader" id="reader" tabindex="-1" aria-labelledby="reader-title">
+          <div class="reader-top"><nav id="breadcrumbs" aria-label="Breadcrumb"></nav><button type="button" id="copy-link" class="text-button">Copy link ↗</button></div>
+          <header class="reader-heading"><span class="overline" id="reader-kicker"></span><h1 id="reader-title" tabindex="-1"></h1><p id="reader-summary"></p><div class="reader-meta" id="reader-meta"></div></header>
+          <div id="quick-start"></div><div id="reader-content"></div><section class="reader-sources" id="reader-sources"></section><section class="reader-related" id="reader-related"></section><nav class="reader-foot" id="reader-next" aria-label="Continue reading"></nav>
+        </article>
+        <aside class="page-outline" aria-label="On this page"><span class="overline">On this page</span><nav id="page-toc"></nav><div class="tour-picker"><label for="tour-select">Take a guided path</label><select id="tour-select"><option value="">Choose a path…</option><option value="study">Worked ticket study</option><option value="architect">Architect briefing</option><option value="engineering">Engineering delivery</option><option value="curation">Country-data curation</option><option value="cost">Cost control</option></select><button class="text-button" type="button" id="start-tour">Start path →</button></div><p class="outline-note">Find related topics below each article, or switch to Explore to see the connections.</p></aside>
+      </div>
+    </div>
+  </main>
+  <dialog id="topics-dialog" aria-labelledby="topics-dialog-title"><div class="dialog-heading"><strong id="topics-dialog-title">Search topics</strong><button type="button" id="close-topics" aria-label="Close topic browser">×</button></div><label class="search-wrap" for="mobile-search"><span aria-hidden="true">⌕</span><input id="mobile-search" type="search" autocomplete="off" placeholder="Search all topics…" aria-describedby="topic-search-help"><span class="sr-only">Search all topics</span></label><p id="topic-search-help" class="topic-search-help">Choose a search result to read its guidance. Browse clusters to find related topics.</p><p id="topic-search-count" class="topic-search-count" role="status"></p><div class="mobile-shortcuts"><button type="button" data-topic="overview">Atlas overview</button><button type="button" data-topic="construct-study">Worked ticket study →</button></div><nav id="mobile-nav" aria-label="Categories and topics"></nav></dialog>
+  <div class="sr-only" id="selection-announcement" aria-live="polite"></div><div class="toast" id="toast" role="status" hidden></div>
+  <noscript><p>Enable JavaScript to browse this interactive Atlas.</p></noscript>
+</body>
+</html>

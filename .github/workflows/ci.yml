@@ -1,0 +1,96 @@
+name: Check Atlas
+
+on:
+  push:
+    branches: ['**']
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: atlas-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  TYPESAFE_API_KEY: ''
+
+jobs:
+  checks:
+    name: Check on Node ${{ matrix.node }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - name: Check out the project
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: ${{ matrix.node }}
+          package-manager-cache: false
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts
+      - name: Check the application version
+        run: npm run check:version
+      - name: Check the version tag
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          ATLAS_VERSION_TAG: ${{ github.ref_name }}
+        run: npm run check:version -- --tag "$ATLAS_VERSION_TAG"
+      - name: Check the generated guides
+        run: npm run check:docs
+      - name: Run unit and integration checks
+        run: npm test
+
+  browser-and-build:
+    name: Check the browser and public bundle
+    needs: checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out the project
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts
+      - name: Install Chrome and its system dependencies
+        run: npx --no-install playwright install --with-deps chrome
+      - name: Check suggestions and exported artifacts
+        run: npm run test:browser
+      - name: Build the public files
+        run: npm run build:static
+      - name: Keep the public bundle for review
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: workflow-atlas-public-${{ github.sha }}
+          path: dist/public-*/
+          if-no-files-found: error
+          retention-days: 14
+          include-hidden-files: false
+      - name: Keep browser check results
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: workflow-atlas-browser-${{ github.sha }}
+          path: |
+            local-knowledge/retests/jev-integration/**/*.json
+            local-knowledge/retests/jev-integration/**/*.png
+            local-knowledge/retests/artifact-beta/**/*.json
+            local-knowledge/retests/artifact-beta/**/*.png
+          if-no-files-found: warn
+          retention-days: 7
+          include-hidden-files: false

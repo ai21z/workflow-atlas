@@ -1,0 +1,2235 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-04T10:25:05.541Z",
+  "scope": {
+    "evidenceType": "Synthetic API screening of saved runs",
+    "confidenceInReconciledMeasurements": "high",
+    "realUserGeneralization": "unknown",
+    "realUsersMeasured": 0,
+    "uiIntegrationMeasured": false,
+    "productionDeploymentMeasured": false,
+    "fallbackValidated": false,
+    "invalidResponsePolicy": "The isolated runner returns no decision for an invalid response. It does not invoke a deterministic fallback. No application fallback was evaluated.",
+    "supportedRecipes": [
+      "feasibility",
+      "bugfix",
+      "feature-delivery"
+    ],
+    "supportedPractices": [
+      "minimum-change",
+      "specification-first",
+      "evidence-wiki"
+    ],
+    "limitations": [
+      "Manually authored synthetic targets are not a random sample of production requests or independent human validation.",
+      "Whole-case success scores intent, selected next question and designated practice inclusion. It does not require every raw slot judgment to be correct.",
+      "Raw coverage accuracy scores three authored workflow slots per eligible case, not every speculative slot returned.",
+      "Next question and final practice inclusion are model plus code. Direct applicability is a separate comparison.",
+      "No empirical confidence calibration, comparison with human authoring, artifact use or user effort was measured.",
+      "Each request assessed intent and nine speculative context slots. One designated practice adds direct applicability, positive need and boundary questions.",
+      "Earlier fresh sets became development data before v7. They do not provide fresh evidence for v7.",
+      "Pricing uses the saved unit price. The exporter does not verify current pricing."
+    ]
+  },
+  "finalRun": {
+    "id": "2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries",
+    "model": "jev-1.13.0",
+    "promptVersion": "pilot-v7-positive-evidence-and-boundaries",
+    "evaluationUse": "Last fresh synthetic set, frozen stopping rule, no further tuning",
+    "sample": {
+      "uniqueCases": 100,
+      "distinctCaseIds": 100,
+      "distinctBriefs": 100,
+      "primaryVariant": "normal-1",
+      "trials": 311,
+      "normalTrials": 300,
+      "additionalNormalRepeatTrials": 200,
+      "reversedOptionTrials": 11,
+      "normalRepetitionsPerCase": 3,
+      "validResponses": 311,
+      "retries": 0,
+      "missingPrimaryResponses": 0,
+      "invalidPrimaryResponses": 0,
+      "note": "Repeats and reversed options measure stability. They are not independent cases. Invalid, missing and abstained decisions stay in primary denominators."
+    },
+    "metrics": {
+      "intent": {
+        "correct": 100,
+        "total": 100,
+        "accuracy": 1
+      },
+      "supportedIntent": {
+        "correct": 75,
+        "total": 75,
+        "accuracy": 1
+      },
+      "clarification": {
+        "correct": 72,
+        "total": 75,
+        "accuracy": 0.96
+      },
+      "jointIntentAndQuestion": {
+        "correct": 72,
+        "total": 75,
+        "accuracy": 0.96
+      },
+      "rawCoverage": {
+        "correct": 217,
+        "total": 225,
+        "accuracy": 0.9644444444444444,
+        "casesWithCoverageTargets": 75,
+        "returnedPrimaryCoverageAnswers": 900,
+        "interval": null,
+        "note": "Only authored coverage targets are scored. Slots cluster within cases."
+      },
+      "practiceInclusion": {
+        "correct": 60,
+        "total": 60,
+        "accuracy": 1
+      },
+      "directPracticeApplicability": {
+        "correct": 55,
+        "total": 60,
+        "accuracy": 0.9166666666666666
+      },
+      "practiceOffers": {
+        "truePositives": 21,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "precision": 1,
+        "recall": 1,
+        "excludedAmbiguousBinaryCases": 0
+      },
+      "directPracticeOffers": {
+        "truePositives": 21,
+        "falsePositives": 3,
+        "falseNegatives": 0,
+        "precision": 0.875,
+        "recall": 1,
+        "excludedAmbiguousBinaryCases": 0
+      },
+      "practiceById": [
+        {
+          "practiceId": "evidence-wiki",
+          "correct": 20,
+          "total": 20,
+          "accuracy": 1
+        },
+        {
+          "practiceId": "minimum-change",
+          "correct": 20,
+          "total": 20,
+          "accuracy": 1
+        },
+        {
+          "practiceId": "specification-first",
+          "correct": 20,
+          "total": 20,
+          "accuracy": 1
+        }
+      ],
+      "wholeCase": {
+        "correct": 97,
+        "total": 100,
+        "accuracy": 0.97,
+        "wilson95": [
+          0.9154806357094745,
+          0.9897454759759607
+        ]
+      },
+      "supportedWholeCase": {
+        "correct": 72,
+        "total": 75,
+        "accuracy": 0.96
+      }
+    },
+    "latency": {
+      "primaryMedian": {
+        "sampleCount": 100,
+        "rank": 50,
+        "valueMs": 423.9296000000031
+      },
+      "primaryP95": {
+        "sampleCount": 100,
+        "rank": 95,
+        "valueMs": 692.9549000000043
+      },
+      "allTrialsP95": {
+        "sampleCount": 311,
+        "rank": 296,
+        "valueMs": 689.1896999999999
+      },
+      "completePrimary": true,
+      "formula": "Sort finite totalLatencyMs values ascending. Select index ceil(probability * sampleCount) - 1.",
+      "sample": "Primary uses normal-1 once per authored case. All trials include normal repeats and reversed options.",
+      "scope": "One API request per decision, three concurrent runner jobs. totalLatencyMs starts before request construction and persistence, includes network, response parsing, validation, response persistence and decision code. It ends before records.jsonl persistence. Browser, proxy, rendering, artifact generation and user time are excluded."
+    },
+    "usage": {
+      "inputTokens": 1465195,
+      "primaryInputTokens": 470742,
+      "pricePerMillionInputUsd": 0.042,
+      "listedPriceEstimateUsd": 0.061538190000000006,
+      "primaryListedPriceEstimateUsd": 0.019771164,
+      "meanEstimatePer1000TrialRequestsUsd": 0.19787199356913185,
+      "meanEstimatePer1000PrimaryRequestsUsd": 0.19771164000000002,
+      "maxTrialInputTokens": 5049,
+      "completeKnownUsage": true,
+      "formula": "inputTokens / 1000000 * saved pricePerMillionInputUsd",
+      "scope": "Model input tokens for the saved request mix. Estimates include stability trials and exclude earlier pilot runs, browser, proxy and other infrastructure. This is not an invoice or a complete app price."
+    },
+    "stability": {
+      "repeatDisagreements": [],
+      "optionOrderDisagreements": [
+        {
+          "caseId": "v7-s18",
+          "task": "clarification",
+          "normal": "none-needed",
+          "reversed": "current-work"
+        }
+      ]
+    },
+    "gateResults": {
+      "intent": {
+        "observed": 1,
+        "minimum": 0.95,
+        "pass": true
+      },
+      "clarification": {
+        "observed": 0.96,
+        "minimum": 0.95,
+        "pass": true
+      },
+      "practiceThreeClass": {
+        "observed": 1,
+        "minimum": 0.95,
+        "pass": true
+      },
+      "practicePrecision": {
+        "observed": 1,
+        "minimum": 0.95,
+        "pass": true
+      },
+      "practiceRecall": {
+        "observed": 1,
+        "minimum": 0.95,
+        "pass": true
+      },
+      "wholeCase": {
+        "observed": 0.97,
+        "minimum": 0.95,
+        "pass": true
+      },
+      "noRepeatedAnsweredQuestion": {
+        "observed": 2,
+        "maximum": 0,
+        "caseIds": [
+          "v7-s11",
+          "v7-f11"
+        ],
+        "pass": false
+      },
+      "p95Latency": {
+        "observedMs": 692.9549000000043,
+        "maximumMs": 2000,
+        "pass": true
+      },
+      "estimatedCost": {
+        "observedMaxUsd": 0.000212058,
+        "maximumUsd": 0.01,
+        "pass": true
+      }
+    },
+    "failedGates": [
+      "noRepeatedAnsweredQuestion"
+    ],
+    "allObservedGatesPass": false,
+    "selectedOutcomes": [
+      {
+        "caseId": "v7-s11",
+        "task": "clarification",
+        "expected": [
+          "none-needed"
+        ],
+        "actual": "desired-outcome",
+        "reportedConfidence": 0.44,
+        "repeatedAnsweredQuestion": true
+      },
+      {
+        "caseId": "v7-s18",
+        "task": "clarification",
+        "expected": [
+          "current-work"
+        ],
+        "actual": "none-needed",
+        "reportedConfidence": 0.29,
+        "repeatedAnsweredQuestion": false
+      },
+      {
+        "caseId": "v7-f11",
+        "task": "clarification",
+        "expected": [
+          "none-needed"
+        ],
+        "actual": "acceptance",
+        "reportedConfidence": 0.9,
+        "repeatedAnsweredQuestion": true
+      }
+    ],
+    "checks": {
+      "datasetHash": {
+        "expectedSha256": "8b4a0e12bb7f0f717c1dd135cb0fc0efa710fda729b506e447dd65df6ea901d0",
+        "actualSha256": "8b4a0e12bb7f0f717c1dd135cb0fc0efa710fda729b506e447dd65df6ea901d0",
+        "matches": true
+      },
+      "manifestCaseCountMatches": true,
+      "manifestTrialCountMatches": true,
+      "manifestInputTokensMatch": true,
+      "savedSummaryCountsMatch": true,
+      "savedSummaryScorerMatchesRunSnapshot": true,
+      "scorerNote": "Earlier summaries were recalculated after a binary precision correction. Their scorer can differ from the original run snapshot. Final inference saved the corrected scorer.",
+      "manifestHashChecks": [
+        {
+          "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/questions-v7.mjs",
+          "expectedSha256": "7fac1cf401209550eed943e637a10bacf12d1a85295173f7696d33872079e346",
+          "actualSha256": "7fac1cf401209550eed943e637a10bacf12d1a85295173f7696d33872079e346",
+          "matches": true
+        },
+        {
+          "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/run.mjs",
+          "expectedSha256": "6649d6dc72da6b8f2bbf6204cf9c3f8919b8a2257061028be640c31bdbd1f8cb",
+          "actualSha256": "6649d6dc72da6b8f2bbf6204cf9c3f8919b8a2257061028be640c31bdbd1f8cb",
+          "matches": true
+        },
+        {
+          "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/transport.mjs",
+          "expectedSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+          "actualSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+          "matches": true
+        },
+        {
+          "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/score.mjs",
+          "expectedSha256": "8ad0fc1b6d353db078c7f50ebb9f4b6cbfd1755c60e10d303d7c5e5f71f1679f",
+          "actualSha256": "8ad0fc1b6d353db078c7f50ebb9f4b6cbfd1755c60e10d303d7c5e5f71f1679f",
+          "matches": true
+        },
+        {
+          "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/gates.json",
+          "expectedSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+          "actualSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+          "matches": true
+        },
+        {
+          "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-v2-questions.mjs",
+          "expectedSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+          "actualSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+          "matches": true
+        },
+        {
+          "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-catalog.mjs",
+          "expectedSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+          "actualSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+          "matches": true
+        },
+        {
+          "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-v3-questions.mjs",
+          "expectedSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+          "actualSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+          "matches": true
+        },
+        {
+          "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-v5-questions.mjs",
+          "expectedSha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3",
+          "actualSha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3",
+          "matches": true
+        },
+        {
+          "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-v6-questions.mjs",
+          "expectedSha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01",
+          "actualSha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01",
+          "matches": true
+        },
+        {
+          "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/selection.json",
+          "expectedSha256": "0d9deecf2683ceed524c52d12cd8bb627b9f164c2c2b57f533850e2cd1bcade9",
+          "actualSha256": "0d9deecf2683ceed524c52d12cd8bb627b9f164c2c2b57f533850e2cd1bcade9",
+          "matches": true
+        }
+      ]
+    }
+  },
+  "optimizationHistory": [
+    {
+      "id": "2026-10-04T062533007Z-development-pilot-v3-atomic-batch",
+      "promptVersion": "pilot-v3-atomic-batch",
+      "evaluationUse": "Exposed development",
+      "sample": {
+        "uniqueCases": 60,
+        "distinctCaseIds": 60,
+        "distinctBriefs": 60,
+        "primaryVariant": "normal-1",
+        "trials": 69,
+        "normalTrials": 60,
+        "additionalNormalRepeatTrials": 0,
+        "reversedOptionTrials": 9,
+        "normalRepetitionsPerCase": 1,
+        "validResponses": 69,
+        "retries": 0,
+        "missingPrimaryResponses": 0,
+        "invalidPrimaryResponses": 0,
+        "note": "Repeats and reversed options measure stability. They are not independent cases. Invalid, missing and abstained decisions stay in primary denominators."
+      },
+      "metrics": {
+        "intent": {
+          "correct": 60,
+          "total": 60,
+          "accuracy": 1
+        },
+        "supportedIntent": {
+          "correct": 48,
+          "total": 48,
+          "accuracy": 1
+        },
+        "clarification": {
+          "correct": 38,
+          "total": 38,
+          "accuracy": 1
+        },
+        "jointIntentAndQuestion": {
+          "correct": 38,
+          "total": 38,
+          "accuracy": 1
+        },
+        "rawCoverage": {
+          "correct": 0,
+          "total": 0,
+          "accuracy": null,
+          "casesWithCoverageTargets": 0,
+          "returnedPrimaryCoverageAnswers": 540,
+          "interval": null,
+          "note": "Only authored coverage targets are scored. Slots cluster within cases."
+        },
+        "practiceInclusion": {
+          "correct": 30,
+          "total": 30,
+          "accuracy": 1
+        },
+        "directPracticeApplicability": {
+          "correct": 30,
+          "total": 30,
+          "accuracy": 1
+        },
+        "practiceOffers": {
+          "truePositives": 11,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "precision": 1,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "directPracticeOffers": {
+          "truePositives": 11,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "precision": 1,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "practiceById": [
+          {
+            "practiceId": "evidence-wiki",
+            "correct": 25,
+            "total": 25,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "minimum-change",
+            "correct": 3,
+            "total": 3,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "specification-first",
+            "correct": 2,
+            "total": 2,
+            "accuracy": 1
+          }
+        ],
+        "wholeCase": {
+          "correct": 60,
+          "total": 60,
+          "accuracy": 1,
+          "wilson95": [
+            0.9398281478579132,
+            0.9999999999999999
+          ]
+        },
+        "supportedWholeCase": {
+          "correct": 48,
+          "total": 48,
+          "accuracy": 1
+        }
+      },
+      "primaryP95Ms": 503.1572,
+      "inputTokens": 236107,
+      "listedPriceEstimateUsd": 0.009916494000000001,
+      "failedGates": []
+    },
+    {
+      "id": "2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch",
+      "promptVersion": "pilot-v4-compact-atomic-batch",
+      "evaluationUse": "Exposed development",
+      "sample": {
+        "uniqueCases": 60,
+        "distinctCaseIds": 60,
+        "distinctBriefs": 60,
+        "primaryVariant": "normal-1",
+        "trials": 69,
+        "normalTrials": 60,
+        "additionalNormalRepeatTrials": 0,
+        "reversedOptionTrials": 9,
+        "normalRepetitionsPerCase": 1,
+        "validResponses": 69,
+        "retries": 0,
+        "missingPrimaryResponses": 0,
+        "invalidPrimaryResponses": 0,
+        "note": "Repeats and reversed options measure stability. They are not independent cases. Invalid, missing and abstained decisions stay in primary denominators."
+      },
+      "metrics": {
+        "intent": {
+          "correct": 60,
+          "total": 60,
+          "accuracy": 1
+        },
+        "supportedIntent": {
+          "correct": 48,
+          "total": 48,
+          "accuracy": 1
+        },
+        "clarification": {
+          "correct": 26,
+          "total": 38,
+          "accuracy": 0.6842105263157895
+        },
+        "jointIntentAndQuestion": {
+          "correct": 26,
+          "total": 38,
+          "accuracy": 0.6842105263157895
+        },
+        "rawCoverage": {
+          "correct": 0,
+          "total": 0,
+          "accuracy": null,
+          "casesWithCoverageTargets": 0,
+          "returnedPrimaryCoverageAnswers": 540,
+          "interval": null,
+          "note": "Only authored coverage targets are scored. Slots cluster within cases."
+        },
+        "practiceInclusion": {
+          "correct": 30,
+          "total": 30,
+          "accuracy": 1
+        },
+        "directPracticeApplicability": {
+          "correct": 30,
+          "total": 30,
+          "accuracy": 1
+        },
+        "practiceOffers": {
+          "truePositives": 11,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "precision": 1,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "directPracticeOffers": {
+          "truePositives": 11,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "precision": 1,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "practiceById": [
+          {
+            "practiceId": "evidence-wiki",
+            "correct": 25,
+            "total": 25,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "minimum-change",
+            "correct": 3,
+            "total": 3,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "specification-first",
+            "correct": 2,
+            "total": 2,
+            "accuracy": 1
+          }
+        ],
+        "wholeCase": {
+          "correct": 48,
+          "total": 60,
+          "accuracy": 0.8,
+          "wilson95": [
+            0.6821819419437246,
+            0.8817149467710234
+          ]
+        },
+        "supportedWholeCase": {
+          "correct": 36,
+          "total": 48,
+          "accuracy": 0.75
+        }
+      },
+      "primaryP95Ms": 424.6222,
+      "inputTokens": 157378,
+      "listedPriceEstimateUsd": 0.006609876,
+      "failedGates": [
+        "clarification",
+        "wholeCase",
+        "noRepeatedAnsweredQuestion"
+      ]
+    },
+    {
+      "id": "2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch",
+      "promptVersion": "pilot-v3-atomic-batch",
+      "evaluationUse": "Fresh at first inference, later used as development",
+      "sample": {
+        "uniqueCases": 60,
+        "distinctCaseIds": 60,
+        "distinctBriefs": 60,
+        "primaryVariant": "normal-1",
+        "trials": 195,
+        "normalTrials": 180,
+        "additionalNormalRepeatTrials": 120,
+        "reversedOptionTrials": 15,
+        "normalRepetitionsPerCase": 3,
+        "validResponses": 195,
+        "retries": 0,
+        "missingPrimaryResponses": 0,
+        "invalidPrimaryResponses": 0,
+        "note": "Repeats and reversed options measure stability. They are not independent cases. Invalid, missing and abstained decisions stay in primary denominators."
+      },
+      "metrics": {
+        "intent": {
+          "correct": 60,
+          "total": 60,
+          "accuracy": 1
+        },
+        "supportedIntent": {
+          "correct": 45,
+          "total": 45,
+          "accuracy": 1
+        },
+        "clarification": {
+          "correct": 43,
+          "total": 45,
+          "accuracy": 0.9555555555555556
+        },
+        "jointIntentAndQuestion": {
+          "correct": 43,
+          "total": 45,
+          "accuracy": 0.9555555555555556
+        },
+        "rawCoverage": {
+          "correct": 128,
+          "total": 135,
+          "accuracy": 0.9481481481481482,
+          "casesWithCoverageTargets": 45,
+          "returnedPrimaryCoverageAnswers": 540,
+          "interval": null,
+          "note": "Only authored coverage targets are scored. Slots cluster within cases."
+        },
+        "practiceInclusion": {
+          "correct": 43,
+          "total": 45,
+          "accuracy": 0.9555555555555556
+        },
+        "directPracticeApplicability": {
+          "correct": 43,
+          "total": 45,
+          "accuracy": 0.9555555555555556
+        },
+        "practiceOffers": {
+          "truePositives": 15,
+          "falsePositives": 2,
+          "falseNegatives": 0,
+          "precision": 0.8823529411764706,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "directPracticeOffers": {
+          "truePositives": 15,
+          "falsePositives": 2,
+          "falseNegatives": 0,
+          "precision": 0.8823529411764706,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "practiceById": [
+          {
+            "practiceId": "evidence-wiki",
+            "correct": 15,
+            "total": 15,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "minimum-change",
+            "correct": 14,
+            "total": 15,
+            "accuracy": 0.9333333333333333
+          },
+          {
+            "practiceId": "specification-first",
+            "correct": 14,
+            "total": 15,
+            "accuracy": 0.9333333333333333
+          }
+        ],
+        "wholeCase": {
+          "correct": 56,
+          "total": 60,
+          "accuracy": 0.9333333333333333,
+          "wilson95": [
+            0.8407464268680316,
+            0.9737713012754932
+          ]
+        },
+        "supportedWholeCase": {
+          "correct": 41,
+          "total": 45,
+          "accuracy": 0.9111111111111111
+        }
+      },
+      "primaryP95Ms": 367.57299999999987,
+      "inputTokens": 682147,
+      "listedPriceEstimateUsd": 0.028650174,
+      "failedGates": [
+        "practicePrecision",
+        "wholeCase",
+        "noRepeatedAnsweredQuestion"
+      ]
+    },
+    {
+      "id": "2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots",
+      "promptVersion": "pilot-v5-scope-and-isolated-slots",
+      "evaluationUse": "Exposed development",
+      "sample": {
+        "uniqueCases": 120,
+        "distinctCaseIds": 120,
+        "distinctBriefs": 120,
+        "primaryVariant": "normal-1",
+        "trials": 144,
+        "normalTrials": 120,
+        "additionalNormalRepeatTrials": 0,
+        "reversedOptionTrials": 24,
+        "normalRepetitionsPerCase": 1,
+        "validResponses": 144,
+        "retries": 0,
+        "missingPrimaryResponses": 0,
+        "invalidPrimaryResponses": 0,
+        "note": "Repeats and reversed options measure stability. They are not independent cases. Invalid, missing and abstained decisions stay in primary denominators."
+      },
+      "metrics": {
+        "intent": {
+          "correct": 120,
+          "total": 120,
+          "accuracy": 1
+        },
+        "supportedIntent": {
+          "correct": 93,
+          "total": 93,
+          "accuracy": 1
+        },
+        "clarification": {
+          "correct": 82,
+          "total": 83,
+          "accuracy": 0.9879518072289156
+        },
+        "jointIntentAndQuestion": {
+          "correct": 82,
+          "total": 83,
+          "accuracy": 0.9879518072289156
+        },
+        "rawCoverage": {
+          "correct": 135,
+          "total": 135,
+          "accuracy": 1,
+          "casesWithCoverageTargets": 45,
+          "returnedPrimaryCoverageAnswers": 1080,
+          "interval": null,
+          "note": "Only authored coverage targets are scored. Slots cluster within cases."
+        },
+        "practiceInclusion": {
+          "correct": 74,
+          "total": 75,
+          "accuracy": 0.9866666666666667
+        },
+        "directPracticeApplicability": {
+          "correct": 73,
+          "total": 75,
+          "accuracy": 0.9733333333333334
+        },
+        "practiceOffers": {
+          "truePositives": 26,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "precision": 1,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "directPracticeOffers": {
+          "truePositives": 26,
+          "falsePositives": 2,
+          "falseNegatives": 0,
+          "precision": 0.9285714285714286,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "practiceById": [
+          {
+            "practiceId": "evidence-wiki",
+            "correct": 40,
+            "total": 40,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "minimum-change",
+            "correct": 18,
+            "total": 18,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "specification-first",
+            "correct": 16,
+            "total": 17,
+            "accuracy": 0.9411764705882353
+          }
+        ],
+        "wholeCase": {
+          "correct": 118,
+          "total": 120,
+          "accuracy": 0.9833333333333333,
+          "wilson95": [
+            0.9412640370278428,
+            0.9954174354340787
+          ]
+        },
+        "supportedWholeCase": {
+          "correct": 92,
+          "total": 93,
+          "accuracy": 0.989247311827957
+        }
+      },
+      "primaryP95Ms": 486.3674000000001,
+      "inputTokens": 586201,
+      "listedPriceEstimateUsd": 0.024620442,
+      "failedGates": []
+    },
+    {
+      "id": "2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope",
+      "promptVersion": "pilot-v6-explicit-gaps-and-scope",
+      "evaluationUse": "Exposed development",
+      "sample": {
+        "uniqueCases": 120,
+        "distinctCaseIds": 120,
+        "distinctBriefs": 120,
+        "primaryVariant": "normal-1",
+        "trials": 144,
+        "normalTrials": 120,
+        "additionalNormalRepeatTrials": 0,
+        "reversedOptionTrials": 24,
+        "normalRepetitionsPerCase": 1,
+        "validResponses": 144,
+        "retries": 0,
+        "missingPrimaryResponses": 0,
+        "invalidPrimaryResponses": 0,
+        "note": "Repeats and reversed options measure stability. They are not independent cases. Invalid, missing and abstained decisions stay in primary denominators."
+      },
+      "metrics": {
+        "intent": {
+          "correct": 120,
+          "total": 120,
+          "accuracy": 1
+        },
+        "supportedIntent": {
+          "correct": 93,
+          "total": 93,
+          "accuracy": 1
+        },
+        "clarification": {
+          "correct": 82,
+          "total": 83,
+          "accuracy": 0.9879518072289156
+        },
+        "jointIntentAndQuestion": {
+          "correct": 82,
+          "total": 83,
+          "accuracy": 0.9879518072289156
+        },
+        "rawCoverage": {
+          "correct": 135,
+          "total": 135,
+          "accuracy": 1,
+          "casesWithCoverageTargets": 45,
+          "returnedPrimaryCoverageAnswers": 1080,
+          "interval": null,
+          "note": "Only authored coverage targets are scored. Slots cluster within cases."
+        },
+        "practiceInclusion": {
+          "correct": 75,
+          "total": 75,
+          "accuracy": 1
+        },
+        "directPracticeApplicability": {
+          "correct": 73,
+          "total": 75,
+          "accuracy": 0.9733333333333334
+        },
+        "practiceOffers": {
+          "truePositives": 26,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "precision": 1,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "directPracticeOffers": {
+          "truePositives": 26,
+          "falsePositives": 2,
+          "falseNegatives": 0,
+          "precision": 0.9285714285714286,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "practiceById": [
+          {
+            "practiceId": "evidence-wiki",
+            "correct": 40,
+            "total": 40,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "minimum-change",
+            "correct": 18,
+            "total": 18,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "specification-first",
+            "correct": 17,
+            "total": 17,
+            "accuracy": 1
+          }
+        ],
+        "wholeCase": {
+          "correct": 119,
+          "total": 120,
+          "accuracy": 0.9916666666666667,
+          "wilson95": [
+            0.9543037087549521,
+            0.998527444266658
+          ]
+        },
+        "supportedWholeCase": {
+          "correct": 92,
+          "total": 93,
+          "accuracy": 0.989247311827957
+        }
+      },
+      "primaryP95Ms": 433.2673,
+      "inputTokens": 632587,
+      "listedPriceEstimateUsd": 0.026568654,
+      "failedGates": []
+    },
+    {
+      "id": "2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope",
+      "promptVersion": "pilot-v6-explicit-gaps-and-scope",
+      "evaluationUse": "Fresh at first inference, later used as development",
+      "sample": {
+        "uniqueCases": 80,
+        "distinctCaseIds": 80,
+        "distinctBriefs": 80,
+        "primaryVariant": "normal-1",
+        "trials": 251,
+        "normalTrials": 240,
+        "additionalNormalRepeatTrials": 160,
+        "reversedOptionTrials": 11,
+        "normalRepetitionsPerCase": 3,
+        "validResponses": 251,
+        "retries": 0,
+        "missingPrimaryResponses": 0,
+        "invalidPrimaryResponses": 0,
+        "note": "Repeats and reversed options measure stability. They are not independent cases. Invalid, missing and abstained decisions stay in primary denominators."
+      },
+      "metrics": {
+        "intent": {
+          "correct": 80,
+          "total": 80,
+          "accuracy": 1
+        },
+        "supportedIntent": {
+          "correct": 60,
+          "total": 60,
+          "accuracy": 1
+        },
+        "clarification": {
+          "correct": 58,
+          "total": 60,
+          "accuracy": 0.9666666666666667
+        },
+        "jointIntentAndQuestion": {
+          "correct": 58,
+          "total": 60,
+          "accuracy": 0.9666666666666667
+        },
+        "rawCoverage": {
+          "correct": 174,
+          "total": 180,
+          "accuracy": 0.9666666666666667,
+          "casesWithCoverageTargets": 60,
+          "returnedPrimaryCoverageAnswers": 720,
+          "interval": null,
+          "note": "Only authored coverage targets are scored. Slots cluster within cases."
+        },
+        "practiceInclusion": {
+          "correct": 53,
+          "total": 60,
+          "accuracy": 0.8833333333333333
+        },
+        "directPracticeApplicability": {
+          "correct": 51,
+          "total": 60,
+          "accuracy": 0.85
+        },
+        "practiceOffers": {
+          "truePositives": 21,
+          "falsePositives": 3,
+          "falseNegatives": 0,
+          "precision": 0.875,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "directPracticeOffers": {
+          "truePositives": 21,
+          "falsePositives": 5,
+          "falseNegatives": 0,
+          "precision": 0.8076923076923077,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "practiceById": [
+          {
+            "practiceId": "evidence-wiki",
+            "correct": 16,
+            "total": 20,
+            "accuracy": 0.8
+          },
+          {
+            "practiceId": "minimum-change",
+            "correct": 20,
+            "total": 20,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "specification-first",
+            "correct": 17,
+            "total": 20,
+            "accuracy": 0.85
+          }
+        ],
+        "wholeCase": {
+          "correct": 71,
+          "total": 80,
+          "accuracy": 0.8875,
+          "wilson95": [
+            0.799817819076274,
+            0.9396731305336942
+          ]
+        },
+        "supportedWholeCase": {
+          "correct": 51,
+          "total": 60,
+          "accuracy": 0.85
+        }
+      },
+      "primaryP95Ms": 592.2946,
+      "inputTokens": 1119659,
+      "listedPriceEstimateUsd": 0.047025678,
+      "failedGates": [
+        "practiceThreeClass",
+        "practicePrecision",
+        "wholeCase",
+        "noRepeatedAnsweredQuestion"
+      ]
+    },
+    {
+      "id": "2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries",
+      "promptVersion": "pilot-v7-positive-evidence-and-boundaries",
+      "evaluationUse": "Exposed development",
+      "sample": {
+        "uniqueCases": 200,
+        "distinctCaseIds": 200,
+        "distinctBriefs": 200,
+        "primaryVariant": "normal-1",
+        "trials": 235,
+        "normalTrials": 200,
+        "additionalNormalRepeatTrials": 0,
+        "reversedOptionTrials": 35,
+        "normalRepetitionsPerCase": 1,
+        "validResponses": 235,
+        "retries": 0,
+        "missingPrimaryResponses": 0,
+        "invalidPrimaryResponses": 0,
+        "note": "Repeats and reversed options measure stability. They are not independent cases. Invalid, missing and abstained decisions stay in primary denominators."
+      },
+      "metrics": {
+        "intent": {
+          "correct": 200,
+          "total": 200,
+          "accuracy": 1
+        },
+        "supportedIntent": {
+          "correct": 153,
+          "total": 153,
+          "accuracy": 1
+        },
+        "clarification": {
+          "correct": 142,
+          "total": 143,
+          "accuracy": 0.993006993006993
+        },
+        "jointIntentAndQuestion": {
+          "correct": 142,
+          "total": 143,
+          "accuracy": 0.993006993006993
+        },
+        "rawCoverage": {
+          "correct": 311,
+          "total": 315,
+          "accuracy": 0.9873015873015873,
+          "casesWithCoverageTargets": 105,
+          "returnedPrimaryCoverageAnswers": 1800,
+          "interval": null,
+          "note": "Only authored coverage targets are scored. Slots cluster within cases."
+        },
+        "practiceInclusion": {
+          "correct": 134,
+          "total": 135,
+          "accuracy": 0.9925925925925926
+        },
+        "directPracticeApplicability": {
+          "correct": 127,
+          "total": 135,
+          "accuracy": 0.9407407407407408
+        },
+        "practiceOffers": {
+          "truePositives": 46,
+          "falsePositives": 0,
+          "falseNegatives": 1,
+          "precision": 1,
+          "recall": 0.9787234042553191,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "directPracticeOffers": {
+          "truePositives": 47,
+          "falsePositives": 5,
+          "falseNegatives": 0,
+          "precision": 0.9038461538461539,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "practiceById": [
+          {
+            "practiceId": "evidence-wiki",
+            "correct": 60,
+            "total": 60,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "minimum-change",
+            "correct": 37,
+            "total": 38,
+            "accuracy": 0.9736842105263158
+          },
+          {
+            "practiceId": "specification-first",
+            "correct": 37,
+            "total": 37,
+            "accuracy": 1
+          }
+        ],
+        "wholeCase": {
+          "correct": 198,
+          "total": 200,
+          "accuracy": 0.99,
+          "wilson95": [
+            0.9642782382838243,
+            0.9972533418664554
+          ]
+        },
+        "supportedWholeCase": {
+          "correct": 151,
+          "total": 153,
+          "accuracy": 0.9869281045751634
+        }
+      },
+      "primaryP95Ms": 540.6373999999996,
+      "inputTokens": 1121561,
+      "listedPriceEstimateUsd": 0.047105562000000004,
+      "failedGates": []
+    },
+    {
+      "id": "2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries",
+      "promptVersion": "pilot-v7-positive-evidence-and-boundaries",
+      "evaluationUse": "Last fresh synthetic set, frozen stopping rule, no further tuning",
+      "sample": {
+        "uniqueCases": 100,
+        "distinctCaseIds": 100,
+        "distinctBriefs": 100,
+        "primaryVariant": "normal-1",
+        "trials": 311,
+        "normalTrials": 300,
+        "additionalNormalRepeatTrials": 200,
+        "reversedOptionTrials": 11,
+        "normalRepetitionsPerCase": 3,
+        "validResponses": 311,
+        "retries": 0,
+        "missingPrimaryResponses": 0,
+        "invalidPrimaryResponses": 0,
+        "note": "Repeats and reversed options measure stability. They are not independent cases. Invalid, missing and abstained decisions stay in primary denominators."
+      },
+      "metrics": {
+        "intent": {
+          "correct": 100,
+          "total": 100,
+          "accuracy": 1
+        },
+        "supportedIntent": {
+          "correct": 75,
+          "total": 75,
+          "accuracy": 1
+        },
+        "clarification": {
+          "correct": 72,
+          "total": 75,
+          "accuracy": 0.96
+        },
+        "jointIntentAndQuestion": {
+          "correct": 72,
+          "total": 75,
+          "accuracy": 0.96
+        },
+        "rawCoverage": {
+          "correct": 217,
+          "total": 225,
+          "accuracy": 0.9644444444444444,
+          "casesWithCoverageTargets": 75,
+          "returnedPrimaryCoverageAnswers": 900,
+          "interval": null,
+          "note": "Only authored coverage targets are scored. Slots cluster within cases."
+        },
+        "practiceInclusion": {
+          "correct": 60,
+          "total": 60,
+          "accuracy": 1
+        },
+        "directPracticeApplicability": {
+          "correct": 55,
+          "total": 60,
+          "accuracy": 0.9166666666666666
+        },
+        "practiceOffers": {
+          "truePositives": 21,
+          "falsePositives": 0,
+          "falseNegatives": 0,
+          "precision": 1,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "directPracticeOffers": {
+          "truePositives": 21,
+          "falsePositives": 3,
+          "falseNegatives": 0,
+          "precision": 0.875,
+          "recall": 1,
+          "excludedAmbiguousBinaryCases": 0
+        },
+        "practiceById": [
+          {
+            "practiceId": "evidence-wiki",
+            "correct": 20,
+            "total": 20,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "minimum-change",
+            "correct": 20,
+            "total": 20,
+            "accuracy": 1
+          },
+          {
+            "practiceId": "specification-first",
+            "correct": 20,
+            "total": 20,
+            "accuracy": 1
+          }
+        ],
+        "wholeCase": {
+          "correct": 97,
+          "total": 100,
+          "accuracy": 0.97,
+          "wilson95": [
+            0.9154806357094745,
+            0.9897454759759607
+          ]
+        },
+        "supportedWholeCase": {
+          "correct": 72,
+          "total": 75,
+          "accuracy": 0.96
+        }
+      },
+      "primaryP95Ms": 692.9549000000043,
+      "inputTokens": 1465195,
+      "listedPriceEstimateUsd": 0.061538190000000006,
+      "failedGates": [
+        "noRepeatedAnsweredQuestion"
+      ]
+    }
+  ],
+  "optimizationAggregate": {
+    "runs": 8,
+    "calls": 1418,
+    "validResponses": 1418,
+    "retries": 0,
+    "inputTokens": 6000835,
+    "listedPriceEstimateUsd": 0.25203506999999997,
+    "scope": "All eight optimization runs, including exposed development, rejected candidates and stability trials. Earlier protocol probes and the previous pilot are excluded."
+  },
+  "provenance": {
+    "sourceAvailability": "Owner local evidence. Raw briefs, author descriptions, API headers and credentials are not included.",
+    "selectionChecks": {
+      "promptHashMatchesFinalSnapshot": true,
+      "datasetHashMatchesFinalSnapshot": true
+    },
+    "runChecks": [
+      {
+        "id": "2026-10-04T062533007Z-development-pilot-v3-atomic-batch",
+        "datasetHash": {
+          "expectedSha256": "df03283095b3b1cf49c9467a42ea88afacc2407b880049f6fa195ed50b14e7ea",
+          "actualSha256": "df03283095b3b1cf49c9467a42ea88afacc2407b880049f6fa195ed50b14e7ea",
+          "matches": true
+        },
+        "manifestCaseCountMatches": true,
+        "manifestTrialCountMatches": true,
+        "manifestInputTokensMatch": true,
+        "savedSummaryCountsMatch": true,
+        "savedSummaryScorerMatchesRunSnapshot": false,
+        "scorerNote": "Earlier summaries were recalculated after a binary precision correction. Their scorer can differ from the original run snapshot. Final inference saved the corrected scorer.",
+        "manifestHashChecks": [
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/questions-v3.mjs",
+            "expectedSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "actualSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/run.mjs",
+            "expectedSha256": "1983dc48245a2e9bec7977704d214f7d433ff3ef442001c9a39ffb72f9942d1a",
+            "actualSha256": "1983dc48245a2e9bec7977704d214f7d433ff3ef442001c9a39ffb72f9942d1a",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/transport.mjs",
+            "expectedSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "actualSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/score.mjs",
+            "expectedSha256": "5d925a5fc034ab7f6c657431755a60d7c1f456e03a398dc817842b36fe034eb7",
+            "actualSha256": "5d925a5fc034ab7f6c657431755a60d7c1f456e03a398dc817842b36fe034eb7",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/gates.json",
+            "expectedSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "actualSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "matches": true
+          }
+        ]
+      },
+      {
+        "id": "2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch",
+        "datasetHash": {
+          "expectedSha256": "df03283095b3b1cf49c9467a42ea88afacc2407b880049f6fa195ed50b14e7ea",
+          "actualSha256": "df03283095b3b1cf49c9467a42ea88afacc2407b880049f6fa195ed50b14e7ea",
+          "matches": true
+        },
+        "manifestCaseCountMatches": true,
+        "manifestTrialCountMatches": true,
+        "manifestInputTokensMatch": true,
+        "savedSummaryCountsMatch": true,
+        "savedSummaryScorerMatchesRunSnapshot": false,
+        "scorerNote": "Earlier summaries were recalculated after a binary precision correction. Their scorer can differ from the original run snapshot. Final inference saved the corrected scorer.",
+        "manifestHashChecks": [
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/questions-v4.mjs",
+            "expectedSha256": "7b8f95b52bce51fbaaf64a79c6458e0900cc03bdf2fcaaa34dfda6ae6ee6cfc2",
+            "actualSha256": "7b8f95b52bce51fbaaf64a79c6458e0900cc03bdf2fcaaa34dfda6ae6ee6cfc2",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/run.mjs",
+            "expectedSha256": "1983dc48245a2e9bec7977704d214f7d433ff3ef442001c9a39ffb72f9942d1a",
+            "actualSha256": "1983dc48245a2e9bec7977704d214f7d433ff3ef442001c9a39ffb72f9942d1a",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/transport.mjs",
+            "expectedSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "actualSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/score.mjs",
+            "expectedSha256": "5d925a5fc034ab7f6c657431755a60d7c1f456e03a398dc817842b36fe034eb7",
+            "actualSha256": "5d925a5fc034ab7f6c657431755a60d7c1f456e03a398dc817842b36fe034eb7",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/gates.json",
+            "expectedSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "actualSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "matches": true
+          }
+        ]
+      },
+      {
+        "id": "2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch",
+        "datasetHash": {
+          "expectedSha256": "f543ad5d4a03024df295321ab67bdd9846914e53fd4e4ba49b599eec7e234ed9",
+          "actualSha256": "f543ad5d4a03024df295321ab67bdd9846914e53fd4e4ba49b599eec7e234ed9",
+          "matches": true
+        },
+        "manifestCaseCountMatches": true,
+        "manifestTrialCountMatches": true,
+        "manifestInputTokensMatch": true,
+        "savedSummaryCountsMatch": true,
+        "savedSummaryScorerMatchesRunSnapshot": false,
+        "scorerNote": "Earlier summaries were recalculated after a binary precision correction. Their scorer can differ from the original run snapshot. Final inference saved the corrected scorer.",
+        "manifestHashChecks": [
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/questions-v3.mjs",
+            "expectedSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "actualSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/run.mjs",
+            "expectedSha256": "3de0980f2cfe92fe282cbf904f09c2bc5b0e0620aee346d003218d6b83f403f3",
+            "actualSha256": "3de0980f2cfe92fe282cbf904f09c2bc5b0e0620aee346d003218d6b83f403f3",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/transport.mjs",
+            "expectedSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "actualSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/score.mjs",
+            "expectedSha256": "5d925a5fc034ab7f6c657431755a60d7c1f456e03a398dc817842b36fe034eb7",
+            "actualSha256": "5d925a5fc034ab7f6c657431755a60d7c1f456e03a398dc817842b36fe034eb7",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/gates.json",
+            "expectedSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "actualSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/dependency-v2-questions.mjs",
+            "expectedSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+            "actualSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/dependency-catalog.mjs",
+            "expectedSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+            "actualSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+            "matches": true
+          }
+        ]
+      },
+      {
+        "id": "2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots",
+        "datasetHash": {
+          "expectedSha256": "c2dbbcf8e26ab9cfc5e62b8aea510d98b2415ae47d08dbd36e70055b17a7b1bb",
+          "actualSha256": "c2dbbcf8e26ab9cfc5e62b8aea510d98b2415ae47d08dbd36e70055b17a7b1bb",
+          "matches": true
+        },
+        "manifestCaseCountMatches": true,
+        "manifestTrialCountMatches": true,
+        "manifestInputTokensMatch": true,
+        "savedSummaryCountsMatch": true,
+        "savedSummaryScorerMatchesRunSnapshot": false,
+        "scorerNote": "Earlier summaries were recalculated after a binary precision correction. Their scorer can differ from the original run snapshot. Final inference saved the corrected scorer.",
+        "manifestHashChecks": [
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/questions-v5.mjs",
+            "expectedSha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3",
+            "actualSha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/run.mjs",
+            "expectedSha256": "d2bb36fcc361d2e3a82f9e1b2aa22782aabc7a375f51d6a0b211ca10a0a4fa9c",
+            "actualSha256": "d2bb36fcc361d2e3a82f9e1b2aa22782aabc7a375f51d6a0b211ca10a0a4fa9c",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/transport.mjs",
+            "expectedSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "actualSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/score.mjs",
+            "expectedSha256": "235dcf5e9ae05ab76a1cc9e970e74b3938524769e96e9126ae5cfa77d5b89b12",
+            "actualSha256": "235dcf5e9ae05ab76a1cc9e970e74b3938524769e96e9126ae5cfa77d5b89b12",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/gates.json",
+            "expectedSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "actualSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/dependency-v2-questions.mjs",
+            "expectedSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+            "actualSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/dependency-catalog.mjs",
+            "expectedSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+            "actualSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/dependency-v3-questions.mjs",
+            "expectedSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "actualSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "matches": true
+          }
+        ]
+      },
+      {
+        "id": "2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope",
+        "datasetHash": {
+          "expectedSha256": "c2dbbcf8e26ab9cfc5e62b8aea510d98b2415ae47d08dbd36e70055b17a7b1bb",
+          "actualSha256": "c2dbbcf8e26ab9cfc5e62b8aea510d98b2415ae47d08dbd36e70055b17a7b1bb",
+          "matches": true
+        },
+        "manifestCaseCountMatches": true,
+        "manifestTrialCountMatches": true,
+        "manifestInputTokensMatch": true,
+        "savedSummaryCountsMatch": true,
+        "savedSummaryScorerMatchesRunSnapshot": false,
+        "scorerNote": "Earlier summaries were recalculated after a binary precision correction. Their scorer can differ from the original run snapshot. Final inference saved the corrected scorer.",
+        "manifestHashChecks": [
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/questions-v6.mjs",
+            "expectedSha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01",
+            "actualSha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/run.mjs",
+            "expectedSha256": "e416be023cd091ae0ff931d77dedca1af9ed710dfeb3785b63f9a793434de6b0",
+            "actualSha256": "e416be023cd091ae0ff931d77dedca1af9ed710dfeb3785b63f9a793434de6b0",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/transport.mjs",
+            "expectedSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "actualSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/score.mjs",
+            "expectedSha256": "383b5d89010e11f011127cf5fe13e616aee6f525384772a55d5f6e90937db82a",
+            "actualSha256": "383b5d89010e11f011127cf5fe13e616aee6f525384772a55d5f6e90937db82a",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/gates.json",
+            "expectedSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "actualSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/dependency-v2-questions.mjs",
+            "expectedSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+            "actualSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/dependency-catalog.mjs",
+            "expectedSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+            "actualSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/dependency-v3-questions.mjs",
+            "expectedSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "actualSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/dependency-v5-questions.mjs",
+            "expectedSha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3",
+            "actualSha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3",
+            "matches": true
+          }
+        ]
+      },
+      {
+        "id": "2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope",
+        "datasetHash": {
+          "expectedSha256": "f670ea00f5d75c1ed4b4f04640a27f17fdab71e1f95d767bd9579248775bbe7b",
+          "actualSha256": "f670ea00f5d75c1ed4b4f04640a27f17fdab71e1f95d767bd9579248775bbe7b",
+          "matches": true
+        },
+        "manifestCaseCountMatches": true,
+        "manifestTrialCountMatches": true,
+        "manifestInputTokensMatch": true,
+        "savedSummaryCountsMatch": true,
+        "savedSummaryScorerMatchesRunSnapshot": false,
+        "scorerNote": "Earlier summaries were recalculated after a binary precision correction. Their scorer can differ from the original run snapshot. Final inference saved the corrected scorer.",
+        "manifestHashChecks": [
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/questions-v6.mjs",
+            "expectedSha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01",
+            "actualSha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/run.mjs",
+            "expectedSha256": "e416be023cd091ae0ff931d77dedca1af9ed710dfeb3785b63f9a793434de6b0",
+            "actualSha256": "e416be023cd091ae0ff931d77dedca1af9ed710dfeb3785b63f9a793434de6b0",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/transport.mjs",
+            "expectedSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "actualSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/score.mjs",
+            "expectedSha256": "40843e2157b5faf6dd3993f04e0c6a77ff8c5407a82a1058f9a7b03b01f80015",
+            "actualSha256": "40843e2157b5faf6dd3993f04e0c6a77ff8c5407a82a1058f9a7b03b01f80015",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/gates.json",
+            "expectedSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "actualSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/dependency-v2-questions.mjs",
+            "expectedSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+            "actualSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/dependency-catalog.mjs",
+            "expectedSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+            "actualSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/dependency-v3-questions.mjs",
+            "expectedSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "actualSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/dependency-v5-questions.mjs",
+            "expectedSha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3",
+            "actualSha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/selection.json",
+            "expectedSha256": "67b0036084aefc4d2c601f8612528703b443a5296f2477960298fb0716615107",
+            "actualSha256": "67b0036084aefc4d2c601f8612528703b443a5296f2477960298fb0716615107",
+            "matches": true
+          }
+        ]
+      },
+      {
+        "id": "2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries",
+        "datasetHash": {
+          "expectedSha256": "d64c1fc0a1986ac2855b3be7e2f1ff6daddb91a560c906e486826f7f2f9cbbf4",
+          "actualSha256": "d64c1fc0a1986ac2855b3be7e2f1ff6daddb91a560c906e486826f7f2f9cbbf4",
+          "matches": true
+        },
+        "manifestCaseCountMatches": true,
+        "manifestTrialCountMatches": true,
+        "manifestInputTokensMatch": true,
+        "savedSummaryCountsMatch": true,
+        "savedSummaryScorerMatchesRunSnapshot": true,
+        "scorerNote": "Earlier summaries were recalculated after a binary precision correction. Their scorer can differ from the original run snapshot. Final inference saved the corrected scorer.",
+        "manifestHashChecks": [
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/questions-v7.mjs",
+            "expectedSha256": "7fac1cf401209550eed943e637a10bacf12d1a85295173f7696d33872079e346",
+            "actualSha256": "7fac1cf401209550eed943e637a10bacf12d1a85295173f7696d33872079e346",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/run.mjs",
+            "expectedSha256": "94460424e1e0ea676fe26f6a14a379ecec7eaa82f7f17cd332070d9093ea0786",
+            "actualSha256": "94460424e1e0ea676fe26f6a14a379ecec7eaa82f7f17cd332070d9093ea0786",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/transport.mjs",
+            "expectedSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "actualSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/score.mjs",
+            "expectedSha256": "63f6ce9513c3d154527830ae9cf0e5dda7acff12e17215db2833fb9610883722",
+            "actualSha256": "63f6ce9513c3d154527830ae9cf0e5dda7acff12e17215db2833fb9610883722",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/gates.json",
+            "expectedSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "actualSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/dependency-v2-questions.mjs",
+            "expectedSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+            "actualSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/dependency-catalog.mjs",
+            "expectedSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+            "actualSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/dependency-v3-questions.mjs",
+            "expectedSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "actualSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/dependency-v5-questions.mjs",
+            "expectedSha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3",
+            "actualSha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/dependency-v6-questions.mjs",
+            "expectedSha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01",
+            "actualSha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01",
+            "matches": true
+          }
+        ]
+      },
+      {
+        "id": "2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries",
+        "datasetHash": {
+          "expectedSha256": "8b4a0e12bb7f0f717c1dd135cb0fc0efa710fda729b506e447dd65df6ea901d0",
+          "actualSha256": "8b4a0e12bb7f0f717c1dd135cb0fc0efa710fda729b506e447dd65df6ea901d0",
+          "matches": true
+        },
+        "manifestCaseCountMatches": true,
+        "manifestTrialCountMatches": true,
+        "manifestInputTokensMatch": true,
+        "savedSummaryCountsMatch": true,
+        "savedSummaryScorerMatchesRunSnapshot": true,
+        "scorerNote": "Earlier summaries were recalculated after a binary precision correction. Their scorer can differ from the original run snapshot. Final inference saved the corrected scorer.",
+        "manifestHashChecks": [
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/questions-v7.mjs",
+            "expectedSha256": "7fac1cf401209550eed943e637a10bacf12d1a85295173f7696d33872079e346",
+            "actualSha256": "7fac1cf401209550eed943e637a10bacf12d1a85295173f7696d33872079e346",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/run.mjs",
+            "expectedSha256": "6649d6dc72da6b8f2bbf6204cf9c3f8919b8a2257061028be640c31bdbd1f8cb",
+            "actualSha256": "6649d6dc72da6b8f2bbf6204cf9c3f8919b8a2257061028be640c31bdbd1f8cb",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/transport.mjs",
+            "expectedSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "actualSha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/score.mjs",
+            "expectedSha256": "8ad0fc1b6d353db078c7f50ebb9f4b6cbfd1755c60e10d303d7c5e5f71f1679f",
+            "actualSha256": "8ad0fc1b6d353db078c7f50ebb9f4b6cbfd1755c60e10d303d7c5e5f71f1679f",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/gates.json",
+            "expectedSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "actualSha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-v2-questions.mjs",
+            "expectedSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+            "actualSha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-catalog.mjs",
+            "expectedSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+            "actualSha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-v3-questions.mjs",
+            "expectedSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "actualSha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-v5-questions.mjs",
+            "expectedSha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3",
+            "actualSha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-v6-questions.mjs",
+            "expectedSha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01",
+            "actualSha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01",
+            "matches": true
+          },
+          {
+            "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/selection.json",
+            "expectedSha256": "0d9deecf2683ceed524c52d12cd8bb627b9f164c2c2b57f533850e2cd1bcade9",
+            "actualSha256": "0d9deecf2683ceed524c52d12cd8bb627b9f164c2c2b57f533850e2cd1bcade9",
+            "matches": true
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/dataset.json",
+        "sha256": "df03283095b3b1cf49c9467a42ea88afacc2407b880049f6fa195ed50b14e7ea"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/gates.json",
+        "sha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/manifest.json",
+        "sha256": "5fe56188f246bd4b9332916103cdcee25dc181cd102b39c9addbd39164afedd4"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/questions-v3.mjs",
+        "sha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/records.json",
+        "sha256": "1dc2e720d929e9736a281e91d5caab07f45b754e4c17750c0cf2aa09f84d839c"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/run.mjs",
+        "sha256": "1983dc48245a2e9bec7977704d214f7d433ff3ef442001c9a39ffb72f9942d1a"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/score.mjs",
+        "sha256": "5d925a5fc034ab7f6c657431755a60d7c1f456e03a398dc817842b36fe034eb7"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/summary.json",
+        "sha256": "ed7e5b6b6094ab80a3f7e7bb46bcce9b9264435c93c68519d61dc7515d1e15ca"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062533007Z-development-pilot-v3-atomic-batch/transport.mjs",
+        "sha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/dataset.json",
+        "sha256": "df03283095b3b1cf49c9467a42ea88afacc2407b880049f6fa195ed50b14e7ea"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/gates.json",
+        "sha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/manifest.json",
+        "sha256": "e4949d895c8e9d8c8fa050f9b8365ae2aa86684e84695dfa2becc9be53605604"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/questions-v4.mjs",
+        "sha256": "7b8f95b52bce51fbaaf64a79c6458e0900cc03bdf2fcaaa34dfda6ae6ee6cfc2"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/records.json",
+        "sha256": "38e8b869bd299f789c75f6876d80606f8edec718bfc7bff6c58d57d888e7e376"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/run.mjs",
+        "sha256": "1983dc48245a2e9bec7977704d214f7d433ff3ef442001c9a39ffb72f9942d1a"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/score.mjs",
+        "sha256": "5d925a5fc034ab7f6c657431755a60d7c1f456e03a398dc817842b36fe034eb7"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/summary.json",
+        "sha256": "828aa7257bf2f0c156ea84e00b0805eb3b1819e89f256b9fcd978bd09f17a670"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062632105Z-development-pilot-v4-compact-atomic-batch/transport.mjs",
+        "sha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/dataset.json",
+        "sha256": "f543ad5d4a03024df295321ab67bdd9846914e53fd4e4ba49b599eec7e234ed9"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/dependency-catalog.mjs",
+        "sha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/dependency-v2-questions.mjs",
+        "sha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/gates.json",
+        "sha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/manifest.json",
+        "sha256": "560b0eebd3fd6f844ec76cfbfb6ffffff6c4558f881d704a030022bfc0ad786f"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/questions-v3.mjs",
+        "sha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/records.json",
+        "sha256": "ccc0306a29a7848d4657ef78c9518c08972f254cc38e4a180c8c7c00f22308c9"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/run.mjs",
+        "sha256": "3de0980f2cfe92fe282cbf904f09c2bc5b0e0620aee346d003218d6b83f403f3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/score.mjs",
+        "sha256": "5d925a5fc034ab7f6c657431755a60d7c1f456e03a398dc817842b36fe034eb7"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/summary.json",
+        "sha256": "9329ae8a4005432704be92d472c1f1f0085fa11238c399bceeeba5a76b03c338"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T062723027Z-fresh-heldout-pilot-v3-atomic-batch/transport.mjs",
+        "sha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/dataset.json",
+        "sha256": "c2dbbcf8e26ab9cfc5e62b8aea510d98b2415ae47d08dbd36e70055b17a7b1bb"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/dependency-catalog.mjs",
+        "sha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/dependency-v2-questions.mjs",
+        "sha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/dependency-v3-questions.mjs",
+        "sha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/gates.json",
+        "sha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/manifest.json",
+        "sha256": "e1c86ed59c150f12e362a33ae72b92e205b3117573ef28c094675234f47960b3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/questions-v5.mjs",
+        "sha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/records.json",
+        "sha256": "cd0db235261d3fc4a47b825f4d70d5ede445b745fd06c10d909e1002aa50624f"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/run.mjs",
+        "sha256": "d2bb36fcc361d2e3a82f9e1b2aa22782aabc7a375f51d6a0b211ca10a0a4fa9c"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/score.mjs",
+        "sha256": "235dcf5e9ae05ab76a1cc9e970e74b3938524769e96e9126ae5cfa77d5b89b12"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/summary.json",
+        "sha256": "81fb0ee75313facec2495099750d065a4cbcb7540f60a0d556d80511130b7be6"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063001726Z-development-pilot-v5-scope-and-isolated-slots/transport.mjs",
+        "sha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/dataset.json",
+        "sha256": "c2dbbcf8e26ab9cfc5e62b8aea510d98b2415ae47d08dbd36e70055b17a7b1bb"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/dependency-catalog.mjs",
+        "sha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/dependency-v2-questions.mjs",
+        "sha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/dependency-v3-questions.mjs",
+        "sha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/dependency-v5-questions.mjs",
+        "sha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/gates.json",
+        "sha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/manifest.json",
+        "sha256": "1f314c7fbcc48ad518cf198f960c92d4d982cc55484da3e7f4be2e8a5ec012ed"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/questions-v6.mjs",
+        "sha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/records.json",
+        "sha256": "488eda8d6297ffd55153f94797999145e4f665b1f537a7c0c2b9951253490d6f"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/run.mjs",
+        "sha256": "e416be023cd091ae0ff931d77dedca1af9ed710dfeb3785b63f9a793434de6b0"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/score.mjs",
+        "sha256": "383b5d89010e11f011127cf5fe13e616aee6f525384772a55d5f6e90937db82a"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/summary.json",
+        "sha256": "8b12106e65a69178224c115d0bf7688ab1184a4573b914207e04c1b23907c144"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063153551Z-development-pilot-v6-explicit-gaps-and-scope/transport.mjs",
+        "sha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/dataset.json",
+        "sha256": "f670ea00f5d75c1ed4b4f04640a27f17fdab71e1f95d767bd9579248775bbe7b"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/dependency-catalog.mjs",
+        "sha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/dependency-v2-questions.mjs",
+        "sha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/dependency-v3-questions.mjs",
+        "sha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/dependency-v5-questions.mjs",
+        "sha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/gates.json",
+        "sha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/manifest.json",
+        "sha256": "6024fde28662e8beaa657e220ed6b39fee30cf95d02a7ba20ca4d3fd002447b7"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/questions-v6.mjs",
+        "sha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/records.json",
+        "sha256": "56b5522a5b1b9c6fcca1a4db6840ae039ad84b1fa8df2f5ef25a1f858bd79db8"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/run.mjs",
+        "sha256": "e416be023cd091ae0ff931d77dedca1af9ed710dfeb3785b63f9a793434de6b0"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/score.mjs",
+        "sha256": "40843e2157b5faf6dd3993f04e0c6a77ff8c5407a82a1058f9a7b03b01f80015"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/selection.json",
+        "sha256": "67b0036084aefc4d2c601f8612528703b443a5296f2477960298fb0716615107"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/summary.json",
+        "sha256": "ed424d6b658ecc69abc1e23869be2d51c9036e7f68176864a2cec6009a5c731f"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T063756189Z-final-fresh-heldout-pilot-v6-explicit-gaps-and-scope/transport.mjs",
+        "sha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/dataset.json",
+        "sha256": "d64c1fc0a1986ac2855b3be7e2f1ff6daddb91a560c906e486826f7f2f9cbbf4"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/dependency-catalog.mjs",
+        "sha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/dependency-v2-questions.mjs",
+        "sha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/dependency-v3-questions.mjs",
+        "sha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/dependency-v5-questions.mjs",
+        "sha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/dependency-v6-questions.mjs",
+        "sha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/gates.json",
+        "sha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/manifest.json",
+        "sha256": "4dbae8adeb9e17dcc111d6a9f0827007da482f36cc602d17cbd32a2c55af0664"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/questions-v7.mjs",
+        "sha256": "7fac1cf401209550eed943e637a10bacf12d1a85295173f7696d33872079e346"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/records.json",
+        "sha256": "a3ddf71c2048af3301ad0bec87501bf82d9503a820ef4d2344a549a7a7a81a36"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/run.mjs",
+        "sha256": "94460424e1e0ea676fe26f6a14a379ecec7eaa82f7f17cd332070d9093ea0786"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/score.mjs",
+        "sha256": "63f6ce9513c3d154527830ae9cf0e5dda7acff12e17215db2833fb9610883722"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/summary.json",
+        "sha256": "a298a4310a2ac3dbf36fa6f7dd2712b4cab43fe79eece8d611285ffbb047f717"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T064246246Z-development-pilot-v7-positive-evidence-and-boundaries/transport.mjs",
+        "sha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dataset.json",
+        "sha256": "8b4a0e12bb7f0f717c1dd135cb0fc0efa710fda729b506e447dd65df6ea901d0"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-catalog.mjs",
+        "sha256": "7bd01f8801a810ca55602caf73a52a4e7b4670cb1a159a7cb574d3acf7c4a2a1"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-v2-questions.mjs",
+        "sha256": "6f66e1243831152451fbd546afcf8587d1722784a21ca1b406365ed077281ea3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-v3-questions.mjs",
+        "sha256": "4b1cddab7a17214893af2d3158b5bc7876e1eef2f369d93e57d291bd4d132061"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-v5-questions.mjs",
+        "sha256": "05100fb5bf1b4bf259b1450bb72187023dc278643906d8b2b0a325411e139ca3"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/dependency-v6-questions.mjs",
+        "sha256": "7006658eae6e71f9064fe8f74a8c148a58656db8577f24b3bb10d15ce82f6c01"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/gates.json",
+        "sha256": "48c5def228ddbe8ee9c50c7d52a7595fcbcf669415bc0c6ecf26e5f2b0bea1aa"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/manifest.json",
+        "sha256": "44ed3ecc06773ebc3c64bd1889c0d8154739ccc9b5e8835073534af6739e6995"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/questions-v7.mjs",
+        "sha256": "7fac1cf401209550eed943e637a10bacf12d1a85295173f7696d33872079e346"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/records.json",
+        "sha256": "1b9ca01cd202f488bde828dcc7758ca6a5295abb02900d943902d175b465f11c"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/run.mjs",
+        "sha256": "6649d6dc72da6b8f2bbf6204cf9c3f8919b8a2257061028be640c31bdbd1f8cb"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/score.mjs",
+        "sha256": "8ad0fc1b6d353db078c7f50ebb9f4b6cbfd1755c60e10d303d7c5e5f71f1679f"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/selection.json",
+        "sha256": "0d9deecf2683ceed524c52d12cd8bb627b9f164c2c2b57f533850e2cd1bcade9"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/summary.json",
+        "sha256": "6596de6d2399c695586beca9a9b21bf60cca1ea1feba07885098f2bc56150a8a"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/runs/2026-10-04T065015370Z-last-fresh-heldout-pilot-v7-positive-evidence-and-boundaries/transport.mjs",
+        "sha256": "6513f0e51c187c455fef62204b1fd937c3726be3538f02b7efb821c1dbd99387"
+      },
+      {
+        "path": "local-knowledge/jev-pilot/optimization/selection-v7.json",
+        "sha256": "0d9deecf2683ceed524c52d12cd8bb627b9f164c2c2b57f533850e2cd1bcade9"
+      }
+    ]
+  }
+}

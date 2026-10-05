@@ -1,0 +1,50 @@
+name: Report a problem
+description: Report a problem with the editor, map, guides or downloaded files.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The beta plans workflows and exports files. It does not execute workflows or connect your accounts. JEV suggestions need local setup.
+
+        Issues are public. Use fictional examples or remove private details. Never include API keys, authorization headers, private project files or unedited logs.
+  - type: input
+    id: version
+    attributes:
+      label: App version or commit
+      description: Enter the release version, commit SHA or unknown.
+      placeholder: Version or commit
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Where did it happen?
+      description: Browser, device and whether you used a static site, local server or downloaded Atlas. For JEV problems, say whether suggestions were configured. Do not include the key.
+      placeholder: Chrome on Windows, local server, manual mode
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How can I reproduce it?
+      description: Give numbered steps and the exact fictional or sanitized input. Name the workflow and output type if relevant.
+      placeholder: |
+        1. Choose Build a feature.
+        2. Enter this fictional description...
+        3. Download a workflow blueprint.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you want to happen?
+      description: Describe your intended result. For generated files, identify the file and the decision it should preserve.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: What happened instead?
+      description: Include the visible error or incorrect result. Add a sanitized screenshot or small text example if it helps.
+    validations:
+      required: true

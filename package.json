@@ -1,0 +1,29 @@
+{
+  "name": "workflow-atlas",
+  "version": "0.1.0-beta.1",
+  "private": true,
+  "description": "Plan software work and export workflow instructions, skills and agent profiles.",
+  "license": "Apache-2.0",
+  "author": "Aris Zounarakis <ariszoun@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ai21z/workflow-atlas.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node tools/serve.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tests/browser-jev.cjs && node tests/browser-artifacts.cjs",
+    "test:handoff": "node tests/browser-handoff.cjs",
+    "build:docs": "node tools/build-docs-guide.mjs",
+    "check:docs": "node tools/check-docs.mjs",
+    "build:static": "node tools/build-static.mjs",
+    "check:version": "node tools/version.mjs --check",
+    "version": "node tools/version.mjs --write"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

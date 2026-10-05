@@ -1,0 +1,1129 @@
+{
+  "provenance": "Recorded responses from authored synthetic v8 cases on 4 October 2026. Safe fictional inputs. Exposed regression material, not a fresh holdout, human study or integrated UI measurement.",
+  "model": "jev-1.13.0",
+  "promptVersion": "pilot-v8-practice-need-separate-from-completeness",
+  "cases": [
+    {
+      "id": "F01",
+      "item": {
+        "brief": "Build a status filter so support staff can show only Open requests or all requests. Scope is the existing request list screen only. Reuse the existing screen and make the smallest necessary change. Do not create or maintain a project wiki.",
+        "projectAnswers": {},
+        "practice": {
+          "id": "specification-first"
+        }
+      },
+      "authoredExpected": {
+        "intent": "feature-delivery",
+        "nextQuestion": "acceptance",
+        "practice": "relevant",
+        "practiceNeed": "established",
+        "practiceScope": "not-rejected",
+        "coverage": {
+          "user-need": "answered",
+          "acceptance": "missing",
+          "affected": "answered"
+        }
+      },
+      "knownFailure": false,
+      "recordedResponse": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "feature-delivery",
+            "confidence": 1,
+            "probabilities": {
+              "unclear": 0,
+              "outside-supported-recipes": 0,
+              "bugfix": 0,
+              "feature-delivery": 1,
+              "feasibility": 0
+            }
+          },
+          "coverage:feasibility:current-work": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.96,
+            "probabilities": {
+              "answered": 0.02,
+              "conflicting": 0,
+              "missing": 0.98
+            }
+          },
+          "coverage:feasibility:desired-outcome": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.56,
+            "probabilities": {
+              "answered": 0.71,
+              "conflicting": 0,
+              "missing": 0.29
+            }
+          },
+          "coverage:feasibility:decision-boundary": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.78,
+            "probabilities": {
+              "answered": 0.85,
+              "conflicting": 0,
+              "missing": 0.15
+            }
+          },
+          "coverage:bugfix:expected": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.69,
+            "probabilities": {
+              "answered": 0.8,
+              "conflicting": 0,
+              "missing": 0.2
+            }
+          },
+          "coverage:bugfix:observed": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.99,
+            "probabilities": {
+              "answered": 0.01,
+              "conflicting": 0,
+              "missing": 0.99
+            }
+          },
+          "coverage:bugfix:impact": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.98,
+            "probabilities": {
+              "answered": 0.99,
+              "conflicting": 0,
+              "missing": 0.01
+            }
+          },
+          "coverage:feature-delivery:user-need": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 1,
+            "probabilities": {
+              "missing": 0,
+              "conflicting": 0,
+              "answered": 1
+            }
+          },
+          "coverage:feature-delivery:acceptance": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.81,
+            "probabilities": {
+              "answered": 0.13,
+              "conflicting": 0,
+              "missing": 0.87
+            }
+          },
+          "coverage:feature-delivery:affected": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 1,
+            "probabilities": {
+              "answered": 1,
+              "conflicting": 0,
+              "missing": 0
+            }
+          },
+          "practice": {
+            "type": "choice",
+            "choice": "relevant",
+            "confidence": 0.9,
+            "probabilities": {
+              "not-relevant": 0.02,
+              "relevant": 0.93,
+              "insufficient-context": 0.05
+            }
+          },
+          "practice_need": {
+            "type": "choice",
+            "choice": "established",
+            "confidence": 1,
+            "probabilities": {
+              "not-established": 0,
+              "established": 1
+            }
+          },
+          "practice_boundary": {
+            "type": "choice",
+            "choice": "not-rejected",
+            "confidence": 0.81,
+            "probabilities": {
+              "not-rejected": 0.9,
+              "rejected": 0.1
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 5144,
+          "output_tokens": 589
+        }
+      }
+    },
+    {
+      "id": "study-before-delivery-known-failure",
+      "item": {
+        "brief": "Compare whether replacing the report service is economically viable before we choose any implementation. Today analysts generate reports manually. We want to reduce their manual effort. The decision is go or no-go for replacing only this service, with the operations manager as owner and a fixed two-week study budget. No software design or delivery plan is requested in this study.",
+        "projectAnswers": {},
+        "practice": {
+          "id": "specification-first"
+        }
+      },
+      "authoredExpected": {
+        "intent": "feasibility",
+        "nextQuestion": "none-needed",
+        "practice": "insufficient-context",
+        "practiceNeed": "not-established",
+        "practiceScope": "not-rejected"
+      },
+      "knownFailure": true,
+      "recordedResponse": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "feasibility",
+            "confidence": 1,
+            "probabilities": {
+              "feature-delivery": 0,
+              "unclear": 0,
+              "outside-supported-recipes": 0,
+              "feasibility": 1,
+              "bugfix": 0
+            }
+          },
+          "coverage:feasibility:current-work": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.37,
+            "probabilities": {
+              "answered": 0.42,
+              "conflicting": 0,
+              "missing": 0.58
+            }
+          },
+          "coverage:feasibility:desired-outcome": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.99,
+            "probabilities": {
+              "answered": 0.99,
+              "conflicting": 0,
+              "missing": 0.01
+            }
+          },
+          "coverage:feasibility:decision-boundary": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 1,
+            "probabilities": {
+              "answered": 1,
+              "conflicting": 0,
+              "missing": 0
+            }
+          },
+          "coverage:bugfix:expected": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.88,
+            "probabilities": {
+              "answered": 0.08,
+              "conflicting": 0,
+              "missing": 0.92
+            }
+          },
+          "coverage:bugfix:observed": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.98,
+            "probabilities": {
+              "answered": 0.01,
+              "conflicting": 0,
+              "missing": 0.99
+            }
+          },
+          "coverage:bugfix:impact": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.5,
+            "probabilities": {
+              "answered": 0.67,
+              "missing": 0.33,
+              "conflicting": 0
+            }
+          },
+          "coverage:feature-delivery:user-need": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.86,
+            "probabilities": {
+              "answered": 0.91,
+              "conflicting": 0,
+              "missing": 0.09
+            }
+          },
+          "coverage:feature-delivery:acceptance": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.96,
+            "probabilities": {
+              "answered": 0.03,
+              "missing": 0.97,
+              "conflicting": 0
+            }
+          },
+          "coverage:feature-delivery:affected": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.29,
+            "probabilities": {
+              "answered": 0.47,
+              "missing": 0.53,
+              "conflicting": 0
+            }
+          },
+          "practice": {
+            "type": "choice",
+            "choice": "not-relevant",
+            "confidence": 0.92,
+            "probabilities": {
+              "relevant": 0,
+              "insufficient-context": 0.05,
+              "not-relevant": 0.95
+            }
+          },
+          "practice_need": {
+            "type": "choice",
+            "choice": "not-established",
+            "confidence": 1,
+            "probabilities": {
+              "not-established": 1,
+              "established": 0
+            }
+          },
+          "practice_boundary": {
+            "type": "choice",
+            "choice": "rejected",
+            "confidence": 0.24,
+            "probabilities": {
+              "not-rejected": 0.38,
+              "rejected": 0.62
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 5166,
+          "output_tokens": 587
+        }
+      }
+    },
+    {
+      "id": "H02",
+      "item": {
+        "brief": "Fix the existing reading progress bar. Its agreed rule is that completing three of ten lessons shows 30 percent. The observed result after completing three lessons is 300 percent. Only the lesson progress display is affected. The cause has not been diagnosed.",
+        "projectAnswers": {},
+        "practice": {
+          "id": "specification-first"
+        }
+      },
+      "authoredExpected": {
+        "intent": "bugfix",
+        "nextQuestion": "none-needed",
+        "practice": "relevant",
+        "practiceNeed": "established",
+        "practiceScope": "not-rejected",
+        "coverage": {
+          "expected": "answered",
+          "observed": "answered",
+          "impact": "answered"
+        }
+      },
+      "knownFailure": false,
+      "recordedResponse": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "bugfix",
+            "confidence": 1,
+            "probabilities": {
+              "outside-supported-recipes": 0,
+              "bugfix": 1,
+              "feasibility": 0,
+              "feature-delivery": 0,
+              "unclear": 0
+            }
+          },
+          "coverage:feasibility:current-work": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.95,
+            "probabilities": {
+              "answered": 0.03,
+              "missing": 0.97,
+              "conflicting": 0
+            }
+          },
+          "coverage:feasibility:desired-outcome": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.95,
+            "probabilities": {
+              "answered": 0.97,
+              "missing": 0.03,
+              "conflicting": 0
+            }
+          },
+          "coverage:feasibility:decision-boundary": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.64,
+            "probabilities": {
+              "answered": 0.24,
+              "missing": 0.76,
+              "conflicting": 0
+            }
+          },
+          "coverage:bugfix:expected": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 1,
+            "probabilities": {
+              "answered": 1,
+              "missing": 0,
+              "conflicting": 0
+            }
+          },
+          "coverage:bugfix:observed": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 1,
+            "probabilities": {
+              "answered": 1,
+              "missing": 0,
+              "conflicting": 0
+            }
+          },
+          "coverage:bugfix:impact": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 1,
+            "probabilities": {
+              "answered": 1,
+              "missing": 0,
+              "conflicting": 0
+            }
+          },
+          "coverage:feature-delivery:user-need": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.99,
+            "probabilities": {
+              "answered": 0.99,
+              "missing": 0.01,
+              "conflicting": 0
+            }
+          },
+          "coverage:feature-delivery:acceptance": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.84,
+            "probabilities": {
+              "answered": 0.9,
+              "missing": 0.1,
+              "conflicting": 0
+            }
+          },
+          "coverage:feature-delivery:affected": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.96,
+            "probabilities": {
+              "answered": 0.97,
+              "missing": 0.03,
+              "conflicting": 0
+            }
+          },
+          "practice": {
+            "type": "choice",
+            "choice": "relevant",
+            "confidence": 0.79,
+            "probabilities": {
+              "insufficient-context": 0.13,
+              "not-relevant": 0.01,
+              "relevant": 0.86
+            }
+          },
+          "practice_need": {
+            "type": "choice",
+            "choice": "established",
+            "confidence": 1,
+            "probabilities": {
+              "established": 1,
+              "not-established": 0
+            }
+          },
+          "practice_boundary": {
+            "type": "choice",
+            "choice": "not-rejected",
+            "confidence": 0.99,
+            "probabilities": {
+              "rejected": 0,
+              "not-rejected": 1
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 5150,
+          "output_tokens": 588
+        }
+      }
+    },
+    {
+      "id": "H04",
+      "item": {
+        "brief": "Add keyboard shortcuts for moving between slides in the presentation viewer. Scope is only the existing viewer. The accepted behavior is that Right Arrow opens the next slide and Left Arrow opens the previous slide. Explicitly omit Requirements before implementation from the exported workflow, because another team owns that work separately.",
+        "projectAnswers": {},
+        "practice": {
+          "id": "specification-first"
+        }
+      },
+      "authoredExpected": {
+        "intent": "feature-delivery",
+        "nextQuestion": "none-needed",
+        "practice": "not-relevant",
+        "practiceNeed": "established",
+        "practiceScope": "rejected",
+        "coverage": {
+          "user-need": "answered",
+          "acceptance": "answered",
+          "affected": "answered"
+        }
+      },
+      "knownFailure": false,
+      "recordedResponse": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "feature-delivery",
+            "confidence": 1,
+            "probabilities": {
+              "outside-supported-recipes": 0,
+              "feasibility": 0,
+              "unclear": 0,
+              "feature-delivery": 1,
+              "bugfix": 0
+            }
+          },
+          "coverage:feasibility:current-work": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.97,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.98,
+              "answered": 0.02
+            }
+          },
+          "coverage:feasibility:desired-outcome": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.43,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.38,
+              "answered": 0.62
+            }
+          },
+          "coverage:feasibility:decision-boundary": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.58,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.28,
+              "answered": 0.72
+            }
+          },
+          "coverage:bugfix:expected": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 1,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0,
+              "answered": 1
+            }
+          },
+          "coverage:bugfix:observed": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.95,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.97,
+              "answered": 0.03
+            }
+          },
+          "coverage:bugfix:impact": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 1,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0,
+              "answered": 1
+            }
+          },
+          "coverage:feature-delivery:user-need": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 1,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0,
+              "answered": 1
+            }
+          },
+          "coverage:feature-delivery:acceptance": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.98,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.01,
+              "answered": 0.99
+            }
+          },
+          "coverage:feature-delivery:affected": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.98,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.01,
+              "answered": 0.99
+            }
+          },
+          "practice": {
+            "type": "choice",
+            "choice": "not-relevant",
+            "confidence": 0.76,
+            "probabilities": {
+              "relevant": 0.15,
+              "not-relevant": 0.83,
+              "insufficient-context": 0.02
+            }
+          },
+          "practice_need": {
+            "type": "choice",
+            "choice": "established",
+            "confidence": 0.99,
+            "probabilities": {
+              "not-established": 0,
+              "established": 1
+            }
+          },
+          "practice_boundary": {
+            "type": "choice",
+            "choice": "rejected",
+            "confidence": 0.92,
+            "probabilities": {
+              "rejected": 0.96,
+              "not-rejected": 0.04
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 5156,
+          "output_tokens": 589
+        }
+      }
+    },
+    {
+      "id": "H05",
+      "item": {
+        "brief": "We would like the library service to feel smoother. We have not picked any next activity. We do not yet know whether the response should be a software change, an investigation, an existing defect repair or something else. Nothing has priority.",
+        "projectAnswers": {},
+        "practice": {
+          "id": "specification-first"
+        }
+      },
+      "authoredExpected": {
+        "intent": "unclear",
+        "nextQuestion": null,
+        "practice": "insufficient-context",
+        "practiceNeed": "not-established",
+        "practiceScope": "not-rejected",
+        "coverage": {}
+      },
+      "knownFailure": false,
+      "recordedResponse": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "unclear",
+            "confidence": 1,
+            "probabilities": {
+              "feature-delivery": 0,
+              "feasibility": 0,
+              "outside-supported-recipes": 0,
+              "unclear": 1,
+              "bugfix": 0
+            }
+          },
+          "coverage:feasibility:current-work": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 1,
+            "probabilities": {
+              "answered": 0,
+              "conflicting": 0,
+              "missing": 1
+            }
+          },
+          "coverage:feasibility:desired-outcome": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.78,
+            "probabilities": {
+              "answered": 0.15,
+              "conflicting": 0,
+              "missing": 0.85
+            }
+          },
+          "coverage:feasibility:decision-boundary": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.98,
+            "probabilities": {
+              "answered": 0.01,
+              "conflicting": 0,
+              "missing": 0.99
+            }
+          },
+          "coverage:bugfix:expected": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 1,
+            "probabilities": {
+              "answered": 0,
+              "conflicting": 0,
+              "missing": 1
+            }
+          },
+          "coverage:bugfix:observed": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 1,
+            "probabilities": {
+              "answered": 0,
+              "conflicting": 0,
+              "missing": 1
+            }
+          },
+          "coverage:bugfix:impact": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.96,
+            "probabilities": {
+              "answered": 0.03,
+              "conflicting": 0,
+              "missing": 0.97
+            }
+          },
+          "coverage:feature-delivery:user-need": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.88,
+            "probabilities": {
+              "answered": 0.08,
+              "conflicting": 0,
+              "missing": 0.92
+            }
+          },
+          "coverage:feature-delivery:acceptance": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 1,
+            "probabilities": {
+              "answered": 0,
+              "conflicting": 0,
+              "missing": 1
+            }
+          },
+          "coverage:feature-delivery:affected": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 1,
+            "probabilities": {
+              "answered": 0,
+              "conflicting": 0,
+              "missing": 1
+            }
+          },
+          "practice": {
+            "type": "choice",
+            "choice": "insufficient-context",
+            "confidence": 0.97,
+            "probabilities": {
+              "relevant": 0.02,
+              "insufficient-context": 0.98,
+              "not-relevant": 0
+            }
+          },
+          "practice_need": {
+            "type": "choice",
+            "choice": "not-established",
+            "confidence": 1,
+            "probabilities": {
+              "not-established": 1,
+              "established": 0
+            }
+          },
+          "practice_boundary": {
+            "type": "choice",
+            "choice": "not-rejected",
+            "confidence": 1,
+            "probabilities": {
+              "not-rejected": 1,
+              "rejected": 0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 5145,
+          "output_tokens": 588
+        }
+      }
+    },
+    {
+      "id": "H06",
+      "item": {
+        "brief": "Sort the paper visitor badges into alphabetical trays for tomorrow's reception desk. This is a physical paper handling task only. There is no software change, system design or software delivery planning involved.",
+        "projectAnswers": {},
+        "practice": {
+          "id": "specification-first"
+        }
+      },
+      "authoredExpected": {
+        "intent": "outside-supported-recipes",
+        "nextQuestion": null,
+        "practice": "not-relevant",
+        "practiceNeed": "not-established",
+        "practiceScope": "rejected",
+        "coverage": {}
+      },
+      "knownFailure": false,
+      "recordedResponse": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coverage:feature-delivery:acceptance": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.51,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.67,
+              "answered": 0.33
+            }
+          },
+          "practice_need": {
+            "type": "choice",
+            "choice": "not-established",
+            "confidence": 1,
+            "probabilities": {
+              "established": 0,
+              "not-established": 1
+            }
+          },
+          "practice_boundary": {
+            "type": "choice",
+            "choice": "rejected",
+            "confidence": 0.99,
+            "probabilities": {
+              "rejected": 1,
+              "not-rejected": 0
+            }
+          },
+          "intent": {
+            "type": "choice",
+            "choice": "outside-supported-recipes",
+            "confidence": 1,
+            "probabilities": {
+              "feasibility": 0,
+              "unclear": 0,
+              "outside-supported-recipes": 1,
+              "feature-delivery": 0,
+              "bugfix": 0
+            }
+          },
+          "coverage:feasibility:desired-outcome": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.28,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.48,
+              "answered": 0.52
+            }
+          },
+          "coverage:feasibility:decision-boundary": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.28,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.52,
+              "answered": 0.48
+            }
+          },
+          "coverage:bugfix:expected": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.33,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.45,
+              "answered": 0.55
+            }
+          },
+          "coverage:bugfix:observed": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.92,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.95,
+              "answered": 0.05
+            }
+          },
+          "coverage:bugfix:impact": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.57,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.71,
+              "answered": 0.29
+            }
+          },
+          "coverage:feature-delivery:affected": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.69,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.79,
+              "answered": 0.21
+            }
+          },
+          "practice": {
+            "type": "choice",
+            "choice": "not-relevant",
+            "confidence": 0.99,
+            "probabilities": {
+              "relevant": 0,
+              "not-relevant": 1,
+              "insufficient-context": 0
+            }
+          },
+          "coverage:feasibility:current-work": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.44,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.63,
+              "answered": 0.37
+            }
+          },
+          "coverage:feature-delivery:user-need": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.97,
+            "probabilities": {
+              "conflicting": 0,
+              "missing": 0.02,
+              "answered": 0.98
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 5135,
+          "output_tokens": 588
+        }
+      }
+    },
+    {
+      "id": "H11",
+      "item": {
+        "brief": "Investigate whether adding automatic duplicate detection to the asset register is worthwhile before choosing an implementation. Today the inventory team compares asset names by hand. We want fewer duplicate records without losing distinct assets. The inventory lead will make a go or no-go decision about this register only, with a three-day study budget. Inspect whether its existing matching utilities could be reused while comparing viability.",
+        "projectAnswers": {},
+        "practice": {
+          "id": "minimum-change"
+        }
+      },
+      "authoredExpected": {
+        "intent": "feasibility",
+        "nextQuestion": "none-needed",
+        "practice": "relevant",
+        "practiceNeed": "established",
+        "practiceScope": "not-rejected",
+        "coverage": {
+          "current-work": "answered",
+          "desired-outcome": "answered",
+          "decision-boundary": "answered"
+        }
+      },
+      "knownFailure": false,
+      "recordedResponse": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "feasibility",
+            "confidence": 1,
+            "probabilities": {
+              "bugfix": 0,
+              "unclear": 0,
+              "feature-delivery": 0,
+              "outside-supported-recipes": 0,
+              "feasibility": 1
+            }
+          },
+          "coverage:feasibility:current-work": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.89,
+            "probabilities": {
+              "conflicting": 0,
+              "answered": 0.93,
+              "missing": 0.07
+            }
+          },
+          "coverage:feasibility:desired-outcome": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 1,
+            "probabilities": {
+              "conflicting": 0,
+              "answered": 1,
+              "missing": 0
+            }
+          },
+          "coverage:feasibility:decision-boundary": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 1,
+            "probabilities": {
+              "conflicting": 0,
+              "answered": 1,
+              "missing": 0
+            }
+          },
+          "coverage:bugfix:expected": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.88,
+            "probabilities": {
+              "conflicting": 0,
+              "answered": 0.08,
+              "missing": 0.92
+            }
+          },
+          "coverage:bugfix:observed": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.87,
+            "probabilities": {
+              "conflicting": 0,
+              "answered": 0.08,
+              "missing": 0.92
+            }
+          },
+          "coverage:bugfix:impact": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.89,
+            "probabilities": {
+              "conflicting": 0,
+              "answered": 0.93,
+              "missing": 0.07
+            }
+          },
+          "coverage:feature-delivery:user-need": {
+            "type": "choice",
+            "choice": "answered",
+            "confidence": 0.98,
+            "probabilities": {
+              "conflicting": 0,
+              "answered": 0.99,
+              "missing": 0.01
+            }
+          },
+          "coverage:feature-delivery:acceptance": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.96,
+            "probabilities": {
+              "conflicting": 0,
+              "answered": 0.03,
+              "missing": 0.97
+            }
+          },
+          "coverage:feature-delivery:affected": {
+            "type": "choice",
+            "choice": "missing",
+            "confidence": 0.26,
+            "probabilities": {
+              "conflicting": 0,
+              "answered": 0.49,
+              "missing": 0.51
+            }
+          },
+          "practice": {
+            "type": "choice",
+            "choice": "relevant",
+            "confidence": 0.99,
+            "probabilities": {
+              "relevant": 1,
+              "not-relevant": 0,
+              "insufficient-context": 0
+            }
+          },
+          "practice_need": {
+            "type": "choice",
+            "choice": "established",
+            "confidence": 1,
+            "probabilities": {
+              "not-established": 0,
+              "established": 1
+            }
+          },
+          "practice_boundary": {
+            "type": "choice",
+            "choice": "not-rejected",
+            "confidence": 1,
+            "probabilities": {
+              "rejected": 0,
+              "not-rejected": 1
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 5030,
+          "output_tokens": 589
+        }
+      }
+    }
+  ]
+}
+
