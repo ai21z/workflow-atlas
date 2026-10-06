@@ -6,11 +6,11 @@ export const JEV_DEFINITIONS = [
   { id: 'overview', title: 'Start here', group: 'Learn', description: 'Understand JEV and what this guide covers.' },
   { id: 'usage', title: 'Use JEV', group: 'Learn', description: 'Prepare a brief and review a useful judgment.' },
   { id: 'integration', title: 'Suggest a workflow', group: 'Learn', description: 'Use the in-app suggestion, review answers and start the local server.' },
-  { id: 'integrated-trial', title: 'Test the integrated journey', group: 'Evaluate', description: 'Check suggestions, answer wording, downloads and manual recovery.' },
+  { id: 'integrated-trial', title: 'Historical integrated trial', group: 'Evaluate', description: 'Read the earlier interface protocol. Replay needs its matching frozen build.' },
   { id: 'architecture', title: 'How it works', group: 'Understand', description: 'Follow the flow from judgment to artifact.' },
   { id: 'metrics', title: 'Evidence and metrics', group: 'Understand', description: 'Read the measured results and their limits.' },
-  { id: 'trial', title: 'People trial', group: 'Evaluate', description: 'Run a separate, facilitated evaluation.' },
-  { id: 'repeatable-trial', title: 'Run the identical test', group: 'Evaluate', description: 'Follow the same detailed steps in two simulations and one human session.' },
+  { id: 'trial', title: 'Historical people trial', group: 'Evaluate', description: 'Read the earlier facilitator protocol and its limits.' },
+  { id: 'repeatable-trial', title: 'Historical identical test', group: 'Evaluate', description: 'Read the frozen seven-card protocol for its matching historical interface.' },
   { id: 'trial-record', title: 'Identical test record', group: 'Evaluate', description: 'Record actual results for every numbered step and JEV card.' },
   { id: 'session-record', title: 'Trial record template', group: 'Evaluate', description: 'Read and download the blank participant record.' },
   { id: 'reference', title: 'Technical reference', group: 'Evaluate', description: 'Check terms, sources, and implementation details.' },
@@ -20,7 +20,7 @@ export const JEV_DEFINITIONS = [
 export const JEV_START_PATH = [
   { id: 'integration', label: 'Use it', title: 'Suggest a workflow', description: 'Start with your description and review a draft.' },
   { id: 'metrics', label: 'Check it', title: 'Read the evidence', description: 'Understand what the results show.' },
-  { id: 'integrated-trial', label: 'Evaluate it', title: 'Test the integrated journey', description: 'Follow the new in-app journey and keep observations separate.' },
+  { id: 'integrated-trial', label: 'Earlier protocol', title: 'Historical integrated trial', description: 'The current three-view interface needs a new protocol and frozen round.' },
 ];
 
 export function serializeGuide(globalName, value) {

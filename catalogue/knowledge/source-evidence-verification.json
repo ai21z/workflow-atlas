@@ -1,0 +1,61 @@
+{
+  "id": "source-evidence-verification",
+  "title": "Verify sources and evidence",
+  "summary": "Check what a source supports, where it applies and what remains uncertain.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Inputs",
+      "text": "The claim or decision being investigated, its intended scope, original source passages, source identifiers and versions, and any contradictory evidence."
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "State the claim precisely and distinguish an observation, inference, proposal and unresolved question.",
+        "Identify the original source, version and exact passage used. Record how the candidate claim was derived.",
+        "Compare the source with the claim. An available link or relevant document does not by itself establish support.",
+        "Retain qualifiers that affect applicability. These may be software version and environment, population, jurisdiction or effective period.",
+        "Record conflicts and missing support. Ask for review when uncertainty affects the decision instead of filling the gap with an invented fact."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Output",
+      "text": "A claim record with its status, supporting and contradictory passages, source/version identifiers, applicable scope, derivation and reviewer questions."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance checks",
+      "text": "A reviewer can locate the cited passage, understand its relationship to the claim and see unresolved limits. A proposed or inferred statement is not labeled as confirmed evidence."
+    },
+    {
+      "type": "p",
+      "label": "Specialist example",
+      "text": "Country-source review adds jurisdiction, classification, effective dates and domain approval to these general evidence questions. It is relevant when those qualifiers affect the work, rather than a mandatory step for every project."
+    }
+  ],
+  "refs": [
+    "prov"
+  ],
+  "basis": "Proposed procedure using provenance concepts",
+  "confidence": "Moderate. Source support and applicability require review",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "instructions",
+      "knowledge"
+    ],
+    "aliases": [
+      "evidence verification",
+      "source review",
+      "claim support"
+    ],
+    "revision": "1",
+    "applicability": "Use when a workflow depends on assertions from documents, research, requirements or other sources. Apply only the qualifiers relevant to the claim.",
+    "limits": "This is a proposed reading procedure. It does not select an exportable skill, configure access, run checks or establish a successful result.",
+    "sourceStatus": "needs-review",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

@@ -1,7 +1,7 @@
 {
   "id": "ci-skill",
-  "title": "Jenkins diagnosis skill",
-  "summary": "Investigate the first actionable failure with build and revision context.",
+  "title": "Jenkins diagnosis example",
+  "summary": "Apply pipeline diagnosis to a Jenkins run, using its actual logs and revision context.",
   "sections": [
     {
       "type": "p",
@@ -11,7 +11,7 @@
     {
       "type": "p",
       "label": "Procedure",
-      "text": "Locate the first actionable error; distinguish implementation, fixture, environment, access, and infrastructure causes; inspect relevant source; propose the smallest supported next step."
+      "text": "Locate the first actionable error. Distinguish implementation, fixture, environment, access and infrastructure causes. Inspect relevant source and propose the smallest supported next step."
     },
     {
       "type": "p",
@@ -28,14 +28,16 @@
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
-    "kind": "procedure",
+    "kind": "example",
     "domains": [
       "instructions"
     ],
-    "aliases": [],
-    "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
-    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "aliases": [
+      "Jenkins diagnosis skill"
+    ],
+    "revision": "2",
+    "applicability": "Use this specialist example when the failing pipeline runs in Jenkins and approved run/log access is available.",
+    "limits": "This reading example does not supply Jenkins credentials, a configured client, commands for your repository or a verified correction.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
     "claims": []

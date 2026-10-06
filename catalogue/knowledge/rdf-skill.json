@@ -1,7 +1,7 @@
 {
   "id": "rdf-skill",
-  "title": "RDF/SPARQL skill",
-  "summary": "Verify graph structure and query behavior using versioned fixtures and the right engine.",
+  "title": "RDF/SPARQL verification procedure",
+  "summary": "Apply data and query verification to RDF graphs and SPARQL in the target engine.",
   "sections": [
     {
       "type": "p",
@@ -15,7 +15,7 @@
         "Validate applicable structural constraints.",
         "Exercise positive, negative, scope, missing-data, and temporal scenarios.",
         "Check API-visible semantics and named-graph selection.",
-        "Use measured Neptune execution plans for performance findings."
+        "For an Amazon Neptune deployment, use its measured execution plans when investigating performance. For another RDF engine, use that engine's supported diagnostics and measured workload."
       ]
     },
     {
@@ -36,10 +36,12 @@
     "domains": [
       "instructions"
     ],
-    "aliases": [],
-    "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
-    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "aliases": [
+      "RDF/SPARQL skill"
+    ],
+    "revision": "2",
+    "applicability": "Use when the workflow uses RDF data and SPARQL. Supply the actual engine, graph scope, vocabulary, fixtures and structural rules.",
+    "limits": "SQL and property graph procedures need their own checks. Neptune diagnostics apply only to Neptune. Reading this procedure does not run a query, install an integration or verify source truth.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
     "claims": []

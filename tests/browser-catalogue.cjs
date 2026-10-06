@@ -33,6 +33,9 @@ async function run() {
   const server = http.createServer(async (request, response) => {
     try {
       const pathname = new URL(request.url, 'http://localhost').pathname
+      if (pathname === '/knowledge-host.html') {
+        return response.writeHead(200, { 'Content-Type': 'text/html' }).end(`<!doctype html><html lang="en"><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}header{height:56px;display:flex;align-items:center;gap:8px;padding:0 8px}h1{font:16px system-ui}iframe{width:100%;height:calc(100dvh - 56px);border:0}button{font:12px system-ui}</style></head><body><header><h1>Workflow Atlas</h1><button id="host-theme">Change theme</button><button id="host-read">Read procedure</button><button id="host-hide">Hide map</button></header><iframe title="Knowledge map" id="atlas" src="/atlas/?embedded=1&theme=light&view=explore#skills"></iframe><script>window.knowledgeMessages=[];const frame=document.getElementById('atlas');window.addEventListener('message',event=>{if(event.source===frame.contentWindow&&event.origin===location.origin)knowledgeMessages.push(event.data)});document.getElementById('host-theme').onclick=()=>frame.contentWindow.postMessage({type:'workflow-atlas:theme',theme:'dark'},location.origin);document.getElementById('host-read').onclick=()=>frame.contentWindow.postMessage({type:'workflow-atlas:knowledge-open',topicId:'pipeline-diagnosis',mode:'read',focus:true},location.origin);document.getElementById('host-hide').onclick=()=>{frame.hidden=!frame.hidden;document.getElementById('host-hide').textContent=frame.hidden?'Show map':'Hide map'};</script></body></html>`)
+      }
       const relative = pathname === '/atlas/' ? 'atlas/index.html' : pathname.slice(1)
       if (!/^atlas\/[\w./-]+$/.test(relative) || relative.includes('..')) return response.writeHead(404).end()
       const content = await fs.readFile(path.join(root, relative))
@@ -171,6 +174,58 @@ async function run() {
     await page.locator('#mobile-nav [data-topic="apache-jena-fuseki"]').press('Enter')
     assert.equal(await page.evaluate(() => window.ATLAS_STATE.selected), 'apache-jena-fuseki')
 
+    // Reusable entry procedures lead to scoped specialist pages through actual reading controls.
+    await page.setViewportSize({ width: 1440, height: 1000 })
+    await page.goto(`${base}?theme=light#skills`)
+    for (const [generic, specialist, label] of [['pipeline-diagnosis', 'ci-skill', 'Worked example'], ['data-query-verification', 'rdf-skill', 'Procedure'], ['source-evidence-verification', 'source-skill', 'Worked example']]) {
+      await page.locator(`#reader-related [data-topic="${generic}"]`).click()
+      assert.equal(await page.locator('#reader-meta .topic-kind-badge').innerText(), 'Procedure')
+      assert.equal(await page.locator('#reader-practice').isVisible(), false, 'Reading a generic procedure does not advertise a generated skill action')
+      await page.locator('#topic-scope summary').click()
+      assert.match(await page.locator('#topic-scope-content').innerText(), /proposed reading procedure/)
+      await page.locator(`#reader-related [data-topic="${specialist}"]`).click()
+      assert.equal(await page.locator('#reader-meta .topic-kind-badge').innerText(), label)
+      await page.locator('#topic-scope summary').click()
+      assert.match(await page.locator('#topic-scope-content').innerText(), /migration did not recheck their claims/)
+      if (specialist === 'rdf-skill') assert.match(await page.locator('#reader-content').innerText(), /For an Amazon Neptune deployment/)
+      await page.locator('#breadcrumbs [data-topic="skills"]').click()
+    }
+    await page.screenshot({ path: path.join(output, 'actual-skills-generic-entry.png') })
+
+    // Embedded map controls are subordinate to the shared shell and keep their state when hidden.
+    await page.goto(new URL('/knowledge-host.html', base).href)
+    const mapFrame = page.frameLocator('#atlas')
+    await mapFrame.locator('[data-view="2d"]').click()
+    await mapFrame.locator('#flat-map [data-topic="pipeline-diagnosis"]').waitFor()
+    assert.equal(await mapFrame.locator('.brand').isVisible(), false)
+    assert.equal(await mapFrame.locator('#theme-toggle').isVisible(), false)
+    assert.equal(await mapFrame.locator('[data-factory-link]').isVisible(), false)
+    assert.equal(await mapFrame.locator('.mode-nav [data-mode="explore"]').getAttribute('aria-pressed'), 'true')
+    await page.locator('#host-read').click()
+    await mapFrame.locator('#reader-title').filter({ hasText: 'Diagnose a pipeline failure' }).waitFor()
+    assert.equal(await mapFrame.locator('.mode-nav [data-mode="read"]').getAttribute('aria-pressed'), 'true')
+    assert.equal(await mapFrame.locator('#reader-title').evaluate(node => node === document.activeElement), true)
+    await page.waitForFunction(() => knowledgeMessages.some(message => message.type === 'workflow-atlas:knowledge-state' && message.topicId === 'pipeline-diagnosis' && message.mode === 'read'))
+    await mapFrame.locator('#knowledge-back').focus()
+    const readyBefore = await page.evaluate(() => knowledgeMessages.filter(message => message.type === 'workflow-atlas:knowledge-ready').length)
+    await page.evaluate(() => document.getElementById('atlas').contentWindow.postMessage({type:'workflow-atlas:knowledge-open',topicId:'pipeline-diagnosis',mode:'read',focus:true},location.origin))
+    await page.waitForFunction(before => knowledgeMessages.filter(message => message.type === 'workflow-atlas:knowledge-ready').length > before,readyBefore)
+    assert.equal(await mapFrame.locator('#knowledge-back').evaluate(node => node === document.activeElement), true, 'Reopening the same reading context preserves the user focus on Back')
+    await page.locator('#host-hide').click()
+    await page.locator('#host-theme').click()
+    await page.locator('#host-hide').click()
+    assert.equal(await mapFrame.locator('body').getAttribute('data-theme'), 'dark')
+    assert.equal(await mapFrame.locator('#reader-title').innerText(), 'Diagnose a pipeline failure')
+    for (const width of [1440, 768, 390, 320]) {
+      await page.setViewportSize({ width, height: 850 })
+      assert.equal(await mapFrame.locator('html').evaluate(node => node.scrollWidth <= innerWidth), true, `Embedded reader fits ${width} pixels`)
+      await mapFrame.locator('.mode-nav [data-mode="explore"]').click()
+      await mapFrame.locator('[data-view="2d"]').click()
+      assert.equal(await mapFrame.locator('html').evaluate(node => node.scrollWidth <= innerWidth), true, `Embedded map fits ${width} pixels`)
+      await mapFrame.locator('.mode-nav [data-mode="read"]').click()
+    }
+    await page.screenshot({ path: path.join(output, 'embedded-shared-shell-mobile.png') })
+
     // The self-contained artifact carries the same public catalogue and remains usable offline.
     execFileSync(process.execPath, ['tools/export-atlas.cjs'], { cwd: root, stdio: 'pipe' })
     const offlineContext = await browser.newContext({ offline: true, viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' })
@@ -200,7 +255,7 @@ async function run() {
     await offline.screenshot({ path: path.join(output, 'actual-retrieval-offline-map.png') })
     assert.deepEqual(remote, [], 'Offline reading, source search and both map views make no HTTP requests')
     assert.deepEqual(errors, [])
-    console.log(`PASS catalogue fixtures and actual ${current.nodes.length}-topic catalogue: retrieval path, four technology examples, type filters, aliases, keyboard/mobile themes and offline 2D/3D with zero HTTP requests`)
+    console.log(`PASS catalogue fixtures and actual ${current.nodes.length}-topic catalogue: scoped procedure entries, embedded state/theme/navigation, retrieval path, four technology examples, keyboard/mobile and offline 2D/3D with zero HTTP requests`)
   } finally {
     if (browser) await browser.close()
     await new Promise(resolve => server.close(resolve))

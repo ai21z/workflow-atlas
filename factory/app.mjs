@@ -9,13 +9,20 @@ import { PRACTICE_TOPIC_IDS, getPracticeAction, applyPracticeAction } from './pr
 import { createDecisionReview, exportDecisionReview, restoreDecisionReview } from './decision-review.mjs'
 import { reviewGuidance } from './guidance-review.mjs'
 import { attachReviewArtifacts } from './session-output.mjs'
-import { createJevAssistance } from './jev-assistance.mjs'
+import { createJevAssistance, composeAssistedProject } from './jev-assistance.mjs'
 import { mountJevView } from './jev-view.mjs'
 import { APP_VERSION } from './version.mjs'
 import { createProcessDesigner } from './process-designer.mjs'
+import { GOAL_STARTERS, createGoalProject } from './starter-goals.mjs'
 
 const { CATALOG, TOOL_ALIASES, createRecipe, createExample, selectRecipe, getStages, getEffectiveSkills, compileStandaloneSkill, compile, validate, parseImport, serializeProject } = engine
 const $ = selector => document.querySelector(selector)
+for (const group of new Set(GOAL_STARTERS.map(goal => goal.group))) {
+  const section = document.createElement('optgroup')
+  section.label = group
+  for (const goal of GOAL_STARTERS.filter(goal => goal.group === group)) section.append(new Option(goal.label, goal.id))
+  $('#starter-goal').append(section)
+}
 $('#app-version').textContent = `WORKFLOW ATLAS · ${APP_VERSION}`
 const storageKey = 'workflow-atlas.factory.v2'
 const legacyKey = 'workflow-atlas.factory.v1'
@@ -54,6 +61,14 @@ let pack, toastTimer, compileTimer
 let recoveryMessage = ''
 let legacyDraft = null
 let workspaceView = 'workflow'
+let mainView = 'brief'
+let routing = false
+let lastRouteKey = ''
+let briefSection = 'intent'
+let workflowSelection = { stage: '', section: 'workflow', inspector: false }
+let knowledgeLoaded = false
+let knowledgeState = { topicId: 'overview', mode: 'explore', mapView: '3d' }
+let processOverview = false
 let selectedStage = ''
 let inspectorOpen = false
 let projectOrigin = 'blank'
@@ -71,8 +86,8 @@ let generationAtOpen = null
 let candidateImport = null
 let outputSelection = null
 let downloadPack = null
+let pendingStandaloneSkill = ''
 let pendingPractice = null
-let briefReturnFocus = null
 let baselineFiles = []
 let existingFiles = []
 let comparison = []
@@ -101,6 +116,7 @@ const compactEditor = matchMedia('(max-width: 1100px)')
 let deferredAssistantQuestions = {}
 let assistantAnswerReviews = {}
 const assistantReviewWording = new Map()
+let replacementWordingDirty = false
 let jevView
 const assistance = createJevAssistance({ onChange: () => jevView?.render() })
 let processDesigner
@@ -119,7 +135,68 @@ applyProcessConfig.preview = next => {
   const after = new Map(compile(next).files.map(file => [file.path, file.content]))
   return [...new Set([...before.keys(), ...after.keys()])].filter(path => before.get(path) !== after.get(path))
 }
-processDesigner = createProcessDesigner({ getConfig: () => config, onApply: applyProcessConfig, onPendingChange: renderSession, onNotice: toast })
+processDesigner = createProcessDesigner({ getConfig: () => config, onApply: applyProcessConfig, onPendingChange: renderSession, onNotice: toast, onBack: () => { processOverview = true; renderStudio() } })
+processDesigner.mount($('#workflow-designer-host'))
+const replacementChoices = document.createElement('div')
+replacementChoices.id = 'replacement-workflow-choices'
+const replacementChoicesHint = document.createElement('p')
+replacementChoicesHint.textContent = 'Choose a replacement workflow. Review it before replacing this project.'
+const replacementChoiceButtons = document.createElement('div')
+replacementChoiceButtons.className = 'inline-actions'
+replacementChoiceButtons.setAttribute('role', 'group')
+replacementChoiceButtons.setAttribute('aria-label', 'Replacement workflow choices')
+for (const item of CATALOG.recipes) {
+  const button = document.createElement('button')
+  button.type = 'button'
+  button.className = 'secondary'
+  button.dataset.reviewRecipe = item.id
+  button.textContent = labelOf(item)
+  replacementChoiceButtons.append(button)
+}
+replacementChoices.append(replacementChoicesHint, replacementChoiceButtons)
+$('#active-suggestion').insertBefore(replacementChoices, $('#jev-active-host'))
+
+function routeTo(hash, state = {}) {
+  if (routing || location.hash === hash) return
+  history.pushState(state, '', hash)
+  lastRouteKey = location.hash + JSON.stringify(history.state)
+}
+
+function showMain(view, focus = true) {
+  if (!['brief', 'workflow', 'knowledge'].includes(view)) return
+  if (view === 'knowledge') { openKnowledge(null, null); return }
+  if (knowledgeOpen) closeKnowledge(false, false)
+  if (mainView === 'workflow') workflowSelection = { stage: selectedStage, section: currentStep, inspector: inspectorOpen }
+  if (mainView === 'brief' && detailSections.includes(currentStep)) briefSection = currentStep
+  mainView = view
+  if (view === 'brief') { currentStep = briefSection; selectedStage = ''; inspectorOpen = Boolean(config) }
+  else { selectedStage = workflowSelection.stage; currentStep = workflowSelection.section; inspectorOpen = workflowSelection.inspector }
+  routeTo(`#${view}`)
+  if(config) {clearTimeout(compileTimer);updatePack(false)}
+  renderStudio()
+  if (config && inspectorOpen) renderStep()
+  if (focus) {
+    const destination = view === 'brief'
+      ? config ? $('#brief-workspace') : $('#start-screen')
+      : !config ? $('#empty-workflow')
+      : workspaceView === 'artifacts' ? $('#artifact-workspace')
+      : $('#workflow-designer-host').hidden ? $('#project-content') : $('#workflow-designer-host')
+    destination.focus({preventScroll:true})
+  }
+}
+
+function pendingDownloadAllowed(skillId = '') {
+  if (!processDesigner.isPending()) return true
+  if ($('#download-dialog').open && $('#download-accepted-only').checked) return true
+  openDownload()
+  if (skillId) {
+    pendingStandaloneSkill = skillId
+    $('#download-pending-skill').hidden = false
+    $('#download-pending-skill-name').textContent = named(CATALOG.skills, skillId)
+  }
+  $('#download-accepted-only').focus()
+  return false
+}
 
 async function createAssistedProject() {
   try {
@@ -131,7 +208,7 @@ async function createAssistedProject() {
     assistance.markAccepted()
     renderTaskGuide()
     renderSession()
-    $('#project-content').focus()
+    $('#brief-workspace').focus({preventScroll:true})
     toast('Your draft is ready. Edit its steps and decisions, then download to keep it.')
   } catch (error) { toast(error.message || 'Choose a workflow before creating a draft.') }
 }
@@ -141,18 +218,18 @@ function setTheme(value) {
   theme = value
   document.documentElement.dataset.theme = theme
   $('#theme-toggle').setAttribute('aria-checked', String(theme === 'dark'))
-  if (knowledgeOpen) $('#knowledge-frame').contentWindow?.postMessage({type:'workflow-atlas:theme',theme}, location.origin)
+  if (knowledgeLoaded) $('#knowledge-frame').contentWindow?.postMessage({type:'workflow-atlas:theme',theme}, location.origin)
 }
 
 function syncEditorAccess() {
-  const modal = inspectorOpen && compactEditor.matches && !knowledgeOpen
+  const modal = false
   $('#studio-main').inert = modal
   $('#start-screen').inert = knowledgeOpen
-  $('.studio-header').inert = modal || knowledgeOpen
+  $('.studio-header').inert = modal
   $('#studio-layout').inert = knowledgeOpen
   document.body.classList.toggle('editor-modal', modal)
   document.body.classList.toggle('knowledge-open', knowledgeOpen)
-  $('.skip').hidden = modal || knowledgeOpen
+  $('.skip').hidden = modal
   if (modal) {
     $('#inspector').setAttribute('role', 'dialog')
     $('#inspector').setAttribute('aria-modal', 'true')
@@ -165,7 +242,7 @@ function syncEditorAccess() {
 }
 compactEditor.addEventListener('change', () => {
   syncEditorAccess()
-  if (inspectorOpen && compactEditor.matches && !$('#inspector').contains(document.activeElement)) $('#close-inspector').focus()
+  if (mainView === 'workflow' && inspectorOpen && compactEditor.matches && !$('#inspector').contains(document.activeElement)) $('#close-inspector').focus()
 })
 
 function syncPalette() {
@@ -205,6 +282,7 @@ function changed(historyKey = '') {
     lastHistoryKey = historyKey
     lastHistoryAt = Date.now()
   }
+  processDesigner.syncConfig()
   renderSession()
   clearTimeout(compileTimer)
   compileTimer = setTimeout(updatePack, 180)
@@ -215,14 +293,16 @@ function renderSession() {
   const dirty = active && sessionDirty()
   $('#download-project').hidden = !active
   $('#new-project').hidden = !active
-  $('#save-state').textContent = dirty ? 'Changes not downloaded' : projectOrigin === 'example' ? 'Fictional example in this session' : 'Session only. Download to keep your work.'
+  $('#save-state').textContent = hasReplacementProposal() ? 'Separate proposal stays in this tab. It is not in project downloads.' : dirty ? 'Changes not downloaded' : projectOrigin === 'example' ? 'Fictional example in this session' : 'Session only. Download to keep your work.'
   $('#save-state').classList.toggle('unsaved', dirty)
   const comparisonNotice = $('#comparison-snapshot-note')
   if (comparisonNotice) comparisonNotice.hidden = !comparisonIsStale()
   $('#undo').disabled = !active || historyIndex === 0
   $('#redo').disabled = !active || historyIndex >= historyEntries.length - 1
   if (!active) return
-  for (const control of document.querySelectorAll('.project-heading [data-field]')) {
+  const replaceDraftButton = $('#jev-create')
+  if (replaceDraftButton) replaceDraftButton.textContent = 'Replace with this draft →'
+  for (const control of document.querySelectorAll('#project-name,#project-purpose')) {
     if (control !== document.activeElement) control.value = config.project[control.dataset.field.split('.')[1]]
   }
   $('#recipe-label').textContent = labelOf(recipe())
@@ -230,6 +310,10 @@ function renderSession() {
   renderOpenedFileNotice()
   refreshIntentProvenance()
   renderTaskGuide()
+  const pending = processDesigner.isPending()
+  $('#pending-process-note').hidden = !pending
+  $('#pending-process-note').innerHTML = pending ? '<strong>Process edits pending.</strong> File previews and downloads use accepted decisions. <button type="button" class="text-button" data-studio-action="return-process">Review and apply in Workflow</button>' : ''
+  if ($('#download-dialog').open) $('#download-pending-note').hidden = !pending
 }
 
 function refreshIntentProvenance() {
@@ -309,8 +393,12 @@ async function canReplaceFileComparison() {
   return !hasUnkeptFileReview() || await confirmReplace('This replaces your pending file review choices. Download the reviewed files first to keep them, or keep this file review unchanged.', { title: 'Replace this file review?', keep: 'Keep this file review', replace: 'Replace file review' })
 }
 
+function hasReplacementProposal() {
+  return Boolean(config && (assistance.isDirty() || replacementWordingDirty))
+}
+
 function sessionDirty({ includeAssistance = true } = {}) {
-  return Boolean(processDesigner?.isPending() || (includeAssistance && !config && assistance.isDirty()) || hasUnrecordedReviewEdits() || hasUnkeptFileReview() || (config && (JSON.stringify(config) !== lastDownloaded || reviewReason !== lastDownloadedReviewReason || baselineNeedsDownload || guidanceChoiceNeedsDownload)))
+  return Boolean(processDesigner?.isPending() || (includeAssistance && (assistance.isDirty() || replacementWordingDirty)) || hasUnrecordedReviewEdits() || hasUnkeptFileReview() || (config && (JSON.stringify(config) !== lastDownloaded || reviewReason !== lastDownloadedReviewReason || baselineNeedsDownload || guidanceChoiceNeedsDownload)))
 }
 
 function currentReview(selection = chosenOutput()) {
@@ -425,38 +513,9 @@ $('#decision-baseline-file').addEventListener('change', async event => {
 
 function openTaskBrief() {
   if (!config) return
-  briefReturnFocus = document.activeElement
-  const firstStage = getStages(config).find(stage => config.workflow.enabledStages.includes(stage.id))?.id
-  $('#brief-name').value = config.project.name
-  $('#brief-purpose').value = config.project.purpose
-  $('#brief-context').value = firstStage ? config.workflow.notes[firstStage] || '' : ''
-  $('#brief-context').disabled = !firstStage
-  $('#brief-context').closest('label').hidden = !firstStage
-  $('#brief-dialog').showModal()
-  $('#brief-name').focus()
+  goTo('intent')
+  $('#project-purpose').focus()
 }
-
-function recordTaskBrief() {
-  if (!config) return
-  config.project.name = $('#brief-name').value
-  config.project.purpose = $('#brief-purpose').value
-  const firstStage = getStages(config).find(stage => config.workflow.enabledStages.includes(stage.id))?.id
-  if (firstStage) config.workflow.notes[firstStage] = $('#brief-context').value
-  changed('task-brief')
-}
-$('#brief-form').addEventListener('input', recordTaskBrief)
-$('#brief-dialog').addEventListener('close', () => requestAnimationFrame(() => {
-  if (briefReturnFocus?.isConnected && !briefReturnFocus.closest('[hidden],[inert]') && briefReturnFocus.getClientRects().length) briefReturnFocus.focus({preventScroll:true})
-  else (workspaceView === 'artifacts' ? $('#artifact-workspace') : $('#project-content')).focus({preventScroll:true})
-}))
-$('#brief-form').addEventListener('submit', event => {
-  event.preventDefault()
-  recordTaskBrief()
-  $('#brief-dialog').close()
-  clearTimeout(compileTimer)
-  updatePack(false)
-  $('#project-content').focus()
-})
 
 function chosenOutput() {
   const recommendation = recommendOutput(config)
@@ -508,17 +567,42 @@ function renderOutputChoice() {
 
 function renderStudio() {
   renderSession()
-  $('#start-screen').hidden = Boolean(config) || knowledgeOpen
+  const goalHost = config ? $('#active-goal-host') : $('#start-goal-host')
+  if ($('#goal-picker').parentElement !== goalHost) goalHost.append($('#goal-picker'))
+  renderGoalPicker()
+  if (config && $('#jev-start').parentElement !== $('#jev-active-host')) $('#jev-active-host').append($('#jev-start'))
+  else if (!config && $('#jev-start').parentElement !== $('#start-screen')) $('#start-screen').insertBefore($('#jev-start'), $('#manual-start-label'))
+  document.body.classList.toggle('brief-mode', mainView === 'brief')
+  document.querySelectorAll('[data-main-view]').forEach(link => {
+    if (link.dataset.mainView === mainView) link.setAttribute('aria-current', 'page')
+    else link.removeAttribute('aria-current')
+  })
+  document.documentElement.style.setProperty('--workspace-header-height', `${$('.studio-header').getBoundingClientRect().height}px`)
+  $('#start-screen').hidden = Boolean(config) || mainView !== 'brief'
+  $('#empty-workflow').hidden = Boolean(config) || mainView !== 'workflow'
+  $('#knowledge-workspace').hidden = mainView !== 'knowledge'
   $('#studio-layout').hidden = !config || knowledgeOpen
+  $('#brief-workspace').hidden = mainView !== 'brief'
+  const inlineBrief = config && mainView === 'brief'
+  const inspectorHost=inlineBrief ? $('#brief-inspector-host') : $('#studio-layout')
+  if($('#inspector').parentElement !== inspectorHost) inspectorHost.append($('#inspector'))
+  const custom = config?.workflowModel.processes.find(process => process.source === 'custom')
+  if (mainView === 'workflow' && workspaceView === 'workflow' && !processOverview && config) {
+    if (!processDesigner.hasDraft() && custom) processDesigner.open(custom.id)
+    else processDesigner.resume()
+  } else processDesigner.suspend()
+  const inlineProcess = mainView === 'workflow' && workspaceView === 'workflow' && processDesigner.isOpen()
+  $('#workflow-designer-host').hidden = !inlineProcess
+  document.body.classList.toggle('workflow-designer-active', inlineProcess)
   if (!config) {
-    $('.skip').href = '#start-screen'
+    $('.skip').href = mainView === 'knowledge' ? '#knowledge-frame' : mainView === 'workflow' ? '#empty-workflow' : '#start-screen'
     syncEditorAccess()
     return
   }
-  $('#project-content').hidden = workspaceView === 'artifacts'
+  $('#project-content').hidden = mainView !== 'workflow' || workspaceView === 'artifacts' || inlineProcess
   $('#project-content').setAttribute('aria-label', workspaceView === 'overview' ? 'Project Atlas preview' : 'Current workflow')
-  $('#artifact-workspace').hidden = workspaceView !== 'artifacts'
-  $('.skip').href = workspaceView === 'artifacts' ? '#artifact-workspace' : '#project-content'
+  $('#artifact-workspace').hidden = mainView !== 'workflow' || workspaceView !== 'artifacts'
+  $('.skip').href = mainView === 'knowledge' ? '#knowledge-frame' : inlineBrief ? '#brief-workspace' : workspaceView === 'artifacts' ? '#artifact-workspace' : inlineProcess ? '#workflow-designer-host' : '#project-content'
   $('#view-nav').querySelectorAll('[data-project-view]').forEach(button => {
     if (button.dataset.projectView === workspaceView) button.setAttribute('aria-current', 'page')
     else button.removeAttribute('aria-current')
@@ -526,7 +610,7 @@ function renderStudio() {
   $('#preview-atlas').setAttribute('aria-pressed', String(workspaceView === 'overview'))
   $('#project-details').setAttribute('aria-expanded', String(inspectorOpen && detailSections.includes(currentStep) && !selectedStage))
   $('#review-project').setAttribute('aria-expanded', String(inspectorOpen && currentStep === 'review' && !selectedStage))
-  if (workspaceView !== 'artifacts') {
+  if (mainView === 'workflow' && workspaceView !== 'artifacts' && !inlineProcess) {
     const active = document.activeElement
     const attributes = active?.tagName === 'BUTTON' && $('#project-content').contains(active) ? [...active.attributes].filter(attribute => attribute.name.startsWith('data-')) : []
     const focusSelector = attributes.map(attribute => `[${attribute.name}="${CSS.escape(attribute.value)}"]`).join('')
@@ -535,8 +619,8 @@ function renderStudio() {
     if (workspaceView === 'workflow') $('#project-content').insertAdjacentHTML('afterbegin', processDesigner.launcher(config))
     if (focusSelector) $('#project-content').querySelector(`button${focusSelector}`)?.focus({preventScroll:true})
   }
-  $('#inspector').hidden = !inspectorOpen
-  $('#studio-layout').classList.toggle('has-inspector', inspectorOpen)
+  $('#inspector').hidden = !(inlineBrief || inspectorOpen) || mainView === 'knowledge' || inlineProcess
+  $('#studio-layout').classList.toggle('has-inspector', !inlineBrief && inspectorOpen && !inlineProcess)
   syncEditorAccess()
   syncPalette()
   const tray = $('#impact-tray')
@@ -559,29 +643,36 @@ function renderInspectorImpact() {
 }
 
 function showView(view, focus = true) {
-  if (!config) { renderStudio(); return }
+  if (!config) { showMain('workflow', focus); return }
   if (view === 'architecture') { goTo('runtime', focus); return }
   if (view === 'evidence') { goTo('evidence', focus); return }
   if (!['overview','workflow','artifacts'].includes(view)) return
+  if (knowledgeOpen) closeKnowledge(false, false)
+  if (mainView === 'brief') briefSection = detailSections.includes(currentStep) ? currentStep : briefSection
+  mainView = 'workflow'
   workspaceView = view
   paletteSelection = null
   $('#palette-hint').hidden = true
   inspectorOpen = false
-  selectedStage = ''
-  history.replaceState(null, '', `#${view === 'overview' ? 'preview' : view === 'artifacts' ? 'files' : view}`)
+  selectedStage = workflowSelection.stage
+  if (view === 'workflow') processOverview = false
+  routeTo(`#${view === 'overview' ? 'preview' : view === 'artifacts' ? 'files' : view}`)
+  clearTimeout(compileTimer)
+  updatePack(false)
   renderStudio()
   if (focus) {
-    const content = view === 'artifacts' ? $('#artifact-workspace') : $('#project-content')
+    const content = view === 'artifacts' ? $('#artifact-workspace') : $('#workflow-designer-host').hidden ? $('#project-content') : $('#workflow-designer-host')
     content.focus({preventScroll:true})
     window.scrollTo({top:0,behavior:'instant'})
   }
 }
 
 function closeInspector() {
+  if (mainView === 'brief') return
   inspectorOpen = false
   selectedStage = ''
   renderStudio()
-  history.replaceState(null, '', `#${workspaceView === 'overview' ? 'preview' : workspaceView === 'artifacts' ? 'files' : 'workflow'}`)
+  routeTo(`#${workspaceView === 'overview' ? 'preview' : workspaceView === 'artifacts' ? 'files' : 'workflow'}`)
   const original = inspectorReturnFocus?.isConnected && inspectorReturnFocus.getClientRects().length ? inspectorReturnFocus : inspectorReturnSelector ? document.querySelector(inspectorReturnSelector) : null
   if (original?.getClientRects().length && !original.closest('[hidden],[inert]')) original.focus()
   else $('#project-details').focus()
@@ -606,8 +697,12 @@ function openStage(id) {
   rememberEditorInvoker()
   selectedStage = id
   currentStep = 'workflow'
+  mainView = 'workflow'
+  workspaceView = 'workflow'
+  processOverview = true
   inspectorOpen = true
-  history.replaceState(null, '', `#stage-${id}`)
+  workflowSelection = {stage:id, section:'workflow', inspector:true}
+  routeTo(`#stage-${id}`)
   renderStudio()
   renderStep(true)
   $('#inspector').scrollTop = 0
@@ -615,12 +710,12 @@ function openStage(id) {
 
 function restoreHistory(direction) {
   if (!config) return
-  if (processDesigner.isOpen()) return
   const next = historyIndex + direction
   if (next < 0 || next >= historyEntries.length) return
   clearTimeout(compileTimer)
   historyIndex = next
   config = JSON.parse(historyEntries[historyIndex])
+  processDesigner.syncConfig()
   pruneAssistantAnswerReviews()
   if (selectedStage && !getStages(config).some(stage => stage.id === selectedStage)) {
     selectedStage = ''
@@ -734,7 +829,7 @@ function stageCard(stage, index) {
     <div class="stage-top"><span>${String(index + 1).padStart(2, '0')}</span><label class="stage-toggle"><div><strong>Include this stage</strong><small>${escape(stage.purpose)}</small></div><input type="checkbox" data-stage="${escape(stage.id)}" ${enabled ? 'checked' : ''} aria-label="Include ${escape(labelOf(stage))}"></label></div>
     <div class="field-grid stage-assignment">${selectField('Responsible actor', `${base}.actorType`, binding.actorType, [{ id: 'human', label: 'Person' }, { id: 'agent', label: 'Agent profile' }, { id: 'external', label: 'External system' }])}${binding.actorType === 'agent' ? selectField('Agent role', `${base}.actorId`, binding.actorId, [{ id: '', label: 'Choose an enabled role' }, ...config.agents.map(agent => CATALOG.roles.find(role => role.id === agent.role))]) : field(binding.actorType === 'external' ? 'System or service' : 'Person or team', `${base}.actorName`, binding.actorName, binding.actorType === 'external' ? 'e.g. CI pipeline' : 'Name or owner')}</div>
     ${binding.actorType === 'agent' ? checkField('Work only from supplied context', `${base}.contextOnly`, binding.contextOnly, 'Appropriate for reviewing supplied material without repository tools.') : ''}
-    ${field('Instructions and handoff for this stage', `workflow.notes.${stage.id}`, config.workflow.notes[stage.id], 'Add project constraints, acceptance examples or handoff details', ['architecture','diagnosis','bug-fix','options','recommendation'].includes(stage.id) ? 'Record the approach and its reason here. Preview Atlas presents these supplied notes in the decision brief.' : '', 'textarea')}
+    ${field('Instructions and handoff for this stage', `workflow.notes.${stage.id}`, config.workflow.notes[stage.id], 'Add project constraints, acceptance examples or handoff details', ['architecture','diagnosis','bug-fix','options','recommendation'].includes(stage.id) ? 'Record the approach and its reason here. Project Atlas presents these supplied notes in the decision brief.' : '', 'textarea')}
     <details data-detail="stage-skills-${escape(stage.id)}"><summary>Relevant skills · ${binding.skills.length} selected</summary><fieldset class="skill-bindings"><legend class="sr-only">Relevant skills</legend>${CATALOG.skills.map(skill => `<label class="tool-toggle"><input type="checkbox" data-binding-skill="${escape(skill.id)}" data-stage-id="${escape(stage.id)}" ${binding.skills.includes(skill.id) ? 'checked' : ''}>${escape(labelOf(skill))}</label>`).join('')}</fieldset></details>
     ${list(stage.dependsOn).map(id => field(`Existing ${named(CATALOG.stages, id)} output`, `workflow.suppliedInputs.${id}`, config.workflow.suppliedInputs[id], 'Path or source reference', 'Supply an existing artifact to satisfy this input without repeating the earlier stage.')).join('')}
     <details data-detail="stage-reference-${escape(stage.id)}"><summary>Stage inputs, outputs and checks</summary><dl class="stage-facts">${fact('Required inputs', stage.inputs)}${fact('Expected outputs', stage.outputs)}${fact('Acceptance and evidence', stage.checks)}${fact('Capabilities if assigned to an agent', stage.capabilities)}</dl></details>
@@ -831,13 +926,18 @@ function renderReview() {
 }
 
 function openDownload() {
+  pendingStandaloneSkill = ''
+  $('#download-pending-skill').hidden = true
+  $('#download-pending-skill-action').disabled = true
   if (!config) return
   clearTimeout(compileTimer)
   updatePack(false)
   renderOutputChoice()
   renderDownloadReview()
-  $('#download-result').textContent = ''
-  $('#download-dialog').showModal()
+  $('#download-result').textContent = hasReplacementProposal() ? 'This download keeps accepted project decisions. Your separate replacement proposal stays in this tab.' : ''
+  $('#download-pending-note').hidden = !processDesigner.isPending()
+  $('#download-accepted-only').checked = false
+  if (!$('#download-dialog').open) $('#download-dialog').showModal()
 }
 
 function openedFileDifferences() {
@@ -901,6 +1001,9 @@ $('#download-output').addEventListener('change', event => {
 
 function exportSelectedOutput() {
   if (!config) return
+  if (!pendingDownloadAllowed()) return
+  clearTimeout(compileTimer)
+  updatePack(false)
   if (!guidanceReady('selected')) return
   try {
     renderOutputChoice()
@@ -910,7 +1013,7 @@ function exportSelectedOutput() {
     const draft = !downloadPack.validation.configurationComplete || !downloadPack.validation.formatChecked
     download(`${filename()}-${selection.kind}${draft ? '-draft' : ''}.zip`, zipFiles(downloadPack.files), 'application/zip')
     markDownloaded()
-    $('#download-result').textContent = `${outputTitle(selection.kind)} downloaded. Open INSTALL.md first. Reopen this ZIP here to continue.`
+    $('#download-result').textContent = `${outputTitle(selection.kind)} downloaded. Open INSTALL.md first. Reopen this ZIP here to continue.${hasReplacementProposal() ? ' Your separate replacement proposal is not in this ZIP and stays in this tab.' : ''}`
     $('#use-download').open = true
     $('#use-download-title').focus()
   } catch (error) { $('#download-result').textContent = `Download failed. ${error.message} Your work remains in this session.` }
@@ -947,7 +1050,11 @@ function goTo(id, focus = true) {
   currentStep = id
   selectedStage = ''
   inspectorOpen = true
-  history.replaceState(null, '', `#details-${id}`)
+  if (knowledgeOpen) closeKnowledge(false, false)
+  mainView = detailSections.includes(id) ? 'brief' : 'workflow'
+  if (mainView === 'brief') briefSection = id
+  else { processOverview = true; workspaceView = 'workflow' }
+  routeTo(`#details-${id}`)
   renderStudio()
   renderStep(focus)
   if (focus) $('#inspector').scrollTop = 0
@@ -964,6 +1071,24 @@ function updatePreview() {
   const used = [...list(metadata.stages).map(id => named(CATALOG.stages, id)), ...list(metadata.roles).map(id => named(CATALOG.roles, id)), ...list(metadata.processes).map(id => processes.find(process => process.id === id)?.name || id), ...list(metadata.steps).map(reference => { const [processId, stepId] = reference.split('/'); return processes.find(process => process.id === processId)?.steps.find(step => step.id === stepId)?.name || reference })]
   $('#file-context').innerHTML = `<p>${escape(metadata.why || 'This file supports review or installation of the selected pack.')}</p>${used.length ? `<p><strong>Used by</strong> ${escape(used.join(', '))}</p>` : ''}${list(metadata.sources).length ? `<p><strong>Sources</strong> ${list(metadata.sources).map(source => escape(typeof source === 'string' ? source : source.url || source.title || source.id)).join(', ')}</p>` : ''}${list(metadata.assumptions).length ? `<p><strong>Review</strong> ${list(metadata.assumptions).map(assumption => escape(assumption)).join(' ')}</p>` : ''}`
   $('#file-tree').querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.file === selectedFile)))
+  renderFileAssociations()
+}
+
+function renderFileAssociations() {
+  const context=processOverview ? null : processDesigner.getContext()
+  const process=context?.processId ? config.workflowModel.processes.find(item=>item.id===context.processId) : undefined
+  const step=process?.steps.find(item=>item.id===context.stepId)
+  const stage=getStages(config).find(item=>item.id===workflowSelection.stage)
+  const relevant=pack.files.filter(file=>{
+    const meta=file.metadata || file
+    if(process) return step ? list(meta.steps).includes(`${process.id}/${step.id}`) : list(meta.processes).includes(process.id)
+    return stage && list(meta.stages).includes(stage.id)
+  })
+  const target=$('#workflow-file-context')
+  target.hidden=!(process || stage)
+  if(target.hidden) {target.replaceChildren();return}
+  const label=step?.name || process?.name || stage.title
+  target.innerHTML=`<strong>Files linked to ${escape(label)}</strong><p>${processDesigner.isPending() ? 'These links and file contents use accepted decisions. Pending process edits are separate.' : 'These are recorded file associations, not proof that a step has run.'}</p><div>${relevant.map(file=>`<button type="button" class="text-button" data-select-file="${escape(file.path)}">${escape(file.path)}</button>`).join('') || '<span>No direct file association in this output.</span>'}</div>`
 }
 
 function updatePack(refreshReview = true) {
@@ -1029,7 +1154,8 @@ function renderFieldIssues() {
     note.className = 'field-error'
     note.dataset.fieldError = ''
     note.textContent = messages.join(' ')
-    control.insertAdjacentElement('afterend', note)
+    const label=control.closest('label')
+    ;(label || control).insertAdjacentElement('afterend', note)
     control.setAttribute('aria-invalid', 'true')
     control.setAttribute('aria-describedby', [control.getAttribute('aria-describedby'),id].filter(Boolean).join(' '))
   }
@@ -1052,6 +1178,7 @@ function filename() {
 
 function exportConfig() {
   if (!config) return
+  if (!pendingDownloadAllowed()) return
   try {
     const content = serializeProject(config)
     download(`${filename()}.project.json`, content, 'application/json')
@@ -1061,16 +1188,27 @@ function exportConfig() {
 }
 
 function exportStandaloneSkill(skillId) {
-  if (!config || !guidanceReady(`skill:${skillId}`)) return
+  if (!config || !pendingDownloadAllowed(skillId)) return false
+  if (!guidanceReady(`skill:${skillId}`)) return false
   try {
     const standalone = compileStandaloneSkill(config, skillId)
     download(`${filename()}-${skillId}-skill.zip`, zipFiles(standalone.files), 'application/zip')
     toast('Standalone skill exported with its required resources. Use a project ZIP or readable Atlas to keep the editable decisions and review.')
-  } catch (error) { toast(`Skill export failed. ${error.message}`) }
+    return true
+  } catch (error) { toast(`Skill export failed. ${error.message}`); return false }
 }
+
+$('#download-accepted-only').addEventListener('change', () => {
+  $('#download-pending-skill-action').disabled = !$('#download-accepted-only').checked
+})
+$('#download-pending-skill-action').addEventListener('click', () => {
+  if (!pendingStandaloneSkill || !$('#download-accepted-only').checked) return
+  if (exportStandaloneSkill(pendingStandaloneSkill)) $('#download-dialog').close()
+})
 
 function exportPack() {
   if (!config) return
+  if (!pendingDownloadAllowed()) return
   if (!guidanceReady('pack')) return
   clearTimeout(compileTimer)
   updatePack()
@@ -1089,7 +1227,7 @@ function confirmReplace(description, wording = {}) {
   $('#confirm-dialog [value="cancel"]').textContent = wording.keep || 'Keep this session'
   $('#confirm-dialog [value="replace"]').textContent = wording.replace || 'Replace project'
   $('#confirm-description').textContent = description
-  $('#download-before-replace').hidden = !config
+  $('#download-before-replace').hidden = !config || hasReplacementProposal()
   $('#download-before-replace').textContent = hasUnkeptFileReview() ? 'Download reviewed files' : 'Download current project'
   dialog.returnValue = 'cancel'
   dialog.showModal()
@@ -1097,12 +1235,18 @@ function confirmReplace(description, wording = {}) {
 }
 
 async function replaceConfig(next, message, origin = 'example', { consumeAssistance = false, applyGuard = () => true } = {}) {
-  if (processDesigner.isPending()) { toast('Apply or discard your process edits before opening another project.'); return false }
-  if (sessionDirty({ includeAssistance: !consumeAssistance }) && !await confirmReplace(hasUnrecordedReviewEdits() ? 'You have wording that is not recorded. Choose Use this answer to include it in your files, or replace this session.' : hasUnkeptFileReview() ? 'Your file review choices have not been downloaded. Download the reviewed files to keep them. Any separate project edits also need their own project download before replacing this session.' : config ? 'There are decisions or review notes you have not downloaded. Download your current project to keep them, or replace this session.' : 'Your description has not been downloaded. Keep this session to use it, or replace it with the selected pack.')) return false
+  const hasPending = processDesigner.isPending()
+  const separateProposal = !consumeAssistance && hasReplacementProposal()
+  const warning = separateProposal
+    ? `You have a separate replacement proposal. Its description and answer wording are not included in a current project download. Keep this session to continue editing it. Replacing the project discards the proposal${hasPending ? ', pending process edits' : ''} and any project decisions not downloaded.`
+    : hasPending ? 'Your process has pending edits. Keep this session to review and apply them first. Replacing the project discards those pending edits and any decisions not downloaded.' : hasUnrecordedReviewEdits() ? 'You have wording that is not recorded. Choose Use this answer to include it in your files, or replace this session.' : hasUnkeptFileReview() ? 'Your file review choices have not been downloaded. Download the reviewed files to keep them. Any separate project edits also need their own project download before replacing this session.' : config ? 'There are decisions or review notes you have not downloaded. Download your current project to keep them, or replace this session.' : 'Your description has not been downloaded. Keep this session to use it, or replace it with the selected pack.'
+  const wording = separateProposal ? { title: 'Keep your replacement proposal?', keep: 'Keep editing', replace: 'Discard proposal and replace' } : hasPending ? { replace: 'Discard pending edits and replace' } : {}
+  if (sessionDirty({ includeAssistance: !consumeAssistance }) && !await confirmReplace(warning, wording)) return false
   if (!applyGuard()) { toast('The description changed. Review the current draft before creating it.'); return false }
-  if (processDesigner.isOpen()) processDesigner.reset()
+  processDesigner.reset()
   clearTimeout(compileTimer)
   if (!consumeAssistance) { assistance.reset(); jevView?.clearReviewWording() }
+  replacementWordingDirty = false
   deferredAssistantQuestions = {}
   assistantAnswerReviews = {}
   assistantReviewWording.clear()
@@ -1119,18 +1263,68 @@ async function replaceConfig(next, message, origin = 'example', { consumeAssista
   guidanceAdoption = null; pendingGuidance = null; guidanceChoiceNeedsDownload = false
   projectOrigin = origin
   historyEntries = config ? [JSON.stringify(config)] : []; historyIndex = 0
-  lastDownloaded = config && origin !== 'assisted' ? JSON.stringify(config) : null; lastHistoryKey = ''
+  lastDownloaded = config && !['assisted', 'starter'].includes(origin) ? JSON.stringify(config) : null; lastHistoryKey = ''
   selectedStage = ''; inspectorOpen = false; paletteSelection = null
+  workflowSelection = {stage:'', section:'workflow', inspector:false}
+  workspaceView = 'workflow'
+  briefSection = 'intent'
+  processOverview = false
   $('#palette-hint').hidden = true
   $('#import-notice').hidden = true
   pack = null
   lastImpact = []
   updatePack(false)
-  if (config) showView('workflow')
-  else { history.replaceState(null, '', '#start'); renderStudio(); $('#start-screen').focus() }
+  if (origin !== 'starter') $('#starter-goal').value = ''
+  showMain(['blank', 'assisted', 'starter'].includes(origin) ? 'brief' : config ? 'workflow' : 'brief')
+  if (config && mainView === 'brief') renderStep()
   if (message) toast(message)
   return true
 }
+
+function renderGoalPicker() {
+  const goal = GOAL_STARTERS.find(item => item.id === $('#starter-goal').value)
+  $('#starter-goal-label').textContent = config ? 'Start another draft' : 'Start with a common goal'
+  $('#starter-goal-description').textContent = goal
+    ? `${goal.description} ${config ? 'Starts a new draft.' : 'Your description is kept if supplied.'}`
+    : config ? 'Your current work stays unchanged until you start a new draft.' : 'An editable starting plan. No AI request.'
+  $('#use-starter-goal').hidden = !goal
+  $('#use-starter-goal').textContent = config ? 'Start a new draft' : 'Use this goal'
+}
+
+async function useStarterGoal() {
+  const goal = GOAL_STARTERS.find(item => item.id === $('#starter-goal').value)
+  if (!goal) return
+  const button = $('#use-starter-goal')
+  button.disabled = true
+  try {
+    let next = createGoalProject(goal.id)
+    const state = assistance.getState()
+    const snapshot = JSON.stringify([state.draft, state.pendingAnswers])
+    const keepDescription = !config && state.dirty
+    if (keepDescription) {
+      if (Object.values(state.pendingAnswers).some(text => text.trim()) && !await confirmReplace('Some answer wording has not been recorded. Keep this session to confirm it, or create the goal draft with your description and recorded answers only.', { title: 'Keep unrecorded wording?', replace: 'Create goal draft' })) return
+      const supplied = composeAssistedProject(state.draft, goal.recipeId)
+      next.project.name = supplied.project.name === 'Untitled workflow' ? next.project.name : supplied.project.name
+      next.project.purpose = supplied.project.purpose.trim() ? supplied.project.purpose : next.project.purpose
+      if (next.runtime.enabled) next.runtime.outcome = next.project.purpose
+      next.workflow.answers = supplied.workflow.answers
+      next.practices = [...new Set([...next.practices, ...supplied.practices])]
+      for (const [id, note] of Object.entries(supplied.workflow.notes)) next.workflow.notes[id] = [next.workflow.notes[id], note].filter(Boolean).join('\n\n')
+    }
+    if (!await replaceConfig(next, '', 'starter', {
+      consumeAssistance: keepDescription,
+      applyGuard: () => !keepDescription || snapshot === JSON.stringify([assistance.getState().draft, assistance.getState().pendingAnswers]),
+    })) return
+    assistance.reset()
+    jevView?.clearReviewWording()
+    $('#project-purpose').focus({ preventScroll: true })
+    toast('Goal draft ready. Adapt the result and review the steps. Unknown details stay open.')
+  } catch (error) { toast(error.message || 'This goal could not be opened. Your current work was kept.') }
+  finally { button.disabled = false }
+}
+
+$('#starter-goal').addEventListener('change', renderGoalPicker)
+$('#use-starter-goal').addEventListener('click', useStarterGoal)
 
 function focusField(path) {
   const reviewId = path.startsWith('workflow.answers.') ? path.slice('workflow.answers.'.length) : ''
@@ -1179,6 +1373,11 @@ function removeRecord(collection, index) {
 }
 
 document.addEventListener('input', event => {
+  if (config && event.target.closest('[data-jev-wording]')) {
+    replacementWordingDirty = true
+    renderSession()
+    return
+  }
   const wording = event.target.closest('[data-assistant-answer-wording]')
   if (wording && assistantAnswerReview(wording.dataset.assistantAnswerWording)) {
     assistantReviewWording.set(wording.dataset.assistantAnswerWording, wording.value)
@@ -1192,6 +1391,7 @@ document.addEventListener('input', event => {
   let target = config
   for (const key of keys) target = target[key]
   target[property] = control.type === 'checkbox' ? control.checked : control.value
+  if (control.dataset.field === 'project.purpose' && $('#active-suggestion').open) assistance.updateBrief(control.value)
   if (control.dataset.field.endsWith('.actorType') && target.actorType === 'agent' && !config.agents.some(agent => agent.role === target.actorId)) target.actorId = config.agents[0]?.role || ''
   if (control.dataset.field === 'project.host' && $('#host-note')) $('#host-note').textContent = hostNote()
   if (control.dataset.field === 'runtime.enabled' && control.checked && !config.runtime.controls.length) config.runtime.controls = CATALOG.runtimeControls.map(item => ({ ...item, status: 'requirement', implementation: '', evidenceId: '' }))
@@ -1266,9 +1466,19 @@ document.addEventListener('change', event => {
 })
 
 document.addEventListener('click', async event => {
+  const skip = event.target.closest('a.skip')
+  if (skip) {
+    event.preventDefault()
+    const destination = document.getElementById(skip.hash.slice(1))
+    if (destination && !destination.closest('[hidden],[inert]')) {
+      destination.focus({preventScroll:true})
+      destination.scrollIntoView({block:'start',behavior:'instant'})
+    }
+    return
+  }
   const processOpen = event.target.closest('[data-pe-open]')
-  if (processOpen && config) { processDesigner.open(processOpen.dataset.peOpen, processOpen.dataset.peStep || ''); return }
-  if (event.target.closest('[data-pe-new]') && config) { processDesigner.open(); return }
+  if (processOpen && config) { mainView='workflow'; workspaceView='workflow'; processOverview=false; processDesigner.open(processOpen.dataset.peOpen, processOpen.dataset.peStep || ''); renderStudio(); return }
+  if (event.target.closest('[data-pe-new]') && config) { mainView='workflow'; workspaceView='workflow'; processOverview=false; processDesigner.open(); renderStudio(); return }
   if (event.target.closest('[data-start-process]')) {
     const next = createRecipe('feasibility')
     next.workflowModel.processes = []
@@ -1276,7 +1486,7 @@ document.addEventListener('click', async event => {
     next.skills = []
     next.practices = []
     next.components = []
-    if (await replaceConfig(next, '', 'blank')) processDesigner.open()
+    if (await replaceConfig(next, '', 'blank')) { mainView='workflow'; workspaceView='workflow'; processOverview=false; processDesigner.open(); routeTo('#workflow'); renderStudio() }
     return
   }
   const evidenceEdit = event.target.closest('[data-edit-evidence]')
@@ -1296,7 +1506,12 @@ document.addEventListener('click', async event => {
       if (process?.source === 'custom') {
         const collection = processPath[2] || 'steps'
         const recordId = process[collection][Number(processPath[3] || 0)]?.id || ''
+        mainView = 'workflow'
+        workspaceView = 'workflow'
+        processOverview = false
+        routeTo('#workflow')
         processDesigner.open(process.id, collection === 'steps' ? recordId : '', { collection, recordId })
+        renderStudio()
         return
       }
     }
@@ -1527,6 +1742,7 @@ function markDownloaded(reviewIncluded = true) {
 
 function downloadAtlas() {
   if (!config) return
+  if (!pendingDownloadAllowed()) return
   if (!guidanceReady('atlas')) return
   try {
     const output = buildProjectAtlas(config, withSessionReview(compileOutput(config, chosenOutput())))
@@ -1536,38 +1752,46 @@ function downloadAtlas() {
   } catch (error) { toast(`Atlas download failed. ${error.message}`) }
 }
 
-function openKnowledge(topic = 'overview', view = 'read', push = true) {
+function openKnowledge(topic = null, view = null, push = true) {
   document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close())
   if (!knowledgeOpen) {
     knowledgeReturnFocus = document.activeElement
-    knowledgeReturnSelector = knowledgeReturnFocus.id ? `#${CSS.escape(knowledgeReturnFocus.id)}` : null
+    const attributes = [...(knowledgeReturnFocus.attributes || [])].filter(attribute=>attribute.name.startsWith('data-'))
+    const container = knowledgeReturnFocus.closest('#step-content') ? '#step-content ' : knowledgeReturnFocus.closest('#project-content') ? '#project-content ' : ''
+    knowledgeReturnSelector = knowledgeReturnFocus.id ? `#${CSS.escape(knowledgeReturnFocus.id)}` : container + attributes.map(attribute=>`[${attribute.name}="${CSS.escape(attribute.value)}"]`).join('') || null
     knowledgeScroll = window.scrollY
-    knowledgeReturnHash = config ? (location.hash === '#knowledge' ? history.state?.returnHash || '#workflow' : location.hash) : '#start'
+    knowledgeReturnHash = location.hash.startsWith('#knowledge') ? history.state?.returnHash || `#${mainView}` : location.hash || '#brief'
+    if (mainView === 'workflow') workflowSelection = {stage:selectedStage, section:currentStep, inspector:inspectorOpen}
+    if (mainView === 'brief' && detailSections.includes(currentStep)) briefSection = currentStep
   }
+  if (topic) knowledgeState = {...knowledgeState,topicId:topic,mode:view || 'read'}
+  else if (view) knowledgeState.mode = view
   knowledgeOpen = true
-  $('#knowledge-workspace').hidden = false
-  $('.skip').hidden = true
-  $('.studio-header').hidden = true
-  $('#studio-layout').hidden = true
-  $('#start-screen').hidden = true
-  const knowledgeView = view === 'explore' ? 'explore' : 'read'
-  // Replace the embedded document so its blank placeholder does not become a Back destination.
-  $('#knowledge-frame').contentWindow.location.replace(new URL(`../atlas/?embedded=1&view=${knowledgeView}&theme=${theme}#${encodeURIComponent(topic)}`, location.href).href)
-  if (push) history.pushState({atlasKnowledge:true,topic,view:knowledgeView,returnHash:knowledgeReturnHash}, '', '#knowledge')
-  syncEditorAccess()
+  mainView = 'knowledge'
+  if (!knowledgeLoaded) {
+    knowledgeLoaded = true
+    $('#knowledge-frame').src = new URL(`../atlas/?embedded=1&view=${knowledgeState.mode}&theme=${theme}#${encodeURIComponent(knowledgeState.topicId)}`, location.href).href
+  } else if (topic || view) $('#knowledge-frame').contentWindow?.postMessage({type:'workflow-atlas:knowledge-open',...knowledgeState,focus:!routing},location.origin)
+  if (push) routeTo(`#knowledge/${encodeURIComponent(knowledgeState.topicId)}/${knowledgeState.mode}`, {atlasKnowledge:true,topic:knowledgeState.topicId,view:knowledgeState.mode,returnHash:knowledgeReturnHash})
+  renderStudio()
+  sendPracticeContext()
   $('#knowledge-frame').focus()
 }
 
-function closeKnowledge(updateHistory = true) {
+function closeKnowledge(updateHistory = true, focus = true) {
   if (!knowledgeOpen) return
   knowledgeOpen = false
-  $('#knowledge-workspace').hidden = true
-  $('.studio-header').hidden = false
-  $('#knowledge-frame').contentWindow.location.replace('about:blank')
-  $('#start-screen').hidden = Boolean(config)
-  $('#studio-layout').hidden = !config
-  syncEditorAccess()
-  if (updateHistory) history.replaceState(null, '', knowledgeReturnHash)
+  mainView = /^#(?:brief|start|details-(?:intent|project|boundaries|evidence|runtime))/.test(knowledgeReturnHash) ? 'brief' : 'workflow'
+  if (mainView === 'brief') {currentStep=briefSection;selectedStage='';inspectorOpen=Boolean(config)}
+  else {selectedStage=workflowSelection.stage;currentStep=workflowSelection.section;inspectorOpen=workflowSelection.inspector}
+  if (updateHistory) routeTo(knowledgeReturnHash)
+  renderStudio()
+  if (config && inspectorOpen) renderStep()
+  if (!focus) return
+  restoreKnowledgeFocus()
+}
+
+function restoreKnowledgeFocus() {
   window.scrollTo({top:knowledgeScroll,behavior:'instant'})
   if (knowledgeReturnFocus?.isConnected && !knowledgeReturnFocus.closest('[hidden],[inert]')) knowledgeReturnFocus.focus({preventScroll:true})
   else if (knowledgeReturnSelector && $(knowledgeReturnSelector)?.getClientRects().length) $(knowledgeReturnSelector).focus({preventScroll:true})
@@ -1629,7 +1853,17 @@ window.addEventListener('message', event => {
   if (event.origin !== location.origin || event.source !== $('#knowledge-frame').contentWindow || !knowledgeOpen) return
   if (event.data?.type === 'workflow-atlas:close-knowledge') closeKnowledge()
   if (event.data?.type === 'workflow-atlas:theme' && event.data.theme !== theme) setTheme(event.data.theme)
-  if (event.data?.type === 'workflow-atlas:knowledge-ready') sendPracticeContext()
+  if (event.data?.type === 'workflow-atlas:knowledge-ready') {sendPracticeContext();setTheme(theme)}
+  if (event.data?.type === 'workflow-atlas:knowledge-state' && typeof event.data.topicId === 'string' && ['read','explore','sources'].includes(event.data.mode)) {
+    knowledgeState={topicId:event.data.topicId,mode:event.data.mode,mapView:event.data.mapView}
+    const hash=`#knowledge/${encodeURIComponent(knowledgeState.topicId)}/${knowledgeState.mode}`
+    if (!routing && location.hash !== hash) {
+      const state={atlasKnowledge:true,topic:knowledgeState.topicId,view:knowledgeState.mode,returnHash:knowledgeReturnHash}
+      if(location.hash === '#knowledge') history.replaceState(state,'',hash)
+      else history.pushState(state,'',hash)
+      lastRouteKey = location.hash + JSON.stringify(history.state)
+    }
+  }
   if (event.data?.type === 'workflow-atlas:practice-request' && typeof event.data.actionId === 'string' && typeof event.data.topicId === 'string') previewPractice(event.data.actionId,event.data.topicId)
 })
 
@@ -1689,7 +1923,17 @@ document.addEventListener('click', async event => {
     renderSession()
     const nextReview = $('#step-content [data-assistant-answer-wording]')
     ;(nextReview || $('#close-inspector')).focus()
-    toast(answerAction.hasAttribute('data-confirm-assistant-answer') ? 'Answer recorded in your project and files.' : 'Left unanswered. You can add it later in Project details.')
+    toast(answerAction.hasAttribute('data-confirm-assistant-answer') ? 'Answer recorded in your project and files.' : 'Left unanswered. You can add it later in Brief.')
+    return
+  }
+  const destination = event.target.closest('[data-main-view]')
+  if (destination) {event.preventDefault();showMain(destination.dataset.mainView);return}
+  const replacementChoice = event.target.closest('[data-review-recipe]')
+  if (replacementChoice && config) {
+    if (!assistance.isDirty()) { assistance.updateBrief(config.project.purpose); assistance.updateName(config.project.name) }
+    assistance.chooseRecipe(replacementChoice.dataset.reviewRecipe)
+    $('#active-suggestion').open = true
+    $('#jev-create')?.focus({ preventScroll: true })
     return
   }
   const start = event.target.closest('[data-start-recipe]')
@@ -1728,7 +1972,17 @@ document.addEventListener('click', async event => {
       break
     case 'review-guidance': openGuidanceReview(); break
     case 'task-brief': openTaskBrief(); break
-    case 'edit-outcome': openTaskBrief(); $('#brief-purpose').focus(); break
+    case 'edit-outcome': openTaskBrief(); break
+    case 'return-process':
+      $('#download-dialog').close()
+      mainView='workflow';workspaceView='workflow';processOverview=false
+      routeTo('#workflow');renderStudio();processDesigner.resume({focus:true})
+      break
+    case 'review-suggestion':
+      if (!assistance.isDirty()) { assistance.updateBrief(config.project.purpose);assistance.updateName(config.project.name) }
+      $('#active-suggestion').open=true
+      $('#jev-brief').focus()
+      break
     case 'choose-output': openDownload(); break
     case 'download-output': exportSelectedOutput(); break
     case 'open-pack': $('#open-dialog').showModal(); break
@@ -1738,9 +1992,9 @@ document.addEventListener('click', async event => {
     case 'redo': restoreHistory(1); break
     case 'choose-project-file': $('#import-file').click(); break
     case 'choose-project-folder': $('#project-folder').click(); break
-    case 'download-pack': exportPack(); if (!$('#guidance-dialog').open) $('#download-dialog').close(); break
-    case 'download-atlas': downloadAtlas(); if (!$('#guidance-dialog').open) $('#download-dialog').close(); break
-    case 'download-json': exportConfig(); $('#download-dialog').close(); break
+    case 'download-pack': exportPack(); if (!$('#guidance-dialog').open && (!processDesigner.isPending() || $('#download-accepted-only').checked)) $('#download-dialog').close(); break
+    case 'download-atlas': downloadAtlas(); if (!$('#guidance-dialog').open && (!processDesigner.isPending() || $('#download-accepted-only').checked)) $('#download-dialog').close(); break
+    case 'download-json': exportConfig(); if (!processDesigner.isPending() || $('#download-accepted-only').checked) $('#download-dialog').close(); break
     case 'dismiss-impact': lastImpact = []; renderStudio(); break
     case 'dismiss-import-notice': $('#import-notice').hidden = true; break
     case 'download-opened-files': download(`${filename()}-opened-files.zip`, zipFiles(importedFiles), 'application/zip'); toast('Original files downloaded exactly as supplied.'); break
@@ -1799,7 +2053,7 @@ document.addEventListener('keydown', event => {
     if (event.shiftKey && (document.activeElement === first || document.activeElement.matches('[tabindex="-1"]'))) { event.preventDefault(); last?.focus() }
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
   }
-  if (event.key === 'Tab' && inspectorOpen && compactEditor.matches && !knowledgeOpen && !document.querySelector('dialog[open]')) {
+  if (event.key === 'Tab' && document.body.classList.contains('editor-modal') && !document.querySelector('dialog[open]')) {
     const controls = [...$('#inspector').querySelectorAll('button,a[href],input,select,textarea,summary,[tabindex="0"]')].filter(item => !item.disabled && !item.closest('[hidden]') && item.getClientRects().length)
     const first = controls[0], last = controls.at(-1)
     if (event.shiftKey && (document.activeElement === first || document.activeElement === $('#step-content'))) { event.preventDefault(); last?.focus() }
@@ -1810,22 +2064,39 @@ document.addEventListener('keydown', event => {
 })
 window.addEventListener('beforeunload', event => { if (sessionDirty()) { event.preventDefault(); event.returnValue = '' } })
 function applyRoute() {
-  const id = location.hash.slice(1)
-  if (id === 'knowledge') { if (!knowledgeOpen) openKnowledge(typeof history.state?.topic === 'string' ? history.state.topic : 'overview', history.state?.view || 'explore', false); return }
-  if (knowledgeOpen) { closeKnowledge(false); if (location.hash === knowledgeReturnHash) return }
-  if (!config) { history.replaceState(null, '', '#start'); renderStudio(); return }
-  if (id.startsWith('stage-')) { openStage(id.slice(6)); return }
-  if (id.startsWith('details-')) { goTo(id.slice(8), false); return }
-  if (['preview', 'overview'].includes(id)) { showView(id === 'preview' ? 'overview' : 'workflow', false); return }
-  if (['files', 'artifacts'].includes(id)) { showView('artifacts', false); return }
-  if (id === 'architecture') { goTo('runtime', false); return }
-  if (id === 'workflow' || id === 'start' || !id) { showView('workflow', false); return }
-  if (steps.some(step => step.id === id)) goTo(id, false)
+  const key=location.hash + JSON.stringify(history.state)
+  if(key===lastRouteKey) return
+  lastRouteKey=key
+  const returning=knowledgeOpen && !location.hash.startsWith('#knowledge') && location.hash === knowledgeReturnHash
+  routing=true
+  try {
+    const id = location.hash.slice(1)
+    if (id === 'knowledge' || id.startsWith('knowledge/')) {
+      const [,encoded,mode]=id.split('/')
+      let topic=history.state?.topic || knowledgeState.topicId
+      if(encoded) {try{topic=decodeURIComponent(encoded)}catch{topic='overview'}}
+      openKnowledge(topic,mode || history.state?.view || knowledgeState.mode,false)
+      return
+    }
+    if (knowledgeOpen) closeKnowledge(false,false)
+    if (!config) {showMain(id === 'workflow' || id === 'files' || id.startsWith('stage-') ? 'workflow' : 'brief',false);return}
+    if (id === 'brief' || id === 'start' || !id) {showMain('brief',false);return}
+    if (id.startsWith('stage-')) {openStage(id.slice(6));return}
+    if (id.startsWith('details-')) {goTo(id.slice(8),false);return}
+    if (['preview','overview'].includes(id)) {showView(id === 'preview' ? 'overview' : 'workflow',false);return}
+    if (['files','artifacts'].includes(id)) {showView('artifacts',false);return}
+    if (id === 'architecture') {goTo('runtime',false);return}
+    if (id === 'workflow') {showMain('workflow',false);return}
+    if (steps.some(step=>step.id===id)) goTo(id,false)
+    else showMain('brief',false)
+  } finally {routing=false;if(returning)restoreKnowledgeFocus()}
 }
 window.addEventListener('hashchange', applyRoute)
+window.addEventListener('popstate', applyRoute)
+window.addEventListener('resize',()=>document.documentElement.style.setProperty('--workspace-header-height',`${$('.studio-header').getBoundingClientRect().height}px`))
 $('#example-options').innerHTML = CATALOG.recipes.map((item, index) => `<button type="button" data-example="${item.id}"><span class="example-icon" aria-hidden="true">${['◈','◎','◇'][index]}</span><div><strong>${escape(labelOf(item))}</strong><p>${escape(item.description)}</p><small>${item.stageIds.length} stages · Fictional project</small></div><span aria-hidden="true">→</span></button>`).join('')
 $('#legacy-notice').hidden = !legacyDraft
-jevView = mountJevView(assistance, { onCreate: createAssistedProject })
+jevView = mountJevView(assistance, { onCreate: createAssistedProject, onChange: renderSession })
 setTheme(theme)
 renderStudio()
 applyRoute()

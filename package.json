@@ -1,6 +1,6 @@
 {
   "name": "workflow-atlas",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0-beta.2",
   "private": true,
   "description": "Plan software work and export workflow instructions, skills and agent profiles.",
   "license": "Apache-2.0",
@@ -15,7 +15,7 @@
   "scripts": {
     "start": "node tools/serve.mjs",
     "test": "node --test tests/*.test.mjs",
-    "test:browser": "node tests/browser-jev.cjs && node tests/browser-artifacts.cjs && node tests/browser-output-choice.cjs && node tests/browser-output-transitions.cjs && node tests/browser-import-recovery.cjs && node tests/browser-navigation-recovery.cjs && node tests/browser-process-designer.cjs",
+    "test:browser": "node tests/browser-jev.cjs && node tests/browser-artifacts.cjs && node tests/browser-output-choice.cjs && node tests/browser-output-transitions.cjs && node tests/browser-import-recovery.cjs && node tests/browser-navigation-recovery.cjs && node tests/browser-process-designer.cjs && node tests/browser-process-designer-session.cjs && node tests/browser-three-view.cjs && node tests/browser-workspace-accessibility.cjs && node tests/browser-starter-goals.cjs",
     "test:handoff": "node tests/browser-handoff.cjs",
     "test:static-browser": "node tests/browser-static.cjs",
     "test:catalogue-browser": "node tests/browser-catalogue.cjs",

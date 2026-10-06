@@ -1,6 +1,6 @@
 # Describe work, then review a draft
 
-Use **Suggest my workflow** on the start screen. Describe the work in your own words. JEV suggests an investigation, feature or bug workflow. Atlas supplies the existing template stages, roles and skills. You review them before creating the project.
+Use **Suggest my workflow** in **Brief**. Describe the work in your own words. JEV suggests an investigation, feature or bug workflow. Atlas supplies the existing template stages, roles and skills. You review them before creating the project. JEV is optional and needs the local server setup. The hosted static workspace supports manual choices.
 
 [[diagram:decision-flow]]
 
@@ -11,7 +11,7 @@ Use **Suggest my workflow** on the start screen. Describe the work in your own w
 3. Select **Suggest my workflow**. Wait for the draft, or use **Cancel suggestion**.
 4. Read the suggested workflow and its stages. **Change workflow** lets you choose another. Your choice takes priority over the model.
 5. Answer the optional question if useful. Typing keeps a pending edit. **Record this answer** adds it to the project. **Continue without this** discards that pending edit and prevents an immediate repeat. If something is already recorded, **Keep my answer** retains that answer and discards the replacement you were typing.
-6. Select **Create this draft**. Unrecorded optional answer text stays out of the files. Edit the workflow, inspect **Files** and choose **Download**.
+6. Select **Create this draft**. Unrecorded optional answer text stays out of the files. Edit in **Workflow**, choose **Preview files** and then **Download**.
 
 You can create a draft with missing details. Stages and planned owners are template defaults, not findings about your team. Technologies, repository paths and commands remain open until you supply them.
 
@@ -21,7 +21,9 @@ JEV assesses whether your description covers a question. It does not extract tex
 
 Open **Review answer** to see your exact description in an editable field. Shorten or edit it, then select **Use this answer**. Only that deliberate action records the text for that question. Until then, the relevant exported field remains unresolved.
 
-You can do this after creating the draft too. When the next question was assessed as covered, **Review wording** opens your original description in Project details. Edit it and choose **Use this answer**, or choose **Leave unanswered** to discard the pending wording and move on. The wording review is kept only in the current session. Changing the project outcome or workflow clears that earlier assessment. Reopening a pack restores recorded answers, not an old model assessment.
+You can do this after creating the draft too. When the next question was assessed as covered, **Review wording** opens your original description in **Brief**. Edit it and choose **Use this answer**, or choose **Leave unanswered** to discard the pending wording and move on. The wording review is kept only in the current session. Changing the project outcome or workflow clears that earlier assessment. Reopening a pack restores recorded answers, not an old model assessment.
+
+In an existing project, **Review workflow options** opens **Review a replacement draft, optional**. Asking for a new suggestion creates a separate proposal. Your current project stays unchanged until you deliberately replace it. Switching to Workflow or Knowledge map alone does not make a provider request.
 
 A feature's user need and an investigation's desired outcome can already use your overall result. A bug still needs its own expected behavior. A goal such as fix checkout does not establish how checkout should work.
 
@@ -99,7 +101,7 @@ For another port, append `--port 8781`. Node loads this file only when the `--en
 
 ### Check the connection
 
-Open the address printed by the server, reload the start screen and enter a small fictional task. Select **Suggest my workflow**. A returned suggestion confirms that request succeeded. An available server status alone only confirms a nonempty key is configured, not that the provider accepted it. The manual choices remain usable if the request fails.
+Open the address printed by the server, return to an empty **Brief** and enter a small fictional task. Select **Suggest my workflow**. A returned suggestion confirms that request succeeded. An available server status alone only confirms a nonempty key is configured, not that the provider accepted it. The manual choices remain usable if the request fails.
 
 ### Sharing this beta
 
@@ -147,6 +149,6 @@ Safe response metadata includes contract versions, definition digest, attempts, 
 
 The view also measures request start through the first render frame of the result. That includes the browser request and rendering handoff, not participant reading time. These diagnostics remain in memory and are not attached to ordinary project downloads.
 
-Historical [metrics](metrics.md) remain synthetic pilot results. The [integrated trial](integrated-trial.md) evaluates this journey separately. Human usefulness and comprehension remain to be measured.
+Historical [metrics](metrics.md) remain synthetic pilot results. The [integrated trial](integrated-trial.md) preserves the earlier interface protocol and requires its matching frozen build. It is not the current three-view test guide. A new human trial needs an updated protocol and a new frozen round. Human usefulness and comprehension remain to be measured.
 
 Setup, provider data-handling links and local server behavior reviewed on 5 October 2026.

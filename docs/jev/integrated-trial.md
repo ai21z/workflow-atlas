@@ -1,6 +1,10 @@
 # Test the integrated suggestion journey
 
-**Protocol: atlas-integrated-trial-1.** This is a new guide for the in-app JEV integration. It does not replace the historical seven-card facilitator trial. No completed human session is claimed by this guide.
+**Historical interface protocol.** These steps describe the earlier in-app JEV interface with Files and Project details controls. They are retained for replay with the matching frozen application build, original protocol copy and verified round manifest. They are not instructions for the current Brief, Workflow and Knowledge map layout.
+
+**Protocol: atlas-integrated-trial-1.** No completed human session is claimed by this guide.
+
+For current usage, follow the [quick start](../quick-start.md) and [JEV integration guide](integration.md). A human trial of the three-view workspace needs an updated protocol and a new frozen round before execution. Preserve earlier step IDs, manifests and evidence. Do not relabel an old round as a test of the current interface.
 
 An owner, two simulated perspectives and one actual participant can follow the same actions. Record each execution separately. A simulation is not feedback from another person. This is scripted acceptance and understanding, not a representative usability study.
 

@@ -1,0 +1,59 @@
+{
+  "id": "pipeline-diagnosis",
+  "title": "Diagnose a pipeline failure",
+  "summary": "Find the first supported cause, then choose a useful next action.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Inputs",
+      "text": "The failed run and candidate revision, the stage that failed, relevant logs or reports, expected behavior and any known environment changes."
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Identify the first actionable failure. Later errors may be consequences.",
+        "Compare the observation with the expected behavior and identify the affected part of the work.",
+        "Separate possible implementation, fixture, dependency, access and infrastructure causes. Keep uncertain causes explicit.",
+        "Inspect evidence for the strongest explanation. Use an approved read path for logs and reports.",
+        "Choose a bounded next action. If a correction is made, rerun the affected checks for the corrected candidate and retain the actual result."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Output",
+      "text": "A finding with the run and revision, the observed failure, supporting evidence, remaining uncertainty, checks actually performed and the proposed next action."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance checks",
+      "text": "Another reviewer can find the relevant evidence and distinguish a proposed explanation from a verified correction. Stop repeated retries when they add no new evidence."
+    },
+    {
+      "type": "p",
+      "label": "Choose the relevant environment",
+      "text": "Jenkins diagnosis is one specialist example. Use the same evidence questions with another pipeline system, then supply that system's actual run identifiers, access path and commands. Atlas does not invent or connect those interfaces."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed procedure",
+  "confidence": "Moderate. Validate the procedure in your environment",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "instructions",
+      "verification"
+    ],
+    "aliases": [
+      "CI diagnosis",
+      "pipeline troubleshooting",
+      "build failure"
+    ],
+    "revision": "1",
+    "applicability": "Use when an automated pipeline fails and a team needs an evidence based diagnosis. A pipeline system or AI agent is not prescribed.",
+    "limits": "This is a proposed reading procedure. It does not select an exportable skill, configure access, run checks or establish a successful result.",
+    "sourceStatus": "needs-review",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

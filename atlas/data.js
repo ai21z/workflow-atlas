@@ -2243,22 +2243,27 @@ window.TOPIC_DATA = {
     {
       "id": "skills",
       "title": "Skills & agent roles",
-      "summary": "Package repeatable procedures around real tasks and executable supporting tools.",
+      "summary": "Start with a repeatable task, then choose procedures and specialist guidance that fit your work.",
       "sections": [
         {
           "type": "p",
-          "label": "Starting package",
-          "text": "Choose procedures that repeat in the actual work, such as requirements investigation, impact analysis, verification or review preparation. Add specialized skills only when their tasks are present."
+          "label": "Start with the task",
+          "text": "Investigate requirements, assess a change, diagnose a pipeline failure, verify data or prepare evidence. The procedure names the work. Its specialization supplies details for a particular environment."
+        },
+        {
+          "type": "p",
+          "label": "Procedure, skill and role",
+          "text": "A reading procedure explains how to approach a task. An exported skill packages supported instructions for reuse. A role names responsibility and boundaries. A topic is not automatically an exportable skill or a working tool connection."
+        },
+        {
+          "type": "p",
+          "label": "Reusable entry points",
+          "text": "Diagnose a pipeline failure, Verify data and query results, and Verify sources and evidence are general starting points below. Jenkins, RDF/SPARQL and country-source review keep their specialist detail within explicit scopes."
         },
         {
           "type": "p",
           "label": "Author from evidence",
-          "text": "Create a skill when a useful procedure repeats or an observed failure reveals missing guidance. A large persona catalog does not substitute for working tools and acceptance criteria."
-        },
-        {
-          "type": "p",
-          "label": "Specialized examples",
-          "text": "Jenkins diagnosis, RDF/SPARQL verification and country-source review illustrate particular environments. They are not a required starter package."
+          "text": "Create a skill when a useful procedure repeats or an observed failure reveals missing guidance. Supply actual inputs, expected outputs and acceptance checks. Confirm the fit of the procedure before using it in your environment."
         }
       ],
       "refs": [
@@ -2272,8 +2277,8 @@ window.TOPIC_DATA = {
           "instructions"
         ],
         "aliases": [],
-        "revision": "1",
-        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+        "revision": "2",
+        "applicability": "Use this cluster to distinguish reusable task procedures, specialist reading examples and supported generated instructions.",
         "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
         "sourceStatus": "legacy",
         "reviewedOn": "",
@@ -2455,9 +2460,76 @@ window.TOPIC_DATA = {
       ]
     },
     {
+      "id": "pipeline-diagnosis",
+      "title": "Diagnose a pipeline failure",
+      "summary": "Find the first supported cause, then choose a useful next action.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Inputs",
+          "text": "The failed run and candidate revision, the stage that failed, relevant logs or reports, expected behavior and any known environment changes."
+        },
+        {
+          "type": "steps",
+          "label": "Procedure",
+          "items": [
+            "Identify the first actionable failure. Later errors may be consequences.",
+            "Compare the observation with the expected behavior and identify the affected part of the work.",
+            "Separate possible implementation, fixture, dependency, access and infrastructure causes. Keep uncertain causes explicit.",
+            "Inspect evidence for the strongest explanation. Use an approved read path for logs and reports.",
+            "Choose a bounded next action. If a correction is made, rerun the affected checks for the corrected candidate and retain the actual result."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Output",
+          "text": "A finding with the run and revision, the observed failure, supporting evidence, remaining uncertainty, checks actually performed and the proposed next action."
+        },
+        {
+          "type": "p",
+          "label": "Acceptance checks",
+          "text": "Another reviewer can find the relevant evidence and distinguish a proposed explanation from a verified correction. Stop repeated retries when they add no new evidence."
+        },
+        {
+          "type": "p",
+          "label": "Choose the relevant environment",
+          "text": "Jenkins diagnosis is one specialist example. Use the same evidence questions with another pipeline system, then supply that system's actual run identifiers, access path and commands. Atlas does not invent or connect those interfaces."
+        }
+      ],
+      "refs": [],
+      "basis": "Proposed procedure",
+      "confidence": "Moderate. Validate the procedure in your environment",
+      "catalog": {
+        "kind": "procedure",
+        "domains": [
+          "instructions",
+          "verification"
+        ],
+        "aliases": [
+          "CI diagnosis",
+          "pipeline troubleshooting",
+          "build failure"
+        ],
+        "revision": "1",
+        "applicability": "Use when an automated pipeline fails and a team needs an evidence based diagnosis. A pipeline system or AI agent is not prescribed.",
+        "limits": "This is a proposed reading procedure. It does not select an exportable skill, configure access, run checks or establish a successful result.",
+        "sourceStatus": "needs-review",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "skills",
+      "related": [
+        "ci-skill",
+        "post-change-checks",
+        "jenkins"
+      ]
+    },
+    {
       "id": "ci-skill",
-      "title": "Jenkins diagnosis skill",
-      "summary": "Investigate the first actionable failure with build and revision context.",
+      "title": "Jenkins diagnosis example",
+      "summary": "Apply pipeline diagnosis to a Jenkins run, using its actual logs and revision context.",
       "sections": [
         {
           "type": "p",
@@ -2467,7 +2539,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Procedure",
-          "text": "Locate the first actionable error; distinguish implementation, fixture, environment, access, and infrastructure causes; inspect relevant source; propose the smallest supported next step."
+          "text": "Locate the first actionable error. Distinguish implementation, fixture, environment, access and infrastructure causes. Inspect relevant source and propose the smallest supported next step."
         },
         {
           "type": "p",
@@ -2484,15 +2556,108 @@ window.TOPIC_DATA = {
       "basis": "Proposed design",
       "confidence": "Moderate",
       "catalog": {
-        "kind": "procedure",
+        "kind": "example",
         "domains": [
           "instructions"
         ],
-        "aliases": [],
-        "revision": "1",
-        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
-        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "aliases": [
+          "Jenkins diagnosis skill"
+        ],
+        "revision": "2",
+        "applicability": "Use this specialist example when the failing pipeline runs in Jenkins and approved run/log access is available.",
+        "limits": "This reading example does not supply Jenkins credentials, a configured client, commands for your repository or a verified correction.",
         "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "pipeline-diagnosis",
+      "related": [
+        "jenkins",
+        "retries",
+        "finding-contract",
+        "pipeline-diagnosis"
+      ]
+    },
+    {
+      "id": "data-query-verification",
+      "title": "Verify data and query results",
+      "summary": "Define the expected meaning, then check the result using the actual data model and engine.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Inputs",
+          "text": "The requested behavior, permitted data scope, relevant schema or model version, representative fixtures, expected results and the actual query interface and target engine."
+        },
+        {
+          "type": "steps",
+          "label": "Procedure",
+          "items": [
+            "Record expected results and scope before choosing checks. Include normal, empty, invalid and unavailable cases where relevant.",
+            "Choose checks that fit the data model. SQL tables, RDF graphs and property graphs have different structure and query semantics.",
+            "Verify structural rules that actually apply, then compare returned values with the expected result and permitted scope.",
+            "Record the dataset, query or API request, engine and version, observed result and limitations. A valid shape does not establish the factual truth of a record.",
+            "When performance matters, use supported diagnostics and measured workloads from the target engine. Distinguish a local fixture check from evidence in the target environment."
+          ]
+        },
+        {
+          "type": "table",
+          "label": "Keep the data families distinct",
+          "headers": [
+            "Environment",
+            "Questions to resolve"
+          ],
+          "rows": [
+            [
+              "Relational SQL",
+              "Which tables, keys, joins, null behavior and transaction boundaries affect the expected result?"
+            ],
+            [
+              "RDF and SPARQL",
+              "Which graph, vocabulary, inference assumptions, shapes and missing statements affect the result?"
+            ],
+            [
+              "Property graph",
+              "Which labels, relationships, properties, traversals and engine behavior affect the result?"
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Output",
+          "text": "A reproducible check record with expected and actual results, input versions, interface, permitted scope and any untested assumptions."
+        },
+        {
+          "type": "p",
+          "label": "Acceptance checks",
+          "text": "The result matches the recorded expectation for the tested inputs and scope. Engine specific checks are named explicitly. Missing tests remain visible."
+        },
+        {
+          "type": "p",
+          "label": "Specializations",
+          "text": "The RDF/SPARQL procedure is available below. PostgreSQL, Neptune, Fuseki and Neo4j pages explain different technology examples. Their presence does not imply interchangeable queries or a working integration."
+        }
+      ],
+      "refs": [],
+      "basis": "Proposed procedure",
+      "confidence": "Moderate. Engine specific checks need local validation",
+      "catalog": {
+        "kind": "procedure",
+        "domains": [
+          "instructions",
+          "verification"
+        ],
+        "aliases": [
+          "query testing",
+          "database verification",
+          "SQL checks",
+          "graph checks"
+        ],
+        "revision": "1",
+        "applicability": "Use when verifying a data transformation, query or retrieval API. Select the actual data model and engine before applying specialist checks.",
+        "limits": "This is a proposed reading procedure. It does not select an exportable skill, configure access, run checks or establish a successful result.",
+        "sourceStatus": "needs-review",
         "reviewedOn": "",
         "claims": [],
         "guidance": "reading",
@@ -2500,15 +2665,17 @@ window.TOPIC_DATA = {
       },
       "parent": "skills",
       "related": [
-        "jenkins",
-        "retries",
-        "finding-contract"
+        "rdf-skill",
+        "retrieval-options",
+        "retrieve-and-validate",
+        "postgresql-data",
+        "neo4j-data"
       ]
     },
     {
       "id": "rdf-skill",
-      "title": "RDF/SPARQL skill",
-      "summary": "Verify graph structure and query behavior using versioned fixtures and the right engine.",
+      "title": "RDF/SPARQL verification procedure",
+      "summary": "Apply data and query verification to RDF graphs and SPARQL in the target engine.",
       "sections": [
         {
           "type": "p",
@@ -2522,7 +2689,7 @@ window.TOPIC_DATA = {
             "Validate applicable structural constraints.",
             "Exercise positive, negative, scope, missing-data, and temporal scenarios.",
             "Check API-visible semantics and named-graph selection.",
-            "Use measured Neptune execution plans for performance findings."
+            "For an Amazon Neptune deployment, use its measured execution plans when investigating performance. For another RDF engine, use that engine's supported diagnostics and measured workload."
           ]
         },
         {
@@ -2543,11 +2710,83 @@ window.TOPIC_DATA = {
         "domains": [
           "instructions"
         ],
-        "aliases": [],
-        "revision": "1",
-        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
-        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "aliases": [
+          "RDF/SPARQL skill"
+        ],
+        "revision": "2",
+        "applicability": "Use when the workflow uses RDF data and SPARQL. Supply the actual engine, graph scope, vocabulary, fixtures and structural rules.",
+        "limits": "SQL and property graph procedures need their own checks. Neptune diagnostics apply only to Neptune. Reading this procedure does not run a query, install an integration or verify source truth.",
         "sourceStatus": "legacy",
+        "reviewedOn": "",
+        "claims": [],
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "data-query-verification",
+      "related": [
+        "coverage",
+        "candidate-isolation",
+        "query-performance",
+        "data-query-verification"
+      ]
+    },
+    {
+      "id": "source-evidence-verification",
+      "title": "Verify sources and evidence",
+      "summary": "Check what a source supports, where it applies and what remains uncertain.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Inputs",
+          "text": "The claim or decision being investigated, its intended scope, original source passages, source identifiers and versions, and any contradictory evidence."
+        },
+        {
+          "type": "steps",
+          "label": "Procedure",
+          "items": [
+            "State the claim precisely and distinguish an observation, inference, proposal and unresolved question.",
+            "Identify the original source, version and exact passage used. Record how the candidate claim was derived.",
+            "Compare the source with the claim. An available link or relevant document does not by itself establish support.",
+            "Retain qualifiers that affect applicability. These may be software version and environment, population, jurisdiction or effective period.",
+            "Record conflicts and missing support. Ask for review when uncertainty affects the decision instead of filling the gap with an invented fact."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Output",
+          "text": "A claim record with its status, supporting and contradictory passages, source/version identifiers, applicable scope, derivation and reviewer questions."
+        },
+        {
+          "type": "p",
+          "label": "Acceptance checks",
+          "text": "A reviewer can locate the cited passage, understand its relationship to the claim and see unresolved limits. A proposed or inferred statement is not labeled as confirmed evidence."
+        },
+        {
+          "type": "p",
+          "label": "Specialist example",
+          "text": "Country-source review adds jurisdiction, classification, effective dates and domain approval to these general evidence questions. It is relevant when those qualifiers affect the work, rather than a mandatory step for every project."
+        }
+      ],
+      "refs": [
+        "prov"
+      ],
+      "basis": "Proposed procedure using provenance concepts",
+      "confidence": "Moderate. Source support and applicability require review",
+      "catalog": {
+        "kind": "procedure",
+        "domains": [
+          "instructions",
+          "knowledge"
+        ],
+        "aliases": [
+          "evidence verification",
+          "source review",
+          "claim support"
+        ],
+        "revision": "1",
+        "applicability": "Use when a workflow depends on assertions from documents, research, requirements or other sources. Apply only the qualifiers relevant to the claim.",
+        "limits": "This is a proposed reading procedure. It does not select an exportable skill, configure access, run checks or establish a successful result.",
+        "sourceStatus": "needs-review",
         "reviewedOn": "",
         "claims": [],
         "guidance": "reading",
@@ -2555,15 +2794,16 @@ window.TOPIC_DATA = {
       },
       "parent": "skills",
       "related": [
-        "coverage",
-        "candidate-isolation",
-        "query-performance"
+        "source-skill",
+        "answer-contract",
+        "provenance",
+        "source-conflicts"
       ]
     },
     {
       "id": "source-skill",
-      "title": "Country-source skill",
-      "summary": "Prepare a source-evidence packet for a proposed domain assertion.",
+      "title": "Country-source review example",
+      "summary": "Apply source verification to a country or domain assertion, keeping the relevant scope and dates.",
       "sections": [
         {
           "type": "p",
@@ -2584,32 +2824,40 @@ window.TOPIC_DATA = {
           "type": "p",
           "label": "Output",
           "text": "Candidate assertion, derivation, evidence passages, conflicts, uncertainty, and reviewer finding. No unsupported publication default."
+        },
+        {
+          "type": "p",
+          "label": "Acceptance checks",
+          "text": "The assertion retains the applicable jurisdiction, population, classifications and effective period. Supporting passages and conflicts remain visible. A qualified reviewer records any approval separately."
         }
       ],
       "refs": [],
       "basis": "Proposed design",
       "confidence": "Moderate",
       "catalog": {
-        "kind": "procedure",
+        "kind": "example",
         "domains": [
           "instructions"
         ],
-        "aliases": [],
-        "revision": "1",
-        "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
-        "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+        "aliases": [
+          "Country-source skill"
+        ],
+        "revision": "2",
+        "applicability": "Use this specialist example for country regulations, labour agreements or other domain assertions where jurisdiction, classifications and effective dates affect applicability.",
+        "limits": "This example does not determine legal correctness, establish source truth, publish a claim or authorize a write. Domain evidence and reviewer authority must come from the actual project.",
         "sourceStatus": "legacy",
         "reviewedOn": "",
         "claims": [],
         "guidance": "reading",
         "definitionRefs": []
       },
-      "parent": "skills",
+      "parent": "source-evidence-verification",
       "related": [
         "jev-support",
         "applicability",
         "answer-contract",
-        "provenance"
+        "provenance",
+        "source-evidence-verification"
       ]
     },
     {
@@ -9549,7 +9797,7 @@ window.TOPIC_DATA = {
       {
         "from": "topic:ci-skill",
         "type": "browse-under",
-        "to": "topic:skills",
+        "to": "topic:pipeline-diagnosis",
         "sourceRefs": []
       },
       {
@@ -9573,7 +9821,7 @@ window.TOPIC_DATA = {
       {
         "from": "topic:rdf-skill",
         "type": "browse-under",
-        "to": "topic:skills",
+        "to": "topic:data-query-verification",
         "sourceRefs": []
       },
       {
@@ -9597,7 +9845,7 @@ window.TOPIC_DATA = {
       {
         "from": "topic:source-skill",
         "type": "browse-under",
-        "to": "topic:skills",
+        "to": "topic:source-evidence-verification",
         "sourceRefs": []
       },
       {
@@ -11844,6 +12092,114 @@ window.TOPIC_DATA = {
         "from": "topic:toolchain",
         "type": "related-reading",
         "to": "topic:retrieval-options",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:pipeline-diagnosis",
+        "type": "browse-under",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:ci-skill",
+        "type": "broader-concept",
+        "to": "topic:pipeline-diagnosis",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:pipeline-diagnosis",
+        "type": "related-reading",
+        "to": "topic:ci-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:data-query-verification",
+        "type": "browse-under",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:rdf-skill",
+        "type": "broader-concept",
+        "to": "topic:data-query-verification",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:data-query-verification",
+        "type": "related-reading",
+        "to": "topic:rdf-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-evidence-verification",
+        "type": "browse-under",
+        "to": "topic:skills",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-skill",
+        "type": "broader-concept",
+        "to": "topic:source-evidence-verification",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-evidence-verification",
+        "type": "related-reading",
+        "to": "topic:source-skill",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:pipeline-diagnosis",
+        "type": "related-reading",
+        "to": "topic:post-change-checks",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:pipeline-diagnosis",
+        "type": "related-reading",
+        "to": "topic:jenkins",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:data-query-verification",
+        "type": "related-reading",
+        "to": "topic:retrieval-options",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:data-query-verification",
+        "type": "related-reading",
+        "to": "topic:retrieve-and-validate",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:data-query-verification",
+        "type": "related-reading",
+        "to": "topic:postgresql-data",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:data-query-verification",
+        "type": "related-reading",
+        "to": "topic:neo4j-data",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-evidence-verification",
+        "type": "related-reading",
+        "to": "topic:answer-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-evidence-verification",
+        "type": "related-reading",
+        "to": "topic:provenance",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:source-evidence-verification",
+        "type": "related-reading",
+        "to": "topic:source-conflicts",
         "sourceRefs": []
       }
     ]

@@ -1,22 +1,27 @@
 {
   "id": "skills",
   "title": "Skills & agent roles",
-  "summary": "Package repeatable procedures around real tasks and executable supporting tools.",
+  "summary": "Start with a repeatable task, then choose procedures and specialist guidance that fit your work.",
   "sections": [
     {
       "type": "p",
-      "label": "Starting package",
-      "text": "Choose procedures that repeat in the actual work, such as requirements investigation, impact analysis, verification or review preparation. Add specialized skills only when their tasks are present."
+      "label": "Start with the task",
+      "text": "Investigate requirements, assess a change, diagnose a pipeline failure, verify data or prepare evidence. The procedure names the work. Its specialization supplies details for a particular environment."
+    },
+    {
+      "type": "p",
+      "label": "Procedure, skill and role",
+      "text": "A reading procedure explains how to approach a task. An exported skill packages supported instructions for reuse. A role names responsibility and boundaries. A topic is not automatically an exportable skill or a working tool connection."
+    },
+    {
+      "type": "p",
+      "label": "Reusable entry points",
+      "text": "Diagnose a pipeline failure, Verify data and query results, and Verify sources and evidence are general starting points below. Jenkins, RDF/SPARQL and country-source review keep their specialist detail within explicit scopes."
     },
     {
       "type": "p",
       "label": "Author from evidence",
-      "text": "Create a skill when a useful procedure repeats or an observed failure reveals missing guidance. A large persona catalog does not substitute for working tools and acceptance criteria."
-    },
-    {
-      "type": "p",
-      "label": "Specialized examples",
-      "text": "Jenkins diagnosis, RDF/SPARQL verification and country-source review illustrate particular environments. They are not a required starter package."
+      "text": "Create a skill when a useful procedure repeats or an observed failure reveals missing guidance. Supply actual inputs, expected outputs and acceptance checks. Confirm the fit of the procedure before using it in your environment."
     }
   ],
   "refs": [
@@ -30,8 +35,8 @@
       "instructions"
     ],
     "aliases": [],
-    "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "revision": "2",
+    "applicability": "Use this cluster to distinguish reusable task procedures, specialist reading examples and supported generated instructions.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",

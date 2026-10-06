@@ -1,6 +1,6 @@
 # Run the same Atlas and JEV trial
 
-**Historical facilitator protocol.** This guide describes the separate seven-card harness, not the new in-app suggestion journey. Use [the integrated trial](integrated-trial.md) for the current interface. Historical records and frozen rounds remain unchanged.
+**Historical facilitator protocol.** This guide describes the separate seven-card harness and requires its matching frozen interface. The [integrated trial](integrated-trial.md) also retains an earlier interface protocol. Neither is the current three-view trial. Use the [quick start](../quick-start.md) and [JEV integration guide](integration.md) for current usage. A new human trial needs an updated protocol and a new frozen round. Historical records and frozen rounds remain unchanged.
 
 This is a scripted acceptance and understanding test. Two simulated user perspectives and Aris will use the same fictional request, the same actions and the same seven JEV cards, in the same order. Three executions are planned, including one actual human participant. Simulated results must not be described as feedback from two people.
 
@@ -18,9 +18,9 @@ The instructions give exact paths and expected results. Completion therefore sho
 
 ## Read this before starting
 
-Atlas currently has three related views. **Workflow** is the editable plan. **Knowledge map** is the reference library. **Preview Atlas** is a readable presentation of the current project decisions. Reading the reference library does not change a project.
+The historical interface covered by this protocol has three related views. **Workflow** is the editable plan. **Knowledge map** is the reference library. **Preview Atlas** is a readable presentation of the project decisions. These historical names are retained in the numbered steps. Reading the reference library does not change a project.
 
-In the interface covered by this historical protocol, JEV was a separate facilitator operated pilot. The facilitator sent a frozen test card to the remote provider and opened a local report. The participant reviewed that report, then made agreed changes manually in Atlas. The current interface has a suggestion screen, so use the [integrated trial](integrated-trial.md) to test it. Replaying these steps requires the matching historical interface.
+In the interface covered by this historical protocol, JEV was a separate facilitator operated pilot. The facilitator sent a frozen test card to the remote provider and opened a local report. The participant reviewed that report, then made agreed changes manually in Atlas. The [integrated trial](integrated-trial.md) describes the subsequent earlier in-app suggestion interface. Replaying either protocol requires its matching historical build. Current suggestions are explained in the [integration guide](integration.md).
 
 [[diagram:repeatable-trial]]
 

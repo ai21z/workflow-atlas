@@ -1,3 +1,4 @@
+const { briefView, workflowView: openWorkflowView, closeWorkspaceDetails } = require('./browser-workspace-helpers.cjs')
 const assert = require('node:assert/strict')
 const fs = require('node:fs/promises')
 const path = require('node:path')
@@ -82,18 +83,19 @@ async function fresh(viewport = { width: 1440, height: 1000 }) {
 }
 async function start(recipe = 'feature-delivery', purpose = wanted) {
   await page.locator(`[data-start-recipe="${recipe}"]`).click()
-  await page.locator('#brief-dialog').waitFor({ state: 'visible' })
-  await page.locator('#brief-name').fill('Saved filters UX regression')
-  await page.locator('#brief-purpose').fill(purpose)
-  await page.locator('#brief-form button[type="submit"]').click()
+  await page.locator('#brief-workspace').waitFor({ state: 'visible' })
+  await page.locator('#project-name').fill('Saved filters UX regression')
+  await briefView(page)
+  await page.locator('#project-purpose').fill(purpose)
+  await openWorkflowView(page)
   await page.locator('#studio-layout').waitFor({ state: 'visible' })
 }
 async function closeDetails() {
-  if (await page.locator('#inspector').isVisible()) await page.locator('#close-inspector').click()
+  await closeWorkspaceDetails(page)
 }
 async function details(section = 'intent') {
   await closeDetails()
-  await page.locator('#project-details').click()
+  await briefView(page)
   await page.locator(`#details-nav [data-goto="${section}"]`).click()
   await page.locator('#inspector').waitFor({ state: 'visible' })
 }
@@ -192,12 +194,14 @@ async function main() {
     })
     await check('02-outcome-inheritance', async () => {
       await closeDetails()
+      await briefView(page)
       await page.locator('#project-purpose').fill(changedWanted)
       await details()
       assert.ok((await page.locator('.inherited-intent').innerText()).includes(changedWanted))
       await expand('[data-detail="intent-user-need"]')
       await page.locator('[data-field="workflow.answers.user-need"]').fill(refined)
       await closeDetails()
+      await briefView(page)
       await page.locator('#project-purpose').fill(finalWanted)
       await details()
       assert.equal(await page.locator('[data-field="workflow.answers.user-need"]').inputValue(), refined)
@@ -375,10 +379,11 @@ async function main() {
         const startDimensions = await assertNoOverflow()
         await page.locator('[data-start-recipe="feature-delivery"]').focus()
         await page.keyboard.press('Enter')
-        await page.locator('#brief-dialog').waitFor({ state: 'visible' })
-        await page.locator('#brief-name').fill('Keyboard journey')
-        await page.locator('#brief-purpose').fill(wanted)
-        await page.locator('#brief-form button[type="submit"]').focus()
+        await page.locator('#brief-workspace').waitFor({ state: 'visible' })
+        await page.locator('#project-name').fill('Keyboard journey')
+        await briefView(page)
+        await page.locator('#project-purpose').fill(wanted)
+        await page.locator('#brief-workspace [data-project-view="workflow"]').focus()
         await page.keyboard.press('Enter')
         await page.locator('#studio-layout').waitFor({ state: 'visible' })
         const workspaceDimensions = await assertNoOverflow()
@@ -387,8 +392,9 @@ async function main() {
         await page.locator('#inspector').waitFor({ state: 'visible' })
         assert.equal(await page.locator('[data-field="workflow.answers.acceptance"]').evaluate(element => element === document.activeElement), true)
         const inspectorDimensions = await assertNoOverflow()
-        await page.keyboard.press('Escape')
-        await page.locator('#inspector').waitFor({ state: 'hidden' })
+        await page.locator('.main-navigation [data-main-view="workflow"]').focus()
+        await page.keyboard.press('Enter')
+        await page.locator('#brief-workspace').waitFor({ state: 'hidden' })
         await page.locator('#download-project').focus()
         await page.keyboard.press('Enter')
         await page.locator('#download-dialog').waitFor({ state: 'visible' })
@@ -405,7 +411,7 @@ async function main() {
         await page.screenshot({ path: path.join(output, `download-${width}-${theme}.png`), fullPage: true })
         await page.keyboard.press('Escape')
         await page.locator('#download-dialog').waitFor({ state: 'hidden' })
-        return { theme, width, startDimensions, workspaceDimensions, inspectorDimensions, dialogDimensions, actionPosition, keyboardActions: 'Recipe, submit, next action, close details, open and close download' }
+        return { theme, width, startDimensions, workspaceDimensions, inspectorDimensions, dialogDimensions, actionPosition, keyboardActions: 'Recipe, shape workflow, next action, return to Workflow, open and close download' }
       })
     }
     await check('10-browser-errors', async () => {

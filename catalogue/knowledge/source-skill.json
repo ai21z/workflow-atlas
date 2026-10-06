@@ -1,7 +1,7 @@
 {
   "id": "source-skill",
-  "title": "Country-source skill",
-  "summary": "Prepare a source-evidence packet for a proposed domain assertion.",
+  "title": "Country-source review example",
+  "summary": "Apply source verification to a country or domain assertion, keeping the relevant scope and dates.",
   "sections": [
     {
       "type": "p",
@@ -22,20 +22,27 @@
       "type": "p",
       "label": "Output",
       "text": "Candidate assertion, derivation, evidence passages, conflicts, uncertainty, and reviewer finding. No unsupported publication default."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance checks",
+      "text": "The assertion retains the applicable jurisdiction, population, classifications and effective period. Supporting passages and conflicts remain visible. A qualified reviewer records any approval separately."
     }
   ],
   "refs": [],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
-    "kind": "procedure",
+    "kind": "example",
     "domains": [
       "instructions"
     ],
-    "aliases": [],
-    "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
-    "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
+    "aliases": [
+      "Country-source skill"
+    ],
+    "revision": "2",
+    "applicability": "Use this specialist example for country regulations, labour agreements or other domain assertions where jurisdiction, classifications and effective dates affect applicability.",
+    "limits": "This example does not determine legal correctness, establish source truth, publish a claim or authorize a write. Domain evidence and reviewer authority must come from the actual project.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
     "claims": []

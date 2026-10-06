@@ -14,17 +14,19 @@ Open [Workflow Atlas online](https://ai21z.github.io/workflow-atlas/). The hoste
 
 Project content stays in your tab and is not uploaded by the hosted app. Download to keep it. GitHub Pages records visitor IP addresses for security, as described in [GitHub's hosting documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection).
 
-1. Open the hosted workspace, or run the local server below.
-2. Choose **Design a connected process** for a custom process, or choose **Investigate an idea**, **Build a feature** or **Fix a bug**. Configured JEV can suggest one of those three development recipes from your description.
-3. Review the suggestion or starting pattern. Keep the decisions you want in the draft.
-4. Edit its steps and inspect **Files**. Unknown details stay unresolved.
-5. Choose **Download**. Start with a blueprint for a team discussion, or choose a skill or full pack for an AI assistant.
+1. Open the hosted workspace, or run the local server below. **Brief** asks what you want to achieve.
+2. Choose a common goal and **Use this goal**, design a connected process, or choose **Investigate an idea**, **Build a feature** or **Fix a bug**. Configured JEV can suggest one of those development recipes.
+3. Shape the work in **Workflow**. Use **Knowledge map** whenever you want explanations and sources.
+4. Choose **Preview files** from Brief or Workflow. Inspect the selected output. Unknown details stay unresolved.
+5. Choose **Download**. Start with a blueprint for a team discussion, or choose a skill or full pack for an AI assistant. Open the download to continue later.
 
 Follow the [quick start](docs/quick-start.md) for the full journey. Read [JEV setup](docs/jev/integration.md) only when you want suggestions.
 
 ## Current workspace
 
-The start screen has no active project. JEV can suggest one of three supported development recipes, or you can choose one yourself:
+The workspace has three main destinations: **Brief**, **Workflow** and **Knowledge map**. They share one session. Brief records the intended result and project context, Workflow edits the work, and Knowledge map explains options and practices. They are freely accessible views, not a wizard. Preview files is a secondary Workflow view, available from both Brief and Workflow.
+
+An empty session begins in Brief with no active project. JEV can suggest one of three supported development recipes, or you can choose one yourself:
 
 - **Investigate an idea**, understand the current process and recommend go or no-go.
 - **Build a feature**, plan, implement and review a scoped change.
@@ -32,17 +34,19 @@ The start screen has no active project. JEV can suggest one of three supported d
 
 **Design a connected process** opens a manual pattern chooser without requiring a development recipe, repository or agent. Start with a sequence, review gate or bounded correction. [Connect a process](docs/factory-guide.md#connect-a-process).
 
+The goal picker offers ten editable starting plans for features, service connections, task automation, performance, refactoring, bugs, pipelines, test coverage, investigations and agent workflow feasibility. **Use this goal** prepares the matching recipe and planning notes. It keeps your typed description and recorded answers. The picker makes no AI request and supplies no project facts or observed results. Starting another goal in an active project creates a replacement draft after a deliberate choice.
+
 Use **Open pack** to continue a supported download or **Browse examples** for explicitly fictional worked projects. Template roles and practices are editable defaults. A blank project leaves the Copilot host and source control unchosen.
 
-**Start with the result** asks for a name, intended outcome and optional existing context. Unknown details can stay blank. The next-step bar helps you return to the brief or review a suggested download, with an explanation and controls to choose a different output.
+Return to **Brief** to edit the outcome, record acceptance examples and add project context. Detailed components, boundaries, sources and optional runtime design stay available without dominating the opening question. Unknown details can stay blank. Editing an outcome keeps separately recorded answers and does not silently regenerate the workflow.
 
 In **Workflow**, select a stage and edit its owner, skills, inputs, notes and evidence in one panel. Assign people, selected agents or external systems. An existing artifact can satisfy a prerequisite without repeating earlier work. Drag assignments or use the equivalent controls. Undo and redo support project changes.
 
-Custom processes open in the process designer. Select a step in **Map** or **Step list**, name its inputs and outputs, define checks and choose each outcome's destination. **Review changes** shows the effect before **Apply changes** updates the project. Applying is not saving. Download afterward to keep the work.
+Custom processes are edited within **Workflow**. Select a step in **Map** or **Step list**, name its inputs and outputs, define checks and choose each outcome's destination. **Review changes** shows the effect before **Apply changes** updates the project. Switching to Brief or Knowledge map keeps pending edits. Applying is not saving. Download afterward to keep the accepted work.
 
-Use **Files** to inspect outputs, **Project details** for project context and **Preview Atlas** for a readable summary. **Roles and skills** keeps the library available. **Download** brings together the review and export choices, including detailed file comparison when needed.
+Use **Preview files** to inspect exact outputs and the readable **Project Atlas** preview for a team summary. **Roles and skills** keeps the library available. **Download** brings together review and export choices, including detailed file comparison when needed. A download with pending process edits identifies that distinction and lets you review them or deliberately download the accepted project.
 
-Preview Atlas starts with a decision brief for the team. Read the intended result, supplied approach notes, planned owners and open decisions. Expand technical context when needed. The editor and downloaded Atlas use the same project values.
+The Project Atlas preview starts with a decision brief for the team. Read the intended result, supplied approach notes, planned owners and open decisions. Expand technical context when needed. The editor and downloaded Atlas use the same accepted project values.
 
 **Review changes** compares recorded decisions with the session baseline or another supplied Atlas file. Read before and after values, see associated generated file changes and add an optional reason. ZIP and readable HTML downloads keep `DECISION-REVIEW.md` and `decision-review.json` when decisions changed or a reason was supplied. Reopening them restores the exact baseline and reason. JSON alone keeps project settings.
 
@@ -50,7 +54,7 @@ Preview Atlas starts with a decision brief for the team. Read the intended resul
 
 Download starts with a blueprint for people to review. Choose one focused skill for a selected procedure or a full pack when that handoff needs agent instructions. Every selected ZIP retains project decisions and a readable Atlas for reopening. **Included files and their purpose** shows its actual contents. **How to use this download** explains the human handoff or selected Copilot host, including placement, discovery, a small task, failures and recording results. The same instructions travel in `INSTALL.md`.
 
-Knowledge map and Help remain available from the start screen and editor. The theme control switches between light and dark. The workspace and embedded reference Atlas share the selected theme in this session.
+Knowledge map remains a main destination even before a project exists. Help remains available while working. The theme control switches between light and dark. The workspace and embedded reference Atlas share the selected theme in this session.
 
 Six curated Knowledge topics connect to applicable project choices through **Review for my workflow**, including **Add retrieval checks**. Inspect proposed changes and affected files before **Apply to my workflow**. Reading alone changes nothing. Applied practices remain requirements or guidance, not runtime enforcement, and Undo can reverse the project edit.
 
@@ -60,7 +64,7 @@ Components retain their own technologies, versions, paths and actual commands. T
 
 Project facts carry sources and status. Evidence records separate expected checks from supplied observations. Model and budget records retain the user's values without ranking models or promising savings.
 
-Runtime design is explicitly optional in Project details. A generic configuration-service example shows how to investigate a backend agent feature. It distinguishes the team's development workflow from the finished application's runtime, including validation before writes, bounded execution, duplicate requests and confirmed results.
+Runtime design is explicitly optional in Brief. A generic configuration-service example shows how to investigate a backend agent feature. It distinguishes the team's development workflow from the finished application's runtime, including validation before writes, bounded execution, duplicate requests and confirmed results.
 
 The compiler uses reviewed templates. It needs no model API key, account or build service. The active project stays in memory in the current tab. Download JSON, a readable project HTML or a complete ZIP to keep it. Open those files or an Atlas project folder to continue. Older browser drafts have an explicit recovery path, with no automatic migration or storage writes.
 
@@ -112,17 +116,17 @@ node tools/build-docs-guide.mjs
 
 Edit topics, definitions, sources, typed relationships, actions and collections under `catalogue/`. Run `npm run build:catalogue` to validate them and regenerate `atlas/data.js` and `factory/catalog.mjs`. Run `npm run check:catalogue` to verify that the checked-in projections match. The [catalogue guide](docs/catalogue.md) gives the source files, authoring steps and validation limits.
 
-Catalogue content `2.1.0` uses authoring schema `1.0`; project configuration stays schema `3.0`. Ajv is a build-time dependency. The hosted app serves generated static data and stores no projects. Migrating old source metadata does not constitute a new factual review. JEV continues to use its separately frozen inference definitions.
+Catalogue content `2.1.0` uses authoring schema `1.0`. Project configuration stays schema `3.0`. Ajv is a build-time dependency. The hosted app serves generated static data and stores no projects. Migrating old source metadata does not constitute a new factual review. JEV continues to use its separately frozen inference definitions.
 
 ## JEV decision pilot
 
-Read the [JEV guide](docs/jev/index.html) for its intended role, local API usage, audited measurements, optimization history and a facilitated trial with 2 or 3 people. The guide opens directly as an offline page or at `/docs/jev/` on the local server, with light and dark themes and expandable diagrams.
+Read the [JEV guide](docs/jev/index.html) for its intended role, local API usage, audited measurements, optimization history and historical trial protocols for 2 or 3 people. The guide opens directly as an offline page or at `/docs/jev/` on the local server, with light and dark themes and expandable diagrams.
 
-The start screen now uses JEV through the local Node server. Describe work, select Suggest my workflow, review the proposal and Create this draft. Confirm wording for any answers that need recording. Template roles and skills remain editable defaults. The compiler creates the files from the accepted configuration. Read [integrated usage](docs/jev/integration.md).
+Brief offers JEV through the local Node server. Describe work, select Suggest my workflow, review the proposal and Create this draft. Confirm wording for any answers that need recording. Template roles and skills remain editable defaults. The compiler creates the files from the accepted configuration. Read [integrated usage](docs/jev/integration.md).
 
 The historical v7 local synthetic run matched 97 of 100 complete expected decision outcomes, with primary p95 of 693 ms. The repeated answered question gate failed on two cases. These are not measurements of the new integrated UI or general human reliability. The [measurement definitions](docs/jev/metrics.md) preserve their denominators and failures. The integrated contract freezes v8 and its catalog definitions separately.
 
-The [integrated test guide](docs/index.html#jev-integrated-trial) checks the suggestion journey, confirmed answers, export/reopen and manual recovery. Freeze a new, named round and verify before and after each session. Keep earlier manifests unchanged. A prepared guide contains no completed human results.
+The [historical integrated test guide](docs/index.html#jev-integrated-trial) retains steps for the earlier interface, including Files and Project details. Replay requires its matching frozen build, original protocol copy and verified manifest. The current three-view workspace needs an updated human-trial protocol and a new frozen round. Use the [quick start](docs/quick-start.md) and [integration guide](docs/jev/integration.md) for current usage. Keep earlier manifests and evidence unchanged. A prepared guide contains no completed human results.
 
 The historical [identical test guide](docs/index.html#jev-repeatable-trial) gives non-developers 48 numbered steps across 10 cases. Its separate seven-card procedure and frozen evidence remain retained. Do not count it as execution of the new in-app journey.
 
@@ -189,7 +193,7 @@ npm run test:browser
 
 GitHub Actions runs version, generated documentation and unit checks on Node.js 22 and 24. Its browser job exercises controlled JEV cases, offline artifacts and the static site under the Pages path. Successful checks on `main` publish only the allowlisted static bundle to GitHub Pages. Branches, pull requests and tags are checked without publishing. The workflow uses no JEV credentials and creates no commits, tags or releases.
 
-App versions appear on the start screen and in generated `manifest.json` files. Read [versions and releases](RELEASING.md) for explicit version updates, tags and release steps. [Changelog](CHANGELOG.md) records what each version contains. Project schema and guidance versions are independent from the app version.
+App versions appear in the empty Brief and in generated `manifest.json` files. Read [versions and releases](RELEASING.md) for explicit version updates, tags and release steps. [Changelog](CHANGELOG.md) records what each version contains. Project schema and guidance versions are independent from the app version.
 
 With the local server running, exercise the start, edit, inspect, download and reopen journey in the [factory guide](docs/factory-guide.md). The [backlog](docs/backlog.md) records the usability questions to answer with another engineer.
 
@@ -206,7 +210,9 @@ These tests establish the behaviors they exercise. They do not execute generated
 
 ## Preserved Atlas
 
-The Knowledge Atlas retains all 109 earlier topics, including the 105 original topics and four general guidance additions. Eight retrieval topics bring the catalogue to 117 topics in 10 clusters, with 72 source records and six guided paths. Reading, map and card views, source browsing, themes and mobile navigation remain available. Search includes aliases and subject areas, with a Topic type filter. The original research snapshot is 2 October 2026. Later review dates apply to their recorded source contributions. Verification and evidence keeps Talos as an attributed example source.
+The Knowledge Atlas retains all 109 earlier topics, including the 105 original topics and four general guidance additions. Eight retrieval topics and three general procedure entries bring the catalogue to 120 topics in 10 clusters, with 72 source records and six guided paths. The skills cluster now leads with general pipeline, source and evidence, and data and query verification procedures. Jenkins and country-source material remains visibly scoped, and Neptune plan checks apply only to Neptune. This focused pass does not generalize or fact-check every topic.
+
+Reading, map and card views, source browsing, themes and mobile navigation remain available. Search includes aliases and subject areas, with a Topic type filter. Existing topic URLs remain stable, while three specialist pages have new browsing parents. The original research snapshot is 2 October 2026. Later review dates apply to their recorded source contributions. The new general procedures need review and add no automatic skill mappings. Verification and evidence keeps Talos as an attributed example source.
 
 The map uses vendored Three.js and OrbitControls, with the original notice in `atlas/vendor/THREE-LICENSE.txt`. Reading remains available without WebGL.
 
@@ -217,7 +223,7 @@ The full reference export is `exports/Workflow Atlas.html`. It contains offline 
 | Document | Purpose |
 | --- | --- |
 | [Quick start](docs/quick-start.md) | Plain steps for learning, editing, downloading and reopening |
-| [JEV guide](docs/jev/index.html) | Intended decision flow, API usage, measured evidence and people trial |
+| [JEV guide](docs/jev/index.html) | Intended decision flow, API usage, measured evidence and historical trial protocols |
 | [Product vision](docs/product-vision.md) | Purpose, abstraction and intended user value |
 | [Requirements](docs/requirements.md) | Accepted scope and explicit acceptance checks |
 | [Reference practices](docs/reference-practices.md) | Primary sources, reviewed revisions, contributions and limits |

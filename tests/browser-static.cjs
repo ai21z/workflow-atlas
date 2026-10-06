@@ -4,6 +4,7 @@ const http = require('node:http')
 const path = require('node:path')
 const { pathToFileURL } = require('node:url')
 const { chromium } = require('playwright')
+const { workflowView } = require('./browser-workspace-helpers.cjs')
 
 async function run() {
   const root = path.resolve(__dirname, '..')
@@ -101,6 +102,7 @@ async function run() {
     assert.equal((await page.locator('#project-purpose').inputValue()).trim(), purpose)
     await page.locator('#project-name').fill('Static hosting trial')
     await page.locator('#project-name').press('Tab')
+    await workflowView(page)
     report.checks.push('A manually selected feature workflow uses the entered description and creates an editable project without inference.')
 
     await page.locator('#open-knowledge-map').click()

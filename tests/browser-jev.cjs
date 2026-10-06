@@ -1,6 +1,8 @@
+const { briefView, workflowView: openWorkflowView, closeWorkspaceDetails } = require('./browser-workspace-helpers.cjs')
 const assert = require('node:assert/strict')
 const fs = require('node:fs/promises')
 const path = require('node:path')
+const http = require('node:http')
 const { createHash } = require('node:crypto')
 const { pathToFileURL } = require('node:url')
 
@@ -131,7 +133,7 @@ async function fresh({ width = 1440, height = 1000, reducedMotion = 'reduce' } =
 }
 async function expand(selector) {
   const detail = page.locator(selector)
-  if (await detail.getAttribute('open') === null) await detail.locator('summary').click()
+  if (await detail.getAttribute('open') === null) await detail.locator(':scope > summary').click()
 }
 async function suggest(brief, nextMode = 'feature') {
   mode = nextMode
@@ -145,16 +147,17 @@ async function suggest(brief, nextMode = 'feature') {
 async function createDraft() {
   await page.locator('#jev-create').click()
   await page.locator('#studio-layout').waitFor({ state: 'visible' })
+  await openWorkflowView(page)
 }
 async function readFile(filename) {
-  if (await page.locator('#inspector').isVisible()) await page.locator('#close-inspector').click()
+  await closeWorkspaceDetails(page)
   await page.locator('#view-nav [data-project-view="artifacts"]').click()
   await page.locator(`[data-file="${filename}"]`).click()
   await page.waitForFunction(filename => document.querySelector('#preview-path')?.textContent === filename, filename)
   return page.locator('#file-preview').innerText()
 }
 async function download(name = 'accepted-feature.zip', kind = 'pack') {
-  if (await page.locator('#inspector').isVisible()) await page.locator('#close-inspector').click()
+  await closeWorkspaceDetails(page)
   await page.locator('#download-project').click()
   await page.locator('#download-dialog').waitFor({ state: 'visible' })
   await page.locator(`[data-output-kind="${kind}"]`).check()
@@ -539,7 +542,7 @@ async function main() {
       assert.ok(!bundle.archive.get('project.json').includes('allCoverage'))
       const before = received
       await openZip(bundle.filePath)
-      await page.locator('#project-details').click()
+      await briefView(page)
       assert.equal(await page.locator('[data-assistant-answer-review]').count(), 0)
       assert.equal(received, before)
       return 'The editor offered the exact original description for a covered field. Editing it stayed pending across Files navigation. Use this answer recorded the chosen wording and the actual ZIP retained it. Reopening did not revive session-only model assessments or trigger inference.'
@@ -557,14 +560,15 @@ async function main() {
       assert.equal(JSON.parse(bundle.archive.get('project.json')).workflow.answers.acceptance, undefined)
       assert.ok([...bundle.archive.values()].every(text => !text.includes('This unconfirmed replacement')))
       await page.locator('[data-close-dialog="download-dialog"]').click()
+      await briefView(page)
       await page.locator('#project-purpose').fill('Investigate an entirely different delivery approach.')
       await page.locator('#project-purpose').press('Tab')
-      await page.locator('#project-details').click()
+      await briefView(page)
       assert.equal(await page.locator('[data-assistant-answer-review]').count(), 0)
       await fresh()
       await suggest(brief, 'covered')
       await createDraft()
-      await page.locator('#project-details').click()
+      await briefView(page)
       await page.locator('#recipe-choice').selectOption('feasibility')
       assert.equal(await page.locator('[data-assistant-answer-review]').count(), 0)
       return 'Leave unanswered discarded pending wording and suppressed the immediate question. Changing the goal or starting workflow cleared old wording-review assessments.'
@@ -582,6 +586,170 @@ async function main() {
       await page.keyboard.press('Enter')
       await page.locator('#studio-layout').waitFor({ state: 'visible' })
       return 'When the final wording review was confirmed, focus advanced to Create this draft and Enter created the project. Focus did not fall back to the document body.'
+    })
+    await check('10i-active-replacement-proposal-survives-project-download-new-and-open', async () => {
+      await openZip(downloadedPack.filePath)
+      await briefView(page)
+      const currentResult = await page.locator('#project-purpose').inputValue()
+      await page.locator('[data-studio-action="review-suggestion"]').click()
+      const proposal = 'Investigate a separate reporting integration before changing the current project.'
+      const recordedAnswer = 'Compare permitted read operations with the approved reporting contract.'
+      const unfinishedAnswer = 'Unconfirmed replacement wording that must remain editable.'
+      await suggest(proposal, 'feature')
+      await page.locator('#jev-next-answer').fill(recordedAnswer)
+      await page.locator('[data-jev-action="answer"]').click()
+      mode = 'feature'
+      await page.locator('#jev-submit').click()
+      await page.waitForFunction(() => document.querySelector('#jev-form')?.getAttribute('aria-busy') === 'false')
+      await page.locator('#jev-next-answer').fill(unfinishedAnswer)
+      const assertProposal = async () => {
+        await briefView(page)
+        await expand('#active-suggestion')
+        assert.equal(await page.locator('#project-purpose').inputValue(), currentResult)
+        assert.equal(await page.locator('#jev-brief').inputValue(), proposal)
+        assert.equal(await page.locator('#jev-next-answer').inputValue(), unfinishedAnswer)
+        await expand('#jev-draft-details')
+        assert.ok((await page.locator('#jev-draft-details').innerText()).includes(recordedAnswer))
+      }
+      await page.locator('#new-project').click()
+      await page.locator('#confirm-dialog').waitFor({ state: 'visible' })
+      assert.match(await page.locator('#confirm-description').innerText(), /separate replacement proposal/i)
+      assert.match(await page.locator('#confirm-description').innerText(), /not included in a current project download/i)
+      await page.locator('#confirm-dialog [value="cancel"]').click()
+      await assertProposal()
+      const bundle = await download('active-project-only.zip')
+      assert.equal(JSON.parse(bundle.archive.get('project.json')).project.purpose, currentResult)
+      for (const text of bundle.archive.values()) {
+        assert.equal(text.includes(proposal), false)
+        assert.equal(text.includes(recordedAnswer), false)
+        assert.equal(text.includes(unfinishedAnswer), false)
+      }
+      await page.locator('[data-close-dialog="download-dialog"]').click()
+      await page.locator('#new-project').click()
+      await page.locator('#confirm-dialog').waitFor({ state: 'visible' })
+      await page.locator('#confirm-dialog [value="cancel"]').click()
+      await assertProposal()
+      await page.locator('#import-config').click()
+      await page.locator('#import-file').setInputFiles(downloadedPack.filePath)
+      await page.locator('#confirm-dialog').waitFor({ state: 'visible' })
+      await page.locator('#confirm-dialog [value="cancel"]').click()
+      await assertProposal()
+      await page.locator('#new-project').click()
+      await page.locator('#confirm-dialog').waitFor({ state: 'visible' })
+      assert.equal(await page.locator('#download-before-replace').isVisible(), false)
+      assert.equal(await page.locator('#confirm-dialog [value="replace"]').innerText(), 'Discard proposal and replace')
+      await page.locator('#confirm-dialog [value="replace"]').click()
+      await page.locator('#start-screen').waitFor({ state: 'visible' })
+      assert.equal(await page.locator('#jev-brief').inputValue(), '')
+      return 'An active replacement proposal keeps its separate description, recorded answer and unfinished answer after cancelling New or Open. Downloaded project ZIP bytes contain only accepted project decisions. Downloading the current project does not clear the separate-proposal warning. Only explicit Discard proposal and replace clears this work.'
+    })
+    await check('10j-active-proposal-warns-before-browser-reload', async () => {
+      await openZip(downloadedPack.filePath)
+      await briefView(page)
+      await page.locator('[data-studio-action="review-suggestion"]').click()
+      const proposal = 'This separate description must survive cancelling a browser reload.'
+      await page.locator('#jev-brief').fill(proposal)
+      const leavePrompt = page.waitForEvent('dialog', { timeout: 3000 })
+      const navigation = page.reload({ waitUntil: 'domcontentloaded', timeout: 3000 }).catch(error => error.message)
+      const dialog = await leavePrompt
+      assert.equal(dialog.type(), 'beforeunload')
+      await dialog.dismiss()
+      await navigation
+      assert.equal(await page.locator('#jev-brief').inputValue(), proposal)
+      assert.equal(await page.locator('#studio-layout').isVisible(), true)
+      return 'Chrome raised the real beforeunload dialog for a separate proposal on an otherwise clean opened project. Cancelling reload preserved the typed description and active project.'
+    })
+    await check('10k-unconfirmed-reuse-wording-protects-an-accepted-session', async () => {
+      await fresh()
+      await suggest('Add saved searches. Save retains filters. Scope is the existing search view.', 'covered')
+      await createDraft()
+      await download('accepted-before-reuse-edit.zip')
+      await page.locator('[data-close-dialog="download-dialog"]').click()
+      await briefView(page)
+      await expand('#active-suggestion')
+      await expand('#jev-covered-acceptance')
+      const wording = 'Separate unconfirmed wording changed after the original draft was accepted.'
+      await page.locator('#jev-wording-acceptance').fill(wording)
+      await page.locator('#new-project').click()
+      await page.locator('#confirm-dialog').waitFor({ state: 'visible' })
+      assert.match(await page.locator('#confirm-description').innerText(), /separate replacement proposal/i)
+      await page.locator('#confirm-dialog [value="cancel"]').click()
+      assert.equal(await page.locator('#jev-wording-acceptance').inputValue(), wording)
+      const bundle = await download('accepted-project-with-separate-reuse-edit.zip')
+      for (const text of bundle.archive.values()) assert.equal(text.includes(wording), false)
+      return 'Editing the separate reuse-answer textarea after the original suggestion was accepted is protected even though that text is intentionally not a recorded controller answer. Cancelling preserves it. Actual accepted-project ZIPs exclude it.'
+    })
+    await check('10l-hosted-active-project-has-a-manual-replacement-path', async () => {
+      const { buildStatic, PUBLIC_ASSETS } = await import(pathToFileURL(path.join(root, 'tools/build-static.mjs')).href)
+      const bundle = await buildStatic({ rootDir: root, knownSecrets: [] })
+      const prefix = '/workflow-atlas/'
+      const allowed = new Set(PUBLIC_ASSETS)
+      const types = { '.html': 'text/html', '.mjs': 'text/javascript', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.md': 'text/plain', '.txt': 'text/plain' }
+      const staticServer = http.createServer(async (request, response) => {
+        try {
+          const pathname = new URL(request.url, 'http://localhost').pathname
+          if (request.method !== 'GET' || !pathname.startsWith(prefix)) { response.writeHead(404).end('Not found'); return }
+          let relative = decodeURIComponent(pathname.slice(prefix.length))
+          if (!relative || relative.endsWith('/')) relative += 'index.html'
+          if (!allowed.has(relative)) { response.writeHead(404).end('Not found'); return }
+          const bytes = await fs.readFile(path.join(bundle.output, ...relative.split('/')))
+          response.writeHead(200, { 'Content-Type': `${types[path.extname(relative)] || 'application/octet-stream'}; charset=utf-8` }).end(bytes)
+        } catch { response.writeHead(500).end('Static trial error') }
+      })
+      await new Promise(resolve => staticServer.listen(0, '127.0.0.1', resolve))
+      const originalBase = base
+      const origin = `http://127.0.0.1:${staticServer.address().port}`
+      base = `${origin}${prefix}factory/`
+      const unexpectedRequests = []
+      const before = received
+      try {
+        await fresh()
+        await context.route('**/*', route => {
+          const url = new URL(route.request().url())
+          if (url.pathname.includes('/api/') || (url.protocol.startsWith('http') && url.origin !== origin)) {
+            unexpectedRequests.push(url.origin + url.pathname)
+            return route.abort()
+          }
+          return route.continue()
+        })
+        assert.equal(await page.locator('html').getAttribute('data-atlas-hosting'), 'static')
+        const currentResult = 'Plan an ordinary reporting feature for the existing staff view.'
+        await page.locator('#jev-brief').fill(currentResult)
+        await page.locator('[data-start-recipe="feature-delivery"]').click()
+        await createDraft()
+        await briefView(page)
+        await page.locator('[data-studio-action="review-suggestion"]').click()
+        assert.equal(await page.locator('#active-suggestion [data-review-recipe]').count(), 3)
+        const proposal = 'Investigate whether a separate reporting integration is feasible.'
+        await page.locator('#jev-brief').fill(proposal)
+        await page.locator('[data-review-recipe="feasibility"]').click()
+        assert.match(await page.locator('#jev-proposal-title').innerText(), /Feasibility/)
+        assert.equal(await page.locator('#recipe-choice').inputValue(), 'feature-delivery')
+        assert.equal(await page.locator('#project-purpose').inputValue(), currentResult)
+        await page.locator('#jev-next-answer').fill('Today staff read the report manually in the existing view.')
+        await page.locator('[data-jev-action="answer"]').click()
+        await page.locator('#jev-create').click()
+        await page.locator('#confirm-dialog').waitFor({ state: 'visible' })
+        await page.locator('#confirm-dialog [value="cancel"]').click()
+        assert.equal(await page.locator('#recipe-choice').inputValue(), 'feature-delivery')
+        assert.equal(await page.locator('#project-purpose').inputValue(), currentResult)
+        assert.equal(await page.locator('#jev-brief').inputValue(), proposal)
+        await page.locator('#jev-create').click()
+        await page.locator('#confirm-dialog [value="replace"]').click()
+        await page.waitForFunction(() => document.querySelector('#recipe-choice')?.value === 'feasibility')
+        assert.equal(await page.locator('#project-purpose').inputValue(), proposal)
+        assert.equal(await page.locator('[data-field="workflow.answers.current-work"]').inputValue(), 'Today staff read the report manually in the existing view.')
+        assert.equal(received, before)
+        assert.deepEqual(unexpectedRequests, [])
+        await page.screenshot({ path: path.join(output, 'hosted-manual-replacement.png'), fullPage: true })
+        return { observation: 'The actual allowlisted static build under /workflow-atlas/ offers three supported manual replacement workflows. Selection only creates a proposal. Cancelling Create keeps the current project and proposal. Explicit replacement applies the proposed result and recorded answer without any API or provider request.', build: { files: bundle.files, credentialFindings: bundle.credentialFindings } }
+      } finally {
+        base = originalBase
+        await context?.close()
+        context = null
+        page = null
+        await new Promise(resolve => staticServer.close(resolve))
+      }
     })
     for (const theme of ['light', 'dark']) {
       await check(`11-responsive-keyboard-${theme}`, async () => {

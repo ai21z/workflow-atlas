@@ -1,127 +1,87 @@
 # Quick start
 
-Workflow Atlas helps you plan and connect work. Choose the steps, add your decisions and download a guide for your team or AI assistant. Your work stays in this tab. Download before closing or reloading.
+Plan your workflow. Review the steps and download instructions for your team or AI assistant.
 
-For a first try, use a small fictional task. No key is needed to choose a workflow yourself. The [local setup guide](jev/integration.md#owner-setup) explains how to start the app and optionally connect JEV.
+Your project stays in this tab. **Download before closing or reloading.** Use **Open pack** to continue later. Manual editing needs no account or API key.
 
-## 1. Choose a starting point
+## Three places to work
 
-Describe the work on the start screen and select **Suggest my workflow** when the local JEV server is configured. Review the proposed stages, answer or defer the optional question and select **Create this draft**. [Suggestion details and owner setup](jev/integration.md).
-
-You can also choose **Investigate an idea**, **Build a feature** or **Fix a bug** yourself. An entered description stays with the manual proposal. With no description, each starts a blank workflow with relevant stages and questions. Template roles and practices are editable defaults, they are not findings about your project.
-
-For your own process, choose **Design a connected process**. Name it and choose a sequence, review or bounded correction pattern, then **Open designer**. **A team process** supports work such as document review without requiring a repository or agent. This manual route does not call JEV. [Full process walkthrough](factory-guide.md#connect-a-process).
-
-**Start with the result** asks for a name, the result you want and optional notes about what you already have. Leave unknowns blank or choose **I will fill this in later**. The notes belong to the first active workflow stage. A supplied link is not retrieved or verified.
-
-An investigation starts without repository components. Compare relevant options against the current approach and agree what evidence would support a decision. AI instruction comparisons are optional and apply only when that is the study's subject. Add actual paths and commands when the work needs them.
-
-Use **Open pack** to continue a supported download. **Browse examples** opens fictional worked examples only when you choose one.
-
-## 2. Adapt the workflow
-
-Give the project a name and describe the outcome. For a recipe, select a stage in **Workflow** to edit its owner, skills, inputs and notes in one panel.
-
-For a custom process, use **Map** or **Step list** in the designer. Select a step to name its action and actor, choose inputs and results, and set checks. Under **What happens next?**, choose the destination for each outcome. Correction limits and approval are under **Inputs, checks and other records**. Unknown details can remain unresolved.
-
-Choose **Review changes**, inspect the changed connections and files, then **Apply changes**. The project stays unchanged until you apply. Closing pending edits offers keeping or discarding them. Project Undo can reverse an applied change. Neither applying nor Undo saves the project, so download when ready.
-
-For a feature or investigation, **Project details**, **Brief** reuses that outcome. You do not need to type it twice. **Add a more specific answer, optional** lets you record a separate refinement. Editing the overall outcome keeps that separate answer. Clear the refinement to use the current project outcome again. A bug still needs its own expected behavior, because a goal such as "fix checkout" does not describe what checkout should do.
-
-An owner is the person, agent or system responsible for a stage. A skill is a reusable procedure. An agent profile describes a role and requested tools, it does not provide credentials or an integration.
-
-For recipe assignments, use **Add a role or skill** in Workflow. Select the role or skill, then its stage. Dragging is optional. The stage panel also provides responsibility and skill controls. For a custom step, expand **Instructions and requested capabilities** in its designer panel. Selected development profiles receive their matching assignments, while application agents remain runtime design choices. No assignment grants tools or permissions.
-
-Open **Project details** when you need to describe components, real commands, boundaries or sources. Leave unknown information unresolved. A technology label does not establish the repository's command or a passing result.
-
-Blank workflows leave the Copilot environment and source control unchosen. A blueprint or portable focused skill can be generated without choosing them. Agent profiles need the actual host and source control choices. Confirm a skill's discovery and behavior in the environment where you intend to use it.
-
-**Runtime design** is optional. Enable it when you are designing the behavior of an application. It is separate from how the team develops that application.
-
-## 3. Learn and apply deliberately
-
-**Knowledge map** opens the reference Atlas at full viewport size. Select a topic, read its guidance and inspect its sources. Return to the same project. Reading alone changes nothing.
-
-Some reviewed topics offer **Review for my workflow** when the practice applies to the active project. Atlas shows the proposed decisions and affected files before you choose **Apply to my workflow**. Cancel to keep your decisions unchanged. Undo reverses an applied change.
-
-Most actions select an existing reference practice. The service-contract action can add a runtime design draft and a validation-before-writes requirement. It creates no implementation, permission or passing evidence. Missing design decisions remain unresolved.
-
-Use reading, topic navigation or cards if the 3D map is unavailable or difficult to use.
-
-## 4. Choose and inspect the output
-
-Open **Files** and select an output. Read its content and **Why this file?** to see which choices contributed to it. **Roles and skills** opens the library and standalone skill downloads.
-
-Use **Preview Atlas** for a readable summary of the project's decisions. It reflects the same configuration as the editor.
-
-Its **Decision brief** shows the intended outcome, supplied approach notes, planned owners and open decisions. Expand **Read all approach notes** to read the supplied notes in full. A filled field does not resolve questions written inside it. Use the edit links to record an approach or review an assignment. Expand **Recorded context and technical details** for commands and sources. Planned order does not show completed work.
-
-With custom processes and no active recipe, the brief instead shows process purposes, their planned entry owners and model findings. Each process has its own starting point. The download preserves the recorded connections and planned evaluation cases. Those cases start as **NOT RUN**.
-
-Use **Review changes** to compare the current decisions with the starting or opened project. Expand changes for before and after values and associated files. Add a reason when it helps the reviewer. **Compare with another Atlas file** changes the comparison baseline without replacing your project.
-
-Expand **Guidance and its limits** for the selected sources, versions and applicability. If an opened pack records different definitions, review the differences before choosing current guidance for a new download. Older packs may not have enough metadata for an exact comparison. Original opened files stay available.
-
-Record checks in the relevant stage. Keep the expected result separate from a supplied observation. **Sources and evidence** in Project details gathers the records for review. Atlas does not run checks or authenticate supplied sources.
-
-Choose **Download** or **Review my download**. Every new workflow starts with a **Workflow blueprint** for people to review. Template agent assignments do not turn that into a full pack. Choose a skill or full pack when that is what the handoff needs. Changing the output does not change workflow stages or assignments.
-
-| Output | Choose it when |
+| View | Use it to |
 | --- | --- |
-| Workflow blueprint | You need a plan and decision records for people to review. Includes relevant templates, with no Copilot profiles or skill folders |
-| One focused skill | You need one procedure, such as investigating a bug, with its project references. No agent profiles |
-| Full artifact pack | You need the selected skills, agent profiles and workflow records together for a larger handoff |
+| Brief | Describe the result, acceptance examples and project context |
+| Workflow | Edit the steps, responsibilities, checks and connections |
+| Knowledge map | Explore practices, technologies, examples and sources |
 
-A focused skill covers its named procedure. Bug diagnosis helps investigate a cause, it is not the complete repair workflow. Your other workflow decisions stay in the project so you can choose a different output later.
+Switch between them whenever you need. They are not mandatory wizard steps. **Preview files** shows the output from the same project. The readable **Project Atlas** is a preview and download of those decisions.
 
-Every selected ZIP also includes project decisions, installation guidance, validation and a readable Project Atlas. **Files** and the Download inventory show the same selected output. **Change output** opens the chooser when you need something different. Open **Included files and their purpose** to inspect the actual inventory. Reopening a supported pack restores its recorded output choice along with the project, so a blueprint stays a blueprint.
+## 1. Describe what you want
 
-Review unresolved items and follow their links when you want to correct them. An incomplete draft can still be downloaded with its unknowns retained.
+Start in **Brief** with **What do you want to achieve?** For a first try, use a small fictional task. You can visit **Knowledge map** before creating a draft and return to your description.
 
-**Draft blueprint ready to share.** means the blueprint can be shared for review while details remain open. Expand **Review N open details and notes** to inspect them. This does not mean the project is technically complete or its instructions have been exercised.
+Prefer a ready starting point? Choose **Start with a common goal** beside the heading, then **Use this goal**. Goals cover features, service connections, automation, performance, refactoring, bugs, build failures, test improvements and investigations. Each creates an editable brief with relevant workflow stages and planning notes. Your typed description and recorded answers are kept when supplied. Project tools, commands, acceptance details and observed evidence stay unresolved until you supply them. Selecting an option alone does not change the project or call AI.
 
-Before using the files, check these five things:
+In an active Brief, **Start another draft** offers the same goals. **Start a new draft** replaces the project after the existing download and replacement safeguards. It does not merge the starter with your current decisions.
 
-| Check | What to look for |
+Choose **Investigate an idea**, **Build a feature** or **Fix a bug** for a development recipe. With a description, review the manual proposal and choose **Create this draft**. Without a description, the choice opens a blank project in Brief. Each recipe supplies relevant stages and questions. Template assignments are starting choices, not findings about your project.
+
+Choose **Design a connected process** for your own steps. A team process can describe work such as document review without requiring a repository or agent. A starting pattern supplies editable connections, not your owners or acceptance criteria. [Connect a process](factory-guide.md#connect-a-process).
+
+If the local JEV server is configured, **Suggest my workflow** proposes a supported recipe. Review it, confirm any answer wording you want to keep and choose **Create this draft**. Suggestions are optional. The hosted GitHub Pages workspace supports manual choices. [Local setup and suggestions](jev/integration.md).
+
+**Browse examples** deliberately opens fictional worked projects. **Open pack** opens supported project JSON, an Atlas ZIP, downloaded Project Atlas HTML or a folder containing Atlas metadata.
+
+## 2. Keep the goal and context in Brief
+
+Return to **Brief** and edit **Wanted result** or record acceptance examples. The sections **Brief**, **Components**, **Boundaries**, **Sources and evidence** and **Runtime design** keep more detailed decisions available. Unknowns can stay blank.
+
+For a feature or investigation, the equivalent recipe question can use your project outcome. **Add a more specific answer, optional** records a separate refinement. Changing the outcome keeps that refinement and other answers. A bug needs its own expected behavior, because "fix checkout" does not explain what checkout should do.
+
+Changing the goal does not silently redesign your workflow. **Review workflow options** opens an optional replacement proposal. Choose a workflow there manually, or request a local JEV suggestion. Review it before **Replace with this draft**. Your project stays unchanged until you deliberately replace it. A supplied link is not fetched or verified. Technology labels do not establish commands, working connections or passing results.
+
+## 3. Shape the work in Workflow
+
+For a recipe, select a stage and edit its owner, skills, supplied inputs, notes and checks. Reviewed stage definitions and prerequisites remain fixed. Use a custom process when you need your own steps and outcome routes.
+
+For a custom process, select a step in **Map** or **Step list**. Name what happens, who acts, its inputs and results, and what each outcome leads to. Expand **Process details** for the process name, purpose and starting step. Local record controls expose checks, approval and correction limits. Blank details remain unresolved.
+
+Process changes are a pending draft until you choose **Review changes**, inspect the effect and **Apply changes**. Switching to Brief or Knowledge map retains that draft in the session. Applied edits can be reversed with **Undo**. Download to keep accepted decisions.
+
+If other project decisions change while a process draft is pending, review the updated comparison before applying. A conflicting edit needs a deliberate choice. Ordinary downloads contain accepted project decisions. Choose **Review pending process** to review and apply first, or explicitly check **Download accepted decisions without the pending process edits** to keep the current accepted project instead.
+
+A person, agent or existing system can own work. A skill describes a reusable procedure. An agent profile requests responsibilities and tools, it does not provide credentials or install an integration. Application agents do not automatically become Copilot development profiles.
+
+## 4. Learn without changing the project
+
+Open **Knowledge map** to explore the full reference Atlas. Use topic cards, reading, search, filters, sources or the 3D map. Search results open guidance directly. Selecting a graph node explores it, **Read topic** opens its explanation.
+
+Reading alone changes nothing. An applicable topic can offer **Review for my workflow**. Inspect its proposed decisions and affected files before choosing **Apply to my workflow**. Cancel keeps the project unchanged. Undo reverses an applied action.
+
+The map distinguishes reusable procedures from specialist examples. A technology page is reference material, not proof of an installed connection or an exportable skill. Use the standalone Knowledge Atlas for independent or offline reading.
+
+## 5. Preview and download
+
+Choose **Preview files** from Brief or Workflow. Select a file to read its exact content and **Why this file?** Selecting a workflow step can help identify associated files. An association does not prove that one decision caused every change. **Edit workflow** returns to the editor.
+
+Use the readable **Project Atlas** preview for a team discussion. It shows the intended outcome, recorded approach, planned responsibility and open decisions. It reflects the same accepted project, not a second editable copy.
+
+Choose **Download** and inspect the selected inventory. New projects start with a **Workflow blueprint**. Template agent assignments do not select a full pack automatically.
+
+| Output | Use it for |
 | --- | --- |
-| My intention | The outcome, scope and acceptance describe the task you actually want. In a JEV draft, only answers you recorded belong in their answer fields |
-| My choices | Owners, skills, tools and practices are choices you want to keep. Template assignments are starting points |
-| Missing details | Unknown commands, paths and decisions stay visibly unresolved. Fill them from your project rather than guessing |
-| Real connections | An agent profile can request tools. It does not install an MCP server, supply credentials or connect an account |
-| Real results | Expected checks are a plan. A supplied observation is your record. Atlas has not run the checks or independently verified their results |
+| Workflow blueprint | A plan and decision records for people to review, without skill folders or agent profiles |
+| One focused skill | One selected procedure with its project references, without agent profiles |
+| Full artifact pack | The selected skills, agent profiles and workflow records together |
 
-## 5. Use, download and reopen
+Every selected ZIP keeps project decisions, validation, use instructions and a readable Project Atlas. Preview files and the Download inventory reflect that selected output. Incomplete drafts remain downloadable with unknowns visible. Planned checks start unrun, supplied observations are not results verified by Atlas.
 
-Open **Read only what you need** to preview the files for your next task. A PM can start with the plan and decision record. For one procedure, start with `SKILL.md` and read its project reference when needed. For a full pack, choose the profile and linked skills relevant to your task.
+Before adopting the files, check your intent, choices, missing details, actual tool access and expected checks. **How to use this download** explains the handoff and travels in `INSTALL.md`. Formatting checks do not establish discovery or successful behavior inside Copilot.
 
-Open **How to use this download** for the adoption steps. A blueprint explains the human handoff. Skills and packs explain file placement, host discovery, a small task, troubleshooting and recording the exercise. The reading routes and adoption steps travel in `INSTALL.md`.
+## 6. Continue tomorrow
 
-Atlas has not exercised the files inside Copilot. Format checks do not establish discovery, successful task behavior or better outcomes. Check those in the actual environment and record what happened.
+Download the selected ZIP, **Project decisions** JSON or **Readable Project Atlas** before leaving. The latter two are under **Other download formats**. Reopen with **Open pack**. ZIP and project HTML retain the selected output scope. JSON retains project settings.
 
-| Download | Use it for |
-| --- | --- |
-| Selected output ZIP | Keep the chosen blueprint, skill or pack, together with project data for reopening |
-| Readable Project Atlas | Read or share a self-contained HTML containing decisions and the selected output files |
-| Editable project JSON | Keep recorded decisions in a small file |
-| Standalone skill from Roles and skills | Take one complete skill directory and its required resources. This separate export does not keep the full editable project |
-| Download opened files | Keep the original supplied contents of an opened pack, including external edits |
+If you edit files outside Atlas, reopening retains them for comparison. Their Markdown edits do not automatically update project decisions. Review differences before generating replacements, or **Download opened files** to preserve the supplied contents. [Keep edited files](factory-guide.md#keep-edited-files).
 
-Changed decisions or a supplied reason add `DECISION-REVIEW.md` and `decision-review.json` to ZIP and readable Atlas downloads. These keep the exact comparison baseline and reason for reopening. Project JSON keeps settings only. **Download review Markdown** is a readable review, it cannot restore an editable project on its own.
+A standalone skill download keeps its complete procedure directory but does not retain the whole editable project. A repository without Atlas metadata cannot restore decisions that were never recorded.
 
-Use **Open pack** to select project JSON, an Atlas ZIP, downloaded project HTML or a folder containing Atlas metadata. JSON restores settings. A supported pack or folder also keeps supplied file contents for review.
-
-A repository without Atlas metadata cannot restore decisions that were never recorded. Use supported selected files as fact candidates instead.
-
-If files were edited outside Atlas, review their differences before generating replacements. Editing exported Markdown does not update project configuration automatically. The [factory guide](factory-guide.md#keep-edited-files) explains file comparison.
-
-After reopening a pack, ordinary project edits can show **Your edits update N files**. These are files that already matched the generator when opened and now change with your decisions. Files that already differed when opened, or whose origin cannot be established, have a separate review notice. Neither notice overwrites the original opened files.
-
-New downloads keep decision-review object keys in a consistent order, so reopening an untouched download from the same generator does not create a conflict from key order alone. Older packs can still differ after generator or guidance changes. Review those differences and keep the original files.
-
-## Learn without losing your place
-
-**Help** explains common tasks without replacing your project. The **Dark mode** switch turns the dark theme on or off. The workspace and embedded reference Atlas share the change in this session.
-
-An older browser draft is recovered only after choosing **Recover draft**. Its original stored content remains unchanged.
-
-For more detail, read the [factory guide](factory-guide.md). The [accessibility review](accessibility.md) records inspected behavior and checks still needed.
+**Help** explains tasks without replacing your work. The **Dark mode** switch changes the workspace and embedded map for this session. The [factory guide](factory-guide.md) covers detailed controls, source records and file comparisons. The [accessibility review](accessibility.md) records observed behavior and open checks.

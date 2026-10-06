@@ -1,6 +1,6 @@
 # Atlas preservation
 
-Preserved on 2 October 2026. Interface review updated on 3 October 2026. Public case wording reviewed on 5 October 2026.
+Preserved on 2 October 2026. Interface review updated on 3 October 2026. Public case wording reviewed on 5 October 2026. Focused skills taxonomy updated on 6 October 2026.
 
 ## The retained baseline
 
@@ -8,7 +8,7 @@ The `atlas/` directory was copied from the original Atlas's static assets. Its s
 
 It retains:
 
-1. All 105 original topics and the four later general guidance topics. The catalogue retains those 109 topics and adds eight retrieval topics, for 117 across the same 10 clusters.
+1. All 105 original topics and the four later general guidance topics. Eight retrieval topics and three general procedure entries bring the catalogue to 120 across the same 10 clusters.
 2. All 55 original source references and confidence qualifiers, plus the later LLM Wiki reference. The combined catalogue now has 72 source records, including factory references and the retrieval sources.
 3. Existing topic identifiers and browser hash navigation.
 4. Reading, 3D map and topic card views.
@@ -26,7 +26,7 @@ The existing standalone export script is adapted in `tools/export-atlas.cjs`. It
 
 The preserved Knowledge Atlas is the reference layer. The Project Atlas shows the current user's configuration and generated decisions. Its editor and artifact preview use the same underlying project model.
 
-Knowledge map opens the full reference Atlas in a dedicated full-viewport workspace view, including its map, reading interface, topic navigation, source library and guided paths. Back to workspace returns to the retained project session. The reference Atlas also remains available at its own served route. Reading a topic does not modify the project or add instructions.
+Knowledge map is a permanent destination alongside Brief and Workflow. It opens the full reference Atlas in the shared workspace, including its map, reading interface, topic navigation, source library and guided paths. Switching back returns to the retained project session. The embedded reader avoids duplicate workspace branding and theme controls. The reference Atlas remains available independently at its own served route. Reading a topic does not modify the project or add instructions.
 
 The workspace and embedded reference Atlas share light or dark theme changes within the session. Neither saves that preference to browser storage. Help and the [quick start](quick-start.md) explain the learning and authoring paths. The [accessibility review](accessibility.md) records inspected behavior and open checks.
 
@@ -42,7 +42,7 @@ The top-level category previously called Talos practices to reuse is now **Verif
 
 Its six child topics explain generic verification practices first. Named Talos examples retain the reviewed commit, source references and limits. The historical source review inspected files but did not execute repository code or verify deployed behavior.
 
-All 105 original topic identifiers, original source records, parent and related links, and five guided paths are retained. Internal identifiers such as `talos` and `talos-boundaries` remain compatible with existing links. New topics add relationships without removing those original connections.
+All 105 original topic identifiers, original source records, related reading and five guided paths remain. Internal identifiers such as `talos` and `talos-boundaries` remain compatible with existing links. The 6 October skills update changes three browsing parents to place specialized material under general procedures, as described below. Published topic URLs remain stable.
 
 ## Reusable guidance update
 
@@ -54,7 +54,7 @@ Generic instructions now distinguish applicable requirements from example tools,
 
 This update changes reference content and reading destinations. It does not add configurable branches, correction loops or execution to the Factory.
 
-Local checks confirmed preservation of all original topic IDs, parent links, related links and source associations. The standalone export matched the current topic data and opened reading, search, sources, topic cards and the 3D map without HTTP asset requests in Chrome.
+Checks at that update confirmed preservation of all original topic IDs, parent links, related links and source associations. The standalone export matched its then-current topic data and opened reading, search, sources, topic cards and the 3D map without HTTP asset requests in Chrome. The later targeted browsing changes below are deliberate exceptions to original-parent preservation.
 
 The served reading view was exercised at 1440, 390 and 320 CSS pixels. All six lifecycle destinations, the pattern entry, search, topic cards and theme switching worked without captured page errors or horizontal page overflow. Feature-stage guidance returned to the retained notes. The header theme label was corrected and its normal and hover text contrast checked in both themes. These are bounded implementation observations, not a human comprehension study or a full accessibility assessment.
 
@@ -75,3 +75,13 @@ Catalogue version `2.1.0` moves authored content into `catalogue/` JSON records.
 Topics now declare their kind, applicability, limits, aliases and source-review scope. Those fields help reading and search. Metadata marked `legacy` records the migration of earlier material, not a new factual review. The new retrieval topics illustrate capability, practice, technology and example records without claiming complete technology coverage.
 
 The catalogue migration changes authoring and generated reference data. User projects remain in memory with explicit download and upload. Reading topics, searching by type and following a collection do not change a project. A supported practice action still requires review before applying its proposed project edit. JEV's frozen inference profile and its retained evidence remain separate from catalogue growth.
+
+## Focused skills taxonomy
+
+The Skills and agent roles cluster adds general reading procedures for pipeline diagnosis, source and evidence verification, and data and query verification. They explain the common task before specialized material.
+
+The stable `ci-skill` topic becomes **Jenkins diagnosis example**, `source-skill` becomes **Country-source review example**, and `rdf-skill` becomes **RDF/SPARQL verification procedure**. Their browsing parents change to the relevant general procedure. Their original identifiers, source references and related reading remain available.
+
+Neptune execution-plan guidance now applies only to Neptune deployments. SQL, RDF/SPARQL and property graphs retain distinct semantics and verification needs. Generic reading does not imply that their queries or tools are interchangeable.
+
+The three new general procedures are marked as proposed guidance needing review. No new factual source-review date, export adapter or actionable skill mapping is established by this change. This is a focused content pass, not a complete rewrite or verification of the catalogue.

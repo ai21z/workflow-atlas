@@ -1,6 +1,6 @@
 # A trial with 2 or 3 people
 
-**Historical facilitator protocol.** For the implemented in-app suggestions, use [Test the integrated suggestion journey](integrated-trial.md). The protocol below describes the earlier separate-harness approach.
+**Historical facilitator protocol.** The protocol below describes the earlier separate-harness approach and needs its matching frozen build. The [integrated trial](integrated-trial.md) also preserves an earlier interface protocol. Neither is a ready-to-run test of the current three-view workspace. Use the [quick start](../quick-start.md) and [JEV integration guide](integration.md) for current usage. A current human trial needs an updated protocol and a new frozen round.
 
 **Proposed protocol, no participant results yet.** Use the trial to discover whether people understand and benefit from the suggestions. Two or three people can expose usability failures, they cannot establish population accuracy or productivity gains.
 
@@ -26,7 +26,7 @@ Ask the person to choose a starting workflow, describe the intended result and d
 
 Observe without explaining every control. Record where they pause, ask for help, choose the wrong output or cannot find the graph. If assistance is required, record it. Do not count a facilitator-completed step as unaided success.
 
-This measures the current Atlas. It does not measure an integrated JEV interface.
+With the matching historical build, this task evaluates that Atlas interface. It does not measure the current three-view workspace or the integrated JEV interface.
 
 ## Task B, review a separate JEV proposal
 

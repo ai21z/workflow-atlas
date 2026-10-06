@@ -2,7 +2,7 @@
 
 JEV helps turn your description into a reviewable starting workflow. Describe the immediate work, review the proposed stages and create an editable draft.
 
-**Current status: local in-app pilot.** The start screen calls JEV through the configured local Node server. The manual editor and artifact compiler work without a key. [Use the integrated journey](integration.md). Human usefulness remains to be measured.
+**Current status: local in-app pilot.** Brief calls JEV through the configured local Node server. The manual editor and artifact compiler work without a key. [Use the integrated journey](integration.md). Human usefulness remains to be measured. Retained trial protocols describe earlier interfaces and need matching frozen builds. A human trial of the current three-view workspace needs an updated protocol and a new round.
 
 ## Start with what you need
 
@@ -10,7 +10,7 @@ JEV helps turn your description into a reviewable starting workflow. Describe th
 | --- | --- |
 | Understand what JEV would do | [Decision flow](architecture.md) |
 | Start the local server and get a suggestion | [Integrated usage](integration.md) |
-| Run the new in-app test with another person | [Integrated trial](integrated-trial.md) |
+| Inspect the earlier in-app test protocol | [Historical integrated trial](integrated-trial.md) |
 | Inspect the historical facilitator harness | [Earlier usage guide](usage.md) |
 | Understand the numbers and failures | [Measurements](metrics.md) |
 | Check sources and implementation details | [Reference](reference.md) |
@@ -33,4 +33,4 @@ JEV can become central to interpretation and guidance. Reviewed definitions, cod
 
 This guide distinguishes **observed**, **provider documented**, **planned** and **unknown** claims. Results describe a bounded synthetic pilot for three recipes and three practices. They do not establish universal workflow coverage, source truth, production latency or a productivity improvement.
 
-Integration guide updated on 5 October 2026. Historical measurements retain their original dates and versions. [How the experiment evolved](history.md). [Machine readable evidence](evidence.json).
+Integration navigation updated on 6 October 2026. Provider and server review retains its recorded 5 October date. Historical measurements and trial protocols retain their original dates and versions. [How the experiment evolved](history.md). [Machine readable evidence](evidence.json).

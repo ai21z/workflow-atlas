@@ -15,6 +15,7 @@ const evidence = {
   checks: [], pageErrors: [], navigationErrors: [], providerCalls: 0,
 }
 let server, browser, context, page, base
+let checkpoints = []
 const note = 'Keep this exact stage note through Knowledge navigation.'
 
 async function focus() {
@@ -28,29 +29,49 @@ async function fresh(viewport = { width: 1440, height: 1000 }) {
   page.on('pageerror', error => evidence.pageErrors.push(error.message))
   await page.goto(base)
   await page.getByRole('button', { name: 'Build a feature Outline the change and how to check it.', exact: true }).press('Enter')
-  await page.getByRole('textbox', { name: 'Give this work a name', exact: true }).fill('Navigation recovery example')
-  await page.getByRole('textbox', { name: 'What should we achieve?', exact: true }).fill('Export the currently filtered report to CSV.')
-  await page.getByRole('button', { name: 'Open my workflow →', exact: true }).press('Enter')
+  await page.getByRole('textbox', { name: 'Project name', exact: true }).fill('Navigation recovery example')
+  await page.locator('#project-purpose').fill('Export the currently filtered report to CSV.')
+  await page.locator('.main-navigation [data-main-view="workflow"]').press('Enter')
   await page.getByRole('button', { name: 'Requirements and evidence', exact: true }).press('Enter')
   await page.getByRole('textbox', { name: 'Instructions and handoff for this stage', exact: true }).fill(note)
 }
 
 async function openKnowledge() {
+  checkpoints.push('Open stage guidance')
+  const before = await page.evaluate(() => history.length)
   await page.getByRole('button', { name: 'Read related guidance ↗', exact: true }).press('Enter')
   await page.frameLocator('#knowledge-frame').getByRole('button', { name: '← Back to workspace', exact: true }).waitFor({ state: 'visible' })
-  assert.ok(page.url().endsWith('#knowledge'))
+  await page.waitForFunction(() => location.hash.startsWith('#knowledge/requirements/read'), null, { timeout: 3000 })
+  assert.equal(await page.evaluate(() => history.length), before + 1, 'Opening guidance adds one meaningful history entry')
+  assert.equal(await page.locator('.studio-header').evaluate(element => element.inert), false, 'The shared header remains usable from Knowledge map')
+}
+
+async function assertKnowledge(topicId = 'requirements', mode = 'read') {
+  await page.waitForFunction(({ topicId, mode }) => location.hash === `#knowledge/${topicId}/${mode}`, { topicId, mode }, { timeout: 3000 })
+  assert.equal(await page.locator('#knowledge-workspace').isVisible(), true)
+  assert.equal(page.frames().some(frame => frame.parentFrame() && frame.url() === 'about:blank'), false)
+  assert.equal(await page.locator('.main-navigation [data-main-view="knowledge"]').getAttribute('aria-current'), 'page')
 }
 
 async function history(direction) {
+  checkpoints.push(`Browser ${direction}`)
   try { await page[direction]({ waitUntil: 'commit', timeout: 3000 }) }
   catch (error) { evidence.navigationErrors.push({ direction, message: error.message.split('\n')[0] }) }
 }
 
 async function assertStageRestored() {
+  checkpoints.push('Verify the stage, note and return focus')
   await page.waitForFunction(() => location.hash === '#stage-requirements', null, { timeout: 3000 })
   assert.equal(await page.locator('#knowledge-workspace').isVisible(), false)
+  assert.ok((await page.locator('#knowledge-frame').getAttribute('src')).includes('/atlas/'), 'Returning keeps the loaded Knowledge map')
+  assert.equal(page.frames().some(frame => frame.parentFrame() && frame.url() === 'about:blank'), false)
   assert.equal(await page.getByRole('textbox', { name: 'Instructions and handoff for this stage', exact: true }).inputValue(), note)
   assert.equal((await focus()).text, 'Read related guidance ↗')
+  const sharedNav=await page.locator('.main-navigation [data-main-view="brief"]').evaluate(link=>{
+    const rect=link.getBoundingClientRect()
+    return rect.top>=0 && rect.bottom<=innerHeight && link.contains(document.elementFromPoint(rect.left+rect.width/2,rect.top+rect.height/2))
+  })
+  assert.equal(sharedNav,true,'The shared navigation stays visible and can be hit while reading a narrow stage inspector.')
 }
 
 async function persist() {
@@ -60,12 +81,15 @@ async function persist() {
 
 async function check(id, action) {
   const item = { id, status: 'Not run' }
+  checkpoints = []
   evidence.checks.push(item)
   try { item.observation = await action(); item.status = 'Pass' }
   catch (error) { item.status = 'Fail'; item.error = error.message }
   if (page && !page.isClosed()) {
     item.visibleState = await page.evaluate(() => ({ url: location.href, active: document.activeElement?.tagName, activeId: document.activeElement?.id, iframeSources: [...document.querySelectorAll('iframe')].map(frame => ({ id: frame.id, src: frame.getAttribute('src') })), width: innerWidth, height: innerHeight, documentWidth: document.documentElement.scrollWidth }))
     item.frames = page.frames().map(frame => frame.url())
+    item.checkpoints = [...checkpoints]
+    item.frameFocus = await Promise.all(page.frames().map(async frame => ({url:frame.url(),...await frame.evaluate(() => ({id:document.activeElement?.id,tag:document.activeElement?.tagName}))})))
     item.screenshot = `${id}.png`
     await page.screenshot({ path: path.join(output, item.screenshot), fullPage: false })
   }
@@ -97,8 +121,7 @@ async function run() {
       await assertStageRestored()
       await history('goForward')
       await page.frameLocator('#knowledge-frame').getByRole('button', { name: '← Back to workspace', exact: true }).waitFor({ state: 'visible' })
-      assert.ok(page.url().endsWith('#knowledge'))
-      assert.equal(page.frames().some(frame => frame.parentFrame() && frame.url() === 'about:blank'), false)
+      await assertKnowledge()
       await page.frameLocator('#knowledge-frame').getByRole('button', { name: '← Back to workspace', exact: true }).press('Enter')
       await assertStageRestored()
     }
@@ -109,6 +132,7 @@ async function run() {
     await fresh({ width: 320, height: 568 })
     for (let cycle = 0; cycle < 2; cycle += 1) {
       await openKnowledge()
+      checkpoints.push(`Explicit return ${cycle + 1}`)
       await page.frameLocator('#knowledge-frame').getByRole('button', { name: '← Back to workspace', exact: true }).press('Enter')
       await assertStageRestored()
     }
@@ -125,14 +149,15 @@ async function run() {
     await frame.getByRole('searchbox', { name: 'Search all topics', exact: true }).fill('Requirements investigation')
     await frame.getByRole('button', { name: 'Requirements investigation. Practice. Read topic', exact: true }).press('Enter')
     await frame.getByRole('heading', { name: 'Requirements investigation', exact: true }).waitFor({ state: 'visible' })
+    await assertKnowledge('requirements-workflow')
     await history('goBack')
     await frame.getByRole('heading', { name: 'Requirements & traceability', exact: true }).waitFor({ state: 'visible', timeout: 3000 })
-    assert.ok(page.url().endsWith('#knowledge'))
+    await assertKnowledge()
     await history('goBack')
     await assertStageRestored()
     await history('goForward')
     await frame.getByRole('heading', { name: 'Requirements & traceability', exact: true }).waitFor({ state: 'visible', timeout: 3000 })
-    assert.ok(page.url().endsWith('#knowledge'))
+    await assertKnowledge()
     return 'Back traverses the selected topic before returning to the stage. Forward restores usable guidance.'
   })
 
@@ -142,7 +167,7 @@ async function run() {
     const frame = page.frameLocator('#knowledge-frame')
     await frame.getByRole('button', { name: 'Search topics', exact: true }).press('Enter')
     await frame.getByRole('searchbox', { name: 'Search all topics', exact: true }).press('Escape')
-    assert.ok(page.url().endsWith('#knowledge'))
+    await assertKnowledge()
     const actualFrame = page.frames().find(item => item.url().includes('/atlas/'))
     assert.equal(await actualFrame.evaluate(() => document.activeElement?.id), 'mobile-topics')
     await frame.getByRole('button', { name: 'Search topics', exact: true }).press('Escape')
@@ -170,7 +195,7 @@ async function run() {
 }
 
 run().catch(error => { evidence.fatal = error.stack; process.exitCode = 1 }).finally(async () => {
-  if (evidence.checks.some(item => item.status !== 'Pass') || evidence.providerCalls || evidence.pageErrors.length) process.exitCode = 1
+  if (evidence.checks.some(item => item.status !== 'Pass') || evidence.providerCalls || evidence.pageErrors.length || evidence.navigationErrors.length) process.exitCode = 1
   await persist()
   if (browser) await browser.close()
   if (server) { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)) }

@@ -6,7 +6,9 @@ Catalogue content is version `2.1.0`. Its authoring schema is `1.0`. Project con
 
 ## Current coverage
 
-The catalogue contains 117 topics, 72 source records, 10 browsing clusters and six guided paths. All 109 earlier topics remain. Eight new topics illustrate information retrieval, validation, technology choices and a fictional example.
+The catalogue contains 120 topics, 72 source records, 10 browsing clusters and six guided paths. All 109 earlier topics remain. Eight retrieval topics illustrate validation, technology choices and a fictional example. Three general procedures introduce pipeline diagnosis, data and query verification, and source and evidence verification.
+
+The Skills and agent roles cluster leads with those general procedures. Its Jenkins and country-source pages are visibly scoped examples. RDF/SPARQL verification keeps its own data-family guidance, with Neptune execution plans relevant only to Neptune. These new entry procedures are proposed guidance marked for review. Their addition is not a new source review or an exportable skill mapping. Broader catalogue-wide abstraction and factual review remain unfinished.
 
 There are 22 technology choices and four question profiles: generic, Spring Boot, React and RDF/SPARQL. A technology choice records a name. A profile adds questions and expected checks. Neither establishes installation, compatibility, available credentials or observed behavior. Other technologies retain generic guidance. The retrieval examples are a starting set, not a complete technology directory.
 
@@ -81,7 +83,7 @@ A reviewed source requires a recorded date. A reviewed topic requires a date and
 
 The generated `factory/catalog.mjs` exports the existing `CATALOG` API, including action definitions and per-definition revision metadata. The factory uses it for selection, validation, previews and instruction generation. `atlas/data.js` contains the reading, search, map, source and collection projections. Edit the JSON sources instead of either generated file.
 
-Six topics offer project actions when applicable. **Retrieve and validate** offers **Add retrieval checks** through **Review for my workflow**. Review the proposed files before applying. That action selects `validated-retrieval`; it does not add steps, roles, tools, facts or observations. Downloads include its written guidance and source. Undo can reverse the project edit.
+Six topics offer project actions when applicable. **Retrieve and validate** offers **Add retrieval checks** through **Review for my workflow**. Review the proposed files before applying. That action selects `validated-retrieval`. It does not add steps, roles, tools, facts or observations. Downloads include its written guidance and source. Undo can reverse the project edit.
 
 Projects, imported files and snapshots remain in memory. Explicit download and upload keep user-owned work. The public catalogue does not provide project storage. Historical export manifests retain selected definition contents, versions, sources, applicability and limits for comparison with current guidance. A newer catalogue version does not silently establish a new review of older definitions.
 

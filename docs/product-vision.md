@@ -1,14 +1,14 @@
 # Product vision
 
-Direction agreed on 2 October 2026. Interface direction updated on 3 October 2026. See [requirements](requirements.md) and the [factory guide](factory-guide.md) for the current implementation and its limits.
+Direction agreed on 2 October 2026. Three-view interface direction agreed on 6 October 2026. See [requirements](requirements.md) and the [factory guide](factory-guide.md) for the current implementation and its limits.
 
 ## What I am building
 
-Workflow Atlas helps people plan software work. Choose the steps, add decisions and download a guide for a team or AI assistant.
+Workflow Atlas helps people plan and connect work. Describe the result, shape the workflow and download a guide for a team or AI assistant.
 
 The Knowledge Atlas explains concepts and practices. The Project Atlas makes the user's current workflow and decisions visible. Its editor captures responsibilities, inputs, checks and evidence. Generated files and a readable project Atlas carry those decisions into the selected environment.
 
-Its first useful audience is an engineer or technical lead working with an existing project, including projects with multiple components. The product does not assume that every user needs a full delivery lifecycle or multiple agents.
+Its intended audience includes product managers, engineers and technical leads. A team process can describe work without a repository or agent. Development and application processes have their own relevant controls. The product does not assume that every user needs a full delivery lifecycle or multiple agents.
 
 The structure is extensible across technologies. Useful technology guidance needs reviewed questions and evidence requirements. A selectable technology label is not a claim of expert support.
 
@@ -25,10 +25,10 @@ The first recipes are feasibility investigation, bug investigation and repair, a
 
 ## The authoring journey
 
-1. Choose a blank starting point or open a supported pack. Fictional examples are optional.
-2. Describe the outcome and adapt the workflow by selecting stages.
-3. Add project details where they affect instructions. Leave unknowns explicit.
-4. Inspect the files or read Preview Atlas to understand the resulting decisions.
+1. Describe the result in Brief, choose a starting point or open a supported pack. Fictional examples are optional.
+2. Shape the steps and assignments in Workflow. Custom processes also record explicit connections.
+3. Return to Brief for outcome, acceptance and project context. Leave unknowns explicit.
+4. Preview files or the readable Project Atlas to understand the resulting decisions.
 5. Review findings and download the pack, readable HTML, JSON or a complete standalone skill.
 6. Reopen the project and review deliberately edited files before replacing them.
 
@@ -57,9 +57,9 @@ Human work and external systems are valid actors. An agent with supplied context
 
 The versioned JSON configuration is the authoring source of truth. Readable Markdown and host profiles are generated from it. An edit to an exported Markdown file does not silently rewrite the configuration.
 
-The current visual editor changes selections and assignments within reviewed recipes. Their stage topology is fixed. Arbitrary nodes, edge drawing, branching conditions and a general executable graph are outside the current implementation.
+Recipe stages retain their reviewed topology and prerequisites. Custom processes can record and edit steps, supplied inputs, produced results, named outcome routes, checks, approval and bounded corrections. Those decisions appear in diagrams and exports. Arbitrary routing expressions, parallel joins and workflow execution remain outside this version.
 
-The [workflow design specification](workflow-design-spec.md) proposes the next milestone: explicit inputs and results, outcome routes and bounded correction paths, with consistent diagrams and exports. It is a design specification, not implemented behavior. Execution remains a later phase.
+The [workflow design specification](workflow-design-spec.md) describes the design scope. The implemented [workflow model](workflow-model.md) records explicit connections. Selecting a pattern, applying a process change or downloading its files does not execute the workflow.
 
 An Atlas pack retains the configuration needed to reopen its decisions. An arbitrary repository can supply facts for review, but it cannot reliably supply every original decision or relationship. Externally edited generated files remain differences to review.
 
@@ -89,15 +89,19 @@ Useful evaluation compares the existing setup, minimal verified facts, one relev
 
 ## Interface principles
 
-Open with a compact start screen and no active fictional project. The three choices are Investigate an idea, Build a feature and Fix a bug. Open pack and Browse examples remain explicit choices.
+Keep three primary destinations visible: **Brief**, **Workflow** and **Knowledge map**. They are coordinated views, not mandatory wizard steps. A fresh session begins in Brief without a fictional project. Opening a supported pack leads to its Workflow. A safe explicit deep link takes precedence.
 
-The active editor has two primary views, Workflow and Files. Project details groups the brief, components, boundaries, sources and optional runtime design. Roles and skills provides the assignment library. Preview Atlas retains the useful project summary as a reading view. Download integrates review and export.
+Brief asks what the user wants to achieve. After a project exists, it remains the place for the outcome, acceptance examples, assumptions, boundaries, components, sources and optional runtime design. Reveal detailed records when they are useful. Each decision has one editing location.
 
-Give each decision one editing location. Selecting a stage opens its details directly. Dragging an actor or skill has an explicit effect, with click and keyboard controls for the same task. Keep undo, redo, actionable findings and file reasons available. Show detailed controls when they help the current decision, without requiring a second editing mode.
+Workflow gives the diagram and selected-step inspector the available space. A keyboard-accessible step list offers equivalent editing commands for custom processes. Recipe stages retain their actual editing limits. Roles and skills provides the assignment library. Dragging is optional.
 
-Stage evidence appears with the relevant stage. Consolidated evidence and unscoped facts, provenance, models and budgets remain accessible through Project details. Optional runtime design requires an explicit choice, not a recipe-based assumption.
+Preview files is a secondary Workflow view reachable from both Brief and Workflow. It shows exact generated content, file reasons, output scope and retained opened files. The readable Project Atlas is another view of the same accepted decisions. Neither is an independently edited project. Download integrates review and export.
 
-Knowledge map is a primary navigation entry from the start screen and editor. It opens the full reference Atlas in a dedicated view and returns to the same start screen or retained editing context. The reference Atlas also remains available on its own. Reading a topic never silently adds instructions or replaces the current project. Essential authoring does not depend on dragging, hover or WebGL.
+Process edits remain a pending draft until reviewed and applied. Switching views retains pending work. When accepted decisions change elsewhere, the process comparison must be reviewed again. Applying must preserve unrelated newer work and make conflicts explicit. Downloads must identify pending edits and export the accepted project only, unless those edits are deliberately applied first.
+
+Stage evidence appears with the relevant stage. Consolidated records remain reachable from Brief. Expected checks, observations, interpretation and approval remain distinct. Optional runtime design requires an explicit choice, not a recipe-based assumption.
+
+Knowledge map supports independent learning and exploration from a project. It preserves the full reference Atlas, reading, cards, filters, search, sources and guided paths. Explicit mappings can open relevant guidance from a step. Reading or switching views never silently adds instructions. A supported practice shows its proposed project and file changes before Apply. The reference Atlas remains available independently and offline. Essential authoring does not depend on dragging, hover or WebGL.
 
 Help follows the user's tasks, with short steps and links to relevant work. Light and dark themes share the current session preference. The [accessibility review](accessibility.md) uses WCAG 2.2 Level AA as a baseline and keeps inspected implementation separate from demonstrated conformance.
 

@@ -1,0 +1,82 @@
+{
+  "id": "data-query-verification",
+  "title": "Verify data and query results",
+  "summary": "Define the expected meaning, then check the result using the actual data model and engine.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Inputs",
+      "text": "The requested behavior, permitted data scope, relevant schema or model version, representative fixtures, expected results and the actual query interface and target engine."
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Record expected results and scope before choosing checks. Include normal, empty, invalid and unavailable cases where relevant.",
+        "Choose checks that fit the data model. SQL tables, RDF graphs and property graphs have different structure and query semantics.",
+        "Verify structural rules that actually apply, then compare returned values with the expected result and permitted scope.",
+        "Record the dataset, query or API request, engine and version, observed result and limitations. A valid shape does not establish the factual truth of a record.",
+        "When performance matters, use supported diagnostics and measured workloads from the target engine. Distinguish a local fixture check from evidence in the target environment."
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Keep the data families distinct",
+      "headers": [
+        "Environment",
+        "Questions to resolve"
+      ],
+      "rows": [
+        [
+          "Relational SQL",
+          "Which tables, keys, joins, null behavior and transaction boundaries affect the expected result?"
+        ],
+        [
+          "RDF and SPARQL",
+          "Which graph, vocabulary, inference assumptions, shapes and missing statements affect the result?"
+        ],
+        [
+          "Property graph",
+          "Which labels, relationships, properties, traversals and engine behavior affect the result?"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Output",
+      "text": "A reproducible check record with expected and actual results, input versions, interface, permitted scope and any untested assumptions."
+    },
+    {
+      "type": "p",
+      "label": "Acceptance checks",
+      "text": "The result matches the recorded expectation for the tested inputs and scope. Engine specific checks are named explicitly. Missing tests remain visible."
+    },
+    {
+      "type": "p",
+      "label": "Specializations",
+      "text": "The RDF/SPARQL procedure is available below. PostgreSQL, Neptune, Fuseki and Neo4j pages explain different technology examples. Their presence does not imply interchangeable queries or a working integration."
+    }
+  ],
+  "refs": [],
+  "basis": "Proposed procedure",
+  "confidence": "Moderate. Engine specific checks need local validation",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "instructions",
+      "verification"
+    ],
+    "aliases": [
+      "query testing",
+      "database verification",
+      "SQL checks",
+      "graph checks"
+    ],
+    "revision": "1",
+    "applicability": "Use when verifying a data transformation, query or retrieval API. Select the actual data model and engine before applying specialist checks.",
+    "limits": "This is a proposed reading procedure. It does not select an exportable skill, configure access, run checks or establish a successful result.",
+    "sourceStatus": "needs-review",
+    "reviewedOn": "",
+    "claims": []
+  }
+}

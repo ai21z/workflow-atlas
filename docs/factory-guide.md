@@ -8,35 +8,41 @@ For a first visit, follow the [quick start](quick-start.md). This guide covers p
 
 ## Start a project
 
-The start screen has no active project. Describe the work and select **Suggest my workflow** if the local JEV server is configured. Review the proposal, record answers you want to keep and select **Create this draft**. [JEV setup and answer recording](jev/integration.md).
+Use **Start with a common goal** beside the Brief heading for a ready plan. Select a goal to read its summary, then choose **Use this goal**. The choice supplies relevant stages and editable planning notes, with project setup and acceptance details left open. An existing description and recorded answers are carried into the draft. This action uses local templates and makes no AI request.
 
-You can also choose **Investigate an idea**, **Build a feature** or **Fix a bug** yourself. An entered description stays with that manual proposal. Without a description, each opens a blank recipe with its own questions, stages and outputs. Template roles and practices are editable starting choices. Supply actual project facts or leave them unresolved.
+The active Brief offers **Start another draft**. **Start a new draft** creates a replacement project, it does not merge goals with current work. Cancel the replacement to keep pending process edits or download the current project before replacing it.
+
+An empty session starts in **Brief** with no active project. Describe what you want to achieve and select **Suggest my workflow** if the local JEV server is configured. Review the proposal, record answers you want to keep and select **Create this draft**. [JEV setup and answer recording](jev/integration.md).
+
+You can also choose **Investigate an idea**, **Build a feature** or **Fix a bug** yourself. An entered description stays with that manual proposal, which you review before **Create this draft**. Without a description, the choice opens a blank project in Brief with its own recipe questions, stages and outputs. Template roles and practices are editable starting choices. Supply actual project facts or leave them unresolved.
 
 Choose **Design a connected process** to start without a development recipe, repository components or selected agent profiles. This opens a pattern chooser for a team process, development work or application behavior. It does not call JEV. The current JEV suggestions still cover the three development recipes only.
 
-The **Start with the result** dialog asks for a name, desired result and optional existing context. Unknowns can stay blank. Entered values stay in the current session as you type. **Open my workflow** or **I will fill this in later** returns to the editor without discarding them. Existing context becomes notes on the first enabled stage. Supplied links are not fetched or verified. The **Next useful step** bar points to a missing name, outcome or recipe answer, then offers the download review. A draft can be downloaded at any point.
+Entered wording stays in the current session when you visit Knowledge map or switch to a manual starting point. Once a project exists, edit its intended result and context in **Brief**. Unknowns can stay blank. Supplied links are not fetched or verified. A draft can be downloaded at any point.
 
 **Browse examples** offers fictional worked projects. The configuration-service feasibility example uses synthetic names, paths, commands, sources and decisions. **Open pack** restores a supported download. Replacing unfinished work requires a deliberate choice, with an opportunity to download the current project.
 
 ## Find the right view
 
-| Control | Use it to |
+| Destination or control | Use it to |
 | --- | --- |
-| Workflow | Edit recipe stages or open the designer for custom steps, inputs, checks and outcome connections |
-| Files | Inspect generated text, file reasons and affected stages or roles |
-| Project details | Edit the brief, components, boundaries, sources and optional runtime design |
+| Brief | Describe the outcome, acceptance and project context, with detailed components, boundaries, sources and optional runtime design |
+| Workflow | Edit recipe stages or custom steps, inputs, checks and outcome connections |
+| Knowledge map | Learn concepts, examples and their source basis, with or without a project |
+| Preview files | Inspect generated text, file reasons and associated stages or steps in a secondary Workflow view |
 | Roles and skills | Inspect roles and procedures, assign them to stages and choose extra exports |
-| Preview Atlas | Read a summary of current project decisions |
+| Project Atlas | Read a summary of accepted project decisions |
 | Review changes | Compare decisions, add a reason, inspect guidance and review external file edits |
 | Download | Review the suggested output, choose files, inspect findings and read use instructions |
-| Knowledge map | Learn concepts, examples and their source basis |
 | Help | Read task instructions without leaving the session |
 
-Workflow, Files and Preview Atlas use the same project. Preview Atlas is a readable presentation, it is not a separately edited copy.
+Brief, Workflow, file previews and the readable Project Atlas use the same accepted project. The three primary destinations are freely accessible views, not a wizard. Preview files is available from an active Brief and from Workflow. The Project Atlas preview is a readable presentation, not a separately edited copy.
+
+Custom process changes remain separately identified pending edits until applied. Switching to another view retains them in this session. Applying updates the project as one undoable change. Merely reading guidance or viewing a file does not apply the process draft.
 
 ### Read the decision brief
 
-For a recipe project, Preview Atlas and the downloaded HTML begin with four questions. What do we want, what approach and why, who is planned to act, and what is still open. The cards use recorded values. Missing information stays visible. Approach notes come from architecture in a feature, diagnosis and repair in a bug, or options and recommendation in a study. Expand **Read all approach notes** to read every supplied note in full. Existing context is not inferred to be an approach.
+For a recipe project, Project Atlas and the downloaded HTML begin with four questions. What do we want, what approach and why, who is planned to act, and what is still open. The cards use recorded values. Missing information stays visible. Approach notes come from architecture in a feature, diagnosis and repair in a bug, or options and recommendation in a study. Expand **Read all approach notes** to read every supplied note in full. Existing context is not inferred to be an approach.
 
 The first two enabled recipe stages identify planned owners. They are not progress or completed work. The brief identifies empty intent and approach fields. A filled field does not resolve questions inside its notes, and the brief does not interpret every unresolved question in free text. Expand recorded context and technical details or the richer project views for specialist information. All views use the same configuration.
 
@@ -54,13 +60,13 @@ ZIP and readable HTML exports include `DECISION-REVIEW.md` and `decision-review.
 
 **Review current guidance for download** shows supplied previous records, current definitions and the opened files that differ from fresh generation. Cancel leaves the project and opened files unchanged. When a comparable definition update exists, generating a replacement requires deliberately selecting current guidance. The selection is recorded in the new manifest. Original files can still be downloaded unchanged. Atlas does not fetch the linked sources, authenticate supplied metadata or claim a fresh source review during this process.
 
-Knowledge map opens the reference Atlas at full viewport size. Use **Search topics**, enter a term in **Search all topics**, then choose a result to open its guidance directly. Selecting a graph node explores the map. **Read topic** beside the selected topic opens its reading view. Returning restores the start screen or the same editing context. Reading a topic does not add instructions to the pack. Reading, topic navigation and cards remain alternatives to the 3D map.
+Knowledge map uses the available workspace beneath the shared navigation. Use **Search topics**, enter a term in **Search all topics**, then choose a result to open its guidance directly. Selecting a graph node explores the map. **Read topic** beside the selected topic opens its reading view. Switching back restores Brief or the same editing context. Reading a topic does not add instructions to the pack. Reading, topic navigation and cards remain alternatives to the 3D map.
 
-For a feature workflow, acceptance examples entered in **Project details**, **Brief** appear verbatim in `WORKFLOW.md` and `templates/REQUIREMENTS.md`. An empty answer leaves the requirements table unresolved. Supplied examples do not establish approval or observed results, and unprovided owners, sources and current behavior remain unresolved. The same answer is retained in the project when downloaded and reopened.
+For a feature workflow, acceptance examples entered in **Brief** appear verbatim in `WORKFLOW.md` and `templates/REQUIREMENTS.md`. An empty answer leaves the requirements table unresolved. Supplied examples do not establish approval or observed results, and unprovided owners, sources and current behavior remain unresolved. The same answer is retained in the project when downloaded and reopened.
 
 ### Use reviewed guidance in the project
 
-Five curated topic mappings connect reference guidance to existing project decisions. They cover relevant context, the smallest necessary change, requirements before implementation, source backed knowledge and validation before writes. A mapping appears only where its conditions fit the active workflow. This is not automatic translation of every topic into instructions.
+Six curated topic mappings connect reference guidance to existing project decisions. They cover relevant context, the smallest necessary change, requirements before implementation, source backed knowledge, validation before writes and retrieval checks. A mapping appears only where its conditions fit the active workflow. This is not automatic translation of every topic into instructions.
 
 Choose **Review for my workflow** to inspect the proposed changes and affected generated files. The project remains unchanged until **Apply to my workflow**. Cancel or Escape closes the review without applying it. After applying, the relevant project controls open. Undo reverses the project change.
 
@@ -70,7 +76,13 @@ The **Dark mode** switch turns the dark theme on or off. The workspace and embed
 
 ## Describe the result and project
 
-Edit the project name and outcome above the workflow. In **Project details**, use **Brief** for recipe questions. For a feature or investigation, the equivalent outcome question shows **Uses your project outcome** rather than asking you to repeat it. **Edit project outcome** changes the shared outcome. Expand **Add a more specific answer, optional** to supply a separate answer when needed. That explicit answer takes priority for the recipe question and stays separate when the overall outcome changes. Clearing it returns to the current project outcome. Atlas keeps the original project fields intact instead of copying text between them.
+Edit the project name in the workspace heading and **Wanted result** in **Brief**. The inline sections are **Brief**, **Components**, **Boundaries**, **Sources and evidence** and **Runtime design**. Brief also holds the recipe questions. For a feature or investigation, the equivalent outcome question shows **Uses your project outcome** rather than asking you to repeat it. Expand **Add a more specific answer, optional** to supply a separate answer when needed. That explicit answer takes priority for the recipe question and stays separate when the overall outcome changes. Clearing it returns to the current project outcome. Atlas keeps the original project fields intact instead of copying text between them.
+
+**Review workflow options** reveals **Review a replacement draft, optional**. Its proposal remains separate from the current project until you deliberately replace the project. Editing the wanted result alone does not replace the workflow.
+
+Choose a replacement workflow in that panel to review an investigation, feature or bug draft manually. This also works in the hosted version without AI requests. **Replace with this draft** applies the reviewed replacement after any pending work safeguards.
+
+Replacement proposal text and unfinished answer wording stay in this tab. Downloads of the current project do not include that separate proposal. Before New, Open or another replacement discards it, choose **Keep editing** or explicitly discard it. Leaving or reloading the page also warns while that work is pending.
 
 A bug's **What should happen?** remains separate. A repair goal does not establish expected behavior. Acceptance examples, affected scope, study boundaries and other questions also remain separate. Displayed reuse means text was supplied, not that it contains every detail or has been verified. `WORKFLOW.md` identifies an inherited answer as using the recorded project outcome.
 
@@ -90,7 +102,7 @@ Use **Boundaries** for allowed work, review requirements, constraints and releva
 
 Select a stage in **Workflow**. Its panel is the single place to edit its enabled state, owner, skills, supplied inputs, notes and related evidence. Assign a person, a selected agent role or an external system. Name human and external owners.
 
-**Add a role or skill** in Workflow offers drag assignment and controls for assignment without dragging. Select a palette item, then its stage. The stage panel puts responsibility and instructions first. Expand **Relevant skills** or **Stage inputs, outputs and checks** when needed. **Roles and skills** in Files opens the full library and standalone downloads. Undo and redo apply to project changes in the current session.
+**Add a role or skill** in Workflow offers drag assignment and controls for assignment without dragging. Select a palette item, then its stage. The stage panel puts responsibility and instructions first. Expand **Relevant skills** or **Stage inputs, outputs and checks** when needed. **Roles and skills** in the file preview opens the full library and standalone downloads. Undo and redo apply to project changes in the current session.
 
 An existing artifact can satisfy an omitted prerequisite. Verification can use an existing proposed change without repeating implementation. Its location records an intended input, it does not prove that the file exists or is sufficient.
 
@@ -104,13 +116,15 @@ Skills assigned only to context-only agents contain a review procedure. Shared s
 
 Use **Download standalone skill** for an included skill. Keep its complete directory, including `SKILL.md` and required references. The separate export also includes its manifest and validation record. Place the skill in a discovery location supported by the intended host.
 
+With pending process edits, the download review keeps your requested standalone skill. After explicitly checking **Download accepted decisions without the pending process edits**, choose **Download requested standalone skill**. This keeps that skill from the accepted project without applying the pending design or changing the main output choice.
+
 The reviewed Copilot formatting uses explicit tool lists. The [configuration reference](https://docs.github.com/en/copilot/reference/custom-agents-configuration) explains omitted and empty lists. Review the intended host's support before adoption. Selected practices do not install Ponytail, Spec Kit, Superpowers or a wiki service.
 
 ## Connect a process
 
 Use this when a result must pass from one step to another, with different destinations for passing checks, missing information or requested changes.
 
-1. **Open the designer.** From a new start, choose **Design a connected process**. From Workflow in an existing project, choose **Design a process**. Existing custom processes have an **Open designer** button.
+1. **Open the process in Workflow.** From an empty Brief, choose **Design a connected process**. From an existing project, choose **Design a process**. The process editor remains part of Workflow, with Brief and Knowledge map still available.
 2. **Choose a starting pattern.** Give the process a name. Choose **A team process**, **How we build it** or **How it works when used**. Select a sequence, review or bounded correction pattern, then **Open designer**. The pattern supplies editable connections. It does not choose your owners, acceptance criteria or correction maximum.
 3. **Select a step.** Click its card in **Map**, or choose it from **Step list**. Both open the same controls. Name what happens and who does it. Use **Add step** only when the process needs another action.
 4. **Name what passes between steps.** Under **What does it need and produce?**, select the needed inputs and produced results. **Add a supplied input** records something that already comes from outside this process. **Add a produced result** records something this step will create. Fill its meaning, structure and revision policy. A result definition is not proof the result exists.
@@ -119,7 +133,11 @@ Use this when a result must pass from one step to another, with different destin
 7. **Review before applying.** Choose **Review changes** inside the designer. Inspect changed connections, affected files and findings. **Keep editing** returns to the draft. Broken references prevent **Apply changes**. Missing decisions can remain visible in an incomplete draft. Applying updates the project together, and project **Undo** can reverse that change.
 8. **Keep the result.** Choose **Download** after applying. The applied process appears in the workflow guide and readable Atlas. Applying alone does not save it. Reopen the downloaded JSON, ZIP or project HTML in a later session.
 
-Closing the designer with unapplied changes offers **Keep editing** or **Discard edits**. Unapplied edits are not included in a project download. Removing a referenced record shows its affected references and requires a replacement or cancellation. The app keeps supplied observations rather than silently deleting evidence.
+Changing the main view keeps unapplied process edits in the session. Returning to Workflow restores the draft and selected record. Unapplied edits are not part of ordinary project downloads. The download review offers **Review pending process** or the explicit checkbox **Download accepted decisions without the pending process edits**. Apply first if you want that process draft in the ordinary download.
+
+When Brief or another project action changes accepted decisions, the pending process review becomes out of date. Review again before applying. Unrelated changes can be preserved together. A change to the same process shows **This process changed elsewhere**. Compare the designs, then choose **Use the current project version**, **Keep my design as another process** or **Review replacing the current version**. Replacement still requires review and Apply. New and Open retain replacement handling for pending drafts. Canceling replacement keeps them.
+
+Removing a referenced record shows its affected references and requires a replacement or cancellation. The app keeps supplied observations rather than silently deleting evidence.
 
 For example, a document review can use **A team process** and **Check and improve within a limit**. Name the author, review criteria and correction maximum. Connect acceptance to the intended ending and unavailable review to a stop. This describes a manual process without requiring repository paths, model calls or deployment.
 
@@ -133,7 +151,7 @@ For **How it works when used**, agent identities describe the application's prop
 
 ## Record sources and results
 
-Use stage details for evidence tied to that stage. **Sources and evidence** in Project details gathers the records, project facts, provenance, model details and budget notes. Choose **Project level check** for evidence that applies to the whole project without assigning it to a stage.
+Use stage details for evidence tied to that stage. **Sources and evidence** in Brief gathers the records, project facts, provenance, model details and budget notes. Choose **Project level check** for evidence that applies to the whole project without assigning it to a stage.
 
 Facts retain their claim, status, source, revision or date, reviewer and unresolved notes. A confirmed fact needs a source and reviewer under factory rules. Atlas does not authenticate that confirmation.
 
@@ -145,7 +163,7 @@ Model name, version, budget and expenditure are optional project values. They do
 
 ## Add an optional runtime design
 
-In **Project details**, choose **Runtime design** and explicitly enable it when relevant. A feasibility recipe does not require a backend agent.
+In **Brief**, choose **Runtime design** and explicitly enable it when relevant. A feasibility recipe does not require a backend agent.
 
 The development workflow describes how the team investigates and builds. Runtime design describes the finished application's behavior. Review outcome, inputs, judgment, tools, validation before writes, execution limits, duplicate requests, failures and confirmed results.
 
@@ -159,7 +177,7 @@ Recording a control does not implement it. A completion statement does not confi
 
 ## Inspect and download
 
-In **Files**, read an output and **Why this file?** for its purpose, relevant stages or roles, sources and assumptions. **Preview Atlas** gives a readable summary of the project.
+Choose **Preview files** from Brief or Workflow. Read an output and **Why this file?** for its purpose, relevant stages or roles, sources and assumptions. The readable **Project Atlas** preview summarizes accepted decisions.
 
 Choose **Download** for the short review. Findings link to relevant controls. An incomplete draft can be downloaded with unresolved information retained. Resolve definite contradictions before adopting its instructions.
 
@@ -179,7 +197,7 @@ Choose the output for the next handoff. A PM reviewing an idea can start with a 
 | One focused skill | One complete `.github/skills/<id>/` directory. No agent profiles |
 | Full artifact pack | All selected skills, profiles and shared workflow records |
 
-Each selected ZIP includes `project.json`, `INSTALL.md`, `VALIDATION.md`, `manifest.json` and `PROJECT-ATLAS.html`. Expand **Included files and their purpose** to inspect the actual inventory. The Files workspace, Download inventory and use guide all match the chosen output. **Change output** in Files opens the same chooser. Opening a supported pack restores its recorded output kind from the manifest, so a blueprint stays a blueprint. The whole recorded configuration is retained, allowing other outputs to be generated when deliberately selected. Reopening alone does not add agent profiles or skill folders to a blueprint.
+Each selected ZIP includes `project.json`, `INSTALL.md`, `VALIDATION.md`, `manifest.json` and `PROJECT-ATLAS.html`. Expand **Included files and their purpose** to inspect the actual inventory. Preview files, the Download inventory and use guide all match the chosen output. **Change output** in the file preview opens the same chooser. Opening a supported pack restores its recorded output kind from the manifest, so a blueprint stays a blueprint. The whole recorded configuration is retained, allowing other outputs to be generated when deliberately selected. Reopening alone does not add agent profiles or skill folders to a blueprint.
 
 Expand **Read only what you need** for a short reading route matched to the selected output. Each file button opens its preview. The same routes are in `INSTALL.md`. You do not need to read every skill or profile to begin one task. Each complete skill directory still contains its own project reference so it can be used independently.
 
@@ -209,7 +227,7 @@ Project edits, imported files and snapshots are not automatically written to loc
 
 Use **Open pack** for supported JSON, Atlas ZIP, downloaded project HTML or a folder containing Atlas metadata. Configuration restores recorded decisions. Arbitrary repository code or Markdown cannot restore relationships never recorded.
 
-JSON restores settings only. A complete pack or folder retains supplied file contents. External file edits stay separate from configuration until reviewed. **Download opened files** preserves the original supplied contents and remains available in Files and Download after dismissing the import notice.
+JSON restores settings only. A complete pack or folder retains supplied file contents. External file edits stay separate from configuration until reviewed. **Download opened files** preserves the original supplied contents and remains available in Preview files and Download after dismissing the import notice.
 
 Ordinary edits after reopening can show **Your edits update N files**. This identifies files that matched generation when opened and now change with decisions made in this session. The comparison uses the opened output kind. If you select a different output, its inventory determines which files the next download includes. Expand the notice to see the affected paths. The original opened files remain available.
 

@@ -1,6 +1,6 @@
 # Requirements
 
-Agreed scope for the connected project workspace, 2 October 2026. Start screen, consolidated authoring and the first three usability priorities updated on 3 October 2026. Feasibility guidance, decision brief and download reopening updated on 4 October 2026. Versioned processes, bounded connection editing, custom exports and process reading updated on 5 October 2026.
+Agreed scope for the connected project workspace, 2 October 2026. Start screen, consolidated authoring and the first three usability priorities updated on 3 October 2026. Feasibility guidance, decision brief and download reopening updated on 4 October 2026. Versioned processes, bounded connection editing, custom exports and process reading updated on 5 October 2026. Three-view navigation and pending-draft continuity updated on 6 October 2026.
 
 This document describes intended behavior and acceptance checks. The [factory guide](factory-guide.md) identifies the implemented authoring path. [Extension contract](extension-contract.md) describes the actual schema and modules.
 
@@ -8,7 +8,7 @@ This document describes intended behavior and acceptance checks. The [factory gu
 
 The product preserves the original Knowledge Atlas and connects it to a visual workflow editor, readable Project Atlas and file generation. GitHub Copilot, portable Agent Skills and a workflow blueprint are the initial targets. The generator remains deterministic and runs locally in a browser without an account or model API.
 
-The fresh session has no active project. Investigate an idea, Build a feature and Fix a bug start blank recipes. Design a connected process starts without a development recipe, repository components or selected profiles and opens a pattern chooser. Open pack and explicitly fictional examples remain separate choices. The active workspace uses Workflow and Files as its primary views, with one editing location for each decision.
+The fresh session begins in Brief with no active project. Investigate an idea, Build a feature and Fix a bug start blank recipes. Design a connected process starts without a development recipe, repository components or selected profiles and opens a pattern chooser. Open pack and explicitly fictional examples remain separate choices. Brief, Workflow and Knowledge map are the three primary views, with one editing location for each decision. File previews and readable Project Atlas remain secondary views of the same project.
 
 The initial recipes are feasibility investigation, bug investigation and repair, and feature delivery. The backend agent example is a generic configuration-generation feasibility case. Execution remains a later phase.
 
@@ -20,10 +20,10 @@ The first usability priorities connect a short outcome brief, an explained and o
 
 | ID | Requirement | Acceptance |
 | --- | --- | --- |
-| LIB-01 | Preserve the Atlas | All 105 original topic identifiers, 10 clusters, original source records, guided paths, reading and map views remain available. The knowledge update adds four general topics, for 109 topics and 56 current sources |
+| LIB-01 | Preserve the Atlas | All 105 original topic identifiers, 10 clusters, original source records, guided paths, reading and map views remain available. Later general and retrieval additions bring the catalogue to 120 topics and 72 source records. Three specialized pages have deliberate new browsing parents and retain stable topic URLs |
 | LIB-02 | Keep reference reading explicit | Opening a topic never adds instructions without a configuration choice |
 | LIB-03 | Preserve offline reading | The standalone export loads reading and map resources locally, with reading available without WebGL |
-| LIB-04 | Keep knowledge in context | Knowledge map is a primary entry from start and editor. Returning retains the start screen or active project, selection, unsaved edits, focus and scroll context |
+| LIB-04 | Keep knowledge in context | Knowledge map is a permanent primary destination, with or without a project. Switching views retains the description or active project, selected record, pending edits and usable return context |
 | LIB-05 | Organize practices by purpose | Generic verification guidance uses Verification and evidence. Named repository examples retain their source attribution and historical review limits |
 | LIB-06 | Apply reviewed guidance deliberately | Applicable curated topics offer a review of specific changes and affected generated files. Reading and canceled reviews leave decisions unchanged. Explicit application is undoable |
 | PRJ-01 | Capture real project context | Components retain editable technologies, versions, paths and actual commands. No missing command is guessed |
@@ -45,13 +45,13 @@ The first usability priorities connect a short outcome brief, an explained and o
 | CASE-01 | Distinguish development and runtime | The backend example studies and designs a deployed feature. Its Copilot profiles support engineering work, they are not the deployed backend agent |
 | CASE-02 | Capture controls without inventing enforcement | Validation before writes, bounded execution, retries, duplicate writes and failure outcomes are recorded as requirements and linked evidence |
 | CASE-03 | Define meaningful success | Business success depends on confirmed results and acceptance checks rather than an HTTP code or completion statement |
-| CASE-04 | Enable runtime design deliberately | Runtime design is an optional Project details capability. Selecting feasibility does not automatically enable it |
+| CASE-04 | Enable runtime design deliberately | Runtime design is an optional Brief capability. Selecting feasibility does not automatically enable it |
 | EVD-01 | Keep facts and observations distinct | Detected, inferred, confirmed and unresolved facts remain identifiable. Supplied observations are not labeled factory-observed |
 | EVD-02 | Require evidence for stronger claims | Recording a requirement does not imply implementation or successful tests |
 | EVD-03 | Export practical templates | Requirements, decisions, verification and evaluation templates retain expected results, observed results and unrun checks |
 | EVD-04 | Support a fair comparison | Evaluation scaffolding compares relevant project options with the current approach and records criteria, observations and limits. Existing setup, verified facts, focused skill and full pack conditions are optional for studies of AI instructions |
 | EVD-05 | Record costs honestly | Model, versions, budgets and observed expenditure can be recorded. No universal model ranking or unmeasured savings are promised |
-| EVD-06 | Keep evidence at the right scope | Stage-associated evidence is accessible from stage details. Consolidated evidence and unscoped facts, provenance, models and budgets stay accessible in Project details without invented stage links |
+| EVD-06 | Keep evidence at the right scope | Stage-associated evidence is accessible from stage details. Consolidated evidence and unscoped facts, provenance, models and budgets stay accessible in Brief without invented stage links |
 | OUT-01 | Export a coherent pack | The blueprint, relevant artifacts, configuration, manifest and reports agree with the selected workflow |
 | OUT-02 | Explain each artifact | File reasons identify purpose, related recipe stages or roles, custom process IDs and namespaced process/step references where applicable, sources, unresolved values and dependencies |
 | OUT-03 | Export a complete standalone skill | A skill export includes every required resource or explicitly declared dependency |
@@ -69,27 +69,27 @@ The first usability priorities connect a short outcome brief, an explained and o
 | VAL-02 | Preserve editable semantic issues | A supported draft with missing inputs or rule findings can still be inspected and corrected |
 | VAL-03 | Keep validation claims separate | Configuration complete, format checked, host discovery, observed behavior and demonstrated improvement never imply one another |
 | VAL-04 | Keep use instructions separate from results | A use guide describes an expected adoption procedure. Exercise records start unrun or unresolved. They never imply that Atlas discovered artifacts, ran tasks or demonstrated improvement |
-| UX-01 | Start with the task | A fresh session offers the three development recipes, optional configured JEV suggestions, Design a connected process, Open pack and Browse examples. It shows no fictional project, file inventory or phantom download |
+| UX-01 | Start with the task | A fresh session asks what the user wants to achieve in Brief, with manual recipes, optional configured JEV suggestions, Design a connected process, Open pack and Browse examples available. It shows no fictional project, file inventory or phantom download |
 | UX-02 | Support keyboard and mobile use | Essential controls have labels, visible focus and usable responsive layouts |
-| UX-03 | Preserve work during navigation | Returning from guidance or preview retains the current draft |
+| UX-03 | Preserve work during navigation | Switching Brief, Workflow, Knowledge map or secondary previews retains committed decisions and separately identified pending process edits. Back and Forward preserve meaningful view and topic changes without replacing the project |
 | UX-04 | Make findings actionable | A finding identifies the relevant field and useful correction |
-| UX-05 | Keep one project model | Workflow, Files, Project details and Preview Atlas derive from the active configuration rather than separately edited copies |
+| UX-05 | Keep one project model | Brief, Workflow, file previews and readable Project Atlas derive from one accepted configuration. Temporary process edits remain explicitly pending until applied, with no second independently edited project |
 | UX-06 | Make assignment visual and explicit | Drag or click controls assign a selected actor or skill to a stage, with an inspector for its details |
 | UX-07 | Support undo and redo | Project editing can be reversed and reapplied during the session. Native text editing remains usable |
 | UX-08 | Keep graph limits visible | Recipe stages retain their catalog definitions. The custom designer edits named steps, result inputs, outcome routes, checks, approval and bounded corrections through Map or Step list controls. Arbitrary routing expressions, parallel joins, concurrent correction and execution remain unsupported |
 | UX-09 | Explain common tasks in context | Help offers a short introduction and task instructions with the actual control labels. Following guidance retains the project |
 | UX-10 | Keep display choices explicit | A labeled Dark mode switch exposes its on or off state and switches the workspace and reference Atlas together during the session, without saving the preference |
-| UX-11 | Consolidate authoring | Workflow and Files are the two primary editor views. Project details, Roles and skills, Preview Atlas and Download retain the other capabilities without a second settings navigation |
+| UX-11 | Consolidate authoring | Brief, Workflow and Knowledge map are the three primary destinations. Preview files is reachable from active Brief and Workflow. Roles and skills, readable Project Atlas, review and Download retain other capabilities as secondary controls |
 | UX-12 | Edit a stage directly | Selecting a stage opens one contextual panel. No Edit workflow mode or duplicate stage detail form is required |
 | UX-13 | Disclose detail when relevant | Brief, Components, Boundaries, Sources and evidence and optional Runtime design provide project detail without a compulsory setup wizard. Unknowns remain visible where they affect decisions |
 | UX-14 | Keep defaults distinguishable | A blank recipe does not include fictional paths, commands or evidence. Template roles, practices and host choices remain editable defaults rather than detected facts |
 | UX-15 | Review at download | Download presents short actionable findings and retains detailed file comparison and export choices. Incomplete drafts remain downloadable with unknowns intact |
-| UX-16 | Keep examples opt-in | Browse examples explicitly loads fictional project information. Supported imports open directly into the editor. Empty-session project links return gracefully to start |
-| UX-17 | Start with a small outcome brief | A blank recipe asks for a name, intended result and optional existing context. Unknowns stay blank and later authoring remains available. Context is recorded as notes, with no link retrieval or fact confirmation |
+| UX-16 | Keep examples opt-in | Browse examples explicitly loads fictional project information. Supported imports open Workflow. A safe explicit deep link takes precedence. An empty-session project destination explains that a project must be created or opened rather than inventing data |
+| UX-17 | Start with a small outcome brief | Brief begins with the intended result. Project name stays in the shared shell and relevant context is progressively disclosed. Unknowns remain blank, with no link retrieval or fact confirmation. An active Brief changes the same project and preserves separately recorded acceptance and other decisions |
 | UX-18 | Preserve choices across guidance and download | Practice reviews explain exact edits and keep an accessible cancel path. Output choice explains contents and reopening. Independent standalone skill export does not mark the whole editable project as downloaded |
 | UX-19 | Explain one project to different readers | Live and downloaded Atlas share a concise brief. Recipe projects use supplied outcome, approach notes and planned owners. Custom-only projects use recorded purposes, independent entry owners and model findings. Inactive recipe choices are not substituted. Counts describe planned work rather than progress, and full supplied text stays available |
 | UX-20 | Review decisions as well as files | Compare exact recorded settings with a session or supplied baseline. Retain an optional user reason, before and after values, related stages and associated actual generated changes. Baseline selection does not replace current decisions |
-| UX-21 | Review custom edits before applying | A separate designer draft shows changed records, connections and generated files before Apply changes. Applying is atomic and undoable. Structural conflicts prevent application and incomplete decisions remain visible |
+| UX-21 | Review custom edits before applying | A separate process draft shows changed records, connections and generated files before Apply changes. Applying is atomic and undoable. A newer accepted project invalidates the prior review. Unrelated changes can be retained together, while a conflicting process change needs an explicit recovery decision. Structural conflicts prevent application and incomplete decisions remain visible |
 | UX-22 | Remove referenced records deliberately | Removal identifies affected references and requires valid explicit handling or cancellation. Supplied observations are retained and broken evidence associations cannot disappear silently |
 | OUT-12 | Preserve decision review for reopening | Changed settings or a supplied reason add readable Markdown and bounded JSON to ZIP and HTML. Matching project settings restore exact baseline and reason. Unsafe or mismatched records stay unapplied with visible warnings |
 | LIB-07 | Compare guidance without implying freshness | Record selected local definition contents, versions, source links, review dates, applicability and limits. Show updates and missing historical metadata. Never treat age, links or user selection as source verification |
@@ -97,7 +97,7 @@ The first usability priorities connect a short outcome brief, an explained and o
 | SES-01 | Keep projects in session memory | Active project content is not automatically written to browser storage, accounts or a server |
 | SES-02 | Make preservation explicit | Incomplete work can be downloaded. The interface identifies the session state and the need to download before leaving |
 | SES-03 | Recover legacy drafts deliberately | An existing stored draft can be recovered or downloaded after a user action. It is not silently loaded, rewritten, migrated or deleted |
-| SES-04 | Keep unapplied process work explicit | Closing pending designer edits offers keeping or discarding them. Unapplied edits are not exported. Applying does not save to browser storage, a server or disk. Download preserves the applied project |
+| SES-04 | Keep unapplied process work explicit | View changes retain the pending process draft. New and Open handle replacement deliberately. Ordinary downloads identify unapplied edits and let the user review them or explicitly download accepted decisions without them. Applying does not save to browser storage, a server or disk |
 | EXT-01 | Use shared definitions and adapters | Recipes and guidance remain separate from host-specific output fields |
 | EXT-02 | Keep upstream integrations explicit | Spec Kit, AgentRC and APM adapters are not labeled available without verified implementation |
 
@@ -127,4 +127,4 @@ A product usefulness claim needs a suitable real-task comparison including resul
 
 Running workflows, paid model evaluations inside the app, scheduling, account connectors, automated repository writes, automatic project persistence, arbitrary graph execution, enterprise administration, a marketplace and runtime permission enforcement remain outside this delivery.
 
-Original workplace material is preserved locally in the Atlas baseline. New default examples use synthetic names and values. Public release still requires review of the retained workplace-specific content.
+Original workplace material is preserved in the Atlas baseline. New default examples use synthetic names and values. Remaining specialized reference content needs continued editorial and source review. The focused skills pass does not establish complete catalogue abstraction or factual verification.

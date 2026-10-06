@@ -20,15 +20,18 @@ test('catalogue validates and committed projections exactly match the source rec
   assert.deepEqual(compileCatalogue(data).catalog, CATALOG)
 })
 
-test('migration preserves every historical route, source, relationship and factory definition', () => {
+test('catalogue retains historical routes, source references, related reading and factory definitions', () => {
   const result = compileCatalogue(data)
-  assert.deepEqual(result.atlas.nodes.slice(0, baseline.topics.length).map(node => node.id), baseline.topics.map(node => node.id))
+  const originalIds = new Set(baseline.topics.map(node => node.id))
+  assert.deepEqual(result.atlas.nodes.filter(node => originalIds.has(node.id)).map(node => node.id), baseline.topics.map(node => node.id))
+  const specializedParents = { 'ci-skill': 'pipeline-diagnosis', 'rdf-skill': 'data-query-verification', 'source-skill': 'source-evidence-verification' }
+  const revisedReading = new Set(['overview', 'workflow-patterns', 'skills', ...Object.keys(specializedParents)])
   for (const old of baseline.topics) {
     const current = result.atlas.nodes.find(node => node.id === old.id)
-    assert.equal(current.parent, old.parent, old.id)
+    assert.equal(current.parent, specializedParents[old.id] || old.parent, old.id)
     assert.deepEqual(current.refs, old.refs, old.id)
     for (const id of old.related) assert.ok(current.related.includes(id), `${old.id} lost ${id}`)
-    if (!['overview', 'workflow-patterns'].includes(old.id)) assert.equal(digest(content(current)), old.contentHash, `reading content changed: ${old.id}`)
+    if (!revisedReading.has(old.id)) assert.equal(digest(content(current)), old.contentHash, `reading content changed: ${old.id}`)
   }
   for (const [id, source] of Object.entries(baseline.sources)) assert.deepEqual(result.atlas.sources[id], source)
   for (const [group, definitions] of Object.entries(baseline.definitions)) for (const old of definitions) {
@@ -36,6 +39,30 @@ test('migration preserves every historical route, source, relationship and facto
   }
   assert.match(result.atlas.nodes.find(node => node.id === 'overview').sections.find(section => section.label === 'What Atlas currently does').text, /bounded correction loops/)
   assert.match(result.atlas.nodes.find(node => node.id === 'workflow-patterns').sections.find(section => section.label === 'Current Atlas boundary').text, /custom process design/)
+})
+
+test('reusable procedures lead to scoped examples without inventing generated skill support or reviews', () => {
+  const { nodes } = compileCatalogue(data).atlas
+  const byId = id => nodes.find(node => node.id === id)
+  for (const [generic, specialist] of [['pipeline-diagnosis', 'ci-skill'], ['data-query-verification', 'rdf-skill'], ['source-evidence-verification', 'source-skill']]) {
+    const entry = byId(generic)
+    assert.equal(entry.parent, 'skills')
+    assert.equal(entry.catalog.kind, 'procedure')
+    assert.equal(entry.catalog.guidance, 'reading')
+    assert.deepEqual(entry.catalog.definitionRefs, [])
+    assert.equal(entry.catalog.sourceStatus, 'needs-review')
+    assert.equal(entry.catalog.reviewedOn, '')
+    assert.ok(entry.related.includes(specialist))
+    assert.ok(byId(specialist).related.includes(generic))
+    assert.equal(byId(specialist).catalog.sourceStatus, 'legacy')
+    assert.equal(byId(specialist).catalog.reviewedOn, '')
+  }
+  assert.equal(byId('ci-skill').catalog.kind, 'example')
+  assert.equal(byId('source-skill').catalog.kind, 'example')
+  assert.match(byId('ci-skill').catalog.applicability, /runs in Jenkins/)
+  assert.match(byId('source-skill').catalog.applicability, /jurisdiction/)
+  assert.match(byId('rdf-skill').sections.find(section => section.label === 'Procedure').items.at(-1), /For an Amazon Neptune deployment/)
+  assert.match(byId('rdf-skill').catalog.limits, /SQL and property graph procedures need their own checks/)
 })
 
 test('type-qualified references preserve distinct meanings for matching raw IDs', () => {

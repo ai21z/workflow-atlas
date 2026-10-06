@@ -84,23 +84,23 @@ A prerequisite can be satisfied by an enabled producer stage or a location in `w
 
 The session explicitly distinguishes no active project from an active configuration. Empty sessions show starting points and opening controls, without compiling or offering a phantom project. Choose a blank recipe with `createRecipe` or explicitly load a fictional example with `createExample`. Do not duplicate defaults in presentation code.
 
-Workflow and Files are the primary authoring views. Project details groups Brief, Components, Boundaries, Sources and evidence and optional Runtime design. Roles and skills provides the library. Preview Atlas presents the rich readable project summary. View selection, inspection and diagram presentation are interface state, they do not define another workflow document.
+Brief, Workflow and Knowledge map are the three primary destinations. Active Brief contains the shared outcome and inline sections for Brief, Components, Boundaries, Sources and evidence and optional Runtime design. Preview files is a secondary Workflow view reachable from Brief and Workflow. Roles and skills provides the library. Project Atlas presents the readable project summary. View selection, inspection and diagram presentation are interface state, they do not define another workflow document.
 
 Stage selection opens its editing panel directly, without a separate editing mode. Keep one editing location for each decision. Evidence records with `stageId` can appear at the associated stage. Unscoped facts, provenance, model and budget fields remain accessible as project-level records. Do not infer associations absent from configuration.
 
 Actor and skill drag operations change explicit assignments. Click controls provide the same capability. Diagram placement does not change prerequisites or imply runtime execution. Undo and redo retain project revisions in memory during the session.
 
-The process designer has a separate draft while open. Editing it does not mutate the active project. Review computes changed records, relationships and generated files. Apply validates the whole proposed project and changes it as one project revision, with Undo available afterward. A changed underlying project invalidates the pending review. The draft remains visible rather than overwriting newer work. Closing a changed draft asks whether to keep editing or discard it.
+The process designer has a separate draft inside Workflow. Editing it does not mutate the active project. Main-view changes retain the draft and selected record. Review computes changed records, relationships and generated files. Apply validates the whole proposed project and changes it as one project revision, with Undo available afterward. A changed underlying project invalidates the pending review. Unrelated accepted decisions can be retained during reconciliation. A conflicting process change requires explicit recovery rather than overwriting newer work. Downloads identify pending changes and require their application or deliberate accepted-only confirmation.
 
 Custom routes use named outcomes and selected destinations. Labels, selectors and the step list provide editing without dragging. Removing a referenced record requires explicit reference handling. Invalid references and unsupported structures block Apply. Missing criteria, unnamed actors and unresolved limits can remain draft findings. Instruction generation still reports its own actor, tool and output findings.
 
-Keep assignments, Project details, Roles and skills, undo, redo and downloads usable at narrow widths. Where a contextual panel becomes modal, preserve named-dialog and focus behavior. Help uses the actual control labels. Download integrates short actionable review while retaining detailed file comparison.
+Keep the three main destinations, inline Brief sections, assignments, Roles and skills, undo, redo and downloads usable at narrow widths. The narrow recipe inspector stays inline with no false modal state. Genuine dialogs preserve named-dialog and focus behavior. Help uses the actual control labels. Download integrates short actionable review while retaining detailed file comparison.
 
 Do not write project content, imported files or snapshots to localStorage, sessionStorage, IndexedDB or a remote account. An explicit download creates a user-owned file. Reopening replaces the active configuration after structural checks and a deliberate replacement action where needed.
 
 Legacy storage may be read to offer recovery or an original download. Do not automatically open, migrate, rewrite or remove that data. A recovered supported draft migrates in memory and retains the original source.
 
-Knowledge map opens the full reference Atlas in a dedicated full-viewport view from the start screen and editor. Returning restores the same empty-session screen or retained editing context. Knowledge reading must not create a project, mutate instructions or discard an active configuration.
+Knowledge map opens the full reference Atlas beneath the shared workspace navigation, with or without a project. Returning restores the empty Brief or retained editing context. Knowledge reading must not create a project, mutate instructions or discard an active configuration or pending process draft.
 
 Keep route aliases for useful existing links. A project route in an empty session must reach start safely. View routes must not collide with detail-panel selection. Preserve Back behavior around Knowledge navigation and guard compilation, history, dirty checks and downloads by active-project state.
 
@@ -129,7 +129,7 @@ Supported custom text extensions are `md`, `txt`, `json`, `jsonl`, `yaml`, `yml`
 
 Manifest paths must be safe, relative and unambiguous. Unsafe paths and case or Unicode alias duplicates reject the import. `.git`, `node_modules`, `vendor`, `dist`, `build`, `target`, `coverage` and `.next` directories remain ignored. An inventory entry does not verify its contents or behavior.
 
-Configuration remains authoritative. Supplied generated files are retained separately, with differences reported for review. Plain JSON restores settings only. A complete pack or folder is needed to retain external artifact edits. The original opened file set stays separately downloadable in Files and Download after dismissing the import notice.
+Configuration remains authoritative. Supplied generated files are retained separately, with differences reported for review. Plain JSON restores settings only. A complete pack or folder is needed to retain external artifact edits. The original opened file set stays separately downloadable in Preview files and Download after dismissing the import notice.
 
 ## Migration and import
 

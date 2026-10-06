@@ -1292,7 +1292,7 @@
   {
     "from": "topic:ci-skill",
     "type": "browse-under",
-    "to": "topic:skills",
+    "to": "topic:pipeline-diagnosis",
     "sourceRefs": []
   },
   {
@@ -1316,7 +1316,7 @@
   {
     "from": "topic:rdf-skill",
     "type": "browse-under",
-    "to": "topic:skills",
+    "to": "topic:data-query-verification",
     "sourceRefs": []
   },
   {
@@ -1340,7 +1340,7 @@
   {
     "from": "topic:source-skill",
     "type": "browse-under",
-    "to": "topic:skills",
+    "to": "topic:source-evidence-verification",
     "sourceRefs": []
   },
   {
@@ -3587,6 +3587,114 @@
     "from": "topic:toolchain",
     "type": "related-reading",
     "to": "topic:retrieval-options",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:pipeline-diagnosis",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:ci-skill",
+    "type": "broader-concept",
+    "to": "topic:pipeline-diagnosis",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:pipeline-diagnosis",
+    "type": "related-reading",
+    "to": "topic:ci-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:data-query-verification",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:rdf-skill",
+    "type": "broader-concept",
+    "to": "topic:data-query-verification",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:data-query-verification",
+    "type": "related-reading",
+    "to": "topic:rdf-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-evidence-verification",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-skill",
+    "type": "broader-concept",
+    "to": "topic:source-evidence-verification",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-evidence-verification",
+    "type": "related-reading",
+    "to": "topic:source-skill",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:pipeline-diagnosis",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:pipeline-diagnosis",
+    "type": "related-reading",
+    "to": "topic:jenkins",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:data-query-verification",
+    "type": "related-reading",
+    "to": "topic:retrieval-options",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:data-query-verification",
+    "type": "related-reading",
+    "to": "topic:retrieve-and-validate",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:data-query-verification",
+    "type": "related-reading",
+    "to": "topic:postgresql-data",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:data-query-verification",
+    "type": "related-reading",
+    "to": "topic:neo4j-data",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-evidence-verification",
+    "type": "related-reading",
+    "to": "topic:answer-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-evidence-verification",
+    "type": "related-reading",
+    "to": "topic:provenance",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-evidence-verification",
+    "type": "related-reading",
+    "to": "topic:source-conflicts",
     "sourceRefs": []
   }
 ]

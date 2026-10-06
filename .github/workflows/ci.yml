@@ -115,6 +115,14 @@ jobs:
             local-knowledge/retests/import-recovery/**/*.png
             local-knowledge/retests/navigation-recovery/**/*.json
             local-knowledge/retests/navigation-recovery/**/*.png
+            local-knowledge/retests/three-view/**/*.json
+            local-knowledge/retests/three-view/**/*.png
+            local-knowledge/retests/workspace-accessibility/**/*.json
+            local-knowledge/retests/workspace-accessibility/**/*.png
+            local-knowledge/retests/starter-goals/**/*.json
+            local-knowledge/retests/starter-goals/**/*.png
+            local-knowledge/retests/process-session-lifecycle/**/*.json
+            local-knowledge/retests/process-session-lifecycle/**/*.png
             local-knowledge/reviews/process-designer/**/*.json
             local-knowledge/reviews/process-designer/**/*.png
             local-knowledge/retests/static-pages/**/*.json

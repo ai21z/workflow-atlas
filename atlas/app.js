@@ -33,8 +33,24 @@
   let selected='overview',mode='read',view=matchMedia('(max-width:700px)').matches?'2d':'3d',graph=null,graphPromise=null,tour=null,tourIndex=0,search='',topicKind='all',toastTimer,mapFocus=embedded,rotation=false;
   document.body.dataset.embedded=String(embedded);
   $('knowledge-back').hidden=!embedded;
-  if(embedded){const factoryLink=document.querySelector('[data-factory-link]');if(factoryLink)factoryLink.hidden=true;}
+  if(embedded){
+    document.querySelectorAll('.brand,[data-factory-link],#atlas-count,#theme-toggle').forEach(control=>control.hidden=true);
+    document.querySelector('.topbar').setAttribute('aria-label','Knowledge map tools');
+    document.querySelector('.mode-nav').setAttribute('aria-label','Knowledge map reading and exploration');
+  }
   function sendParent(message){if(embedded&&location.origin!=='null')window.parent.postMessage(message,location.origin);}
+  function viewCanReceiveFocus(){
+    if(!embedded)return true;
+    const frame=window.frameElement;
+    return Boolean(frame&&frame.getClientRects().length&&!frame.closest('[hidden],[inert]'));
+  }
+  let lastKnowledgeState='',knowledgeStateScheduled=false;
+  function knowledgeState(){return {topicId:selected,mode,mapView:view};}
+  function shareKnowledgeState(){
+    if(!embedded||knowledgeStateScheduled)return;
+    knowledgeStateScheduled=true;
+    queueMicrotask(()=>{knowledgeStateScheduled=false;const state=knowledgeState(),key=JSON.stringify(state);if(key===lastKnowledgeState)return;lastKnowledgeState=key;sendParent({type:'workflow-atlas:knowledge-state',...state});});
+  }
   let practiceContext=null;
   const readerPractice=el('div','practice-slot');readerPractice.id='reader-practice';readerPractice.hidden=true;document.querySelector('.reader-heading').append(readerPractice);
   const mapActions=el('div','map-selection-actions'),mapPractice=el('div','practice-slot');mapPractice.id='map-practice';mapPractice.hidden=true;$('read-selection').before(mapActions);mapActions.append(mapPractice,$('read-selection'));
@@ -62,6 +78,7 @@
   }
   function restorePracticeFocus(data){
     requestAnimationFrame(()=>{
+      if(!viewCanReceiveFocus())return;
       const slot=mode==='explore'?mapPractice:readerPractice;
       const button=slot.querySelector('[data-practice-request]');
       if(selected===data.topicId&&button&&!button.disabled&&button.dataset.practiceRequest===data.actionId){button.focus({preventScroll:true});return;}
@@ -114,7 +131,7 @@
     const path=el('div','study-path');[['study-baseline','01','Baseline'],['study-quality','02','Output quality'],['study-contract','03','Service shape'],['study-economics','04','Economics'],['study-decision','05','Decision']].forEach(([id,num,title])=>{const b=topicButton(byId.get(id),'path-stop');b.replaceChildren(el('span','',num),el('strong','',title));path.append(b);});root.append(path);
     const clusters=el('section','home-section');clusters.append(el('span','overline','EXPLORE BY SUBJECT'),el('h2','','Ten connected topic clusters'));const grid=el('div','cluster-grid');categories.forEach(n=>{const b=topicButton(n,'cluster-card');b.replaceChildren(el('span','cluster-number',String(meta.get(n.id).index+1).padStart(2,'0')),el('strong','',n.title),el('span','',`${descendants(n.id).length} topics · Open cluster →`));grid.append(b);});clusters.append(grid);root.append(clusters);
   }
-  function renderReader(){const n=byId.get(selected),cat=categoryFor(selected);$('reader').style.setProperty('--category',colorFor(selected));const chain=[];let p=n;while(p){chain.unshift(p);p=byId.get(p.parent);}const crumbs=$('breadcrumbs');crumbs.replaceChildren();chain.slice(0,-1).forEach(x=>crumbs.append(topicButton(x,'breadcrumb-button',x.id==='overview'?'Atlas':meta.get(x.id)?.short||x.title),el('span','','/')));crumbs.append(el('span','breadcrumb-current',selected==='overview'?'Overview':cat===selected?meta.get(cat).short:'Topic'));
+  function renderReader(){const n=byId.get(selected),cat=categoryFor(selected);$('reader').style.setProperty('--category',colorFor(selected));const chain=[];let p=n;while(p){chain.unshift(p);p=byId.get(p.parent);}const crumbs=$('breadcrumbs');crumbs.replaceChildren();chain.slice(0,-1).forEach(x=>crumbs.append(topicButton(x,'breadcrumb-button',x.id==='overview'?'All topics':meta.get(x.id)?.short||x.title),el('span','','/')));crumbs.append(el('span','breadcrumb-current',selected==='overview'?'Overview':cat===selected?meta.get(cat).short:'Topic'));
     $('reader-kicker').textContent=selected==='overview'?'KNOWLEDGE ATLAS':selected==='construct-study'||n.parent==='construct-study'?'REFERENCE TO CONFIGURATION · WORKED CASE STUDY':n.parent==='overview'?'TOPIC CLUSTER':meta.get(cat)?.short;
     $('reader-title').textContent=n.title;$('reader-summary').textContent=n.summary;const metadata=$('reader-meta');metadata.replaceChildren(el('span','basis-badge',n.basis),el('span','confidence-label','Confidence: '+n.confidence));if(kindLabel(n))metadata.prepend(el('span','topic-kind-badge',kindLabel(n)));if(n.refs.length){const a=el('a','evidence-shortcut',`${n.refs.length} source${n.refs.length===1?'':'s'} ↓`);a.href='#source-evidence';a.dataset.section='source-evidence';metadata.append(a);}renderScope(n);
     $('page-toc').replaceChildren();renderHome();const content=$('reader-content');content.replaceChildren();if(selected==='construct-study'){const path=el('div','study-chapter-links');children(selected).forEach((x,i)=>{const b=topicButton(x,'chapter-link');b.prepend(el('span','',String(i+1).padStart(2,'0')));path.append(b);});content.append(path);}if(selected==='study-contract'){const flow=el('section','study-flow');flow.append(el('span','overline','ILLUSTRATIVE FLOW TO ASSESS'));const steps=el('div','flow-steps');[['study-baseline','Describe / import'],['study-runtime','Generate a draft'],['study-quality','Validate the output'],['study-decision','Accept the artifact']].forEach(([id,label],i)=>{const b=topicButton(byId.get(id),'flow-stop',label);b.prepend(el('small','',String(i+1).padStart(2,'0')+' →'));steps.append(b);});flow.append(steps,el('p','','Saving, applying and executing are separate actions. Accepting a generated artifact does not, by itself, authorize activation.'));content.append(flow);}
@@ -125,10 +142,10 @@
   }
   function renderFlat(){const cat=categoryFor(selected),shown=cat?[byId.get(cat),...descendants(cat)]:categories,root=$('flat-map');root.replaceChildren();root.classList.toggle('cluster-overview',!cat);shown.forEach(n=>{const b=topicButton(n,'map-card');b.replaceChildren(el('span','map-card-category',[n.parent==='overview'?'CLUSTER':meta.get(categoryFor(n.id)).short.toUpperCase(),kindLabel(n)].filter(Boolean).join(' · ')),el('strong','',n.title),el('span','',n.summary));root.append(b);});const list=$('map-topic-list');list.replaceChildren();nodes.forEach(n=>list.append(topicButton(n,'map-list-button')));document.querySelector('.map-index summary').textContent=`Browse all ${nodes.length} topics as a list`;}
   function mapHeading(){const cat=categoryFor(selected),n=byId.get(selected);$('map-eyebrow').textContent=cat?'FOCUSED KNOWLEDGE CLUSTER':'TEN CONNECTED KNOWLEDGE CLUSTERS';$('map-title').textContent=cat?byId.get(cat).title:'Explore the Knowledge Atlas';$('map-current-title').textContent=n.title;['read-map-topic','read-selection'].forEach(id=>$(id).setAttribute('aria-label','Read topic: '+n.title));$('map-selection-title').textContent=n.title;$('map-selection-summary').textContent=n.summary;$('map-selection-evidence').textContent=`${kindLabel(n)?kindLabel(n)+' · ':''}${n.basis} · Confidence: ${n.confidence} · ${n.refs.length} linked source${n.refs.length===1?'':'s'}`;}
-  function updateState(){window.ATLAS_STATE={selected,category:categoryFor(selected),mode,view,tour:tour?.name||null,topics:nodes.length,sources:Object.keys(sources).length,embedded,mapFocus,theme:document.body.dataset.theme,rotation,reducedMotion:reducedMotion.matches,topicKind};}
+  function updateState(){window.ATLAS_STATE={selected,category:categoryFor(selected),mode,view,tour:tour?.name||null,topics:nodes.length,sources:Object.keys(sources).length,embedded,mapFocus,theme:document.body.dataset.theme,rotation,reducedMotion:reducedMotion.matches,topicKind};shareKnowledgeState();}
   function clearTopicFilters(){search='';topicKind='all';$('topic-search').value=$('mobile-search').value='';$('topic-kind').value=$('mobile-topic-kind').value='all';renderNav();updateState();}
-  function focusReader(){requestAnimationFrame(()=>{$('reader-title').focus({preventScroll:true});$('reader').scrollIntoView({block:'start',behavior:'instant'});});}
-  function select(id,options={}){if(!byId.has(id))id='overview';if(tour&&!options.fromTour)exitTour();selected=id;renderNav();renderReader();renderFlat();mapHeading();graph?.select(id);if(!options.fromHash&&location.hash.slice(1)!==id)history.pushState({topic:id},'', '#'+id);if($('topics-dialog').open)$('topics-dialog').close();if(mode==='sources')setMode('read',false);if(options.focus!==false){if(mode==='read')focusReader();else $('read-map-topic').focus({preventScroll:true});}$('selection-announcement').textContent='Selected '+byId.get(id).title;updateState();}
+  function focusReader(){if(!viewCanReceiveFocus())return;$('reader-title').focus({preventScroll:true});$('reader').scrollIntoView({block:'start',behavior:'instant'});}
+  function select(id,options={}){if(!byId.has(id))id='overview';if(tour&&!options.fromTour)exitTour();selected=id;renderNav();renderReader();renderFlat();mapHeading();graph?.select(id);if(!options.fromHash&&location.hash.slice(1)!==id)history[embedded?'replaceState':'pushState']({topic:id},'', '#'+id);if($('topics-dialog').open)$('topics-dialog').close();if(mode==='sources')setMode('read',false);if(options.focus!==false){if(mode==='read')focusReader();else $('read-map-topic').focus({preventScroll:true});}$('selection-announcement').textContent='Selected '+byId.get(id).title;updateState();}
   function ensureGraph(){if(graphPromise)return graphPromise;$('map-loading').hidden=false;graphPromise=import('./graph.mjs').then(({mountGraph})=>{graph=mountGraph({container:$('scene-canvas'),labels:$('scene-labels'),stage:$('graph-stage'),nodes,meta,byId,categoryFor,colorFor,onSelect:id=>select(id,{focus:false}),onHover:n=>{$('hover-caption').hidden=!n;if(n)$('hover-caption').textContent=n.title;}});graph.setTheme(document.body.dataset.theme);graph.setRotation(rotation);graph.select(selected,{instant:true});graph.setActive(mode==='explore'&&view==='3d');$('map-loading').hidden=true;document.body.dataset.graph='ready';}).catch(()=>{$('map-loading').hidden=true;document.body.dataset.graph='fallback';document.querySelector('[data-view="3d"]').disabled=true;setView('2d');toast('3D is unavailable here. Browse every topic with the topic cards or topic list.');});return graphPromise;}
   function setView(next){view=next;$('scene-canvas').hidden=view!=='3d';$('scene-labels').hidden=view!=='3d';$('flat-map').hidden=view!=='2d';['zoom-in','zoom-out','rotate-left','rotate-right','map-rotation'].forEach(id=>$(id).hidden=view==='2d');document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)));graph?.setActive(mode==='explore'&&view==='3d');$('map-hint').textContent=view==='3d'?'Drag to rotate. Use + / − to zoom. Tab to topic buttons, or browse the full topic list.':'Select a card to explore its cluster. The full topic list is below.';if(mode==='explore'&&view==='3d')ensureGraph();else $('map-loading').hidden=true;updateState();}
   function setMapFocus(value){mapFocus=value;document.body.dataset.mapFocus=String(mapFocus);$('map-focus').setAttribute('aria-expanded',String(!mapFocus));$('map-focus').textContent=mapFocus?'Show reading panel ↙':'Focus map ↗';$('reading-layout').hidden=mode==='sources'||mode==='explore'&&mapFocus;updateState();}
@@ -150,11 +167,28 @@
   $('copy-link').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href);toast('Topic link copied');}catch{toast('Copy this topic’s link from the address bar.');}});
   function setTheme(theme,notify=false){if(!['light','dark'].includes(theme))return;document.body.dataset.theme=theme;$('theme-toggle').setAttribute('aria-checked',String(theme==='dark'));graph?.setTheme(theme);updateState();if(notify)sendParent({type:'workflow-atlas:theme',theme});}
   $('theme-toggle').addEventListener('click',()=>setTheme(document.body.dataset.theme==='dark'?'light':'dark',true));setTheme(initialTheme);
-  window.addEventListener('message',event=>{if(!embedded||event.origin!==location.origin||event.source!==window.parent)return;if(event.data?.type==='workflow-atlas:theme'&&['light','dark'].includes(event.data.theme))setTheme(event.data.theme);if(event.data?.type==='workflow-atlas:practice-context'){practiceContext=acceptedPracticeContext(event.data);renderPracticeLinks();}if(event.data?.type==='workflow-atlas:practice-review-closed')restorePracticeFocus(event.data);});
+  window.addEventListener('message',event=>{
+    if(!embedded||event.origin!==location.origin||event.source!==window.parent)return;
+    const data=event.data;
+    if(data?.type==='workflow-atlas:theme'&&['light','dark'].includes(data.theme))setTheme(data.theme);
+    if(data?.type==='workflow-atlas:knowledge-open'){
+      if(data.topicId!==undefined&&(typeof data.topicId!=='string'||!byId.has(data.topicId)))return;
+      if(data.mode!==undefined&&!['read','explore','sources'].includes(data.mode))return;
+      if(data.mapView!==undefined&&!['2d','3d'].includes(data.mapView))return;
+      if(data.focus!==undefined&&typeof data.focus!=='boolean')return;
+      const readingChanged=data.topicId!==undefined&&data.topicId!==selected||data.mode!==undefined&&data.mode!==mode;
+      if(data.topicId!==undefined&&data.topicId!==selected){select(data.topicId,{fromHash:true,focus:false});if(location.hash.slice(1)!==data.topicId)history.replaceState({topic:data.topicId},'','#'+data.topicId);}
+      if(data.mapView!==undefined&&data.mapView!==view)setView(data.mapView);
+      if(readingChanged)setMode(data.mode||mode,data.focus===true);
+      sendParent({type:'workflow-atlas:knowledge-ready',...knowledgeState()});
+    }
+    if(data?.type==='workflow-atlas:practice-context'){practiceContext=acceptedPracticeContext(data);renderPracticeLinks();}
+    if(data?.type==='workflow-atlas:practice-review-closed')restorePracticeFocus(data);
+  });
   document.addEventListener('click',event=>{const button=event.target.closest('[data-practice-request]');if(!button||button.disabled)return;const action=practiceContext?.actions.find(action=>action.topicId===selected&&action.topicId===button.dataset.practiceTopic&&action.id===button.dataset.practiceRequest&&!action.alreadyApplied);if(action)sendParent({type:'workflow-atlas:practice-request',actionId:action.id,topicId:action.topicId});});
   function hashTopic(){let id='overview';try{id=decodeURIComponent(location.hash.slice(1))||id;}catch{}return byId.has(id)?id:'overview';}window.addEventListener('hashchange',()=>select(hashTopic(),{fromHash:true}));window.addEventListener('popstate',()=>{if(hashTopic()!==selected)select(hashTopic(),{fromHash:true});});
   document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)&&!document.activeElement.isContentEditable){e.preventDefault();if(mode==='sources')$('source-search').focus();else if(innerWidth<=1000||mode==='explore'&&mapFocus){if(!$('topics-dialog').open)$('topics-dialog').showModal();$('mobile-search').focus();}else $('topic-search').focus();}if(e.key!=='Escape'||$('topics-dialog').open)return;if(search||topicKind!=='all'){e.preventDefault();clearTopicFilters();return;}if(mode==='sources'&&$('source-search').value){e.preventDefault();$('source-search').value='';renderSources();return;}if(embedded){e.preventDefault();sendParent({type:'workflow-atlas:close-knowledge'});}});
   new ResizeObserver(tourOffset).observe($('tour-bar'));
   $('atlas-count').textContent=`${nodes.length} topics · ${Object.keys(sources).length} sources`;setMapFocus(mapFocus);setRotation(false);setView(view);select(hashTopic(),{fromHash:true,focus:false});setMode(['read','explore','sources'].includes(params.get('view'))?params.get('view'):embedded?'explore':'read',false);
-  sendParent({type:'workflow-atlas:knowledge-ready'});
+  sendParent({type:'workflow-atlas:knowledge-ready',...knowledgeState()});
 })();

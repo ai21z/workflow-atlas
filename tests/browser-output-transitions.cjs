@@ -1,3 +1,4 @@
+const { briefView, workflowView: openWorkflowView, closeWorkspaceDetails } = require('./browser-workspace-helpers.cjs')
 const assert = require('node:assert/strict')
 const fs = require('node:fs/promises')
 const path = require('node:path')
@@ -23,9 +24,10 @@ async function run() {
     page.on('pageerror', error => report.pageErrors.push(error.message))
     await page.goto(`http://127.0.0.1:${server.address().port}/factory/`)
     await page.locator('[data-start-recipe="bugfix"]').click()
-    await page.locator('#brief-name').fill('Output transitions')
-    await page.locator('#brief-purpose').fill('Keep false and zero in saved filters.')
-    await page.locator('#brief-form button[type="submit"]').click()
+    await page.locator('#project-name').fill('Output transitions')
+    await briefView(page)
+    await page.locator('#project-purpose').fill('Keep false and zero in saved filters.')
+    await openWorkflowView(page)
   }
   const open = async () => { await page.locator('#download-project').click(); await page.locator('#download-dialog').waitFor({ state: 'visible' }) }
   const close = () => page.locator('[data-close-dialog="download-dialog"]').click()
@@ -46,7 +48,7 @@ async function run() {
       for (const stage of ['bug-review', 'regression', 'bug-fix', 'diagnosis', 'reproduction']) {
         await page.locator(`[data-select-stage="${stage}"]`).first().click()
         await page.locator(`[data-stage="${stage}"]`).uncheck()
-        await page.locator('#close-inspector').click()
+        await closeWorkspaceDetails(page)
       }
       await open()
       assert.equal(await page.locator('[data-output-kind="skill"]').isChecked(), true)
@@ -74,9 +76,9 @@ async function run() {
       await fresh()
       await skill()
       const changeRecipe = async value => {
-        await page.locator('#project-details').click()
+        await briefView(page)
         await page.locator('[data-recipe-select]').selectOption(value)
-        await page.locator('#close-inspector').click()
+        await closeWorkspaceDetails(page)
       }
       await changeRecipe('feasibility')
       await open()
@@ -93,9 +95,9 @@ async function run() {
     await check('replace-import-and-new-session', async () => {
       await fresh()
       await skill()
-      await page.locator('#project-details').click()
+      await briefView(page)
       await page.locator('[data-recipe-select]').selectOption('feasibility')
-      await page.locator('#close-inspector').click()
+      await closeWorkspaceDetails(page)
       const imported = createRecipe('feasibility')
       imported.project.name = 'Imported study'
       imported.project.purpose = 'Compare ordinary code and a model before selecting an approach.'
@@ -130,7 +132,7 @@ async function run() {
       await close()
       await page.locator('#new-project').click()
       await page.locator('[data-start-recipe="bugfix"]').click()
-      await page.locator('#brief-form button[type="submit"]').click()
+      await openWorkflowView(page)
       await open()
       assert.equal(await page.locator('[data-output-kind="blueprint"]').isChecked(), true)
       return 'Cancel import and new project preserve the unavailable skill and current decisions. Confirmed import adopts its manifest scope. A later new project starts with its own default blueprint.'
@@ -138,9 +140,9 @@ async function run() {
     await check('unavailable-output-files-html-control', async () => {
       await fresh()
       await skill()
-      await page.locator('#project-details').click()
+      await briefView(page)
       await page.locator('[data-recipe-select]').selectOption('feasibility')
-      await page.locator('#close-inspector').click()
+      await closeWorkspaceDetails(page)
       await page.locator('#view-nav [data-project-view="artifacts"]').click()
       assert.equal(await page.locator('#export-pack').isDisabled(), true)
       const html = page.locator('#download-atlas')
@@ -154,9 +156,10 @@ async function run() {
       }
       assert.equal(await html.isDisabled(), true, 'Files view should disable unreadable Atlas export when the chosen procedure is unavailable')
       assert.equal(await page.locator('#export-config').isEnabled(), true)
-      await page.locator('#project-details').click()
+      await briefView(page)
       await page.locator('[data-recipe-select]').selectOption('bugfix')
-      await page.locator('#close-inspector').click()
+      await closeWorkspaceDetails(page)
+      await page.locator('#view-nav [data-project-view="artifacts"]').click()
       await page.waitForFunction(() => !document.querySelector('#download-atlas').disabled)
       const pending = page.waitForEvent('download')
       await html.focus()
@@ -218,9 +221,9 @@ async function run() {
     await check('practice-edit-with-unavailable-output', async () => {
       await fresh()
       await skill()
-      await page.locator('#project-details').click()
+      await briefView(page)
       await page.locator('[data-recipe-select]').selectOption('feature-delivery')
-      await page.locator('#close-inspector').click()
+      await closeWorkspaceDetails(page)
       const projectJson = async () => {
         await open()
         if (await page.locator('.other-downloads').getAttribute('open') === null) await page.locator('.other-downloads summary').click()
@@ -258,7 +261,7 @@ async function run() {
       assert.deepEqual(await projectJson(), before)
       await requestPractice()
       await page.locator('#apply-practice').click()
-      await page.locator('#close-inspector').click()
+      await closeWorkspaceDetails(page)
       await open()
       assert.equal(await page.locator('#output-skill').inputValue(), 'bug-diagnosis')
       assert.equal(await page.locator('[data-studio-action="download-output"]').isDisabled(), true)

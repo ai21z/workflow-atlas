@@ -14,20 +14,21 @@ The hosted app does not upload project content or offer AI suggestions. Keep you
 
 - **First visit.** Follow the [quick start](quick-start.md) from choosing a workflow to reopening a download.
 - **Already working.** Use the [workspace guide](factory-guide.md) to find a control, review decisions or keep files you edited elsewhere.
-- **Trying JEV.** Follow [Suggest a workflow](jev/integration.md) for the integrated start screen and local server setup. You can always choose manually.
+- **Trying JEV.** Follow [Suggest a workflow](jev/integration.md) for optional suggestions in Brief and local server setup. You can always choose manually.
 
 ## Find the right view
 
 | I want to | Open |
 | --- | --- |
 | Understand workflow concepts and inspect their sources | [Knowledge Atlas](../atlas/) |
-| Describe my own task and generate instructions | [Atlas workspace](../factory/) |
-| Read the decisions in my current project | Preview Atlas inside the workspace |
+| Describe my own task | Brief in the [Atlas workspace](../factory/) |
+| Shape the steps and inspect generated instructions | Workflow and Preview files in the workspace |
+| Read the decisions in my current project | Project Atlas inside the workspace |
 | Keep or share my work | Download inside the workspace |
 | Understand JEV results and their limits | [Evidence and metrics](jev/metrics.md) |
-| Evaluate Atlas and JEV with someone | [People trial](jev/trial.md) |
+| Inspect the earlier people-trial approach | [Historical protocol](jev/trial.md) |
 
-The Knowledge Atlas is a reference library. Preview Atlas is a reading view of your project decisions. This documentation explains how to use both.
+Brief, Workflow and Knowledge map are the three main workspace destinations. Knowledge map is a reference library, including before you create a project. Project Atlas is a reading view of your accepted project decisions. This documentation explains how to use them.
 
 ## Keep your work
 

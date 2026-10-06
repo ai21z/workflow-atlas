@@ -14,15 +14,15 @@ Custom instruction selections now drive skill generation. Selected development o
 
 ## Edit a connected process
 
-From the start screen, choose **Design a connected process** for a project without a development recipe, agent profiles or repository components. In an existing project, choose **Design a process** in Workflow to add another process. Give it a name, choose what it describes and select a sequence, review or bounded correction pattern. Choose **Open designer** to inspect the proposed starting design. Existing custom processes have an **Open designer** control.
+From **Brief**, choose **Design a connected process** for a project without a development recipe, agent profiles or repository components. In an existing project, choose **Design a process** in Workflow to add another process. Give it a name, choose what it describes and select a sequence, review or bounded correction pattern. Choose **Open designer** to inspect the proposed starting design. Existing custom processes have an **Open designer** control.
 
 Select a step in **Map** or **Step list**. Name its action and actor, choose required inputs and produced results, define checks and select destinations under **What happens next?** Expand **Inputs, checks and other records** for correction limits, approval and endings. No dragging is required.
 
 The designer holds a separate, session-only draft until **Review changes**, then **Apply changes**. Review lists changed records, connections, affected files and unresolved decisions. Broken references and unsupported structures prevent applying. Incomplete decisions can remain a draft. Apply changes replaces the process and related references together. Project Undo can restore the prior project state.
 
-Removing a referenced record requires an explicit replacement or cancellation. Observations are kept. If an evidence association cannot remain valid, resolve it rather than silently removing it. Closing with pending edits offers **Keep editing** or **Discard edits**. Applying is not saving. Download the project to keep it, then reopen that download for a later session.
+Removing a referenced record requires an explicit replacement or cancellation. Observations are kept. If an evidence association cannot remain valid, resolve it rather than silently removing it. **Process overview** and switching workspace views keep pending edits in this tab. Use **Discard process edits** for a deliberate discard. Applying is not saving. Download the project to keep it, then reopen that download for a later session.
 
-To remove a whole process, open **Purpose and pattern**, then **Remove this process**. Review its removal before applying. A process with linked evidence cannot be removed while those associations refer to it. This designer preserves existing evidence associations and does not provide controls to reassign them.
+To remove a whole process, open **Process details**, then **Remove this process**. Review its removal before applying. A process with linked evidence cannot be removed while those associations refer to it. This designer preserves existing evidence associations and does not provide controls to reassign them.
 
 See the [factory guide](factory-guide.md) for a practical walkthrough.
 

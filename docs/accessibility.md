@@ -1,6 +1,33 @@
 # Accessibility review
 
-Review date: 3 October 2026.
+Latest recorded review: 6 October 2026. Earlier exercises retain their own dates and interface scope.
+
+## Three-view workspace review, 6 October 2026
+
+The revised navigation has three destinations: Brief, Workflow and Knowledge map. Preview files is a secondary Workflow view. The earlier browser observations below describe their named interface versions and remain historical evidence. They do not establish behavior of this revised layout.
+
+Source inspection finds navigation links with an active destination, a labeled theme switch, inline Brief sections and the custom process editor inside Workflow. Narrow recipe inspectors remain within the page rather than presenting a false modal. Genuine dialogs retain their modal behavior. These are implementation observations, not proof of complete keyboard or assistive-technology behavior.
+
+The controlled Chrome process-designer exercise used public controls and actual downloaded bytes. Its inline editor fit 1440, 768, 390 and 320 CSS pixels in both themes without horizontal document overflow. The graph remained an explicitly scrollable region. Undo and Redo restored an applied process. ZIP contents and reopening preserved its graph and correction limits, and the exported process HTML rendered offline at 390 CSS pixels. No captured page errors occurred in that exercise. Its report and screenshots are under ignored `local-knowledge/reviews/process-designer/2026-10-06T05-31-35-929Z/`.
+
+The separate artifact check opened nine portable project exports covering three recipes and three output scopes. At 1440, 768 and 320 CSS pixels in both themes, all 54 combinations exercised four reader perspectives without captured page errors, remote HTTP requests or horizontal document overflow. Keyboard activation checked the theme switch state and focus. This exercise covers exported readers rather than every live workspace state. Its records are under ignored `local-knowledge/retests/artifact-beta/2026-10-06T05-27-49-513Z/`.
+
+The three-view browser journey used public controls, synthetic work, file-input imports and actual downloaded bytes. The empty description survived a Knowledge visit. Brief and stage edits reached the full pack and reopened through ZIP, JSON and HTML. Pending process edits survived Knowledge, Brief, practice cancel, application and Undo. An accepted-only download omitted the pending design. Applying retained newer Brief wording. A conflict after Undo retained both designs through explicit keep-both recovery. The three destinations fit 1440, 768, 390 and 320 CSS pixels in both themes, including 320 by 568. No captured page errors or live provider calls occurred. Its exact records are under ignored `local-knowledge/retests/three-view/2026-10-06T05-36-41-240Z/`.
+
+The separate six-group accessibility exercise checked the following behaviors through controlled Chrome events and DOM observations:
+
+| Area | Observed result and limit |
+| --- | --- |
+| Main navigation and skip links | Tab and Enter reached all three destinations. Skip focused the empty Brief, active Brief or inline custom editor without adding a route entry |
+| Editor and file focus | Keyboard view changes retained the selected stage, file and recorded text. Edit workflow focused the diagram region. Workflow reopened its previous file perspective |
+| Reduced motion and WebGL fallback | Forced WebGL context failure disabled 3D. Topic cards, keyboard search, reading and Escape return remained available. Reduced motion disabled automatic rotation and switch transitions |
+| Native zoom attempt | Ctrl+Equal produced no observable native zoom change in headless Chrome. A 720 by 500 CSS viewport checked narrower reflow only |
+| Controlled text enlargement | Test styles doubled each current element's computed font size once. Inspected empty Brief, active Brief and Workflow states at 1440, 768 and 320 CSS pixels had no horizontal document overflow. This is a text-only test, not native browser zoom or a complete text-resizing audit |
+| Custom editor keyboard return | The skip link targeted the inline process region, and main navigation returned to the retained process editor |
+
+The expected Three.js console error from forced WebGL failure was recorded. No page errors or live provider calls occurred in that exercise. Its records are under ignored `local-knowledge/retests/workspace-accessibility/2026-10-06T05-40-59-618Z/`.
+
+Native Computer Use stopped at browser URL verification in this environment. Controlled browser harness checks and screenshots remain separate evidence, and no complete native user walkthrough is claimed here. Screen-reader compatibility, full rendered contrast, native browser zoom, touch-device coverage and WCAG conformance remain unestablished. Later changes and their regression checks should retain their own records rather than rewriting these dated observations.
 
 ## Beta interface review, 5 October 2026
 
@@ -80,7 +107,7 @@ The original research snapshot remains 2 October 2026. The bounded primary-sourc
 
 | Area | Acceptance check | Primary guidance |
 | --- | --- | --- |
-| Keyboard | Complete start, stage edit, Files, Project details, Help, knowledge and Download without a pointer. Exercise a deliberate example and reopened pack too. No control depends only on hover | [Keyboard accessibility](https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html) |
+| Keyboard | Complete Brief, stage or custom-step editing, Preview files, Help, Knowledge map and Download without a pointer. Exercise a deliberate example and reopened pack too. No control depends only on hover | [Keyboard accessibility](https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html) |
 | Visible focus | Keep a visible indicator on the focused control, including map labels and dynamically updated regions | [Focus Visible](https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html) |
 | Focus obstruction | Sticky headers, inspectors and overlays must not entirely hide the focused control. Prefer keeping it fully visible | [Focus Not Obscured](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html) |
 | Dialogs | Focus enters the named dialog, Tab stays inside, Escape closes it, and closing returns focus to a suitable opener. Long help should begin at a readable heading | [WAI modal dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) |
@@ -106,7 +133,7 @@ Help must remain available without changing the project. Keep knowledge explorat
 
 The middle-priority follow-up inspected the decision brief, semantic review and updated-guidance dialog at 320 CSS px. The exercised states had no horizontal document overflow. Native dialog entry, explicit Tab and Shift+Tab wrapping, cancel and Escape return were observed. The light and dark workspace states were inspected. The actual exported HTML rendered the same brief with technical disclosures collapsed. This is bounded browser evidence, it does not replace the checks below. Screenshots and synthetic fixtures are in ignored `exports/audit-mid/`.
 
-1. Exercise the fresh start, all three recipes, stage edit, Files, Project details and Download keyboard journeys. Check focus entry and return for Help, project dialogs and the full-viewport Knowledge view from empty and active sessions.
+1. Extend the recorded Brief, all three recipes, stage or custom-step editing, Preview files and Download keyboard journeys across more values and states. Check focus entry and return for Help, genuine dialogs and Knowledge map from empty and active sessions.
 2. Extend the 320 px check to long findings and supplied values, and exercise 200% text enlargement and 400% browser zoom with the inspector open.
 3. Measure text, control, selection and focus contrast across light and dark states.
 4. Exercise pointer alternatives, touch targets and keyboard assignments against the same expected project changes, without requiring an editing mode.
@@ -118,6 +145,6 @@ Record the exact build, browser, viewport or zoom, input method, assistive techn
 
 ## Unknown in this review
 
-Complete WCAG conformance, comprehensive rendered contrast results, screen-reader behavior, forced-colors behavior, 200% text enlargement, 400% zoom and broad device coverage are not established here. The browser zoom shortcut did not produce an observable zoom change in this environment. Current and historical observations establish only their exercised paths and states.
+Complete WCAG conformance, comprehensive rendered contrast results, screen-reader behavior, forced-colors behavior, native text-resizing settings, native 200% or 400% browser zoom and broad device coverage are not established here. The controlled doubled-text exercise is described above with its scope. The browser zoom shortcut did not produce an observable zoom change in this environment. Current and historical observations establish only their exercised paths and states.
 
 Generated profiles, source citations and local UI checks do not establish consumer-host discovery, task correctness or improved team productivity.

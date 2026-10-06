@@ -2,10 +2,21 @@
 
 Release notes describe application changes. Project schema and guidance versions are managed separately.
 
-## Unreleased
+## 0.1.0-beta.2
 
+- Add ten common goals with editable workflow starting plans, deliberate draft replacement and matching downloaded files.
+- Protect separate replacement proposals, including unfinished answer wording, before replacing a project or leaving the page.
+- Offer manual replacement workflow choices in Brief, including the hosted version without AI suggestions.
+- Preserve named process drafts when reviewing a switch and clear resolved conflicts when project history returns to the draft's base.
+- Correct process editor instructions to match the current navigation and controls.
+
+- Organize the workspace into Brief, Workflow and Knowledge map, with shared session decisions and file previews available from Brief and Workflow.
+- Edit custom processes inside Workflow, retain pending drafts across views and require a refreshed review when accepted project decisions change.
+- Keep pending process edits distinct from downloadable decisions, with explicit review, apply and recovery controls.
+- Update the quick start, factory guide and product vision to explain the three views and implemented process model.
 - Generate Knowledge Atlas data and factory definitions from one versioned JSON catalogue, with schema, reference and stale-output checks.
-- Retain the 109 earlier topics and add eight retrieval topics, a guided collection and a reviewable retrieval-check practice. The catalogue contains 117 topics and 72 source records.
+- Retain the 109 earlier topics and add eight retrieval topics, a guided collection and a reviewable retrieval-check practice.
+- Add three general procedure entries and scope Jenkins, country-source and RDF/SPARQL guidance explicitly, preserving published topic IDs. The catalogue contains 120 topics and 72 source records, with wider editorial review still pending.
 - Add topic kinds, aliases, applicability and source-claim metadata, with type filtering and broader search. Retain legacy review status without claiming a new source review.
 - Keep per-definition revisions and review dates in exported guidance while catalogue content advances to 2.1.0. Project schema remains 3.0.
 - Validate JEV responses against its frozen recipe and question set. New catalogue questions stay manually answerable and are excluded from inference requests.
