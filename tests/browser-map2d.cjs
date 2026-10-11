@@ -89,30 +89,58 @@ async function insideViewBox(ref, target = page) {
   return x >= left && x <= left + width && y >= top && y <= top + height
 }
 
-async function clusterLabelClearances() {
+async function clusterLabelClearances({ fitted = true } = {}) {
   await settleMap()
   const memberships = current.catalog.layout2d.clusters.map(cluster => ({ id: cluster.id, records: current.catalog.layout2d.nodes.filter(item => item.clusterId === cluster.id).map(item => item.id) }))
-  const clearances = await page.evaluate(groups => groups.map(({ id, records }) => {
+  const clearances = await page.evaluate(({ groups, fitted }) => groups.map(({ id, records }) => {
     const svgBounds = document.querySelector('#map-2d svg').getBoundingClientRect()
     const cluster = document.querySelector(`#map-2d .map2d-cluster[data-cluster="${id}"]`)
     const labels = [...cluster.querySelectorAll('.map2d-cluster-name, .map2d-cluster-count')].filter(item => getComputedStyle(item).display !== 'none')
-    const labelBottom = Math.max(...labels.map(item => item.getBoundingClientRect().bottom))
+    const rectangles = labels.map(item => item.getBoundingClientRect())
+    const labelBottom = Math.max(...rectangles.map(rect => rect.bottom))
+    const block = { left: Math.min(...rectangles.map(rect => rect.left)), right: Math.max(...rectangles.map(rect => rect.right)), top: Math.min(...rectangles.map(rect => rect.top)), bottom: labelBottom }
+    const visibleBlock = { left: Math.max(block.left, svgBounds.left), right: Math.min(block.right, svgBounds.right), top: Math.max(block.top, svgBounds.top), bottom: Math.min(block.bottom, svgBounds.bottom) }
     const labelInsets = labels.map(item => {
       const rect = item.getBoundingClientRect()
-      return { text: item.textContent, left: rect.left - svgBounds.left, right: svgBounds.right - rect.right, top: rect.top - svgBounds.top, bottom: svgBounds.bottom - rect.bottom }
+      return { text: item.textContent, renderedFontSize: parseFloat(getComputedStyle(item).fontSize) * item.getScreenCTM().a, expectedFontSize: item.classList.contains('map2d-cluster-name') ? 14 : 11, left: rect.left - svgBounds.left, right: svgBounds.right - rect.right, top: rect.top - svgBounds.top, bottom: svgBounds.bottom - rect.bottom }
     })
     const shapes = records.map(ref => document.querySelector(`#map-2d .map2d-node[data-record="${ref}"] .map2d-shape`))
-    return { id, labelBottom, labelInsets, shapeCount: shapes.length, shapeTop: Math.min(...shapes.map(item => item.getBoundingClientRect().top)) }
-  }), memberships)
+    const foreignGlyphs = [...document.querySelectorAll('#map-2d .map2d-node')].filter(group => !records.includes(group.dataset.record)).map(group => {
+      const rect = group.querySelector('.map2d-shape').getBoundingClientRect()
+      const visible = { left: Math.max(rect.left, svgBounds.left), right: Math.min(rect.right, svgBounds.right), top: Math.max(rect.top, svgBounds.top), bottom: Math.min(rect.bottom, svgBounds.bottom) }
+      const glyph = fitted ? rect : visible, heading = fitted ? block : visibleBlock
+      if (!fitted && (glyph.left >= glyph.right || glyph.top >= glyph.bottom || heading.left >= heading.right || heading.top >= heading.bottom)) return null
+      return { id: group.dataset.record, separation: Math.max(heading.left - glyph.right, glyph.left - heading.right, heading.top - glyph.bottom, glyph.top - heading.bottom) }
+    }).filter(Boolean).sort((a, b) => a.separation - b.separation)
+    const nodeLabels = [...document.querySelectorAll('#map-2d .map2d-label')].filter(label => getComputedStyle(label).display !== 'none').map(label => {
+      const rect = label.getBoundingClientRect()
+      const visible = { left: Math.max(rect.left, svgBounds.left), right: Math.min(rect.right, svgBounds.right), top: Math.max(rect.top, svgBounds.top), bottom: Math.min(rect.bottom, svgBounds.bottom) }
+      const heading = fitted ? block : visibleBlock
+      if (visible.left >= visible.right || visible.top >= visible.bottom || heading.left >= heading.right || heading.top >= heading.bottom) return null
+      return { id: label.dataset.record, text: label.textContent, separation: Math.max(heading.left - visible.right, visible.left - heading.right, heading.top - visible.bottom, visible.top - heading.bottom) }
+    }).filter(Boolean).sort((a, b) => a.separation - b.separation)
+    return { id, context: `${innerWidth}x${innerHeight}, subject ${document.querySelector('#map-subject').value || 'all'}`, labelBottom, labelInsets, block, visibleBlock, closestForeignGlyph: foreignGlyphs[0] || null, closestNodeLabel: nodeLabels[0] || null, shapeCount: shapes.length, shapeTop: Math.min(...shapes.map(item => item.getBoundingClientRect().top)) }
+  }), { groups: memberships, fitted })
   for (const item of clearances) {
     assert.ok(item.shapeCount > 0, `${item.id} contains actual rendered shapes`)
     item.clearance = item.shapeTop - item.labelBottom
     assert.ok(item.clearance > 0, `${item.id} heading and count must sit above its own node shapes, actual clearance ${item.clearance}px`)
-    for (const label of item.labelInsets) for (const side of ['left', 'right', 'top', 'bottom']) {
+    for (const label of item.labelInsets) assert.ok(label.renderedFontSize >= label.expectedFontSize - .1, `${item.context}: ${item.id} label "${label.text}" must retain its ${label.expectedFontSize}px screen font size, actual ${label.renderedFontSize}px`)
+    if (item.closestForeignGlyph) assert.ok(item.closestForeignGlyph.separation >= 4, `${item.context}: ${item.id} heading/count block must keep 4px clear of foreign glyph ${item.closestForeignGlyph.id}, actual ${item.closestForeignGlyph.separation}px`)
+    if (item.closestNodeLabel) assert.ok(item.closestNodeLabel.separation >= 4, `${item.context}: ${item.id} heading/count block must keep 4px clear of visible node label ${item.closestNodeLabel.id}, actual ${item.closestNodeLabel.separation}px`)
+    for (const label of fitted ? item.labelInsets : []) for (const side of ['left', 'right', 'top', 'bottom']) {
       assert.ok(label[side] >= 4, `${item.id} label "${label.text}" must fit inside the SVG with a 4px inset on ${side}, actual inset ${label[side]}px`)
     }
   }
-  return clearances.map(({ id, clearance, labelInsets }) => ({ id, clearance, labelInsets }))
+  const visible = clearances.filter(item => item.visibleBlock.right > item.visibleBlock.left && item.visibleBlock.bottom > item.visibleBlock.top)
+  let minimumSeparation = Infinity
+  for (let a = 0; a < visible.length; a++) for (let b = a + 1; b < visible.length; b++) {
+    const left = visible[a], right = visible[b], first = fitted ? left.block : left.visibleBlock, second = fitted ? right.block : right.visibleBlock
+    const separation = Math.max(first.left - second.right, second.left - first.right, first.top - second.bottom, second.top - first.bottom)
+    assert.ok(separation >= 4, `${left.context}: ${left.id} and ${right.id} heading/count blocks need at least 4px separation, actual ${separation}px`)
+    minimumSeparation = Math.min(minimumSeparation, separation)
+  }
+  return clearances.map(({ id, clearance, labelInsets, block, closestForeignGlyph, closestNodeLabel }) => ({ id, clearance, labelInsets, block, closestForeignGlyph, closestNodeLabel, minimumVisibleBlockSeparation: Number.isFinite(minimumSeparation) ? minimumSeparation : null }))
 }
 
 async function settleMap() {
@@ -125,18 +153,22 @@ async function fittedMapBounds() {
   assert.equal(viewBox.length, 4)
   assert.ok(viewBox.every(Number.isFinite) && viewBox[2] > 0 && viewBox[3] > 0, 'Fit map has a finite camera with a positive extent')
   const clusterLabels = await clusterLabelClearances()
-  const glyphs = await page.evaluate(() => {
+  const measured = await page.evaluate(() => {
     const bounds = document.querySelector('#map-2d svg').getBoundingClientRect()
-    return [...document.querySelectorAll('#map-2d .map2d-node')].map(group => {
+    const source = new Map(TOPIC_DATA.catalog.layout2d.nodes.map(node => [node.id, node]))
+    const glyphs = [...document.querySelectorAll('#map-2d .map2d-node')].map(group => {
       const rect = group.querySelector('.map2d-shape').getBoundingClientRect()
-      return { id: group.dataset.record, left: rect.left - bounds.left, right: bounds.right - rect.right, top: rect.top - bounds.top, bottom: bounds.bottom - rect.bottom }
+      return { id: group.dataset.record, width: rect.width, sourceDiameter: source.get(group.dataset.record).radius * 2, left: rect.left - bounds.left, right: bounds.right - rect.right, top: rect.top - bounds.top, bottom: bounds.bottom - rect.bottom }
     })
+    return { glyphs, possibleBaseScale: Math.min(bounds.width / TOPIC_DATA.catalog.layout2d.width, bounds.height / TOPIC_DATA.catalog.layout2d.height) }
   })
+  const glyphs = measured.glyphs
   assert.equal(glyphs.length, current.catalog.layout2d.nodes.length)
+  for (const glyph of glyphs) assert.ok(glyph.width + .01 >= glyph.sourceDiameter * measured.possibleBaseScale / 2, `${glyph.id} must retain at least half the possible base map scale, actual rendered width ${glyph.width}px`)
   for (const glyph of glyphs) for (const side of ['left', 'right', 'top', 'bottom']) {
     assert.ok(glyph[side] >= 4, `${glyph.id} glyph must fit inside the SVG with a 4px inset on ${side}, actual inset ${glyph[side]}px`)
   }
-  return { viewBox, clusterLabels, fittedGlyphs: glyphs.length }
+  return { viewBox, clusterLabels, fittedGlyphs: glyphs.length, possibleBaseScale: measured.possibleBaseScale, minimumRenderedScale: Math.min(...glyphs.map(glyph => glyph.width / glyph.sourceDiameter)) }
 }
 
 async function visibleGlyphCenters() {
@@ -442,6 +474,7 @@ async function run() {
       await page.locator('#map-reset').click()
       await fittedMapBounds()
       await key.locator('.map2d-key-details > summary').click()
+      await fittedMapBounds()
       await key.locator('.map2d-cluster-key li').last().scrollIntoViewIfNeeded()
       assert.equal(await key.locator('.map2d-cluster-key li').count(), current.catalog.layout2d.clusters.length)
       await assertKeyFits()
@@ -510,6 +543,54 @@ async function run() {
       await page.screenshot({ path: path.join(output, `resized-fit-desktop-${theme}.png`), fullPage: false })
       await unchangedGraph()
       return { fittedSequence: observations, manualViewBox: manual, restored }
+    })
+
+    for (const theme of ['light', 'dark']) await check(`06e-small-desktop-cluster-label-spacing-${theme}`, async () => {
+      const observations = []
+      for (const width of [1024, 1280]) {
+        await fresh({ width, height: 600, theme })
+        const subjects = await page.locator('#map-subject option').evaluateAll(options => options.map(option => option.value).filter(Boolean))
+        assert.equal(subjects.length, current.catalog.subjects.length)
+        for (const subject of ['', ...subjects, '']) {
+          await page.locator('#map-subject').selectOption(subject)
+          const fitted = await fittedMapBounds()
+          observations.push({ width, height: 600, subject: subject || 'all', ...fitted })
+          if (['ci-pipelines', 'workflow-measurements'].includes(subject)) {
+            await page.locator('#map-2d svg').scrollIntoViewIfNeeded()
+            await page.screenshot({ path: path.join(output, `small-desktop-${width}-${subject === 'ci-pipelines' ? 'ci' : subject}-${theme}.png`), fullPage: false })
+          }
+        }
+      }
+      await unchangedGraph()
+      return observations
+    })
+
+    for (const theme of ['light', 'dark']) await check(`06f-zoomed-cluster-label-spacing-${theme}`, async () => {
+      const observations = []
+      for (const width of [1280, 390, 320]) {
+        await fresh({ width, height: 720, theme })
+        await page.locator('#map-subject').selectOption('ci-pipelines')
+        const svg = page.locator('#map-2d svg')
+        await fittedMapBounds()
+        if (width < 620) {
+          await page.locator('.map2d-key-details > summary').click()
+          await fittedMapBounds()
+        }
+        for (let zoomStep = 1; zoomStep <= 4; zoomStep++) {
+          await page.locator('#zoom-in').click()
+          const labels = await clusterLabelClearances({ fitted: false })
+          observations.push({ width, zoomStep, viewBox: await svg.getAttribute('viewBox'), labels })
+        }
+        await svg.press('ArrowRight')
+        await svg.press('ArrowUp')
+        observations.push({ width, state: 'panned', labels: await clusterLabelClearances({ fitted: false }) })
+        await page.locator('#map-reset').click()
+        observations.push({ width, state: 'restored fit', ...await fittedMapBounds() })
+        await svg.scrollIntoViewIfNeeded()
+        await page.screenshot({ path: path.join(output, `cluster-spacing-${width}-${theme}.png`), fullPage: false })
+      }
+      await unchangedGraph()
+      return observations
     })
 
     await check('07-legacy-projection-fallback-and-preserved-3d', async () => {

@@ -67,13 +67,14 @@
     }
     svg.append(defs);
     const background = make('rect', { class: 'map2d-background', fill: 'transparent' });
+    const clusterLeaders = make('g', { class: 'map2d-cluster-guides', 'aria-hidden': 'true' });
     const clusterLayer = make('g', { class: 'map2d-clusters', 'aria-hidden': 'true' });
     const edgeLayer = make('g', { class: 'map2d-edges', 'aria-hidden': 'true' });
     const hitLayer = make('g', { class: 'map2d-hit-targets', 'aria-hidden': 'true' });
     const labelLayer = make('g', { class: 'map2d-labels', 'aria-hidden': 'true' });
     const nodeLayer = make('g', { class: 'map2d-nodes' });
     // Visible glyphs take priority over nearby labels and enlarged transparent targets.
-    svg.append(background, clusterLayer, edgeLayer, hitLayer, labelLayer, nodeLayer);
+    svg.append(background, clusterLeaders, clusterLayer, edgeLayer, hitLayer, labelLayer, nodeLayer);
     const compactKey = document.createElement('div');
     compactKey.className = 'map2d-compact-key';
     compactKey.hidden = true;
@@ -216,7 +217,7 @@
       subjectList.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.map2dSubjectRecord === selected)));
       if (compact || showSubjects) container.style.setProperty('--map2d-key-space', `${Math.ceil(compactKey.getBoundingClientRect().height) + 24}px`);
       const s = scale(), close = neighbours(), matches = subjectMatches();
-      const zoom = layout.width / box.width, globalFit = zoom <= 1.15;
+      const zoom = Math.max(layout.width / box.width, layout.height / box.height), globalFit = zoom <= 1.15;
       const threshold = globalFit ? 0 : Math.min(sourceNodes.length, Math.round(11 + 12 * Math.max(0, zoom - 1) ** 1.5));
       const clusterIds = new Set((layout.clusters || []).map(cluster => cluster.id));
       for (const node of sourceNodes) {
@@ -257,18 +258,97 @@
         label.style.display = chosen || focused || subjectTopic || (!hub && !globalFit && (nearby || match && node.labelRank <= threshold)) ? '' : 'none';
       }
       refreshClusterLabels(s, compact);
+      separateNodeLabels(s);
     }
+    function separateNodeLabels(s) {
+      const headings = [...clusterLayer.children].map(group => {
+        const text = [...group.children].filter(item => getComputedStyle(item).display !== 'none').map(item => item.getBoundingClientRect());
+        return { left: Math.min(...text.map(rect => rect.left)), right: Math.max(...text.map(rect => rect.right)), top: Math.min(...text.map(rect => rect.top)), bottom: Math.max(...text.map(rect => rect.bottom)) };
+      });
+      for (const { label } of groups.values()) {
+        if (label.style.display === 'none') continue;
+        const bounds = label.getBoundingClientRect(), gap = 10;
+        const overlaps = headings.filter(rect => bounds.left < rect.right + gap && bounds.right > rect.left - gap);
+        const candidates = [0, ...overlaps.flatMap(rect => [rect.top - gap - bounds.bottom, rect.bottom + gap - bounds.top])];
+        candidates.sort((a, b) => Math.abs(a) - Math.abs(b) || b - a);
+        const offset = candidates.find(dy => overlaps.every(rect => bounds.top + dy >= rect.bottom + gap - .01 || bounds.bottom + dy <= rect.top - gap + .01)) || 0;
+        if (offset) for (const span of label.children) span.setAttribute('y', String(Number(span.getAttribute('y')) + offset / s));
+      }
+    }
+    let clusterLabelLayout = '';
     function refreshClusterLabels(s, compact) {
-      const zoom = layout.width / box.width;
+      const visible = svg.getBoundingClientRect();
+      if (!visible.width || !visible.height) { clusterLabelLayout = ''; return; }
+      const numbered = compact && Math.max(layout.width / box.width, layout.height / box.height) < 2.2;
+      const signature = `${s}|${numbered}`;
+      if (signature === clusterLabelLayout) return;
+      clusterLabelLayout = signature;
+      clusterLeaders.replaceChildren();
+      const headings = [];
       for (const cluster of clusterLayer.children) {
-        const numbered = compact && zoom < 2.2;
-        cluster.firstChild.textContent = numbered ? cluster.dataset.number : cluster.dataset.label;
-        cluster.firstChild.setAttribute('font-size', String(14 / s));
+        const name = cluster.firstChild, count = cluster.lastChild;
+        name.setAttribute('font-size', String(14 / s));
+        name.setAttribute('x', '0');
+        name.removeAttribute('y');
+        name.textContent = numbered ? cluster.dataset.number : cluster.dataset.label;
+        const words = name.textContent.split(/\s+/), lines = [];
+        let line = '';
+        for (const word of words) {
+          name.textContent = line ? `${line} ${word}` : word;
+          if (line && name.getComputedTextLength() * s > 120) { lines.push(line); line = word; }
+          else line = name.textContent;
+        }
+        lines.push(line);
         const top = Number(cluster.dataset.top) || 0;
-        cluster.firstChild.setAttribute('y', String(top + (numbered ? -20 : -34) / s));
-        cluster.lastChild.setAttribute('font-size', String(11 / s));
-        cluster.lastChild.setAttribute('y', String(top - 18 / s));
-        cluster.lastChild.style.display = numbered ? 'none' : '';
+        name.replaceChildren(...lines.map((text, index) => {
+          const span = make('tspan', { x: 0, y: top + ((numbered ? -20 : -34) - (lines.length - 1 - index) * 17) / s });
+          span.textContent = text;
+          return span;
+        }));
+        count.setAttribute('x', '0');
+        count.setAttribute('font-size', String(11 / s));
+        count.setAttribute('y', String(top - 18 / s));
+        count.style.display = numbered ? 'none' : '';
+        const bounds = cluster.getBBox(), transform = cluster.transform.baseVal.getItem(0).matrix;
+        const textBounds = [name, ...(numbered ? [] : [count])].map(text => text.getBoundingClientRect());
+        headings.push({ cluster, name, count, top, transform, bottom: transform.f + bounds.y + bounds.height, rect: { left: Math.min(...textBounds.map(rect => rect.left)), right: Math.max(...textBounds.map(rect => rect.right)), top: Math.min(...textBounds.map(rect => rect.top)), bottom: Math.max(...textBounds.map(rect => rect.bottom)) } });
+      }
+      const glyphs = [...nodeLayer.querySelectorAll('.map2d-shape')].map(shape => shape.getBoundingClientRect());
+      const overlaps = (a, b, gap) => a.left < b.right + gap && a.right > b.left - gap && a.top < b.bottom + gap && a.bottom > b.top - gap;
+      const placed = [];
+      // Keep headings above their groups. Try nearby clear space before a
+      // longer sideways move, leaving node geometry and the camera alone.
+      for (const heading of headings.sort((a, b) => a.rect.left - b.rect.left || a.cluster.dataset.cluster.localeCompare(b.cluster.dataset.cluster))) {
+        const obstacles = [...placed.map(rect => ({ rect, gap: 10 })), ...glyphs.map(rect => ({ rect, gap: 6 }))];
+        const rises = new Set([0, -24, -48, -72]);
+        for (const { rect, gap } of obstacles) {
+          const rise = rect.top - gap - heading.rect.bottom;
+          if (rise < 0 && rise >= -72) rises.add(rise);
+        }
+        let placement;
+        for (const dy of rises) {
+          const row = { ...heading.rect, top: heading.rect.top + dy, bottom: heading.rect.bottom + dy };
+          const candidates = [0];
+          for (const { rect, gap } of obstacles) {
+            if (row.top >= rect.bottom + gap || row.bottom <= rect.top - gap) continue;
+            candidates.push(rect.left - gap - row.right, rect.right + gap - row.left);
+          }
+          candidates.sort((a, b) => Math.abs(a) - Math.abs(b) || a - b);
+          const dx = candidates.find(offset => obstacles.every(item => !overlaps({ ...row, left: row.left + offset, right: row.right + offset }, item.rect, item.gap - .01)));
+          if (dx === undefined) continue;
+          const score = Math.hypot(dx, dy * 1.5);
+          if (!placement || score < placement.score) placement = { dx, dy, score };
+        }
+        const { dx = 0, dy = 0 } = placement || {};
+        const x = dx / s, y = dy / s;
+        for (const span of heading.name.children) span.setAttribute('x', String(x));
+        for (const span of heading.name.children) span.setAttribute('y', String(Number(span.getAttribute('y')) + y));
+        heading.count.setAttribute('x', String(x));
+        heading.count.setAttribute('y', String(Number(heading.count.getAttribute('y')) + y));
+        placed.push({ left: heading.rect.left + dx, right: heading.rect.right + dx, top: heading.rect.top + dy, bottom: heading.rect.bottom + dy });
+        if (Math.hypot(dx, dy) > 4) {
+          clusterLeaders.append(make('line', { class: 'map2d-cluster-guide', x1: heading.transform.e + x, y1: heading.bottom + y + 4 / s, x2: heading.transform.e, y2: heading.transform.f + heading.top - 6 / s, 'vector-effect': 'non-scaling-stroke' }));
+        }
       }
     }
     function refreshEdges() {
@@ -296,7 +376,9 @@
     function fitCamera() {
       const rect = svg.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
-      box = { x: 0, y: 0, width: layout.width, height: layout.height };
+      const aspect = rect.width / rect.height;
+      const initialWidth = Math.max(layout.width, layout.height * aspect), initialHeight = initialWidth / aspect;
+      box = { x: (layout.width - initialWidth) / 2, y: (layout.height - initialHeight) / 2, width: initialWidth, height: initialHeight };
       const compact = container.classList.contains('map2d-compact');
       // Text keeps its screen size as the camera moves. Include its measured
       // bounds and halo in the fit, without moving headings into their nodes.
@@ -304,7 +386,9 @@
         applyBox();
         const s = scale(), padding = 8 / s;
         refreshClusterLabels(s, compact);
-        let left = 0, top = 0, right = layout.width, bottom = layout.height;
+        // Retain the current envelope while labels settle. A smaller camera
+        // can otherwise change their preferred row and oscillate at the edge.
+        let left = box.x, top = box.y, right = box.x + box.width, bottom = box.y + box.height;
         for (const cluster of clusterLayer.children) {
           const bounds = cluster.getBBox(), transform = cluster.transform.baseVal.getItem(0).matrix;
           left = Math.min(left, transform.e + bounds.x - padding);
@@ -312,8 +396,7 @@
           right = Math.max(right, transform.e + bounds.x + bounds.width + padding);
           bottom = Math.max(bottom, transform.f + bounds.y + bounds.height + padding);
         }
-        const extent = Math.max((right - left) / layout.width, (bottom - top) / layout.height);
-        const width = layout.width * extent, height = layout.height * extent;
+        const width = Math.max(right - left, (bottom - top) * aspect), height = width / aspect;
         const next = { x: (left + right - width) / 2, y: (top + bottom - height) / 2, width, height };
         const settled = Object.keys(next).every(key => Math.abs(next[key] - box[key]) < .01);
         box = next;
@@ -357,7 +440,7 @@
       if (!Number.isFinite(factor) || factor <= 0) return;
       const current = layout.width / box.width;
       const next = Math.min(12, Math.max(minimumZoom, current * factor));
-      const width = layout.width / next, height = layout.height / next;
+      const width = layout.width / next, height = box.height * width / box.width;
       const point = anchor || { x: box.x + box.width / 2, y: box.y + box.height / 2 };
       const ratioX = (point.x - box.x) / box.width, ratioY = (point.y - box.y) / box.height;
       box = { x: point.x - ratioX * width, y: point.y - ratioY * height, width, height };

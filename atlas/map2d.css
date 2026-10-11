@@ -20,6 +20,8 @@
 .map2d-cluster-name{font-weight:750;letter-spacing:.1px}
 .map2d-cluster-count{font-weight:500}
 .map2d-clusters{pointer-events:none}
+.map2d-cluster-guides{pointer-events:none}
+.map2d-cluster-guide{stroke:var(--map2d-ink);stroke-width:1;opacity:.65;pointer-events:none}
 .map2d-edge{stroke:var(--map2d-line);stroke-width:1.5;pointer-events:none}
 .map2d-edge-applies{stroke:var(--map2d-applies);stroke-width:2;stroke-dasharray:7 5}
 .map2d-edge-reading{stroke:var(--map2d-reading);stroke-width:1.5;stroke-dasharray:2 5}

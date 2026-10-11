@@ -45,7 +45,9 @@ The generated `catalog.layout2d` record has its own layout `version: 1`, canvas 
 
 The ten existing clusters retain their identities, colours and original 3D positions. A linked practice or technology sits with its explanatory article. Unlinked definitions sit in **Factory definitions**. Cluster article counts exclude the cluster's own hub and all definition shapes. They measure recorded articles, not completeness. Layout distance is geometry, not semantic similarity, a source rating or a dependency declaration. Subject selection does not recompute positions.
 
-The browser reads the generated layout and changes only the viewport when panning or zooming. It adds no layout library or inference request. A missing or unsupported layout falls back to Topic cards. Neither map browsing nor the layout projection changes factory definitions, project decisions or generated instructions.
+The browser reads the generated layout and changes the viewport when panning or zooming. Cluster headings wrap at word boundaries and shift into nearby clear space above their groups to separate their measured text blocks from other headings and node shapes. Small guide lines connect shifted headings to their groups. Visible node labels shift vertically to avoid headings. Text keeps its screen size. The numbered phone overview uses a Map key with each cluster name and recorded count, and zooming reveals full headings. These label adjustments do not move nodes or change cluster membership.
+
+The map adds no layout library or inference request. A missing or unsupported layout falls back to Topic cards. Neither map browsing nor the layout projection changes factory definitions, project decisions or generated instructions.
 
 ## Source files
 
