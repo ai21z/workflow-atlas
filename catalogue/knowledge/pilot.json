@@ -63,12 +63,33 @@
     "domains": [
       "evaluation"
     ],
-    "aliases": [],
+    "aliases": [
+      "rollout",
+      "bounded trial",
+      "shadow comparison",
+      "controlled use",
+      "staged adoption",
+      "expansion"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when deciding how to introduce an automation and expand it in steps, from a baseline and bounded trial through controlled use to measured expansion, with acceptance criteria agreed with the owners before results are collected.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "recipes": [
+        "feasibility"
+      ],
+      "stages": [
+        "experiment-plan"
+      ]
+    }
   }
 }

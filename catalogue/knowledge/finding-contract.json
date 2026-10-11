@@ -31,12 +31,25 @@
     "domains": [
       "maintenance"
     ],
-    "aliases": [],
+    "aliases": [
+      "finding template",
+      "finding fields",
+      "audit finding",
+      "reproducible finding",
+      "ticket evidence",
+      "remediation proposal"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when recording an audit or debt finding that another person must confirm and act on. It lists the fields that make a finding actionable and reproducible, or explicit about its evidential limits.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

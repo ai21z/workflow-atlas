@@ -1,6 +1,6 @@
 # Atlas preservation
 
-Preserved on 2 October 2026. Interface review updated on 3 October 2026. Public case wording reviewed on 5 October 2026. Focused skills taxonomy updated on 6 October 2026.
+Preserved on 2 October 2026. Interface review updated on 3 October 2026. Public case wording reviewed on 5 October 2026. Focused skills taxonomy updated on 6 October 2026. Subject navigation and the 2D map added on 11 October 2026.
 
 ## The retained baseline
 
@@ -8,10 +8,10 @@ The `atlas/` directory was copied from the original Atlas's static assets. Its s
 
 It retains:
 
-1. All 105 original topics and the four later general guidance topics. Eight retrieval topics and three general procedure entries bring the catalogue to 120 across the same 10 clusters.
-2. All 55 original source references and confidence qualifiers, plus the later LLM Wiki reference. The combined catalogue now has 72 source records, including factory references and the retrieval sources.
+1. All 105 original topics and the four later general guidance topics. Eight retrieval topics and three general procedure entries brought the catalogue to 120 across the same 10 clusters. Five later topics bring the current total to 125.
+2. All 55 original source references and confidence qualifiers, plus the later LLM Wiki reference. The combined catalogue had 72 source records at the retrieval update. It now has 137 records, including the later technology references. More records do not imply a new factual review of earlier material.
 3. Existing topic identifiers and browser hash navigation.
-4. Reading, 3D map and topic card views.
+4. Reading, 3D map and topic card views, alongside the new 2D map.
 5. Source library search and links back to topics.
 6. All five earlier guided paths, including the reference-to-configuration feasibility study, plus Retrieve and check information.
 7. Light and dark reading themes.
@@ -85,3 +85,25 @@ The stable `ci-skill` topic becomes **Jenkins diagnosis example**, `source-skill
 Neptune execution-plan guidance now applies only to Neptune deployments. SQL, RDF/SPARQL and property graphs retain distinct semantics and verification needs. Generic reading does not imply that their queries or tools are interchangeable.
 
 The three new general procedures are marked as proposed guidance needing review. No new factual source-review date, export adapter or actionable skill mapping is established by this change. This is a focused content pass, not a complete rewrite or verification of the catalogue.
+
+## Subject navigation
+
+The 11 October 2026 update adds four reading groups across existing clusters: CI and pipelines, Containers, Access and action controls, and Workflow measurements. The optional `subjects` records in `catalogue/navigation.json` carry their summaries, limits and explicit topic membership. A topic can appear in more than one subject without moving.
+
+Home cards and **Browse a subject** in Topics open the same filtered list. Search and topic type intersect with that selection. Opening a topic retains the subject for continued reading, while its published hash, breadcrumbs and original parent remain unchanged. **All subjects** restores browsing across subjects. The existing 3D map, its cluster positions, ten clusters, 125 topics and six guided paths stay available. Subject navigation itself does not introduce or replace a map renderer.
+
+Subjects describe the available articles, not a complete technology directory. Containers currently contains Docker only. Access and action controls is not a full security review. Workflow measurements is not full observability coverage. The eight-slot maintainer coverage report and recorded source statuses keep their own meaning. Reading a subject does not change project decisions, practice matching or inference requests. The same subject controls are part of standalone knowledge reading and its offline export.
+
+## 2D map
+
+The later map update adds an SVG **2D map** as the default exploration view. **Topic cards** and **3D map** stay beside it in the workspace and standalone Atlas. The Three.js scene, original cluster positions, camera controls, library and MIT notice remain. The SVG renderer uses generated geometry and no browser layout dependency.
+
+All 125 topics retain their published identifiers, parents, breadcrumbs and source records. Seven practice definitions and 24 technology definitions add separate shapes to the 2D map. Linked definitions sit in their explanatory article's cluster. Unlinked definitions use a separate **Factory definitions** area. Existing graph relationships remain intact. The new layout groups reciprocal connections for drawing while retaining their directed predicates and metadata.
+
+**Highlight a subject** shares the Topics selection without hiding the rest of the graph or rearranging its clusters. Article counts and subject limits retain their original meanings. Positions, proximity, shape size and label prominence do not establish source quality, applicability or complete coverage. The selected node panel reports recorded review information and source counts separately.
+
+The map offers background dragging, zoom controls and **Fit map**. With keyboard focus in the map, arrows pan, Home fits, and plus and minus zoom. Browser modifier shortcuts remain available. Enter or Space selects a focused node, and Escape moves focus to the selected record panel. **Neighbours** offers named controls for the same immediate connections. Structure and Applies connections start enabled. Reading connections can be enabled separately. Topic reading, search, sources, guided paths and cards remain alternative ways to navigate.
+
+The standalone exporter now inlines the 2D renderer and its stylesheet alongside the existing data and 3D assets. This does not change the separate Project Atlas artifact into a copy of the Knowledge Atlas. Older or malformed layout data falls back to cards. No workflow runs and no catalogue text is added to inference requests by this map.
+
+These controls support browser verification. Independent human comprehension, screen reader use and Firefox behavior remain separate checks, not established by the implementation alone.

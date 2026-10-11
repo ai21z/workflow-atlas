@@ -49,12 +49,31 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "deployment",
+      "rollback",
+      "release plan",
+      "recovery procedure",
+      "operating owner",
+      "forward correction"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when a software or data change is moving into an operating environment and needs a release plan, a chosen recovery path and an operating owner. A study that ends with a recommendation or a pilot of a new automation is a separate decision.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "release",
+        "operations"
+      ]
+    }
   }
 }

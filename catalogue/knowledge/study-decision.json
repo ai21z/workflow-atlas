@@ -64,12 +64,38 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "go no-go",
+      "conditional go",
+      "decision package",
+      "study recommendation",
+      "phase 2 planning",
+      "success measures"
+    ],
     "revision": "1",
-    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "applicability": "Use this when a feasibility study must end in a go, conditional go or no-go recommendation. Agree the usability, error, access and cost criteria with the owners before interpreting results, and treat the recommendation as a study outcome rather than production certification.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "supplied",
+        "recommended"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "configuration-study"
+    },
+    "applies": {
+      "stages": [
+        "recommendation"
+      ],
+      "recipes": [
+        "feasibility"
+      ]
+    }
   }
 }

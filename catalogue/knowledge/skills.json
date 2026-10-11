@@ -34,12 +34,24 @@
     "domains": [
       "instructions"
     ],
-    "aliases": [],
+    "aliases": [
+      "skills and roles",
+      "task procedures",
+      "specialist guidance",
+      "exported skills",
+      "procedures"
+    ],
     "revision": "2",
     "applicability": "Use this cluster to distinguish reusable task procedures, specialist reading examples and supported generated instructions.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

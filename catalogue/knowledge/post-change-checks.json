@@ -34,12 +34,33 @@
     "domains": [
       "verification"
     ],
-    "aliases": [],
+    "aliases": [
+      "final state",
+      "stale checks",
+      "re-verification",
+      "candidate revision",
+      "command success",
+      "readback"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when recording verification evidence for a change, so that checks describe the final relevant code or data state rather than a stale local success. Repeat affected checks after each subsequent change and keep command success distinct from verification of the resulting content.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "recommended",
+        "inspected"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "verification",
+        "regression",
+        "bug-review"
+      ]
+    }
   }
 }

@@ -127,6 +127,10 @@ jobs:
             local-knowledge/reviews/process-designer/**/*.png
             local-knowledge/retests/static-pages/**/*.json
             local-knowledge/retests/static-pages/**/*.png
+            local-knowledge/retests/subjects/**/*.json
+            local-knowledge/retests/subjects/**/*.png
+            local-knowledge/retests/map2d/**/*.json
+            local-knowledge/retests/map2d/**/*.png
             exports/browser-qa-catalogue/*.png
           if-no-files-found: warn
           retention-days: 7

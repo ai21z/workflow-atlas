@@ -61,12 +61,25 @@
     "domains": [
       "evaluation"
     ],
-    "aliases": [],
+    "aliases": [
+      "unknowns",
+      "confidence table",
+      "freshness",
+      "research limits",
+      "verified facts",
+      "unmeasured outcomes"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when deciding how much to rely on a claim in this map. It states which areas rest on inspected documentation, which are proposed fit, and which remain unknown until a benchmark, repository investigation or shadow evaluation is done.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "research"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

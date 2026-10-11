@@ -40,5 +40,12 @@
     "title": "Add retrieval checks",
     "reason": "Record written checks for the approved interface, inputs and returned information. This adds a selected practice to the workflow and source record. It does not change steps, roles, tools or evidence.",
     "eligibility": "always"
+  },
+  {
+    "topicId": "agents-md",
+    "practiceId": "agents-md",
+    "title": "Keep repository instructions for agents",
+    "reason": "Record the practice of one short root AGENTS.md that host files point to, together with its sources. Atlas already writes an AGENTS.md into the full pack, so this adds the practice to that file and to the source record without changing steps, roles, tools or evidence.",
+    "eligibility": "always"
   }
 ]

@@ -34,12 +34,29 @@
     "domains": [
       "requirements"
     ],
-    "aliases": [],
+    "aliases": [
+      "investigation",
+      "baseline",
+      "implementation brief",
+      "acceptance scenarios",
+      "bounded capability"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this procedure when you need to investigate one bounded capability before writing tickets or changing code, following its data, components, interfaces and tests with actual evidence. The result is an implementation brief or a concrete decision with facts kept apart from suggestions and unknowns.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements"
+      ]
+    }
   }
 }

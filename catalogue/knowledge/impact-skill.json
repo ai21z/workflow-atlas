@@ -37,12 +37,29 @@
     "domains": [
       "instructions"
     ],
-    "aliases": [],
+    "aliases": [
+      "impact analysis",
+      "change impact",
+      "dependency investigation",
+      "affected components",
+      "consumer contracts"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when a proposed change needs its affected components, migrations, consumer contracts and test scenarios traced and the needed verification identified. Label indirect impacts as hypotheses until a source relationship, code reference, contract or executed observation supports them.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture"
+      ]
+    }
   }
 }

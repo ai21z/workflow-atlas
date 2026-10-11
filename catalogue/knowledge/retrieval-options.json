@@ -58,9 +58,16 @@
     "domains": [
       "information-retrieval"
     ],
-    "aliases": [],
+    "aliases": [
+      "retrieval approach",
+      "data model",
+      "database choice",
+      "sql or sparql",
+      "relational or graph",
+      "custom technology"
+    ],
     "revision": "1",
-    "applicability": "Use when designing how existing information is retrieved and checked.",
+    "applicability": "Use when choosing between an existing approved API and a relational, RDF or property graph store for a retrieval need. Record the interface contract and validation needs first, a database replacement is a separate architecture decision.",
     "limits": "This is design guidance. It does not connect to a service or prove that a result is correct.",
     "sourceStatus": "reviewed",
     "reviewedOn": "2026-10-05",
@@ -75,6 +82,21 @@
           "neo4j-start"
         ]
       }
-    ]
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "established"
+    },
+    "applies": {
+      "technologies": [
+        "postgresql",
+        "neptune",
+        "jena-fuseki",
+        "neo4j"
+      ]
+    }
   }
 }

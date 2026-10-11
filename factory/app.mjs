@@ -14,6 +14,7 @@ import { mountJevView } from './jev-view.mjs'
 import { APP_VERSION } from './version.mjs'
 import { createProcessDesigner } from './process-designer.mjs'
 import { GOAL_STARTERS, createGoalProject } from './starter-goals.mjs'
+import { mountBriefSuggestions } from './brief-suggestions-view.mjs'
 
 const { CATALOG, TOOL_ALIASES, createRecipe, createExample, selectRecipe, getStages, getEffectiveSkills, compileStandaloneSkill, compile, validate, parseImport, serializeProject } = engine
 const $ = selector => document.querySelector(selector)
@@ -67,7 +68,7 @@ let lastRouteKey = ''
 let briefSection = 'intent'
 let workflowSelection = { stage: '', section: 'workflow', inspector: false }
 let knowledgeLoaded = false
-let knowledgeState = { topicId: 'overview', mode: 'explore', mapView: '3d' }
+let knowledgeState = { topicId: 'overview', mode: 'explore', mapView: 'map' }
 let processOverview = false
 let selectedStage = ''
 let inspectorOpen = false
@@ -118,6 +119,7 @@ let assistantAnswerReviews = {}
 const assistantReviewWording = new Map()
 let replacementWordingDirty = false
 let jevView
+let briefIdeas
 const assistance = createJevAssistance({ onChange: () => jevView?.render() })
 let processDesigner
 function applyProcessConfig(next) {
@@ -289,6 +291,7 @@ function changed(historyKey = '') {
 }
 
 function renderSession() {
+  briefIdeas?.update()
   const active = Boolean(config)
   const dirty = active && sessionDirty()
   $('#download-project').hidden = !active
@@ -566,6 +569,8 @@ function renderOutputChoice() {
 }
 
 function renderStudio() {
+  const ideasHost = config ? $('#active-ideas-host') : $('#start-ideas-host')
+  if ($('#brief-suggestions').parentElement !== ideasHost) ideasHost.append($('#brief-suggestions'))
   renderSession()
   const goalHost = config ? $('#active-goal-host') : $('#start-goal-host')
   if ($('#goal-picker').parentElement !== goalHost) goalHost.append($('#goal-picker'))
@@ -1243,6 +1248,7 @@ async function replaceConfig(next, message, origin = 'example', { consumeAssista
   const wording = separateProposal ? { title: 'Keep your replacement proposal?', keep: 'Keep editing', replace: 'Discard proposal and replace' } : hasPending ? { replace: 'Discard pending edits and replace' } : {}
   if (sessionDirty({ includeAssistance: !consumeAssistance }) && !await confirmReplace(warning, wording)) return false
   if (!applyGuard()) { toast('The description changed. Review the current draft before creating it.'); return false }
+  briefIdeas?.invalidate()
   processDesigner.reset()
   clearTimeout(compileTimer)
   if (!consumeAssistance) { assistance.reset(); jevView?.clearReviewWording() }
@@ -1805,7 +1811,7 @@ function sendPracticeContext() {
   $('#knowledge-frame').contentWindow?.postMessage({type:'workflow-atlas:practice-context',actions,projectName:config?.project.name || 'Untitled workflow'}, location.origin)
 }
 
-function previewPractice(actionId, topicId) {
+function previewPractice(actionId, topicId, source = 'knowledge') {
   if (!config) return
   const action = getPracticeAction(topicId, config)
   if (!action || action.id !== actionId || action.alreadyApplied) return
@@ -1820,7 +1826,7 @@ function previewPractice(actionId, topicId) {
       const changes = [...new Set([...beforeFiles.keys(),...afterFiles.keys()])].filter(path => beforeFiles.get(path) !== afterFiles.get(path)).map(path => ({path,kind:!beforeFiles.has(path) ? 'Added' : !afterFiles.has(path) ? 'Removed' : 'Updated'}))
       filePreview = `<details class="download-inventory"><summary>Affected generated files (${changes.length})</summary><ul>${changes.map(change => `<li><code>${escape(change.path)}</code><span>${change.kind}</span></li>`).join('')}</ul></details>`
     }
-    pendingPractice = {actionId,topicId,projectState:JSON.stringify(config)}
+    pendingPractice = {actionId,topicId,source,projectState:JSON.stringify(config)}
     $('#practice-preview').innerHTML = `<p class="eyebrow">FOR ${escape(config.project.name || 'YOUR WORKFLOW')}</p><h3>${escape(action.title)}</h3><p>${escape(action.reason)}</p><ul class="practice-changes">${action.changes.map(change => `<li>${escape(change)}</li>`).join('')}</ul><p class="hint">This records intended guidance. It does not run tools, grant permissions or verify a result.</p>${filePreview}<p><a href="${escape(action.source)}" target="_blank" rel="noopener noreferrer">Read the source behind this practice ↗</a></p>`
     $('#practice-dialog').showModal()
     $('#practice-title').focus()
@@ -1841,7 +1847,10 @@ $('#apply-practice').addEventListener('click', () => {
   changed()
   clearTimeout(compileTimer)
   updatePack(false)
-  goTo(action.actionId.startsWith('runtime:') ? 'runtime' : 'boundaries')
+  if (action.source === 'brief') {
+    briefIdeas?.update({ immediate: true })
+    $('#brief-ideas-title')?.focus({ preventScroll: true })
+  } else goTo(action.actionId.startsWith('runtime:') ? 'runtime' : 'boundaries')
   toast('Practice applied to your decisions. Review the changes, or use Undo to return.')
 })
 $('#practice-dialog').addEventListener('close', () => {
@@ -2097,6 +2106,12 @@ window.addEventListener('resize',()=>document.documentElement.style.setProperty(
 $('#example-options').innerHTML = CATALOG.recipes.map((item, index) => `<button type="button" data-example="${item.id}"><span class="example-icon" aria-hidden="true">${['◈','◎','◇'][index]}</span><div><strong>${escape(labelOf(item))}</strong><p>${escape(item.description)}</p><small>${item.stageIds.length} stages · Fictional project</small></div><span aria-hidden="true">→</span></button>`).join('')
 $('#legacy-notice').hidden = !legacyDraft
 jevView = mountJevView(assistance, { onCreate: createAssistedProject, onChange: renderSession })
+briefIdeas = mountBriefSuggestions({
+  root: $('#brief-suggestions'),
+  getContext: () => ({ brief: config ? config.project.purpose : assistance.getState().draft.userBrief, config }),
+  onRead: topicId => openKnowledge(topicId),
+  onReview: (actionId, topicId) => previewPractice(actionId, topicId, 'brief'),
+})
 setTheme(theme)
 renderStudio()
 applyRoute()

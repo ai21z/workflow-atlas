@@ -43,12 +43,30 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "design decision",
+      "decision record",
+      "adr",
+      "tradeoffs",
+      "compare approaches",
+      "interface sketch"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when a design choice must be made from agreed behavior, existing systems and evidence, and someone needs to accept it. Record the selected approach, its reasons, the alternatives, the owner and the unresolved questions.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture"
+      ]
+    }
   }
 }

@@ -29,12 +29,29 @@
     "domains": [
       "model-decisions"
     ],
-    "aliases": [],
+    "aliases": [
+      "english",
+      "translation",
+      "multilingual",
+      "stratified evaluation",
+      "source language",
+      "typesafe"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Jev example when your official sources are not in English or use domain-specific terminology. Stratify reviewed examples by language and task so a high aggregate result does not conceal a weak language subset.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "jev-typesafe"
+    }
   }
 }

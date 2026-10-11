@@ -41,12 +41,30 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "evidence packet",
+      "pull request",
+      "smallest coherent change",
+      "focused verification",
+      "scope control"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when implementing a scoped change and preparing a pull request or review submission. The evidence must name the resulting revision, the actual commands or pipeline runs, their results, exclusions and unresolved concerns.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "implementation",
+        "bug-fix"
+      ]
+    }
   }
 }

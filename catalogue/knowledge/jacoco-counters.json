@@ -29,12 +29,34 @@
     "domains": [
       "maintenance"
     ],
-    "aliases": [],
+    "aliases": [
+      "jacoco",
+      "branch coverage",
+      "line coverage",
+      "instruction coverage",
+      "java coverage",
+      "coverage counters"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this JaCoCo example when a Java coverage report is being read as proof of correct behavior. It explains what the instruction, line and branch counters record and what they leave out, such as exception handling in the branch counter.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented"
+      ],
+      "confidenceLevel": "established"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "atlassian-jenkins"
+    },
+    "applies": {
+      "stages": [
+        "verification"
+      ]
+    }
   }
 }

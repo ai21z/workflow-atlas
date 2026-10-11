@@ -31,12 +31,36 @@
     "domains": [
       "engineering-tools"
     ],
-    "aliases": [],
+    "aliases": [
+      "rdf4j",
+      "shacl",
+      "ttl",
+      "named graphs",
+      "query plans",
+      "sparql"
+    ],
     "revision": "1",
-    "applicability": "An RDF4J and Neptune environment example. It is not the default database architecture for every workflow.",
+    "applicability": "Use this RDF4J and Neptune example when an RDF application is checked with local RDF4J fixtures and served from Neptune, and graph behavior must be verified in the actual serving environment. It is not the default database architecture for every workflow.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "neptune-rdf"
+    },
+    "applies": {
+      "technologies": [
+        "neptune",
+        "rdf",
+        "sparql"
+      ]
+    }
   }
 }

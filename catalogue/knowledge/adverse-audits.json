@@ -42,12 +42,26 @@
     "domains": [
       "verification"
     ],
-    "aliases": [],
+    "aliases": [
+      "failure cases",
+      "traces",
+      "manual qa runbook",
+      "budget tests",
+      "stalled streams",
+      "fabricated completion"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this when auditing whether a workflow run reported the right outcome under failure and uncertainty cases, by comparing its claims with traces, tool results, approvals and the actual resulting state. Choose cases that challenge the assumptions of your workflow, such as stale sources, duplicate events or denied access.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed",
+        "inspected"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

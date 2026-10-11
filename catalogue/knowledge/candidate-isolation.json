@@ -29,12 +29,36 @@
     "domains": [
       "knowledge"
     ],
-    "aliases": [],
+    "aliases": [
+      "named graphs",
+      "default graph",
+      "union graph",
+      "quarantine",
+      "serving queries",
+      "sparql"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this when candidate assertions are stored in a Neptune named graph next to approved data and serving queries use SPARQL. The default graph is the union of named graphs, so use a separate candidate store or enforce explicit approved datasets and audit every serving path.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "established"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "neptune-rdf"
+    },
+    "applies": {
+      "technologies": [
+        "neptune",
+        "sparql"
+      ]
+    }
   }
 }

@@ -37,13 +37,36 @@
       "instructions"
     ],
     "aliases": [
-      "RDF/SPARQL skill"
+      "RDF/SPARQL skill",
+      "rdf/sparql skill",
+      "sparql verification",
+      "ttl",
+      "named graphs",
+      "execution plans",
+      "graph verification"
     ],
     "revision": "2",
-    "applicability": "Use when the workflow uses RDF data and SPARQL. Supply the actual engine, graph scope, vocabulary, fixtures and structural rules.",
+    "applicability": "Use this RDF and SPARQL procedure when the workflow uses RDF data and SPARQL. Supply the actual engine, graph scope, vocabulary, fixtures and structural rules, and use Neptune execution plans only for a Neptune deployment.",
     "limits": "SQL and property graph procedures need their own checks. Neptune diagnostics apply only to Neptune. Reading this procedure does not run a query, install an integration or verify source truth.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "neptune-rdf"
+    },
+    "applies": {
+      "technologies": [
+        "rdf",
+        "sparql",
+        "neptune"
+      ]
+    }
   }
 }

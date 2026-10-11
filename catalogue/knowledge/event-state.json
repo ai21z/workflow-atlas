@@ -27,12 +27,25 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "idempotency",
+      "duplicate deliveries",
+      "event replay",
+      "run identity",
+      "terminal status",
+      "automation loops"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when retries or duplicate event deliveries could create repeated tickets, pull requests or other external writes. Record task and run identity, completed steps, input versions and terminal status so a replay reuses valid work.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

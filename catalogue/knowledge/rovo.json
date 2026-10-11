@@ -31,12 +31,29 @@
     "domains": [
       "engineering-tools"
     ],
-    "aliases": [],
+    "aliases": [
+      "atlassian automation",
+      "use agent",
+      "agent actions",
+      "think deeper",
+      "rovo credits"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Rovo Cloud example when a bounded task needs Atlassian context and a configured Jira or Confluence action after the analysis. Direct writes are off by default, so inspect action traces, the actor identity and credit consumption for the chosen reasoning tier.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "atlassian-jenkins"
+    }
   }
 }

@@ -87,12 +87,35 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "first-pass usability",
+      "repaired acceptance",
+      "validation gap",
+      "schema validity",
+      "diagnostic cases",
+      "model grading"
+    ],
     "revision": "1",
-    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "applicability": "Use this when a study must judge whether generated artifacts are usable and not only schema valid. Separate first-pass usable, usable after repair, rejected and incorrect but passed checks, and let product and technical owners define usability and unacceptable errors.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "supplied",
+        "recommended"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "configuration-study"
+    },
+    "applies": {
+      "recipes": [
+        "feasibility"
+      ]
+    }
   }
 }

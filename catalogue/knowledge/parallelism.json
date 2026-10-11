@@ -27,12 +27,25 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "delegation",
+      "multiple agents",
+      "parallel agents",
+      "merge findings",
+      "independent work",
+      "agent count"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when independent investigations can run at the same time and that improves speed or evidence quality. One owner merges the findings and controls the implementation, and concurrent edits of the same files are avoided.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

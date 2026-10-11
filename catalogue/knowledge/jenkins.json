@@ -27,12 +27,33 @@
     "domains": [
       "engineering-tools"
     ],
-    "aliases": [],
+    "aliases": [
+      "sonar",
+      "ci pipeline",
+      "quality gate",
+      "test evidence",
+      "failed stage"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Jenkins example when executed tests and quality checks run in Jenkins and Sonar and their results must be attached to the actual candidate revision. Pipeline success is evidence of the checks that ran, not proof of every requirement.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "atlassian-jenkins"
+    },
+    "applies": {
+      "stages": [
+        "verification"
+      ]
+    }
   }
 }

@@ -36,12 +36,29 @@
     "domains": [
       "model-decisions"
     ],
-    "aliases": [],
+    "aliases": [
+      "weaknesses",
+      "numeric precision",
+      "date comparison",
+      "multi-hop",
+      "adversarial content",
+      "model pinning"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Jev example when deciding what to keep outside semantic judgment, such as counting, date comparison, multi-hop questions or enforceable rules. Implement calculations, dates and invariants in code and test adverse cases before expanding use.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented"
+      ],
+      "confidenceLevel": "established"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "jev-typesafe"
+    }
   }
 }

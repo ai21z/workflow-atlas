@@ -34,12 +34,25 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "temporal",
+      "persistent orchestration",
+      "checkpoints",
+      "resume after restart",
+      "long-running workflows",
+      "workflow recovery"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when a process must survive restarts, wait days for an approval or external data, or resume without repeating external writes. Evaluate persistent orchestration against those requirements rather than adding it to the stack by default.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

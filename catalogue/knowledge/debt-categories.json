@@ -63,12 +63,25 @@
     "domains": [
       "maintenance"
     ],
-    "aliases": [],
+    "aliases": [
+      "technical debt",
+      "debt audit",
+      "code smells",
+      "debt classification",
+      "investigation categories",
+      "debt taxonomy"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when planning a debt investigation and you want evidence categories beyond code smells, covering structure, verification, data and ontology, queries, CI and release, documentation and agent workflows. Use it also to classify a finding by actual cause and ownership before calling it debt.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

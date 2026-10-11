@@ -42,10 +42,14 @@
     ],
     "aliases": [
       "retrieval checks",
-      "read validation"
+      "read validation",
+      "input validation",
+      "owasp",
+      "validated retrieval",
+      "scope checks"
     ],
     "revision": "1",
-    "applicability": "Use when designing how existing information is retrieved and checked.",
+    "applicability": "Use when a workflow step reads existing information and you want written checks for the approved interface, expected results, permitted scope and the normal, empty, invalid and unavailable cases. Add retrieval checks selects this practice in a Factory project, your team still supplies the real interface, fixtures and acceptance decisions.",
     "limits": "This is design guidance. It does not connect to a service or prove that a result is correct.",
     "sourceStatus": "reviewed",
     "reviewedOn": "2026-10-05",
@@ -57,6 +61,13 @@
           "input-validation"
         ]
       }
-    ]
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "established"
+    }
   }
 }

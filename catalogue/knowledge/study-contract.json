@@ -48,12 +48,38 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "api contract",
+      "sync versus async",
+      "async request-reply",
+      "job status resource",
+      "input and output schema",
+      "failure behaviour"
+    ],
     "revision": "1",
-    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "applicability": "Use this when a study must specify what a proposed service accepts, returns and does on failure before a platform is chosen. Decide sync versus async from observed duration, caller timeouts and recovery needs, and keep generation, saving, application and execution as separate actions.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "supplied",
+        "recommended"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "configuration-study"
+    },
+    "applies": {
+      "stages": [
+        "feasibility-scope"
+      ],
+      "recipes": [
+        "feasibility"
+      ]
+    }
   }
 }

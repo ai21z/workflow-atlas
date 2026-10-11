@@ -33,12 +33,25 @@
     "domains": [
       "knowledge"
     ],
-    "aliases": [],
+    "aliases": [
+      "claim record",
+      "evidence per claim",
+      "citations",
+      "uncertainty statement",
+      "source support",
+      "verification layers"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this when an answer or finding must carry support for each substantive claim, with its status, exact source, scope and uncertainty. A working link, a relevant passage and a supported claim are different layers, and missing support should produce an uncertainty statement rather than a fabricated answer.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

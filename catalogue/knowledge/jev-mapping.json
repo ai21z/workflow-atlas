@@ -29,12 +29,29 @@
     "domains": [
       "model-decisions"
     ],
-    "aliases": [],
+    "aliases": [
+      "concept mapping",
+      "candidate concepts",
+      "shortlist",
+      "neighboring concepts",
+      "schema checks",
+      "terminology"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Jev example when mapping source terminology to a bounded candidate list of supplied concepts with definitions and scope constraints. Shortlist candidates with existing retrieval and keep new-concept proposals separate from mappings to approved concepts.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "jev-typesafe"
+    }
   }
 }

@@ -33,12 +33,34 @@
     "domains": [
       "requirements"
     ],
-    "aliases": [],
+    "aliases": [
+      "regional holiday",
+      "acceptance scenario",
+      "scope mistake",
+      "country data example",
+      "semantic path",
+      "hypothetical requirement"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this country-data example when you want hypothetical acceptance scenarios that check a regional scope survives source ingestion, RDF storage, API output and frontend presentation. It illustrates the method and is not a finding about your data.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "country-data"
+    },
+    "applies": {
+      "stages": [
+        "requirements"
+      ]
+    }
   }
 }

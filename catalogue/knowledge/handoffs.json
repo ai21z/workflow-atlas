@@ -28,12 +28,24 @@
     "domains": [
       "models"
     ],
-    "aliases": [],
+    "aliases": [
+      "agent handoff",
+      "subagent results",
+      "structured findings",
+      "delegation output",
+      "evidence identifiers"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when one agent passes work to another, so that the receiving agent gets the task and revision identity, confirmed observations, labeled inferences, executed actions and open questions instead of the whole conversation.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

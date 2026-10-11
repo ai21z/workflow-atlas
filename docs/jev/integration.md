@@ -7,7 +7,7 @@ Use **Suggest my workflow** in **Brief**. Describe the work in your own words. J
 ## Start and stay in control
 
 1. Enter **What do you want to achieve?** Include the immediate task and anything already known.
-2. Read **What gets sent?** Your description and recorded answers go to TypeSafe with the frozen question definitions. Selecting a practice includes its definition. Atlas does not automatically send your files or the entire Knowledge map. Keep credentials and private material you cannot share out of the text you enter.
+2. Read **What gets sent?** Your description and recorded answers go to TypeSafe with the frozen question definitions. Selecting a supported practice includes its frozen definition. Catalogue summaries, node digests, topic bodies and the search index stay out of the request. Atlas does not automatically send your files. Keep credentials and private material you cannot share out of the text you enter.
 3. Select **Suggest my workflow**. Wait for the draft, or use **Cancel suggestion**.
 4. Read the suggested workflow and its stages. **Change workflow** lets you choose another. Your choice takes priority over the model.
 5. Answer the optional question if useful. Typing keeps a pending edit. **Record this answer** adds it to the project. **Continue without this** discards that pending edit and prevents an immediate repeat. If something is already recorded, **Keep my answer** retains that answer and discards the replacement you were typing.
@@ -38,6 +38,22 @@ The result can suggest it, decline it or need more context. A suggested practice
 Earlier selected practices stay visible when the description changes. Remove them explicitly if they no longer fit. A later negative assessment does not silently erase your selection. **Review my description again** deliberately reopens deferred questions. Checking a practice alone keeps those deferrals.
 
 The Knowledge map's contextual actions remain separate. A suggestion can add a supported practice to a repair or investigation even when the map's implementation-specific action is not shown.
+
+## Find practices from your current Brief
+
+**Ideas for your workflow** finds candidates locally from your description and recorded project choices. It works without JEV, including on the hosted static app. It shows up to three eligible practices, each with a reason and recorded source status. There can be fewer than three or none. Already selected practices are left out.
+
+Choose **Review practice** to inspect the proposed project edit and affected files. Only **Apply to my workflow** changes the project. Cancel keeps your accepted decisions. **Read topic** opens related guidance without applying anything. Technology articles and specialist examples are reading, not selectable practices or established technology recommendations.
+
+Before a project exists, related reading is available and the app asks you to choose a starting workflow before reviewing practices for it. A brief alone does not establish workflow eligibility, technologies, tools or commands.
+
+When a local JEV connection is available, **Check fit with JEV** offers one explicit assessment for the highest eligible candidate supported by its frozen practice contract. Other candidates remain **Not assessed by JEV**. The result says **JEV suggests this fits**, **JEV suggests this does not fit** or **JEV needs more context**. None of these is a review of the candidate's sources. A positive result still requires review and Apply. A negative result does not silently remove a selected practice.
+
+Changing the brief or relevant project decisions invalidates the old assessment. A late response cannot apply a practice or replace the current state. This retrieval feature sends no catalogue summaries, node digests, topic bodies or source excerpts to JEV. The explicit request uses the same user context and frozen practice definitions as the existing practice question path.
+
+Local matching handles a limited set of explicit named exclusions. It does not understand every refusal, exception or conflicting instruction in ordinary language. Read the reason and correct the project choices. No match is a valid result.
+
+Practice ideas also require specific matching evidence or an applicable stage reason. General article words do not turn related reading into an action. The matcher can miss valid paraphrases and does not fill the list to three. A chosen recipe alone does not justify adding repository instructions, a wiki or retrieval checks.
 
 ## What stays local
 

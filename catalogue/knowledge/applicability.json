@@ -34,12 +34,30 @@
     "domains": [
       "requirements"
     ],
-    "aliases": [],
+    "aliases": [
+      "jurisdiction",
+      "country baseline",
+      "source qualifier",
+      "scope preservation",
+      "classification scheme",
+      "effective period"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when a source statement is narrowed by jurisdiction, region, population, period or classification scheme, and that narrowing must survive ingestion, graph representation, serving and documentation. Use it also before designing a schema or integration around unfamiliar project terminology.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements"
+      ]
+    }
   }
 }

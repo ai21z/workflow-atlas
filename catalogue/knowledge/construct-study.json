@@ -71,12 +71,35 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "worked example",
+      "configuration generation",
+      "governed service",
+      "go no-go",
+      "decision package",
+      "phase 2 planning"
+    ],
     "revision": "1",
-    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "applicability": "Use this when assessing whether an existing engineer-assisted generation process should become a governed backend service and the result is a study-sized decision package rather than a production build. The baseline already uses AI, so it is not a comparison with a manual process.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "supplied",
+        "recommended"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "configuration-study"
+    },
+    "applies": {
+      "recipes": [
+        "feasibility"
+      ]
+    }
   }
 }

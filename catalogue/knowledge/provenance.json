@@ -35,12 +35,25 @@
     "domains": [
       "knowledge"
     ],
-    "aliases": [],
+    "aliases": [
+      "prov-o",
+      "w3c prov",
+      "derivation",
+      "attribution",
+      "lineage",
+      "approval record"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this when you need to record what an assertion, answer or analysis was derived from, which input versions affected it and who approved it. Apply PROV-O principles to existing mechanisms, since an ontology rewrite is not a prerequisite.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

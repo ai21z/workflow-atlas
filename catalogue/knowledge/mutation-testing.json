@@ -29,12 +29,24 @@
     "domains": [
       "maintenance"
     ],
-    "aliases": [],
+    "aliases": [
+      "mutants",
+      "surviving mutations",
+      "assertion strength",
+      "mutation pilot",
+      "google mutation testing"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when coverage looks high but you doubt that the assertions on important changed logic would catch a real fault. It proposes a bounded pilot that inspects surviving mutations and bounds scope and runner cost before any broader adoption.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

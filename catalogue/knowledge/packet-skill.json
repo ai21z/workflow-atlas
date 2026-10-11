@@ -29,12 +29,24 @@
     "domains": [
       "instructions"
     ],
-    "aliases": [],
+    "aliases": [
+      "review packet",
+      "review summary",
+      "change description",
+      "verdict",
+      "evidence links"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when a finished change needs a concise review result that points to the final revision, diff, executed reports, findings and evidence links. Executed results stay distinguishable from intended checks and skipped or unsupported checks remain visible.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

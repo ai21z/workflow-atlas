@@ -30,7 +30,7 @@
       ],
       "properties": {
         "schemaVersion": {
-          "const": "1.0"
+          "const": "1.1"
         },
         "version": {
           "type": "string",
@@ -343,6 +343,103 @@
                     }
                   }
                 }
+              },
+              "evidence": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "basisKinds",
+                  "confidenceLevel"
+                ],
+                "properties": {
+                  "basisKinds": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "documented",
+                        "proposed",
+                        "inspected",
+                        "recommended",
+                        "research",
+                        "illustrative",
+                        "supplied"
+                      ]
+                    },
+                    "uniqueItems": true,
+                    "minItems": 1
+                  },
+                  "confidenceLevel": {
+                    "enum": [
+                      "established",
+                      "proposed",
+                      "speculative"
+                    ]
+                  }
+                }
+              },
+              "applies": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "stages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9-]*$"
+                    },
+                    "uniqueItems": true
+                  },
+                  "recipes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9-]*$"
+                    },
+                    "uniqueItems": true
+                  },
+                  "technologies": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9-]*$"
+                    },
+                    "uniqueItems": true
+                  },
+                  "hosts": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9-]*$"
+                    },
+                    "uniqueItems": true
+                  }
+                }
+              },
+              "scope": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "generality"
+                ],
+                "properties": {
+                  "generality": {
+                    "enum": [
+                      "general",
+                      "example"
+                    ]
+                  },
+                  "context": {
+                    "enum": [
+                      "atlassian-jenkins",
+                      "neptune-rdf",
+                      "talos",
+                      "country-data",
+                      "configuration-study",
+                      "jev-typesafe",
+                      "copilot"
+                    ]
+                  }
+                }
               }
             }
           }
@@ -494,6 +591,17 @@
                     "pattern": "^[a-z][a-z0-9-]*$"
                   }
                 }
+              },
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidenceLevel": {
+                "enum": [
+                  "established",
+                  "proposed",
+                  "speculative"
+                ]
               }
             }
           },
@@ -570,6 +678,17 @@
                     "type": "string"
                   }
                 }
+              },
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidenceLevel": {
+                "enum": [
+                  "established",
+                  "proposed",
+                  "speculative"
+                ]
               }
             }
           },
@@ -645,6 +764,17 @@
                     }
                   }
                 }
+              },
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidenceLevel": {
+                "enum": [
+                  "established",
+                  "proposed",
+                  "speculative"
+                ]
               }
             }
           },
@@ -722,6 +852,17 @@
                     "pattern": "^$|^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
                   }
                 }
+              },
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidenceLevel": {
+                "enum": [
+                  "established",
+                  "proposed",
+                  "speculative"
+                ]
               }
             }
           },
@@ -817,6 +958,17 @@
                     }
                   }
                 }
+              },
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidenceLevel": {
+                "enum": [
+                  "established",
+                  "proposed",
+                  "speculative"
+                ]
               }
             }
           },
@@ -899,6 +1051,17 @@
                     "minLength": 1
                   }
                 }
+              },
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidenceLevel": {
+                "enum": [
+                  "established",
+                  "proposed",
+                  "speculative"
+                ]
               }
             }
           },
@@ -953,6 +1116,17 @@
                     "minLength": 1
                   }
                 }
+              },
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidenceLevel": {
+                "enum": [
+                  "established",
+                  "proposed",
+                  "speculative"
+                ]
               }
             }
           },
@@ -1007,6 +1181,30 @@
                     "minLength": 1
                   }
                 }
+              },
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidenceLevel": {
+                "enum": [
+                  "established",
+                  "proposed",
+                  "speculative"
+                ]
+              },
+              "category": {
+                "enum": [
+                  "language",
+                  "framework",
+                  "build-test",
+                  "hosting-ci",
+                  "tracking-docs",
+                  "data-store",
+                  "deployment",
+                  "agent-host",
+                  "other"
+                ]
               }
             }
           },
@@ -1061,6 +1259,17 @@
                     "minLength": 1
                   }
                 }
+              },
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidenceLevel": {
+                "enum": [
+                  "established",
+                  "proposed",
+                  "speculative"
+                ]
               }
             }
           }
@@ -1111,6 +1320,31 @@
           "contribution": {
             "type": "string",
             "minLength": 1
+          },
+          "license": {
+            "type": "string",
+            "minLength": 1
+          },
+          "retrievedOn": {
+            "type": "string",
+            "pattern": "^$|^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "kind": {
+            "enum": [
+              "documentation",
+              "specification",
+              "standard",
+              "repository",
+              "research",
+              "article",
+              "survey",
+              "dataset",
+              "other"
+            ]
+          },
+          "publisher": {
+            "type": "string",
+            "minLength": 1
           }
         }
       }
@@ -1154,6 +1388,30 @@
               "requirements-and-change",
               "runtime-design"
             ]
+          },
+          "conditions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "technology": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9-]*$"
+                    },
+                    "uniqueItems": true,
+                    "minItems": 1
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1223,6 +1481,47 @@
             }
           }
         },
+        "subjects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "title",
+              "summary",
+              "limits",
+              "nodeIds"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]*$"
+              },
+              "title": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "summary": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "limits": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "nodeIds": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9-]*$"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        },
         "collections": {
           "type": "array",
           "items": {
@@ -1279,7 +1578,11 @@
               "explained-by",
               "uses-definition",
               "provides-capability",
-              "illustrates"
+              "illustrates",
+              "requires",
+              "evidenced-by",
+              "example-of",
+              "works-with"
             ]
           },
           "to": {
@@ -1293,6 +1596,21 @@
               "pattern": "^[a-z][a-z0-9-]*$"
             },
             "uniqueItems": true
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "legacy",
+              "reviewed",
+              "needs-review"
+            ]
+          },
+          "reviewedOn": {
+            "type": "string",
+            "pattern": "^$|^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
           }
         }
       }

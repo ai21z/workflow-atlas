@@ -47,13 +47,23 @@
     "aliases": [
       "CI diagnosis",
       "pipeline troubleshooting",
-      "build failure"
+      "build failure",
+      "ci diagnosis",
+      "failed run",
+      "first actionable failure",
+      "ci failure"
     ],
     "revision": "1",
     "applicability": "Use when an automated pipeline fails and a team needs an evidence based diagnosis. A pipeline system or AI agent is not prescribed.",
     "limits": "This is a proposed reading procedure. It does not select an exportable skill, configure access, run checks or establish a successful result.",
     "sourceStatus": "needs-review",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

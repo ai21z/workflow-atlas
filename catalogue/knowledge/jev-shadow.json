@@ -29,12 +29,34 @@
     "domains": [
       "model-decisions"
     ],
-    "aliases": [],
+    "aliases": [
+      "held-out cases",
+      "baseline comparison",
+      "missed errors",
+      "false alarms",
+      "utility llm",
+      "re-evaluation"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Jev example when you want to test Jev on a narrow task, such as holiday scope-support checking, without changing publication behavior. Compare it with existing rules, a constrained utility LLM and the current reviewer process on reviewed examples, and record the model and question versions.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "jev-typesafe"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan"
+      ]
+    }
   }
 }

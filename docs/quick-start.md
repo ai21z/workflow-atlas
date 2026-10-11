@@ -38,6 +38,8 @@ For a feature or investigation, the equivalent recipe question can use your proj
 
 Changing the goal does not silently redesign your workflow. **Review workflow options** opens an optional replacement proposal. Choose a workflow there manually, or request a local JEV suggestion. Review it before **Replace with this draft**. Your project stays unchanged until you deliberately replace it. A supplied link is not fetched or verified. Technology labels do not establish commands, working connections or passing results.
 
+**Ideas for your workflow** offers up to three eligible practices with one reason each. **Review practice** shows the edit before **Apply to my workflow**. **Read topic** opens related reading without changing the project. Suggestions also work without JEV. If configured locally, **Check fit with JEV** can assess one supported candidate. Its result is a suggestion about fit, not source verification. [How practice suggestions work](jev/integration.md#find-practices-from-your-current-brief).
+
 ## 3. Shape the work in Workflow
 
 For a recipe, select a stage and edit its owner, skills, supplied inputs, notes and checks. Reviewed stage definitions and prerequisites remain fixed. Use a custom process when you need your own steps and outcome routes.
@@ -52,7 +54,13 @@ A person, agent or existing system can own work. A skill describes a reusable pr
 
 ## 4. Learn without changing the project
 
-Open **Knowledge map** to explore the full reference Atlas. Use topic cards, reading, search, filters, sources or the 3D map. Search results open guidance directly. Selecting a graph node explores it, **Read topic** opens its explanation.
+Open **Knowledge map** to explore the full reference Atlas. **2D map** is the default exploration view. Your choice of map view is retained while you browse. Select a node, inspect its connections and choose **Read topic** or **Read explanation** when available. **Neighbours** gives the connections as named controls. **Topic cards** and the **3D map** remain beside the new map. Search results open guidance directly.
+
+Drag empty map space to pan. Use the zoom buttons, then **Fit map** to see everything again. Structure and Applies connections start on. Turn on Reading for other immediate links. With focus in the map, arrow keys pan, Home fits, plus and minus zoom, and Escape moves to the selected record panel. Enter or Space selects a focused node. **Browse all map nodes as a list** gives you a named button for every record.
+
+Want a smaller reading list? Choose a **Browse a subject** card on the home page, or choose a subject in Topics. Search and **Topic type** narrow that list further. In the 2D map, **Highlight a subject** uses the same selection. Its articles are highlighted and all nodes stay available. **All subjects** removes the subject filter. Read the group's limits, a topic count does not mean complete coverage. The original 3D map and topic hierarchy stay the same.
+
+Use **Highlighted articles** to choose a subject article by name. On a phone, **Map key** explains the numbered clusters. Zoom in to see their names on the map.
 
 Reading alone changes nothing. An applicable topic can offer **Review for my workflow**. Inspect its proposed decisions and affected files before choosing **Apply to my workflow**. Cancel keeps the project unchanged. Undo reverses an applied action.
 

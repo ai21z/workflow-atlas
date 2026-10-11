@@ -49,12 +49,29 @@
     "domains": [
       "model-decisions"
     ],
-    "aliases": [],
+    "aliases": [
+      "answer space",
+      "passage relevance",
+      "scope support",
+      "source-change classification",
+      "workflow routing",
+      "none of these"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Jev example when framing a question for Jev, so that it has a precise question and a small, explicit answer space. Include insufficient evidence or none-of-these as answers and keep permissible actions with the controller.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "jev-typesafe"
+    }
   }
 }

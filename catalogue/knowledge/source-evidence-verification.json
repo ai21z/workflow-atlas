@@ -49,13 +49,22 @@
     "aliases": [
       "evidence verification",
       "source review",
-      "claim support"
+      "claim support",
+      "provenance",
+      "claim record",
+      "cited passage"
     ],
     "revision": "1",
     "applicability": "Use when a workflow depends on assertions from documents, research, requirements or other sources. Apply only the qualifiers relevant to the claim.",
     "limits": "This is a proposed reading procedure. It does not select an exportable skill, configure access, run checks or establish a successful result.",
     "sourceStatus": "needs-review",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

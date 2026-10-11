@@ -29,12 +29,25 @@
     "domains": [
       "requirements"
     ],
-    "aliases": [],
+    "aliases": [
+      "effective date",
+      "publication date",
+      "retrieval time",
+      "approval time",
+      "applicability window",
+      "date parsing"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when a rule, source or assertion carries more than one date and you must keep publication, effective period, retrieval time and approval time apart, or when historical queries must reproduce a past answer from recorded source and dataset versions.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

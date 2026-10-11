@@ -38,12 +38,30 @@
     "domains": [
       "evaluation"
     ],
-    "aliases": [],
+    "aliases": [
+      "proposal",
+      "architecture discussion",
+      "decisions to resolve",
+      "capability map",
+      "bounded alternative",
+      "scope decision"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when preparing a proposal for an architect or decision owner that compares the current approach with one bounded alternative. It lists the decisions to resolve, such as task owner, available clients and models, acceptance evidence and data boundaries, before a small measured pilot.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "recipes": [
+        "feasibility"
+      ]
+    }
   }
 }

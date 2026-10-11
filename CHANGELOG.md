@@ -2,6 +2,19 @@
 
 Release notes describe application changes. Project schema and guidance versions are managed separately.
 
+## Unreleased
+
+- Add a fixed 2D knowledge map with topic, practice and technology shapes, subject highlighting, selected connections, a named Neighbours list, pan, zoom and keyboard controls. Keep Topic cards, the 3D map, topic parents and published links. Include the new map in standalone offline exports. Layout geometry does not rate sources or change project decisions.
+- Browse four subjects from Knowledge map home cards or the Topics filter: CI and pipelines, Containers, Access and action controls, and Workflow measurements. Search and topic type narrow the chosen subject. Each group shows its coverage limits. Keep the existing map, topic parents, published links and guided paths unchanged.
+- Add `AGENTS.md` to the full artifact pack. It carries recorded commands, stage order, owners, acceptance and boundaries in one short file at the repository root, in the open format read by Copilot cloud agent and other coding agent hosts. The blueprint and single skill outputs do not include it.
+- Correct the phone layout of the three starting workflow cards, whose titles wrapped one letter per line.
+- Show the pending process edit state once while the designer is open, instead of a banner above the designer's own header and footer.
+- Offer up to three practice ideas under the brief, matched in the browser from the description and the recorded project choices, each with one reason and its recorded source status. Review practice shows the edit before Apply, Read topic opens the Knowledge map, and related reading stays separate. With the local JEV setup, one optional check sends the wanted result, the current answers and the practice id of the top supported candidate and reports whether it fits. Atlas does not automatically add catalogue content to that request. Fifteen labeled cases in `docs/jev/retrieval-cases.json` run under the unit tests.
+- Explain text matches in a sentence using the supplied words. Keep project facts separate from display wording and show missing sources honestly.
+- Add a dependency free query module over the knowledge graph with search, record lookup, typed neighbours and explained proposals for a brief and recorded project facts, a command line in `tools/atlas-query.mjs`, and a coverage report of the eight stack slots in the catalogue check.
+- Add topics and question profiles for Node.js, Python, GitHub Actions and Docker, two technology names for GitHub and GitHub Actions, and a practice with a project action for repository instructions to agents. The 64 new source records and five topics are marked for review. Record search aliases on 124 of the 125 topics, specific applicability sentences where the topic text supports one, and example labels on the 40 topics tied to one workplace.
+- Raise the catalogue authoring schema to 1.1 with optional evidence, applicability, scope, category, license and condition fields, four new relationship types, and build generated edges with inverses. Every published id, parent and compiled definition stays the same. The reader projection gains the full graph, claim ids, compact definition records and cluster digests, and the check reports reviewed records older than 180 days.
+
 ## 0.1.0-beta.2
 
 - Add ten common goals with editable workflow starting plans, deliberate draft replacement and matching downloaded files.

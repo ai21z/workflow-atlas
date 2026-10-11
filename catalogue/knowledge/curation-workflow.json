@@ -32,12 +32,29 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "data curation",
+      "candidate assertion",
+      "approved data",
+      "shape checks",
+      "domain review",
+      "jev"
+    ],
     "revision": "1",
-    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "applicability": "Use this when proposed data assertions must be compared with source evidence and pass deterministic parsing, datatype, shape and temporal checks before they become approved domain data. Candidate data stays out of ordinary serving queries until it is published.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "country-data"
+    }
   }
 }

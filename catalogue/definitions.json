@@ -1390,7 +1390,8 @@
     "spec": {
       "id": "react",
       "label": "React"
-    }
+    },
+    "category": "framework"
   },
   {
     "type": "technology",
@@ -1400,7 +1401,8 @@
     "spec": {
       "id": "typescript",
       "label": "TypeScript"
-    }
+    },
+    "category": "language"
   },
   {
     "type": "technology",
@@ -1410,7 +1412,8 @@
     "spec": {
       "id": "javascript",
       "label": "JavaScript"
-    }
+    },
+    "category": "language"
   },
   {
     "type": "technology",
@@ -1420,7 +1423,8 @@
     "spec": {
       "id": "java",
       "label": "Java"
-    }
+    },
+    "category": "language"
   },
   {
     "type": "technology",
@@ -1430,7 +1434,8 @@
     "spec": {
       "id": "spring-boot",
       "label": "Spring Boot"
-    }
+    },
+    "category": "framework"
   },
   {
     "type": "technology",
@@ -1440,7 +1445,8 @@
     "spec": {
       "id": "python",
       "label": "Python"
-    }
+    },
+    "category": "language"
   },
   {
     "type": "technology",
@@ -1450,7 +1456,8 @@
     "spec": {
       "id": "nodejs",
       "label": "Node.js"
-    }
+    },
+    "category": "language"
   },
   {
     "type": "technology",
@@ -1460,7 +1467,8 @@
     "spec": {
       "id": "go",
       "label": "Go"
-    }
+    },
+    "category": "language"
   },
   {
     "type": "technology",
@@ -1470,7 +1478,8 @@
     "spec": {
       "id": "rust",
       "label": "Rust"
-    }
+    },
+    "category": "language"
   },
   {
     "type": "technology",
@@ -1480,7 +1489,8 @@
     "spec": {
       "id": "dotnet",
       "label": ".NET"
-    }
+    },
+    "category": "framework"
   },
   {
     "type": "technology",
@@ -1490,7 +1500,8 @@
     "spec": {
       "id": "kotlin",
       "label": "Kotlin"
-    }
+    },
+    "category": "language"
   },
   {
     "type": "technology",
@@ -1500,7 +1511,8 @@
     "spec": {
       "id": "vue",
       "label": "Vue"
-    }
+    },
+    "category": "framework"
   },
   {
     "type": "technology",
@@ -1510,7 +1522,8 @@
     "spec": {
       "id": "angular",
       "label": "Angular"
-    }
+    },
+    "category": "framework"
   },
   {
     "type": "technology",
@@ -1520,7 +1533,8 @@
     "spec": {
       "id": "sparql",
       "label": "SPARQL"
-    }
+    },
+    "category": "data-store"
   },
   {
     "type": "technology",
@@ -1530,7 +1544,8 @@
     "spec": {
       "id": "rdf",
       "label": "RDF"
-    }
+    },
+    "category": "data-store"
   },
   {
     "type": "technology",
@@ -1540,7 +1555,8 @@
     "spec": {
       "id": "neptune",
       "label": "Amazon Neptune"
-    }
+    },
+    "category": "data-store"
   },
   {
     "type": "technology",
@@ -1550,7 +1566,8 @@
     "spec": {
       "id": "graphql",
       "label": "GraphQL"
-    }
+    },
+    "category": "other"
   },
   {
     "type": "technology",
@@ -1560,7 +1577,8 @@
     "spec": {
       "id": "postgresql",
       "label": "PostgreSQL"
-    }
+    },
+    "category": "data-store"
   },
   {
     "type": "technology",
@@ -1570,7 +1588,8 @@
     "spec": {
       "id": "docker",
       "label": "Docker"
-    }
+    },
+    "category": "deployment"
   },
   {
     "type": "technology",
@@ -1580,7 +1599,8 @@
     "spec": {
       "id": "aws",
       "label": "AWS"
-    }
+    },
+    "category": "deployment"
   },
   {
     "type": "host",
@@ -1629,7 +1649,8 @@
     "spec": {
       "id": "jena-fuseki",
       "label": "Apache Jena Fuseki"
-    }
+    },
+    "category": "data-store"
   },
   {
     "type": "technology",
@@ -1642,7 +1663,8 @@
     "spec": {
       "id": "neo4j",
       "label": "Neo4j"
-    }
+    },
+    "category": "data-store"
   },
   {
     "type": "practice",
@@ -1660,6 +1682,168 @@
       "reviewedOn": "2026-10-05",
       "application": "Name the approved retrieval interface and required inputs. Define expected results, permitted scope and resource limits. Validate returned information against the request before using it. Cover normal, empty, invalid and unavailable cases. Record actual observations separately from expected results. Define any later write permissions and confirmation separately.",
       "limits": "This is written guidance. It does not configure access, execute checks or establish correct results. OWASP supports the validation principle. The retrieval sequence is an Atlas adaptation."
+    }
+  },
+  {
+    "type": "practice",
+    "id": "agents-md",
+    "revision": "1.0.0",
+    "sourceRefs": [
+      "agentsmd",
+      "codex-agents-md",
+      "claude-code-memory",
+      "copilot-repository-instructions",
+      "evaluating-agents-md"
+    ],
+    "spec": {
+      "id": "agents-md",
+      "label": "Repository instructions for agents",
+      "description": "Keep one short AGENTS.md at the repository root with the commands, structure, conventions, testing guidance and boundaries that the README does not cover.",
+      "version": "1.0.0",
+      "limits": "The file does not configure a host, grant a permission or prove that its instructions were followed.",
+      "application": "Write or trim AGENTS.md to the commands, structure, conventions, testing guidance and boundaries that are beyond the README, and keep it under about 200 lines. Let CLAUDE.md, copilot-instructions.md and similar host files import or point to it instead of repeating it."
+    }
+  },
+  {
+    "type": "profile",
+    "id": "docker",
+    "revision": "1.0.0",
+    "sourceRefs": [
+      "docker-build-best-practices",
+      "docker-build-checks",
+      "docker-compose-model",
+      "docker-compose-merge",
+      "docker-image-pull"
+    ],
+    "spec": {
+      "id": "docker",
+      "label": "Containerised services",
+      "technologies": [
+        "docker"
+      ],
+      "questions": [
+        "Which Dockerfile, .dockerignore and Compose files does the change touch, and which override or extra Compose files apply? Skip if no container file changes.",
+        "Which base image tags or digests are pinned, and how are they updated? Skip if the base image is unchanged.",
+        "Does the service run as a non root user, and are build check violations warnings or errors in this project? Skip if the Dockerfile is unchanged."
+      ],
+      "checks": [
+        "Record the exact build and Compose commands run, their exit status, and the resulting image name and tag.",
+        "Record the output of a build check run and whether this project treats violations as warnings or errors.",
+        "Confirm which Compose file names and overrides are present and which one wins before describing merged settings."
+      ],
+      "limits": "Questions inform review. The profile does not infer commands, pin versions, run builds or verify image contents or runtime behaviour."
+    }
+  },
+  {
+    "type": "technology",
+    "id": "github-actions",
+    "revision": "1.0.0",
+    "sourceRefs": [
+      "gh-actions-about-workflows"
+    ],
+    "spec": {
+      "id": "github-actions",
+      "label": "GitHub Actions"
+    },
+    "category": "hosting-ci"
+  },
+  {
+    "type": "technology",
+    "id": "github",
+    "revision": "1.0.0",
+    "sourceRefs": [
+      "gh-protected-branches"
+    ],
+    "spec": {
+      "id": "github",
+      "label": "GitHub"
+    },
+    "category": "hosting-ci"
+  },
+  {
+    "type": "profile",
+    "id": "github-actions",
+    "revision": "1.0.0",
+    "sourceRefs": [
+      "gh-actions-events",
+      "gh-actions-workflow-syntax",
+      "gh-actions-github-token",
+      "gh-protected-branches"
+    ],
+    "spec": {
+      "id": "github-actions",
+      "label": "GitHub Actions pipelines",
+      "technologies": [
+        "github-actions"
+      ],
+      "questions": [
+        "Which workflows and required status checks run for this change, and does any of their triggers need the workflow file on the default branch first?",
+        "If the workflow pushes commits, opens pull requests or calls the API, which permissions does it declare and does the GITHUB_TOKEN rule stop a follow up run?",
+        "If the change touches caching or concurrency, which branch can restore the cache and which pending or running runs may be canceled?"
+      ],
+      "checks": [
+        "Record the run URL, the job names and the final status of each required check on the pull request.",
+        "Confirm the repository workflow permission setting and the permissions block of the workflow from the actual settings and files.",
+        "Confirm that a workflow changed on a branch was started by the intended event, or record that it waits for a merge to the default branch."
+      ],
+      "limits": "Questions inform review and can be skipped when they do not apply. The profile does not read workflow files, run workflows or verify branch protection."
+    }
+  },
+  {
+    "type": "profile",
+    "id": "nodejs",
+    "revision": "1.0.0",
+    "sourceRefs": [
+      "npm-package-json",
+      "npm-ci",
+      "npm-scripts",
+      "node-test-runner"
+    ],
+    "spec": {
+      "id": "nodejs",
+      "label": "Node.js projects",
+      "technologies": [
+        "nodejs"
+      ],
+      "questions": [
+        "Which npm scripts cover install, test, lint and build here? Skip if the project has no scripts field.",
+        "Is a lockfile committed, and does CI install with npm ci? Skip if the project does not use npm.",
+        "Which type and engines values does package.json declare? Skip if neither field exists."
+      ],
+      "checks": [
+        "Record the observed Node.js and npm versions and the scripts field as it exists in package.json.",
+        "Record the test command that was run and the runner that produced its result.",
+        "Record whether the lockfile and package.json matched during installation."
+      ],
+      "limits": "Questions inform review. The profile does not infer commands, versions, module system or compatibility."
+    }
+  },
+  {
+    "type": "profile",
+    "id": "python",
+    "revision": "1.0.0",
+    "sourceRefs": [
+      "pypa-pyproject-guide",
+      "pytest-good-practices",
+      "python-venv"
+    ],
+    "spec": {
+      "id": "python",
+      "label": "Python projects",
+      "technologies": [
+        "python"
+      ],
+      "questions": [
+        "Which files define the environment and dependencies, pyproject.toml, a requirements file, uv.lock or pylock.toml, and did any of them change?",
+        "Which pytest and Ruff configuration file applies to the changed code, and which checks does CI actually run, if any?",
+        "Which Python versions and platforms must the change support, if the project states them?"
+      ],
+      "checks": [
+        "Record the interpreter version, the environment creation step and the exact install, test, lint and format commands that ran, with their results.",
+        "Confirm that new test files and classes follow the collection rules of the project's pytest configuration, so they actually ran.",
+        "Note any lock file or requirements change and the tool that produced it."
+      ],
+      "limits": "Questions inform review. The profile does not infer commands, package manager choice, interpreter version or compatibility."
     }
   }
 ]

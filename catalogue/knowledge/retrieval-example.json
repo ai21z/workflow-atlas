@@ -45,13 +45,22 @@
     ],
     "aliases": [
       "topic list",
-      "subject areas"
+      "subject areas",
+      "fictional example",
+      "matching topics",
+      "worked example"
     ],
     "revision": "1",
-    "applicability": "Use when designing how existing information is retrieved and checked.",
+    "applicability": "Use this fictional example to see how a retrieval request becomes validated input, a call to an approved operation, a checked result and recorded acceptance examples. It illustrates the design only, no endpoint, test result, policy or schema has been verified.",
     "limits": "Fictional example, not evidence of a working integration.",
     "sourceStatus": "needs-review",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "illustrative"
+      ],
+      "confidenceLevel": "established"
+    }
   }
 }

@@ -34,12 +34,30 @@
     "domains": [
       "requirements"
     ],
-    "aliases": [],
+    "aliases": [
+      "trace chain",
+      "requirement to evidence",
+      "bidirectional links",
+      "revision linked evidence",
+      "missing links"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when you need to move from a requirement to its affected components, checks and delivery evidence, or back from a changed query, API or test to the requirement and decision it serves.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "verification"
+      ]
+    }
   }
 }

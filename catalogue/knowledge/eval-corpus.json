@@ -41,12 +41,30 @@
     "domains": [
       "evaluation"
     ],
-    "aliases": [],
+    "aliases": [
+      "evaluation cases",
+      "test set",
+      "held out",
+      "hard negatives",
+      "error probes",
+      "workload sample"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when assembling the cases that an agent workflow will be judged on. It lists the task classes to include, such as hard negatives, missing evidence and correct abstention, and the held-out rule that keeps related documents and revisions together.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan"
+      ]
+    }
   }
 }

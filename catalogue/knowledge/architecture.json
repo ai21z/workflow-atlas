@@ -57,12 +57,25 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "workflow controller",
+      "orchestration layer",
+      "execution state",
+      "runtime enforcement",
+      "agent runtime",
+      "layered architecture"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when deciding which layer owns execution state, permissions and budget controls in an agent setup. A prompt or skill can describe a rule, but the runtime has to enforce it.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

@@ -35,12 +35,29 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "copilot cli",
+      "copilot sdk",
+      "code-defined orchestration",
+      "github copilot",
+      "public preview"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when evaluating Copilot's code-defined workflow option for a pilot. Check the actual client, enterprise policy, credit limits and runner permissions first, then compare a small versioned workflow with existing automation.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "copilot"
+    }
   }
 }

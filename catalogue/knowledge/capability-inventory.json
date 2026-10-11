@@ -38,12 +38,25 @@
     "domains": [
       "engineering-tools"
     ],
-    "aliases": [],
+    "aliases": [
+      "inventory",
+      "environment check",
+      "available models",
+      "client versions",
+      "supported integrations",
+      "execution path"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this before choosing an architecture or proposing an integration, to record which clients, models, tools, access and budgets your organization can actually run. A feature announced for one client counts as available only where its execution path has been tested.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

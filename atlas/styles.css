@@ -166,3 +166,53 @@ body[data-theme="light"] #read-map-topic{background:#244e71;color:#fff;border-co
 .guided-path-choice:hover{border-color:var(--accent);background:var(--subtle)}
 body[data-theme="dark"] .topic-kind-badge{color:#a6d7f3}
 @media(max-width:620px){.guided-path-grid{grid-template-columns:1fr}.guided-path-choice{min-height:68px}}
+
+/* Subjects filter reading lists without changing the map or topic hierarchy. */
+.subject-filter{display:grid;gap:7px;margin-top:14px;flex-shrink:0}
+.subject-filter>label{font-size:11px;line-height:1.5;color:#bdd0e5}
+.subject-filter select{width:100%;min-width:0;min-height:44px;padding:9px 10px;border:1px solid #536980;border-radius:6px;background:#15273c;color:#e5effb;color-scheme:dark;font-size:12px}
+.subject-context{border-left:2px solid #67849c;padding:0 0 0 10px;margin:3px 0 0;overflow-wrap:anywhere}
+.subject-context p{font-size:12px;line-height:1.6;color:#d4e6f7;margin:0 0 7px}
+.subject-context .subject-limits{font-size:11px;color:#bdcde0;margin-bottom:0}
+.subject-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.subject-card{display:flex;flex-direction:column;align-items:flex-start;gap:9px;min-width:0;min-height:44px;padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);text-align:left;line-height:1.6;overflow-wrap:anywhere}
+.subject-card strong{font-size:14px}
+.subject-card>span{font-size:12px;color:var(--muted)}
+.subject-card small{font-size:11px;color:var(--accent);margin-top:auto}
+.subject-card:hover{border-color:var(--accent);background:var(--subtle)}
+body[data-subject-navigation="true"] .sidebar{overflow-y:auto}
+body[data-subject-navigation="true"] .topic-nav{min-height:140px}
+@media(max-width:620px){.subject-grid{grid-template-columns:1fr}.subject-card{padding:14px}}
+@media(forced-colors:active){.subject-card,.subject-filter select{border-color:ButtonText}.subject-context{border-color:CanvasText}}
+
+/* The 2D map shares recorded subjects and leaves the original scene intact. */
+.map-2d-controls{display:flex;align-items:flex-end;flex-wrap:wrap;gap:12px 24px;padding:14px 24px;border-block:1px solid #2c3c54;background:#14253a;color:#d8e7f7}
+.map-subject-choice{display:grid;gap:6px;min-width:200px;max-width:100%}
+.map-subject-choice label,.map-edge-choices legend{font-size:12px;line-height:1.6}
+.map-subject-choice select{min-height:44px;max-width:100%;border:1px solid #67819a;border-radius:6px;background:#1d324a;color:#e4effb;padding:9px 11px;font-size:13px;color-scheme:dark}
+.map-edge-choices{display:flex;flex-wrap:wrap;gap:4px 16px;border:0;margin:0;padding:0;min-width:0}
+.map-edge-choices label{display:flex;gap:8px;align-items:center;min-height:44px;font-size:12px;cursor:pointer}
+.map-edge-choices input{width:18px;height:18px;accent-color:#a4d8f2}
+#map2d-navigation{display:flex;gap:7px;flex-wrap:wrap}#map2d-navigation button{min-height:44px;min-width:44px;padding:9px 13px;border:1px solid #7896af;border-radius:6px;background:#1d324a;color:#e4effb;font-size:13px}
+#map-subject-context{flex-basis:100%;margin:0;font-size:12px;line-height:1.7;overflow-wrap:anywhere}
+.map-record-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;padding:24px;border-top:1px solid #2c3c54;background:#192d43;color:#e1ecf8}
+.map-record-panel h3{font-size:19px;line-height:1.4;margin:8px 0}
+.map-record-panel p{font-size:13px;line-height:1.7;overflow-wrap:anywhere;margin:8px 0 14px}
+#map-record-evidence,#map-neighbour-help{font-size:12px;color:#bbd0e5}
+#map-record-read{min-height:44px;padding:10px 14px;border:1px solid #89b9d4;border-radius:6px;background:#274d69;color:#eff8ff;font-size:13px}
+#map-record-sources{margin:10px 0 16px;font-size:12px}#map-record-sources summary{min-height:44px;cursor:pointer;padding:12px 0}#map-record-source-links{display:grid;gap:8px}#map-record-source-links a{color:#a8daf6;line-height:1.7;min-height:44px;overflow-wrap:anywhere}
+#map-record-panel .practice-slot{margin-top:16px}
+#map-neighbours{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:7px;max-height:290px;overflow-y:auto}
+.map-neighbour{display:grid;gap:4px;width:100%;min-height:44px;text-align:left;padding:11px;border:1px solid #54708b;border-radius:6px;background:#21394f;color:#e2effb}
+.map-neighbour strong{font-size:13px;line-height:1.5}.map-neighbour span{font-size:11px;line-height:1.6;color:#bbd2e6;overflow-wrap:anywhere}
+.map-no-neighbours{font-size:13px;line-height:1.7;padding:12px}
+body[data-theme="light"] .map-2d-controls,body[data-theme="light"] .map-record-panel{background:#f7fafc;color:#243f57;border-color:#c6d5e3}
+body[data-theme="light"] .map-subject-choice select,body[data-theme="light"] .map-neighbour{background:#fff;color:#274862;border-color:#829eb7;color-scheme:light}
+body[data-theme="light"] .map-neighbour span,body[data-theme="light"] #map-record-evidence,body[data-theme="light"] #map-neighbour-help{color:#4b6379}
+body[data-theme="light"] #map-record-read{background:#244e71;color:#fff;border-color:#244e71}
+body[data-theme="light"] #map2d-navigation button{background:#fff;color:#274862;border-color:#829eb7}body[data-theme="light"] #map-record-source-links a{color:#205d88}
+body[data-map-view="map"] .graph-stage{min-height:500px;height:min(68dvh,760px)}
+body[data-mode="explore"][data-map-focus="true"][data-map-view="map"] .graph-stage{min-height:400px;height:clamp(400px,64dvh,950px)}
+@media(max-width:700px){.map-record-panel{grid-template-columns:minmax(0,1fr);padding:18px;gap:18px}.map-2d-controls{padding:14px 18px;gap:10px}.map-subject-choice{width:100%;min-width:0}.map-edge-choices{width:100%}.map-tools{flex-wrap:wrap;gap:10px}.view-switch{min-width:0}.view-switch button{padding:10px 8px;font-size:11px;min-height:44px}body[data-map-view="map"] .graph-stage,body[data-mode="explore"][data-map-focus="true"][data-map-view="map"] .graph-stage{height:60dvh;min-height:360px}.map-bottom .map-actions{flex-wrap:wrap}#map-hint{font-size:11px}#map-neighbours{max-height:none}}
+@media(forced-colors:active){.map-neighbour,.map-subject-choice select,#map-record-read{border-color:ButtonText}.map-2d-controls,.map-record-panel{border-color:CanvasText}}
+@media(max-width:620px){body[data-map-view="map"] .graph-stage,body[data-mode="explore"][data-map-focus="true"][data-map-view="map"] .graph-stage{min-height:520px}}

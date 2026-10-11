@@ -67,12 +67,32 @@
     "domains": [
       "verification"
     ],
-    "aliases": [],
+    "aliases": [
+      "outcome labels",
+      "not run",
+      "policy denied",
+      "unsupported",
+      "audit design",
+      "skipped checks"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this when defining the outcome labels for checks in your project, so that skipped, unavailable, denied, invalid audit and unrun outcomes stay distinct from pass and fail. The Talos vocabulary is an example to adapt, not a mandatory standard.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "inspected",
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "verification",
+        "regression"
+      ]
+    }
   }
 }

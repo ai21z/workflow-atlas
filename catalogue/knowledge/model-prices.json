@@ -79,12 +79,30 @@
     "domains": [
       "models"
     ],
-    "aliases": [],
+    "aliases": [
+      "pricing",
+      "token prices",
+      "copilot rates",
+      "price snapshot",
+      "model candidates",
+      "benchmark roles"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Copilot example when estimating spend from the published Copilot per token rates for candidate models. Refresh the snapshot first, the table excludes cache and long context tiers and the candidates are starting points rather than measured recommendations.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "copilot"
+    }
   }
 }

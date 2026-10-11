@@ -30,12 +30,29 @@
     "domains": [
       "model-decisions"
     ],
-    "aliases": [],
+    "aliases": [
+      "calibration",
+      "confidence thresholds",
+      "typesafe",
+      "noul",
+      "routing thresholds"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Jev example when you set or interpret Choice and Score confidence thresholds for routing. Evaluate calibration over relevant examples instead of treating one confidence value as a certificate attached to one result.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "jev-typesafe"
+    }
   }
 }

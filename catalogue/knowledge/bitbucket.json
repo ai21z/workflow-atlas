@@ -29,12 +29,34 @@
     "domains": [
       "engineering-tools"
     ],
-    "aliases": [],
+    "aliases": [
+      "source control",
+      "version control",
+      "pr evidence",
+      "submodule revisions",
+      "copilot cloud agent"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Bitbucket example when source, tests and review evidence live in a Bitbucket repository and you need to know which agent route applies. GitHub Copilot cloud agent works with GitHub hosted repositories, so a Bitbucket checkout relies on supervised IDE work or an approved runner.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "established"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "atlassian-jenkins"
+    },
+    "applies": {
+      "hosts": [
+        "jetbrains"
+      ]
+    }
   }
 }

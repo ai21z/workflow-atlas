@@ -30,12 +30,30 @@
     "domains": [
       "maintenance"
     ],
-    "aliases": [],
+    "aliases": [
+      "sonarqube",
+      "sonar",
+      "remediation cost",
+      "quality gate",
+      "new code",
+      "technical debt metric"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Sonar example when a displayed remediation cost or technical debt figure is about to be read as the project's whole debt or as a delivery estimate. It explains what the metric covers and how to use rule findings as evidence to investigate.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "established"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "atlassian-jenkins"
+    }
   }
 }

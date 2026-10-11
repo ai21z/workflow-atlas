@@ -27,12 +27,28 @@
     "domains": [
       "engineering-tools"
     ],
-    "aliases": [],
+    "aliases": [
+      "wiki",
+      "documentation drafting",
+      "runbooks",
+      "decision records",
+      "stale references"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Confluence example when reviewed decisions, requirements, runbooks and explanations live in Confluence and you want automation to draft or check documentation from accepted changes. Generated prose becomes project knowledge only through the normal ownership process.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "atlassian-jenkins"
+    }
   }
 }

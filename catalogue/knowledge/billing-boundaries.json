@@ -36,12 +36,29 @@
     "domains": [
       "models"
     ],
-    "aliases": [],
+    "aliases": [
+      "ai credits",
+      "copilot business",
+      "pooled credits",
+      "teamwork graph",
+      "billing attribution",
+      "server to server"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Copilot example when a workflow spans Copilot and Rovo and can consume more than one allowance, such as pooled Copilot Business credits and Rovo credits for Teamwork Graph context. Read measured reports from each system and do not equate an Atlassian API token, a model token and an AI credit.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "copilot"
+    }
   }
 }

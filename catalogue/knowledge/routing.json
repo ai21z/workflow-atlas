@@ -33,12 +33,25 @@
     "domains": [
       "models"
     ],
-    "aliases": [],
+    "aliases": [
+      "model routing",
+      "model selection",
+      "escalation",
+      "utility model",
+      "model tiers",
+      "deterministic code"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when deciding which work goes to deterministic code, a utility model, the main implementation model or a stronger model, and on which condition to escalate. Back the routing with held out task results, cost, latency and review effort rather than model reputation.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

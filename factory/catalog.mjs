@@ -6,7 +6,8 @@ export const SOURCES = Object.freeze({
   "agents": "https://docs.github.com/en/copilot/reference/custom-agents-configuration",
   "install": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents",
   "skills": "https://agentskills.io/specification",
-  "copilotSkills": "https://docs.github.com/en/copilot/concepts/agents/about-agent-skills"
+  "copilotSkills": "https://docs.github.com/en/copilot/concepts/agents/about-agent-skills",
+  "agentsMd": "https://agents.md/"
 });
 export const TOOL_ALIASES = Object.freeze([
   "read",
@@ -946,6 +947,21 @@ export const CATALOG = deepFreeze({
       "application": "Name the approved retrieval interface and required inputs. Define expected results, permitted scope and resource limits. Validate returned information against the request before using it. Cover normal, empty, invalid and unavailable cases. Record actual observations separately from expected results. Define any later write permissions and confirmation separately.",
       "limits": "This is written guidance. It does not configure access, execute checks or establish correct results. OWASP supports the validation principle. The retrieval sequence is an Atlas adaptation.",
       "source": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+    },
+    {
+      "id": "agents-md",
+      "label": "Repository instructions for agents",
+      "description": "Keep one short AGENTS.md at the repository root with the commands, structure, conventions, testing guidance and boundaries that the README does not cover.",
+      "version": "1.0.0",
+      "limits": "The file does not configure a host, grant a permission or prove that its instructions were followed.",
+      "application": "Write or trim AGENTS.md to the commands, structure, conventions, testing guidance and boundaries that are beyond the README, and keep it under about 200 lines. Let CLAUDE.md, copilot-instructions.md and similar host files import or point to it instead of repeating it.",
+      "source": "https://agents.md/",
+      "sources": [
+        "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
+        "https://code.claude.com/docs/en/memory",
+        "https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions",
+        "https://arxiv.org/abs/2602.11988"
+      ]
     }
   ],
   "recipes": [
@@ -1120,6 +1136,102 @@ export const CATALOG = deepFreeze({
       "sources": [
         "https://www.w3.org/TR/shacl/"
       ]
+    },
+    {
+      "id": "docker",
+      "label": "Containerised services",
+      "technologies": [
+        "docker"
+      ],
+      "questions": [
+        "Which Dockerfile, .dockerignore and Compose files does the change touch, and which override or extra Compose files apply? Skip if no container file changes.",
+        "Which base image tags or digests are pinned, and how are they updated? Skip if the base image is unchanged.",
+        "Does the service run as a non root user, and are build check violations warnings or errors in this project? Skip if the Dockerfile is unchanged."
+      ],
+      "checks": [
+        "Record the exact build and Compose commands run, their exit status, and the resulting image name and tag.",
+        "Record the output of a build check run and whether this project treats violations as warnings or errors.",
+        "Confirm which Compose file names and overrides are present and which one wins before describing merged settings."
+      ],
+      "limits": "Questions inform review. The profile does not infer commands, pin versions, run builds or verify image contents or runtime behaviour.",
+      "source": "https://docs.docker.com/build/building/best-practices/",
+      "sources": [
+        "https://docs.docker.com/build/checks/",
+        "https://docs.docker.com/compose/intro/compose-application-model/",
+        "https://docs.docker.com/compose/how-tos/multiple-compose-files/merge/",
+        "https://docs.docker.com/reference/cli/docker/image/pull/"
+      ]
+    },
+    {
+      "id": "github-actions",
+      "label": "GitHub Actions pipelines",
+      "technologies": [
+        "github-actions"
+      ],
+      "questions": [
+        "Which workflows and required status checks run for this change, and does any of their triggers need the workflow file on the default branch first?",
+        "If the workflow pushes commits, opens pull requests or calls the API, which permissions does it declare and does the GITHUB_TOKEN rule stop a follow up run?",
+        "If the change touches caching or concurrency, which branch can restore the cache and which pending or running runs may be canceled?"
+      ],
+      "checks": [
+        "Record the run URL, the job names and the final status of each required check on the pull request.",
+        "Confirm the repository workflow permission setting and the permissions block of the workflow from the actual settings and files.",
+        "Confirm that a workflow changed on a branch was started by the intended event, or record that it waits for a merge to the default branch."
+      ],
+      "limits": "Questions inform review and can be skipped when they do not apply. The profile does not read workflow files, run workflows or verify branch protection.",
+      "source": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+      "sources": [
+        "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax",
+        "https://docs.github.com/en/actions/concepts/security/github_token",
+        "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches"
+      ]
+    },
+    {
+      "id": "nodejs",
+      "label": "Node.js projects",
+      "technologies": [
+        "nodejs"
+      ],
+      "questions": [
+        "Which npm scripts cover install, test, lint and build here? Skip if the project has no scripts field.",
+        "Is a lockfile committed, and does CI install with npm ci? Skip if the project does not use npm.",
+        "Which type and engines values does package.json declare? Skip if neither field exists."
+      ],
+      "checks": [
+        "Record the observed Node.js and npm versions and the scripts field as it exists in package.json.",
+        "Record the test command that was run and the runner that produced its result.",
+        "Record whether the lockfile and package.json matched during installation."
+      ],
+      "limits": "Questions inform review. The profile does not infer commands, versions, module system or compatibility.",
+      "source": "https://docs.npmjs.com/cli/v12/configuring-npm/package-json",
+      "sources": [
+        "https://docs.npmjs.com/cli/v12/commands/npm-ci",
+        "https://docs.npmjs.com/cli/v12/using-npm/scripts",
+        "https://nodejs.org/api/test.html"
+      ]
+    },
+    {
+      "id": "python",
+      "label": "Python projects",
+      "technologies": [
+        "python"
+      ],
+      "questions": [
+        "Which files define the environment and dependencies, pyproject.toml, a requirements file, uv.lock or pylock.toml, and did any of them change?",
+        "Which pytest and Ruff configuration file applies to the changed code, and which checks does CI actually run, if any?",
+        "Which Python versions and platforms must the change support, if the project states them?"
+      ],
+      "checks": [
+        "Record the interpreter version, the environment creation step and the exact install, test, lint and format commands that ran, with their results.",
+        "Confirm that new test files and classes follow the collection rules of the project's pytest configuration, so they actually ran.",
+        "Note any lock file or requirements change and the tool that produced it."
+      ],
+      "limits": "Questions inform review. The profile does not infer commands, package manager choice, interpreter version or compatibility.",
+      "source": "https://packaging.python.org/en/latest/guides/writing-pyproject-toml/",
+      "sources": [
+        "https://docs.pytest.org/en/stable/explanation/goodpractices.html",
+        "https://docs.python.org/3/library/venv.html"
+      ]
     }
   ],
   "runtimeControls": [
@@ -1234,6 +1346,16 @@ export const CATALOG = deepFreeze({
       "id": "neo4j",
       "label": "Neo4j",
       "source": "https://neo4j.com/docs/getting-started/"
+    },
+    {
+      "id": "github-actions",
+      "label": "GitHub Actions",
+      "source": "https://docs.github.com/en/actions/writing-workflows/about-workflows"
+    },
+    {
+      "id": "github",
+      "label": "GitHub",
+      "source": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches"
     }
   ],
   "hosts": [
@@ -1314,6 +1436,13 @@ export const CATALOG = deepFreeze({
       "practiceId": "validated-retrieval",
       "title": "Add retrieval checks",
       "reason": "Record written checks for the approved interface, inputs and returned information. This adds a selected practice to the workflow and source record. It does not change steps, roles, tools or evidence.",
+      "eligibility": "always"
+    },
+    {
+      "topicId": "agents-md",
+      "practiceId": "agents-md",
+      "title": "Keep repository instructions for agents",
+      "reason": "Record the practice of one short root AGENTS.md that host files point to, together with its sources. Atlas already writes an AGENTS.md into the full pack, so this adds the practice to that file and to the source record without changing steps, roles, tools or evidence.",
       "eligibility": "always"
     }
   ],
@@ -1577,102 +1706,122 @@ export const CATALOG = deepFreeze({
     "technology:react": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "framework"
     },
     "technology:typescript": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "language"
     },
     "technology:javascript": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "language"
     },
     "technology:java": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "language"
     },
     "technology:spring-boot": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "framework"
     },
     "technology:python": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "language"
     },
     "technology:nodejs": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "language"
     },
     "technology:go": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "language"
     },
     "technology:rust": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "language"
     },
     "technology:dotnet": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "framework"
     },
     "technology:kotlin": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "language"
     },
     "technology:vue": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "framework"
     },
     "technology:angular": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "framework"
     },
     "technology:sparql": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "data-store"
     },
     "technology:rdf": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "data-store"
     },
     "technology:neptune": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "data-store"
     },
     "technology:graphql": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "other"
     },
     "technology:postgresql": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "data-store"
     },
     "technology:docker": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "deployment"
     },
     "technology:aws": {
       "revision": "2.0.1",
       "reviewedOn": "",
-      "sourceRefs": []
+      "sourceRefs": [],
+      "category": "deployment"
     },
     "host:jetbrains": {
       "revision": "2.0.1",
@@ -1700,20 +1849,89 @@ export const CATALOG = deepFreeze({
       "reviewedOn": "2026-10-05",
       "sourceRefs": [
         "jena-fuseki"
-      ]
+      ],
+      "category": "data-store"
     },
     "technology:neo4j": {
       "revision": "2.1.0",
       "reviewedOn": "2026-10-05",
       "sourceRefs": [
         "neo4j-start"
-      ]
+      ],
+      "category": "data-store"
     },
     "practice:validated-retrieval": {
       "revision": "2.1.0",
       "reviewedOn": "2026-10-05",
       "sourceRefs": [
         "input-validation"
+      ]
+    },
+    "practice:agents-md": {
+      "revision": "1.0.0",
+      "reviewedOn": "",
+      "sourceRefs": [
+        "agentsmd",
+        "codex-agents-md",
+        "claude-code-memory",
+        "copilot-repository-instructions",
+        "evaluating-agents-md"
+      ]
+    },
+    "profile:docker": {
+      "revision": "1.0.0",
+      "reviewedOn": "",
+      "sourceRefs": [
+        "docker-build-best-practices",
+        "docker-build-checks",
+        "docker-compose-model",
+        "docker-compose-merge",
+        "docker-image-pull"
+      ]
+    },
+    "technology:github-actions": {
+      "revision": "1.0.0",
+      "reviewedOn": "",
+      "sourceRefs": [
+        "gh-actions-about-workflows"
+      ],
+      "category": "hosting-ci"
+    },
+    "technology:github": {
+      "revision": "1.0.0",
+      "reviewedOn": "",
+      "sourceRefs": [
+        "gh-protected-branches"
+      ],
+      "category": "hosting-ci"
+    },
+    "profile:github-actions": {
+      "revision": "1.0.0",
+      "reviewedOn": "",
+      "sourceRefs": [
+        "gh-actions-events",
+        "gh-actions-workflow-syntax",
+        "gh-actions-github-token",
+        "gh-protected-branches"
+      ]
+    },
+    "profile:nodejs": {
+      "revision": "1.0.0",
+      "reviewedOn": "",
+      "sourceRefs": [
+        "npm-package-json",
+        "npm-ci",
+        "npm-scripts",
+        "node-test-runner"
+      ]
+    },
+    "profile:python": {
+      "revision": "1.0.0",
+      "reviewedOn": "",
+      "sourceRefs": [
+        "pypa-pyproject-guide",
+        "pytest-good-practices",
+        "python-venv"
       ]
     }
   }

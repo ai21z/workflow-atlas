@@ -147,6 +147,53 @@
       ]
     }
   ],
+  "subjects": [
+    {
+      "id": "ci-pipelines",
+      "title": "CI and pipelines",
+      "summary": "Understand pipeline setup and investigate failed runs.",
+      "limits": "Includes GitHub Actions guidance and scoped Jenkins examples. Pipeline tools and cases are not covered exhaustively.",
+      "nodeIds": [
+        "github-actions",
+        "pipeline-diagnosis",
+        "ci-skill",
+        "jenkins"
+      ]
+    },
+    {
+      "id": "containers",
+      "title": "Containers",
+      "summary": "Read about Docker image builds and service configuration.",
+      "limits": "Docker only. This subject does not cover other container tools or orchestration platforms.",
+      "nodeIds": [
+        "docker"
+      ]
+    },
+    {
+      "id": "access-controls",
+      "title": "Access and action controls",
+      "summary": "Define allowed actions and check what a workflow actually did.",
+      "limits": "Selected workflow controls and failure cases. This is not a comprehensive security review or a complete security catalogue.",
+      "nodeIds": [
+        "permissions",
+        "task-contract",
+        "adverse-audits"
+      ]
+    },
+    {
+      "id": "workflow-measurements",
+      "title": "Workflow measurements",
+      "summary": "Measure results, limits and cost, then plan how to observe a release.",
+      "limits": "Selected workflow measures and release guidance. This is not a full observability catalogue or a monitoring integration.",
+      "nodeIds": [
+        "eval-metrics",
+        "verdicts",
+        "budgets",
+        "cost-per-result",
+        "release-operations"
+      ]
+    }
+  ],
   "collections": [
     {
       "id": "study",

@@ -30,12 +30,29 @@
     "domains": [
       "knowledge"
     ],
-    "aliases": [],
+    "aliases": [
+      "truthy",
+      "wdt",
+      "full statements",
+      "statement rank",
+      "wikibase",
+      "country assertion"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this country-data example when importing Wikidata statements and the qualifiers, references, rank or revision matter. Keep full statements, since the truthy wdt representation drops those details and an imported reference or label match alone does not establish a country assertion.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented"
+      ],
+      "confidenceLevel": "established"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "country-data"
+    }
   }
 }

@@ -34,12 +34,32 @@
     "domains": [
       "verification"
     ],
-    "aliases": [],
+    "aliases": [
+      "inner loop",
+      "release qa gate",
+      "ci gates",
+      "jenkins",
+      "sonar",
+      "focused checks"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this when deciding which checks to run while developing and which gates to apply to the candidate being reviewed. Define what each loop must prove first, and do not run every expensive gate after every edit or treat one focused check as sufficient release evidence.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "recommended",
+        "inspected"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "verification",
+        "regression"
+      ]
+    }
   }
 }

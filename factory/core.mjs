@@ -571,6 +571,78 @@ function agentContent(agent, config) {
   return `---\nname: ${JSON.stringify(role.label)}\ndescription: ${JSON.stringify(description)}\n${target}tools: ${JSON.stringify(tools)}\n---\n\n# ${role.label}\n\nRead the [workflow](../../WORKFLOW.md) and [validation record](../../VALIDATION.md) before starting. Intended environment: ${CATALOG.hosts.find(host => host.id === config.project.host)?.label || 'UNRESOLVED'}.\n\n## Responsibilities\n\n${responsibilities.map(text => `- ${text}`).join('\n')}\n\n## Assigned stages and handoffs\n\n${assigned.map(stage => `- ${stage.title}. Expected outputs: ${stage.outputs.join(', ')}. ${config.workflow.bindings[stage.id].contextOnly ? 'Use supplied context only. Other actors must provide changes and observed execution.' : 'Use only available selected capabilities.'}`).join('\n') || 'No recipe stage assigned.'}${customHandoffs ? `\n\n## Custom process assignments\n\n${customHandoffs}` : ''}${commandScope ? `\n\n## Command scope across assigned stages\n\n${commandScope}` : ''}\n\n## Relevant skills\n\n${skills.filter(skill => skillIds.has(skill.id)).map(skill => `- [${skill.label}](../skills/${skill.id}/SKILL.md)`).join('\n') || 'No skills assigned to this role. Read the workflow and supplied context.'}\n\n## Boundaries\n\n${boundaryText(config)}\n\nIf a required capability or input is unavailable, report what is needed. Do not treat named tools or commands as configured integrations. This is a development profile. It is not a deployed backend agent.\n`;
 }
 
+function agentsContent(config) {
+  const recipe = lookupRecipe(config.workflow.recipe);
+  const enabled = getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id));
+  const customProcesses = config.workflowModel.processes.filter(process => process.source !== 'recipe');
+  const effectiveSkills = getEffectiveSkills(config);
+  const agents = roles.filter(role => config.agents.some(agent => agent.role === role.id));
+  const commandLines = config.components.length
+    ? config.components.map(component => `### ${escapeText(placeholder(component.name, 'component name'))}\n\nPath: ${escapeText(placeholder(component.path, 'component path'))}\n\n${['test', 'lint', 'build'].map(kind => `- ${kind}: ${fenceInline(placeholder(component.commands[kind], `${kind} command`))}`).join('\n')}`).join('\n\n')
+    : 'No repository component is recorded. Ask before assuming a build, test or lint command.';
+  const stageLines = enabled.length
+    ? enabled.map((stage, index) => `${index + 1}. ${stage.title}. ${actorText(config.workflow.bindings[stage.id])}. Produces: ${stage.outputs.join(', ')}.`).join('\n')
+    : 'No recipe stages are selected.';
+  const processLines = customProcesses.map(process => `- ${escapeText(placeholder(process.name, 'process name'))}, ${process.steps?.length || 0} steps. Read the routes and checks in [WORKFLOW.md](WORKFLOW.md).`).join('\n');
+  const roleLines = agents.length
+    ? agents.map(role => `- [${role.label}](.github/agents/${role.id}.agent.md). ${assignedStages(config, role.id).map(stage => stage.title).join(', ') || 'No recipe stage assigned'}.`).join('\n')
+    : 'No agent profile is selected. People and external systems own every stage.';
+  const skillLines = effectiveSkills.length
+    ? effectiveSkills.map(skill => `- [${skill.label}](.github/skills/${skill.id}/SKILL.md). ${skill.description}`).join('\n')
+    : 'No skill is selected.';
+  const acceptanceLines = (recipe?.questions || []).map(question => { const answer = getIntentAnswer(config, question.id); return `### ${question.label}\n\n${fence(placeholder(answer.text, question.label))}`; }).join('\n\n');
+  const selectedPractices = practices.filter(practice => config.practices.includes(practice.id));
+  const practiceLines = selectedPractices.length ? `${selectedPractices.map(practice => `- ${practice.label}. ${practice.application}`).join('\n')}\n\nSources and scope are in [SOURCES.md](SOURCES.md).` : 'No optional reference practice is selected.';
+  return `# ${escapeText(placeholder(config.project.name, 'project name'))}
+
+Workflow Atlas wrote this file from [project.json](project.json). It describes planned work, owners and boundaries for coding agents. It does not run anything, configure an integration or grant a permission. An unresolved value is a question for a person, not a value to invent.
+
+## Purpose
+
+${fence(placeholder(config.project.purpose, 'project purpose'))}
+
+## Commands
+
+${commandLines}
+
+Run only commands recorded here or confirmed by a person. Report a missing or failing command instead of substituting another.
+
+## Workflow
+
+${stageLines}
+${processLines ? `\n${processLines}\n` : ''}
+Inputs, outcome routes, correction limits and expected evidence are in [WORKFLOW.md](WORKFLOW.md). Review feedback returns to the relevant earlier stage. Existing artifacts can satisfy an omitted earlier stage.
+
+## Roles
+
+${roleLines}
+
+## Skills
+
+${skillLines}
+
+## Acceptance
+
+${acceptanceLines || 'No acceptance questions are defined for this workflow.'}
+
+## Boundaries
+
+${boundaryText(config)}
+
+${fence(config.constraints.notes || 'No additional constraint notes supplied.')}
+
+## Practices
+
+${practiceLines}
+`;
+}
+
+function fenceInline(value) {
+  const content = String(value).replace(/[\r\n]+/g, ' ');
+  const delimiter = '`'.repeat(Math.max(0, ...[...content.matchAll(/`+/g)].map(match => match[0].length)) + 1);
+  return `${delimiter}${content.startsWith('`') ? ' ' : ''}${content}${content.endsWith('`') ? ' ' : ''}${delimiter}`;
+}
+
 function workflowContent(config, outputKind = 'pack') {
   const selected = getStages(config).filter(stage => config.workflow.enabledStages.includes(stage.id));
   const recipe = getStages(config).length ? lookupRecipe(config.workflow.recipe) : undefined;
@@ -779,6 +851,7 @@ function artifactFiles(config) {
   const files = [];
   const add = (path, content, why, stageIds = [], roleIds = [], sources = [], assignments = []) => files.push({ path, content, why, stages: stageIds, roles: roleIds, sources, processes: [...new Set(assignments.map(item => item.process.id))], steps: assignments.map(stepReference), assumptions: ['Project values and supplied evidence require review.', 'Generated instructions do not execute or enforce this workflow.'] });
   add('WORKFLOW.md', workflowContent(config), 'Connect the selected processes, responsible actors, inputs, outcomes, correction limits and expected evidence.', enabled.map(stage => stage.id), [], [], custom);
+  add('AGENTS.md', agentsContent(config), 'Give any coding agent that reads the repository root the recorded commands, stage order, owners, acceptance and boundaries in one short file.', enabled.map(stage => stage.id), config.agents.map(agent => agent.role), [SOURCES.agentsMd], custom);
   add('project.json', json(config), 'Preserve the versioned editable configuration as the authoritative saved representation.', [], [], [], custom);
   add('INSTALL.md', installContent(config), 'Review destinations and exercise the selected host before adoption.', [], [], [SOURCES.agents]);
   add('SOURCES.md', sourceContent(config), 'Trace adapted practices and project claims to their recorded sources.', [], [], [...practiceSources, ...projectSources]);
@@ -823,13 +896,18 @@ function formatIssues(files) {
     if (!safeOutputPath(file.path)) issues.push({ severity: 'error', code: 'unsafe-output', path: file.path, message: 'Generated paths must be portable and repository relative.' });
     if (paths.has(file.path.toLowerCase())) issues.push({ severity: 'error', code: 'duplicate-output', path: file.path, message: 'Generated paths must be unique on case insensitive filesystems.' }); paths.add(file.path.toLowerCase());
     if (file.path.endsWith('.agent.md') && file.content.split('\n---\n')[1]?.length > 30000) issues.push({ severity: 'error', code: 'agent-length', path: file.path, message: 'Agent prompt exceeds 30,000 characters.' });
+    if (file.path === 'AGENTS.md') {
+      const size = bytes(file.content);
+      if (size > 32 * 1024) issues.push({ severity: 'error', code: 'agents-length', path: file.path, message: 'AGENTS.md exceeds 32 KiB, the documented Codex combined limit. Shorten recorded notes or move detail to WORKFLOW.md.' });
+      else if (size > 16 * 1024) issues.push({ severity: 'warning', code: 'agents-length', path: file.path, message: 'AGENTS.md exceeds 16 KiB. Some hosts read only the first 16 KiB.' });
+    }
     if (file.path.endsWith('/SKILL.md')) {
       const id = file.path.split('/').at(-2);
       const name = file.content.match(/^name: (.+)$/m)?.[1];
       const description = file.content.match(/^description: (.+)$/m)?.[1];
       if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id) || id.length > 64 || name !== JSON.stringify(id) || !description || JSON.parse(description).length > 1024) issues.push({ severity: 'error', code: 'skill-format', path: file.path, message: 'Skill metadata violates selected format rules.' });
     }
-    if (file.path.endsWith('.md')) for (const match of removeFencedData(file.content).matchAll(/(?<!\\)\[[^\]]*\]\(([^)]+)\)/g)) {
+    if (file.path.endsWith('.md')) for (const match of removeFencedData(file.content).replace(/(`+)[\s\S]*?\1/g, '').matchAll(/(?<!\\)\[[^\]]*\]\(([^)]+)\)/g)) {
       if (/^https:\/\//.test(match[1])) continue;
       const resolved = resolveReference(file.path, match[1]);
       if (!resolved || !references.has(resolved)) issues.push({ severity: 'error', code: 'missing-reference', path: file.path, message: `Internal resource is missing: ${match[1]}.` });
@@ -890,7 +968,7 @@ export function compileSelectedOutput(config, selection = { kind: 'pack' }) {
   if (kind === 'skill' && !skill) throw new Error('Choose a supported skill.');
   if (kind === 'skill' && !getEffectiveSkills(config).some(item => item.id === skill.id)) throw new Error('Assign or select this skill before exporting it.');
   const prefix = skill ? `.github/skills/${skill.id}/` : '';
-  const files = complete.files.filter(file => !['VALIDATION.md', 'manifest.json'].includes(file.path) && (kind === 'blueprint' ? !file.path.startsWith('.github/') : file.path === 'project.json' || file.path === 'INSTALL.md' || file.path.startsWith(prefix)));
+  const files = complete.files.filter(file => !['VALIDATION.md', 'manifest.json'].includes(file.path) && (kind === 'blueprint' ? !file.path.startsWith('.github/') && file.path !== 'AGENTS.md' : file.path === 'project.json' || file.path === 'INSTALL.md' || file.path.startsWith(prefix)));
   if (kind === 'blueprint') {
     files.find(file => file.path === 'WORKFLOW.md').content = workflowContent(config, kind);
     files.find(file => file.path === 'SOURCES.md').content = sourceContent(config, kind);

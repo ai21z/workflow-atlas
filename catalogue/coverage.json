@@ -1,0 +1,13 @@
+{
+  "note": "Maintainer file. Eight stack slots and the ids the catalogue wants for each. npm run check:catalogue reports every wanted id as covered (name and related topic, plus a question profile for technologies), thin (technology name and topic without a profile), named only (name without a topic), topic only (topic without a name) or missing. Hosts do not need a technology question profile for covered status. These states measure catalogue structure, not reviewed content, a working integration or suitability for a team. The file is not served.",
+  "slots": [
+    { "id": "language-runtime", "title": "Language and runtime", "wanted": ["javascript", "typescript", "python", "nodejs", "java", "go", "rust", "dotnet", "kotlin"] },
+    { "id": "framework", "title": "Application framework", "wanted": ["react", "spring-boot", "vue", "angular"] },
+    { "id": "build-test", "title": "Build and test tooling", "wanted": ["npm", "pytest", "maven", "gradle", "vitest", "playwright"] },
+    { "id": "hosting-ci", "title": "Source hosting and CI", "wanted": ["github", "github-actions", "gitlab", "gitlab-ci", "azure-devops", "jenkins"] },
+    { "id": "tracking-docs", "title": "Issue tracking and docs", "wanted": ["github-issues", "jira", "confluence", "markdown-adr"] },
+    { "id": "data-store", "title": "Data store", "wanted": ["postgresql", "mysql", "sqlite", "mongodb", "redis", "neptune", "neo4j", "jena-fuseki", "rdf", "sparql"] },
+    { "id": "deployment", "title": "Deployment target", "wanted": ["docker", "kubernetes", "aws", "azure", "gcp"] },
+    { "id": "agent-host", "title": "Agent host", "wanted": [{ "id": "github", "type": "host" }, { "id": "vscode", "type": "host" }, { "id": "jetbrains", "type": "host" }, { "id": "claude-code", "type": "host" }, { "id": "codex", "type": "host" }, { "id": "cursor", "type": "host" }, { "id": "kiro", "type": "host" }] }
+  ]
+}

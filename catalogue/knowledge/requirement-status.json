@@ -43,12 +43,30 @@
     "domains": [
       "requirements"
     ],
-    "aliases": [],
+    "aliases": [
+      "four statuses",
+      "confirmed",
+      "observed",
+      "proposed",
+      "unresolved",
+      "claim status"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when writing a brief or generating a ticket and each substantive claim needs a label of confirmed, observed, proposed or unresolved, so that unsupported assumptions do not silently become acceptance criteria.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements"
+      ]
+    }
   }
 }

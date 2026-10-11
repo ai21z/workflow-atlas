@@ -38,12 +38,30 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "implementation brief",
+      "traceable brief",
+      "acceptance scenarios",
+      "confirmed requirements",
+      "request analysis",
+      "jira"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when a request must become a reviewed implementation brief before tickets are written. Every asserted requirement needs supporting evidence or an explicit proposal label, and missing context stays visible instead of being guessed.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements"
+      ]
+    }
   }
 }

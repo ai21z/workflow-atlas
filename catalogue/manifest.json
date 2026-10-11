@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "version": "2.1.0",
   "projectSchemaVersion": "3.0",
   "reviewedOn": "2026-10-02",
@@ -123,13 +123,19 @@
     "amazon-neptune",
     "apache-jena-fuseki",
     "neo4j-data",
-    "retrieval-example"
+    "retrieval-example",
+    "agents-md",
+    "docker",
+    "github-actions",
+    "nodejs",
+    "python"
   ],
   "sourceAliases": {
     "agents": "reference-65",
     "install": "reference-66",
     "skills": "skillspec",
-    "copilotSkills": "reference-67"
+    "copilotSkills": "reference-67",
+    "agentsMd": "agentsmd"
   },
   "toolAliases": [
     "read",

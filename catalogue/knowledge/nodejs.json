@@ -1,0 +1,206 @@
+{
+  "id": "nodejs",
+  "title": "Node.js",
+  "summary": "Node.js is a JavaScript runtime whose project conventions live in package.json, the lockfile and npm scripts.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Where config lives",
+      "text": "Node.js is an asynchronous event-driven JavaScript runtime. A project declares scripts, dependencies and devDependencies in package.json. The engines field states which Node.js versions the package works with. package-lock.json describes the exact dependency tree and is intended to be committed into source repositories. ESLint reads eslint.config.js, .mjs or .cjs, searching upward from the target file's directory. Which of these files exist is a fact about the repository, not about Node.js."
+    },
+    {
+      "type": "code",
+      "label": "Conventional commands",
+      "text": "# Conventions, not facts about any project. Read the scripts field first.\nnpm ci\nnpm test\nnpm run lint\nnpm run build\nnode --test"
+    },
+    {
+      "type": "p",
+      "label": "How CI is declared",
+      "text": "Node.js does not declare CI, the CI system does. On GitHub Actions the workflow file lives in the .github/workflows directory, the actions/setup-node step installs the requested Node.js version, and the documented example runs npm ci and then npm test. The same page says npm ci installs the exact lockfile versions and does not update the lockfile. Other CI systems have their own file conventions, which this topic does not record."
+    },
+    {
+      "type": "p",
+      "label": "Where review conventions live",
+      "text": "Review conventions belong to the repository host, not to Node.js. Look for pull request templates, required checks and branch rules there. This topic records no review policy."
+    },
+    {
+      "type": "list",
+      "label": "Gotchas",
+      "items": [
+        "npm ci requires an existing package-lock.json, exits with an error when package.json and the lockfile do not match, removes node_modules first, and never writes to package.json or the lockfile.",
+        "A .js file is CommonJS unless the nearest package.json sets type to module, .mjs is always an ES module and .cjs is always CommonJS, and Node.js recommends setting type explicitly.",
+        "An exports field encapsulates a package, so requiring a subpath it does not list throws ERR_PACKAGE_PATH_NOT_EXPORTED.",
+        "The engines field is advisory and only produces warnings unless the engine-strict setting is on.",
+        "npm test runs pretest, test and posttest, and npm run executes any named script with its pre and post scripts.",
+        "node --test without arguments runs files matching patterns such as **/*.test.js and **/test/**/*.js, and matches the .ts equivalents unless --no-strip-types is given.",
+        "Node.js can run .ts files by stripping types without type checking, it ignores tsconfig.json, and syntax that needs transformation such as enum declarations is an error.",
+        "The release page says production applications should use only Active LTS or Maintenance LTS releases."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "What Atlas provides",
+      "text": "Selecting Node.js adds the Node.js profile questions and checks to a project. The profile does not infer commands, versions, module system or compatibility, and the Atlas runs nothing."
+    },
+    {
+      "type": "p",
+      "label": "Check in your environment",
+      "text": "Confirm the installed Node.js and npm versions, the scripts field, whether a lockfile is committed, the type and engines fields, and the test runner the project uses. Every command here is a convention to confirm against that evidence."
+    }
+  ],
+  "refs": [
+    "nodejs-about",
+    "npm-package-json",
+    "npm-package-lock",
+    "eslint-config-files",
+    "github-actions-nodejs",
+    "npm-ci",
+    "node-packages",
+    "npm-scripts",
+    "node-test-runner",
+    "node-typescript",
+    "node-releases"
+  ],
+  "basis": "Documented conventions and proposed use",
+  "confidence": "Documented facts have scoped sources read on 2026-10-11. Commands are conventions and fit for a given project is unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [
+      "node",
+      "npm",
+      "javascript runtime",
+      "package.json",
+      "npm ci"
+    ],
+    "revision": "1",
+    "applicability": "Use when a project installs, tests or builds through package.json and npm scripts on Node.js.",
+    "limits": "Catalogue inclusion is not an installed runtime, a verified command set or confirmed compatibility with any project.",
+    "sourceStatus": "needs-review",
+    "reviewedOn": "",
+    "claims": [
+      {
+        "sectionLabel": "Where config lives",
+        "text": "Node.js is an asynchronous event-driven JavaScript runtime.",
+        "sourceRefs": [
+          "nodejs-about"
+        ]
+      },
+      {
+        "sectionLabel": "Where config lives",
+        "text": "A project declares scripts, dependencies and devDependencies in package.json.",
+        "sourceRefs": [
+          "npm-package-json"
+        ]
+      },
+      {
+        "sectionLabel": "Where config lives",
+        "text": "The engines field states which Node.js versions the package works with.",
+        "sourceRefs": [
+          "npm-package-json"
+        ]
+      },
+      {
+        "sectionLabel": "Where config lives",
+        "text": "package-lock.json describes the exact dependency tree and is intended to be committed into source repositories.",
+        "sourceRefs": [
+          "npm-package-lock"
+        ]
+      },
+      {
+        "sectionLabel": "Where config lives",
+        "text": "ESLint reads eslint.config.js, .mjs or .cjs, searching upward from the target file's directory.",
+        "sourceRefs": [
+          "eslint-config-files"
+        ]
+      },
+      {
+        "sectionLabel": "How CI is declared",
+        "text": "On GitHub Actions the workflow file lives in the .github/workflows directory, the actions/setup-node step installs the requested Node.js version, and the documented example runs npm ci and then npm test.",
+        "sourceRefs": [
+          "github-actions-nodejs"
+        ]
+      },
+      {
+        "sectionLabel": "How CI is declared",
+        "text": "The same page says npm ci installs the exact lockfile versions and does not update the lockfile.",
+        "sourceRefs": [
+          "github-actions-nodejs"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "npm ci requires an existing package-lock.json, exits with an error when package.json and the lockfile do not match, removes node_modules first, and never writes to package.json or the lockfile.",
+        "sourceRefs": [
+          "npm-ci"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "A .js file is CommonJS unless the nearest package.json sets type to module, .mjs is always an ES module and .cjs is always CommonJS, and Node.js recommends setting type explicitly.",
+        "sourceRefs": [
+          "node-packages"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "An exports field encapsulates a package, so requiring a subpath it does not list throws ERR_PACKAGE_PATH_NOT_EXPORTED.",
+        "sourceRefs": [
+          "node-packages"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "The engines field is advisory and only produces warnings unless the engine-strict setting is on.",
+        "sourceRefs": [
+          "npm-package-json"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "npm test runs pretest, test and posttest, and npm run executes any named script with its pre and post scripts.",
+        "sourceRefs": [
+          "npm-scripts"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "node --test without arguments runs files matching patterns such as **/*.test.js and **/test/**/*.js, and matches the .ts equivalents unless --no-strip-types is given.",
+        "sourceRefs": [
+          "node-test-runner"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "Node.js can run .ts files by stripping types without type checking, it ignores tsconfig.json, and syntax that needs transformation such as enum declarations is an error.",
+        "sourceRefs": [
+          "node-typescript"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "The release page says production applications should use only Active LTS or Maintenance LTS releases.",
+        "sourceRefs": [
+          "node-releases"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "established"
+    },
+    "applies": {
+      "technologies": [
+        "nodejs"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

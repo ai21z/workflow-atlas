@@ -1,0 +1,227 @@
+{
+  "id": "python",
+  "title": "Python",
+  "summary": "Python projects keep metadata in pyproject.toml, install into a virtual environment and test with pytest, and commands remain project conventions.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Where config lives",
+      "text": "Project metadata lives in pyproject.toml, where the [build-system] table should always be present and the [project] table carries the name and version. pytest reads pytest.toml, .pytest.toml, pytest.ini, .pytest.ini, pyproject.toml, tox.ini or setup.cfg, and the first match while searching upward sets the rootdir. Ruff reads the closest .ruff.toml, ruff.toml or pyproject.toml with a [tool.ruff] section. A requirements file, usually requirements.txt, lists items for pip to install."
+    },
+    {
+      "type": "p",
+      "label": "Conventional commands",
+      "text": "These commands are conventions, not facts about any project. python -m venv creates an isolated environment, and activation is optional when the environment's interpreter is called by its full path. pip install -e . installs a project without copying files, so source edits take effect without reinstalling."
+    },
+    {
+      "type": "code",
+      "label": "Example commands",
+      "text": "python -m venv .venv\npip install -e .\npytest\nruff check .\nruff format --check ."
+    },
+    {
+      "type": "p",
+      "label": "How CI is declared",
+      "text": "Python has no CI declaration. CI lives in the source host's files, which show the commands a project actually runs. pytest treats a run as CI when the CI or BUILD_NUMBER environment variable is set to a non empty value and then stops truncating the short test summary. pip says regular installs, not editable installs, belong in CI systems and deployments."
+    },
+    {
+      "type": "p",
+      "label": "Where review conventions live",
+      "text": "Review conventions live with the source host, in files such as CODEOWNERS and pull request templates, or in repository instruction files, not in the Python toolchain."
+    },
+    {
+      "type": "list",
+      "label": "Gotchas",
+      "items": [
+        "A virtual environment is disposable, not movable and not checked into source control, and since Python 3.13 venv writes a .gitignore file into it by default.",
+        "pytest collects test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method. Its docs strongly suggest a src layout with an editable install.",
+        "pytest.ini takes precedence over other configuration files except pytest.toml and .pytest.toml, even when empty.",
+        "Ruff ignores a pyproject.toml without a [tool.ruff] section, uses the closest configuration file and does not merge settings across files.",
+        "uv writes uv.lock next to pyproject.toml, a cross platform file that is checked in and not edited by hand. pip lock is experimental, writes pylock.toml by default, and its output is only guaranteed valid for the current Python version and platform. pylock.toml is the format PEP 751 defines.",
+        "ruff check applies only safe fixes by default, and ruff format --check exits with 1 when a file would be reformatted."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "What Atlas provides",
+      "text": "Selecting Python adds the Python projects profile with its review questions and expected evidence. It does not install an interpreter, pick a package manager or verify any command."
+    },
+    {
+      "type": "p",
+      "label": "Check in your environment",
+      "text": "Confirm the interpreter version, which environment and lock files exist, which pytest and Ruff configuration files are closest, and which commands CI actually runs."
+    }
+  ],
+  "refs": [
+    "pypa-pyproject-guide",
+    "pytest-customize",
+    "ruff-configuration",
+    "pip-requirements-format",
+    "python-venv",
+    "pip-local-installs",
+    "pytest-ci",
+    "pytest-good-practices",
+    "uv-project-layout",
+    "pip-lock",
+    "pylock-spec",
+    "ruff-linter",
+    "ruff-formatter"
+  ],
+  "basis": "Documented conventions and proposed use",
+  "confidence": "Documented facts have scoped sources read on 2026-10-11. Commands and review guidance are conventions, and fit for a particular project remains unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [
+      "pip",
+      "pytest",
+      "pyproject",
+      "venv",
+      "ruff",
+      "uv"
+    ],
+    "revision": "1",
+    "applicability": "Use when a coding agent or reviewer works in a repository with a pyproject.toml, a requirements file or pytest tests and needs the file and command conventions before running anything.",
+    "limits": "Catalogue inclusion is not an installed interpreter, a chosen package manager, a working command or verified compatibility.",
+    "sourceStatus": "needs-review",
+    "reviewedOn": "",
+    "claims": [
+      {
+        "sectionLabel": "Where config lives",
+        "text": "Project metadata lives in pyproject.toml, where the [build-system] table should always be present and the [project] table carries the name and version.",
+        "sourceRefs": [
+          "pypa-pyproject-guide"
+        ]
+      },
+      {
+        "sectionLabel": "Where config lives",
+        "text": "pytest reads pytest.toml, .pytest.toml, pytest.ini, .pytest.ini, pyproject.toml, tox.ini or setup.cfg, and the first match while searching upward sets the rootdir.",
+        "sourceRefs": [
+          "pytest-customize"
+        ]
+      },
+      {
+        "sectionLabel": "Where config lives",
+        "text": "Ruff reads the closest .ruff.toml, ruff.toml or pyproject.toml with a [tool.ruff] section.",
+        "sourceRefs": [
+          "ruff-configuration"
+        ]
+      },
+      {
+        "sectionLabel": "Where config lives",
+        "text": "A requirements file, usually requirements.txt, lists items for pip to install.",
+        "sourceRefs": [
+          "pip-requirements-format"
+        ]
+      },
+      {
+        "sectionLabel": "Conventional commands",
+        "text": "python -m venv creates an isolated environment, and activation is optional when the environment's interpreter is called by its full path.",
+        "sourceRefs": [
+          "python-venv"
+        ]
+      },
+      {
+        "sectionLabel": "Conventional commands",
+        "text": "pip install -e . installs a project without copying files, so source edits take effect without reinstalling.",
+        "sourceRefs": [
+          "pip-local-installs"
+        ]
+      },
+      {
+        "sectionLabel": "How CI is declared",
+        "text": "pytest treats a run as CI when the CI or BUILD_NUMBER environment variable is set to a non empty value and then stops truncating the short test summary.",
+        "sourceRefs": [
+          "pytest-ci"
+        ]
+      },
+      {
+        "sectionLabel": "How CI is declared",
+        "text": "pip says regular installs, not editable installs, belong in CI systems and deployments.",
+        "sourceRefs": [
+          "pip-local-installs"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "A virtual environment is disposable, not movable and not checked into source control, and since Python 3.13 venv writes a .gitignore file into it by default.",
+        "sourceRefs": [
+          "python-venv"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "pytest collects test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method.",
+        "sourceRefs": [
+          "pytest-good-practices"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "Its docs strongly suggest a src layout with an editable install.",
+        "sourceRefs": [
+          "pytest-good-practices"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "pytest.ini takes precedence over other configuration files except pytest.toml and .pytest.toml, even when empty.",
+        "sourceRefs": [
+          "pytest-customize"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "Ruff ignores a pyproject.toml without a [tool.ruff] section, uses the closest configuration file and does not merge settings across files.",
+        "sourceRefs": [
+          "ruff-configuration"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "uv writes uv.lock next to pyproject.toml, a cross platform file that is checked in and not edited by hand.",
+        "sourceRefs": [
+          "uv-project-layout"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "pip lock is experimental, writes pylock.toml by default, and its output is only guaranteed valid for the current Python version and platform.",
+        "sourceRefs": [
+          "pip-lock"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "pylock.toml is the format PEP 751 defines.",
+        "sourceRefs": [
+          "pylock-spec"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "ruff check applies only safe fixes by default, and ruff format --check exits with 1 when a file would be reformatted.",
+        "sourceRefs": [
+          "ruff-linter",
+          "ruff-formatter"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "technologies": [
+        "python"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

@@ -27,12 +27,25 @@
     "domains": [
       "models"
     ],
-    "aliases": [],
+    "aliases": [
+      "cache",
+      "cache invalidation",
+      "reuse analysis",
+      "commit key",
+      "stale results",
+      "derived results"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when reusing a previous repository analysis, source review or graph result, so that the reuse is keyed by the commit, document version or dataset and ontology version it describes. A changed input, schema, prompt or evaluation policy invalidates the derived result.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

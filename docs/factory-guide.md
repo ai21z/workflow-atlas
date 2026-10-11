@@ -60,19 +60,47 @@ ZIP and readable HTML exports include `DECISION-REVIEW.md` and `decision-review.
 
 **Review current guidance for download** shows supplied previous records, current definitions and the opened files that differ from fresh generation. Cancel leaves the project and opened files unchanged. When a comparable definition update exists, generating a replacement requires deliberately selecting current guidance. The selection is recorded in the new manifest. Original files can still be downloaded unchanged. Atlas does not fetch the linked sources, authenticate supplied metadata or claim a fresh source review during this process.
 
-Knowledge map uses the available workspace beneath the shared navigation. Use **Search topics**, enter a term in **Search all topics**, then choose a result to open its guidance directly. Selecting a graph node explores the map. **Read topic** beside the selected topic opens its reading view. Switching back restores Brief or the same editing context. Reading a topic does not add instructions to the pack. Reading, topic navigation and cards remain alternatives to the 3D map.
+Knowledge map uses the available workspace beneath the shared navigation. Use **Search topics**, enter a term in **Search all topics**, then choose a result to open its guidance directly. **2D map** is the default exploration view. Your choice of map view is retained while you browse. **Topic cards** and the preserved **3D map** stay available. Switching back restores Brief or the same editing context. Reading and map browsing do not add instructions to the pack.
+
+In the 2D map, circles are reading topics, rounded squares are practice definitions and hexagons are technology names. Select a node to see its summary, recorded review information, linked source count and **Neighbours**. Choose **Read topic** for an article or **Read explanation** for a definition with an explanatory article. A named choice can exist without an article. A map shape does not establish an installed connection or an exportable skill.
+
+**Structure**, **Applies** and **Reading** filter the selected node's immediate connections and the Neighbours list. Structure and Applies start enabled. Reading starts disabled. The list gives each connected record and its relationship names. A relationship is catalogue information, not an instruction to execute work. Source quality and project fit do not follow from the node's position, size or proximity.
+
+Drag empty space to pan, use plus and minus to zoom, and choose **Fit map** to return to all nodes. With focus in the map, arrow keys pan, Home fits, and plus and minus zoom. Browser shortcuts with Control, Command or Alt are left alone. Enter or Space selects a focused node. Escape moves focus to the selected record panel. **Browse all map nodes as a list** offers every topic, practice and technology as a named button. Selecting from that list or Neighbours brings the node into view. Topic search, reading and cards provide other ways to navigate.
+
+**Browse a subject** offers smaller reading groups: CI and pipelines, Containers, Access and action controls, and Workflow measurements. Choose a home card or the subject control in Topics. On a phone, the card opens the Topics dialog. Search and **Topic type** work within the selected subject. **All subjects** removes that filter, and clearing filters restores the full list. If nothing matches, widen a filter or clear them.
+
+Opening a result keeps the subject list available. Its title, topic link and breadcrumbs still belong to the original hierarchy. The subject's description and limits explain what the list covers. Containers currently contains Docker only. Access and action controls is not a full security review, and Workflow measurements is not full observability coverage. Subject membership and topic counts do not change source review status, project choices, practice suggestions, inference requests or generated files.
+
+**Highlight a subject** in the 2D map shares that subject selection. It highlights the member articles without hiding other nodes or moving them. Topic search and type still narrow the reading list, not the map's full record set. Cluster article counts exclude their own hub and definition shapes. Unlinked practices and technologies sit in **Factory definitions**, which is a layout area, not a new browsing parent. Missing or unsupported map layout data leaves Topic cards available.
+
+**Highlighted articles** gives you named buttons for the selected subject. On narrow screens, numbered clusters use a **Map key** with their names and counts. Expand the key while a subject is highlighted, or zoom in to see cluster names on the map.
 
 For a feature workflow, acceptance examples entered in **Brief** appear verbatim in `WORKFLOW.md` and `templates/REQUIREMENTS.md`. An empty answer leaves the requirements table unresolved. Supplied examples do not establish approval or observed results, and unprovided owners, sources and current behavior remain unresolved. The same answer is retained in the project when downloaded and reopened.
 
 ### Use reviewed guidance in the project
 
-Six curated topic mappings connect reference guidance to existing project decisions. They cover relevant context, the smallest necessary change, requirements before implementation, source backed knowledge, validation before writes and retrieval checks. A mapping appears only where its conditions fit the active workflow. This is not automatic translation of every topic into instructions.
+Seven curated topic mappings connect reference guidance to existing project decisions. They cover relevant context, the smallest necessary change, requirements before implementation, source backed knowledge, validation before writes, retrieval checks and repository instructions. A mapping appears only where its conditions fit the active workflow. This is not automatic translation of every topic into instructions.
 
 Choose **Review for my workflow** to inspect the proposed changes and affected generated files. The project remains unchanged until **Apply to my workflow**. Cancel or Escape closes the review without applying it. After applying, the relevant project controls open. Undo reverses the project change.
 
 The ordinary actions select an existing source backed practice. They preserve stage ownership, tools, skills, notes, facts and evidence. The service-contract action can enable the optional runtime draft and add its before-write control as a requirement, with no implementation or evidence link. Existing control progress and validation text remain intact. Missing runtime decisions remain unresolved. This does not implement enforcement or grant permission to write.
 
 The **Dark mode** switch turns the dark theme on or off. The workspace and embedded Knowledge Atlas share the session preference. Theme is not a project decision or a saved browser preference.
+
+## Review ideas for this workflow
+
+**Ideas for your workflow** offers up to three eligible practices from your brief and recorded choices. Each has a short reason and its recorded source status. Selected practices stay out of the list. Fewer suggestions or none can be appropriate.
+
+Suggestions are deliberately conservative. A clear practice name or specific wording helps. General words such as scope, request or checks do not justify an action on their own. Atlas can miss a useful paraphrase. Keep editing or use the Knowledge map if no clear suggestion appears.
+
+Choose **Review practice**, inspect the proposed edit and affected files, then **Apply to my workflow** if you want to keep it. Cancel changes nothing. Undo can reverse an applied edit. Suggestions alone do not change the workflow or downloaded files.
+
+**Read topic** opens related guidance. Technology pages and specialist examples remain reading, rather than practices to apply. With no project, choose a starting workflow before reviewing practices for it. Local matching recognizes limited named exclusions and does not understand every instruction or conflict in a description.
+
+With the local JEV setup, **Check fit with JEV** can assess the highest eligible candidate among its three supported practices. Read its actual outcome, including a rejection or need for context. Other candidates remain **Not assessed by JEV**. This optional request does not send catalogue summaries, topic bodies or node digests. JEV assesses fit, it does not verify the sources or apply the suggestion. Changing relevant choices invalidates the old assessment.
+
+The same local suggestions work on the static hosted app without a key. Source status is reported as recorded. Neither a match nor a JEV assessment establishes reviewed evidence, a working integration or successful execution.
 
 ## Describe the result and project
 

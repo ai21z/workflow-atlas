@@ -50,12 +50,25 @@
     "domains": [
       "evaluation"
     ],
-    "aliases": [],
+    "aliases": [
+      "ragchecker",
+      "unsupported answer",
+      "hallucination",
+      "rag diagnosis",
+      "retrieval failure",
+      "wrong passage"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when an answer is unsupported and you need to tell whether the evidence was never found, the wrong passage or version was selected, the generation misused it, or the claim falls outside the required scope, before reaching for a larger model.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

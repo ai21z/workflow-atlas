@@ -39,12 +39,25 @@
     "domains": [
       "knowledge"
     ],
-    "aliases": [],
+    "aliases": [
+      "karpathy",
+      "generated wiki",
+      "derived pages",
+      "recursive authority",
+      "generated summaries",
+      "review status"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this when generated summary pages or an LLM maintained wiki help people navigate knowledge. Keep source anchors, owner, review status and verification date visible, and follow links back to original evidence rather than letting one generated page establish a fact by citing another.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

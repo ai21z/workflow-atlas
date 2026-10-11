@@ -34,12 +34,30 @@
     "domains": [
       "evaluation"
     ],
-    "aliases": [],
+    "aliases": [
+      "graders",
+      "model grader",
+      "llm as judge",
+      "regression policy",
+      "rerun evaluations",
+      "deterministic checks"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when deciding how evaluation results will be judged and when they must be re-run. It assigns deterministic checks, human judgment and calibrated model graders to different kinds of evidence and never accepts the system's own success claim as the grade.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan"
+      ]
+    }
   }
 }

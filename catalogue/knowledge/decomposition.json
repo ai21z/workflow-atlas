@@ -34,12 +34,30 @@
     "domains": [
       "maintenance"
     ],
-    "aliases": [],
+    "aliases": [
+      "remediation plan",
+      "remediation tasks",
+      "dependency order",
+      "reviewable outcomes",
+      "refactor sequence",
+      "split findings"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when a debt finding or correction is too large for one review and you need to split it into tasks in dependency order, each with a verifiable outcome, while the end-to-end scenario stays represented.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "breakdown"
+      ]
+    }
   }
 }

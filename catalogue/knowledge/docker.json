@@ -1,0 +1,265 @@
+{
+  "id": "docker",
+  "title": "Docker",
+  "summary": "Docker builds images from a Dockerfile and runs services from a Compose file, with context, cache, tag and merge rules an agent must respect.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Where config lives",
+      "text": "Docker reads a file named Dockerfile at the root of the build context unless the build names another file. A .dockerignore in the context root trims the context before it is sent to the builder. Compose looks for compose.yaml, compose.yml, docker-compose.yaml or docker-compose.yml in the working directory and prefers compose.yaml. docker init scaffolds .dockerignore, Dockerfile, compose.yaml and README.Docker.md and offers to overwrite existing files."
+    },
+    {
+      "type": "code",
+      "label": "Conventional commands",
+      "text": "# Conventions, not facts about any project. Check its own scripts first.\ndocker build -t myapp:dev .\ndocker build --check .\ndocker compose up --build\ndocker compose down"
+    },
+    {
+      "type": "p",
+      "label": "How CI is declared",
+      "text": "Docker does not declare a pipeline. Its CI pages present the Dockerfile as a way to define the runtime, operating system and binaries needed to build and test the application in a reproducible container. Docker maintains official GitHub Actions for building, annotating and pushing images and links setup for GitLab, CircleCI and Render."
+    },
+    {
+      "type": "p",
+      "label": "Where review conventions live",
+      "text": "Build checks inspect the Dockerfile and build options for deviations from current best practices without running the build, and docker build --check reports violations with a non zero exit status. Violations are warnings by default, so to block on them add # check=error=true to the Dockerfile or set the BUILDKIT_DOCKERFILE_CHECK build argument. Checks need Buildx 0.15.0 and Dockerfile 1.8 or later. Other rules are the project's own."
+    },
+    {
+      "type": "list",
+      "label": "Gotchas",
+      "items": [
+        "Everything under the build path except .dockerignore matches reaches the builder and COPY, so node_modules and .git travel unless excluded.",
+        "Once a layer changes every later layer is rebuilt, so copy package manifests and install dependencies before the rest of the source.",
+        "FROM or a pull without a tag uses latest, tags are mutable, and a pinned digest receives no fixes on its own.",
+        "USER sets the user for later RUN steps, ENTRYPOINT and CMD, and Docker recommends a non root user when the service can run without privileges.",
+        "Compose merges compose.yaml with compose.override.yaml from the same directory and applies -f files in the order given, later files overriding earlier ones.",
+        "The top level version key in a Compose file is obsolete and not used for validation.",
+        "Multi stage builds keep build tools out of the final image, and docker build --target stops at a named stage."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "What Atlas provides",
+      "text": "Selecting Docker adds the Containerised services profile, which asks about the files a change touches, image pinning, build checks and the runtime user, and does not install Docker, build or verify an image."
+    },
+    {
+      "type": "p",
+      "label": "Check in your environment",
+      "text": "Confirm the installed Docker and Compose versions, which Compose files and overrides exist, whether build checks run, and whether a project script wraps these conventional commands."
+    }
+  ],
+  "refs": [
+    "docker-build-context",
+    "docker-build-cache",
+    "docker-cache-optimize",
+    "docker-multi-stage",
+    "docker-dockerfile-reference",
+    "docker-build-best-practices",
+    "docker-build-checks",
+    "docker-buildx-build",
+    "docker-image-pull",
+    "docker-engine-security",
+    "docker-compose-cli",
+    "docker-compose-model",
+    "docker-compose-version-name",
+    "docker-compose-merge",
+    "docker-ci",
+    "docker-ci-github-actions",
+    "docker-init",
+    "docker-guide-nodejs",
+    "docker-guide-python"
+  ],
+  "basis": "Docker documentation on docs.docker.com read on 2026-10-11, and the Slot 6 deployment target row of the coverage gap research from the same day.",
+  "confidence": "Documented behaviour has scoped sources that still need review. The command lines are conventions and the review guidance is proposed.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [
+      "container",
+      "dockerfile",
+      "compose",
+      "image build",
+      "docker compose",
+      "build context"
+    ],
+    "revision": "1",
+    "applicability": "Use when a project builds container images from a Dockerfile or runs services with Docker Compose and a coding agent must build, run or review those files.",
+    "limits": "Catalogue inclusion does not install Docker, verify a build, or confirm image contents, registry access or runtime behaviour.",
+    "sourceStatus": "needs-review",
+    "reviewedOn": "",
+    "claims": [
+      {
+        "sectionLabel": "Where config lives",
+        "text": "Docker reads a file named Dockerfile at the root of the build context unless the build names another file.",
+        "sourceRefs": [
+          "docker-buildx-build"
+        ]
+      },
+      {
+        "sectionLabel": "Where config lives",
+        "text": "A .dockerignore in the context root trims the context before it is sent to the builder.",
+        "sourceRefs": [
+          "docker-build-context"
+        ]
+      },
+      {
+        "sectionLabel": "Where config lives",
+        "text": "Compose looks for compose.yaml, compose.yml, docker-compose.yaml or docker-compose.yml in the working directory and prefers compose.yaml.",
+        "sourceRefs": [
+          "docker-compose-model"
+        ]
+      },
+      {
+        "sectionLabel": "Where config lives",
+        "text": "docker init scaffolds .dockerignore, Dockerfile, compose.yaml and README.Docker.md and offers to overwrite existing files.",
+        "sourceRefs": [
+          "docker-init"
+        ]
+      },
+      {
+        "sectionLabel": "Conventional commands",
+        "text": "docker build -t myapp:dev .",
+        "sourceRefs": [
+          "docker-buildx-build",
+          "docker-guide-nodejs"
+        ]
+      },
+      {
+        "sectionLabel": "Conventional commands",
+        "text": "docker build --check .",
+        "sourceRefs": [
+          "docker-build-checks"
+        ]
+      },
+      {
+        "sectionLabel": "Conventional commands",
+        "text": "docker compose up --build",
+        "sourceRefs": [
+          "docker-guide-nodejs",
+          "docker-guide-python"
+        ]
+      },
+      {
+        "sectionLabel": "Conventional commands",
+        "text": "docker compose down",
+        "sourceRefs": [
+          "docker-guide-nodejs",
+          "docker-guide-python"
+        ]
+      },
+      {
+        "sectionLabel": "How CI is declared",
+        "text": "Its CI pages present the Dockerfile as a way to define the runtime, operating system and binaries needed to build and test the application in a reproducible container.",
+        "sourceRefs": [
+          "docker-ci"
+        ]
+      },
+      {
+        "sectionLabel": "How CI is declared",
+        "text": "Docker maintains official GitHub Actions for building, annotating and pushing images and links setup for GitLab, CircleCI and Render.",
+        "sourceRefs": [
+          "docker-ci",
+          "docker-ci-github-actions"
+        ]
+      },
+      {
+        "sectionLabel": "Where review conventions live",
+        "text": "Build checks inspect the Dockerfile and build options for deviations from current best practices without running the build, and docker build --check reports violations with a non zero exit status.",
+        "sourceRefs": [
+          "docker-build-checks"
+        ]
+      },
+      {
+        "sectionLabel": "Where review conventions live",
+        "text": "Violations are warnings by default, so to block on them add # check=error=true to the Dockerfile or set the BUILDKIT_DOCKERFILE_CHECK build argument.",
+        "sourceRefs": [
+          "docker-build-checks"
+        ]
+      },
+      {
+        "sectionLabel": "Where review conventions live",
+        "text": "Checks need Buildx 0.15.0 and Dockerfile 1.8 or later.",
+        "sourceRefs": [
+          "docker-build-checks"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "Everything under the build path except .dockerignore matches reaches the builder and COPY, so node_modules and .git travel unless excluded.",
+        "sourceRefs": [
+          "docker-build-context",
+          "docker-cache-optimize",
+          "docker-guide-nodejs"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "Once a layer changes every later layer is rebuilt, so copy package manifests and install dependencies before the rest of the source.",
+        "sourceRefs": [
+          "docker-build-cache",
+          "docker-cache-optimize"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "FROM or a pull without a tag uses latest, tags are mutable, and a pinned digest receives no fixes on its own.",
+        "sourceRefs": [
+          "docker-dockerfile-reference",
+          "docker-image-pull",
+          "docker-build-best-practices"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "USER sets the user for later RUN steps, ENTRYPOINT and CMD, and Docker recommends a non root user when the service can run without privileges.",
+        "sourceRefs": [
+          "docker-dockerfile-reference",
+          "docker-build-best-practices",
+          "docker-engine-security"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "Compose merges compose.yaml with compose.override.yaml from the same directory and applies -f files in the order given, later files overriding earlier ones.",
+        "sourceRefs": [
+          "docker-compose-merge",
+          "docker-compose-cli"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "The top level version key in a Compose file is obsolete and not used for validation.",
+        "sourceRefs": [
+          "docker-compose-version-name"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "Multi stage builds keep build tools out of the final image, and docker build --target stops at a named stage.",
+        "sourceRefs": [
+          "docker-multi-stage"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "technologies": [
+        "docker"
+      ],
+      "stages": [
+        "release"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

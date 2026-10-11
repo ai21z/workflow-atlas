@@ -27,12 +27,25 @@
     "domains": [
       "knowledge"
     ],
-    "aliases": [],
+    "aliases": [
+      "conflicting sources",
+      "disagreement",
+      "missing information",
+      "source authority",
+      "supersedes",
+      "unresolved decision"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this when sources disagree or the evidence is insufficient to answer. Preserve the competing evidence and the unresolved decision in the answer or review packet, and let the approved process decide whether one source supersedes another.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

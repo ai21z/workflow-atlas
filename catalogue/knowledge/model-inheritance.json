@@ -30,12 +30,30 @@
     "domains": [
       "models"
     ],
-    "aliases": [],
+    "aliases": [
+      "subagent model",
+      "per agent model",
+      "reasoning effort",
+      "effective model",
+      "session model",
+      "model override"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when a workflow assigns different models or effort settings to subagents and you need to know what the Copilot SDK, the JetBrains IDE or another harness actually supports. Verify the effective model in the real run and measure the cost and performance of the observed route.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented"
+      ],
+      "confidenceLevel": "established"
+    },
+    "applies": {
+      "hosts": [
+        "jetbrains"
+      ]
+    }
   }
 }

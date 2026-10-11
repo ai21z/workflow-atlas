@@ -30,12 +30,33 @@
     "domains": [
       "engineering-tools"
     ],
-    "aliases": [],
+    "aliases": [
+      "jetbrains",
+      "ide",
+      "copilot plugin",
+      "session model",
+      "built in subagents"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this IntelliJ example when repository investigation and bounded changes happen in a supervised IDE checkout with Copilot. Record the effective client, plugin, harness, model and permitted tools, since independent per agent routing in the IDE still depends on the harness.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "atlassian-jenkins"
+    },
+    "applies": {
+      "hosts": [
+        "jetbrains"
+      ]
+    }
   }
 }

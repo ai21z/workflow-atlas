@@ -33,12 +33,25 @@
     "domains": [
       "maintenance"
     ],
-    "aliases": [],
+    "aliases": [
+      "triage",
+      "ranking findings",
+      "duplicate findings",
+      "root cause",
+      "priority score",
+      "ticket discipline"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when many findings or warnings have been collected and you must decide which deserve tickets now. It ranks by consequence and change exposure, clusters duplicates by root cause and keeps estimate uncertainty visible.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

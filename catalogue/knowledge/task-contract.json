@@ -34,12 +34,25 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "task definition",
+      "completion record",
+      "allowed actions",
+      "required fields",
+      "stopping outcome",
+      "task spec"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when handing a task to a person, an agent or a system and the outcome, inputs, permitted actions, checks and limits must be explicit. The same structure fits a code investigation, a document review or a data curation task.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

@@ -32,12 +32,28 @@
     "domains": [
       "model-decisions"
     ],
-    "aliases": [],
+    "aliases": [
+      "duplicates",
+      "near-duplicate",
+      "terminology reconciliation",
+      "grouping",
+      "candidate pairs"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Jev example when you are deciding whether to group duplicate candidate assertions, reconcile terminology across sources or group source changes. Define the objective first, since Jev judges bounded candidate pairs or categories and is not a general embedding or clustering engine.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "speculative"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "jev-typesafe"
+    }
   }
 }

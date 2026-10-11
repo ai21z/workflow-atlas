@@ -29,12 +29,26 @@
     "domains": [
       "knowledge"
     ],
-    "aliases": [],
+    "aliases": [
+      "microsoft graphrag",
+      "graph retrieval",
+      "community summaries",
+      "global search",
+      "local search",
+      "retrieval baseline"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this when considering Microsoft GraphRAG or another graph retrieval approach for your project. Measure a simpler retrieval baseline first, and include relevant SPARQL queries in the comparison if a curated RDF graph already exists.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "speculative"
+    }
   }
 }

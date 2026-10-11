@@ -46,12 +46,35 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "acceptance criteria",
+      "ticket refinement",
+      "feasibility report",
+      "paste-ready wording",
+      "study scope",
+      "evidence requirements"
+    ],
     "revision": "1",
-    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "applicability": "Use this when a time-boxed feasibility ticket needs acceptance wording that requires explicit evidence, such as representative examples, measured versus estimated results and a go, conditional go or no-go recommendation. The wording is a recommendation, not an observed workplace outcome.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "supplied",
+        "recommended"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "configuration-study"
+    },
+    "applies": {
+      "recipes": [
+        "feasibility"
+      ]
+    }
   }
 }

@@ -3696,5 +3696,340 @@
     "type": "related-reading",
     "to": "topic:source-conflicts",
     "sourceRefs": []
+  },
+  {
+    "from": "topic:jira",
+    "type": "example-of",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:confluence",
+    "type": "example-of",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bitbucket",
+    "type": "example-of",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jenkins",
+    "type": "example-of",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:rovo",
+    "type": "example-of",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:intellij",
+    "type": "example-of",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:ci-skill",
+    "type": "example-of",
+    "to": "topic:pipeline-diagnosis",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jacoco-counters",
+    "type": "example-of",
+    "to": "topic:coverage",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:sonar-debt",
+    "type": "example-of",
+    "to": "topic:debt",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:neptune-stack",
+    "type": "example-of",
+    "to": "topic:retrieval-options",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:candidate-isolation",
+    "type": "example-of",
+    "to": "topic:data-query-verification",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:rdf-skill",
+    "type": "example-of",
+    "to": "topic:data-query-verification",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:query-performance",
+    "type": "example-of",
+    "to": "topic:data-query-verification",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:talos-boundaries",
+    "type": "example-of",
+    "to": "topic:talos",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:curation-workflow",
+    "type": "example-of",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:wikidata-statements",
+    "type": "example-of",
+    "to": "topic:applicability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-skill",
+    "type": "example-of",
+    "to": "topic:source-evidence-verification",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:holiday-example",
+    "type": "example-of",
+    "to": "topic:temporal-scope",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:dynamic-workflows",
+    "type": "example-of",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:billing-boundaries",
+    "type": "example-of",
+    "to": "topic:budgets",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:model-prices",
+    "type": "example-of",
+    "to": "topic:economy",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:agents-md",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:agents-md",
+    "type": "uses-definition",
+    "to": "practice:agents-md",
+    "sourceRefs": []
+  },
+  {
+    "from": "practice:agents-md",
+    "type": "explained-by",
+    "to": "topic:agents-md",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:agents-md",
+    "type": "related-reading",
+    "to": "topic:skill-definition",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:agents-md",
+    "type": "related-reading",
+    "to": "topic:context-selection",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:agents-md",
+    "type": "related-reading",
+    "to": "topic:eager-skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:docker",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:docker",
+    "type": "explained-by",
+    "to": "topic:docker",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:docker",
+    "type": "related-reading",
+    "to": "topic:release-operations",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:docker",
+    "type": "related-reading",
+    "to": "topic:pipeline-diagnosis",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:docker",
+    "type": "works-with",
+    "to": "technology:nodejs",
+    "sourceRefs": [
+      "docker-guide-nodejs"
+    ]
+  },
+  {
+    "from": "technology:docker",
+    "type": "works-with",
+    "to": "technology:python",
+    "sourceRefs": [
+      "docker-guide-python"
+    ]
+  },
+  {
+    "from": "technology:docker",
+    "type": "works-with",
+    "to": "technology:postgresql",
+    "sourceRefs": [
+      "docker-guide-python-develop",
+      "docker-guide-nodejs"
+    ]
+  },
+  {
+    "from": "topic:github-actions",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:github-actions",
+    "type": "explained-by",
+    "to": "topic:github-actions",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:github-actions",
+    "type": "works-with",
+    "to": "technology:github",
+    "sourceRefs": [
+      "gh-actions-about-workflows"
+    ]
+  },
+  {
+    "from": "topic:github-actions",
+    "type": "related-reading",
+    "to": "topic:pipeline-diagnosis",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:github-actions",
+    "type": "related-reading",
+    "to": "topic:release-operations",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:github-actions",
+    "type": "related-reading",
+    "to": "topic:dynamic-workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:nodejs",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:nodejs",
+    "type": "explained-by",
+    "to": "topic:nodejs",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:nodejs",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:nodejs",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:nodejs",
+    "type": "related-reading",
+    "to": "topic:pipeline-diagnosis",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:nodejs",
+    "type": "works-with",
+    "to": "technology:javascript",
+    "sourceRefs": [
+      "nodejs-about"
+    ]
+  },
+  {
+    "from": "technology:nodejs",
+    "type": "works-with",
+    "to": "technology:typescript",
+    "sourceRefs": [
+      "node-typescript"
+    ]
+  },
+  {
+    "from": "topic:python",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:python",
+    "type": "explained-by",
+    "to": "topic:python",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:python",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:python",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:python",
+    "type": "related-reading",
+    "to": "topic:implementation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:python",
+    "type": "works-with",
+    "to": "technology:docker",
+    "sourceRefs": [
+      "uv-docker"
+    ],
+    "note": "The uv Docker guide documents a Python project built and run inside a Docker image. It is uv's guide, not a Python or Docker page, so review whether that is enough for the link.",
+    "status": "needs-review"
   }
 ]

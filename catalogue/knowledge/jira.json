@@ -27,12 +27,28 @@
     "domains": [
       "engineering-tools"
     ],
-    "aliases": [],
+    "aliases": [
+      "tickets",
+      "issue tracking",
+      "acceptance criteria",
+      "task contracts",
+      "debt findings"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this Jira example when task contracts, acceptance criteria, ownership and reviewed findings are tracked in Jira and you want automation to flag gaps, draft briefs or link evidence. Do not replace missing product decisions with invented requirements.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "atlassian-jenkins"
+    }
   }
 }

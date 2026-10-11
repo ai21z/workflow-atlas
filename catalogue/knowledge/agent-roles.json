@@ -48,12 +48,25 @@
     "domains": [
       "instructions"
     ],
-    "aliases": [],
+    "aliases": [
+      "roles",
+      "investigator",
+      "implementer",
+      "reviewer",
+      "role contract",
+      "controller"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when splitting agent work into roles such as investigator, implementer, reviewer and documentation writer, each with its own task, evidence inputs, permitted tools and output contract. The controller decides permissible actions and acceptance, not a vote between agents.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

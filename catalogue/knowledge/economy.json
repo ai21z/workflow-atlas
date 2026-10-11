@@ -24,12 +24,24 @@
     "domains": [
       "models"
     ],
-    "aliases": [],
+    "aliases": [
+      "token economy",
+      "model cost",
+      "token cost",
+      "models and cost",
+      "model strategy"
+    ],
     "revision": "1",
     "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

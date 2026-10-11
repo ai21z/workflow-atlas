@@ -30,12 +30,25 @@
     "domains": [
       "models"
     ],
-    "aliases": [],
+    "aliases": [
+      "context management",
+      "progressive context",
+      "task brief",
+      "compaction",
+      "evidence selection",
+      "module map"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when preparing the context for an agent task, so that it holds a compact brief, the affected module map and the relevant passages, decisions, symbols and tests instead of the whole repository or wiki. A smaller context is useful only while the necessary meaning stays intact.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

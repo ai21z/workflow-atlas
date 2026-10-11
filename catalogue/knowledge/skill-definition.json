@@ -37,12 +37,24 @@
     "domains": [
       "instructions"
     ],
-    "aliases": [],
+    "aliases": [
+      "skill structure",
+      "skill authoring",
+      "skill package",
+      "skill contents",
+      "repository instructions"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when writing or reviewing a skill, so that it states its trigger, required inputs, procedure, expected output, acceptance checks, failure conditions and supporting resources. A skill does not enforce permissions, persist a job or prove that its instructions were followed.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

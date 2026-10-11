@@ -54,12 +54,38 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "runtime identity",
+      "github app",
+      "installation token",
+      "session limits",
+      "credential ownership",
+      "skill.md"
+    ],
     "revision": "1",
-    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "applicability": "Use this when a study must establish where a proposed backend capability would run, under which identity, with which dependencies and limits, and who owns its cost and incidents. Model authentication does not grant permissions in Jira, Bitbucket, Jenkins or Neptune, so check each application separately.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "supplied",
+        "recommended"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "configuration-study"
+    },
+    "applies": {
+      "stages": [
+        "options"
+      ],
+      "recipes": [
+        "feasibility"
+      ]
+    }
   }
 }

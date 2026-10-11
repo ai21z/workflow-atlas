@@ -15,7 +15,7 @@ Open [Workflow Atlas online](https://ai21z.github.io/workflow-atlas/). The hoste
 Project content stays in your tab and is not uploaded by the hosted app. Download to keep it. GitHub Pages records visitor IP addresses for security, as described in [GitHub's hosting documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection).
 
 1. Open the hosted workspace, or run the local server below. **Brief** asks what you want to achieve.
-2. Choose a common goal and **Use this goal**, design a connected process, or choose **Investigate an idea**, **Build a feature** or **Fix a bug**. Configured JEV can suggest one of those development recipes.
+2. Choose a common goal and **Use this goal**, design a connected process, or choose **Investigate an idea**, **Build a feature** or **Fix a bug**. Configured JEV can suggest one of those development recipes. Brief then lists up to three practice ideas from your words, each with a reason. Review one before adding it.
 3. Shape the work in **Workflow**. Use **Knowledge map** whenever you want explanations and sources.
 4. Choose **Preview files** from Brief or Workflow. Inspect the selected output. Unknown details stay unresolved.
 5. Choose **Download**. Start with a blueprint for a team discussion, or choose a skill or full pack for an AI assistant. Open the download to continue later.
@@ -56,11 +56,11 @@ Download starts with a blueprint for people to review. Choose one focused skill 
 
 Knowledge map remains a main destination even before a project exists. Help remains available while working. The theme control switches between light and dark. The workspace and embedded reference Atlas share the selected theme in this session.
 
-Six curated Knowledge topics connect to applicable project choices through **Review for my workflow**, including **Add retrieval checks**. Inspect proposed changes and affected files before **Apply to my workflow**. Reading alone changes nothing. Applied practices remain requirements or guidance, not runtime enforcement, and Undo can reverse the project edit.
+Seven curated Knowledge topics connect to applicable project choices through **Review for my workflow**, including **Add retrieval checks**. Inspect proposed changes and affected files before **Apply to my workflow**. Reading alone changes nothing. Applied practices remain requirements or guidance, not runtime enforcement, and Undo can reverse the project edit.
 
 Recipe stages keep their reviewed definitions and prerequisites. Custom processes have explicit input relationships, named outcome routes, checks, approval and bounded correction. Editing does not support arbitrary routing expressions, parallel joins or workflow execution. Runtime agent identities do not automatically become Copilot development profiles.
 
-Components retain their own technologies, versions, paths and actual commands. The catalogue contains 22 technology choices and four profiles: generic, Spring Boot, React and RDF/SPARQL. The specialist profiles add relevant questions and expected evidence. Other technology labels use generic guidance. Selecting a label does not install or verify an integration.
+Components retain their own technologies, versions, paths and actual commands. The catalogue contains 24 technology choices and eight profiles: generic, Spring Boot, React, RDF/SPARQL, Node.js, Python, GitHub Actions and containerised services. The specialist profiles add relevant questions and expected evidence. Other technology labels use generic guidance. Selecting a label does not install or verify an integration.
 
 Project facts carry sources and status. Evidence records separate expected checks from supplied observations. Model and budget records retain the user's values without ranking models or promising savings.
 
@@ -114,9 +114,9 @@ node tools/build-docs-guide.mjs
 
 ## Maintain the catalogue
 
-Edit topics, definitions, sources, typed relationships, actions and collections under `catalogue/`. Run `npm run build:catalogue` to validate them and regenerate `atlas/data.js` and `factory/catalog.mjs`. Run `npm run check:catalogue` to verify that the checked-in projections match. The [catalogue guide](docs/catalogue.md) gives the source files, authoring steps and validation limits.
+Edit topics, definitions, sources, typed relationships, actions and collections under `catalogue/`. Run `npm run build:catalogue` to validate them and regenerate `atlas/data.js` and `factory/catalog.mjs`. Run `npm run check:catalogue` to verify that the checked-in projections match. The check also prints which of the eight stack slots in `catalogue/coverage.json` are covered. `node tools/atlas-query.mjs search <terms>` searches the graph from the command line, and `propose` suggests topics for a brief and recorded project facts with a reason and a source status for each. The [catalogue guide](docs/catalogue.md) gives the source files, authoring steps, query commands and validation limits.
 
-Catalogue content `2.1.0` uses authoring schema `1.0`. Project configuration stays schema `3.0`. Ajv is a build-time dependency. The hosted app serves generated static data and stores no projects. Migrating old source metadata does not constitute a new factual review. JEV continues to use its separately frozen inference definitions.
+Catalogue content `2.1.0` uses authoring schema `1.1`. Project configuration stays schema `3.0`. Ajv is a build-time dependency. The hosted app serves generated static data and stores no projects. Migrating old source metadata does not constitute a new factual review. JEV continues to use its separately frozen inference definitions.
 
 ## JEV decision pilot
 
@@ -147,6 +147,7 @@ The complete pack includes:
 | File or directory | Purpose |
 | --- | --- |
 | `WORKFLOW.md` | Selected processes and stages, actors, inputs, outcome routes, correction limits and expected evidence |
+| `AGENTS.md` | Short repository root instructions for coding agents, with recorded commands, stage order, owners, acceptance and boundaries. Read by Copilot cloud agent, code review and CLI, and by other hosts that follow the [AGENTS.md format](https://agents.md/) |
 | `project.json` | Authoritative configuration for importing and editing again |
 | `PROJECT-ATLAS.html` | Self-contained readable project views with embedded configuration for reopening |
 | `PROJECT-FACTS.md` | Claims, provenance status and component context |
@@ -210,11 +211,11 @@ These tests establish the behaviors they exercise. They do not execute generated
 
 ## Preserved Atlas
 
-The Knowledge Atlas retains all 109 earlier topics, including the 105 original topics and four general guidance additions. Eight retrieval topics and three general procedure entries bring the catalogue to 120 topics in 10 clusters, with 72 source records and six guided paths. The skills cluster now leads with general pipeline, source and evidence, and data and query verification procedures. Jenkins and country-source material remains visibly scoped, and Neptune plan checks apply only to Neptune. This focused pass does not generalize or fact-check every topic.
+The Knowledge Atlas retains all 109 earlier topics, including the 105 original topics and four general guidance additions. Eight retrieval topics, three general procedure entries, four technology topics and one practice bring the catalogue to 125 topics in 10 clusters, with 137 source records and six guided paths. The newest five topics are drafts awaiting review. Linked source records retain their individual review status. The skills cluster now leads with general pipeline, source and evidence, and data and query verification procedures. Jenkins and country-source material remains visibly scoped, and Neptune plan checks apply only to Neptune. This focused pass does not generalize or fact-check every topic.
 
 Reading, map and card views, source browsing, themes and mobile navigation remain available. Search includes aliases and subject areas, with a Topic type filter. Existing topic URLs remain stable, while three specialist pages have new browsing parents. The original research snapshot is 2 October 2026. Later review dates apply to their recorded source contributions. The new general procedures need review and add no automatic skill mappings. Verification and evidence keeps Talos as an attributed example source.
 
-The map uses vendored Three.js and OrbitControls, with the original notice in `atlas/vendor/THREE-LICENSE.txt`. Reading remains available without WebGL.
+The default 2D exploration view uses a fixed SVG layout, with subject highlighting, named connections and a full record list. Topic cards and the original 3D map remain available. The 3D map uses vendored Three.js and OrbitControls, with the original notice in `atlas/vendor/THREE-LICENSE.txt`. The 2D map and reading remain available without WebGL. See the [map guide](docs/catalogue.md#explore-the-2d-map) for controls and limits.
 
 The full reference export is `exports/Workflow Atlas.html`. It contains offline knowledge reading and exploration. A downloaded project Atlas is a separate readable artifact containing the user's decisions and project configuration. Reopen it in the served workspace to edit.
 

@@ -69,12 +69,35 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "illustrative cases",
+      "hypothetical cases",
+      "scenario walkthrough",
+      "clarification outcome",
+      "duplicate effects",
+      "worked cases"
+    ],
     "revision": "1",
-    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "applicability": "Use this when you want to explain a proposed service's behaviour case by case, such as a complete reference, a missing detail, a conflict, a timeout or a retried save, without claiming workplace results. Convert the relevant cases into reviewed checks for the actual formats.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "supplied",
+        "recommended"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "configuration-study"
+    },
+    "applies": {
+      "recipes": [
+        "feasibility"
+      ]
+    }
   }
 }

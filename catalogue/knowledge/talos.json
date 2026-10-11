@@ -35,12 +35,30 @@
     "domains": [
       "verification"
     ],
-    "aliases": [],
+    "aliases": [
+      "talos",
+      "work-test cycle",
+      "release candidate",
+      "evidence record",
+      "verification gates"
+    ],
     "revision": "1",
     "applicability": "Illustrative context. Compare its assumptions with your own work.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "recommended",
+        "inspected"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "verification"
+      ]
+    }
   }
 }

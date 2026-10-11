@@ -70,13 +70,27 @@
       "query testing",
       "database verification",
       "SQL checks",
-      "graph checks"
+      "graph checks",
+      "sql checks",
+      "data verification",
+      "expected results"
     ],
     "revision": "1",
     "applicability": "Use when verifying a data transformation, query or retrieval API. Select the actual data model and engine before applying specialist checks.",
     "limits": "This is a proposed reading procedure. It does not select an exportable skill, configure access, run checks or establish a successful result.",
     "sourceStatus": "needs-review",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "verification"
+      ]
+    }
   }
 }

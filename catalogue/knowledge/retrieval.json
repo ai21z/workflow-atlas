@@ -34,12 +34,31 @@
     "domains": [
       "knowledge"
     ],
-    "aliases": [],
+    "aliases": [
+      "exact search",
+      "semantic search",
+      "reranking",
+      "structured queries",
+      "sparql",
+      "candidate set"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this when choosing how to retrieve evidence for a question by combining exact search, semantic search, structured queries such as SPARQL over RDF, and access or version filters. Retrieve a bounded candidate set, verify relevance and applicability, and measure retrieval separately from answer generation.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "technologies": [
+        "rdf",
+        "sparql"
+      ]
+    }
   }
 }

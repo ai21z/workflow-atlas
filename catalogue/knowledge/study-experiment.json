@@ -61,12 +61,38 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "experiment plan",
+      "experiment contract",
+      "timebox",
+      "proportionate evidence",
+      "candidate experiments",
+      "named uncertainty"
+    ],
     "revision": "1",
-    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "applicability": "Use this when a study has an assumption whose evidence could change the decision and a small timeboxed experiment can resolve it. Name the assumption, owner, timebox, expected evidence and the decision it could change.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "supplied",
+        "recommended"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "configuration-study"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan"
+      ],
+      "recipes": [
+        "feasibility"
+      ]
+    }
   }
 }

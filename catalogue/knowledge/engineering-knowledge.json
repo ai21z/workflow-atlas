@@ -34,12 +34,25 @@
     "domains": [
       "knowledge"
     ],
-    "aliases": [],
+    "aliases": [
+      "traceability table",
+      "knowledge graph",
+      "decision records",
+      "confluence",
+      "bitbucket",
+      "requirement links"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this when you want to represent links between requirements, components, checks and recorded results. Start from a traceability table or existing metadata and add a development knowledge graph only when actual queries and maintenance needs justify it.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

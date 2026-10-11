@@ -68,12 +68,30 @@
     "domains": [
       "maintenance"
     ],
-    "aliases": [],
+    "aliases": [
+      "test coverage",
+      "coverage percentage",
+      "verification plan",
+      "shacl",
+      "coverage aggregation",
+      "execution coverage"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when planning or judging the verification of a change and an execution percentage is being treated as the whole picture. It lists the other dimensions to consider and the rule for aggregating only comparable metrics.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "verification"
+      ]
+    }
   }
 }

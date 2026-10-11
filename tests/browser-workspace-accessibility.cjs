@@ -131,10 +131,15 @@ async function run() {
       await enterNav('knowledge', true)
       const map = page.frameLocator('#knowledge-frame')
       await map.locator('[data-view="2d"]').waitFor({ state: 'visible' })
+      assert.equal(await map.locator('[data-view="map"]').getAttribute('aria-pressed'), 'true')
+      await map.locator('#map-2d svg').waitFor({ state: 'visible' })
+      await map.locator('[data-view="3d"]').click()
       await page.waitForFunction(() => document.querySelector('#knowledge-frame').contentDocument.body.dataset.graph === 'fallback')
       assert.equal(await map.locator('[data-view="3d"]').isDisabled(), true)
       assert.equal(await map.locator('[data-view="2d"]').getAttribute('aria-pressed'), 'true')
       assert.equal(await map.locator('#map-rotation').isDisabled(), true)
+      await map.locator('[data-view="map"]').click()
+      await map.locator('#map-2d svg').waitFor({ state: 'visible' })
       await map.locator('#mobile-topics').press('Enter')
       await map.locator('#mobile-search').fill('Requirements investigation')
       await map.locator('#mobile-nav [data-topic="requirements-workflow"]').press('Enter')
@@ -143,7 +148,7 @@ async function run() {
       await page.keyboard.press('Escape')
       await page.keyboard.press('Escape')
       await page.locator('#start-screen').waitFor({ state: 'visible' })
-      return 'WebGL context creation was forced to return null. The unavailable 3D control is disabled, topic cards remain selected, keyboard search opens the reading heading, and Escape returns to Brief. Reduced motion disables automatic rotation and switch transitions.'
+      return 'WebGL context creation was forced to return null. The default SVG map works without it. Explicitly choosing 3D disables the unavailable control and falls back to topic cards. The SVG map remains usable, keyboard search opens the reading heading, and Escape returns to Brief. Reduced motion disables automatic rotation and switch transitions.'
     })
     await check('native-zoom-attempt-and-reflow', async () => {
       await fresh()

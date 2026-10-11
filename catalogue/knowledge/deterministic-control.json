@@ -49,12 +49,25 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "deterministic components",
+      "model-assisted tasks",
+      "division of work",
+      "enforceable rules",
+      "code or model",
+      "controller rules"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when deciding which parts of a process a model may perform and which must stay in code, such as exact calculations, access rules, identity checks and schema validation. A model expressing certainty never turns an unsupported claim into approved data.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

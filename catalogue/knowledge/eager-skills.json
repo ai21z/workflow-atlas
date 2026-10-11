@@ -30,12 +30,25 @@
     "domains": [
       "instructions"
     ],
-    "aliases": [],
+    "aliases": [
+      "progressive disclosure",
+      "progressive loading",
+      "eager injection",
+      "skill assignment",
+      "agent skills specification",
+      "custom agent skills"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when assigning skills to agents or custom agents, since the Copilot SDK injects explicitly assigned skills in full at startup and children do not inherit every parent skill. Assign only the skills each role needs and inspect the actual prompt and context usage.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "documented"
+      ],
+      "confidenceLevel": "established"
+    }
   }
 }

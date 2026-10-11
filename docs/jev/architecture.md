@@ -1,6 +1,6 @@
 # Where JEV fits
 
-**Local in-app pilot.** The start screen sends an explicit request through the local Node server. The app validates JEV choices, shows a proposal and creates a project only after your review. [Use it and understand answer recording](integration.md).
+**Local in-app pilot.** Brief can send an explicit request through the local Node server. The app validates JEV choices, shows a proposal and creates a project only after your review. Local practice retrieval also works without JEV. [Use it and understand answer recording](integration.md).
 
 [[diagram:decision-flow]]
 
@@ -9,7 +9,8 @@
 | Part | Responsibility |
 | --- | --- |
 | User brief and supplied answers | Express the task, boundaries and known facts |
-| Reviewed catalog | Define recipes, question priorities, practice meaning and source references |
+| Frozen inference definitions | Define supported recipes, questions and practice assessment meaning |
+| Local catalogue retrieval | Find related reading and eligible practices, with match reasons and recorded source status |
 | JEV | Assess intention, coverage and evidence using declared choices |
 | Response validation | Check the model, IDs, values, distributions and usage shape |
 | Code policy | Choose the next unresolved question and combine practice judgments |
@@ -52,11 +53,15 @@ In the final pilot, an already answered acceptance question was requested again 
 
 Any future automatic action needs its own evaluation and control boundary. The initial product proposal remains reviewable, even when model confidence is high.
 
-## Make knowledge useful without sending everything
+## Retrieve locally, assess one supported practice
 
-Keep reviewed definitions versioned. Send the user context and the definitions required by the tested question contract. Record catalog and prompt versions with results. TypeSafe's [Choice guidance](https://docs.typesafe.ai/primitives/choice) supports independent questions evaluated against shared state.
+Catalogue retrieval runs deterministically in the browser. It uses the brief and recorded project choices to find candidates. Catalogue summaries, node digests, topic bodies, source excerpts and the search index never enter an inference request through this feature. Reading and retrieval make no provider request.
 
-The pilot did not retrieve the entire Knowledge Atlas, browse sources, recommend a technology stack or assess every catalog practice. Expanding the catalog is a new evaluation problem. A larger context is not automatically a better decision.
+An explicit JEV request can assess one candidate supported by the frozen practice contract: Requirements before implementation, Smallest necessary change or Source backed project wiki. It sends the user context and the definitions required by the existing tested question path. It does not widen JEV's supported practice set. Record contract and prompt versions with results. TypeSafe's [Choice guidance](https://docs.typesafe.ai/primitives/choice) supports independent questions evaluated against shared state.
+
+An assessment may suggest that the practice fits, reject it or need more context. It is not source verification or a confirmation of every suggestion. A changed brief or relevant project choice makes an earlier assessment out of date. The user reviews an eligible practice before applying it. Retrieval and assessment alone do not modify the project or generated files.
+
+Catalogue additions can change local retrieval results without changing the inference definitions. Retrieval quality needs its own labeled evaluation. The historical pilot did not evaluate catalogue retrieval, technology selection or every catalogue practice. Its reported accuracy and latency do not transfer to this feature.
 
 ## Preserve user control
 

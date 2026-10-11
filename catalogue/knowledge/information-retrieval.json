@@ -43,10 +43,12 @@
       "lookup",
       "fetch data",
       "query data",
-      "database retrieval"
+      "database retrieval",
+      "retrieval",
+      "approved api"
     ],
     "revision": "1",
-    "applicability": "Use when designing how existing information is retrieved and checked.",
+    "applicability": "Use when designing how an application finds existing information through a suitable interface and checks that the result answers the request. Reuse an approved API first and add a model step only when interpretation or variable decisions contribute something useful.",
     "limits": "This is design guidance. It does not connect to a service or prove that a result is correct.",
     "sourceStatus": "reviewed",
     "reviewedOn": "2026-10-05",
@@ -58,6 +60,13 @@
           "input-validation"
         ]
       }
-    ]
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "proposed"
+      ],
+      "confidenceLevel": "established"
+    }
   }
 }

@@ -47,12 +47,38 @@
     "domains": [
       "workflow-design"
     ],
-    "aliases": [],
+    "aliases": [
+      "current process",
+      "process map",
+      "baseline measurement",
+      "case evidence",
+      "engineer effort",
+      "hidden work"
+    ],
     "revision": "1",
-    "applicability": "Illustrative context. Compare its assumptions with your own work.",
+    "applicability": "Use this when a study needs to observe how an existing AI-assisted process actually runs, including the engineer decisions, corrections and time around it. The output is a concise process map and case evidence table with gaps labeled rather than guessed.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "supplied",
+        "recommended"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "configuration-study"
+    },
+    "applies": {
+      "stages": [
+        "current-process"
+      ],
+      "recipes": [
+        "feasibility"
+      ]
+    }
   }
 }

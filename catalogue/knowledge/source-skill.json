@@ -38,13 +38,29 @@
       "instructions"
     ],
     "aliases": [
-      "Country-source skill"
+      "Country-source skill",
+      "country-source skill",
+      "jurisdiction",
+      "effective dates",
+      "classification scheme",
+      "country regulations",
+      "domain assertion"
     ],
     "revision": "2",
     "applicability": "Use this specialist example for country regulations, labour agreements or other domain assertions where jurisdiction, classifications and effective dates affect applicability.",
     "limits": "This example does not determine legal correctness, establish source truth, publish a claim or authorize a write. Domain evidence and reviewer authority must come from the actual project.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "scope": {
+      "generality": "example",
+      "context": "country-data"
+    }
   }
 }

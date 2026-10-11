@@ -41,12 +41,32 @@
     "domains": [
       "verification"
     ],
-    "aliases": [],
+    "aliases": [
+      "review handoff",
+      "completion packet",
+      "pull request evidence",
+      "unrun checks",
+      "candidate revision",
+      "packet template"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use this when preparing the review handoff for one identifiable candidate, such as an issue brief, pull request or data review. Record the candidate revision, executed checks with actual results, findings, exclusions and verdict so a reviewer can assess the limits of the result.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed",
+        "inspected"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "verification",
+        "bug-review"
+      ]
+    }
   }
 }

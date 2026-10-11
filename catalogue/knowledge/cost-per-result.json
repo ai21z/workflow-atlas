@@ -37,12 +37,25 @@
     "domains": [
       "models"
     ],
-    "aliases": [],
+    "aliases": [
+      "cost metric",
+      "accepted results",
+      "rework cost",
+      "savings percentage",
+      "baseline measurement",
+      "cost per task"
+    ],
     "revision": "1",
-    "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
+    "applicability": "Use when measuring whether an AI workflow earns its cost, so that rejected runs, retries, connector and runner time and human correction are counted against accepted results. Do not claim a savings percentage before measuring the baseline.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
     "reviewedOn": "",
-    "claims": []
+    "claims": [],
+    "evidence": {
+      "basisKinds": [
+        "proposed"
+      ],
+      "confidenceLevel": "proposed"
+    }
   }
 }

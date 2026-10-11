@@ -4,8 +4,8 @@ import { CATALOG, createRecipe, createExample, compile, parseImport } from '../f
 import { PRACTICE_TOPIC_IDS, getPracticeAction, applyPracticeAction } from '../factory/practice-actions.mjs';
 import { guidanceSnapshot } from '../factory/guidance-review.mjs';
 
-test('the Knowledge bridge exposes six curated topic actions with primary references', () => {
-  assert.equal(PRACTICE_TOPIC_IDS.length, 6);
+test('the Knowledge bridge exposes seven curated topic actions with primary references', () => {
+  assert.equal(PRACTICE_TOPIC_IDS.length, 7);
   const config = createExample('feature-delivery');
   config.runtime.enabled = true;
   for (const topicId of PRACTICE_TOPIC_IDS) {
