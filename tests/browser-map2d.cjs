@@ -90,20 +90,53 @@ async function insideViewBox(ref, target = page) {
 }
 
 async function clusterLabelClearances() {
+  await settleMap()
   const memberships = current.catalog.layout2d.clusters.map(cluster => ({ id: cluster.id, records: current.catalog.layout2d.nodes.filter(item => item.clusterId === cluster.id).map(item => item.id) }))
   const clearances = await page.evaluate(groups => groups.map(({ id, records }) => {
+    const svgBounds = document.querySelector('#map-2d svg').getBoundingClientRect()
     const cluster = document.querySelector(`#map-2d .map2d-cluster[data-cluster="${id}"]`)
     const labels = [...cluster.querySelectorAll('.map2d-cluster-name, .map2d-cluster-count')].filter(item => getComputedStyle(item).display !== 'none')
     const labelBottom = Math.max(...labels.map(item => item.getBoundingClientRect().bottom))
+    const labelInsets = labels.map(item => {
+      const rect = item.getBoundingClientRect()
+      return { text: item.textContent, left: rect.left - svgBounds.left, right: svgBounds.right - rect.right, top: rect.top - svgBounds.top, bottom: svgBounds.bottom - rect.bottom }
+    })
     const shapes = records.map(ref => document.querySelector(`#map-2d .map2d-node[data-record="${ref}"] .map2d-shape`))
-    return { id, labelBottom, shapeCount: shapes.length, shapeTop: Math.min(...shapes.map(item => item.getBoundingClientRect().top)) }
+    return { id, labelBottom, labelInsets, shapeCount: shapes.length, shapeTop: Math.min(...shapes.map(item => item.getBoundingClientRect().top)) }
   }), memberships)
   for (const item of clearances) {
     assert.ok(item.shapeCount > 0, `${item.id} contains actual rendered shapes`)
     item.clearance = item.shapeTop - item.labelBottom
     assert.ok(item.clearance > 0, `${item.id} heading and count must sit above its own node shapes, actual clearance ${item.clearance}px`)
+    for (const label of item.labelInsets) for (const side of ['left', 'right', 'top', 'bottom']) {
+      assert.ok(label[side] >= 4, `${item.id} label "${label.text}" must fit inside the SVG with a 4px inset on ${side}, actual inset ${label[side]}px`)
+    }
   }
-  return clearances.map(({ id, clearance }) => ({ id, clearance }))
+  return clearances.map(({ id, clearance, labelInsets }) => ({ id, clearance, labelInsets }))
+}
+
+async function settleMap() {
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+}
+
+async function fittedMapBounds() {
+  await settleMap()
+  const viewBox = (await page.locator('#map-2d svg').getAttribute('viewBox')).split(/\s+/).map(Number)
+  assert.equal(viewBox.length, 4)
+  assert.ok(viewBox.every(Number.isFinite) && viewBox[2] > 0 && viewBox[3] > 0, 'Fit map has a finite camera with a positive extent')
+  const clusterLabels = await clusterLabelClearances()
+  const glyphs = await page.evaluate(() => {
+    const bounds = document.querySelector('#map-2d svg').getBoundingClientRect()
+    return [...document.querySelectorAll('#map-2d .map2d-node')].map(group => {
+      const rect = group.querySelector('.map2d-shape').getBoundingClientRect()
+      return { id: group.dataset.record, left: rect.left - bounds.left, right: bounds.right - rect.right, top: rect.top - bounds.top, bottom: bounds.bottom - rect.bottom }
+    })
+  })
+  assert.equal(glyphs.length, current.catalog.layout2d.nodes.length)
+  for (const glyph of glyphs) for (const side of ['left', 'right', 'top', 'bottom']) {
+    assert.ok(glyph[side] >= 4, `${glyph.id} glyph must fit inside the SVG with a 4px inset on ${side}, actual inset ${glyph[side]}px`)
+  }
+  return { viewBox, clusterLabels, fittedGlyphs: glyphs.length }
 }
 
 async function visibleGlyphCenters() {
@@ -233,6 +266,7 @@ async function run() {
       await fresh()
       await openMap()
       const svg = page.locator('#map-2d svg')
+      await settleMap()
       const original = await svg.getAttribute('viewBox')
       const fixedPositions = await page.locator('#map-2d .map2d-node').evaluateAll(items => items.map(item => item.getAttribute('transform')))
       await svg.press('ArrowRight')
@@ -243,7 +277,9 @@ async function run() {
       await page.locator('#zoom-out').press('Enter')
       assert.notEqual(await svg.getAttribute('viewBox'), zoomed)
       await page.locator('#map-reset').press('Enter')
+      await settleMap()
       assert.equal(await svg.getAttribute('viewBox'), original)
+      await fittedMapBounds()
       await svg.scrollIntoViewIfNeeded()
       const bounds = await svg.boundingBox()
       const header = await page.locator('.topbar').boundingBox()
@@ -256,6 +292,7 @@ async function run() {
       await page.mouse.up()
       assert.notEqual(await svg.getAttribute('viewBox'), original, 'Dragging empty map space pans without moving topic positions')
       await page.locator('#map-reset').click()
+      await fittedMapBounds()
       assert.deepEqual(await page.locator('#map-2d .map2d-node').evaluateAll(items => items.map(item => item.getAttribute('transform'))), fixedPositions, 'Pan and zoom never rearrange node positions')
       await choose('topic:docker', page, 'Space')
       assert.equal(await page.locator('#map-record-title').innerText(), current.nodes.find(item => item.id === 'docker').title)
@@ -362,7 +399,7 @@ async function run() {
         await openMap()
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, 'No page level horizontal overflow')
         await page.locator('#map-2d svg').scrollIntoViewIfNeeded()
-        const clearances = width === 1440 ? await clusterLabelClearances() : null
+        const clearances = await clusterLabelClearances()
         await page.screenshot({ path: path.join(output, `full-map-${width}-${theme}.png`), fullPage: false })
         await page.locator('#map-subject').selectOption('ci-pipelines')
         if (width < 620) {
@@ -403,7 +440,7 @@ async function run() {
       assert.equal(await page.locator('#map-record-title').innerText(), current.nodes.find(item => item.id === 'github-actions').title)
       assert.equal(await insideViewBox('topic:github-actions'), true)
       await page.locator('#map-reset').click()
-      assert.equal(await page.locator('#map-2d svg').getAttribute('viewBox'), `0 0 ${current.catalog.layout2d.width} ${current.catalog.layout2d.height}`)
+      await fittedMapBounds()
       await key.locator('.map2d-key-details > summary').click()
       await key.locator('.map2d-cluster-key li').last().scrollIntoViewIfNeeded()
       assert.equal(await key.locator('.map2d-cluster-key li').count(), current.catalog.layout2d.clusters.length)
@@ -412,6 +449,67 @@ async function run() {
       await page.locator('#map-reset').click()
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
       return 'At 320 by 568, named highlighted articles, the compact cluster key and Fit map remain reachable without horizontal overflow or bottom clipping.'
+    })
+
+    for (const theme of ['light', 'dark']) await check(`06c-short-desktop-fit-headings-${theme}`, async () => {
+      await fresh({ width: 1280, height: 720, theme })
+      const observations = []
+      for (const subject of ['', 'ci-pipelines', 'containers', '']) {
+        await page.locator('#map-subject').selectOption(subject)
+        const automatic = await fittedMapBounds()
+        await page.locator('#map-reset').click()
+        const explicit = await fittedMapBounds()
+        assert.deepEqual(explicit.viewBox, automatic.viewBox, 'Changing subject controls while fitted updates the same complete Fit map camera')
+        await page.locator('#map-reset').click()
+        assert.deepEqual((await fittedMapBounds()).viewBox, explicit.viewBox, 'Repeated Fit map is stable for the same viewport and subject')
+        observations.push({ subject: subject || 'all', ...explicit })
+        if (subject === 'ci-pipelines') {
+          await page.locator('#map-2d svg').scrollIntoViewIfNeeded()
+          await page.screenshot({ path: path.join(output, `short-desktop-fit-ci-${theme}.png`), fullPage: false })
+        }
+      }
+      await unchangedGraph()
+      return observations
+    })
+
+    for (const theme of ['light', 'dark']) await check(`06d-responsive-fit-and-manual-camera-${theme}`, async () => {
+      await fresh({ width: 390, height: 720, theme })
+      await page.locator('#map-subject').selectOption('ci-pipelines')
+      const observations = []
+      for (const width of [390, 320, 1280]) {
+        await page.setViewportSize({ width, height: 720 })
+        const automatic = await fittedMapBounds()
+        await page.locator('#map-reset').click()
+        const explicit = await fittedMapBounds()
+        assert.deepEqual(explicit.viewBox, automatic.viewBox, 'A fitted camera adapts to the actual SVG dimensions after resizing')
+        observations.push({ width, ...explicit })
+      }
+      const svg = page.locator('#map-2d svg'), fitted = await svg.getAttribute('viewBox')
+      await page.locator('#zoom-in').click()
+      await svg.press('ArrowRight')
+      await svg.press('ArrowDown')
+      await settleMap()
+      const manual = await svg.getAttribute('viewBox')
+      assert.notEqual(manual, fitted, 'The user intentionally zoomed and panned away from Fit map')
+      const selected = await page.evaluate(() => ATLAS_STATE.mapRecord)
+      for (const subject of ['', 'containers', 'ci-pipelines', '']) {
+        await page.locator('#map-subject').selectOption(subject)
+        await settleMap()
+        assert.equal(await svg.getAttribute('viewBox'), manual, 'Subject controls do not replace an intentionally panned or zoomed camera')
+      }
+      for (const width of [390, 320, 1280]) {
+        await page.setViewportSize({ width, height: 720 })
+        await settleMap()
+        assert.equal(await svg.getAttribute('viewBox'), manual, 'Resizing preserves the user camera until Fit map is requested')
+      }
+      assert.equal(await page.evaluate(() => ATLAS_STATE.mapRecord), selected, 'Fitting and resizing do not change the selected record')
+      await page.locator('#map-reset').click()
+      const restored = await fittedMapBounds()
+      assert.notEqual((await svg.getAttribute('viewBox')), manual, 'Fit map restores a complete view after manual navigation')
+      await page.locator('#map-2d svg').scrollIntoViewIfNeeded()
+      await page.screenshot({ path: path.join(output, `resized-fit-desktop-${theme}.png`), fullPage: false })
+      await unchangedGraph()
+      return { fittedSequence: observations, manualViewBox: manual, restored }
     })
 
     await check('07-legacy-projection-fallback-and-preserved-3d', async () => {

@@ -51,6 +51,7 @@
     const families = { structure: true, applies: true, reading: false };
     let selected = records.has('topic:overview') ? 'topic:overview' : sourceNodes[0].id;
     let roving = selected, subject = null, active = true, drag = null, theme = 'light';
+    let fitted = true, fitDirty = true, minimumZoom = .65;
     let box = { x: 0, y: 0, width: layout.width, height: layout.height };
     const svg = make('svg', { class: 'map2d-svg', role: 'group', 'aria-label': 'Knowledge map. Arrow keys pan, plus and minus zoom, Home shows the full map. Tab reaches the selected node.', tabindex: '0', preserveAspectRatio: 'xMidYMid meet' });
     const title = make('title');
@@ -255,6 +256,10 @@
         [...label.children].forEach((span, index) => { span.setAttribute('x', String(labelX)); span.setAttribute('y', String((index - (lines.length - 1) / 2) * 16 / s)); });
         label.style.display = chosen || focused || subjectTopic || (!hub && !globalFit && (nearby || match && node.labelRank <= threshold)) ? '' : 'none';
       }
+      refreshClusterLabels(s, compact);
+    }
+    function refreshClusterLabels(s, compact) {
+      const zoom = layout.width / box.width;
       for (const cluster of clusterLayer.children) {
         const numbered = compact && zoom < 2.2;
         cluster.firstChild.textContent = numbered ? cluster.dataset.number : cluster.dataset.label;
@@ -282,12 +287,49 @@
         edgeLayer.append(line);
       }
     }
-    function render() {
+    function applyBox() {
       svg.setAttribute('viewBox', `${box.x} ${box.y} ${box.width} ${box.height}`);
       svg.dataset.viewbox = `${box.x} ${box.y} ${box.width} ${box.height}`;
       svg.dataset.zoom = String(layout.width / box.width);
       for (const [key, value] of Object.entries(box)) background.setAttribute(key, String(value));
+    }
+    function fitCamera() {
+      const rect = svg.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      box = { x: 0, y: 0, width: layout.width, height: layout.height };
+      const compact = container.classList.contains('map2d-compact');
+      // Text keeps its screen size as the camera moves. Include its measured
+      // bounds and halo in the fit, without moving headings into their nodes.
+      for (let pass = 0; pass < 16; pass++) {
+        applyBox();
+        const s = scale(), padding = 8 / s;
+        refreshClusterLabels(s, compact);
+        let left = 0, top = 0, right = layout.width, bottom = layout.height;
+        for (const cluster of clusterLayer.children) {
+          const bounds = cluster.getBBox(), transform = cluster.transform.baseVal.getItem(0).matrix;
+          left = Math.min(left, transform.e + bounds.x - padding);
+          top = Math.min(top, transform.f + bounds.y - padding);
+          right = Math.max(right, transform.e + bounds.x + bounds.width + padding);
+          bottom = Math.max(bottom, transform.f + bounds.y + bounds.height + padding);
+        }
+        const extent = Math.max((right - left) / layout.width, (bottom - top) / layout.height);
+        const width = layout.width * extent, height = layout.height * extent;
+        const next = { x: (left + right - width) / 2, y: (top + bottom - height) / 2, width, height };
+        const settled = Object.keys(next).every(key => Math.abs(next[key] - box[key]) < .01);
+        box = next;
+        if (settled) break;
+      }
+      fitDirty = false;
+      minimumZoom = Math.min(.65, layout.width / box.width);
+      applyBox();
+    }
+    function render() {
+      applyBox();
       refreshNodes();
+      if (fitted && fitDirty) {
+        fitCamera();
+        refreshNodes();
+      }
     }
     function activate(id, options) {
       select(id, options);
@@ -301,6 +343,7 @@
         const node = records.get(canonical);
         const margin = Math.max(node.radius, 24 / scale());
         if (node.x < box.x + margin || node.x > box.x + box.width - margin || node.y < box.y + margin || node.y > box.y + box.height - margin) {
+          fitted = false;
           box.x = node.x - box.width / 2;
           box.y = node.y - box.height / 2;
         }
@@ -312,22 +355,26 @@
     }
     function zoom(factor, anchor) {
       if (!Number.isFinite(factor) || factor <= 0) return;
-      const next = Math.min(12, Math.max(.65, layout.width / box.width * factor));
+      const current = layout.width / box.width;
+      const next = Math.min(12, Math.max(minimumZoom, current * factor));
       const width = layout.width / next, height = layout.height / next;
       const point = anchor || { x: box.x + box.width / 2, y: box.y + box.height / 2 };
       const ratioX = (point.x - box.x) / box.width, ratioY = (point.y - box.y) / box.height;
       box = { x: point.x - ratioX * width, y: point.y - ratioY * height, width, height };
+      fitted = false;
       render();
     }
     function pan(dx, dy) {
       if (![dx, dy].every(Number.isFinite)) return;
       const s = scale();
+      fitted = false;
       box.x += dx / s;
       box.y += dy / s;
       render();
     }
     function reset() {
-      box = { x: 0, y: 0, width: layout.width, height: layout.height };
+      fitted = true;
+      fitDirty = true;
       render();
     }
     svg.addEventListener('keydown', event => {
@@ -361,16 +408,17 @@
       const rect = svg.getBoundingClientRect(), s = scale(), left = rect.left + (rect.width - box.width * s) / 2, top = rect.top + (rect.height - box.height * s) / 2;
       zoom(Math.exp(-Math.max(-100, Math.min(100, event.deltaY)) * .004), { x: box.x + (event.clientX - left) / s, y: box.y + (event.clientY - top) / s });
     }, { passive: false });
-    const observer = new ResizeObserver(() => { if (active) render(); });
+    const observer = new ResizeObserver(() => { if (active) { fitDirty = fitted; render(); } });
     observer.observe(container);
-    keyDetails.addEventListener('toggle', () => { if (active) render(); });
+    observer.observe(svg);
+    keyDetails.addEventListener('toggle', () => { if (active) { fitDirty = fitted; render(); } });
     refreshEdges();
     render();
     return {
       select,
-      setSubject(topicIds) { subject = Array.isArray(topicIds) ? new Set(topicIds.filter(id => typeof id === 'string')) : null; refreshNodes(); },
+      setSubject(topicIds) { subject = Array.isArray(topicIds) ? new Set(topicIds.filter(id => typeof id === 'string')) : null; fitDirty = fitted; render(); },
       setTheme(value) { theme = value === 'dark' ? 'dark' : 'light'; container.dataset.map2dTheme = theme; },
-      setActive(value) { active = Boolean(value); svg.dataset.active = String(active); svg.setAttribute('tabindex', active ? '0' : '-1'); svg.setAttribute('aria-hidden', String(!active)); if (!active) stopDrag(); render(); },
+      setActive(value) { active = Boolean(value); svg.dataset.active = String(active); svg.setAttribute('tabindex', active ? '0' : '-1'); svg.setAttribute('aria-hidden', String(!active)); if (!active) stopDrag(); fitDirty = fitted; render(); },
       setFamily(family, enabled) { if (!Object.hasOwn(families, family)) return; families[family] = Boolean(enabled); refreshEdges(); refreshNodes(); },
       zoom, reset, pan,
       getState() { return { selected, zoom: layout.width / box.width, viewBox: { ...box }, families: { ...families }, subject: subject ? [...subject] : null }; },
