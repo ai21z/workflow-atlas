@@ -153,10 +153,77 @@
     const foot=$('reader-next');foot.replaceChildren();const study=tours.study?.ids||[],seq=study.includes(selected)?study:cat?[cat,...descendants(cat).map(x=>x.id)]:[],at=seq.indexOf(selected);if(at>0){const b=topicButton(byId.get(seq[at-1]),'continue-button');b.prepend(el('small','','← Previous topic'));foot.append(b);}if(at>=0&&at<seq.length-1){const b=topicButton(byId.get(seq[at+1]),'continue-button');b.prepend(el('small','','Next topic →'));foot.append(b);}document.title=n.title+' · Workflow Atlas';renderPracticeLinks();
   }
   function renderFlat(){const cat=categoryFor(selected),shown=cat?[byId.get(cat),...descendants(cat)]:categories,root=$('flat-map');root.replaceChildren();root.classList.toggle('cluster-overview',!cat);shown.forEach(n=>{const b=topicButton(n,'map-card');b.replaceChildren(el('span','map-card-category',[n.parent==='overview'?'CLUSTER':meta.get(categoryFor(n.id)).short.toUpperCase(),kindLabel(n)].filter(Boolean).join(' · ')),el('strong','',n.title),el('span','',n.summary));root.append(b);});renderMapIndex();}
-  function renderMapIndex(){const list=$('map-topic-list');list.replaceChildren();if(view==='map'){for(const record of mapRecords.values()){const button=el('button','map-list-button',record.title+' · '+record.kind);button.type='button';button.dataset.mapRecord=record.ref;list.append(button);}document.querySelector('.map-index summary').textContent=`Browse all ${mapRecords.size} map nodes as a list`;}else{nodes.forEach(n=>list.append(topicButton(n,'map-list-button')));document.querySelector('.map-index summary').textContent=`Browse all ${nodes.length} topics as a list`;}}
+  function renderMapIndex(){const list=$('map-topic-list');list.replaceChildren();if(view==='map'){for(const record of mapRecords.values()){const button=el('button','map-list-button',record.title+' · '+mapKindLabel(record));button.type='button';button.dataset.mapRecord=record.ref;list.append(button);}document.querySelector('.map-index summary').textContent=`Browse all ${mapRecords.size} map nodes as a list`;}else{nodes.forEach(n=>list.append(topicButton(n,'map-list-button')));document.querySelector('.map-index summary').textContent=`Browse all ${nodes.length} topics as a list`;}}
   function mapHeading(){const cat=categoryFor(selected),n=byId.get(selected);$('map-eyebrow').textContent=view==='map'?'TOPICS, PRACTICES AND TECHNOLOGIES':cat?'FOCUSED KNOWLEDGE CLUSTER':'TEN CONNECTED KNOWLEDGE CLUSTERS';$('map-title').textContent=view!=='map'&&cat?byId.get(cat).title:'Explore the Knowledge Atlas';$('map-current-title').textContent=n.title;['read-map-topic','read-selection'].forEach(id=>$(id).setAttribute('aria-label','Read topic: '+n.title));$('map-selection-title').textContent=n.title;$('map-selection-summary').textContent=n.summary;$('map-selection-evidence').textContent=`${kindLabel(n)?kindLabel(n)+' · ':''}${n.basis} · Confidence: ${n.confidence} · ${n.refs.length} linked source${n.refs.length===1?'':'s'}`;}
   const mapRecords=new Map(nodes.map(node=>[`topic:${node.id}`,{ref:`topic:${node.id}`,kind:'topic',title:node.title,summary:node.summary,topicId:node.id,sourceRefs:node.refs,reviewedOn:node.catalog?.reviewedOn||'',reviewed:node.catalog?.sourceStatus==='reviewed'}]));
   for(const definition of window.TOPIC_DATA.catalog?.definitions||[]){if(!['practice','technology'].includes(definition.type))continue;mapRecords.set(definition.ref,{...definition,title:definition.label,kind:definition.type,topicId:definition.explainedBy?.replace(/^topic:/,'')||null,reviewed:Boolean(definition.reviewedOn)});}
+  const mapKindLabel=record=>record.kind==='topic'?'Guide':record.kind==='practice'?'Practice':'Technology';
+  function mapReadingTarget(record){
+    if(record.topicId&&byId.has(record.topicId))return {id:record.topicId,label:record.kind==='topic'?'Read topic':'Read explanation'};
+    const connected=[...mapNeighbours(record.ref,false).values()].flatMap(item=>item.relations);
+    for(const relation of connected){
+      const other=relation.from===record.ref?relation.to:relation.to===record.ref?relation.from:null,topic=mapRecords.get(other);
+      if(topic?.kind!=='topic')continue;
+      if(relation.from===record.ref&&relation.type==='explained-by'||relation.to===record.ref&&relation.type==='explains')return {id:topic.topicId,label:'Read explanation'};
+    }
+    for(const relation of connected){
+      const other=relation.from===record.ref?relation.to:relation.to===record.ref?relation.from:null,topic=mapRecords.get(other);
+      if(topic?.kind==='topic'&&(relation.type==='uses-definition'&&relation.to===record.ref||relation.type==='used-by'&&relation.from===record.ref))return {id:topic.topicId,label:'Read related guide'};
+    }
+    return null;
+  }
+  function connectionMeaning(relation){
+    const forward=relation.from===mapRecord,pairs={
+      'browse-under':['In this topic group','Topic in this group'],'browses':['Topic in this group','In this topic group'],
+      'part-of':['Part of this item','Contains this item'],'has-part':['Contains this item','Part of this item'],
+      'applies-to':['Applies to this item','Guidance that applies here'],'applied-by':['Guidance that applies here','Applies to this item'],
+      'requires':['Requires this item','Required by this item'],'required-by':['Required by this item','Requires this item'],
+      'explained-by':['Explained by this guide','Explains this item'],'explains':['Explains this item','Explained by this guide'],
+      'uses-definition':['Uses this definition','Used by this guide'],'used-by':['Used by this guide','Uses this definition'],
+      'provides-capability':['Provides this capability','Capability of this item'],'capability-of':['Capability of this item','Provides this capability'],
+      'illustrates':['Illustrates this item','Illustrated by this example'],'illustrated-by':['Illustrated by this example','Illustrates this item'],
+      'example-of':['Example of this item','Has this example'],'has-example':['Has this example','Example of this item'],
+      'broader-concept':['Has this broader concept','Has this more specific concept'],'narrower-concept':['Has this more specific concept','Has this broader concept']
+    };
+    if(relation.type==='related-reading')return 'Related reading';
+    if(relation.type==='works-with')return 'Works with this item';
+    return pairs[relation.type]?.[forward?0:1]||`${forward?'Links to':'Linked from'} this item: ${relation.type.replaceAll('-',' ')}`;
+  }
+  function mapNeighbours(recordRef,filtered=true){
+    const neighbours=new Map();
+    for(const edge of mapConnectionEdges()){
+      if(!edge||!['structure','applies','reading'].includes(edge.family)||filtered&&!mapFamilyEnabled(edge.family)||edge.from!==recordRef&&edge.to!==recordRef)continue;
+      const id=edge.from===recordRef?edge.to:edge.from,other=mapRecords.get(id);
+      if(!other||id===recordRef||!Array.isArray(edge.relations))continue;
+      const valid=edge.relations.filter(relation=>relation&&typeof relation.type==='string'&&((relation.from===recordRef&&relation.to===id)||(relation.to===recordRef&&relation.from===id)));
+      if(!valid.length)continue;
+      if(!neighbours.has(id))neighbours.set(id,{record:other,relations:[]});
+      const explicit=valid.filter(relation=>!relation.derived);
+      neighbours.get(id).relations.push(...(explicit.length?explicit:valid));
+    }
+    return neighbours;
+  }
+  function focusMapSelection(){const title=$('map-selected-name');title.scrollIntoView({block:'center',behavior:'instant'});title.focus({preventScroll:true});}
+  function focusMapDetails(){const title=$('map-record-title');title.scrollIntoView({block:'start',behavior:'instant'});title.focus({preventScroll:true});}
+  function renderMapFinder(){
+    const query=$('map-find-search').value.toLocaleLowerCase().trim();
+    const terms=query.match(/[\p{L}\p{N}]+/gu)||[];
+    const matchesText=value=>{const text=value.toLocaleLowerCase(),words=text.match(/[\p{L}\p{N}]+/gu)||[];return terms.length?terms.every(term=>words.some(word=>term.length<=3?word===term:word.startsWith(term))):text.includes(query);};
+    const matches=[...mapRecords.values()].map(record=>{
+      const title=record.title.toLocaleLowerCase(),aliases=[...(record.aliases||[]),...(byId.get(record.topicId)?.catalog?.aliases||[])].join(' '),text=[record.title,record.summary,aliases,record.topicId?searchText.get(record.topicId)||'':''].join(' ');
+      return {record,score:title===query?3:query&&matchesText(title)?2:query&&matchesText(aliases)?1.5:1,match:!query||matchesText(text)};
+    }).filter(item=>item.match).sort((a,b)=>b.score-a.score||a.record.title.localeCompare(b.record.title)||a.record.kind.localeCompare(b.record.kind));
+    $('map-find-count').textContent=`${matches.length} of ${mapRecords.size} map items${query?' match':' available'}`;
+    const list=$('map-find-results');list.replaceChildren();
+    for(const {record} of matches){
+      const button=el('button','map-find-result');button.type='button';button.dataset.mapFindRecord=record.ref;
+      button.setAttribute('aria-label',`Show ${record.title} on map. ${mapKindLabel(record)}`);
+      button.append(el('small','',mapKindLabel(record)),el('strong','',record.title),el('span','',record.summary||(mapReadingTarget(record)?'Catalogue record with a linked guide.':'Catalogue name. No guide is recorded yet.')),el('span','map-find-action','Show on map →'));
+      list.append(button);
+    }
+    if(!matches.length)list.append(el('p','empty-search','No map items match. Try a shorter name or clear the search to browse every item.'));
+  }
+  function openMapFinder(){renderMapFinder();if(!$('map-find-dialog').open)$('map-find-dialog').showModal();$('map-find-search').focus();}
   function mapFamilyEnabled(family){return Boolean($('map-family-'+family)?.checked);}
   function mapConnectionEdges(){
     const projected=window.TOPIC_DATA.catalog?.layout2d?.edges;
@@ -168,16 +235,36 @@
   function renderMapRecord(){
     const record=mapRecords.get(mapRecord);if(!record)return;
     $('map-record-kind').textContent=record.kind==='topic'?'READING TOPIC':record.kind==='practice'?'WORKFLOW PRACTICE':'TECHNOLOGY NAME';
-    $('map-record-title').textContent=record.title;$('map-record-summary').textContent=record.summary||'A recorded workflow choice. Open its explanation or connected topics for context.';
+    $('map-record-title').textContent=record.title;$('map-record-summary').textContent=record.summary||(mapReadingTarget(record)?'A catalogue record with a linked guide. Open the guide for context.':'A catalogue name. No explanatory guide is recorded yet.');
     const count=(record.sourceRefs||[]).length,review=record.kind==='topic'?(record.reviewed&&record.reviewedOn?'Reviewed '+record.reviewedOn:'No claim review recorded'):(record.reviewedOn?'Record reviewed '+record.reviewedOn:'No record review date');
     $('map-record-evidence').textContent=`${review}. ${count} linked source${count===1?'':'s'}. Source links do not establish correctness.`;
     const sourceLinks=$('map-record-source-links');sourceLinks.replaceChildren();$('map-record-sources').hidden=!count;for(const id of record.sourceRefs||[]){const source=sources[id];if(!source)continue;const link=el('a','',source[0]+' ↗');link.href=source[1];link.target='_blank';link.rel='noopener noreferrer';sourceLinks.append(link);}
-    const readable=record.topicId&&byId.has(record.topicId);$('map-record-read').hidden=!readable;$('map-record-read').textContent=record.kind==='topic'?'Read topic →':'Read explanation →';$('map-record-read').setAttribute('aria-label',(record.kind==='topic'?'Read topic: ':'Read explanation: ')+record.title);
-    const neighbours=new Map();
-    for(const edge of mapConnectionEdges()){if(!edge||!mapFamilyEnabled(edge.family)||edge.from!==mapRecord&&edge.to!==mapRecord)continue;const id=edge.from===mapRecord?edge.to:edge.from,other=mapRecords.get(id);if(!other||id===mapRecord||!Array.isArray(edge.relations))continue;const valid=edge.relations.filter(relation=>relation&&typeof relation.type==='string'&&((relation.from===mapRecord&&relation.to===id)||(relation.to===mapRecord&&relation.from===id)));if(!valid.length)continue;if(!neighbours.has(id))neighbours.set(id,{record:other,relations:new Set()});const relations=valid.filter(relation=>!relation.derived);for(const relation of relations.length?relations:valid){neighbours.get(id).relations.add((relation.from===mapRecord?'':'Incoming: ')+relation.type.replaceAll('-',' '));}}
+    const reading=mapReadingTarget(record);$('map-record-read').hidden=!reading;$('map-record-read').textContent=(reading?.label||'Read topic')+' →';$('map-record-read').setAttribute('aria-label',(reading?.label||'Read topic')+': '+record.title);
+    const neighbours=mapNeighbours(mapRecord),allNeighbours=mapNeighbours(mapRecord,false);
+    $('map-selected-kind').textContent=mapKindLabel(record)+(record.kind!=='topic'&&!reading?' · No guide recorded':'');$('map-selected-kind').title=$('map-selected-kind').textContent;$('map-selected-name').textContent=record.title;$('map-selected-name').title=record.title;
+    $('map-open-details').textContent=`Details and connections (${neighbours.size})`;
     const list=$('map-neighbours');list.replaceChildren();
-    for(const {record:other,relations} of [...neighbours.values()].sort((a,b)=>a.record.title.localeCompare(b.record.title))){const item=el('li'),button=el('button','map-neighbour');button.type='button';button.dataset.mapRecord=other.ref;button.append(el('strong','',other.title),el('span','',other.kind+' · '+[...relations].join(', ')));item.append(button);list.append(item);}
-    if(!neighbours.size)list.append(el('li','map-no-neighbours','No neighbours in the selected connection groups. Try Reading or select another node.'));
+    for(const {record:other,relations} of [...neighbours.values()].sort((a,b)=>a.record.title.localeCompare(b.record.title))){
+      const item=el('li'),button=el('button','map-neighbour');button.type='button';button.dataset.mapRecord=other.ref;
+      button.append(el('strong','',other.title),el('span','',mapKindLabel(other)+' · '+[...new Set(relations.map(connectionMeaning))].join('. ')));
+      if(relations.some(relation=>relation.status==='needs-review'))button.append(el('span','map-relation-warning','Connection needs review'));
+      item.append(button);
+      const details=el('details','map-relation-details');details.append(el('summary','','Why connected?'));
+      for(const relation of relations){
+        const fromRecord=mapRecords.get(relation.from),toRecord=mapRecords.get(relation.to),from=fromRecord?`${fromRecord.title} (${mapKindLabel(fromRecord)})`:relation.from,to=toRecord?`${toRecord.title} (${mapKindLabel(toRecord)})`:relation.to;
+        const description=el('div','map-relation-note');description.append(el('p','',`${from} → ${relation.type.replaceAll('-',' ')} → ${to}`),el('p','',relation.status==='needs-review'?'Needs review.':relation.status?`Recorded status: ${relation.status}.`:'No relationship review status recorded.'));
+        if(relation.note)description.append(el('p','',relation.note));
+        for(const id of Array.isArray(relation.sourceRefs)?relation.sourceRefs:[]){const source=sources[id];if(!source)continue;const link=el('a','',source[0]+' ↗');link.href=source[1];link.target='_blank';link.rel='noopener noreferrer';description.append(link);}
+        if(!Array.isArray(relation.sourceRefs)||!relation.sourceRefs.length)description.append(el('p','','No sources recorded for this relationship.'));
+        details.append(description);
+      }
+      item.append(details);list.append(item);
+    }
+    if(!neighbours.size){
+      const item=el('li','map-no-neighbours',allNeighbours.size?'Connections are hidden by the current filters.':record.kind==='topic'?'No connections to other map items are recorded.':'Catalogue name only. No connections to other map items are recorded yet.');
+      if(allNeighbours.size){const show=el('button','map-show-connections','Show all connection groups');show.type='button';show.addEventListener('click',()=>{for(const family of ['structure','applies','reading']){$('map-family-'+family).checked=true;map2d?.setFamily(family,true);}renderMapRecord();});item.append(show);}
+      list.append(item);
+    }
   }
   function syncMapSubject(){
     const choice=$('map-subject'),subject=subjects.get(subjectId);choice.value=subjectId;choice.closest('.map-subject-choice').hidden=!subjects.size;
@@ -188,11 +275,11 @@
     const record=mapRecords.get(ref);if(!record)return;mapRecord=ref;
     if(record.kind==='topic')select(record.topicId,{focus:false,fromMap:true});else{map2d?.select(ref);renderMapRecord();renderPracticeLinks();updateState();$('selection-announcement').textContent='Selected '+record.title;}
     if(recenter)map2d?.select(ref,{recenter:true});
-    if(focus)$('map-record-title').focus({preventScroll:true});
+    if(focus)focusMapDetails();
   }
   function ensureMap2D(){
     if(map2d)return map2d;if(document.body.dataset.map2d==='unavailable')return null;
-    try{if(typeof window.mountAtlas2D!=='function')throw new Error('Map renderer unavailable');map2d=window.mountAtlas2D({container:$('map-2d'),data:window.TOPIC_DATA,byId,colors:Object.fromEntries([...meta].map(([id,entry])=>[id,entry.color])),onSelect:ref=>selectMapRecord(ref),onEscape:()=>{$('map-record-title').focus({preventScroll:true});}});if(!map2d)throw new Error('Map layout unavailable');document.body.dataset.map2d='ready';map2d.setTheme(document.body.dataset.theme);map2d.select(mapRecord);syncMapSubject();renderMapRecord();return map2d;}
+    try{if(typeof window.mountAtlas2D!=='function')throw new Error('Map renderer unavailable');map2d=window.mountAtlas2D({container:$('map-2d'),data:window.TOPIC_DATA,byId,colors:Object.fromEntries([...meta].map(([id,entry])=>[id,entry.color])),onSelect:ref=>selectMapRecord(ref),onEscape:focusMapDetails});if(!map2d)throw new Error('Map layout unavailable');document.body.dataset.map2d='ready';map2d.setTheme(document.body.dataset.theme);map2d.select(mapRecord);syncMapSubject();renderMapRecord();return map2d;}
     catch{document.body.dataset.map2d='unavailable';const button=document.querySelector('[data-view="map"]');button.disabled=true;button.title='This catalogue has no supported 2D layout. Topic cards remain available.';if(view==='map')setView('2d');toast('2D map unavailable. Browse the topic cards or topic list.');return null;}
   }
   for(const subject of subjects.values()){const option=el('option','',subject.title);option.value=subject.id;$('map-subject').append(option);}
@@ -200,17 +287,18 @@
   function clearTopicFilters(){search='';topicKind='all';subjectId='';$('topic-search').value=$('mobile-search').value='';$('topic-kind').value=$('mobile-topic-kind').value='all';$('topic-subject').value=$('mobile-subject').value='';renderNav();syncMapSubject();updateState();}
   function chooseSubject(id,{fromCard=false}={}){subjectId=subjects.has(id)?id:'';if(fromCard){search='';topicKind='all';$('topic-search').value=$('mobile-search').value='';$('topic-kind').value=$('mobile-topic-kind').value='all';}$('topic-subject').value=$('mobile-subject').value=subjectId;renderNav();syncMapSubject();updateState();if(fromCard){if(innerWidth<=1000||mode==='explore'&&mapFocus){if(!$('topics-dialog').open)$('topics-dialog').showModal();$('mobile-subject').focus();}else{$('topic-subject').focus();$('topic-subject').scrollIntoView({block:'nearest'});}}}
   function focusReader(){if(!viewCanReceiveFocus())return;$('reader-title').focus({preventScroll:true});$('reader').scrollIntoView({block:'start',behavior:'instant'});}
-  function select(id,options={}){if(!byId.has(id))id='overview';if(tour&&!options.fromTour)exitTour();selected=id;mapRecord=`topic:${id}`;renderNav();renderReader();renderFlat();mapHeading();graph?.select(id);map2d?.select(mapRecord);renderMapRecord();if(!options.fromHash&&location.hash.slice(1)!==id)history[embedded?'replaceState':'pushState']({topic:id},'', '#'+id);if($('topics-dialog').open)$('topics-dialog').close();if(mode==='sources')setMode('read',false);if(options.focus!==false){if(mode==='read')focusReader();else (view==='map'?$('map-record-title'):$('read-map-topic')).focus({preventScroll:true});}$('selection-announcement').textContent='Selected '+byId.get(id).title;updateState();}
+  function select(id,options={}){if(!byId.has(id))id='overview';if(tour&&!options.fromTour)exitTour();selected=id;mapRecord=`topic:${id}`;renderNav();renderReader();renderFlat();mapHeading();graph?.select(id);map2d?.select(mapRecord,{recenter:mode==='explore'&&!options.fromMap&&!options.fromHash});renderMapRecord();if(!options.fromHash&&location.hash.slice(1)!==id)history[embedded?'replaceState':'pushState']({topic:id},'', '#'+id);if($('topics-dialog').open)$('topics-dialog').close();if(mode==='sources')setMode('read',false);if(options.focus!==false){if(mode==='read')focusReader();else if(view==='map')focusMapSelection();else $('read-map-topic').focus({preventScroll:true});}$('selection-announcement').textContent='Selected '+byId.get(id).title;updateState();}
   function ensureGraph(){if(graphPromise)return graphPromise;$('map-loading').hidden=false;graphPromise=import('./graph.mjs').then(({mountGraph})=>{graph=mountGraph({container:$('scene-canvas'),labels:$('scene-labels'),stage:$('graph-stage'),nodes,meta,byId,categoryFor,colorFor,onSelect:id=>select(id,{focus:false}),onHover:n=>{$('hover-caption').hidden=!n;if(n)$('hover-caption').textContent=n.title;}});graph.setTheme(document.body.dataset.theme);graph.setRotation(rotation);graph.select(selected,{instant:true});graph.setActive(mode==='explore'&&view==='3d');$('map-loading').hidden=true;document.body.dataset.graph='ready';}).catch(()=>{$('map-loading').hidden=true;document.body.dataset.graph='fallback';document.querySelector('[data-view="3d"]').disabled=true;setView('2d');toast('3D is unavailable here. Browse every topic with the topic cards or topic list.');});return graphPromise;}
   function setView(next){
     if(!['map','2d','3d'].includes(next))return;view=next;document.body.dataset.mapView=view;
-    $('scene-canvas').hidden=view!=='3d';$('scene-labels').hidden=view!=='3d';$('flat-map').hidden=view!=='2d';$('map-2d').hidden=view!=='map';$('map-2d-controls').hidden=view!=='map';$('map-record-panel').hidden=view!=='map';document.querySelector('.map-selection').hidden=view==='map';document.querySelector('.map-current-topic').hidden=view==='map';$('map-reset').hidden=view!=='map';
+    $('scene-canvas').hidden=view!=='3d';$('scene-labels').hidden=view!=='3d';$('flat-map').hidden=view!=='2d';$('map-2d').hidden=view!=='map';$('map-2d-controls').hidden=view!=='map';$('map-record-panel').hidden=view!=='map';$('map-selection-bar').hidden=view!=='map';document.querySelector('.map-selection').hidden=view==='map';document.querySelector('.map-current-topic').hidden=view==='map';$('map-reset').hidden=view!=='map';
+    document.querySelector('.map-intro').textContent=view==='map'?'Find an item or select a node. Open its details to read the guidance and connections.':'Choose a node to see its connections. Details and reading links appear below the map.';
     const navigation=view==='map'?$('map2d-navigation'):document.querySelector('.map-actions');for(const id of ['zoom-out','zoom-in','map-reset'])navigation.append($(id));$('overview-button').hidden=view==='map';
     ['rotate-left','rotate-right','map-rotation'].forEach(id=>$(id).hidden=view!=='3d');['zoom-in','zoom-out'].forEach(id=>$(id).hidden=view==='2d');
     document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)));graph?.setActive(mode==='explore'&&view==='3d');map2d?.setActive(mode==='explore'&&view==='map');
     if(view==='map')$('map-record-panel').firstElementChild.append(mapPractice);else mapActions.prepend(mapPractice);renderPracticeLinks();
     $('map-hint').textContent=view==='3d'?'Drag to rotate. Use + / − to zoom. Tab to topic buttons, or browse the full topic list.':view==='map'?'Drag the background to pan. Use + / − or hold Control while scrolling to zoom. Fit map returns to all nodes. Keyboard: arrows pan, Home fits, Enter selects.':'Select a card to explore its cluster. The full topic list is below.';
-    document.querySelector('.map-legend').textContent=view==='map'?'Circle: topic. Rounded square: practice. Hexagon: technology. Short guides connect headings to their groups. Arrows show connections from your selection. Solid: structure. Dashed: applies. Dotted: reading. Connections describe records, not executed workflows or verified evidence.':'Solid lines group topics. Dashed lines connect related topics. These connections do not represent executed workflows or verified evidence.';
+    document.querySelector('.map-legend').textContent=view==='map'?'Circle: guide. Rounded square: practice. Hexagon: technology. Short guide lines join headings to their groups. Lines show connections involving your selection. Arrows follow recorded directions. Related reading and works with have no arrows. Solid: structure. Dashed: applies. Dotted: reading. Open Why connected? for each meaning, review status and sources. Connections are not executed workflows or proof of correctness.':'Solid lines group topics. Dashed lines connect related topics. These connections do not represent executed workflows or verified evidence.';
     if(mode==='explore'&&view==='3d')ensureGraph();else $('map-loading').hidden=true;
     if(mode==='explore'&&view==='map'){const mounted=ensureMap2D();if(!mounted)return;mounted.setActive(true);}
     mapHeading();syncMapSubject();renderMapRecord();renderMapIndex();updateState();
@@ -231,7 +319,11 @@
   $('map-subject').addEventListener('change',e=>chooseSubject(e.target.value));
   ['structure','applies','reading'].forEach(family=>$('map-family-'+family).addEventListener('change',e=>{map2d?.setFamily(family,e.target.checked);renderMapRecord();}));
   $('map-reset').addEventListener('click',()=>map2d?.reset());
-  $('map-record-read').addEventListener('click',()=>{const record=mapRecords.get(mapRecord);if(record?.topicId&&byId.has(record.topicId)){setMode('read',false);select(record.topicId);}});
+  $('map-record-read').addEventListener('click',()=>{const record=mapRecords.get(mapRecord),reading=record&&mapReadingTarget(record);if(reading){setMode('read',false);select(reading.id);}});
+  $('map-find').addEventListener('click',openMapFinder);$('close-map-find').addEventListener('click',()=>$('map-find-dialog').close());$('map-find-search').addEventListener('input',renderMapFinder);
+  $('map-find-results').addEventListener('click',event=>{const button=event.target.closest('[data-map-find-record]');if(!button)return;$('map-find-dialog').close();selectMapRecord(button.dataset.mapFindRecord,{recenter:true});focusMapSelection();});
+  $('map-open-details').addEventListener('click',focusMapDetails);$('map-return').addEventListener('click',focusMapSelection);
+  $('map-find-dialog').addEventListener('click',event=>{if(event.target!==event.currentTarget)return;const rect=event.currentTarget.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)event.currentTarget.close();});
   $('source-search').addEventListener('input',renderSources);$('source-filter').addEventListener('change',renderSources);
   $('mobile-topics').addEventListener('click',()=>{$('topics-dialog').showModal();$('mobile-search').focus();});$('close-topics').addEventListener('click',()=>$('topics-dialog').close());$('topics-dialog').addEventListener('click',e=>{if(e.target===$('topics-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
   $('start-tour').addEventListener('click',()=>{const key=$('tour-select').value;if(key)startTour(key);else $('tour-select').focus();});$('tour-previous').addEventListener('click',()=>{if(tourIndex>0){tourIndex--;showTourStep();}});$('tour-next').addEventListener('click',()=>{if(tourIndex<tour.ids.length-1){tourIndex++;showTourStep();}else{exitTour();toast('Path complete. Explore connected topics or review the sources.');}});$('tour-exit').addEventListener('click',exitTour);
@@ -259,7 +351,7 @@
   });
   document.addEventListener('click',event=>{const button=event.target.closest('[data-practice-request]');if(!button||button.disabled)return;const action=practiceContext?.actions.find(action=>action.topicId===selected&&action.topicId===button.dataset.practiceTopic&&action.id===button.dataset.practiceRequest&&!action.alreadyApplied);if(action)sendParent({type:'workflow-atlas:practice-request',actionId:action.id,topicId:action.topicId});});
   function hashTopic(){let id='overview';try{id=decodeURIComponent(location.hash.slice(1))||id;}catch{}return byId.has(id)?id:'overview';}window.addEventListener('hashchange',()=>select(hashTopic(),{fromHash:true}));window.addEventListener('popstate',()=>{if(hashTopic()!==selected)select(hashTopic(),{fromHash:true});});
-  document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)&&!document.activeElement.isContentEditable){e.preventDefault();if(mode==='sources')$('source-search').focus();else if(innerWidth<=1000||mode==='explore'&&mapFocus){if(!$('topics-dialog').open)$('topics-dialog').showModal();$('mobile-search').focus();}else $('topic-search').focus();}if(e.key!=='Escape'||$('topics-dialog').open||document.activeElement.tagName==='SELECT')return;if(search||topicKind!=='all'||subjectId){e.preventDefault();clearTopicFilters();return;}if(mode==='sources'&&$('source-search').value){e.preventDefault();$('source-search').value='';renderSources();return;}if(embedded){e.preventDefault();sendParent({type:'workflow-atlas:close-knowledge'});}});
+  document.addEventListener('keydown',e=>{if($('map-find-dialog').open)return;if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)&&!document.activeElement.isContentEditable){e.preventDefault();if(mode==='sources')$('source-search').focus();else if(mode==='explore'&&view==='map')openMapFinder();else if(innerWidth<=1000||mode==='explore'&&mapFocus){if(!$('topics-dialog').open)$('topics-dialog').showModal();$('mobile-search').focus();}else $('topic-search').focus();}if(e.key!=='Escape'||$('topics-dialog').open||document.activeElement.tagName==='SELECT')return;if(search||topicKind!=='all'||subjectId){e.preventDefault();clearTopicFilters();return;}if(mode==='sources'&&$('source-search').value){e.preventDefault();$('source-search').value='';renderSources();return;}if(embedded){e.preventDefault();sendParent({type:'workflow-atlas:close-knowledge'});}});
   new ResizeObserver(tourOffset).observe($('tour-bar'));
   $('atlas-count').textContent=`${nodes.length} topics · ${Object.keys(sources).length} sources`;setMapFocus(mapFocus);setRotation(false);setView(view);select(hashTopic(),{fromHash:true,focus:false});setMode(['read','explore','sources'].includes(params.get('view'))?params.get('view'):embedded?'explore':'read',false);
   sendParent({type:'workflow-atlas:knowledge-ready',...knowledgeState()});

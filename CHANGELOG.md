@@ -4,9 +4,11 @@ Release notes describe application changes. Project schema and guidance versions
 
 ## Unreleased
 
+- Find every guide, practice and technology name with a separate Find on map search. Keep the selected name above the canvas, offer Details and connections and Back to map, and bring externally selected articles into view.
+- Explain connected items in plain words and expose their recorded relationship, review status, notes and sources under Why connected?. Flag pending review, distinguish hidden connections from isolated names, and offer reading only through recorded links. Follow directional relationships with arrows and leave symmetric reading and stack links undirected.
 - Wrap and separate cluster headings in the 2D map without shrinking the text or moving nodes. Small guide lines connect shifted headings to their groups. Keep the numbered phone view and its named Map key.
 - Keep cluster headings inside Fit map on shorter screens and when subject controls change the map height. Preserve manual pan and zoom during layout changes.
-- Add a fixed 2D knowledge map with topic, practice and technology shapes, subject highlighting, selected connections, a named Neighbours list, pan, zoom and keyboard controls. Keep Topic cards, the 3D map, topic parents and published links. Include the new map in standalone offline exports. Layout geometry does not rate sources or change project decisions.
+- Add a fixed 2D knowledge map with topic, practice and technology shapes, subject highlighting, selected connections, a named list of connected items, pan, zoom and keyboard controls. Keep Topic cards, the 3D map, topic parents and published links. Include the new map in standalone offline exports. Layout geometry does not rate sources or change project decisions.
 - Browse four subjects from Knowledge map home cards or the Topics filter: CI and pipelines, Containers, Access and action controls, and Workflow measurements. Search and topic type narrow the chosen subject. Each group shows its coverage limits. Keep the existing map, topic parents, published links and guided paths unchanged.
 - Add `AGENTS.md` to the full artifact pack. It carries recorded commands, stage order, owners, acceptance and boundaries in one short file at the repository root, in the open format read by Copilot cloud agent and other coding agent hosts. The blueprint and single skill outputs do not include it.
 - Correct the phone layout of the three starting workflow cards, whose titles wrapped one letter per line.

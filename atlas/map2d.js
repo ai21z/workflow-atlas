@@ -57,7 +57,7 @@
     const title = make('title');
     title.textContent = 'Knowledge map';
     const description = make('desc');
-    description.textContent = 'Fixed clusters contain reading topics, practices and technologies. Select a node to inspect its recorded connections. Use the Neighbours list for named links. Drag empty space to pan. Hold Control while scrolling to zoom.';
+    description.textContent = 'Fixed clusters contain reading topics, practices and technologies. Select a node to inspect its recorded connections. Use Find on map for any item, or Connected topics and tools for named links. Drag empty space to pan. Hold Control while scrolling to zoom.';
     svg.append(title, description);
     const defs = make('defs');
     for (const family of Object.keys(families)) {
@@ -358,9 +358,14 @@
         const from = records.get(edge.from), to = records.get(edge.to), dx = to.x - from.x, dy = to.y - from.y, length = Math.hypot(dx, dy);
         if (!length) continue;
         const unitX = dx / length, unitY = dy / length;
-        const relation = edge.relations.find(item => item && !item.derived) || edge.relations[0];
-        const reverse = relation?.to === edge.from;
-        const line = make('line', { class: `map2d-edge map2d-edge-${edge.family}`, 'data-family': edge.family, 'data-edge-family': edge.family, x1: from.x + unitX * (from.radius + 3), y1: from.y + unitY * (from.radius + 3), x2: to.x - unitX * (to.radius + 3), y2: to.y - unitY * (to.radius + 3), 'vector-effect': 'non-scaling-stroke', [reverse ? 'marker-start' : 'marker-end']: `url(#${prefix}-${edge.family})` });
+        const explicit = edge.relations.filter(item => item && !item.derived);
+        // Generated inverse records express the same fact, not another direction.
+        const inverseTypes = ['browses', 'has-part', 'applied-by', 'required-by', 'explains', 'used-by', 'capability-of', 'illustrated-by', 'has-example', 'narrower-concept'];
+        const forward = edge.relations.filter(item => item && !inverseTypes.includes(item.type));
+        const directional = (explicit.length ? explicit : forward.length ? forward : edge.relations.slice(0, 1)).filter(item => item && !['related-reading', 'works-with'].includes(item.type));
+        const line = make('line', { class: `map2d-edge map2d-edge-${edge.family}`, 'data-family': edge.family, 'data-edge-family': edge.family, 'data-from': edge.from, 'data-to': edge.to, 'data-directed': String(directional.length > 0), x1: from.x + unitX * (from.radius + 3), y1: from.y + unitY * (from.radius + 3), x2: to.x - unitX * (to.radius + 3), y2: to.y - unitY * (to.radius + 3), 'vector-effect': 'non-scaling-stroke' });
+        if (directional.some(item => item.from === edge.from)) line.setAttribute('marker-end', `url(#${prefix}-${edge.family})`);
+        if (directional.some(item => item.to === edge.from)) line.setAttribute('marker-start', `url(#${prefix}-${edge.family})`);
         const tooltip = make('title');
         tooltip.textContent = [...new Set(edge.relations.map(item => `${labels.get(item.from) || item.from} → ${item.type.replaceAll('-', ' ')} → ${labels.get(item.to) || item.to}`))].join('\n');
         line.append(tooltip);

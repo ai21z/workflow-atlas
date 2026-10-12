@@ -54,9 +54,15 @@ A person, agent or existing system can own work. A skill describes a reusable pr
 
 ## 4. Learn without changing the project
 
-Open **Knowledge map** to explore the full reference Atlas. **2D map** is the default exploration view. Your choice of map view is retained while you browse. Select a node, inspect its connections and choose **Read topic** or **Read explanation** when available. **Neighbours** gives the connections as named controls. **Topic cards** and the **3D map** remain beside the new map. Search results open guidance directly.
+Open **Knowledge map** to explore the full reference Atlas. **2D map** is the default exploration view. Your choice of map view is retained while you browse. **Topic cards** and the **3D map** remain available.
 
-Drag empty map space to pan. Use the zoom buttons, then **Fit map** to see everything again. Structure and Applies connections start on. Turn on Reading for other immediate links. With focus in the map, arrow keys pan, Home fits, plus and minus zoom, and Escape moves to the selected record panel. Enter or Space selects a focused node. **Browse all map nodes as a list** gives you a named button for every record.
+Choose **Find on map** to search every map item, across all subjects. Results label each item **Guide**, **Practice** or **Technology**. **Show on map** keeps you in Explore and brings the selected node and its name into view. Ordinary topic search opens reading directly instead.
+
+Choose **Details and connections** beside the selected name to read its summary and **Connected topics and tools** below the map. The number counts connected items in the enabled connection groups. **Why connected?** shows the original relationship, review status, notes and sources. Pending links say **Connection needs review**. Select a connected item to explore it, or **Back to map** to return to the selected name.
+
+**Read topic**, **Read explanation** or **Read related guide** opens recorded guidance when available. **No guide recorded** means the name has no recorded reading route. Atlas does not invent one. An empty connection list distinguishes hidden connections from a name with none recorded. Use **Show all connection groups** when that option appears.
+
+Drag empty map space to pan. Use the zoom buttons, then **Fit map** to see everything again. Structure and Applies connections start on. Turn on Reading for other immediate links. Arrows show recorded directions. Related reading and works with links have no arrows. With focus in the map, arrow keys pan, Home fits, plus and minus zoom, and Escape moves to the selected record panel. Enter or Space selects a focused node. **Browse all map nodes as a list** gives you a named button for every record.
 
 Want a smaller reading list? Choose a **Browse a subject** card on the home page, or choose a subject in Topics. Search and **Topic type** narrow that list further. In the 2D map, **Highlight a subject** uses the same selection. Its articles are highlighted and all nodes stay available. **All subjects** removes the subject filter. Read the group's limits, a topic count does not mean complete coverage. The original 3D map and topic hierarchy stay the same.
 
