@@ -5,6 +5,7 @@ Release notes describe application changes. Project schema and guidance versions
 ## Unreleased
 
 - Find every guide, practice and technology name with a separate Find on map search. Keep the selected name above the canvas, offer Details and connections and Back to map, and bring externally selected articles into view.
+- Keep map search results at their full height on phones and scroll longer lists without cutting off descriptions or actions.
 - Explain connected items in plain words and expose their recorded relationship, review status, notes and sources under Why connected?. Flag pending review, distinguish hidden connections from isolated names, and offer reading only through recorded links. Follow directional relationships with arrows and leave symmetric reading and stack links undirected.
 - Wrap and separate cluster headings in the 2D map without shrinking the text or moving nodes. Small guide lines connect shifted headings to their groups. Keep the numbered phone view and its named Map key.
 - Keep cluster headings inside Fit map on shorter screens and when subject controls change the map height. Preserve manual pan and zoom during layout changes.

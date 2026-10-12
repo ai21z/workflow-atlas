@@ -87,6 +87,42 @@ async function findMapRecord(ref, query, target = page) {
   await target.locator(`#map-find-results [data-map-find-record="${ref}"]`).click()
 }
 
+async function finderCardGeometry() {
+  const measured = await page.evaluate(() => {
+    const list = document.getElementById('map-find-results'), dialog = document.getElementById('map-find-dialog')
+    const cards = [...list.querySelectorAll('[data-map-find-record]')].map(item => {
+      const rect = item.getBoundingClientRect()
+      return { record: item.dataset.mapFindRecord, top: rect.top, bottom: rect.bottom, height: rect.height, clientHeight: item.clientHeight, scrollHeight: item.scrollHeight, children: [...item.children].map(child => {
+        const bounds = child.getBoundingClientRect()
+        return { text: child.textContent, top: bounds.top, bottom: bounds.bottom, left: bounds.left - rect.left, right: rect.right - bounds.right, clientWidth: child.clientWidth, scrollWidth: child.scrollWidth }
+      }) }
+    })
+    const bounds = list.getBoundingClientRect(), modal = dialog.getBoundingClientRect()
+    return { cards, viewport: { width: innerWidth, height: innerHeight }, list: { top: bounds.top, bottom: bounds.bottom, clientHeight: list.clientHeight, scrollHeight: list.scrollHeight }, dialog: { top: modal.top, bottom: modal.bottom } }
+  })
+  assert.ok(measured.cards.length > 0, 'The finder has actual result cards to inspect')
+  let minimumGap = Infinity, minimumContentInset = Infinity
+  for (let index = 0; index < measured.cards.length; index++) {
+    const card = measured.cards[index]
+    assert.ok(card.scrollHeight <= card.clientHeight + 2, `${measured.viewport.width}px: ${card.record} must contain its complete result text, actual scrollHeight ${card.scrollHeight}px exceeds clientHeight ${card.clientHeight}px`)
+    for (const child of card.children) {
+      const inset = Math.min(child.top - card.top, card.bottom - child.bottom, child.left, child.right)
+      assert.ok(inset >= 2, `${measured.viewport.width}px: ${card.record} text "${child.text}" must remain inside its own result card, actual minimum inset ${inset}px`)
+      assert.ok(child.scrollWidth <= child.clientWidth + 1, `${card.record} content must not clip horizontally`)
+      minimumContentInset = Math.min(minimumContentInset, inset)
+    }
+    if (index) {
+      const gap = card.top - measured.cards[index - 1].bottom
+      assert.ok(gap >= 4, `${card.record} must remain visually separate from the preceding result, actual gap ${gap}px`)
+      minimumGap = Math.min(minimumGap, gap)
+    }
+  }
+  assert.ok(measured.list.clientHeight > 0, 'The bounded results region has usable visible height')
+  assert.ok(measured.list.scrollHeight > measured.list.clientHeight, 'A long result list scrolls instead of shrinking its cards')
+  assert.ok(measured.dialog.top >= 0 && measured.dialog.bottom <= measured.viewport.height + 1, 'The finder remains inside the viewport')
+  return { cards: measured.cards.length, minimumContentInset, minimumGap: Number.isFinite(minimumGap) ? minimumGap : null, list: measured.list, dialog: measured.dialog }
+}
+
 async function visibleFocus(id) {
   const measured = await page.evaluate(id => {
     const item = document.getElementById(id), rect = item.getBoundingClientRect(), header = document.querySelector('.topbar').getBoundingClientRect()
@@ -752,6 +788,34 @@ async function run() {
       assert.equal(await page.locator('.map-show-connections').count(), 0, 'An isolated item does not offer to reveal invented connections')
       await unchangedGraph()
       return 'Phone keyboard users can reveal genuinely filtered connections, while an isolated catalogue name remains truthfully unconnected.'
+    })
+
+    for (const width of [320, 390]) for (const theme of ['light', 'dark']) await check(`06j-finder-complete-cards-and-scroll-${width}-${theme}`, async () => {
+      await fresh({ width, height: 844, theme })
+      const observations = []
+      for (const query of ['', 'ci', 'GitHub Actions']) {
+        await page.locator('#map-find').click()
+        await page.locator('#map-find-search').fill(query)
+        const geometry = await finderCardGeometry()
+        if (!query) assert.equal(geometry.cards, current.catalog.layout2d.nodes.length, 'The initial finder includes every map record')
+        const last = page.locator('#map-find-results [data-map-find-record]').last()
+        const ref = await last.getAttribute('data-map-find-record')
+        await last.scrollIntoViewIfNeeded()
+        const revealed = await last.evaluate(item => {
+          const bounds = item.getBoundingClientRect(), list = document.getElementById('map-find-results').getBoundingClientRect()
+          return { top: bounds.top, bottom: bounds.bottom, listTop: list.top, listBottom: list.bottom }
+        })
+        assert.ok(revealed.top >= revealed.listTop - 1 && revealed.bottom <= revealed.listBottom + 1, 'The final card can be fully revealed by scrolling the bounded results list')
+        assert.equal(await page.locator('#close-map-find').isVisible(), true, 'The close control stays available while results scroll')
+        assert.equal(await page.locator('#map-find-search').isVisible(), true, 'The search input stays available while results scroll')
+        await last.press('Enter')
+        assert.equal(await page.evaluate(() => ATLAS_STATE.mapRecord), ref, 'The final scrolled result remains operable by keyboard')
+        assert.equal(await page.locator('#map-find-dialog').evaluate(dialog => dialog.open), false)
+        await visibleFocus('map-selected-name')
+        observations.push({ query: query || 'All records', ...geometry, lastRecord: ref, revealed })
+      }
+      await unchangedGraph()
+      return observations
     })
 
     await check('07-legacy-projection-fallback-and-preserved-3d', async () => {
