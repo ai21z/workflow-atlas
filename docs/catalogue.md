@@ -2,23 +2,25 @@
 
 The catalogue supplies the Knowledge Atlas and the instruction factory from versioned JSON in `catalogue/`. Edit those sources, validate them and rebuild the two static projections. The browser reads the generated files without a database service.
 
-Catalogue content is version `2.1.0`. Its authoring schema is `1.1`. Project configuration remains schema `3.0`, with workflow model `1.0`. These versions describe different contracts.
+Catalogue content is version `2.2.0`. Its authoring schema is `1.1`. Project configuration remains schema `3.0`, with workflow model `1.0`. These versions describe different contracts.
 
 ## Current coverage
 
-The catalogue contains 125 topics, 137 source records, 10 browsing clusters and six guided paths. All 109 earlier topics remain. Eight retrieval topics illustrate validation, technology choices and a fictional example. Three general procedures introduce pipeline diagnosis, data and query verification, and source and evidence verification.
+The catalogue contains 131 topics, 149 source records, 10 browsing clusters, nine subjects and seven guided paths. All 109 earlier topics remain. Existing retrieval and specialist examples stay available alongside the new feature path.
 
-Five topics added on 11 October 2026 start the balanced coverage: Node.js, Python, GitHub Actions, Docker and a practice for repository instructions to agents. Each technology topic uses the same section labels, where config lives, conventional commands, how CI is declared, where review conventions live and gotchas, and carries its statements as claims with official documentation sources. All five topics are `needs-review`. They were drafted from pages read on that date and await a dated topic review. Linked sources retain their individual recorded review status. Search aliases are recorded on 124 of the 125 topics. Where existing text supports them, topics also have a specific applicability sentence and an `applies` block. Forty topics tied to one workplace are labeled as examples with their context.
+Node.js, Python, GitHub Actions, Docker and Repository instructions for agents now have dated, scoped claim reviews from 12 October 2026. Corrections include version dependent Node.js and npm behavior, Python environment commands, Docker build checks, GitHub token exceptions and host specific instruction loading. Review does not establish that example commands ran or fit a particular project. Older topics retain their recorded status, 109 are legacy and four still need review. The 18 reviewed topics include procedures with proposed examples. Their badges refer to the listed factual claims, not to approval of every recommendation or a verified implementation.
 
-The Skills and agent roles cluster leads with those general procedures. Its Jenkins and country-source pages are visibly scoped examples. RDF/SPARQL verification keeps its own data-family guidance, with Neptune execution plans relevant only to Neptune. These new entry procedures are proposed guidance marked for review. Their addition is not a new source review or an exportable skill mapping. Broader catalogue-wide abstraction and factual review remain unfinished.
+Six new guides complete the first reference path: Deliver a user-facing feature, JavaScript and TypeScript, React, npm, Vitest and Playwright. They explain project facts to find, a procedure, useful outputs, expected examples and limits. The language guide distinguishes JavaScript runtime behavior from TypeScript checks. Technology guides match their recorded technologies, rather than treating any development stage as a reason to choose that stack.
 
-There are 24 technology choices and eight question profiles: generic, Spring Boot, React, RDF/SPARQL, Node.js, Python, GitHub Actions and containerised services. A technology choice records a name. A profile adds questions and expected checks. Neither establishes installation, compatibility, available credentials or observed behavior. Other technologies retain generic guidance. The retrieval examples are a starting set, not a complete technology directory.
+There are 27 technology choices and 13 question profiles, including generic guidance. Fourteen technologies trigger a specialist profile. A choice records a name. A profile adds questions and expected checks to project references in generated skills and to SOURCES.md. Neither establishes installation, compatibility, available credentials or observed behavior. Spring Boot has questions but no dedicated guide yet. pytest guidance is inside Python, with no separate selectable pytest definition. These gaps stay visible.
+
+The general procedures for pipeline diagnosis, data and query verification, and source and evidence verification remain proposed guidance awaiting review. Jenkins and country-source pages are visibly scoped examples. RDF/SPARQL verification keeps its data-family guidance, with Neptune execution plans relevant only to Neptune. Broader catalogue review and technology coverage remain unfinished.
 
 In the Knowledge Atlas, search titles, aliases and subject areas, or use **Topic type** to narrow the results. **Browse a subject** groups existing articles across their original clusters. **Take a guided path** includes **Retrieve and check information**. Reading or filtering does not create or edit a project.
 
 ### Browse a subject
 
-The home page offers four subject cards. Choose one to open its topics, or select **Browse a subject** in the topic navigation. On a phone, this opens the Topics dialog. Search and **Topic type** narrow the selected subject further. Choose **All subjects** to remove the subject filter, or clear the filters to return to every topic.
+The home page offers nine subject cards. Choose one to open its topics, or select **Browse a subject** in the topic navigation. On a phone, this opens the Topics dialog. Search and **Topic type** narrow the selected subject further. Choose **All subjects** to remove the subject filter, or clear the filters to return to every topic.
 
 | Subject | What it groups | Coverage limit |
 | --- | --- | --- |
@@ -26,6 +28,11 @@ The home page offers four subject cards. Choose one to open its topics, or selec
 | Containers | The Docker article | Docker only, not Kubernetes or a complete deployment guide |
 | Access and action controls | Tool boundaries, credentials, validation and approval guidance | Not a full security review |
 | Workflow measurements | Existing cost, evaluation and workflow evidence guidance | Not a full observability guide |
+| Clarify the work | Outcomes, acceptance examples and traceability | Requirements are not approved by reading |
+| Design and delivery | Architecture, breakdown and scoped implementation | Real ownership and commands remain project facts |
+| Verification and evidence | Relevant checks, findings and observed results | No checks run while reading |
+| Release and recovery | Candidate identity, operating ownership and recovery | No deployment or incident tool is configured |
+| Change a user facing feature | The fictional status filter and its optional reference stack | One example, with no implemented result or required stack |
 
 Each subject records its own limits, which appear beside the filtered topics. The displayed count is the number of member articles. It is not a completeness score, a source review or proof of a working integration. Subjects can overlap. They are reading groups, not ordered paths, new map clusters or workflow prerequisites.
 
@@ -33,9 +40,9 @@ Subject membership does not change topic parents, cluster identities, graph posi
 
 ### Explore the 2D map
 
-**Explore the map** opens the new **2D map** by default. **Topic cards** and the preserved **3D map** remain available in both the workspace and standalone Atlas. The 2D map draws 125 reading topics, seven practice definitions and 24 technology definitions. Circles are topics, rounded squares are practices and hexagons are technology names. A topic and its corresponding definition remain separate records.
+**Explore the map** opens the new **2D map** by default. **Topic cards** and the preserved **3D map** remain available in both the workspace and standalone Atlas. The 2D map draws 131 reading topics, seven practice definitions and 27 technology definitions. Circles are topics, rounded squares are practices and hexagons are technology names. A topic and its corresponding definition remain separate records.
 
-Use **Find on map** to search all 156 displayed records, independently of the subject and topic filters used for reading. Results distinguish **Guide**, **Practice** and **Technology**. Choose **Show on map** to stay in Explore, bring the node into view and reveal its name above the canvas. Article search remains a separate way to open reading directly. **Browse all map nodes as a list** also includes every displayed record.
+Use **Find on map** to search all 165 displayed records, independently of the subject and topic filters used for reading. Results distinguish **Guide**, **Practice** and **Technology**. Choose **Show on map** to stay in Explore, bring the node into view and reveal its name above the canvas. Article search remains a separate way to open reading directly. **Browse all map nodes as a list** also includes every displayed record.
 
 Select **Details and connections** beside the selected name to reach its summary, recorded review information, source links and **Connected topics and tools** below the map. The number on that button counts connected items in the enabled connection groups. **Back to map** returns to the selected name. Choosing a connected item selects it and brings its node into view. Choosing an article from the sidebar while exploring also brings that node into view.
 
@@ -66,7 +73,7 @@ The map adds no layout library or inference request. A missing or unsupported la
 | `catalogue/relations.json` | Typed links between topics, definitions and their referenced evidence |
 | `catalogue/actions.json` | Curated topic actions, their practice or runtime-control target, explanation and eligibility rule |
 | `catalogue/navigation.json` | Domains, browsing clusters, optional subject groups and ordered guided collections |
-| `catalogue/coverage.json` | Maintainer list of eight stack slots and wanted IDs, used only for structural coverage reporting |
+| `catalogue/coverage.json` | Maintainer slots, indirect reading and explicit task, output and example sections, kept separate from review and export support |
 | `catalogue/catalogue.schema.json` | JSON Schema for the assembled authoring model |
 
 Topic kinds are `concept`, `capability`, `technology`, `practice`, `example`, `reference` and `procedure`. Factory definition types are `stage`, `skill`, `role`, `practice`, `recipe`, `profile`, `control`, `technology` and `host`. A capability topic explains an intended ability. A stage's capability aliases describe requested host tools. These records have different purposes.
@@ -187,7 +194,33 @@ The runner prints two numbers. Expected practice hit at three counts cases where
 
 These measurements follow project eligibility, current selections and the final match policy. They are engineering checks on authored cases, not a general accuracy, usability, source-correctness or JEV claim. A later catalogue or matching change can alter the results. Use `npm test` for the complete unit suite.
 
-Coverage of the eight stack slots is a maintainer report. `catalogue/coverage.json` names the slots and the ids the catalogue wants, and `npm run check:catalogue` prints each id as covered, thin, named only, topic only or missing. Covered means a name and related topic are present, plus a question profile for technologies. Hosts do not need a technology profile. Thin means a technology name and topic without a profile. Named only and topic only identify a record without its other side. Missing means neither is present. These states measure catalogue structure. They do not establish reviewed content, compatibility, a working integration or suitability for a team. The file is not served.
+## Read the coverage report
+
+Run npm run check:catalogue to check the projections and print the maintainer report. catalogue/coverage.json is not served and never enters an inference request. Its 51 requested slot entries are a selected backlog, not a complete technology directory or 51 unique products.
+
+| Dimension | What the report establishes | What it does not establish |
+| --- | --- | --- |
+| Structure | Covered, thin, named only, topic only or missing under the original record rules | Quality, completeness or project fit |
+| Reading | Linked topics, explicitly recorded indirect guidance or no guide | Independent support for a name mentioned inside another guide |
+| Task guidance | Recorded task, existing procedure and output sections, scope and any worked example sections | That the proposed procedure succeeds for a real user |
+| Review | Each related topic's status, review date and number of scoped claims | Whole article certification or verified compatibility |
+| Factory effect | Relevant question profile IDs or an available host export target | Installed tools, working connections, execution or successful host use |
+
+Covered still means a name and related topic plus a technology profile, or a supported host record. Thin means a technology name and related topic without a profile. Named only and topic only identify a record without its other side. Missing means neither is directly present. Indirect reading does not silently promote a missing technology to covered. pytest therefore reports missing structurally while showing Python as indirect reading. Spring Boot reports named only while showing its existing question profile. A shared host article does not become three complete host adoption guides.
+
+Task metadata explicitly names the section labels. The report rejects nonexistent sections, unknown topics, duplicate entries and unsupported fields. It cannot judge the quality of the prose or whether an external source supports a claim. Recommendations and fictional expected results stay distinct from the factual claims and actual observations. There is no combined completeness score.
+
+### Try the feature reference path
+
+1. In Knowledge map, choose Change a user facing feature under Browse a subject, or under Take a guided path for ordered reading. Start with Deliver a user-facing feature. Reading does not select its stack.
+2. In Brief, open Browse examples and choose Build a feature. Atlas opens the editable Request list status filter example in Workflow. Return to Brief to inspect its outcome and acceptance examples.
+3. In Project details, replace the example stack as needed. Supply real component paths, versions, scripts and sources from the target repository. Missing values deliberately keep the export a draft.
+4. Read the questions for the selected stack. They distinguish static checks, rule fixtures, simulated rendering, actual browser interaction and delivery gates. Record decisions and keep unresolved questions visible.
+5. In Workflow, review the stage notes and planned checks. Expected examples are proposals, not approved requirements or test results.
+6. Preview files, then Download. The blueprint includes the proposed workflow and templates. A full pack also includes selected skills, agent profiles and their project references. Inspect WORKFLOW.md, templates/REQUIREMENTS.md and the verification files. Keep evidence empty until someone performs and records a check.
+7. Open the downloaded pack to continue. Reading the map must leave the recorded project unchanged.
+
+The optional reference stack is React, TypeScript, Node.js, npm, Vitest, Playwright and GitHub Actions. It is an example path, not a technology recommendation for every team. The app does not implement the status filter or run its tests.
 
 ## Project and inference boundaries
 

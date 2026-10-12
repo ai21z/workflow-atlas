@@ -78,7 +78,7 @@ test('older packs expose unknown contents rather than treating age as invalidity
 test('selection and intended environment changes are separate recorded differences', () => {
   const config = createExample('feature-delivery')
   const old = getManifest(config)
-  config.project.host = 'vscode'
+  config.project.host = 'jetbrains'
   config.practices.push('evidence-wiki')
   const report = reviewGuidance(config, manifestFiles(old))
   assert.ok(report.changes.some(item => item.id === 'environment'))

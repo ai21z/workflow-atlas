@@ -1,0 +1,121 @@
+{
+  "id": "playwright",
+  "title": "Playwright user journeys",
+  "summary": "Exercise the accepted interaction in a browser, with controlled data and an explicit viewport.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this guide",
+      "text": "Use this when the project uses Playwright to exercise a browser journey. Start with the accepted user outcome. Running every browser or every possible viewport is not an automatic requirement for a small change."
+    },
+    {
+      "type": "p",
+      "label": "Documented guidance",
+      "text": "Playwright recommends tests of user visible behavior, isolation and controlled data, with locators based on roles or other user facing attributes. It can emulate viewport, touch, device parameters and color scheme. Its accessibility guidance says automated testing detects only some problems."
+    },
+    {
+      "type": "list",
+      "label": "Find the project facts",
+      "items": [
+        "Actual test script, browser projects, base URL and how the application starts.",
+        "Approved test environment, data and identity, including whether responses are mocked.",
+        "Supported browsers, viewport needs and any physical device checks required by the task.",
+        "Accessible names, keyboard interaction, visible states and the location of useful failure reports."
+      ]
+    },
+    {
+      "type": "steps",
+      "label": "Exercise one useful journey",
+      "items": [
+        "Arrange controlled request data and the agreed loading or failure responses. Keep tests independent of previous runs.",
+        "Open the actual target and choose the filter using its visible label or role. Assert the expected requests and relevant empty or failure message.",
+        "Exercise the interaction with a keyboard and inspect the narrow layout. Include both themes only if the product supports them and the changed behavior can differ.",
+        "Record browser, viewport, revision, simulated inputs and observed results. Keep an emulated phone configuration distinct from a physical phone test.",
+        "For a failure, preserve the report needed to reproduce it. Correct the cause and rerun the relevant journey."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Status filter example",
+      "text": "Choose Open and observe only the Open request. Choose All and observe both requests. Use an empty response to check the empty message and a failed response to check recovery. A successful mocked journey supports the UI contract. It does not establish real service permissions, production data behavior or complete accessibility."
+    },
+    {
+      "type": "p",
+      "label": "Useful result",
+      "text": "Example journey plan: arrange approved data, choose Open, check the matching request, choose All, check both requests, then exercise keyboard and the agreed narrow viewport. Record whether responses were mocked. Application URL, browser projects, identity and command remain to confirm. No browser or physical device result is asserted."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas changes",
+      "text": "Selecting Playwright adds browser, data, environment and evidence questions to generated skill references. Atlas does not install browser binaries, start the application, connect credentials or turn a planned check into observed evidence."
+    }
+  ],
+  "refs": [
+    "playwright-best-practices",
+    "playwright-emulation",
+    "reference-63",
+    "wai-keyboard",
+    "wai-reflow"
+  ],
+  "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+  "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [
+      "playwright",
+      "browser testing",
+      "end to end",
+      "e2e",
+      "mobile emulation",
+      "keyboard",
+      "browser journey"
+    ],
+    "revision": "1",
+    "applicability": "Use for accepted user journeys in a project that uses Playwright, with an approved target, controlled data and known browser configuration.",
+    "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
+    "claims": [
+      {
+        "sectionLabel": "Documented guidance",
+        "text": "Playwright recommends user visible behavior, isolated tests, controlled data and user facing locators.",
+        "sourceRefs": [
+          "playwright-best-practices"
+        ]
+      },
+      {
+        "sectionLabel": "Documented guidance",
+        "text": "Playwright can emulate viewport, touch, device parameters and color scheme.",
+        "sourceRefs": [
+          "playwright-emulation"
+        ]
+      },
+      {
+        "sectionLabel": "Documented guidance",
+        "text": "Automated accessibility testing detects only some problems.",
+        "sourceRefs": [
+          "reference-63"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "technologies": [
+        "playwright"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

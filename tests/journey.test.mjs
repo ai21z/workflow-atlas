@@ -12,6 +12,7 @@ const manifest = pack => JSON.parse(find(pack, 'manifest.json').content);
 const file = (name, content) => new File([content], name);
 function focusedProject() {
   const config = createExample('feature-delivery');
+  config.components.forEach((component, index) => { component.path = `fixture-component-${index}`; });
   config.workflow.enabledStages = ['architecture'];
   config.workflow.suppliedInputs.requirements = 'docs/accepted-requirements.md';
   config.skills = [];

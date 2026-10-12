@@ -1,27 +1,27 @@
 {
   "id": "python",
   "title": "Python",
-  "summary": "Python projects keep metadata in pyproject.toml, install into a virtual environment and test with pytest, and commands remain project conventions.",
+  "summary": "Identify a Python project's environment, dependency tool and test conventions. pyproject.toml, pytest and Ruff are common options, not requirements for every Python project.",
   "sections": [
     {
       "type": "p",
       "label": "Where config lives",
-      "text": "Project metadata lives in pyproject.toml, where the [build-system] table should always be present and the [project] table carries the name and version. pytest reads pytest.toml, .pytest.toml, pytest.ini, .pytest.ini, pyproject.toml, tox.ini or setup.cfg, and the first match while searching upward sets the rootdir. Ruff reads the closest .ruff.toml, ruff.toml or pyproject.toml with a [tool.ruff] section. A requirements file, usually requirements.txt, lists items for pip to install."
+      "text": "Python packaging can use pyproject.toml. PyPA recommends a [build-system] table for build configuration. A [project] table holds package metadata, with a required name and a version that may be supplied dynamically by the build backend. Some backends use another metadata format. pytest 9 supports pytest.toml and .pytest.toml as well as pytest.ini, .pytest.ini, pyproject.toml, tox.ini and setup.cfg. Its search starts from the common ancestor of supplied paths, or the working directory, and the first matching configuration determines rootdir unless a command option overrides it. Ruff reads the closest .ruff.toml, ruff.toml or pyproject.toml with a [tool.ruff] section. A requirements file, usually requirements.txt, lists items for pip to install."
     },
     {
       "type": "p",
       "label": "Conventional commands",
-      "text": "These commands are conventions, not facts about any project. python -m venv creates an isolated environment, and activation is optional when the environment's interpreter is called by its full path. pip install -e . installs a project without copying files, so source edits take effect without reinstalling."
+      "text": "These commands are conventions, not facts about any project. python -m venv creates an isolated environment, and activation is optional when the environment's interpreter is called by its full path. An editable pip install exposes project sources without copying them. Python source edits normally take effect without reinstalling, but metadata changes can require reinstallation and compiled extensions still need building."
     },
     {
       "type": "code",
       "label": "Example commands",
-      "text": "python -m venv .venv\npip install -e .\npytest\nruff check .\nruff format --check ."
+      "text": "# Example only. Confirm the project uses these tools first.\npython -m venv .venv\n# Activate .venv using the command for your shell before continuing.\n# Or replace python below with the full path to its interpreter.\n# Install the project's documented test and lint dependencies too.\npython -m pip install -e .\npython -m pytest\npython -m ruff check .\npython -m ruff format --check ."
     },
     {
       "type": "p",
       "label": "How CI is declared",
-      "text": "Python has no CI declaration. CI lives in the source host's files, which show the commands a project actually runs. pytest treats a run as CI when the CI or BUILD_NUMBER environment variable is set to a non empty value and then stops truncating the short test summary. pip says regular installs, not editable installs, belong in CI systems and deployments."
+      "text": "Python has no single CI declaration. The project's CI configuration and logs show the commands it actually runs. pytest treats a run as CI when the CI or BUILD_NUMBER environment variable is set to a non empty value and then stops truncating the short test summary. pip says regular installs, not editable installs, belong in CI systems and deployments."
     },
     {
       "type": "p",
@@ -33,11 +33,11 @@
       "label": "Gotchas",
       "items": [
         "A virtual environment is disposable, not movable and not checked into source control, and since Python 3.13 venv writes a .gitignore file into it by default.",
-        "pytest collects test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method. Its docs strongly suggest a src layout with an editable install.",
-        "pytest.ini takes precedence over other configuration files except pytest.toml and .pytest.toml, even when empty.",
-        "Ruff ignores a pyproject.toml without a [tool.ruff] section, uses the closest configuration file and does not merge settings across files.",
+        "By default pytest collects test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method. Project configuration can change discovery. Its good practices guide recommends an editable install for development and strongly suggests a src layout, particularly with the prepend import mode.",
+        "In pytest 9, pytest.toml and .pytest.toml take priority over pytest.ini and .pytest.ini. These files match even when empty. Other candidates need their documented configuration sections, with a pyproject.toml fallback when no other match is found.",
+        "Ruff ignores a pyproject.toml without a [tool.ruff] section and uses the closest configuration file. It does not implicitly merge ancestor settings, but its extend field supports explicit inheritance.",
         "uv writes uv.lock next to pyproject.toml, a cross platform file that is checked in and not edited by hand. pip lock is experimental, writes pylock.toml by default, and its output is only guaranteed valid for the current Python version and platform. pylock.toml is the format PEP 751 defines.",
-        "ruff check applies only safe fixes by default, and ruff format --check exits with 1 when a file would be reformatted."
+        "ruff check reports violations and needs --fix to apply fixes. Fixing applies only safe fixes by default. ruff format --check writes nothing and exits with 1 when formatting would change."
       ]
     },
     {
@@ -49,6 +49,11 @@
       "type": "p",
       "label": "Check in your environment",
       "text": "Confirm the interpreter version, which environment and lock files exist, which pytest and Ruff configuration files are closest, and which commands CI actually runs."
+    },
+    {
+      "type": "p",
+      "label": "Review scope",
+      "text": "Scoped claims checked on 2026-10-12 against Python 3.15, pip 26.2.1, pytest 9 configuration and the linked current PyPA and Astral documentation. pytest.toml needs pytest 9. Tool choices and example commands are proposed conventions, not verified project settings."
     }
   ],
   "refs": [
@@ -66,8 +71,8 @@
     "ruff-linter",
     "ruff-formatter"
   ],
-  "basis": "Documented conventions and proposed use",
-  "confidence": "Documented facts have scoped sources read on 2026-10-11. Commands and review guidance are conventions, and fit for a particular project remains unverified.",
+  "basis": "Scoped official documentation and proposed project guidance",
+  "confidence": "The listed factual claims were checked against their sources on 2026-10-12 within the stated version and host scope. Recommendations and example commands do not prove suitability or execution in a particular project.",
   "catalog": {
     "kind": "technology",
     "domains": [
@@ -81,22 +86,22 @@
       "ruff",
       "uv"
     ],
-    "revision": "1",
+    "revision": "2",
     "applicability": "Use when a coding agent or reviewer works in a repository with a pyproject.toml, a requirements file or pytest tests and needs the file and command conventions before running anything.",
     "limits": "Catalogue inclusion is not an installed interpreter, a chosen package manager, a working command or verified compatibility.",
-    "sourceStatus": "needs-review",
-    "reviewedOn": "",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
     "claims": [
       {
         "sectionLabel": "Where config lives",
-        "text": "Project metadata lives in pyproject.toml, where the [build-system] table should always be present and the [project] table carries the name and version.",
+        "text": "Python packaging can use pyproject.toml. PyPA recommends a [build-system] table for build configuration. A [project] table holds package metadata, with a required name and a version that may be supplied dynamically by the build backend. Some backends use another metadata format.",
         "sourceRefs": [
           "pypa-pyproject-guide"
         ]
       },
       {
         "sectionLabel": "Where config lives",
-        "text": "pytest reads pytest.toml, .pytest.toml, pytest.ini, .pytest.ini, pyproject.toml, tox.ini or setup.cfg, and the first match while searching upward sets the rootdir.",
+        "text": "pytest 9 supports pytest.toml and .pytest.toml as well as pytest.ini, .pytest.ini, pyproject.toml, tox.ini and setup.cfg. Its search starts from the common ancestor of supplied paths, or the working directory, and the first matching configuration determines rootdir unless a command option overrides it.",
         "sourceRefs": [
           "pytest-customize"
         ]
@@ -124,7 +129,7 @@
       },
       {
         "sectionLabel": "Conventional commands",
-        "text": "pip install -e . installs a project without copying files, so source edits take effect without reinstalling.",
+        "text": "An editable pip install exposes project sources without copying them. Python source edits normally take effect without reinstalling, but metadata changes can require reinstallation and compiled extensions still need building.",
         "sourceRefs": [
           "pip-local-installs"
         ]
@@ -152,28 +157,28 @@
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "pytest collects test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method.",
+        "text": "By default pytest collects test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method. Project configuration can change discovery.",
         "sourceRefs": [
           "pytest-good-practices"
         ]
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "Its docs strongly suggest a src layout with an editable install.",
+        "text": "Its good practices guide recommends an editable install for development and strongly suggests a src layout, particularly with the prepend import mode.",
         "sourceRefs": [
           "pytest-good-practices"
         ]
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "pytest.ini takes precedence over other configuration files except pytest.toml and .pytest.toml, even when empty.",
+        "text": "In pytest 9, pytest.toml and .pytest.toml take priority over pytest.ini and .pytest.ini. These files match even when empty. Other candidates need their documented configuration sections, with a pyproject.toml fallback when no other match is found.",
         "sourceRefs": [
           "pytest-customize"
         ]
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "Ruff ignores a pyproject.toml without a [tool.ruff] section, uses the closest configuration file and does not merge settings across files.",
+        "text": "Ruff ignores a pyproject.toml without a [tool.ruff] section and uses the closest configuration file. It does not implicitly merge ancestor settings, but its extend field supports explicit inheritance.",
         "sourceRefs": [
           "ruff-configuration"
         ]
@@ -201,7 +206,7 @@
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "ruff check applies only safe fixes by default, and ruff format --check exits with 1 when a file would be reformatted.",
+        "text": "ruff check reports violations and needs --fix to apply fixes. Fixing applies only safe fixes by default. ruff format --check writes nothing and exits with 1 when formatting would change.",
         "sourceRefs": [
           "ruff-linter",
           "ruff-formatter"

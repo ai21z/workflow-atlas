@@ -192,6 +192,75 @@
         "cost-per-result",
         "release-operations"
       ]
+    },
+    {
+      "id": "clarify-the-work",
+      "title": "Clarify the work",
+      "summary": "Turn a request into supported outcomes, examples and open questions.",
+      "limits": "Selected requirement procedures and traceability guidance. These articles do not approve requirements or verify supplied sources.",
+      "nodeIds": [
+        "requirements-workflow",
+        "requirement-status",
+        "traceability",
+        "requirements-skill"
+      ]
+    },
+    {
+      "id": "design-and-delivery",
+      "title": "Design and delivery",
+      "summary": "Compare approaches, split the work and implement a reviewable change.",
+      "limits": "General decision and delivery guidance. Project architecture, ownership and commands must still be supplied.",
+      "nodeIds": [
+        "architecture-decisions",
+        "work-breakdown",
+        "implementation-workflow",
+        "impact-skill",
+        "workflow-patterns"
+      ]
+    },
+    {
+      "id": "verification-evidence",
+      "title": "Verification and evidence",
+      "summary": "Choose meaningful checks and keep expected results separate from observations.",
+      "limits": "Selected verification procedures. Reading them does not run tests or establish acceptance, accessibility or production reliability.",
+      "nodeIds": [
+        "verification-loops",
+        "post-change-checks",
+        "qa-packet",
+        "grader-design",
+        "eval-corpus",
+        "coverage"
+      ]
+    },
+    {
+      "id": "release-and-recovery",
+      "title": "Release and recovery",
+      "summary": "Plan a candidate release, its operating owner and a usable recovery route.",
+      "limits": "General release guidance with related failure and measurement topics. No deployment, incident response or recovery tool is configured.",
+      "nodeIds": [
+        "release-operations",
+        "task-contract",
+        "retries",
+        "eval-metrics"
+      ]
+    },
+    {
+      "id": "user-facing-feature",
+      "title": "Change a user facing feature",
+      "summary": "Follow a status filter from acceptance examples to planned checks and a downloadable draft.",
+      "limits": "One fictional reference path with optional React, TypeScript and related tools. Examples are proposed, repository facts remain unresolved and no implementation or tests have run.",
+      "nodeIds": [
+        "user-facing-feature",
+        "requirements-workflow",
+        "javascript-typescript",
+        "react",
+        "nodejs",
+        "npm",
+        "vitest",
+        "playwright",
+        "github-actions",
+        "release-operations"
+      ]
     }
   ],
   "collections": [
@@ -273,6 +342,22 @@
         "retrieval-options",
         "retrieve-and-validate",
         "retrieval-example"
+      ]
+    },
+    {
+      "id": "user-facing-feature",
+      "title": "Change a user facing feature",
+      "nodeIds": [
+        "user-facing-feature",
+        "requirements-workflow",
+        "javascript-typescript",
+        "react",
+        "nodejs",
+        "npm",
+        "vitest",
+        "playwright",
+        "github-actions",
+        "release-operations"
       ]
     }
   ]

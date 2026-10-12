@@ -45,7 +45,7 @@
     "topicId": "agents-md",
     "practiceId": "agents-md",
     "title": "Keep repository instructions for agents",
-    "reason": "Record the practice of one short root AGENTS.md that host files point to, together with its sources. Atlas already writes an AGENTS.md into the full pack, so this adds the practice to that file and to the source record without changing steps, roles, tools or evidence.",
+    "reason": "Record focused repository instructions and check how the chosen host loads them. Atlas already writes AGENTS.md into the full pack. This selection adds the practice and sources without configuring a host or changing steps, roles, tools or evidence.",
     "eligibility": "always"
   }
 ]

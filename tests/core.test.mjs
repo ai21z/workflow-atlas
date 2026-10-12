@@ -5,7 +5,15 @@ import { CATALOG, TOOL_ALIASES, PROJECT_JSON_MAX_BYTES, serializeProject, create
 
 const file = (pack, path) => pack.files.find(item => item.path === path)?.content;
 const hasIssue = (result, code, severity = 'error') => result.issues.some(issue => issue.code === code && issue.severity === severity);
-const fixture = () => { const config = createExample(); config.project.host = 'vscode'; return config; };
+// These supplied fixture values exercise validation. The public example keeps real repository values unresolved.
+const fixture = () => {
+  const config = createExample();
+  config.components.forEach((component, index) => {
+    component.path = `fixture-component-${index}`;
+    component.commands = { test: 'fixture-test', lint: 'fixture-lint', build: 'fixture-build' };
+  });
+  return config;
+};
 
 test('project JSON export and import share a byte limit and do not truncate supplied facts', () => {
   const config = fixture();
@@ -42,7 +50,7 @@ test('project-level evidence stays unassigned and never becomes a stage executio
   assert.throws(() => parseImport(JSON.stringify(config)), /known stage/);
 });
 
-test('example is clearly fictional and yields a complete pack without claiming a host exercise', () => {
+test('a fictional example with explicitly supplied fixture paths and commands yields a complete pack without claiming a host exercise', () => {
   const config = fixture();
   assert.match(config.project.purpose, /Fictional example/);
   const pack = compile(config);
@@ -386,6 +394,7 @@ test('compiler regeneration is deterministic, importable and does not mutate its
   const config = fixture();
   config.project.name = 'Σχέδιο 日本語';
   config.constraints.notes = '';
+  config.workflow.notes = {};
   const before = JSON.stringify(config);
   const first = compile(config);
   const second = compile(parseImport(file(first, 'project.json')));
@@ -420,8 +429,8 @@ test('catalog source records identify local adaptation and primary references', 
 test('each intent has distinct stages and focused procedure outputs', () => {
   const examples = ['feasibility', 'bugfix', 'feature-delivery'].map(id => createExample(id));
   const packs = examples.map(compile);
-  for (const pack of packs) {
-    assert.equal(pack.validation.configurationComplete, true);
+  for (const [index, pack] of packs.entries()) {
+    assert.equal(pack.validation.configurationComplete, index !== 2, 'The feature example leaves actual repository paths and commands unresolved.');
     assert.equal(pack.validation.formatChecked, true);
   }
   assert.match(file(packs[0], 'WORKFLOW.md'), /Recommend go or no-go/);
@@ -600,11 +609,12 @@ test('complete skill directories resolve all resources without root pack depende
 
 test('technology profiles add questions without inventing commands or compatibility', () => {
   const config = fixture();
+  config.components[1].technologies.push({ id: 'spring-boot', version: '' });
   config.workflow.answers['technology-spring-boot-0'] = 'Actual API examples recorded in docs/api-contract.md';
   config.components[0].technologies.push({ id: 'sparql', version: '' });
   const sources = file(compile(config), 'SOURCES.md');
   assert.match(sources, /controller and actual server/);
-  assert.match(sources, /manual interaction/);
+  assert.match(sources, /manual accessibility assessment/);
   assert.match(sources, /shape conformance and domain correctness/);
   assert.match(sources, /Actual API examples recorded/);
   assert.deepEqual(parseImport(JSON.stringify(config)), config);

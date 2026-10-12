@@ -1,12 +1,12 @@
 {
   "id": "nodejs",
   "title": "Node.js",
-  "summary": "Node.js is a JavaScript runtime whose project conventions live in package.json, the lockfile and npm scripts.",
+  "summary": "Find the runtime version, package scripts and module rules before changing a Node.js project. npm is one package manager option, not a requirement of Node.js.",
   "sections": [
     {
       "type": "p",
       "label": "Where config lives",
-      "text": "Node.js is an asynchronous event-driven JavaScript runtime. A project declares scripts, dependencies and devDependencies in package.json. The engines field states which Node.js versions the package works with. package-lock.json describes the exact dependency tree and is intended to be committed into source repositories. ESLint reads eslint.config.js, .mjs or .cjs, searching upward from the target file's directory. Which of these files exist is a fact about the repository, not about Node.js."
+      "text": "Node.js is an asynchronous event-driven JavaScript runtime. A project declares scripts, dependencies and devDependencies in package.json. The engines field declares a supported Node.js version range, rather than proving compatibility. package-lock.json describes the exact dependency tree and is intended to be committed into source repositories. ESLint 10 flat config searches from each target file's directory upward for eslint.config.js, .mjs, .cjs or supported TypeScript variants. Earlier ESLint versions can use different discovery rules. Which of these files exist is a fact about the repository, not about Node.js."
     },
     {
       "type": "code",
@@ -27,25 +27,30 @@
       "type": "list",
       "label": "Gotchas",
       "items": [
-        "npm ci requires an existing package-lock.json, exits with an error when package.json and the lockfile do not match, removes node_modules first, and never writes to package.json or the lockfile.",
-        "A .js file is CommonJS unless the nearest package.json sets type to module, .mjs is always an ES module and .cjs is always CommonJS, and Node.js recommends setting type explicitly.",
-        "An exports field encapsulates a package, so requiring a subpath it does not list throws ERR_PACKAGE_PATH_NOT_EXPORTED.",
-        "The engines field is advisory and only produces warnings unless the engine-strict setting is on.",
-        "npm test runs pretest, test and posttest, and npm run executes any named script with its pre and post scripts.",
-        "node --test without arguments runs files matching patterns such as **/*.test.js and **/test/**/*.js, and matches the .ts equivalents unless --no-strip-types is given.",
-        "Node.js can run .ts files by stripping types without type checking, it ignores tsconfig.json, and syntax that needs transformation such as enum declarations is an error.",
+        "npm ci needs a lockfile accepted by the installed npm version. npm 11 accepts package-lock.json or npm-shrinkwrap.json. npm 12 requires package-lock.json and no longer reads shrinkwrap files. A manifest mismatch fails, existing node_modules is removed first, and package.json and the lockfile are not rewritten.",
+        "In the reviewed Node.js documentation, .mjs means ES modules and .cjs means CommonJS. An explicit package.json type controls .js files. Without a controlling type, syntax detection can treat an ambiguous .js file as an ES module. Detection is enabled by default since Node.js 22.7.0 and 20.19.0. Set type explicitly.",
+        "An exports field limits imports through package subpaths, so an unlisted subpath throws ERR_PACKAGE_PATH_NOT_EXPORTED. This is not a security boundary against absolute file access.",
+        "npm treats engines as advisory when installing a dependency unless engine-strict is enabled.",
+        "By default npm test runs defined pretest, test and posttest scripts, and npm run runs a named script with its matching pre and post scripts. Check script settings before assuming hooks ran.",
+        "In the reviewed Node.js 26 documentation, node --test discovers patterns including **/*.test.js and **/test/**/*.js, and TypeScript equivalents unless --no-strip-types is given. Confirm the actual runtime version before relying on these patterns.",
+        "Node.js 26 can run erasable TypeScript by stripping types without type checking. This built-in path ignores tsconfig.json and rejects syntax that needs code generation, such as enums. Earlier releases have different support and flags.",
         "The release page says production applications should use only Active LTS or Maintenance LTS releases."
       ]
     },
     {
       "type": "p",
       "label": "What Atlas provides",
-      "text": "Selecting Node.js adds the Node.js profile questions and checks to a project. The profile does not infer commands, versions, module system or compatibility, and the Atlas runs nothing."
+      "text": "Selecting Node.js adds the Node.js profile questions and checks to a project. The profile does not infer commands, versions, module system or compatibility, and Atlas runs nothing."
     },
     {
       "type": "p",
       "label": "Check in your environment",
       "text": "Confirm the installed Node.js and npm versions, the scripts field, whether a lockfile is committed, the type and engines fields, and the test runner the project uses. Every command here is a convention to confirm against that evidence."
+    },
+    {
+      "type": "p",
+      "label": "Review scope",
+      "text": "Scoped claims checked on 2026-10-12 against Node.js 26.11.1, npm 11.21.0 and 12.2.0, ESLint 10 documentation and the linked GitHub tutorial. Runtime features and discovery can differ on earlier versions. Example commands are not executed evidence and do not apply to projects that use another package manager."
     }
   ],
   "refs": [
@@ -59,10 +64,11 @@
     "npm-scripts",
     "node-test-runner",
     "node-typescript",
-    "node-releases"
+    "node-releases",
+    "npm-ci-v11"
   ],
-  "basis": "Documented conventions and proposed use",
-  "confidence": "Documented facts have scoped sources read on 2026-10-11. Commands are conventions and fit for a given project is unverified.",
+  "basis": "Scoped official documentation and proposed project guidance",
+  "confidence": "The listed factual claims were checked against their sources on 2026-10-12 within the stated version and host scope. Recommendations and example commands do not prove suitability or execution in a particular project.",
   "catalog": {
     "kind": "technology",
     "domains": [
@@ -75,11 +81,11 @@
       "package.json",
       "npm ci"
     ],
-    "revision": "1",
+    "revision": "2",
     "applicability": "Use when a project installs, tests or builds through package.json and npm scripts on Node.js.",
     "limits": "Catalogue inclusion is not an installed runtime, a verified command set or confirmed compatibility with any project.",
-    "sourceStatus": "needs-review",
-    "reviewedOn": "",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
     "claims": [
       {
         "sectionLabel": "Where config lives",
@@ -97,7 +103,7 @@
       },
       {
         "sectionLabel": "Where config lives",
-        "text": "The engines field states which Node.js versions the package works with.",
+        "text": "The engines field declares a supported Node.js version range, rather than proving compatibility.",
         "sourceRefs": [
           "npm-package-json"
         ]
@@ -111,7 +117,7 @@
       },
       {
         "sectionLabel": "Where config lives",
-        "text": "ESLint reads eslint.config.js, .mjs or .cjs, searching upward from the target file's directory.",
+        "text": "ESLint 10 flat config searches from each target file's directory upward for eslint.config.js, .mjs, .cjs or supported TypeScript variants. Earlier ESLint versions can use different discovery rules.",
         "sourceRefs": [
           "eslint-config-files"
         ]
@@ -132,49 +138,51 @@
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "npm ci requires an existing package-lock.json, exits with an error when package.json and the lockfile do not match, removes node_modules first, and never writes to package.json or the lockfile.",
+        "text": "npm ci needs a lockfile accepted by the installed npm version. npm 11 accepts package-lock.json or npm-shrinkwrap.json. npm 12 requires package-lock.json and no longer reads shrinkwrap files. A manifest mismatch fails, existing node_modules is removed first, and package.json and the lockfile are not rewritten.",
         "sourceRefs": [
-          "npm-ci"
+          "npm-ci",
+          "npm-ci-v11",
+          "npm-package-lock"
         ]
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "A .js file is CommonJS unless the nearest package.json sets type to module, .mjs is always an ES module and .cjs is always CommonJS, and Node.js recommends setting type explicitly.",
-        "sourceRefs": [
-          "node-packages"
-        ]
-      },
-      {
-        "sectionLabel": "Gotchas",
-        "text": "An exports field encapsulates a package, so requiring a subpath it does not list throws ERR_PACKAGE_PATH_NOT_EXPORTED.",
+        "text": "In the reviewed Node.js documentation, .mjs means ES modules and .cjs means CommonJS. An explicit package.json type controls .js files. Without a controlling type, syntax detection can treat an ambiguous .js file as an ES module. Detection is enabled by default since Node.js 22.7.0 and 20.19.0. Set type explicitly.",
         "sourceRefs": [
           "node-packages"
         ]
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "The engines field is advisory and only produces warnings unless the engine-strict setting is on.",
+        "text": "An exports field limits imports through package subpaths, so an unlisted subpath throws ERR_PACKAGE_PATH_NOT_EXPORTED. This is not a security boundary against absolute file access.",
+        "sourceRefs": [
+          "node-packages"
+        ]
+      },
+      {
+        "sectionLabel": "Gotchas",
+        "text": "npm treats engines as advisory when installing a dependency unless engine-strict is enabled.",
         "sourceRefs": [
           "npm-package-json"
         ]
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "npm test runs pretest, test and posttest, and npm run executes any named script with its pre and post scripts.",
+        "text": "By default npm test runs defined pretest, test and posttest scripts, and npm run runs a named script with its matching pre and post scripts. Check script settings before assuming hooks ran.",
         "sourceRefs": [
           "npm-scripts"
         ]
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "node --test without arguments runs files matching patterns such as **/*.test.js and **/test/**/*.js, and matches the .ts equivalents unless --no-strip-types is given.",
+        "text": "In the reviewed Node.js 26 documentation, node --test discovers patterns including **/*.test.js and **/test/**/*.js, and TypeScript equivalents unless --no-strip-types is given. Confirm the actual runtime version before relying on these patterns.",
         "sourceRefs": [
           "node-test-runner"
         ]
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "Node.js can run .ts files by stripping types without type checking, it ignores tsconfig.json, and syntax that needs transformation such as enum declarations is an error.",
+        "text": "Node.js 26 can run erasable TypeScript by stripping types without type checking. This built-in path ignores tsconfig.json and rejects syntax that needs code generation, such as enums. Earlier releases have different support and flags.",
         "sourceRefs": [
           "node-typescript"
         ]

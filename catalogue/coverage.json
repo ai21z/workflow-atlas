@@ -1,13 +1,244 @@
 {
-  "note": "Maintainer file. Eight stack slots and the ids the catalogue wants for each. npm run check:catalogue reports every wanted id as covered (name and related topic, plus a question profile for technologies), thin (technology name and topic without a profile), named only (name without a topic), topic only (topic without a name) or missing. Hosts do not need a technology question profile for covered status. These states measure catalogue structure, not reviewed content, a working integration or suitability for a team. The file is not served.",
+  "note": "Maintainer report, not served. Structural states describe names, linked topics and profiles. Reading can also be indirect. Task guidance records procedure, output and example sections explicitly. Review is scoped to recorded claims. Export questions and host targets do not establish installation, compatibility, executed checks or successful use.",
   "slots": [
-    { "id": "language-runtime", "title": "Language and runtime", "wanted": ["javascript", "typescript", "python", "nodejs", "java", "go", "rust", "dotnet", "kotlin"] },
-    { "id": "framework", "title": "Application framework", "wanted": ["react", "spring-boot", "vue", "angular"] },
-    { "id": "build-test", "title": "Build and test tooling", "wanted": ["npm", "pytest", "maven", "gradle", "vitest", "playwright"] },
-    { "id": "hosting-ci", "title": "Source hosting and CI", "wanted": ["github", "github-actions", "gitlab", "gitlab-ci", "azure-devops", "jenkins"] },
-    { "id": "tracking-docs", "title": "Issue tracking and docs", "wanted": ["github-issues", "jira", "confluence", "markdown-adr"] },
-    { "id": "data-store", "title": "Data store", "wanted": ["postgresql", "mysql", "sqlite", "mongodb", "redis", "neptune", "neo4j", "jena-fuseki", "rdf", "sparql"] },
-    { "id": "deployment", "title": "Deployment target", "wanted": ["docker", "kubernetes", "aws", "azure", "gcp"] },
-    { "id": "agent-host", "title": "Agent host", "wanted": [{ "id": "github", "type": "host" }, { "id": "vscode", "type": "host" }, { "id": "jetbrains", "type": "host" }, { "id": "claude-code", "type": "host" }, { "id": "codex", "type": "host" }, { "id": "cursor", "type": "host" }, { "id": "kiro", "type": "host" }] }
+    {
+      "id": "language-runtime",
+      "title": "Language and runtime",
+      "wanted": [
+        "javascript",
+        "typescript",
+        "python",
+        "nodejs",
+        "java",
+        "go",
+        "rust",
+        "dotnet",
+        "kotlin"
+      ]
+    },
+    {
+      "id": "framework",
+      "title": "Application framework",
+      "wanted": [
+        "react",
+        "spring-boot",
+        "vue",
+        "angular"
+      ]
+    },
+    {
+      "id": "build-test",
+      "title": "Build and test tooling",
+      "wanted": [
+        "npm",
+        "pytest",
+        "maven",
+        "gradle",
+        "vitest",
+        "playwright"
+      ]
+    },
+    {
+      "id": "hosting-ci",
+      "title": "Source hosting and CI",
+      "wanted": [
+        "github",
+        "github-actions",
+        "gitlab",
+        "gitlab-ci",
+        "azure-devops",
+        "jenkins"
+      ]
+    },
+    {
+      "id": "tracking-docs",
+      "title": "Issue tracking and docs",
+      "wanted": [
+        "github-issues",
+        "jira",
+        "confluence",
+        "markdown-adr"
+      ]
+    },
+    {
+      "id": "data-store",
+      "title": "Data store",
+      "wanted": [
+        "postgresql",
+        "mysql",
+        "sqlite",
+        "mongodb",
+        "redis",
+        "neptune",
+        "neo4j",
+        "jena-fuseki",
+        "rdf",
+        "sparql"
+      ]
+    },
+    {
+      "id": "deployment",
+      "title": "Deployment target",
+      "wanted": [
+        "docker",
+        "kubernetes",
+        "aws",
+        "azure",
+        "gcp"
+      ]
+    },
+    {
+      "id": "agent-host",
+      "title": "Agent host",
+      "wanted": [
+        {
+          "id": "github",
+          "type": "host"
+        },
+        {
+          "id": "vscode",
+          "type": "host"
+        },
+        {
+          "id": "jetbrains",
+          "type": "host"
+        },
+        {
+          "id": "claude-code",
+          "type": "host"
+        },
+        {
+          "id": "codex",
+          "type": "host"
+        },
+        {
+          "id": "cursor",
+          "type": "host"
+        },
+        {
+          "id": "kiro",
+          "type": "host"
+        }
+      ]
+    }
+  ],
+  "indirect": [
+    {
+      "id": "pytest",
+      "type": "technology",
+      "topicIds": [
+        "python"
+      ],
+      "note": "pytest conventions are described within Python. There is no independently selectable pytest definition or profile."
+    }
+  ],
+  "guidance": [
+    {
+      "topicId": "requirements-workflow",
+      "task": "Clarify a request before implementation",
+      "procedureSection": "Sequence",
+      "outputSection": "Output",
+      "exampleSections": [
+        "Worked example"
+      ],
+      "scope": "Proposed general workflow. An example does not establish approved requirements."
+    },
+    {
+      "topicId": "architecture-decisions",
+      "task": "Compare approaches for a change",
+      "procedureSection": "Compare workable approaches",
+      "outputSection": "Useful result",
+      "exampleSections": [
+        "Example decision"
+      ],
+      "scope": "Proposed decision procedure, not a compatibility assessment."
+    },
+    {
+      "topicId": "work-breakdown",
+      "task": "Split delivery into reviewable pieces",
+      "procedureSection": "Plan the pieces",
+      "outputSection": "Useful result",
+      "exampleSections": [
+        "Example feature slices"
+      ],
+      "scope": "Illustrative slices, to adapt to project risk and review capacity."
+    },
+    {
+      "topicId": "release-operations",
+      "task": "Prepare a release and recovery decision",
+      "procedureSection": "Prepare the release",
+      "outputSection": "Useful result",
+      "exampleSections": [
+        "Example to adapt"
+      ],
+      "scope": "General guidance only. No release or recovery action is configured or tested."
+    },
+    {
+      "topicId": "user-facing-feature",
+      "task": "Deliver a small feature with acceptance examples and review evidence",
+      "procedureSection": "From brief to review",
+      "outputSection": "A useful draft output",
+      "exampleSections": [
+        "Fictional acceptance examples",
+        "A useful draft output"
+      ],
+      "scope": "Recommended neutral workflow with a fictional reference stack. All example results are expected, no implementation or test outcome is asserted."
+    },
+    {
+      "topicId": "react",
+      "task": "Change a React interaction and its visible states",
+      "procedureSection": "Make the change",
+      "outputSection": "Useful result",
+      "exampleSections": [
+        "Status filter example",
+        "A finding that changes the plan",
+        "Useful result"
+      ],
+      "scope": "Scoped React facts with a recommended design procedure. Component paths, data contracts, versions and observed rendering remain project facts to establish."
+    },
+    {
+      "topicId": "javascript-typescript",
+      "task": "Separate static checks from runtime input and behavior checks",
+      "procedureSection": "Plan distinct checks",
+      "outputSection": "Useful result",
+      "exampleSections": [
+        "Status filter example",
+        "Useful result"
+      ],
+      "scope": "Shared reading guide with distinct JavaScript and TypeScript profiles. A selected language does not prove a compiler or validation setup exists."
+    },
+    {
+      "topicId": "npm",
+      "task": "Find and reproduce the project's installation and check scripts",
+      "procedureSection": "Prepare useful evidence",
+      "outputSection": "Useful result",
+      "exampleSections": [
+        "Example outcome",
+        "Useful result"
+      ],
+      "scope": "npm CLI documentation informs the procedure. Actual versions, workspace, scripts, registry access and results remain unverified until supplied."
+    },
+    {
+      "topicId": "vitest",
+      "task": "Check a changed rule or component in an identified test environment",
+      "procedureSection": "Test the changed decision",
+      "outputSection": "Useful result",
+      "exampleSections": [
+        "Status filter example",
+        "Useful result"
+      ],
+      "scope": "Vitest 5 reference documentation, not an assumed project version. Expected fixture outcomes are illustrative and no check is claimed to have run."
+    },
+    {
+      "topicId": "playwright",
+      "task": "Exercise an accepted user journey in a browser with controlled data",
+      "procedureSection": "Exercise one useful journey",
+      "outputSection": "Useful result",
+      "exampleSections": [
+        "Status filter example",
+        "Useful result"
+      ],
+      "scope": "Recommended browser evidence plan. Emulation, mocks and automated accessibility checks do not establish physical device coverage, real service access or whole product conformance."
+    }
   ]
 }

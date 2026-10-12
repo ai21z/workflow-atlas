@@ -12,14 +12,32 @@ const withoutSubjects = () => {
 }
 
 test('subject navigation projects the authored reading groups without creating topics', () => {
-  assert.deepEqual(data.navigation.subjects.map(subject => subject.id), ['ci-pipelines', 'containers', 'access-controls', 'workflow-measurements'])
+  assert.deepEqual(data.navigation.subjects.slice(0, 4).map(subject => subject.id), ['ci-pipelines', 'containers', 'access-controls', 'workflow-measurements'])
   const result = compileCatalogue(data)
   assert.deepEqual(result.atlas.catalog.subjects, data.navigation.subjects)
-  assert.deepEqual(result.atlas.catalog.subjects.map(subject => subject.nodeIds.length), [4, 1, 3, 5])
+  assert.deepEqual(result.atlas.catalog.subjects.slice(0, 4).map(subject => subject.nodeIds.length), [4, 1, 3, 5])
   assert.deepEqual(result.atlas.catalog.subjects.find(subject => subject.id === 'containers').nodeIds, ['docker'])
   assert.match(result.atlas.catalog.subjects.find(subject => subject.id === 'containers').limits, /Docker only/)
   assert.match(result.atlas.catalog.subjects.find(subject => subject.id === 'access-controls').limits, /not a comprehensive security review/)
   assert.match(result.atlas.catalog.subjects.find(subject => subject.id === 'workflow-measurements').limits, /not a full observability catalogue/)
+})
+
+test('lifecycle subjects expose existing procedures with honest limits and keep original parents', () => {
+  const expected = {
+    'clarify-the-work': ['requirements-workflow', 'requirement-status', 'traceability'],
+    'design-and-delivery': ['architecture-decisions', 'work-breakdown', 'implementation-workflow'],
+    'verification-evidence': ['verification-loops', 'post-change-checks', 'qa-packet'],
+    'release-and-recovery': ['release-operations', 'task-contract', 'retries'],
+  }
+  for (const [id, members] of Object.entries(expected)) {
+    const subject = data.navigation.subjects.find(item => item.id === id)
+    assert.ok(subject)
+    for (const member of members) assert.ok(subject.nodeIds.includes(member))
+    assert.ok(subject.limits.length > 40)
+  }
+  const compiled = compileCatalogue(data).atlas
+  assert.equal(compiled.nodes.find(item => item.id === 'requirements-workflow').parent, 'workflows')
+  assert.equal(compiled.nodes.find(item => item.id === 'qa-packet').parent, 'talos')
 })
 
 test('subjects remain optional for legacy catalogues and may be absent or empty', () => {

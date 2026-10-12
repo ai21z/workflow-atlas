@@ -1,0 +1,119 @@
+{
+  "id": "vitest",
+  "title": "Vitest focused verification",
+  "summary": "Check a changed rule or component in a named environment, then record what the test did and did not establish.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this guide",
+      "text": "Use this when the project already uses Vitest or the team has chosen it. The referenced documentation is for Vitest 5. Confirm the installed release and its requirements rather than assuming the current documentation matches the repository."
+    },
+    {
+      "type": "p",
+      "label": "Documented behavior",
+      "text": "Vitest can reuse Vite configuration or use a dedicated vitest.config file. vitest run performs one run without watch mode. Node is its default environment. jsdom and happy-dom provide emulated browser environments, while Browser Mode is a separate option."
+    },
+    {
+      "type": "list",
+      "label": "Find the project facts",
+      "items": [
+        "Installed version, applicable configuration, test discovery and actual test script.",
+        "Environment used by the changed test, such as Node, a simulated DOM or Browser Mode.",
+        "Fixtures, request mocks and setup needed for deterministic expected results.",
+        "Which behavior the focused check establishes and which browser or integration checks remain."
+      ]
+    },
+    {
+      "type": "steps",
+      "label": "Test the changed decision",
+      "items": [
+        "Turn the acceptance example into small representative inputs and expected outcomes.",
+        "Check the changed filter or state transition with the existing test conventions. Include an empty result and any agreed invalid input behavior.",
+        "When mocking a response, state the simulated contract. A mock does not prove the real API accepts or returns that data.",
+        "Use the configured command that completes a run for review evidence. Record discovered tests, result, environment and revision.",
+        "Follow a failed assertion back to the requirement or implementation. Correct it and rerun the relevant checks without changing the expected result merely to match the bug."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Status filter example",
+      "text": "With one Open and one Closed request, the Open choice returns one item and All returns two. An empty fixture returns an empty result. A component check can exercise the agreed empty message. Keep real layout, focus and device observations separate from tests that only run in a simulated environment."
+    },
+    {
+      "type": "p",
+      "label": "Useful result",
+      "text": "Example check plan: the proposed fixture contains one Open and one Closed request, with expected counts one for Open and two for All. Add an empty fixture. Confirm the configured environment, discovery and command. Record the actual run later. This expected result is not an observed pass or browser evidence."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas changes",
+      "text": "Selecting Vitest adds environment, discovery, fixtures and completed run questions to generated skill references. Atlas does not add a dependency, create test configuration or declare the test result."
+    }
+  ],
+  "refs": [
+    "vitest-guide",
+    "vitest-cli",
+    "vitest-environments"
+  ],
+  "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+  "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [
+      "vitest",
+      "unit test",
+      "component test",
+      "jsdom",
+      "happy-dom",
+      "browser mode",
+      "fixtures"
+    ],
+    "revision": "1",
+    "applicability": "Use for focused checks in a project that uses Vitest, after confirming the installed version, discovery and environment.",
+    "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
+    "claims": [
+      {
+        "sectionLabel": "Documented behavior",
+        "text": "Vitest can reuse Vite configuration or use a dedicated vitest.config file.",
+        "sourceRefs": [
+          "vitest-guide"
+        ]
+      },
+      {
+        "sectionLabel": "Documented behavior",
+        "text": "vitest run performs one run without watch mode.",
+        "sourceRefs": [
+          "vitest-cli"
+        ]
+      },
+      {
+        "sectionLabel": "Documented behavior",
+        "text": "Node is the default environment, jsdom and happy-dom emulate browser environments, and Browser Mode is separate.",
+        "sourceRefs": [
+          "vitest-environments"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "technologies": [
+        "vitest"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

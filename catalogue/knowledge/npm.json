@@ -1,0 +1,108 @@
+{
+  "id": "npm",
+  "title": "npm installs and project checks",
+  "summary": "Find the package scripts, installation assumptions and results that belong to this repository.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this guide",
+      "text": "Use this when the project actually uses npm. The documented behavior below is scoped to npm 12. Confirm the installed release and its documentation instead of assuming the same rules for older versions. Keep an existing alternative package manager unless the task calls for a reviewed migration. Node.js, npm, a test runner and CI each describe different parts of the toolchain."
+    },
+    {
+      "type": "p",
+      "label": "Documented behavior",
+      "text": "In the npm 12 documentation, npm ci requires an existing package-lock.json, fails when it disagrees with package.json and removes an existing node_modules directory before installing. It does not update package.json or the lockfile. npm run executes a named script from package.json. The script content determines which tool runs."
+    },
+    {
+      "type": "list",
+      "label": "Find the project facts",
+      "items": [
+        "Installed npm and Node.js versions, the correct package or workspace and committed lockfile.",
+        "Repository scripts and any configuration needed to reproduce installation.",
+        "Which scripts cover the affected change, and which ones the actual pipeline runs.",
+        "Approved registry access and credentials when needed. Record only the credential source, never the secret."
+      ]
+    },
+    {
+      "type": "steps",
+      "label": "Prepare useful evidence",
+      "items": [
+        "Read the manifest, lockfile and project instructions before choosing an installation command.",
+        "Use the approved environment and existing package scripts. Record the package or workspace they ran in.",
+        "If installation fails, distinguish a dependency or lockfile issue from an unavailable registry or access problem. Do not silently rewrite the lockfile to make CI green.",
+        "Record actual versions, command results and any dependency changes alongside the candidate revision."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Example outcome",
+      "text": "A feature change can need the existing unit, browser and build scripts without adding a dependency. An unavailable private registry blocks installation. It is not proof that the feature fails. A missing browser script remains an open setup question rather than becoming an invented command."
+    },
+    {
+      "type": "p",
+      "label": "Useful result",
+      "text": "Example environment note: npm is selected for this fictional project, but its version, package or workspace and install settings need confirmation. Record the real installation result and named scripts before reviewing the candidate. Registry access is unresolved, so installation evidence is unavailable. Do not export a fabricated successful install."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas changes",
+      "text": "Selecting npm adds package, workspace, installation and script questions to generated skill references. A Node.js profile can also apply. Reading either guide does not install dependencies or authorize package scripts."
+    }
+  ],
+  "refs": [
+    "npm-ci",
+    "npm-scripts"
+  ],
+  "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+  "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [
+      "npm",
+      "package-lock",
+      "package scripts",
+      "npm ci",
+      "workspace"
+    ],
+    "revision": "1",
+    "applicability": "Use when installation and project checks are controlled through npm and package.json in the actual repository.",
+    "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
+    "claims": [
+      {
+        "sectionLabel": "Documented behavior",
+        "text": "The npm 12 documentation states that npm ci requires an existing package-lock.json, fails on a package.json mismatch, removes node_modules before installing and does not write either manifest or lockfile.",
+        "sourceRefs": [
+          "npm-ci"
+        ]
+      },
+      {
+        "sectionLabel": "Documented behavior",
+        "text": "npm run executes a named script from package.json.",
+        "sourceRefs": [
+          "npm-scripts"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "technologies": [
+        "npm"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

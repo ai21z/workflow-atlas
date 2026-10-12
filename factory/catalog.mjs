@@ -1,6 +1,6 @@
 // Compiled from catalogue/. Edit source records and run npm run build:catalogue.
 export const SCHEMA_VERSION = "3.0";
-export const DEFINITION_VERSION = "2.1.0";
+export const DEFINITION_VERSION = "2.2.0";
 export const REVIEW_DATE = "2026-10-02";
 export const SOURCES = Object.freeze({
   "agents": "https://docs.github.com/en/copilot/reference/custom-agents-configuration",
@@ -21,7 +21,7 @@ export const TOOL_ALIASES = Object.freeze([
 function deepFreeze(value) { if (value && typeof value === 'object') { Object.values(value).forEach(deepFreeze); Object.freeze(value); } return value; }
 export const CATALOG = deepFreeze({
   "schemaVersion": "3.0",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "reviewedOn": "2026-10-02",
   "stages": [
     {
@@ -952,9 +952,9 @@ export const CATALOG = deepFreeze({
       "id": "agents-md",
       "label": "Repository instructions for agents",
       "description": "Keep one short AGENTS.md at the repository root with the commands, structure, conventions, testing guidance and boundaries that the README does not cover.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "limits": "The file does not configure a host, grant a permission or prove that its instructions were followed.",
-      "application": "Write or trim AGENTS.md to the commands, structure, conventions, testing guidance and boundaries that are beyond the README, and keep it under about 200 lines. Let CLAUDE.md, copilot-instructions.md and similar host files import or point to it instead of repeating it.",
+      "application": "Write or trim common repository instructions to relevant commands, structure, conventions, checks and boundaries. Identify their intended host and use its documented loading or import mechanism. Claude Code documents @AGENTS.md imports in CLAUDE.md. A Markdown link or pointer in Copilot instructions does not by itself guarantee that another file is loaded. Atlas exports starting files, it does not prove host loading.",
       "source": "https://agents.md/",
       "sources": [
         "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
@@ -1098,18 +1098,22 @@ export const CATALOG = deepFreeze({
         "react"
       ],
       "questions": [
-        "Which state and component responsibilities change?",
-        "What loading, empty and failed states must users understand?",
-        "How will keyboard, labels, responsive and browser behavior be exercised?"
+        "Which components and state owner change, and is the displayed result derived from local data or an API?",
+        "What loading, populated, empty and failed states must users understand, including paging and recovery?",
+        "How will labels, keyboard interaction, focus and the narrow layout be exercised in the actual rendering environment?"
       ],
       "checks": [
-        "Record observed behavior for relevant user interactions and states.",
-        "Combine relevant automated checks with manual interaction and accessibility assessment."
+        "Record observed behavior for agreed interactions and visible states, including what was mocked.",
+        "Separate focused logic or simulated DOM checks from actual browser, keyboard and responsive observations.",
+        "Combine relevant automated checks with manual accessibility assessment. Record any unrun work."
       ],
       "limits": "Automated checks cover some issues. The selected technology does not prove rendering, accessibility or framework compatibility.",
       "source": "https://react.dev/learn/thinking-in-react",
       "sources": [
-        "https://playwright.dev/docs/accessibility-testing"
+        "https://react.dev/learn/typescript",
+        "https://playwright.dev/docs/accessibility-testing",
+        "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html",
+        "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html"
       ]
     },
     {
@@ -1231,6 +1235,111 @@ export const CATALOG = deepFreeze({
       "sources": [
         "https://docs.pytest.org/en/stable/explanation/goodpractices.html",
         "https://docs.python.org/3/library/venv.html"
+      ]
+    },
+    {
+      "id": "javascript",
+      "label": "JavaScript runtime behavior",
+      "technologies": [
+        "javascript"
+      ],
+      "questions": [
+        "Which browser or server runtime and module conventions apply to this JavaScript component?",
+        "Which checks cover unexpected or missing data at its input boundary?",
+        "Which existing tests and build or lint scripts cover the changed behavior?"
+      ],
+      "checks": [
+        "Record runtime, input cases and actual check results without assuming a TypeScript compiler is configured.",
+        "Separate a successful build or lint result from observed runtime behavior."
+      ],
+      "limits": "Questions are recommendations. This profile does not introduce TypeScript, infer commands or validate runtime inputs.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/basic-types.html"
+    },
+    {
+      "id": "typescript",
+      "label": "TypeScript checks and runtime boundaries",
+      "technologies": [
+        "typescript"
+      ],
+      "questions": [
+        "Which tsconfig and actual command perform type checking for this component?",
+        "Does the build type check, transpile only or delegate checks to another script?",
+        "Which external input needs runtime validation, even when its code has a type annotation or assertion?"
+      ],
+      "checks": [
+        "Record type check and runtime behavior results separately against the candidate revision.",
+        "Exercise relevant missing or invalid input without treating a type assertion as validation."
+      ],
+      "limits": "Questions do not configure the compiler, infer flags or establish runtime correctness.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/basic-types.html",
+      "sources": [
+        "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html",
+        "https://www.typescriptlang.org/tsconfig/noEmit.html"
+      ]
+    },
+    {
+      "id": "npm",
+      "label": "npm installation and scripts",
+      "technologies": [
+        "npm"
+      ],
+      "questions": [
+        "Which package or workspace, Node.js and npm versions, lockfile and install settings apply?",
+        "Which package scripts actually cover the affected check, build and delivery gate?",
+        "Does installation need approved registry access, and where is that access provided without recording a secret?"
+      ],
+      "checks": [
+        "Record installation and script results in their actual package or workspace.",
+        "Distinguish dependency and lockfile failures from unavailable registry access. Record dependency changes explicitly."
+      ],
+      "limits": "Selecting npm does not install packages, authorize scripts, supply credentials or replace another package manager.",
+      "source": "https://docs.npmjs.com/cli/v12/commands/npm-ci",
+      "sources": [
+        "https://docs.npmjs.com/cli/v12/using-npm/scripts"
+      ]
+    },
+    {
+      "id": "vitest",
+      "label": "Vitest focused checks",
+      "technologies": [
+        "vitest"
+      ],
+      "questions": [
+        "Which installed Vitest version, configuration and discovery rules apply to the changed test?",
+        "Does it run in Node, a simulated DOM or Browser Mode, and what does that environment leave unverified?",
+        "Which fixtures or mocks establish the expected result, and which configured command completes the run?"
+      ],
+      "checks": [
+        "Record discovered tests, environment, candidate revision and completed run results.",
+        "Keep mocked responses and simulated DOM behavior separate from real service and browser observations."
+      ],
+      "limits": "Questions do not install Vitest, generate tests or establish passing evidence.",
+      "source": "https://vitest.dev/guide/",
+      "sources": [
+        "https://vitest.dev/guide/cli.html",
+        "https://vitest.dev/guide/environment.html"
+      ]
+    },
+    {
+      "id": "playwright",
+      "label": "Playwright browser journeys",
+      "technologies": [
+        "playwright"
+      ],
+      "questions": [
+        "Which actual application URL, startup method, browser projects and test command apply?",
+        "Which approved test identity and controlled data are used, and which responses are mocked?",
+        "Which user journey, keyboard interaction, viewport and supported themes need evidence?"
+      ],
+      "checks": [
+        "Record browser, viewport, candidate revision, simulated inputs and observed journey results.",
+        "Distinguish emulated mobile behavior from a physical device test, and automated accessibility checks from a complete assessment."
+      ],
+      "limits": "Questions do not start the application, install browsers, provide credentials or establish whole product accessibility.",
+      "source": "https://playwright.dev/docs/best-practices",
+      "sources": [
+        "https://playwright.dev/docs/emulation",
+        "https://playwright.dev/docs/accessibility-testing"
       ]
     }
   ],
@@ -1356,6 +1465,31 @@ export const CATALOG = deepFreeze({
       "id": "github",
       "label": "GitHub",
       "source": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches"
+    },
+    {
+      "id": "npm",
+      "label": "npm",
+      "source": "https://docs.npmjs.com/cli/v12/commands/npm-ci",
+      "sources": [
+        "https://docs.npmjs.com/cli/v12/using-npm/scripts"
+      ]
+    },
+    {
+      "id": "vitest",
+      "label": "Vitest",
+      "source": "https://vitest.dev/guide/",
+      "sources": [
+        "https://vitest.dev/guide/cli.html",
+        "https://vitest.dev/guide/environment.html"
+      ]
+    },
+    {
+      "id": "playwright",
+      "label": "Playwright",
+      "source": "https://playwright.dev/docs/best-practices",
+      "sources": [
+        "https://playwright.dev/docs/emulation"
+      ]
     }
   ],
   "hosts": [
@@ -1442,7 +1576,7 @@ export const CATALOG = deepFreeze({
       "topicId": "agents-md",
       "practiceId": "agents-md",
       "title": "Keep repository instructions for agents",
-      "reason": "Record the practice of one short root AGENTS.md that host files point to, together with its sources. Atlas already writes an AGENTS.md into the full pack, so this adds the practice to that file and to the source record without changing steps, roles, tools or evidence.",
+      "reason": "Record focused repository instructions and check how the chosen host loads them. Atlas already writes AGENTS.md into the full pack. This selection adds the practice and sources without configuring a host or changing steps, roles, tools or evidence.",
       "eligibility": "always"
     }
   ],
@@ -1663,11 +1797,14 @@ export const CATALOG = deepFreeze({
       ]
     },
     "profile:react": {
-      "revision": "2.0.1",
-      "reviewedOn": "",
+      "revision": "2.0.2",
+      "reviewedOn": "2026-10-12",
       "sourceRefs": [
         "reference-62",
-        "reference-63"
+        "react-typescript",
+        "reference-63",
+        "wai-keyboard",
+        "wai-reflow"
       ]
     },
     "profile:graph-data": {
@@ -1868,7 +2005,7 @@ export const CATALOG = deepFreeze({
       ]
     },
     "practice:agents-md": {
-      "revision": "1.0.0",
+      "revision": "1.0.1",
       "reviewedOn": "",
       "sourceRefs": [
         "agentsmd",
@@ -1933,6 +2070,86 @@ export const CATALOG = deepFreeze({
         "pytest-good-practices",
         "python-venv"
       ]
+    },
+    "profile:javascript": {
+      "revision": "1.0.0",
+      "reviewedOn": "2026-10-12",
+      "sourceRefs": [
+        "typescript-basics"
+      ],
+      "basis": "Recommended project questions grounded in scoped official documentation",
+      "confidenceLevel": "proposed"
+    },
+    "profile:typescript": {
+      "revision": "1.0.0",
+      "reviewedOn": "2026-10-12",
+      "sourceRefs": [
+        "typescript-basics",
+        "typescript-everyday-types",
+        "typescript-no-emit"
+      ],
+      "basis": "Recommended project questions grounded in scoped official documentation",
+      "confidenceLevel": "proposed"
+    },
+    "profile:npm": {
+      "revision": "1.0.0",
+      "reviewedOn": "2026-10-12",
+      "sourceRefs": [
+        "npm-ci",
+        "npm-scripts"
+      ],
+      "basis": "Recommended project questions grounded in scoped official documentation",
+      "confidenceLevel": "proposed"
+    },
+    "profile:vitest": {
+      "revision": "1.0.0",
+      "reviewedOn": "2026-10-12",
+      "sourceRefs": [
+        "vitest-guide",
+        "vitest-cli",
+        "vitest-environments"
+      ],
+      "basis": "Recommended project questions grounded in scoped official documentation",
+      "confidenceLevel": "proposed"
+    },
+    "profile:playwright": {
+      "revision": "1.0.0",
+      "reviewedOn": "2026-10-12",
+      "sourceRefs": [
+        "playwright-best-practices",
+        "playwright-emulation",
+        "reference-63"
+      ],
+      "basis": "Recommended project questions grounded in scoped official documentation",
+      "confidenceLevel": "proposed"
+    },
+    "technology:npm": {
+      "revision": "1.0.0",
+      "reviewedOn": "2026-10-12",
+      "sourceRefs": [
+        "npm-ci",
+        "npm-scripts"
+      ],
+      "category": "build-test"
+    },
+    "technology:vitest": {
+      "revision": "1.0.0",
+      "reviewedOn": "2026-10-12",
+      "sourceRefs": [
+        "vitest-guide",
+        "vitest-cli",
+        "vitest-environments"
+      ],
+      "category": "build-test"
+    },
+    "technology:playwright": {
+      "revision": "1.0.0",
+      "reviewedOn": "2026-10-12",
+      "sourceRefs": [
+        "playwright-best-practices",
+        "playwright-emulation"
+      ],
+      "category": "build-test"
     }
   }
 });

@@ -16,7 +16,7 @@
     {
       "type": "code",
       "label": "How CI is declared",
-      "text": "# Illustrative, the echo step is a placeholder.\nname: ci\non: [push, pull_request]\npermissions:\n  contents: read\nconcurrency:\n  group: ci-${{ github.ref }}\n  cancel-in-progress: true\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v6\n      - run: echo \"placeholder\""
+      "text": "# Illustrative only. This job performs no tests. Replace the echo\n# with confirmed project checks before using it as a merge gate.\nname: ci\non: [push, pull_request]\npermissions:\n  contents: read\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v6\n      - run: echo \"placeholder\""
     },
     {
       "type": "p",
@@ -28,12 +28,12 @@
       "label": "Gotchas",
       "items": [
         "schedule, workflow_dispatch, repository_dispatch, issue_comment and workflow_run only trigger a run if the workflow file exists on the default branch.",
-        "Events caused by GITHUB_TOKEN do not create new workflow runs, except workflow_dispatch and repository_dispatch, and a pull request opened by a workflow with that token gets runs that wait for approval.",
-        "In pull requests from forks, secrets other than GITHUB_TOKEN are not passed to the runner and GITHUB_TOKEN is read only.",
-        "Setting any permissions key makes every unlisted permission none, and a new personal repository defaults to read access for contents and packages, with workflows unable to create or approve pull requests.",
+        "GITHUB_TOKEN events normally do not start another workflow. The documented exceptions are workflow_dispatch, repository_dispatch and pull_request opened, synchronize or reopened events. Those pull request runs require approval from a user with write access.",
+        "For the documented pull_request fork flow, secrets other than GITHUB_TOKEN are withheld and the token is read only by default. Repository policy and the selected event matter. pull_request_target has different authority and must not be treated as equivalent.",
+        "When specific permissions are listed, unlisted permissions become none. New personal repositories default to read access for contents and packages and disallow workflow creation or approval of pull requests. Existing and organization repositories can have different settings.",
         "Required status checks must be successful, skipped or neutral before merging, and a job name reused across workflows can give ambiguous checks that block the merge.",
-        "Caches restore only from the current branch, the default branch or a pull request base branch, and unused caches are removed after 7 days.",
-        "A concurrency group runs one job or workflow at a time, queuing a new run cancels the pending one by default, and cancel-in-progress true also cancels the running one."
+        "Cache access is scoped to the current branch, default branch and, for pull requests, the base branch. Pull request merge caches have narrower reuse. Cache access settings also apply, and entries not accessed in over 7 days are removed by default.",
+        "A concurrency group allows one running job or workflow. By default a new queued run replaces the pending one, and cancel-in-progress true also cancels the running one. The documented queue option changes pending capacity. Choose cancellation behavior deliberately for deployment work."
       ]
     },
     {
@@ -45,6 +45,11 @@
       "type": "p",
       "label": "Check in your environment",
       "text": "Confirm which workflow files exist on the default branch, which checks the target branch requires, the repository workflow permission setting, and whether gh is installed and authenticated."
+    },
+    {
+      "type": "p",
+      "label": "Review scope",
+      "text": "Scoped claims checked on 2026-10-12 against the linked GitHub.com documentation. Server editions, repository policies and settings can differ. The YAML is illustrative and its placeholder performs no testing. No workflow or repository setting was verified for the reader."
     }
   ],
   "refs": [
@@ -63,8 +68,8 @@
     "gh-actions-rerun",
     "gh-actions-quickstart"
   ],
-  "basis": "GitHub documentation on docs.github.com read on 2026-10-11, plus one illustrative workflow example.",
-  "confidence": "Documented behavior has scoped sources that still need review. The YAML example and the Atlas profile text are illustrative and proposed.",
+  "basis": "Scoped official documentation and proposed project guidance",
+  "confidence": "The listed factual claims were checked against their sources on 2026-10-12 within the stated version and host scope. Recommendations and example commands do not prove suitability or execution in a particular project.",
   "catalog": {
     "kind": "technology",
     "domains": [
@@ -78,11 +83,11 @@
       "github token",
       "branch protection"
     ],
-    "revision": "1",
+    "revision": "2",
     "applicability": "Use when a repository is hosted on GitHub and its checks run as GitHub Actions workflows under .github/workflows.",
     "limits": "Catalogue inclusion does not verify your repository settings, installed CLI, runner availability or whether a workflow passes.",
-    "sourceStatus": "needs-review",
-    "reviewedOn": "",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
     "claims": [
       {
         "sectionLabel": "Where config lives",
@@ -167,7 +172,7 @@
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "Events caused by GITHUB_TOKEN do not create new workflow runs, except workflow_dispatch and repository_dispatch, and a pull request opened by a workflow with that token gets runs that wait for approval.",
+        "text": "GITHUB_TOKEN events normally do not start another workflow. The documented exceptions are workflow_dispatch, repository_dispatch and pull_request opened, synchronize or reopened events. Those pull request runs require approval from a user with write access.",
         "sourceRefs": [
           "gh-actions-github-token",
           "gh-actions-events"
@@ -175,14 +180,14 @@
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "In pull requests from forks, secrets other than GITHUB_TOKEN are not passed to the runner and GITHUB_TOKEN is read only.",
+        "text": "For the documented pull_request fork flow, secrets other than GITHUB_TOKEN are withheld and the token is read only by default. Repository policy and the selected event matter. pull_request_target has different authority and must not be treated as equivalent.",
         "sourceRefs": [
           "gh-actions-events"
         ]
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "Setting any permissions key makes every unlisted permission none, and a new personal repository defaults to read access for contents and packages, with workflows unable to create or approve pull requests.",
+        "text": "When specific permissions are listed, unlisted permissions become none. New personal repositories default to read access for contents and packages and disallow workflow creation or approval of pull requests. Existing and organization repositories can have different settings.",
         "sourceRefs": [
           "gh-actions-workflow-syntax",
           "gh-actions-repo-settings"
@@ -197,14 +202,14 @@
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "Caches restore only from the current branch, the default branch or a pull request base branch, and unused caches are removed after 7 days.",
+        "text": "Cache access is scoped to the current branch, default branch and, for pull requests, the base branch. Pull request merge caches have narrower reuse. Cache access settings also apply, and entries not accessed in over 7 days are removed by default.",
         "sourceRefs": [
           "gh-actions-caching"
         ]
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "A concurrency group runs one job or workflow at a time, queuing a new run cancels the pending one by default, and cancel-in-progress true also cancels the running one.",
+        "text": "A concurrency group allows one running job or workflow. By default a new queued run replaces the pending one, and cancel-in-progress true also cancels the running one. The documented queue option changes pending capacity. Choose cancellation behavior deliberately for deployment work.",
         "sourceRefs": [
           "gh-actions-concurrency"
         ]

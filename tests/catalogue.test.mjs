@@ -35,6 +35,16 @@ test('catalogue retains historical routes, source references, related reading an
   }
   for (const [id, source] of Object.entries(baseline.sources)) assert.deepEqual(result.atlas.sources[id], source)
   for (const [group, definitions] of Object.entries(baseline.definitions)) for (const old of definitions) {
+    // React's profile was deliberately completed with the feature reference path.
+    // Every other historical definition still must match its preservation baseline.
+    if (group === 'technologyProfiles' && old.id === 'react') {
+      const react = result.catalog.technologyProfiles.find(record => record.id === 'react')
+      assert.equal(result.catalog.definitionMetadata['profile:react'].revision, '2.0.2')
+      assert.deepEqual(react.technologies, ['react'])
+      assert.ok(react.questions.some(question => /loading.*empty.*failed/i.test(question)))
+      assert.ok(react.checks.some(check => /keyboard/i.test(check)))
+      continue
+    }
     assert.equal(digest(result.catalog[group].find(record => record.id === old.id)), old.hash, `definition changed: ${group}/${old.id}`)
   }
   assert.match(result.atlas.nodes.find(node => node.id === 'overview').sections.find(section => section.label === 'What Atlas currently does').text, /bounded correction loops/)

@@ -6,7 +6,7 @@
     {
       "type": "p",
       "label": "Where config lives",
-      "text": "Docker reads a file named Dockerfile at the root of the build context unless the build names another file. A .dockerignore in the context root trims the context before it is sent to the builder. Compose looks for compose.yaml, compose.yml, docker-compose.yaml or docker-compose.yml in the working directory and prefers compose.yaml. docker init scaffolds .dockerignore, Dockerfile, compose.yaml and README.Docker.md and offers to overwrite existing files."
+      "text": "Docker reads a file named Dockerfile at the root of the build context unless the build names another file. A .dockerignore in the context root excludes matching context files, and a Dockerfile specific ignore file takes precedence when present. Compose supports compose.yaml, compose.yml, docker-compose.yaml and docker-compose.yml, preferring compose.yaml. Without an explicit file selection, it searches the working directory and its parents. docker init scaffolds .dockerignore, Dockerfile, compose.yaml and README.Docker.md and offers to overwrite existing files."
     },
     {
       "type": "code",
@@ -21,19 +21,19 @@
     {
       "type": "p",
       "label": "Where review conventions live",
-      "text": "Build checks inspect the Dockerfile and build options for deviations from current best practices without running the build, and docker build --check reports violations with a non zero exit status. Violations are warnings by default, so to block on them add # check=error=true to the Dockerfile or set the BUILDKIT_DOCKERFILE_CHECK build argument. Checks need Buildx 0.15.0 and Dockerfile 1.8 or later. Other rules are the project's own."
+      "text": "Build checks inspect the Dockerfile and build options for deviations from current best practices without running the build, and docker build --check reports violations with a non zero exit status. In a regular build, check violations are warnings by default. To make that build fail on them, use # check=error=true or the corresponding BUILDKIT_DOCKERFILE_CHECK argument. The separate --check command already exits with a non zero status on violations. Checks need Buildx 0.15.0 and Dockerfile 1.8 or later. Other rules are the project's own."
     },
     {
       "type": "list",
       "label": "Gotchas",
       "items": [
-        "Everything under the build path except .dockerignore matches reaches the builder and COPY, so node_modules and .git travel unless excluded.",
-        "Once a layer changes every later layer is rebuilt, so copy package manifests and install dependencies before the rest of the source.",
-        "FROM or a pull without a tag uses latest, tags are mutable, and a pinned digest receives no fixes on its own.",
+        "A filesystem context makes its files available to COPY and ADD after ignore rules. Files are loaded as needed, rather than necessarily all copied into the image. Exclude unnecessary local directories such as node_modules and .git. Git contexts omit .git by default unless configured otherwise.",
+        "When a layer changes, downstream layers in that build chain need rebuilding. Copy package manifests and install dependencies before frequently changing source to preserve useful cache entries.",
+        "An image reference without an explicit tag or digest defaults to latest. Tags are mutable, while a pinned digest does not pick up fixes until it is updated.",
         "USER sets the user for later RUN steps, ENTRYPOINT and CMD, and Docker recommends a non root user when the service can run without privileges.",
-        "Compose merges compose.yaml with compose.override.yaml from the same directory and applies -f files in the order given, later files overriding earlier ones.",
+        "By default Compose merges compose.yaml with an optional compose.override.yaml. Explicit -f files are applied in order. Later values can replace or append according to each field's merge rule, so inspect the merged configuration rather than assuming a whole file wins.",
         "The top level version key in a Compose file is obsolete and not used for validation.",
-        "Multi stage builds keep build tools out of the final image, and docker build --target stops at a named stage."
+        "Multi stage builds let you copy selected artifacts into a final stage without its build tools. This depends on the Dockerfile contents. docker build --target selects a named target stage."
       ]
     },
     {
@@ -45,6 +45,11 @@
       "type": "p",
       "label": "Check in your environment",
       "text": "Confirm the installed Docker and Compose versions, which Compose files and overrides exist, whether build checks run, and whether a project script wraps these conventional commands."
+    },
+    {
+      "type": "p",
+      "label": "Review scope",
+      "text": "Scoped claims checked on 2026-10-12 against current Docker Build, Dockerfile, Buildx and Compose documentation. Build checks require the stated versions. CLI examples are conventions, not observed builds or verified runtime behavior."
     }
   ],
   "refs": [
@@ -68,8 +73,8 @@
     "docker-guide-nodejs",
     "docker-guide-python"
   ],
-  "basis": "Docker documentation on docs.docker.com read on 2026-10-11, and the Slot 6 deployment target row of the coverage gap research from the same day.",
-  "confidence": "Documented behaviour has scoped sources that still need review. The command lines are conventions and the review guidance is proposed.",
+  "basis": "Scoped official documentation and proposed project guidance",
+  "confidence": "The listed factual claims were checked against their sources on 2026-10-12 within the stated version and host scope. Recommendations and example commands do not prove suitability or execution in a particular project.",
   "catalog": {
     "kind": "technology",
     "domains": [
@@ -83,11 +88,11 @@
       "docker compose",
       "build context"
     ],
-    "revision": "1",
+    "revision": "2",
     "applicability": "Use when a project builds container images from a Dockerfile or runs services with Docker Compose and a coding agent must build, run or review those files.",
     "limits": "Catalogue inclusion does not install Docker, verify a build, or confirm image contents, registry access or runtime behaviour.",
-    "sourceStatus": "needs-review",
-    "reviewedOn": "",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
     "claims": [
       {
         "sectionLabel": "Where config lives",
@@ -98,14 +103,14 @@
       },
       {
         "sectionLabel": "Where config lives",
-        "text": "A .dockerignore in the context root trims the context before it is sent to the builder.",
+        "text": "A .dockerignore in the context root excludes matching context files, and a Dockerfile specific ignore file takes precedence when present.",
         "sourceRefs": [
           "docker-build-context"
         ]
       },
       {
         "sectionLabel": "Where config lives",
-        "text": "Compose looks for compose.yaml, compose.yml, docker-compose.yaml or docker-compose.yml in the working directory and prefers compose.yaml.",
+        "text": "Compose supports compose.yaml, compose.yml, docker-compose.yaml and docker-compose.yml, preferring compose.yaml. Without an explicit file selection, it searches the working directory and its parents.",
         "sourceRefs": [
           "docker-compose-model"
         ]
@@ -172,7 +177,7 @@
       },
       {
         "sectionLabel": "Where review conventions live",
-        "text": "Violations are warnings by default, so to block on them add # check=error=true to the Dockerfile or set the BUILDKIT_DOCKERFILE_CHECK build argument.",
+        "text": "In a regular build, check violations are warnings by default. To make that build fail on them, use # check=error=true or the corresponding BUILDKIT_DOCKERFILE_CHECK argument. The separate --check command already exits with a non zero status on violations.",
         "sourceRefs": [
           "docker-build-checks"
         ]
@@ -186,7 +191,7 @@
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "Everything under the build path except .dockerignore matches reaches the builder and COPY, so node_modules and .git travel unless excluded.",
+        "text": "A filesystem context makes its files available to COPY and ADD after ignore rules. Files are loaded as needed, rather than necessarily all copied into the image. Exclude unnecessary local directories such as node_modules and .git. Git contexts omit .git by default unless configured otherwise.",
         "sourceRefs": [
           "docker-build-context",
           "docker-cache-optimize",
@@ -195,7 +200,7 @@
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "Once a layer changes every later layer is rebuilt, so copy package manifests and install dependencies before the rest of the source.",
+        "text": "When a layer changes, downstream layers in that build chain need rebuilding. Copy package manifests and install dependencies before frequently changing source to preserve useful cache entries.",
         "sourceRefs": [
           "docker-build-cache",
           "docker-cache-optimize"
@@ -203,7 +208,7 @@
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "FROM or a pull without a tag uses latest, tags are mutable, and a pinned digest receives no fixes on its own.",
+        "text": "An image reference without an explicit tag or digest defaults to latest. Tags are mutable, while a pinned digest does not pick up fixes until it is updated.",
         "sourceRefs": [
           "docker-dockerfile-reference",
           "docker-image-pull",
@@ -221,7 +226,7 @@
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "Compose merges compose.yaml with compose.override.yaml from the same directory and applies -f files in the order given, later files overriding earlier ones.",
+        "text": "By default Compose merges compose.yaml with an optional compose.override.yaml. Explicit -f files are applied in order. Later values can replace or append according to each field's merge rule, so inspect the merged configuration rather than assuming a whole file wins.",
         "sourceRefs": [
           "docker-compose-merge",
           "docker-compose-cli"
@@ -236,7 +241,7 @@
       },
       {
         "sectionLabel": "Gotchas",
-        "text": "Multi stage builds keep build tools out of the final image, and docker build --target stops at a named stage.",
+        "text": "Multi stage builds let you copy selected artifacts into a final stage without its build tools. This depends on the Dockerfile contents. docker build --target selects a named target stage.",
         "sourceRefs": [
           "docker-multi-stage"
         ]

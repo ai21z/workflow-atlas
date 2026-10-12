@@ -97,7 +97,7 @@ async function run() {
   const sandbox = { window: {} }
   vm.runInNewContext(await fs.readFile(path.join(root, 'atlas/data.js'), 'utf8'), sandbox)
   current = JSON.parse(JSON.stringify(sandbox.window.TOPIC_DATA))
-  const wantedIds = ['ci-pipelines', 'containers', 'access-controls', 'workflow-measurements']
+  const wantedIds = ['ci-pipelines', 'containers', 'access-controls', 'workflow-measurements', 'clarify-the-work', 'design-and-delivery', 'verification-evidence', 'release-and-recovery', 'user-facing-feature']
   assert.deepEqual(current.catalog.subjects.map(subject => subject.id), wantedIds)
   const bySubject = Object.fromEntries(current.catalog.subjects.map(subject => [subject.id, subject]))
   const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml' }
@@ -116,7 +116,7 @@ async function run() {
     browser = await playwright.chromium.launch({ channel: 'chrome', headless: true, args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] })
     await check('01-desktop-discovery-and-keyboard-reading', async () => {
       await fresh()
-      assert.equal(await page.locator('#subject-browse [data-subject]').count(), 4)
+      assert.equal(await page.locator('#subject-browse [data-subject]').count(), current.catalog.subjects.length)
       assert.equal(await page.locator('label[for="topic-subject"]').count(), 1)
       assert.equal(await page.locator('#topic-subject').inputValue(), '')
       const before = await page.evaluate(() => ({ hash: location.hash, selected: ATLAS_STATE.selected }))

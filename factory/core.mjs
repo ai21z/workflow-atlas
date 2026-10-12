@@ -78,6 +78,34 @@ export function selectRecipe(config, recipeId) {
 
 export function createExample(recipeId = 'feature-delivery') {
   const config = createRecipe(recipeId);
+  if (recipeId === 'feature-delivery') {
+    config.project = {
+      name: 'Request list status filter',
+      purpose: 'Fictional example. Let people switch a request list between Open and All while keeping existing access rules. Loading, empty and failed requests remain understandable. This is a proposed feature, not an implemented or verified result.',
+      host: 'vscode', sourceControl: 'github',
+      sourceLocations: 'Fictional worked example only. Supply the actual requirement owner, repository revision, list implementation, API contract and existing tests before adopting this pack.',
+    };
+    config.components = [
+      { id: 'web', name: 'Request list interface', path: '', technologies: ['typescript', 'react', 'vitest', 'playwright'].map(id => ({ id, version: '' })), commands: { test: '', lint: '', build: '' } },
+      { id: 'delivery', name: 'Build and delivery tooling', path: '', technologies: ['nodejs', 'npm', 'github-actions'].map(id => ({ id, version: '' })), commands: { test: '', lint: '', build: '' } },
+    ];
+    config.workflow.answers = {
+      'user-need': 'Proposed example outcome. People reviewing requests can select Open to focus on open requests, or All to see every request they are permitted to access. Confirm the starting choice with the requirement owner.',
+      acceptance: 'Proposed examples, not approved or run. Open shows permitted open requests and excludes closed requests. All shows every permitted request. Loading is shown while data is pending, without presenting it as an empty result. No matching requests shows a clear empty message. A failed request shows an error and a retry action that keeps the chosen filter. The filter has an accessible name and works with the keyboard. The list and filter remain usable on a narrow screen. Neither choice reveals records outside the existing access rules.',
+      affected: 'Inspect the existing list, its data source, authorization boundary and tests. The UI, focused tests and delivery checks are in scope for this example. Whether the API needs a filter parameter is unresolved until the data contract and pagination are known. Versions, repository paths, executable commands and release ownership have not been supplied.',
+    };
+    config.workflow.notes = {
+      requirements: 'Confirm the Open and All examples with the requirement owner. Record the default selection, status definitions, pagination behavior and expected retry behavior. Use permitted open and closed records, no matches, pending data and a failed request as proposed situations. Do not record these examples as observed results.',
+      architecture: 'Proposed options. Reuse filtering over loaded data only if it contains the complete permitted result set for the task. Otherwise inspect whether the existing API can filter the full permitted set and preserve pagination. Keep authorization in the existing trusted boundary. Choose the smaller supported change after inspecting the actual contract. No API change, new service or model is assumed necessary.',
+      breakdown: 'First agree the expected behavior and inspect the list contract. Then implement the selection and loading, empty, error and retry states. Add focused filtering and component checks and a browser journey. Review access boundaries and existing behavior before the normal release handoff. Connect each task to its acceptance example and record any dependency on a changed API.',
+      implementation: 'Use the existing TypeScript and React conventions once inspected. Represent the selection and request state clearly. Reuse current components and data access where suitable. Preserve existing access rules and unrelated list behavior. Confirm real source paths, versions and approved commands before editing or running checks. This pack contains instructions and does not execute this work.',
+      verification: 'Proposed checks, all not run. Use Vitest for filtering logic and appropriate component behavior in the actual configured environment. Use Playwright for Open to All, pending data, no matches, error then retry, keyboard selection and the agreed narrow viewport. Verify permitted records and the authorization boundary at the relevant service layer. Confirm existing npm scripts and GitHub Actions jobs, directories, fixtures and versions before execution. Record observed results and remaining gaps separately. A green command alone does not prove every acceptance example.',
+      release: 'Before release, name the release owner and confirm the actual pipeline, approval and deployment procedure. Review the changed files and the evidence for each acceptance example. Record a proportionate recovery route if filtering hides the wrong records or breaks existing behavior. No deployment, recovery command or approval is supplied or implied by this example.',
+      operations: 'After a real release, compare actual filter behavior, request failures and user feedback with the agreed outcome. Name the support owner and where a problem is reported. Record the release revision and observations before proposing a correction. Usage, reliability and user benefit are unknown until observed.',
+    };
+    config.constraints.notes = 'Fictional reference stack, not a required stack for other projects. Preserve existing access rules. No production access or credentials are provided. Confirm acceptance, permission boundaries, actual paths, versions, commands, release owner and approval policy. All planned checks are not run. Downloads remain draft instructions until the project supplies its missing facts and evidence.';
+    return config;
+  }
   config.project = { name: recipeId === 'feasibility' ? 'Configuration service feasibility' : recipeId === 'bugfix' ? 'Saved search repair' : 'Example delivery project', purpose: 'Fictional example. ' + (recipeId === 'feasibility' ? 'Investigate turning supplied references into a valid draft configuration. Produce a go/no-go decision, not a deployed service.' : recipeId === 'bugfix' ? 'Investigate and repair a saved search that loses an optional filter.' : 'Add a saved search feature to a web app with an API.') + ' Paths, versions and commands are sample values, not verified against a real repository.', host: 'jetbrains', sourceControl: 'github', sourceLocations: 'Synthetic example: docs/requirements.md and docs/decisions/. Replace with actual project sources.' };
   config.components = [
     { id: 'web', name: 'Example web app', path: 'web', technologies: [{ id: 'react', version: '19' }, { id: 'typescript', version: '5' }], commands: { test: 'npm test -- --run', lint: 'npm run lint', build: 'npm run build' } },

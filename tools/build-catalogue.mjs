@@ -3,6 +3,8 @@ import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import Ajv2020 from 'ajv/dist/2020.js'
 import { buildAtlasLayout } from './atlas-layout.mjs'
+import { coverageReport, guidanceReport } from './catalogue-coverage.mjs'
+export { coverageReport, guidanceReport } from './catalogue-coverage.mjs'
 
 const repository = fileURLToPath(new URL('../', import.meta.url))
 const schema = JSON.parse(await readFile(new URL('../catalogue/catalogue.schema.json', import.meta.url), 'utf8'))
@@ -270,41 +272,19 @@ export function staleReviews(data, today = new Date()) {
   ]
 }
 
-// Structural coverage of the eight stack slots named in catalogue/coverage.json. A report for the maintainer, never a projection.
-export function coverageReport(data, coverage) {
-  if (!coverage || !Array.isArray(coverage.slots)) throw new Error('coverage.json needs a slots array')
-  const topics = new Set(data.topics.map(item => item.id))
-  const names = new Map(data.definitions.filter(item => item.type === 'technology' || item.type === 'host').map(item => [`${item.type}:${item.id}`, item]))
-  const profiled = new Set(data.definitions.filter(item => item.type === 'profile').flatMap(item => item.spec.technologies))
-  const explained = new Set(data.relations.filter(item => item.type === 'explained-by').map(item => item.from))
-  const used = new Set(data.relations.filter(item => item.type === 'uses-definition').map(item => item.to))
-  const applied = new Set(data.topics.flatMap(topic => [...(topic.catalog.applies?.technologies || []).map(id => `technology:${id}`), ...(topic.catalog.applies?.hosts || []).map(id => `host:${id}`)]))
-  return coverage.slots.map(slot => {
-    if (!slot.id || !slot.title || !Array.isArray(slot.wanted)) throw new Error(`coverage slot needs id, title and wanted: ${JSON.stringify(slot)}`)
-    const items = slot.wanted.map(entry => {
-      const { id, type = 'technology' } = typeof entry === 'string' ? { id: entry } : entry
-      const ref = `${type}:${id}`
-      const named = names.has(ref)
-      const topic = topics.has(id) || explained.has(ref) || used.has(ref) || applied.has(ref)
-      const profile = type === 'technology' && profiled.has(id)
-      const status = named && topic && (profile || type === 'host') ? 'covered' : named && topic ? 'thin' : named ? 'named only' : topic ? 'topic only' : 'missing'
-      return { id, type, status }
-    })
-    return { id: slot.id, title: slot.title, items }
-  })
-}
-
 export async function buildCatalogue({ rootDir = repository, check = false } = {}) {
   const data = await readCatalogue(rootDir)
   const compiled = compileCatalogue(data)
-  const coverage = coverageReport(data, JSON.parse(await readFile(path.join(rootDir, 'catalogue', 'coverage.json'), 'utf8').catch(() => '{"slots":[]}')))
+  const coverageMetadata = JSON.parse(await readFile(path.join(rootDir, 'catalogue', 'coverage.json'), 'utf8'))
+  const coverage = coverageReport(data, coverageMetadata)
+  const guidance = guidanceReport(data, coverageMetadata)
   for (const [name, content] of Object.entries(compiled.files)) {
     const destination = path.join(rootDir, name)
     if (check) {
       if (await readFile(destination, 'utf8').catch(() => '') !== content) throw new Error(`Generated catalogue is stale: ${name}. Run npm run build:catalogue.`)
     } else await writeFile(destination, content)
   }
-  return { topics: data.topics.length, definitions: data.definitions.length, sources: data.sources.length, edges: compiled.atlas.catalog.edges.length, version: data.manifest.version, staleReviews: staleReviews(data), coverage }
+  return { topics: data.topics.length, definitions: data.definitions.length, sources: data.sources.length, edges: compiled.atlas.catalog.edges.length, version: data.manifest.version, staleReviews: staleReviews(data), coverage, guidance }
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
@@ -316,6 +296,11 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
     for (const slot of result.coverage) {
       const by = status => slot.items.filter(item => item.status === status).map(item => item.id)
       console.log(`Coverage, ${slot.title}: covered ${by('covered').join(', ') || 'none'}. Thin ${by('thin').join(', ') || 'none'}. Named only ${by('named only').join(', ') || 'none'}. Topic only ${by('topic only').join(', ') || 'none'}. Missing ${by('missing').join(', ') || 'none'}.`)
+      for (const item of slot.items.filter(item => item.reading.topicIds.length || item.factory.profileIds.length)) {
+        const reviews = item.review.map(review => `${review.topicId}: ${review.status}, ${review.scopedClaims} scoped claims${review.reviewedOn ? ', ' + review.reviewedOn : ''}`).join(' | ') || 'no topic review'
+        console.log(`  ${item.type}:${item.id}. Reading: ${item.reading.presence}. Task procedures: ${item.taskGuidance.length}. Worked examples: ${item.taskGuidance.filter(guide => guide.exampleSections.length).length}. Export questions: ${item.factory.profileIds.join(', ') || 'none'}${item.factory.hostTarget ? '. Host export target present' : ''}. Review: ${reviews}.`)
+      }
     }
+    for (const guide of result.guidance) console.log(`Task guidance, ${guide.topicId}: ${guide.task}. Procedure and output recorded. ${guide.exampleSections.length ? 'Worked example recorded' : 'No worked example recorded'}. Review: ${guide.reviewStatus}, ${guide.scopedClaims} scoped claims. This is metadata, not an observed successful task.`)
   } catch (error) { console.error(error.message); process.exitCode = 1 }
 }

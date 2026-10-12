@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "projectSchemaVersion": "3.0",
   "reviewedOn": "2026-10-02",
   "topicOrder": [
@@ -128,7 +128,13 @@
     "docker",
     "github-actions",
     "nodejs",
-    "python"
+    "python",
+    "user-facing-feature",
+    "javascript-typescript",
+    "react",
+    "npm",
+    "vitest",
+    "playwright"
   ],
   "sourceAliases": {
     "agents": "reference-65",

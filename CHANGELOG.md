@@ -4,6 +4,11 @@ Release notes describe application changes. Project schema and guidance versions
 
 ## Unreleased
 
+- Complete the first feature reference path with useful React, JavaScript and TypeScript, npm, Vitest and Playwright guides, stack questions and a fictional status filter draft. Keep actual commands, paths, versions and test results unresolved until supplied.
+- Review scoped claims in Node.js, Python, Docker, GitHub Actions and repository instructions, correcting version and host assumptions without claiming project compatibility.
+- Separate structural coverage, indirect reading, task procedures, worked examples, scoped review and export questions in the maintainer report. Reject missing section references and retain the visible gaps.
+- Add subjects for requirements, design and delivery, verification, release and the feature path. Preserve original topic parents, existing maps and the inference boundary. Advance catalogue content to 2.2.0.
+
 - Find every guide, practice and technology name with a separate Find on map search. Keep the selected name above the canvas, offer Details and connections and Back to map, and bring externally selected articles into view.
 - Keep map search results at their full height on phones and scroll longer lists without cutting off descriptions or actions.
 - Explain connected items in plain words and expose their recorded relationship, review status, notes and sources under Why connected?. Flag pending review, distinguish hidden connections from isolated names, and offer reading only through recorded links. Follow directional relationships with arrows and leave symmetric reading and stack links undirected.

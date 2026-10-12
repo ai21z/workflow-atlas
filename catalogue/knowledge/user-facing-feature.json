@@ -1,0 +1,192 @@
+{
+  "id": "user-facing-feature",
+  "title": "Deliver a user-facing feature",
+  "summary": "Turn a small user need into acceptance examples, a scoped change and evidence someone can review.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this path",
+      "text": "Use this when a change affects what a person sees or does. Start with the behavior and the existing system. The reference example uses React, TypeScript, Node.js, npm, Vitest, Playwright and GitHub Actions. Those tools are optional examples, not requirements for the workflow."
+    },
+    {
+      "type": "list",
+      "label": "Find the project facts",
+      "items": [
+        "Who needs the change, what they do today and what success should look like.",
+        "Affected screen, source of its data, access rules and whether filtering belongs in the browser or API.",
+        "Actual components, supported browsers, viewport needs, existing check commands and release owner.",
+        "What is confirmed, proposed or unresolved. Keep unknown paths, versions and commands blank until the repository or its owner supplies them."
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Fictional acceptance examples",
+      "headers": [
+        "Case",
+        "Expected behavior to agree"
+      ],
+      "rows": [
+        [
+          "Choose Open",
+          "With one Open and one Closed request in the example data, only the Open request is shown."
+        ],
+        [
+          "Choose All",
+          "Both requests return. This example proposes All as the default."
+        ],
+        [
+          "No matching requests",
+          "Show a clear empty message and leave the filter available."
+        ],
+        [
+          "Data still loading",
+          "Show loading feedback and do not describe unavailable data as an empty result."
+        ],
+        [
+          "Request failed",
+          "Explain that the list could not load and offer the agreed recovery action. Do not claim the result is empty."
+        ],
+        [
+          "Keyboard and narrow screen",
+          "A person can reach and operate the filter, read its label and see the result without controls being clipped."
+        ]
+      ]
+    },
+    {
+      "type": "steps",
+      "label": "From brief to review",
+      "items": [
+        "Agree the examples with the requirement owner. Decide whether default, persistence, paging and recovery behavior are in scope.",
+        "Inspect the existing list and API before choosing local or server filtering. Do not filter only a loaded page if the requirement concerns all available requests.",
+        "Record the decision, affected components and any API or access implications. Ordinary application code is a valid implementation. This feature does not require an agent.",
+        "Split the change into the smallest reviewable pieces: behavior, relevant tests and any necessary contract change. Keep unrelated redesign outside the task.",
+        "Implement the agreed states and check the changed behavior. When a check fails, correct the specific finding and run the affected check again. Missing requirements return to the owner.",
+        "Prepare a review packet for the actual candidate revision. Include observed results, unsuccessful checks, unrun work and the release or recovery decision."
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Choose evidence that answers the question",
+      "headers": [
+        "Question",
+        "Example evidence"
+      ],
+      "rows": [
+        [
+          "Does filtering implement the agreed rule?",
+          "Small data fixtures and a focused logic test, with expected and observed results."
+        ],
+        [
+          "Does the UI communicate each state?",
+          "Component or browser checks for loading, populated, empty and failed responses. State what was mocked."
+        ],
+        [
+          "Can a person complete the interaction?",
+          "A browser journey plus keyboard and narrow viewport inspection. Record browser, viewport and any physical device actually used."
+        ],
+        [
+          "Is this candidate ready for the team gate?",
+          "The repository checks and relevant pipeline run linked to the same revision. Passing a focused test does not replace the agreed gate."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Accessibility and mobile limits",
+      "text": "W3C keyboard guidance concerns operating functionality through a keyboard interface. Its reflow guidance includes exceptions for content that needs a two dimensional layout. Automated accessibility checks find only some problems. The example therefore combines relevant automation with manual interaction, without claiming whole product conformance or real phone coverage from viewport emulation."
+    },
+    {
+      "type": "p",
+      "label": "A useful draft output",
+      "text": "Requirement: users can filter requests by status. Decision: reuse the current list and approved data interface, subject to confirming paging. Planned checks: rule fixtures, visible states, keyboard and responsive interaction, then the actual delivery gate. Open: real source paths, status vocabulary, permitted data scope, supported browsers, commands and release owner. No checks have run in this fictional example."
+    },
+    {
+      "type": "p",
+      "label": "Use it in Atlas",
+      "text": "Open Browse examples and choose Build a feature. The fictional draft carries the acceptance examples and reference stack into editable project fields. Technology selection adds profile questions and checks to the generated skill references. Inspect WORKFLOW.md and the requirement and verification templates before using the pack. Opening this reading topic alone changes nothing in the draft."
+    },
+    {
+      "type": "p",
+      "label": "If the evidence is missing",
+      "text": "An unknown API permission, an inaccessible test environment or an unresolved paging rule blocks the relevant decision. Record the owner and next action. Do not invent credentials, choose a new stack or treat an unrun test as a pass."
+    }
+  ],
+  "refs": [
+    "reference-62",
+    "playwright-best-practices",
+    "playwright-emulation",
+    "reference-63",
+    "wai-keyboard",
+    "wai-reflow"
+  ],
+  "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+  "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "workflow-design",
+      "requirements",
+      "verification"
+    ],
+    "aliases": [
+      "user facing feature",
+      "status filter",
+      "acceptance examples",
+      "loading empty error",
+      "keyboard",
+      "responsive",
+      "frontend feature"
+    ],
+    "revision": "1",
+    "applicability": "Use when a proposed feature changes a user interface or user journey. The fictional status filter demonstrates the path without choosing tools for the reader.",
+    "limits": "This is a recommended workflow with fictional inputs and expected outcomes. It is not an observed implementation, a required stack, a conformance audit or an executable workflow.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
+    "claims": [
+      {
+        "sectionLabel": "Accessibility and mobile limits",
+        "text": "W3C keyboard guidance concerns operating functionality through a keyboard interface.",
+        "sourceRefs": [
+          "wai-keyboard"
+        ]
+      },
+      {
+        "sectionLabel": "Accessibility and mobile limits",
+        "text": "W3C reflow guidance includes exceptions for content that needs a two dimensional layout.",
+        "sourceRefs": [
+          "wai-reflow"
+        ]
+      },
+      {
+        "sectionLabel": "Accessibility and mobile limits",
+        "text": "Automated accessibility checks find only some problems.",
+        "sourceRefs": [
+          "reference-63"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "recipes": [
+        "feature-delivery"
+      ],
+      "stages": [
+        "requirements",
+        "architecture",
+        "implementation",
+        "verification",
+        "release"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

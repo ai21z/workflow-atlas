@@ -1,0 +1,122 @@
+{
+  "id": "javascript-typescript",
+  "title": "JavaScript and TypeScript changes",
+  "summary": "Separate static checks from the runtime inputs and behavior a user actually receives.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this guide",
+      "text": "Use this when changing JavaScript or TypeScript in a browser, service or shared package. Check the actual runtime and build setup before reusing a command. Choosing TypeScript does not mean a project has a separate type check."
+    },
+    {
+      "type": "p",
+      "label": "What type checks establish",
+      "text": "TypeScript checks code before it runs, and type annotations are removed when JavaScript is produced. A type assertion does not validate an API response at runtime. The noEmit option suppresses JavaScript, declaration and source map output while allowing type checking."
+    },
+    {
+      "type": "list",
+      "label": "Find the project facts",
+      "items": [
+        "JavaScript or TypeScript source, actual runtime versions and supported browser targets.",
+        "Configuration for modules, compilation and type checking, including the applicable tsconfig where present.",
+        "Data arriving from APIs, user input or stored files, and the checks that validate it at runtime.",
+        "Existing scripts and tests, including whether build, type check, lint and behavior checks are separate."
+      ]
+    },
+    {
+      "type": "steps",
+      "label": "Plan distinct checks",
+      "items": [
+        "Define the accepted behavior and malformed or missing input cases first.",
+        "Use the repository type check when it exists. Record the exact configured command and result, rather than assuming that transpilation ran it.",
+        "For JavaScript, record the project checks that are actually available. Do not invent a TypeScript migration to complete the task.",
+        "Check incoming data and the runtime result through the existing approved validation and test approach.",
+        "Record static, runtime and browser results separately for the candidate revision. Passing one does not establish the others."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Status filter example",
+      "text": "A TypeScript union can describe the agreed All and Open choices in code. The allowed values from a request, URL or persisted setting still need runtime handling. A test should cover an unexpected value and the agreed recovery. In a JavaScript project, exercise the same behavior without assuming a compiler catches it."
+    },
+    {
+      "type": "p",
+      "label": "Useful result",
+      "text": "Example verification plan: confirm the repository's language and type check setup, exercise All, Open and an unexpected incoming value, then record static and runtime results separately. Runtime versions, actual commands and the invalid input recovery decision remain unresolved. The example does not claim either check passed."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas changes",
+      "text": "Selecting JavaScript or TypeScript adds its own language profile questions and checks to generated skill references. Select the actual language used. Selecting Node.js separately describes a runtime, while selecting React describes an interface library. The shared reading guide does not make those choices for you."
+    }
+  ],
+  "refs": [
+    "typescript-basics",
+    "typescript-everyday-types",
+    "typescript-no-emit",
+    "react-typescript"
+  ],
+  "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+  "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [
+      "javascript",
+      "typescript",
+      "js",
+      "ts",
+      "type check",
+      "type assertion",
+      "runtime validation",
+      "tsconfig"
+    ],
+    "revision": "1",
+    "applicability": "Use for JavaScript or TypeScript changes where runtime behavior and, when configured, static checks need different evidence.",
+    "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
+    "claims": [
+      {
+        "sectionLabel": "What type checks establish",
+        "text": "TypeScript checks code before it runs, and type annotations are removed when JavaScript is produced.",
+        "sourceRefs": [
+          "typescript-basics"
+        ]
+      },
+      {
+        "sectionLabel": "What type checks establish",
+        "text": "A type assertion does not validate an API response at runtime.",
+        "sourceRefs": [
+          "typescript-everyday-types"
+        ]
+      },
+      {
+        "sectionLabel": "What type checks establish",
+        "text": "The noEmit option suppresses JavaScript, declaration and source map output.",
+        "sourceRefs": [
+          "typescript-no-emit"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "technologies": [
+        "javascript",
+        "typescript"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

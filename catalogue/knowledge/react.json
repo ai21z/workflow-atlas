@@ -1,0 +1,114 @@
+{
+  "id": "react",
+  "title": "React feature changes",
+  "summary": "Identify component responsibilities, visible states and the interactions that need evidence.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this guide",
+      "text": "Use this for a feature or repair in an existing React interface. It helps plan a coherent change. It does not prescribe a router, state library, rendering framework or test library."
+    },
+    {
+      "type": "p",
+      "label": "Documented foundation",
+      "text": "React describes building an interface through component responsibilities, visual states and data flow. Values that can be calculated from current props or state do not need a second state variable. Shared state can live in a common parent of the components that use it."
+    },
+    {
+      "type": "list",
+      "label": "Find the project facts",
+      "items": [
+        "Installed React version, rendering setup and the components that own the changed interaction.",
+        "Source of data, existing state owner and whether the result is local, paged or refreshed from an API.",
+        "Loading, empty, failed and successful states, plus labels, focus and narrow viewport behavior.",
+        "Actual test setup and where behavior is checked in the component, browser and delivery gate."
+      ]
+    },
+    {
+      "type": "steps",
+      "label": "Make the change",
+      "items": [
+        "Write the accepted interaction examples and inspect the affected component tree.",
+        "Place the new state with its existing owner where possible. Derive display values rather than maintaining two competing copies.",
+        "Implement the agreed states and recovery behavior. Preserve accessible names and ordinary keyboard interaction.",
+        "Check the rule with small fixtures and exercise the rendered interaction in the project environment. Record what was simulated and what ran in a browser."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Status filter example",
+      "text": "A proposed status value lives with the list interaction. Visible requests are calculated from the available requests and that value. If the API pages results, confirm whether the filter must change the request instead. A loading response, an empty match and a failure each need different expected feedback. This example is a design recommendation, not a rule imposed by React."
+    },
+    {
+      "type": "p",
+      "label": "A finding that changes the plan",
+      "text": "If only the first page is loaded but the acceptance example says all matching requests, a browser filter can produce the wrong result. Resolve the data contract before approving the implementation. If test setup uses a simulated DOM, preserve the distinction from observed rendering and focus behavior in a browser."
+    },
+    {
+      "type": "p",
+      "label": "Useful result",
+      "text": "Example design note: reuse the request list's existing state owner, derive visible items from the agreed status and available data, and define loading, empty and failed feedback. Paging, source paths and rendering setup remain to confirm. Planned evidence includes focused rule checks and observed keyboard and narrow layout behavior. No test has run in this example."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas changes",
+      "text": "Selecting React adds the React profile questions and checks to generated skill project references. The profile prompts state ownership, visible states, keyboard and responsive evidence. It neither reads the component tree nor configures React or its tests."
+    }
+  ],
+  "refs": [
+    "reference-62",
+    "react-typescript",
+    "reference-63"
+  ],
+  "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+  "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools"
+    ],
+    "aliases": [
+      "react components",
+      "react state",
+      "props",
+      "component tree",
+      "frontend"
+    ],
+    "revision": "1",
+    "applicability": "Use for a feature or repair in an existing React interface, after confirming the actual rendering setup and versions.",
+    "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
+    "claims": [
+      {
+        "sectionLabel": "Documented foundation",
+        "text": "React describes building an interface through component responsibilities, visual states and data flow.",
+        "sourceRefs": [
+          "reference-62"
+        ]
+      },
+      {
+        "sectionLabel": "Documented foundation",
+        "text": "Values calculated from props or state do not need a second state variable, and shared state can live in a common parent.",
+        "sourceRefs": [
+          "reference-62"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "technologies": [
+        "react"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

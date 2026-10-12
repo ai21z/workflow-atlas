@@ -16,7 +16,7 @@ test('the full pack carries a short AGENTS.md at the repository root', () => {
   assert.equal(lines[0], `# ${config.project.name}`);
   for (const heading of ['## Purpose', '## Commands', '## Workflow', '## Roles', '## Skills', '## Acceptance', '## Boundaries', '## Practices']) assert.ok(file.content.includes(`\n${heading}\n`), `${heading} present`);
   assert.ok(!file.content.startsWith('---'), 'AGENTS.md has no frontmatter');
-  assert.match(file.content, /- test: `[^`]+`/, 'recorded test command appears inline');
+  assert.match(file.content, /- test: `\[UNRESOLVED: test command\]`/, 'the feature example keeps real repository commands unresolved');
   assert.match(file.content, /^1\. /m, 'stages are numbered in order');
   assert.ok(file.content.includes('(.github/agents/'), 'agent profiles are linked');
   assert.ok(file.content.includes('(.github/skills/'), 'skills are linked');

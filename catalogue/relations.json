@@ -4031,5 +4031,285 @@
     ],
     "note": "The uv Docker guide documents a Python project built and run inside a Docker image. It is uv's guide, not a Python or Docker page, so review whether that is enough for the link.",
     "status": "needs-review"
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:react",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:javascript-typescript",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:npm",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:vitest",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:playwright",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:react",
+    "type": "explained-by",
+    "to": "topic:react",
+    "sourceRefs": []
+  },
+  {
+    "from": "profile:react",
+    "type": "explained-by",
+    "to": "topic:react",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:javascript",
+    "type": "explained-by",
+    "to": "topic:javascript-typescript",
+    "sourceRefs": []
+  },
+  {
+    "from": "profile:javascript",
+    "type": "explained-by",
+    "to": "topic:javascript-typescript",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:typescript",
+    "type": "explained-by",
+    "to": "topic:javascript-typescript",
+    "sourceRefs": []
+  },
+  {
+    "from": "profile:typescript",
+    "type": "explained-by",
+    "to": "topic:javascript-typescript",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:npm",
+    "type": "explained-by",
+    "to": "topic:npm",
+    "sourceRefs": []
+  },
+  {
+    "from": "profile:npm",
+    "type": "explained-by",
+    "to": "topic:npm",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:vitest",
+    "type": "explained-by",
+    "to": "topic:vitest",
+    "sourceRefs": []
+  },
+  {
+    "from": "profile:vitest",
+    "type": "explained-by",
+    "to": "topic:vitest",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:playwright",
+    "type": "explained-by",
+    "to": "topic:playwright",
+    "sourceRefs": []
+  },
+  {
+    "from": "profile:playwright",
+    "type": "explained-by",
+    "to": "topic:playwright",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:requirements-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:work-breakdown",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:implementation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:release-operations",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:react",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:javascript-typescript",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:nodejs",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:npm",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:vitest",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:playwright",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:user-facing-feature",
+    "type": "related-reading",
+    "to": "topic:github-actions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:react",
+    "type": "related-reading",
+    "to": "topic:javascript-typescript",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:react",
+    "type": "related-reading",
+    "to": "topic:vitest",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:react",
+    "type": "related-reading",
+    "to": "topic:playwright",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:javascript-typescript",
+    "type": "related-reading",
+    "to": "topic:nodejs",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:javascript-typescript",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:npm",
+    "type": "related-reading",
+    "to": "topic:nodejs",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:npm",
+    "type": "related-reading",
+    "to": "topic:github-actions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:npm",
+    "type": "related-reading",
+    "to": "topic:pipeline-diagnosis",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:vitest",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:vitest",
+    "type": "related-reading",
+    "to": "topic:playwright",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:playwright",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:playwright",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:react",
+    "type": "works-with",
+    "to": "technology:typescript",
+    "sourceRefs": [
+      "react-typescript"
+    ],
+    "status": "reviewed",
+    "reviewedOn": "2026-10-12",
+    "note": "Documents React with TypeScript, not compatibility of arbitrary installed versions."
+  },
+  {
+    "from": "technology:react",
+    "type": "works-with",
+    "to": "technology:vitest",
+    "sourceRefs": [
+      "vitest-guide"
+    ],
+    "status": "reviewed",
+    "reviewedOn": "2026-10-12",
+    "note": "The Vitest guide links a React example. A project still needs its own version and environment checks."
   }
 ]

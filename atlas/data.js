@@ -9305,12 +9305,12 @@ window.TOPIC_DATA = {
     {
       "id": "agents-md",
       "title": "Repository instructions for agents",
-      "summary": "Keep one short AGENTS.md at the repository root for what the README does not say, and point host files at it.",
+      "summary": "Keep project instructions short and specific. Share a root AGENTS.md where the chosen host supports it, and verify how that host loads additional guidance.",
       "sections": [
         {
           "type": "p",
           "label": "What the file is",
-          "text": "AGENTS.md is plain Markdown at the repository root with no required fields. The agents.md site calls it a README for agents and lists Codex, Copilot, Cursor and Gemini CLI as readers. Claude Code targets under 200 lines per CLAUDE.md file. This practice adopts that limit."
+          "text": "AGENTS.md is plain Markdown at the repository root with no required fields. The agents.md site calls it a README for agents and lists Codex, Copilot, Cursor and Gemini CLI as readers. Claude Code recommends under 200 lines per CLAUDE.md file. This practice uses that as an editorial target, not a universal limit or proven optimum."
         },
         {
           "type": "list",
@@ -9327,17 +9327,17 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "What to leave out",
-          "text": "The Claude Code doctor checkup trims directory layouts, dependency lists and architecture overviews and keeps pitfalls, rationale and conventions that differ from tool defaults. The evaluation below found that repository overviews did not help. Claude Code sends a multi step procedure to a skill and a partial rule to a path scoped rule."
+          "text": "Keep instructions focused on details the agent cannot reliably discover. Claude Code's /doctor checkup proposes trimming discoverable codebase summaries while retaining pitfalls, rationale and unusual conventions. In the benchmark settings tested, repository overviews did not improve navigation. Claude Code recommends skills for task procedures and path scoped rules for guidance relevant to only part of the codebase."
         },
         {
           "type": "p",
           "label": "How hosts read it",
-          "text": "Codex takes one file per directory, AGENTS.override.md before AGENTS.md, concatenates them from the root down to the working directory and stops at a default 32 KiB. Copilot reads AGENTS.md anywhere in the repository and the nearest file takes precedence. Claude Code reads AGENTS.md only when no CLAUDE.md or CLAUDE.local.md sits in the working directory or above it, and a CLAUDE.md can import it with an @AGENTS.md line. Keep host specific files as pointers, not copies."
+          "text": "Codex loads global guidance and then at most one instruction file per directory from the project root to the working directory. AGENTS.override.md precedes AGENTS.md, with configured fallback names afterward. The default combined limit is 32 KiB. GitHub's Copilot on GitHub documentation supports AGENTS.md files within the repository, with the nearest file taking precedence. This is not evidence that every Copilot surface and version reads them identically. Claude Code direct AGENTS.md loading needs v2.1.277 or later and an enabled supporting session. Its default chooses CLAUDE.md files when those or CLAUDE.local.md exist on the project path. The Project instructions setting can change that behavior, and a CLAUDE.md can import @AGENTS.md. Use documented host loading or import rules, a plain Markdown link alone does not guarantee inclusion."
         },
         {
           "type": "p",
           "label": "What the evidence says",
-          "text": "Developer written files raised success on a new CTXbench set by about 2.4 percent, a gain the authors call marginal and not statistically significant. Model generated files lowered resolution by 0.5 percent on SWE-bench and 2 percent on CTXbench and raised cost by 20 and 23 percent. Removing the testing section cut cost by about a fifth on CTXbench with no significant change in accuracy. File length showed no clear dependency with success or cost. The authors recommend including only what agents need that the README lacks. One study with particular agents and models does not predict your project."
+          "text": "The reviewed arXiv v3 study tested particular coding agents on SWE-bench and CTXbench. The authors report a 2.4 percent average CTXbench resolution improvement with developer files and average resolution drops of 0.5 and 2 percent with generated files. None of those differences from no context file were statistically significant. Generated files increased average cost by 20 and 23 percent. Removing testing text reduced cost without a significant accuracy change in the reported ablation. File length showed no clear dependency with success or cost. The authors recommend including only what agents need that existing documentation lacks. These results do not establish a universal file length or justify skipping project tests."
         },
         {
           "type": "p",
@@ -9347,7 +9347,12 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Check in your environment",
-          "text": "Confirm which host reads the file and whether a CLAUDE.md or copilot-instructions.md shadows it. Run every listed command and remove any that fails. In Claude Code, /doctor prompt-audit covers AGENTS.md and reports stale references and contradictions without changing files. Claude Code treats these files as context, not enforced configuration, so a rule that must always hold needs a hook or a setting."
+          "text": "Confirm the host, version and instruction files actually loaded. Check each listed command in the intended environment. A failure can reveal a real defect or missing access, so record and investigate it rather than deleting a valid check. Claude Code v2.1.283 or later supports /doctor prompt-audit for instruction files including AGENTS.md, when its bundled audit skill is enabled. It reports findings without applying changes. Claude Code treats instruction files as context rather than enforced configuration. Its settings and appropriate hooks provide enforcement mechanisms."
+        },
+        {
+          "type": "p",
+          "label": "Review scope",
+          "text": "Scoped host claims checked on 2026-10-12 against the linked host documentation. Research statements refer to arXiv 2602.11988 v3, not a universal improvement estimate. The content checklist and short file target are editorial recommendations. Host behavior must be confirmed in the intended surface and version."
         }
       ],
       "refs": [
@@ -9357,8 +9362,8 @@ window.TOPIC_DATA = {
         "copilot-repository-instructions",
         "evaluating-agents-md"
       ],
-      "basis": "Documented host behavior, research findings and proposed practice",
-      "confidence": "Host behavior and study figures have scoped sources read on 2026-10-11. The content list and the line limit are a proposed practice, not a measured result.",
+      "basis": "Scoped host documentation, scoped research findings and proposed practice",
+      "confidence": "The listed factual claims were checked against their sources on 2026-10-12 within the stated version and host scope. Recommendations and example commands do not prove suitability or execution in a particular project.",
       "catalog": {
         "kind": "practice",
         "domains": [
@@ -9371,11 +9376,11 @@ window.TOPIC_DATA = {
           "context file",
           "repository instructions"
         ],
-        "revision": "1",
+        "revision": "2",
         "applicability": "Use when a repository is worked on by coding agents and needs one shared place for commands, conventions and boundaries.",
         "limits": "The file is written context for an agent. It does not configure a host, grant a permission or prove that its instructions were followed.",
-        "sourceStatus": "needs-review",
-        "reviewedOn": "",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
         "claims": [
           {
             "id": "claim:agents-md-1",
@@ -9396,7 +9401,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-3",
             "sectionLabel": "What the file is",
-            "text": "Claude Code targets under 200 lines per CLAUDE.md file.",
+            "text": "Claude Code recommends under 200 lines per CLAUDE.md file.",
             "sourceRefs": [
               "claude-code-memory"
             ]
@@ -9404,7 +9409,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-4",
             "sectionLabel": "What to leave out",
-            "text": "The Claude Code doctor checkup trims directory layouts, dependency lists and architecture overviews and keeps pitfalls, rationale and conventions that differ from tool defaults.",
+            "text": "Claude Code's /doctor checkup proposes trimming discoverable codebase summaries while retaining pitfalls, rationale and unusual conventions.",
             "sourceRefs": [
               "claude-code-memory"
             ]
@@ -9412,7 +9417,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-5",
             "sectionLabel": "What to leave out",
-            "text": "The evaluation below found that repository overviews did not help.",
+            "text": "In the benchmark settings tested, repository overviews did not improve navigation.",
             "sourceRefs": [
               "evaluating-agents-md"
             ]
@@ -9420,7 +9425,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-6",
             "sectionLabel": "What to leave out",
-            "text": "Claude Code sends a multi step procedure to a skill and a partial rule to a path scoped rule.",
+            "text": "Claude Code recommends skills for task procedures and path scoped rules for guidance relevant to only part of the codebase.",
             "sourceRefs": [
               "claude-code-memory"
             ]
@@ -9428,7 +9433,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-7",
             "sectionLabel": "How hosts read it",
-            "text": "Codex takes one file per directory, AGENTS.override.md before AGENTS.md, concatenates them from the root down to the working directory and stops at a default 32 KiB.",
+            "text": "Codex loads global guidance and then at most one instruction file per directory from the project root to the working directory. AGENTS.override.md precedes AGENTS.md, with configured fallback names afterward. The default combined limit is 32 KiB.",
             "sourceRefs": [
               "codex-agents-md"
             ]
@@ -9436,7 +9441,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-8",
             "sectionLabel": "How hosts read it",
-            "text": "Copilot reads AGENTS.md anywhere in the repository and the nearest file takes precedence.",
+            "text": "GitHub's Copilot on GitHub documentation supports AGENTS.md files within the repository, with the nearest file taking precedence. This is not evidence that every Copilot surface and version reads them identically.",
             "sourceRefs": [
               "copilot-repository-instructions",
               "agentsmd"
@@ -9445,7 +9450,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-9",
             "sectionLabel": "How hosts read it",
-            "text": "Claude Code reads AGENTS.md only when no CLAUDE.md or CLAUDE.local.md sits in the working directory or above it, and a CLAUDE.md can import it with an @AGENTS.md line.",
+            "text": "Claude Code direct AGENTS.md loading needs v2.1.277 or later and an enabled supporting session. Its default chooses CLAUDE.md files when those or CLAUDE.local.md exist on the project path. The Project instructions setting can change that behavior, and a CLAUDE.md can import @AGENTS.md.",
             "sourceRefs": [
               "claude-code-memory"
             ]
@@ -9453,7 +9458,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-10",
             "sectionLabel": "What the evidence says",
-            "text": "Developer written files raised success on a new CTXbench set by about 2.4 percent, a gain the authors call marginal and not statistically significant.",
+            "text": "The authors report a 2.4 percent average CTXbench resolution improvement with developer files. The difference from no context file was not statistically significant.",
             "sourceRefs": [
               "evaluating-agents-md"
             ]
@@ -9461,7 +9466,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-11",
             "sectionLabel": "What the evidence says",
-            "text": "Model generated files lowered resolution by 0.5 percent on SWE-bench and 2 percent on CTXbench and raised cost by 20 and 23 percent.",
+            "text": "The authors report average resolution drops of 0.5 and 2 percent with generated files, neither statistically significant, and average cost increases of 20 and 23 percent.",
             "sourceRefs": [
               "evaluating-agents-md"
             ]
@@ -9469,7 +9474,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-12",
             "sectionLabel": "What the evidence says",
-            "text": "Removing the testing section cut cost by about a fifth on CTXbench with no significant change in accuracy.",
+            "text": "Removing testing text reduced cost without a statistically significant accuracy change in the reported ablation.",
             "sourceRefs": [
               "evaluating-agents-md"
             ]
@@ -9485,7 +9490,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-14",
             "sectionLabel": "What the evidence says",
-            "text": "The authors recommend including only what agents need that the README lacks.",
+            "text": "The authors recommend including only what agents need that existing documentation lacks.",
             "sourceRefs": [
               "evaluating-agents-md"
             ]
@@ -9493,7 +9498,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-15",
             "sectionLabel": "Check in your environment",
-            "text": "In Claude Code, /doctor prompt-audit covers AGENTS.md and reports stale references and contradictions without changing files.",
+            "text": "Claude Code v2.1.283 or later supports /doctor prompt-audit for instruction files including AGENTS.md, when its bundled audit skill is enabled. It reports findings without applying changes.",
             "sourceRefs": [
               "claude-code-memory"
             ]
@@ -9501,7 +9506,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:agents-md-16",
             "sectionLabel": "Check in your environment",
-            "text": "Claude Code treats these files as context, not enforced configuration, so a rule that must always hold needs a hook or a setting.",
+            "text": "Claude Code treats instruction files as context rather than enforced configuration. Its settings and appropriate hooks provide enforcement mechanisms.",
             "sourceRefs": [
               "claude-code-memory"
             ]
@@ -9550,7 +9555,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Where config lives",
-          "text": "Docker reads a file named Dockerfile at the root of the build context unless the build names another file. A .dockerignore in the context root trims the context before it is sent to the builder. Compose looks for compose.yaml, compose.yml, docker-compose.yaml or docker-compose.yml in the working directory and prefers compose.yaml. docker init scaffolds .dockerignore, Dockerfile, compose.yaml and README.Docker.md and offers to overwrite existing files."
+          "text": "Docker reads a file named Dockerfile at the root of the build context unless the build names another file. A .dockerignore in the context root excludes matching context files, and a Dockerfile specific ignore file takes precedence when present. Compose supports compose.yaml, compose.yml, docker-compose.yaml and docker-compose.yml, preferring compose.yaml. Without an explicit file selection, it searches the working directory and its parents. docker init scaffolds .dockerignore, Dockerfile, compose.yaml and README.Docker.md and offers to overwrite existing files."
         },
         {
           "type": "code",
@@ -9565,19 +9570,19 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Where review conventions live",
-          "text": "Build checks inspect the Dockerfile and build options for deviations from current best practices without running the build, and docker build --check reports violations with a non zero exit status. Violations are warnings by default, so to block on them add # check=error=true to the Dockerfile or set the BUILDKIT_DOCKERFILE_CHECK build argument. Checks need Buildx 0.15.0 and Dockerfile 1.8 or later. Other rules are the project's own."
+          "text": "Build checks inspect the Dockerfile and build options for deviations from current best practices without running the build, and docker build --check reports violations with a non zero exit status. In a regular build, check violations are warnings by default. To make that build fail on them, use # check=error=true or the corresponding BUILDKIT_DOCKERFILE_CHECK argument. The separate --check command already exits with a non zero status on violations. Checks need Buildx 0.15.0 and Dockerfile 1.8 or later. Other rules are the project's own."
         },
         {
           "type": "list",
           "label": "Gotchas",
           "items": [
-            "Everything under the build path except .dockerignore matches reaches the builder and COPY, so node_modules and .git travel unless excluded.",
-            "Once a layer changes every later layer is rebuilt, so copy package manifests and install dependencies before the rest of the source.",
-            "FROM or a pull without a tag uses latest, tags are mutable, and a pinned digest receives no fixes on its own.",
+            "A filesystem context makes its files available to COPY and ADD after ignore rules. Files are loaded as needed, rather than necessarily all copied into the image. Exclude unnecessary local directories such as node_modules and .git. Git contexts omit .git by default unless configured otherwise.",
+            "When a layer changes, downstream layers in that build chain need rebuilding. Copy package manifests and install dependencies before frequently changing source to preserve useful cache entries.",
+            "An image reference without an explicit tag or digest defaults to latest. Tags are mutable, while a pinned digest does not pick up fixes until it is updated.",
             "USER sets the user for later RUN steps, ENTRYPOINT and CMD, and Docker recommends a non root user when the service can run without privileges.",
-            "Compose merges compose.yaml with compose.override.yaml from the same directory and applies -f files in the order given, later files overriding earlier ones.",
+            "By default Compose merges compose.yaml with an optional compose.override.yaml. Explicit -f files are applied in order. Later values can replace or append according to each field's merge rule, so inspect the merged configuration rather than assuming a whole file wins.",
             "The top level version key in a Compose file is obsolete and not used for validation.",
-            "Multi stage builds keep build tools out of the final image, and docker build --target stops at a named stage."
+            "Multi stage builds let you copy selected artifacts into a final stage without its build tools. This depends on the Dockerfile contents. docker build --target selects a named target stage."
           ]
         },
         {
@@ -9589,6 +9594,11 @@ window.TOPIC_DATA = {
           "type": "p",
           "label": "Check in your environment",
           "text": "Confirm the installed Docker and Compose versions, which Compose files and overrides exist, whether build checks run, and whether a project script wraps these conventional commands."
+        },
+        {
+          "type": "p",
+          "label": "Review scope",
+          "text": "Scoped claims checked on 2026-10-12 against current Docker Build, Dockerfile, Buildx and Compose documentation. Build checks require the stated versions. CLI examples are conventions, not observed builds or verified runtime behavior."
         }
       ],
       "refs": [
@@ -9612,8 +9622,8 @@ window.TOPIC_DATA = {
         "docker-guide-nodejs",
         "docker-guide-python"
       ],
-      "basis": "Docker documentation on docs.docker.com read on 2026-10-11, and the Slot 6 deployment target row of the coverage gap research from the same day.",
-      "confidence": "Documented behaviour has scoped sources that still need review. The command lines are conventions and the review guidance is proposed.",
+      "basis": "Scoped official documentation and proposed project guidance",
+      "confidence": "The listed factual claims were checked against their sources on 2026-10-12 within the stated version and host scope. Recommendations and example commands do not prove suitability or execution in a particular project.",
       "catalog": {
         "kind": "technology",
         "domains": [
@@ -9627,11 +9637,11 @@ window.TOPIC_DATA = {
           "docker compose",
           "build context"
         ],
-        "revision": "1",
+        "revision": "2",
         "applicability": "Use when a project builds container images from a Dockerfile or runs services with Docker Compose and a coding agent must build, run or review those files.",
         "limits": "Catalogue inclusion does not install Docker, verify a build, or confirm image contents, registry access or runtime behaviour.",
-        "sourceStatus": "needs-review",
-        "reviewedOn": "",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
         "claims": [
           {
             "id": "claim:docker-1",
@@ -9644,7 +9654,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:docker-2",
             "sectionLabel": "Where config lives",
-            "text": "A .dockerignore in the context root trims the context before it is sent to the builder.",
+            "text": "A .dockerignore in the context root excludes matching context files, and a Dockerfile specific ignore file takes precedence when present.",
             "sourceRefs": [
               "docker-build-context"
             ]
@@ -9652,7 +9662,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:docker-3",
             "sectionLabel": "Where config lives",
-            "text": "Compose looks for compose.yaml, compose.yml, docker-compose.yaml or docker-compose.yml in the working directory and prefers compose.yaml.",
+            "text": "Compose supports compose.yaml, compose.yml, docker-compose.yaml and docker-compose.yml, preferring compose.yaml. Without an explicit file selection, it searches the working directory and its parents.",
             "sourceRefs": [
               "docker-compose-model"
             ]
@@ -9728,7 +9738,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:docker-12",
             "sectionLabel": "Where review conventions live",
-            "text": "Violations are warnings by default, so to block on them add # check=error=true to the Dockerfile or set the BUILDKIT_DOCKERFILE_CHECK build argument.",
+            "text": "In a regular build, check violations are warnings by default. To make that build fail on them, use # check=error=true or the corresponding BUILDKIT_DOCKERFILE_CHECK argument. The separate --check command already exits with a non zero status on violations.",
             "sourceRefs": [
               "docker-build-checks"
             ]
@@ -9744,7 +9754,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:docker-14",
             "sectionLabel": "Gotchas",
-            "text": "Everything under the build path except .dockerignore matches reaches the builder and COPY, so node_modules and .git travel unless excluded.",
+            "text": "A filesystem context makes its files available to COPY and ADD after ignore rules. Files are loaded as needed, rather than necessarily all copied into the image. Exclude unnecessary local directories such as node_modules and .git. Git contexts omit .git by default unless configured otherwise.",
             "sourceRefs": [
               "docker-build-context",
               "docker-cache-optimize",
@@ -9754,7 +9764,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:docker-15",
             "sectionLabel": "Gotchas",
-            "text": "Once a layer changes every later layer is rebuilt, so copy package manifests and install dependencies before the rest of the source.",
+            "text": "When a layer changes, downstream layers in that build chain need rebuilding. Copy package manifests and install dependencies before frequently changing source to preserve useful cache entries.",
             "sourceRefs": [
               "docker-build-cache",
               "docker-cache-optimize"
@@ -9763,7 +9773,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:docker-16",
             "sectionLabel": "Gotchas",
-            "text": "FROM or a pull without a tag uses latest, tags are mutable, and a pinned digest receives no fixes on its own.",
+            "text": "An image reference without an explicit tag or digest defaults to latest. Tags are mutable, while a pinned digest does not pick up fixes until it is updated.",
             "sourceRefs": [
               "docker-dockerfile-reference",
               "docker-image-pull",
@@ -9783,7 +9793,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:docker-18",
             "sectionLabel": "Gotchas",
-            "text": "Compose merges compose.yaml with compose.override.yaml from the same directory and applies -f files in the order given, later files overriding earlier ones.",
+            "text": "By default Compose merges compose.yaml with an optional compose.override.yaml. Explicit -f files are applied in order. Later values can replace or append according to each field's merge rule, so inspect the merged configuration rather than assuming a whole file wins.",
             "sourceRefs": [
               "docker-compose-merge",
               "docker-compose-cli"
@@ -9800,7 +9810,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:docker-20",
             "sectionLabel": "Gotchas",
-            "text": "Multi stage builds keep build tools out of the final image, and docker build --target stops at a named stage.",
+            "text": "Multi stage builds let you copy selected artifacts into a final stage without its build tools. This depends on the Dockerfile contents. docker build --target selects a named target stage.",
             "sourceRefs": [
               "docker-multi-stage"
             ]
@@ -9854,7 +9864,7 @@ window.TOPIC_DATA = {
         {
           "type": "code",
           "label": "How CI is declared",
-          "text": "# Illustrative, the echo step is a placeholder.\nname: ci\non: [push, pull_request]\npermissions:\n  contents: read\nconcurrency:\n  group: ci-${{ github.ref }}\n  cancel-in-progress: true\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v6\n      - run: echo \"placeholder\""
+          "text": "# Illustrative only. This job performs no tests. Replace the echo\n# with confirmed project checks before using it as a merge gate.\nname: ci\non: [push, pull_request]\npermissions:\n  contents: read\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v6\n      - run: echo \"placeholder\""
         },
         {
           "type": "p",
@@ -9866,12 +9876,12 @@ window.TOPIC_DATA = {
           "label": "Gotchas",
           "items": [
             "schedule, workflow_dispatch, repository_dispatch, issue_comment and workflow_run only trigger a run if the workflow file exists on the default branch.",
-            "Events caused by GITHUB_TOKEN do not create new workflow runs, except workflow_dispatch and repository_dispatch, and a pull request opened by a workflow with that token gets runs that wait for approval.",
-            "In pull requests from forks, secrets other than GITHUB_TOKEN are not passed to the runner and GITHUB_TOKEN is read only.",
-            "Setting any permissions key makes every unlisted permission none, and a new personal repository defaults to read access for contents and packages, with workflows unable to create or approve pull requests.",
+            "GITHUB_TOKEN events normally do not start another workflow. The documented exceptions are workflow_dispatch, repository_dispatch and pull_request opened, synchronize or reopened events. Those pull request runs require approval from a user with write access.",
+            "For the documented pull_request fork flow, secrets other than GITHUB_TOKEN are withheld and the token is read only by default. Repository policy and the selected event matter. pull_request_target has different authority and must not be treated as equivalent.",
+            "When specific permissions are listed, unlisted permissions become none. New personal repositories default to read access for contents and packages and disallow workflow creation or approval of pull requests. Existing and organization repositories can have different settings.",
             "Required status checks must be successful, skipped or neutral before merging, and a job name reused across workflows can give ambiguous checks that block the merge.",
-            "Caches restore only from the current branch, the default branch or a pull request base branch, and unused caches are removed after 7 days.",
-            "A concurrency group runs one job or workflow at a time, queuing a new run cancels the pending one by default, and cancel-in-progress true also cancels the running one."
+            "Cache access is scoped to the current branch, default branch and, for pull requests, the base branch. Pull request merge caches have narrower reuse. Cache access settings also apply, and entries not accessed in over 7 days are removed by default.",
+            "A concurrency group allows one running job or workflow. By default a new queued run replaces the pending one, and cancel-in-progress true also cancels the running one. The documented queue option changes pending capacity. Choose cancellation behavior deliberately for deployment work."
           ]
         },
         {
@@ -9883,6 +9893,11 @@ window.TOPIC_DATA = {
           "type": "p",
           "label": "Check in your environment",
           "text": "Confirm which workflow files exist on the default branch, which checks the target branch requires, the repository workflow permission setting, and whether gh is installed and authenticated."
+        },
+        {
+          "type": "p",
+          "label": "Review scope",
+          "text": "Scoped claims checked on 2026-10-12 against the linked GitHub.com documentation. Server editions, repository policies and settings can differ. The YAML is illustrative and its placeholder performs no testing. No workflow or repository setting was verified for the reader."
         }
       ],
       "refs": [
@@ -9901,8 +9916,8 @@ window.TOPIC_DATA = {
         "gh-actions-rerun",
         "gh-actions-quickstart"
       ],
-      "basis": "GitHub documentation on docs.github.com read on 2026-10-11, plus one illustrative workflow example.",
-      "confidence": "Documented behavior has scoped sources that still need review. The YAML example and the Atlas profile text are illustrative and proposed.",
+      "basis": "Scoped official documentation and proposed project guidance",
+      "confidence": "The listed factual claims were checked against their sources on 2026-10-12 within the stated version and host scope. Recommendations and example commands do not prove suitability or execution in a particular project.",
       "catalog": {
         "kind": "technology",
         "domains": [
@@ -9916,11 +9931,11 @@ window.TOPIC_DATA = {
           "github token",
           "branch protection"
         ],
-        "revision": "1",
+        "revision": "2",
         "applicability": "Use when a repository is hosted on GitHub and its checks run as GitHub Actions workflows under .github/workflows.",
         "limits": "Catalogue inclusion does not verify your repository settings, installed CLI, runner availability or whether a workflow passes.",
-        "sourceStatus": "needs-review",
-        "reviewedOn": "",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
         "claims": [
           {
             "id": "claim:github-actions-1",
@@ -10017,7 +10032,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:github-actions-12",
             "sectionLabel": "Gotchas",
-            "text": "Events caused by GITHUB_TOKEN do not create new workflow runs, except workflow_dispatch and repository_dispatch, and a pull request opened by a workflow with that token gets runs that wait for approval.",
+            "text": "GITHUB_TOKEN events normally do not start another workflow. The documented exceptions are workflow_dispatch, repository_dispatch and pull_request opened, synchronize or reopened events. Those pull request runs require approval from a user with write access.",
             "sourceRefs": [
               "gh-actions-github-token",
               "gh-actions-events"
@@ -10026,7 +10041,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:github-actions-13",
             "sectionLabel": "Gotchas",
-            "text": "In pull requests from forks, secrets other than GITHUB_TOKEN are not passed to the runner and GITHUB_TOKEN is read only.",
+            "text": "For the documented pull_request fork flow, secrets other than GITHUB_TOKEN are withheld and the token is read only by default. Repository policy and the selected event matter. pull_request_target has different authority and must not be treated as equivalent.",
             "sourceRefs": [
               "gh-actions-events"
             ]
@@ -10034,7 +10049,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:github-actions-14",
             "sectionLabel": "Gotchas",
-            "text": "Setting any permissions key makes every unlisted permission none, and a new personal repository defaults to read access for contents and packages, with workflows unable to create or approve pull requests.",
+            "text": "When specific permissions are listed, unlisted permissions become none. New personal repositories default to read access for contents and packages and disallow workflow creation or approval of pull requests. Existing and organization repositories can have different settings.",
             "sourceRefs": [
               "gh-actions-workflow-syntax",
               "gh-actions-repo-settings"
@@ -10051,7 +10066,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:github-actions-16",
             "sectionLabel": "Gotchas",
-            "text": "Caches restore only from the current branch, the default branch or a pull request base branch, and unused caches are removed after 7 days.",
+            "text": "Cache access is scoped to the current branch, default branch and, for pull requests, the base branch. Pull request merge caches have narrower reuse. Cache access settings also apply, and entries not accessed in over 7 days are removed by default.",
             "sourceRefs": [
               "gh-actions-caching"
             ]
@@ -10059,7 +10074,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:github-actions-17",
             "sectionLabel": "Gotchas",
-            "text": "A concurrency group runs one job or workflow at a time, queuing a new run cancels the pending one by default, and cancel-in-progress true also cancels the running one.",
+            "text": "A concurrency group allows one running job or workflow. By default a new queued run replaces the pending one, and cancel-in-progress true also cancels the running one. The documented queue option changes pending capacity. Choose cancellation behavior deliberately for deployment work.",
             "sourceRefs": [
               "gh-actions-concurrency"
             ]
@@ -10101,12 +10116,12 @@ window.TOPIC_DATA = {
     {
       "id": "nodejs",
       "title": "Node.js",
-      "summary": "Node.js is a JavaScript runtime whose project conventions live in package.json, the lockfile and npm scripts.",
+      "summary": "Find the runtime version, package scripts and module rules before changing a Node.js project. npm is one package manager option, not a requirement of Node.js.",
       "sections": [
         {
           "type": "p",
           "label": "Where config lives",
-          "text": "Node.js is an asynchronous event-driven JavaScript runtime. A project declares scripts, dependencies and devDependencies in package.json. The engines field states which Node.js versions the package works with. package-lock.json describes the exact dependency tree and is intended to be committed into source repositories. ESLint reads eslint.config.js, .mjs or .cjs, searching upward from the target file's directory. Which of these files exist is a fact about the repository, not about Node.js."
+          "text": "Node.js is an asynchronous event-driven JavaScript runtime. A project declares scripts, dependencies and devDependencies in package.json. The engines field declares a supported Node.js version range, rather than proving compatibility. package-lock.json describes the exact dependency tree and is intended to be committed into source repositories. ESLint 10 flat config searches from each target file's directory upward for eslint.config.js, .mjs, .cjs or supported TypeScript variants. Earlier ESLint versions can use different discovery rules. Which of these files exist is a fact about the repository, not about Node.js."
         },
         {
           "type": "code",
@@ -10127,25 +10142,30 @@ window.TOPIC_DATA = {
           "type": "list",
           "label": "Gotchas",
           "items": [
-            "npm ci requires an existing package-lock.json, exits with an error when package.json and the lockfile do not match, removes node_modules first, and never writes to package.json or the lockfile.",
-            "A .js file is CommonJS unless the nearest package.json sets type to module, .mjs is always an ES module and .cjs is always CommonJS, and Node.js recommends setting type explicitly.",
-            "An exports field encapsulates a package, so requiring a subpath it does not list throws ERR_PACKAGE_PATH_NOT_EXPORTED.",
-            "The engines field is advisory and only produces warnings unless the engine-strict setting is on.",
-            "npm test runs pretest, test and posttest, and npm run executes any named script with its pre and post scripts.",
-            "node --test without arguments runs files matching patterns such as **/*.test.js and **/test/**/*.js, and matches the .ts equivalents unless --no-strip-types is given.",
-            "Node.js can run .ts files by stripping types without type checking, it ignores tsconfig.json, and syntax that needs transformation such as enum declarations is an error.",
+            "npm ci needs a lockfile accepted by the installed npm version. npm 11 accepts package-lock.json or npm-shrinkwrap.json. npm 12 requires package-lock.json and no longer reads shrinkwrap files. A manifest mismatch fails, existing node_modules is removed first, and package.json and the lockfile are not rewritten.",
+            "In the reviewed Node.js documentation, .mjs means ES modules and .cjs means CommonJS. An explicit package.json type controls .js files. Without a controlling type, syntax detection can treat an ambiguous .js file as an ES module. Detection is enabled by default since Node.js 22.7.0 and 20.19.0. Set type explicitly.",
+            "An exports field limits imports through package subpaths, so an unlisted subpath throws ERR_PACKAGE_PATH_NOT_EXPORTED. This is not a security boundary against absolute file access.",
+            "npm treats engines as advisory when installing a dependency unless engine-strict is enabled.",
+            "By default npm test runs defined pretest, test and posttest scripts, and npm run runs a named script with its matching pre and post scripts. Check script settings before assuming hooks ran.",
+            "In the reviewed Node.js 26 documentation, node --test discovers patterns including **/*.test.js and **/test/**/*.js, and TypeScript equivalents unless --no-strip-types is given. Confirm the actual runtime version before relying on these patterns.",
+            "Node.js 26 can run erasable TypeScript by stripping types without type checking. This built-in path ignores tsconfig.json and rejects syntax that needs code generation, such as enums. Earlier releases have different support and flags.",
             "The release page says production applications should use only Active LTS or Maintenance LTS releases."
           ]
         },
         {
           "type": "p",
           "label": "What Atlas provides",
-          "text": "Selecting Node.js adds the Node.js profile questions and checks to a project. The profile does not infer commands, versions, module system or compatibility, and the Atlas runs nothing."
+          "text": "Selecting Node.js adds the Node.js profile questions and checks to a project. The profile does not infer commands, versions, module system or compatibility, and Atlas runs nothing."
         },
         {
           "type": "p",
           "label": "Check in your environment",
           "text": "Confirm the installed Node.js and npm versions, the scripts field, whether a lockfile is committed, the type and engines fields, and the test runner the project uses. Every command here is a convention to confirm against that evidence."
+        },
+        {
+          "type": "p",
+          "label": "Review scope",
+          "text": "Scoped claims checked on 2026-10-12 against Node.js 26.11.1, npm 11.21.0 and 12.2.0, ESLint 10 documentation and the linked GitHub tutorial. Runtime features and discovery can differ on earlier versions. Example commands are not executed evidence and do not apply to projects that use another package manager."
         }
       ],
       "refs": [
@@ -10159,10 +10179,11 @@ window.TOPIC_DATA = {
         "npm-scripts",
         "node-test-runner",
         "node-typescript",
-        "node-releases"
+        "node-releases",
+        "npm-ci-v11"
       ],
-      "basis": "Documented conventions and proposed use",
-      "confidence": "Documented facts have scoped sources read on 2026-10-11. Commands are conventions and fit for a given project is unverified.",
+      "basis": "Scoped official documentation and proposed project guidance",
+      "confidence": "The listed factual claims were checked against their sources on 2026-10-12 within the stated version and host scope. Recommendations and example commands do not prove suitability or execution in a particular project.",
       "catalog": {
         "kind": "technology",
         "domains": [
@@ -10175,11 +10196,11 @@ window.TOPIC_DATA = {
           "package.json",
           "npm ci"
         ],
-        "revision": "1",
+        "revision": "2",
         "applicability": "Use when a project installs, tests or builds through package.json and npm scripts on Node.js.",
         "limits": "Catalogue inclusion is not an installed runtime, a verified command set or confirmed compatibility with any project.",
-        "sourceStatus": "needs-review",
-        "reviewedOn": "",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
         "claims": [
           {
             "id": "claim:nodejs-1",
@@ -10200,7 +10221,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:nodejs-3",
             "sectionLabel": "Where config lives",
-            "text": "The engines field states which Node.js versions the package works with.",
+            "text": "The engines field declares a supported Node.js version range, rather than proving compatibility.",
             "sourceRefs": [
               "npm-package-json"
             ]
@@ -10216,7 +10237,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:nodejs-5",
             "sectionLabel": "Where config lives",
-            "text": "ESLint reads eslint.config.js, .mjs or .cjs, searching upward from the target file's directory.",
+            "text": "ESLint 10 flat config searches from each target file's directory upward for eslint.config.js, .mjs, .cjs or supported TypeScript variants. Earlier ESLint versions can use different discovery rules.",
             "sourceRefs": [
               "eslint-config-files"
             ]
@@ -10240,15 +10261,17 @@ window.TOPIC_DATA = {
           {
             "id": "claim:nodejs-8",
             "sectionLabel": "Gotchas",
-            "text": "npm ci requires an existing package-lock.json, exits with an error when package.json and the lockfile do not match, removes node_modules first, and never writes to package.json or the lockfile.",
+            "text": "npm ci needs a lockfile accepted by the installed npm version. npm 11 accepts package-lock.json or npm-shrinkwrap.json. npm 12 requires package-lock.json and no longer reads shrinkwrap files. A manifest mismatch fails, existing node_modules is removed first, and package.json and the lockfile are not rewritten.",
             "sourceRefs": [
-              "npm-ci"
+              "npm-ci",
+              "npm-ci-v11",
+              "npm-package-lock"
             ]
           },
           {
             "id": "claim:nodejs-9",
             "sectionLabel": "Gotchas",
-            "text": "A .js file is CommonJS unless the nearest package.json sets type to module, .mjs is always an ES module and .cjs is always CommonJS, and Node.js recommends setting type explicitly.",
+            "text": "In the reviewed Node.js documentation, .mjs means ES modules and .cjs means CommonJS. An explicit package.json type controls .js files. Without a controlling type, syntax detection can treat an ambiguous .js file as an ES module. Detection is enabled by default since Node.js 22.7.0 and 20.19.0. Set type explicitly.",
             "sourceRefs": [
               "node-packages"
             ]
@@ -10256,7 +10279,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:nodejs-10",
             "sectionLabel": "Gotchas",
-            "text": "An exports field encapsulates a package, so requiring a subpath it does not list throws ERR_PACKAGE_PATH_NOT_EXPORTED.",
+            "text": "An exports field limits imports through package subpaths, so an unlisted subpath throws ERR_PACKAGE_PATH_NOT_EXPORTED. This is not a security boundary against absolute file access.",
             "sourceRefs": [
               "node-packages"
             ]
@@ -10264,7 +10287,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:nodejs-11",
             "sectionLabel": "Gotchas",
-            "text": "The engines field is advisory and only produces warnings unless the engine-strict setting is on.",
+            "text": "npm treats engines as advisory when installing a dependency unless engine-strict is enabled.",
             "sourceRefs": [
               "npm-package-json"
             ]
@@ -10272,7 +10295,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:nodejs-12",
             "sectionLabel": "Gotchas",
-            "text": "npm test runs pretest, test and posttest, and npm run executes any named script with its pre and post scripts.",
+            "text": "By default npm test runs defined pretest, test and posttest scripts, and npm run runs a named script with its matching pre and post scripts. Check script settings before assuming hooks ran.",
             "sourceRefs": [
               "npm-scripts"
             ]
@@ -10280,7 +10303,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:nodejs-13",
             "sectionLabel": "Gotchas",
-            "text": "node --test without arguments runs files matching patterns such as **/*.test.js and **/test/**/*.js, and matches the .ts equivalents unless --no-strip-types is given.",
+            "text": "In the reviewed Node.js 26 documentation, node --test discovers patterns including **/*.test.js and **/test/**/*.js, and TypeScript equivalents unless --no-strip-types is given. Confirm the actual runtime version before relying on these patterns.",
             "sourceRefs": [
               "node-test-runner"
             ]
@@ -10288,7 +10311,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:nodejs-14",
             "sectionLabel": "Gotchas",
-            "text": "Node.js can run .ts files by stripping types without type checking, it ignores tsconfig.json, and syntax that needs transformation such as enum declarations is an error.",
+            "text": "Node.js 26 can run erasable TypeScript by stripping types without type checking. This built-in path ignores tsconfig.json and rejects syntax that needs code generation, such as enums. Earlier releases have different support and flags.",
             "sourceRefs": [
               "node-typescript"
             ]
@@ -10332,27 +10355,27 @@ window.TOPIC_DATA = {
     {
       "id": "python",
       "title": "Python",
-      "summary": "Python projects keep metadata in pyproject.toml, install into a virtual environment and test with pytest, and commands remain project conventions.",
+      "summary": "Identify a Python project's environment, dependency tool and test conventions. pyproject.toml, pytest and Ruff are common options, not requirements for every Python project.",
       "sections": [
         {
           "type": "p",
           "label": "Where config lives",
-          "text": "Project metadata lives in pyproject.toml, where the [build-system] table should always be present and the [project] table carries the name and version. pytest reads pytest.toml, .pytest.toml, pytest.ini, .pytest.ini, pyproject.toml, tox.ini or setup.cfg, and the first match while searching upward sets the rootdir. Ruff reads the closest .ruff.toml, ruff.toml or pyproject.toml with a [tool.ruff] section. A requirements file, usually requirements.txt, lists items for pip to install."
+          "text": "Python packaging can use pyproject.toml. PyPA recommends a [build-system] table for build configuration. A [project] table holds package metadata, with a required name and a version that may be supplied dynamically by the build backend. Some backends use another metadata format. pytest 9 supports pytest.toml and .pytest.toml as well as pytest.ini, .pytest.ini, pyproject.toml, tox.ini and setup.cfg. Its search starts from the common ancestor of supplied paths, or the working directory, and the first matching configuration determines rootdir unless a command option overrides it. Ruff reads the closest .ruff.toml, ruff.toml or pyproject.toml with a [tool.ruff] section. A requirements file, usually requirements.txt, lists items for pip to install."
         },
         {
           "type": "p",
           "label": "Conventional commands",
-          "text": "These commands are conventions, not facts about any project. python -m venv creates an isolated environment, and activation is optional when the environment's interpreter is called by its full path. pip install -e . installs a project without copying files, so source edits take effect without reinstalling."
+          "text": "These commands are conventions, not facts about any project. python -m venv creates an isolated environment, and activation is optional when the environment's interpreter is called by its full path. An editable pip install exposes project sources without copying them. Python source edits normally take effect without reinstalling, but metadata changes can require reinstallation and compiled extensions still need building."
         },
         {
           "type": "code",
           "label": "Example commands",
-          "text": "python -m venv .venv\npip install -e .\npytest\nruff check .\nruff format --check ."
+          "text": "# Example only. Confirm the project uses these tools first.\npython -m venv .venv\n# Activate .venv using the command for your shell before continuing.\n# Or replace python below with the full path to its interpreter.\n# Install the project's documented test and lint dependencies too.\npython -m pip install -e .\npython -m pytest\npython -m ruff check .\npython -m ruff format --check ."
         },
         {
           "type": "p",
           "label": "How CI is declared",
-          "text": "Python has no CI declaration. CI lives in the source host's files, which show the commands a project actually runs. pytest treats a run as CI when the CI or BUILD_NUMBER environment variable is set to a non empty value and then stops truncating the short test summary. pip says regular installs, not editable installs, belong in CI systems and deployments."
+          "text": "Python has no single CI declaration. The project's CI configuration and logs show the commands it actually runs. pytest treats a run as CI when the CI or BUILD_NUMBER environment variable is set to a non empty value and then stops truncating the short test summary. pip says regular installs, not editable installs, belong in CI systems and deployments."
         },
         {
           "type": "p",
@@ -10364,11 +10387,11 @@ window.TOPIC_DATA = {
           "label": "Gotchas",
           "items": [
             "A virtual environment is disposable, not movable and not checked into source control, and since Python 3.13 venv writes a .gitignore file into it by default.",
-            "pytest collects test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method. Its docs strongly suggest a src layout with an editable install.",
-            "pytest.ini takes precedence over other configuration files except pytest.toml and .pytest.toml, even when empty.",
-            "Ruff ignores a pyproject.toml without a [tool.ruff] section, uses the closest configuration file and does not merge settings across files.",
+            "By default pytest collects test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method. Project configuration can change discovery. Its good practices guide recommends an editable install for development and strongly suggests a src layout, particularly with the prepend import mode.",
+            "In pytest 9, pytest.toml and .pytest.toml take priority over pytest.ini and .pytest.ini. These files match even when empty. Other candidates need their documented configuration sections, with a pyproject.toml fallback when no other match is found.",
+            "Ruff ignores a pyproject.toml without a [tool.ruff] section and uses the closest configuration file. It does not implicitly merge ancestor settings, but its extend field supports explicit inheritance.",
             "uv writes uv.lock next to pyproject.toml, a cross platform file that is checked in and not edited by hand. pip lock is experimental, writes pylock.toml by default, and its output is only guaranteed valid for the current Python version and platform. pylock.toml is the format PEP 751 defines.",
-            "ruff check applies only safe fixes by default, and ruff format --check exits with 1 when a file would be reformatted."
+            "ruff check reports violations and needs --fix to apply fixes. Fixing applies only safe fixes by default. ruff format --check writes nothing and exits with 1 when formatting would change."
           ]
         },
         {
@@ -10380,6 +10403,11 @@ window.TOPIC_DATA = {
           "type": "p",
           "label": "Check in your environment",
           "text": "Confirm the interpreter version, which environment and lock files exist, which pytest and Ruff configuration files are closest, and which commands CI actually runs."
+        },
+        {
+          "type": "p",
+          "label": "Review scope",
+          "text": "Scoped claims checked on 2026-10-12 against Python 3.15, pip 26.2.1, pytest 9 configuration and the linked current PyPA and Astral documentation. pytest.toml needs pytest 9. Tool choices and example commands are proposed conventions, not verified project settings."
         }
       ],
       "refs": [
@@ -10397,8 +10425,8 @@ window.TOPIC_DATA = {
         "ruff-linter",
         "ruff-formatter"
       ],
-      "basis": "Documented conventions and proposed use",
-      "confidence": "Documented facts have scoped sources read on 2026-10-11. Commands and review guidance are conventions, and fit for a particular project remains unverified.",
+      "basis": "Scoped official documentation and proposed project guidance",
+      "confidence": "The listed factual claims were checked against their sources on 2026-10-12 within the stated version and host scope. Recommendations and example commands do not prove suitability or execution in a particular project.",
       "catalog": {
         "kind": "technology",
         "domains": [
@@ -10412,16 +10440,16 @@ window.TOPIC_DATA = {
           "ruff",
           "uv"
         ],
-        "revision": "1",
+        "revision": "2",
         "applicability": "Use when a coding agent or reviewer works in a repository with a pyproject.toml, a requirements file or pytest tests and needs the file and command conventions before running anything.",
         "limits": "Catalogue inclusion is not an installed interpreter, a chosen package manager, a working command or verified compatibility.",
-        "sourceStatus": "needs-review",
-        "reviewedOn": "",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
         "claims": [
           {
             "id": "claim:python-1",
             "sectionLabel": "Where config lives",
-            "text": "Project metadata lives in pyproject.toml, where the [build-system] table should always be present and the [project] table carries the name and version.",
+            "text": "Python packaging can use pyproject.toml. PyPA recommends a [build-system] table for build configuration. A [project] table holds package metadata, with a required name and a version that may be supplied dynamically by the build backend. Some backends use another metadata format.",
             "sourceRefs": [
               "pypa-pyproject-guide"
             ]
@@ -10429,7 +10457,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:python-2",
             "sectionLabel": "Where config lives",
-            "text": "pytest reads pytest.toml, .pytest.toml, pytest.ini, .pytest.ini, pyproject.toml, tox.ini or setup.cfg, and the first match while searching upward sets the rootdir.",
+            "text": "pytest 9 supports pytest.toml and .pytest.toml as well as pytest.ini, .pytest.ini, pyproject.toml, tox.ini and setup.cfg. Its search starts from the common ancestor of supplied paths, or the working directory, and the first matching configuration determines rootdir unless a command option overrides it.",
             "sourceRefs": [
               "pytest-customize"
             ]
@@ -10461,7 +10489,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:python-6",
             "sectionLabel": "Conventional commands",
-            "text": "pip install -e . installs a project without copying files, so source edits take effect without reinstalling.",
+            "text": "An editable pip install exposes project sources without copying them. Python source edits normally take effect without reinstalling, but metadata changes can require reinstallation and compiled extensions still need building.",
             "sourceRefs": [
               "pip-local-installs"
             ]
@@ -10493,7 +10521,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:python-10",
             "sectionLabel": "Gotchas",
-            "text": "pytest collects test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method.",
+            "text": "By default pytest collects test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method. Project configuration can change discovery.",
             "sourceRefs": [
               "pytest-good-practices"
             ]
@@ -10501,7 +10529,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:python-11",
             "sectionLabel": "Gotchas",
-            "text": "Its docs strongly suggest a src layout with an editable install.",
+            "text": "Its good practices guide recommends an editable install for development and strongly suggests a src layout, particularly with the prepend import mode.",
             "sourceRefs": [
               "pytest-good-practices"
             ]
@@ -10509,7 +10537,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:python-12",
             "sectionLabel": "Gotchas",
-            "text": "pytest.ini takes precedence over other configuration files except pytest.toml and .pytest.toml, even when empty.",
+            "text": "In pytest 9, pytest.toml and .pytest.toml take priority over pytest.ini and .pytest.ini. These files match even when empty. Other candidates need their documented configuration sections, with a pyproject.toml fallback when no other match is found.",
             "sourceRefs": [
               "pytest-customize"
             ]
@@ -10517,7 +10545,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:python-13",
             "sectionLabel": "Gotchas",
-            "text": "Ruff ignores a pyproject.toml without a [tool.ruff] section, uses the closest configuration file and does not merge settings across files.",
+            "text": "Ruff ignores a pyproject.toml without a [tool.ruff] section and uses the closest configuration file. It does not implicitly merge ancestor settings, but its extend field supports explicit inheritance.",
             "sourceRefs": [
               "ruff-configuration"
             ]
@@ -10549,7 +10577,7 @@ window.TOPIC_DATA = {
           {
             "id": "claim:python-17",
             "sectionLabel": "Gotchas",
-            "text": "ruff check applies only safe fixes by default, and ruff format --check exits with 1 when a file would be reformatted.",
+            "text": "ruff check reports violations and needs --fix to apply fixes. Fixing applies only safe fixes by default. ruff format --check writes nothing and exits with 1 when formatting would change.",
             "sourceRefs": [
               "ruff-linter",
               "ruff-formatter"
@@ -10581,6 +10609,870 @@ window.TOPIC_DATA = {
         "verification-loops",
         "post-change-checks",
         "implementation-workflow"
+      ]
+    },
+    {
+      "id": "user-facing-feature",
+      "title": "Deliver a user-facing feature",
+      "summary": "Turn a small user need into acceptance examples, a scoped change and evidence someone can review.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Use this path",
+          "text": "Use this when a change affects what a person sees or does. Start with the behavior and the existing system. The reference example uses React, TypeScript, Node.js, npm, Vitest, Playwright and GitHub Actions. Those tools are optional examples, not requirements for the workflow."
+        },
+        {
+          "type": "list",
+          "label": "Find the project facts",
+          "items": [
+            "Who needs the change, what they do today and what success should look like.",
+            "Affected screen, source of its data, access rules and whether filtering belongs in the browser or API.",
+            "Actual components, supported browsers, viewport needs, existing check commands and release owner.",
+            "What is confirmed, proposed or unresolved. Keep unknown paths, versions and commands blank until the repository or its owner supplies them."
+          ]
+        },
+        {
+          "type": "table",
+          "label": "Fictional acceptance examples",
+          "headers": [
+            "Case",
+            "Expected behavior to agree"
+          ],
+          "rows": [
+            [
+              "Choose Open",
+              "With one Open and one Closed request in the example data, only the Open request is shown."
+            ],
+            [
+              "Choose All",
+              "Both requests return. This example proposes All as the default."
+            ],
+            [
+              "No matching requests",
+              "Show a clear empty message and leave the filter available."
+            ],
+            [
+              "Data still loading",
+              "Show loading feedback and do not describe unavailable data as an empty result."
+            ],
+            [
+              "Request failed",
+              "Explain that the list could not load and offer the agreed recovery action. Do not claim the result is empty."
+            ],
+            [
+              "Keyboard and narrow screen",
+              "A person can reach and operate the filter, read its label and see the result without controls being clipped."
+            ]
+          ]
+        },
+        {
+          "type": "steps",
+          "label": "From brief to review",
+          "items": [
+            "Agree the examples with the requirement owner. Decide whether default, persistence, paging and recovery behavior are in scope.",
+            "Inspect the existing list and API before choosing local or server filtering. Do not filter only a loaded page if the requirement concerns all available requests.",
+            "Record the decision, affected components and any API or access implications. Ordinary application code is a valid implementation. This feature does not require an agent.",
+            "Split the change into the smallest reviewable pieces: behavior, relevant tests and any necessary contract change. Keep unrelated redesign outside the task.",
+            "Implement the agreed states and check the changed behavior. When a check fails, correct the specific finding and run the affected check again. Missing requirements return to the owner.",
+            "Prepare a review packet for the actual candidate revision. Include observed results, unsuccessful checks, unrun work and the release or recovery decision."
+          ]
+        },
+        {
+          "type": "table",
+          "label": "Choose evidence that answers the question",
+          "headers": [
+            "Question",
+            "Example evidence"
+          ],
+          "rows": [
+            [
+              "Does filtering implement the agreed rule?",
+              "Small data fixtures and a focused logic test, with expected and observed results."
+            ],
+            [
+              "Does the UI communicate each state?",
+              "Component or browser checks for loading, populated, empty and failed responses. State what was mocked."
+            ],
+            [
+              "Can a person complete the interaction?",
+              "A browser journey plus keyboard and narrow viewport inspection. Record browser, viewport and any physical device actually used."
+            ],
+            [
+              "Is this candidate ready for the team gate?",
+              "The repository checks and relevant pipeline run linked to the same revision. Passing a focused test does not replace the agreed gate."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Accessibility and mobile limits",
+          "text": "W3C keyboard guidance concerns operating functionality through a keyboard interface. Its reflow guidance includes exceptions for content that needs a two dimensional layout. Automated accessibility checks find only some problems. The example therefore combines relevant automation with manual interaction, without claiming whole product conformance or real phone coverage from viewport emulation."
+        },
+        {
+          "type": "p",
+          "label": "A useful draft output",
+          "text": "Requirement: users can filter requests by status. Decision: reuse the current list and approved data interface, subject to confirming paging. Planned checks: rule fixtures, visible states, keyboard and responsive interaction, then the actual delivery gate. Open: real source paths, status vocabulary, permitted data scope, supported browsers, commands and release owner. No checks have run in this fictional example."
+        },
+        {
+          "type": "p",
+          "label": "Use it in Atlas",
+          "text": "Open Browse examples and choose Build a feature. The fictional draft carries the acceptance examples and reference stack into editable project fields. Technology selection adds profile questions and checks to the generated skill references. Inspect WORKFLOW.md and the requirement and verification templates before using the pack. Opening this reading topic alone changes nothing in the draft."
+        },
+        {
+          "type": "p",
+          "label": "If the evidence is missing",
+          "text": "An unknown API permission, an inaccessible test environment or an unresolved paging rule blocks the relevant decision. Record the owner and next action. Do not invent credentials, choose a new stack or treat an unrun test as a pass."
+        }
+      ],
+      "refs": [
+        "reference-62",
+        "playwright-best-practices",
+        "playwright-emulation",
+        "reference-63",
+        "wai-keyboard",
+        "wai-reflow"
+      ],
+      "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+      "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+      "catalog": {
+        "kind": "procedure",
+        "domains": [
+          "workflow-design",
+          "requirements",
+          "verification"
+        ],
+        "aliases": [
+          "user facing feature",
+          "status filter",
+          "acceptance examples",
+          "loading empty error",
+          "keyboard",
+          "responsive",
+          "frontend feature"
+        ],
+        "revision": "1",
+        "applicability": "Use when a proposed feature changes a user interface or user journey. The fictional status filter demonstrates the path without choosing tools for the reader.",
+        "limits": "This is a recommended workflow with fictional inputs and expected outcomes. It is not an observed implementation, a required stack, a conformance audit or an executable workflow.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "claims": [
+          {
+            "id": "claim:user-facing-feature-1",
+            "sectionLabel": "Accessibility and mobile limits",
+            "text": "W3C keyboard guidance concerns operating functionality through a keyboard interface.",
+            "sourceRefs": [
+              "wai-keyboard"
+            ]
+          },
+          {
+            "id": "claim:user-facing-feature-2",
+            "sectionLabel": "Accessibility and mobile limits",
+            "text": "W3C reflow guidance includes exceptions for content that needs a two dimensional layout.",
+            "sourceRefs": [
+              "wai-reflow"
+            ]
+          },
+          {
+            "id": "claim:user-facing-feature-3",
+            "sectionLabel": "Accessibility and mobile limits",
+            "text": "Automated accessibility checks find only some problems.",
+            "sourceRefs": [
+              "reference-63"
+            ]
+          }
+        ],
+        "evidence": {
+          "basisKinds": [
+            "documented",
+            "recommended",
+            "illustrative"
+          ],
+          "confidenceLevel": "proposed"
+        },
+        "applies": {
+          "recipes": [
+            "feature-delivery"
+          ],
+          "stages": [
+            "requirements",
+            "architecture",
+            "implementation",
+            "verification",
+            "release"
+          ]
+        },
+        "scope": {
+          "generality": "general"
+        },
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
+      "related": [
+        "requirements-workflow",
+        "architecture-decisions",
+        "work-breakdown",
+        "implementation-workflow",
+        "verification-loops",
+        "release-operations",
+        "react",
+        "javascript-typescript",
+        "nodejs",
+        "npm",
+        "vitest",
+        "playwright",
+        "github-actions"
+      ]
+    },
+    {
+      "id": "javascript-typescript",
+      "title": "JavaScript and TypeScript changes",
+      "summary": "Separate static checks from the runtime inputs and behavior a user actually receives.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Use this guide",
+          "text": "Use this when changing JavaScript or TypeScript in a browser, service or shared package. Check the actual runtime and build setup before reusing a command. Choosing TypeScript does not mean a project has a separate type check."
+        },
+        {
+          "type": "p",
+          "label": "What type checks establish",
+          "text": "TypeScript checks code before it runs, and type annotations are removed when JavaScript is produced. A type assertion does not validate an API response at runtime. The noEmit option suppresses JavaScript, declaration and source map output while allowing type checking."
+        },
+        {
+          "type": "list",
+          "label": "Find the project facts",
+          "items": [
+            "JavaScript or TypeScript source, actual runtime versions and supported browser targets.",
+            "Configuration for modules, compilation and type checking, including the applicable tsconfig where present.",
+            "Data arriving from APIs, user input or stored files, and the checks that validate it at runtime.",
+            "Existing scripts and tests, including whether build, type check, lint and behavior checks are separate."
+          ]
+        },
+        {
+          "type": "steps",
+          "label": "Plan distinct checks",
+          "items": [
+            "Define the accepted behavior and malformed or missing input cases first.",
+            "Use the repository type check when it exists. Record the exact configured command and result, rather than assuming that transpilation ran it.",
+            "For JavaScript, record the project checks that are actually available. Do not invent a TypeScript migration to complete the task.",
+            "Check incoming data and the runtime result through the existing approved validation and test approach.",
+            "Record static, runtime and browser results separately for the candidate revision. Passing one does not establish the others."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Status filter example",
+          "text": "A TypeScript union can describe the agreed All and Open choices in code. The allowed values from a request, URL or persisted setting still need runtime handling. A test should cover an unexpected value and the agreed recovery. In a JavaScript project, exercise the same behavior without assuming a compiler catches it."
+        },
+        {
+          "type": "p",
+          "label": "Useful result",
+          "text": "Example verification plan: confirm the repository's language and type check setup, exercise All, Open and an unexpected incoming value, then record static and runtime results separately. Runtime versions, actual commands and the invalid input recovery decision remain unresolved. The example does not claim either check passed."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas changes",
+          "text": "Selecting JavaScript or TypeScript adds its own language profile questions and checks to generated skill references. Select the actual language used. Selecting Node.js separately describes a runtime, while selecting React describes an interface library. The shared reading guide does not make those choices for you."
+        }
+      ],
+      "refs": [
+        "typescript-basics",
+        "typescript-everyday-types",
+        "typescript-no-emit",
+        "react-typescript"
+      ],
+      "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+      "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [
+          "javascript",
+          "typescript",
+          "js",
+          "ts",
+          "type check",
+          "type assertion",
+          "runtime validation",
+          "tsconfig"
+        ],
+        "revision": "1",
+        "applicability": "Use for JavaScript or TypeScript changes where runtime behavior and, when configured, static checks need different evidence.",
+        "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "claims": [
+          {
+            "id": "claim:javascript-typescript-1",
+            "sectionLabel": "What type checks establish",
+            "text": "TypeScript checks code before it runs, and type annotations are removed when JavaScript is produced.",
+            "sourceRefs": [
+              "typescript-basics"
+            ]
+          },
+          {
+            "id": "claim:javascript-typescript-2",
+            "sectionLabel": "What type checks establish",
+            "text": "A type assertion does not validate an API response at runtime.",
+            "sourceRefs": [
+              "typescript-everyday-types"
+            ]
+          },
+          {
+            "id": "claim:javascript-typescript-3",
+            "sectionLabel": "What type checks establish",
+            "text": "The noEmit option suppresses JavaScript, declaration and source map output.",
+            "sourceRefs": [
+              "typescript-no-emit"
+            ]
+          }
+        ],
+        "evidence": {
+          "basisKinds": [
+            "documented",
+            "recommended",
+            "illustrative"
+          ],
+          "confidenceLevel": "proposed"
+        },
+        "applies": {
+          "technologies": [
+            "javascript",
+            "typescript"
+          ]
+        },
+        "scope": {
+          "generality": "general"
+        },
+        "guidance": "reading",
+        "definitionRefs": [
+          "technology:javascript",
+          "profile:javascript",
+          "technology:typescript",
+          "profile:typescript"
+        ]
+      },
+      "parent": "toolchain",
+      "related": [
+        "nodejs",
+        "verification-loops"
+      ]
+    },
+    {
+      "id": "react",
+      "title": "React feature changes",
+      "summary": "Identify component responsibilities, visible states and the interactions that need evidence.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Use this guide",
+          "text": "Use this for a feature or repair in an existing React interface. It helps plan a coherent change. It does not prescribe a router, state library, rendering framework or test library."
+        },
+        {
+          "type": "p",
+          "label": "Documented foundation",
+          "text": "React describes building an interface through component responsibilities, visual states and data flow. Values that can be calculated from current props or state do not need a second state variable. Shared state can live in a common parent of the components that use it."
+        },
+        {
+          "type": "list",
+          "label": "Find the project facts",
+          "items": [
+            "Installed React version, rendering setup and the components that own the changed interaction.",
+            "Source of data, existing state owner and whether the result is local, paged or refreshed from an API.",
+            "Loading, empty, failed and successful states, plus labels, focus and narrow viewport behavior.",
+            "Actual test setup and where behavior is checked in the component, browser and delivery gate."
+          ]
+        },
+        {
+          "type": "steps",
+          "label": "Make the change",
+          "items": [
+            "Write the accepted interaction examples and inspect the affected component tree.",
+            "Place the new state with its existing owner where possible. Derive display values rather than maintaining two competing copies.",
+            "Implement the agreed states and recovery behavior. Preserve accessible names and ordinary keyboard interaction.",
+            "Check the rule with small fixtures and exercise the rendered interaction in the project environment. Record what was simulated and what ran in a browser."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Status filter example",
+          "text": "A proposed status value lives with the list interaction. Visible requests are calculated from the available requests and that value. If the API pages results, confirm whether the filter must change the request instead. A loading response, an empty match and a failure each need different expected feedback. This example is a design recommendation, not a rule imposed by React."
+        },
+        {
+          "type": "p",
+          "label": "A finding that changes the plan",
+          "text": "If only the first page is loaded but the acceptance example says all matching requests, a browser filter can produce the wrong result. Resolve the data contract before approving the implementation. If test setup uses a simulated DOM, preserve the distinction from observed rendering and focus behavior in a browser."
+        },
+        {
+          "type": "p",
+          "label": "Useful result",
+          "text": "Example design note: reuse the request list's existing state owner, derive visible items from the agreed status and available data, and define loading, empty and failed feedback. Paging, source paths and rendering setup remain to confirm. Planned evidence includes focused rule checks and observed keyboard and narrow layout behavior. No test has run in this example."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas changes",
+          "text": "Selecting React adds the React profile questions and checks to generated skill project references. The profile prompts state ownership, visible states, keyboard and responsive evidence. It neither reads the component tree nor configures React or its tests."
+        }
+      ],
+      "refs": [
+        "reference-62",
+        "react-typescript",
+        "reference-63"
+      ],
+      "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+      "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [
+          "react components",
+          "react state",
+          "props",
+          "component tree",
+          "frontend"
+        ],
+        "revision": "1",
+        "applicability": "Use for a feature or repair in an existing React interface, after confirming the actual rendering setup and versions.",
+        "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "claims": [
+          {
+            "id": "claim:react-1",
+            "sectionLabel": "Documented foundation",
+            "text": "React describes building an interface through component responsibilities, visual states and data flow.",
+            "sourceRefs": [
+              "reference-62"
+            ]
+          },
+          {
+            "id": "claim:react-2",
+            "sectionLabel": "Documented foundation",
+            "text": "Values calculated from props or state do not need a second state variable, and shared state can live in a common parent.",
+            "sourceRefs": [
+              "reference-62"
+            ]
+          }
+        ],
+        "evidence": {
+          "basisKinds": [
+            "documented",
+            "recommended",
+            "illustrative"
+          ],
+          "confidenceLevel": "proposed"
+        },
+        "applies": {
+          "technologies": [
+            "react"
+          ]
+        },
+        "scope": {
+          "generality": "general"
+        },
+        "guidance": "reading",
+        "definitionRefs": [
+          "technology:react",
+          "profile:react"
+        ]
+      },
+      "parent": "toolchain",
+      "related": [
+        "javascript-typescript",
+        "vitest",
+        "playwright"
+      ]
+    },
+    {
+      "id": "npm",
+      "title": "npm installs and project checks",
+      "summary": "Find the package scripts, installation assumptions and results that belong to this repository.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Use this guide",
+          "text": "Use this when the project actually uses npm. The documented behavior below is scoped to npm 12. Confirm the installed release and its documentation instead of assuming the same rules for older versions. Keep an existing alternative package manager unless the task calls for a reviewed migration. Node.js, npm, a test runner and CI each describe different parts of the toolchain."
+        },
+        {
+          "type": "p",
+          "label": "Documented behavior",
+          "text": "In the npm 12 documentation, npm ci requires an existing package-lock.json, fails when it disagrees with package.json and removes an existing node_modules directory before installing. It does not update package.json or the lockfile. npm run executes a named script from package.json. The script content determines which tool runs."
+        },
+        {
+          "type": "list",
+          "label": "Find the project facts",
+          "items": [
+            "Installed npm and Node.js versions, the correct package or workspace and committed lockfile.",
+            "Repository scripts and any configuration needed to reproduce installation.",
+            "Which scripts cover the affected change, and which ones the actual pipeline runs.",
+            "Approved registry access and credentials when needed. Record only the credential source, never the secret."
+          ]
+        },
+        {
+          "type": "steps",
+          "label": "Prepare useful evidence",
+          "items": [
+            "Read the manifest, lockfile and project instructions before choosing an installation command.",
+            "Use the approved environment and existing package scripts. Record the package or workspace they ran in.",
+            "If installation fails, distinguish a dependency or lockfile issue from an unavailable registry or access problem. Do not silently rewrite the lockfile to make CI green.",
+            "Record actual versions, command results and any dependency changes alongside the candidate revision."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Example outcome",
+          "text": "A feature change can need the existing unit, browser and build scripts without adding a dependency. An unavailable private registry blocks installation. It is not proof that the feature fails. A missing browser script remains an open setup question rather than becoming an invented command."
+        },
+        {
+          "type": "p",
+          "label": "Useful result",
+          "text": "Example environment note: npm is selected for this fictional project, but its version, package or workspace and install settings need confirmation. Record the real installation result and named scripts before reviewing the candidate. Registry access is unresolved, so installation evidence is unavailable. Do not export a fabricated successful install."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas changes",
+          "text": "Selecting npm adds package, workspace, installation and script questions to generated skill references. A Node.js profile can also apply. Reading either guide does not install dependencies or authorize package scripts."
+        }
+      ],
+      "refs": [
+        "npm-ci",
+        "npm-scripts"
+      ],
+      "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+      "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [
+          "npm",
+          "package-lock",
+          "package scripts",
+          "npm ci",
+          "workspace"
+        ],
+        "revision": "1",
+        "applicability": "Use when installation and project checks are controlled through npm and package.json in the actual repository.",
+        "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "claims": [
+          {
+            "id": "claim:npm-1",
+            "sectionLabel": "Documented behavior",
+            "text": "The npm 12 documentation states that npm ci requires an existing package-lock.json, fails on a package.json mismatch, removes node_modules before installing and does not write either manifest or lockfile.",
+            "sourceRefs": [
+              "npm-ci"
+            ]
+          },
+          {
+            "id": "claim:npm-2",
+            "sectionLabel": "Documented behavior",
+            "text": "npm run executes a named script from package.json.",
+            "sourceRefs": [
+              "npm-scripts"
+            ]
+          }
+        ],
+        "evidence": {
+          "basisKinds": [
+            "documented",
+            "recommended",
+            "illustrative"
+          ],
+          "confidenceLevel": "proposed"
+        },
+        "applies": {
+          "technologies": [
+            "npm"
+          ]
+        },
+        "scope": {
+          "generality": "general"
+        },
+        "guidance": "reading",
+        "definitionRefs": [
+          "technology:npm",
+          "profile:npm"
+        ]
+      },
+      "parent": "toolchain",
+      "related": [
+        "nodejs",
+        "github-actions",
+        "pipeline-diagnosis"
+      ]
+    },
+    {
+      "id": "vitest",
+      "title": "Vitest focused verification",
+      "summary": "Check a changed rule or component in a named environment, then record what the test did and did not establish.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Use this guide",
+          "text": "Use this when the project already uses Vitest or the team has chosen it. The referenced documentation is for Vitest 5. Confirm the installed release and its requirements rather than assuming the current documentation matches the repository."
+        },
+        {
+          "type": "p",
+          "label": "Documented behavior",
+          "text": "Vitest can reuse Vite configuration or use a dedicated vitest.config file. vitest run performs one run without watch mode. Node is its default environment. jsdom and happy-dom provide emulated browser environments, while Browser Mode is a separate option."
+        },
+        {
+          "type": "list",
+          "label": "Find the project facts",
+          "items": [
+            "Installed version, applicable configuration, test discovery and actual test script.",
+            "Environment used by the changed test, such as Node, a simulated DOM or Browser Mode.",
+            "Fixtures, request mocks and setup needed for deterministic expected results.",
+            "Which behavior the focused check establishes and which browser or integration checks remain."
+          ]
+        },
+        {
+          "type": "steps",
+          "label": "Test the changed decision",
+          "items": [
+            "Turn the acceptance example into small representative inputs and expected outcomes.",
+            "Check the changed filter or state transition with the existing test conventions. Include an empty result and any agreed invalid input behavior.",
+            "When mocking a response, state the simulated contract. A mock does not prove the real API accepts or returns that data.",
+            "Use the configured command that completes a run for review evidence. Record discovered tests, result, environment and revision.",
+            "Follow a failed assertion back to the requirement or implementation. Correct it and rerun the relevant checks without changing the expected result merely to match the bug."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Status filter example",
+          "text": "With one Open and one Closed request, the Open choice returns one item and All returns two. An empty fixture returns an empty result. A component check can exercise the agreed empty message. Keep real layout, focus and device observations separate from tests that only run in a simulated environment."
+        },
+        {
+          "type": "p",
+          "label": "Useful result",
+          "text": "Example check plan: the proposed fixture contains one Open and one Closed request, with expected counts one for Open and two for All. Add an empty fixture. Confirm the configured environment, discovery and command. Record the actual run later. This expected result is not an observed pass or browser evidence."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas changes",
+          "text": "Selecting Vitest adds environment, discovery, fixtures and completed run questions to generated skill references. Atlas does not add a dependency, create test configuration or declare the test result."
+        }
+      ],
+      "refs": [
+        "vitest-guide",
+        "vitest-cli",
+        "vitest-environments"
+      ],
+      "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+      "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [
+          "vitest",
+          "unit test",
+          "component test",
+          "jsdom",
+          "happy-dom",
+          "browser mode",
+          "fixtures"
+        ],
+        "revision": "1",
+        "applicability": "Use for focused checks in a project that uses Vitest, after confirming the installed version, discovery and environment.",
+        "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "claims": [
+          {
+            "id": "claim:vitest-1",
+            "sectionLabel": "Documented behavior",
+            "text": "Vitest can reuse Vite configuration or use a dedicated vitest.config file.",
+            "sourceRefs": [
+              "vitest-guide"
+            ]
+          },
+          {
+            "id": "claim:vitest-2",
+            "sectionLabel": "Documented behavior",
+            "text": "vitest run performs one run without watch mode.",
+            "sourceRefs": [
+              "vitest-cli"
+            ]
+          },
+          {
+            "id": "claim:vitest-3",
+            "sectionLabel": "Documented behavior",
+            "text": "Node is the default environment, jsdom and happy-dom emulate browser environments, and Browser Mode is separate.",
+            "sourceRefs": [
+              "vitest-environments"
+            ]
+          }
+        ],
+        "evidence": {
+          "basisKinds": [
+            "documented",
+            "recommended",
+            "illustrative"
+          ],
+          "confidenceLevel": "proposed"
+        },
+        "applies": {
+          "technologies": [
+            "vitest"
+          ]
+        },
+        "scope": {
+          "generality": "general"
+        },
+        "guidance": "reading",
+        "definitionRefs": [
+          "technology:vitest",
+          "profile:vitest"
+        ]
+      },
+      "parent": "toolchain",
+      "related": [
+        "verification-loops",
+        "playwright"
+      ]
+    },
+    {
+      "id": "playwright",
+      "title": "Playwright user journeys",
+      "summary": "Exercise the accepted interaction in a browser, with controlled data and an explicit viewport.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Use this guide",
+          "text": "Use this when the project uses Playwright to exercise a browser journey. Start with the accepted user outcome. Running every browser or every possible viewport is not an automatic requirement for a small change."
+        },
+        {
+          "type": "p",
+          "label": "Documented guidance",
+          "text": "Playwright recommends tests of user visible behavior, isolation and controlled data, with locators based on roles or other user facing attributes. It can emulate viewport, touch, device parameters and color scheme. Its accessibility guidance says automated testing detects only some problems."
+        },
+        {
+          "type": "list",
+          "label": "Find the project facts",
+          "items": [
+            "Actual test script, browser projects, base URL and how the application starts.",
+            "Approved test environment, data and identity, including whether responses are mocked.",
+            "Supported browsers, viewport needs and any physical device checks required by the task.",
+            "Accessible names, keyboard interaction, visible states and the location of useful failure reports."
+          ]
+        },
+        {
+          "type": "steps",
+          "label": "Exercise one useful journey",
+          "items": [
+            "Arrange controlled request data and the agreed loading or failure responses. Keep tests independent of previous runs.",
+            "Open the actual target and choose the filter using its visible label or role. Assert the expected requests and relevant empty or failure message.",
+            "Exercise the interaction with a keyboard and inspect the narrow layout. Include both themes only if the product supports them and the changed behavior can differ.",
+            "Record browser, viewport, revision, simulated inputs and observed results. Keep an emulated phone configuration distinct from a physical phone test.",
+            "For a failure, preserve the report needed to reproduce it. Correct the cause and rerun the relevant journey."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Status filter example",
+          "text": "Choose Open and observe only the Open request. Choose All and observe both requests. Use an empty response to check the empty message and a failed response to check recovery. A successful mocked journey supports the UI contract. It does not establish real service permissions, production data behavior or complete accessibility."
+        },
+        {
+          "type": "p",
+          "label": "Useful result",
+          "text": "Example journey plan: arrange approved data, choose Open, check the matching request, choose All, check both requests, then exercise keyboard and the agreed narrow viewport. Record whether responses were mocked. Application URL, browser projects, identity and command remain to confirm. No browser or physical device result is asserted."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas changes",
+          "text": "Selecting Playwright adds browser, data, environment and evidence questions to generated skill references. Atlas does not install browser binaries, start the application, connect credentials or turn a planned check into observed evidence."
+        }
+      ],
+      "refs": [
+        "playwright-best-practices",
+        "playwright-emulation",
+        "reference-63",
+        "wai-keyboard",
+        "wai-reflow"
+      ],
+      "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+      "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools"
+        ],
+        "aliases": [
+          "playwright",
+          "browser testing",
+          "end to end",
+          "e2e",
+          "mobile emulation",
+          "keyboard",
+          "browser journey"
+        ],
+        "revision": "1",
+        "applicability": "Use for accepted user journeys in a project that uses Playwright, with an approved target, controlled data and known browser configuration.",
+        "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "claims": [
+          {
+            "id": "claim:playwright-1",
+            "sectionLabel": "Documented guidance",
+            "text": "Playwright recommends user visible behavior, isolated tests, controlled data and user facing locators.",
+            "sourceRefs": [
+              "playwright-best-practices"
+            ]
+          },
+          {
+            "id": "claim:playwright-2",
+            "sectionLabel": "Documented guidance",
+            "text": "Playwright can emulate viewport, touch, device parameters and color scheme.",
+            "sourceRefs": [
+              "playwright-emulation"
+            ]
+          },
+          {
+            "id": "claim:playwright-3",
+            "sectionLabel": "Documented guidance",
+            "text": "Automated accessibility testing detects only some problems.",
+            "sourceRefs": [
+              "reference-63"
+            ]
+          }
+        ],
+        "evidence": {
+          "basisKinds": [
+            "documented",
+            "recommended",
+            "illustrative"
+          ],
+          "confidenceLevel": "proposed"
+        },
+        "applies": {
+          "technologies": [
+            "playwright"
+          ]
+        },
+        "scope": {
+          "generality": "general"
+        },
+        "guidance": "reading",
+        "definitionRefs": [
+          "technology:playwright",
+          "profile:playwright"
+        ]
+      },
+      "parent": "toolchain",
+      "related": [
+        "verification-loops",
+        "post-change-checks"
       ]
     }
   ],
@@ -11132,11 +12024,59 @@ window.TOPIC_DATA = {
     "uv-docker": [
       "uv, using uv in Docker",
       "https://docs.astral.sh/uv/guides/integration/docker/"
+    ],
+    "react-typescript": [
+      "React, using TypeScript",
+      "https://react.dev/learn/typescript"
+    ],
+    "typescript-basics": [
+      "TypeScript handbook, the basics",
+      "https://www.typescriptlang.org/docs/handbook/2/basic-types.html"
+    ],
+    "typescript-everyday-types": [
+      "TypeScript handbook, everyday types",
+      "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html"
+    ],
+    "typescript-no-emit": [
+      "TypeScript TSConfig, noEmit",
+      "https://www.typescriptlang.org/tsconfig/noEmit.html"
+    ],
+    "vitest-guide": [
+      "Vitest, getting started",
+      "https://vitest.dev/guide/"
+    ],
+    "vitest-cli": [
+      "Vitest, command line interface",
+      "https://vitest.dev/guide/cli.html"
+    ],
+    "vitest-environments": [
+      "Vitest, test environment",
+      "https://vitest.dev/guide/environment.html"
+    ],
+    "playwright-best-practices": [
+      "Playwright, best practices",
+      "https://playwright.dev/docs/best-practices"
+    ],
+    "playwright-emulation": [
+      "Playwright, emulation",
+      "https://playwright.dev/docs/emulation"
+    ],
+    "wai-keyboard": [
+      "W3C WAI, understanding keyboard access",
+      "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+    ],
+    "wai-reflow": [
+      "W3C WAI, understanding reflow",
+      "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html"
+    ],
+    "npm-ci-v11": [
+      "npm 11, npm ci",
+      "https://docs.npmjs.com/cli/v11/commands/npm-ci/"
     ]
   },
   "catalog": {
     "schemaVersion": "1.1",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "reviewCycleDays": 180,
     "domains": [
       {
@@ -11331,6 +12271,75 @@ window.TOPIC_DATA = {
           "cost-per-result",
           "release-operations"
         ]
+      },
+      {
+        "id": "clarify-the-work",
+        "title": "Clarify the work",
+        "summary": "Turn a request into supported outcomes, examples and open questions.",
+        "limits": "Selected requirement procedures and traceability guidance. These articles do not approve requirements or verify supplied sources.",
+        "nodeIds": [
+          "requirements-workflow",
+          "requirement-status",
+          "traceability",
+          "requirements-skill"
+        ]
+      },
+      {
+        "id": "design-and-delivery",
+        "title": "Design and delivery",
+        "summary": "Compare approaches, split the work and implement a reviewable change.",
+        "limits": "General decision and delivery guidance. Project architecture, ownership and commands must still be supplied.",
+        "nodeIds": [
+          "architecture-decisions",
+          "work-breakdown",
+          "implementation-workflow",
+          "impact-skill",
+          "workflow-patterns"
+        ]
+      },
+      {
+        "id": "verification-evidence",
+        "title": "Verification and evidence",
+        "summary": "Choose meaningful checks and keep expected results separate from observations.",
+        "limits": "Selected verification procedures. Reading them does not run tests or establish acceptance, accessibility or production reliability.",
+        "nodeIds": [
+          "verification-loops",
+          "post-change-checks",
+          "qa-packet",
+          "grader-design",
+          "eval-corpus",
+          "coverage"
+        ]
+      },
+      {
+        "id": "release-and-recovery",
+        "title": "Release and recovery",
+        "summary": "Plan a candidate release, its operating owner and a usable recovery route.",
+        "limits": "General release guidance with related failure and measurement topics. No deployment, incident response or recovery tool is configured.",
+        "nodeIds": [
+          "release-operations",
+          "task-contract",
+          "retries",
+          "eval-metrics"
+        ]
+      },
+      {
+        "id": "user-facing-feature",
+        "title": "Change a user facing feature",
+        "summary": "Follow a status filter from acceptance examples to planned checks and a downloadable draft.",
+        "limits": "One fictional reference path with optional React, TypeScript and related tools. Examples are proposed, repository facts remain unresolved and no implementation or tests have run.",
+        "nodeIds": [
+          "user-facing-feature",
+          "requirements-workflow",
+          "javascript-typescript",
+          "react",
+          "nodejs",
+          "npm",
+          "vitest",
+          "playwright",
+          "github-actions",
+          "release-operations"
+        ]
       }
     ],
     "collections": [
@@ -11412,6 +12421,22 @@ window.TOPIC_DATA = {
           "retrieval-options",
           "retrieve-and-validate",
           "retrieval-example"
+        ]
+      },
+      {
+        "id": "user-facing-feature",
+        "title": "Change a user facing feature",
+        "nodeIds": [
+          "user-facing-feature",
+          "requirements-workflow",
+          "javascript-typescript",
+          "react",
+          "nodejs",
+          "npm",
+          "vitest",
+          "playwright",
+          "github-actions",
+          "release-operations"
         ]
       }
     ],
@@ -11969,19 +12994,25 @@ window.TOPIC_DATA = {
         "id": "reference-62",
         "title": "react.dev/learn/thinking-in-react",
         "url": "https://react.dev/learn/thinking-in-react",
-        "revision": "",
-        "reviewedOn": "",
-        "status": "legacy",
-        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+        "revision": "React documentation 19.3, read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Documents decomposition into components, visual states, minimal state, derived values and shared state ownership. Supports the scoped React claims. The Atlas procedure and fictional status filter example are recommendations, not React requirements.",
+        "retrievedOn": "2026-10-12",
+        "kind": "documentation",
+        "publisher": "React"
       },
       {
         "id": "reference-63",
         "title": "playwright.dev/docs/accessibility-testing",
         "url": "https://playwright.dev/docs/accessibility-testing",
-        "revision": "",
-        "reviewedOn": "",
-        "status": "legacy",
-        "contribution": "Retained factory reference. See the definition for its contribution and limitations."
+        "revision": "Current documentation read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "States that automated accessibility testing detects only some problems and recommends combining automation with manual assessment and inclusive user testing. Supports the limit of browser checks, not a conformance claim for any project.",
+        "retrievedOn": "2026-10-12",
+        "kind": "documentation",
+        "publisher": "Microsoft"
       },
       {
         "id": "reference-64",
@@ -12068,69 +13099,70 @@ window.TOPIC_DATA = {
         "id": "agentsmd",
         "title": "AGENTS.md open format",
         "url": "https://agents.md/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
         "status": "reviewed",
-        "contribution": "Plain Markdown instructions file read by Codex, Copilot cloud agent and code review, Cursor, Gemini CLI, Claude Code and other hosts. No required fields. The nearest file to an edited file wins. It contributes the repository root placement and the absence of frontmatter. Per host size limits and precedence are documented separately by each host."
+        "contribution": "Plain Markdown instructions file read by Codex, Copilot cloud agent and code review, Cursor, Gemini CLI, Claude Code and other hosts. No required fields. The nearest file to an edited file wins. It contributes the repository root placement and the absence of frontmatter. Per host size limits and precedence are documented separately by each host. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12"
       },
       {
         "id": "codex-agents-md",
         "title": "OpenAI Codex: AGENTS.md discovery and limits",
         "url": "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
-        "revision": "site read 2026-10-11",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "revision": "scoped claims checked 2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "OpenAI",
-        "contribution": "Documents the file names Codex recognizes, AGENTS.override.md, AGENTS.md and configured fallback names, the search from the Codex home directory and then from the project root down to the working directory with one file per directory, concatenation from the root down with files nearer the working directory later, and the default combined limit of 32 KiB set by project_doc_max_bytes. Recommends concise project specific guidance such as setup and test commands. No license is stated on the page."
+        "contribution": "Documents the file names Codex recognizes, AGENTS.override.md, AGENTS.md and configured fallback names, the search from the Codex home directory and then from the project root down to the working directory with one file per directory, concatenation from the root down with files nearer the working directory later, and the default combined limit of 32 KiB set by project_doc_max_bytes. Recommends concise project specific guidance such as setup and test commands. No license is stated on the page. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "claude-code-memory",
         "title": "Claude Code: How Claude remembers your project",
         "url": "https://code.claude.com/docs/en/memory",
-        "revision": "site read 2026-10-11",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "revision": "scoped claims checked 2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "Anthropic",
-        "contribution": "Documents CLAUDE.md locations and load order, the target of under 200 lines per file, concrete verifiable instructions grouped under headers and bullets, @path imports that load at launch without reducing context cost, moving procedures to skills and partial rules to path scoped rules, when Claude Code reads AGENTS.md instead of CLAUDE.md and the version that requires, the Project instructions setting, the @AGENTS.md import for sharing one file, the /doctor prompt-audit check and the trims proposed by /doctor, and the statement that these files are context rather than enforced configuration. No license is stated on the page."
+        "contribution": "Supports Claude Code project instructions, direct AGENTS.md loading in supported enabled sessions from v2.1.277, documented selection and import behavior, and prompt audit from v2.1.283 with the bundled audit skill. Recommendations are not enforced limits. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "copilot-repository-instructions",
         "title": "GitHub: Add repository custom instructions for Copilot",
         "url": "https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions",
-        "revision": "site read 2026-10-11",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "revision": "scoped claims checked 2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "GitHub",
-        "contribution": "Documents .github/copilot-instructions.md for repository wide instructions, path specific .instructions.md files with applyTo and excludeAgent, support for AGENTS.md anywhere in the repository with the nearest file taking precedence, a single CLAUDE.md or GEMINI.md at the root as an alternative, the order of personal, repository and organization instructions, and that code review reads instructions from the head branch. The page does not list which IDEs read each file. No license is stated on the page."
+        "contribution": "Supports repository instruction loading documented for Copilot on GitHub, including nearest AGENTS.md behavior. Does not prove identical behavior across every IDE surface or host version. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "evaluating-agents-md",
         "title": "Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?",
         "url": "https://arxiv.org/abs/2602.11988",
         "revision": "arXiv v3, 29 September 2026",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "research",
         "publisher": "arXiv",
         "license": "CC BY 4.0",
-        "contribution": "Reports that context files generated by a language model lowered resolution by 0.5 percent on SWE-bench and 2 percent on CTXbench and raised cost by 20 and 23 percent, that developer written files added about 2.4 percent on CTXbench without statistical significance, that removing the testing section cut cost significantly with no significant accuracy change, that file length showed no clear relation to success or cost, and that repository overviews did not help. Recommends including only instructions agents need beyond the README. The abstract page states the cost increase and the recommendation. The per category and length figures come from the full text at arxiv.org/html/2602.11988v3. The ICLR 2026 venue was not stated on either page."
+        "contribution": "Supports scoped arXiv v3 benchmark results. Both developer-file gains and generated-file drops cited in the guide were not statistically significant. Does not establish universal improvements, an optimal file length or grounds for skipping tests. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "docker-build-context",
         "title": "Build context",
         "url": "https://docs.docker.com/build/concepts/context/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Defines the build context as the set of files a build can access, states that the context is sent to the builder minus .dockerignore matches, that .dockerignore sits in the context root or beside a named Dockerfile, and that COPY and ADD can reference any file in the context.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Supports files available to COPY/ADD, loading as needed, ignore precedence, and default .git omission for Git contexts. Context availability is not proof that files are copied into the image. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12138,11 +13170,11 @@ window.TOPIC_DATA = {
         "id": "docker-build-cache",
         "title": "Docker build cache",
         "url": "https://docs.docker.com/build/cache/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Explains that each Dockerfile instruction becomes a layer and that once a layer changes all downstream layers are rebuilt.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Explains that each Dockerfile instruction becomes a layer and that once a layer changes all downstream layers are rebuilt. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12150,11 +13182,11 @@ window.TOPIC_DATA = {
         "id": "docker-cache-optimize",
         "title": "Optimize cache usage in builds",
         "url": "https://docs.docker.com/build/cache/optimize/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Recommends placing frequently changing steps near the end of the Dockerfile, copying package management files and installing dependencies before the project source, and using .dockerignore to keep directories such as node_modules out of the context.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Recommends placing frequently changing steps near the end of the Dockerfile, copying package management files and installing dependencies before the project source, and using .dockerignore to keep directories such as node_modules out of the context. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12162,11 +13194,11 @@ window.TOPIC_DATA = {
         "id": "docker-multi-stage",
         "title": "Multi-stage builds",
         "url": "https://docs.docker.com/build/building/multi-stage/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Documents that each FROM starts a stage, that COPY --from copies from an earlier stage by index or by the name given with AS, and that docker build --target stops the build at a chosen stage.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Documents that each FROM starts a stage, that COPY --from copies from an earlier stage by index or by the name given with AS, and that docker build --target stops the build at a chosen stage. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12174,11 +13206,11 @@ window.TOPIC_DATA = {
         "id": "docker-dockerfile-reference",
         "title": "Dockerfile reference",
         "url": "https://docs.docker.com/reference/dockerfile/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "States that FROM without a tag or digest assumes the latest tag, and that USER sets the user for the rest of the build stage, for RUN instructions and for ENTRYPOINT and CMD at runtime. The first 100000 characters of the page were read, which covered FROM and USER.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "States that FROM without a tag or digest assumes the latest tag, and that USER sets the user for the rest of the build stage, for RUN instructions and for ENTRYPOINT and CMD at runtime. The first 100000 characters of the page were read, which covered FROM and USER. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12186,11 +13218,11 @@ window.TOPIC_DATA = {
         "id": "docker-build-best-practices",
         "title": "Building best practices",
         "url": "https://docs.docker.com/build/building/best-practices/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Recommends .dockerignore to exclude files not relevant to the build, notes that image tags are mutable and that pinning a digest opts out of automatic security fixes, and says to create a user and group and switch with USER when a service can run without privileges.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Recommends .dockerignore to exclude files not relevant to the build, notes that image tags are mutable and that pinning a digest opts out of automatic security fixes, and says to create a user and group and switch with USER when a service can run without privileges. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12198,11 +13230,11 @@ window.TOPIC_DATA = {
         "id": "docker-build-checks",
         "title": "Checking your build configuration",
         "url": "https://docs.docker.com/build/checks/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Documents build checks that inspect the Dockerfile and build options without running the build, the docker build --check flag with a non zero exit on violations, the warning only default, the check=error=true directive and BUILDKIT_DOCKERFILE_CHECK build argument, and the minimum Buildx 0.15.0 and Dockerfile 1.8 versions.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Supports version requirements, separate --check failure on violations, and warnings by default during a regular build unless error behavior is requested. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12210,11 +13242,11 @@ window.TOPIC_DATA = {
         "id": "docker-buildx-build",
         "title": "docker buildx build",
         "url": "https://docs.docker.com/reference/cli/docker/buildx/build/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Documents the build command with a path or URL as context, the -f flag whose omission means a file named Dockerfile at the root of the context, the -t flag for naming the image, and the --no-cache option.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Documents the build command with a path or URL as context, the -f flag whose omission means a file named Dockerfile at the root of the context, the -t flag for naming the image, and the --no-cache option. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12222,11 +13254,11 @@ window.TOPIC_DATA = {
         "id": "docker-image-pull",
         "title": "docker image pull",
         "url": "https://docs.docker.com/reference/cli/docker/image/pull/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "States that a pull without a tag uses latest, that a digest identifies one exact image, and that a pinned digest does not pick up updates until the digest is changed.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "States that a pull without a tag uses latest, that a digest identifies one exact image, and that a pinned digest does not pick up updates until the digest is changed. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12234,11 +13266,11 @@ window.TOPIC_DATA = {
         "id": "docker-engine-security",
         "title": "Docker Engine security",
         "url": "https://docs.docker.com/engine/security/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "States that the daemon requires root privileges unless Rootless mode is used, and that containers are secure by default especially when processes run as non privileged users inside the container.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "States that the daemon requires root privileges unless Rootless mode is used, and that containers are secure by default especially when processes run as non privileged users inside the container. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12246,11 +13278,11 @@ window.TOPIC_DATA = {
         "id": "docker-compose-cli",
         "title": "docker compose",
         "url": "https://docs.docker.com/reference/cli/docker/compose/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Documents that without -f Compose searches the working directory and its parents for a Compose file, that multiple -f files merge in the order given with later files overriding, and that COMPOSE_FILE works like -f with an explicit -f taking precedence.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Documents that without -f Compose searches the working directory and its parents for a Compose file, that multiple -f files merge in the order given with later files overriding, and that COMPOSE_FILE works like -f with an explicit -f taking precedence. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12258,11 +13290,11 @@ window.TOPIC_DATA = {
         "id": "docker-compose-model",
         "title": "How Compose works",
         "url": "https://docs.docker.com/compose/intro/compose-application-model/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Lists the four default file names compose.yaml, compose.yml, docker-compose.yaml and docker-compose.yml, names compose.yaml as preferred, keeps the docker-compose names for backwards compatibility, and states that Compose prefers the canonical compose.yaml when both exist.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Lists the four default file names compose.yaml, compose.yml, docker-compose.yaml and docker-compose.yml, names compose.yaml as preferred, keeps the docker-compose names for backwards compatibility, and states that Compose prefers the canonical compose.yaml when both exist. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12270,11 +13302,11 @@ window.TOPIC_DATA = {
         "id": "docker-compose-version-name",
         "title": "Version and name top-level elements",
         "url": "https://docs.docker.com/reference/compose-file/version-and-name/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "States that the top level version property is obsolete, kept for backward compatibility and only informative, that Compose validates against the most recent schema regardless of it, and that name sets the project name.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "States that the top level version property is obsolete, kept for backward compatibility and only informative, that Compose validates against the most recent schema regardless of it, and that name sets the project name. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12282,11 +13314,11 @@ window.TOPIC_DATA = {
         "id": "docker-compose-merge",
         "title": "Merge Compose files",
         "url": "https://docs.docker.com/compose/how-tos/multiple-compose-files/merge/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Documents that Compose reads compose.yaml plus an optional compose.override.yaml from the same directory, merges -f files in command line order, replaces single value options, concatenates multi value options such as ports, merges environment and volumes by key, and resolves relative paths against the first file.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Supports ordered Compose file merge with field-specific replacement and append behavior. It does not establish that a whole later file replaces an earlier one. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12294,11 +13326,11 @@ window.TOPIC_DATA = {
         "id": "docker-ci",
         "title": "Continuous integration with Docker",
         "url": "https://docs.docker.com/build/ci/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Presents the Dockerfile as a definition of the runtimes, operating system and binaries needed to build and test an application in a reproducible container, mentions Docker in Docker, says Docker maintains official GitHub Actions, and links setup instructions for GitHub Actions, GitLab, CircleCI and Render.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Presents the Dockerfile as a definition of the runtimes, operating system and binaries needed to build and test an application in a reproducible container, mentions Docker in Docker, says Docker maintains official GitHub Actions, and links setup instructions for GitHub Actions, GitLab, CircleCI and Render. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12306,11 +13338,11 @@ window.TOPIC_DATA = {
         "id": "docker-ci-github-actions",
         "title": "Docker Build GitHub Actions",
         "url": "https://docs.docker.com/build/ci/github-actions/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Lists Docker's official GitHub Actions, including Docker Setup Buildx, Build and push Docker images, Docker Login and Docker Metadata action, and links example workflows. It does not state where a workflow file lives.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Lists Docker's official GitHub Actions, including Docker Setup Buildx, Build and push Docker images, Docker Login and Docker Metadata action, and links example workflows. It does not state where a workflow file lives. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12318,11 +13350,11 @@ window.TOPIC_DATA = {
         "id": "docker-init",
         "title": "docker init",
         "url": "https://docs.docker.com/reference/cli/docker/init/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Documents that docker init creates .dockerignore, Dockerfile, compose.yaml and README.Docker.md, warns and offers to overwrite existing files, recommends copying them first, and lists templates for ASP.NET Core, Go, Java, Node, PHP, Python, Rust and a general purpose option.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Documents that docker init creates .dockerignore, Dockerfile, compose.yaml and README.Docker.md, warns and offers to overwrite existing files, recommends copying them first, and lists templates for ASP.NET Core, Go, Java, Node, PHP, Python, Rust and a general purpose option. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12330,11 +13362,11 @@ window.TOPIC_DATA = {
         "id": "docker-guide-nodejs",
         "title": "Node.js language-specific guide",
         "url": "https://docs.docker.com/guides/nodejs/containerize/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Walks through a Dockerfile with dev, deps, runner and test stages, a compose.yaml with a server service and later a PostgreSQL db service, and a .dockerignore excluding node_modules, dist, .env and .git. Uses docker compose up --build, docker compose down, docker compose watch and docker build --target test -t nodejs-app-test . It also uses docker login dhi.io for Docker Hardened Images.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Walks through a Dockerfile with dev, deps, runner and test stages, a compose.yaml with a server service and later a PostgreSQL db service, and a .dockerignore excluding node_modules, dist, .env and .git. Uses docker compose up --build, docker compose down, docker compose watch and docker build --target test -t nodejs-app-test . It also uses docker login dhi.io for Docker Hardened Images. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12342,11 +13374,11 @@ window.TOPIC_DATA = {
         "id": "docker-guide-python",
         "title": "Python language-specific guide",
         "url": "https://docs.docker.com/guides/python/containerize/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Walks through a multi stage Dockerfile for a FastAPI app, a compose.yaml with a server service, and a .dockerignore excluding .git, .venv and __pycache__. Uses docker compose up --build, docker compose down and docker compose watch, and docker login dhi.io for Docker Hardened Images. Marked as a community contribution on the page.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Walks through a multi stage Dockerfile for a FastAPI app, a compose.yaml with a server service, and a .dockerignore excluding .git, .venv and __pycache__. Uses docker compose up --build, docker compose down and docker compose watch, and docker login dhi.io for Docker Hardened Images. Marked as a community contribution on the page. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Docker"
       },
@@ -12366,11 +13398,11 @@ window.TOPIC_DATA = {
         "id": "gh-actions-about-workflows",
         "title": "GitHub Docs: Workflows",
         "url": "https://docs.github.com/en/actions/writing-workflows/about-workflows",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Workflow files live in .github/workflows, a repository can have several workflows, and a workflow has triggers set with the on key, jobs on runners and steps that run a script or an action.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Workflow files live in .github/workflows, a repository can have several workflows, and a workflow has triggers set with the on key, jobs on runners and steps that run a script or an action. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12378,11 +13410,11 @@ window.TOPIC_DATA = {
         "id": "gh-actions-workflow-syntax",
         "title": "GitHub Docs: Workflow syntax for GitHub Actions",
         "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "The .yml and .yaml extensions, the on, permissions, concurrency, runs-on, steps, uses and run keys, and the rule that specifying any permission sets every unspecified permission to none.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "The .yml and .yaml extensions, the on, permissions, concurrency, runs-on, steps, uses and run keys, and the rule that specifying any permission sets every unspecified permission to none. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12390,11 +13422,11 @@ window.TOPIC_DATA = {
         "id": "gh-actions-events",
         "title": "GitHub Docs: Events that trigger workflows",
         "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Which events only trigger a run when the workflow file exists on the default branch, that GITHUB_TOKEN triggered events other than workflow_dispatch and repository_dispatch do not create runs, and that forks get no secrets beyond a read only GITHUB_TOKEN.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Supports documented triggers and GITHUB_TOKEN event suppression, including dispatch events and pull_request opened, synchronize and reopened approval exceptions. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12402,11 +13434,11 @@ window.TOPIC_DATA = {
         "id": "gh-actions-github-token",
         "title": "GitHub Docs: GITHUB_TOKEN",
         "url": "https://docs.github.com/en/actions/concepts/security/github_token",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "The token is created per job and expires when the job finishes, and events it triggers do not create new runs except workflow_dispatch, repository_dispatch and pull_request opened, synchronize or reopened runs that wait for approval.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Supports token permissions and event suppression with documented dispatch and approval-gated pull request exceptions. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12414,11 +13446,11 @@ window.TOPIC_DATA = {
         "id": "gh-actions-repo-settings",
         "title": "GitHub Docs: Managing GitHub Actions settings for a repository",
         "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "The workflow permissions setting, its restricted default for new personal repositories with read access to contents and packages, inheritance of the organization setting, and the setting that allows workflows to create or approve pull requests.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "The workflow permissions setting, its restricted default for new personal repositories with read access to contents and packages, inheritance of the organization setting, and the setting that allows workflows to create or approve pull requests. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12426,11 +13458,11 @@ window.TOPIC_DATA = {
         "id": "gh-code-owners",
         "title": "GitHub Docs: About code owners",
         "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "CODEOWNERS locations and lookup order, the base branch rule, last matching pattern precedence and the branch protection option that requires code owner review.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "CODEOWNERS locations and lookup order, the base branch rule, last matching pattern precedence and the branch protection option that requires code owner review. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12438,11 +13470,11 @@ window.TOPIC_DATA = {
         "id": "gh-pr-template",
         "title": "GitHub Docs: Creating a pull request template for your repository",
         "url": "https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "The pull_request_template.md file name, its root, docs/ and .github/ locations, and availability only after merge into the default branch.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "The pull_request_template.md file name, its root, docs/ and .github/ locations, and availability only after merge into the default branch. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12450,11 +13482,11 @@ window.TOPIC_DATA = {
         "id": "gh-protected-branches",
         "title": "GitHub Docs: About protected branches",
         "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Required status checks and their accepted successful, skipped or neutral states, the advice to keep job names unique across workflows, and required review from code owners.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Required status checks and their accepted successful, skipped or neutral states, the advice to keep job names unique across workflows, and required review from code owners. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12462,11 +13494,11 @@ window.TOPIC_DATA = {
         "id": "gh-actions-caching",
         "title": "GitHub Docs: Dependency caching reference",
         "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Which branches a run can restore caches from, the exclusion of child and sibling branches, and removal of caches not accessed in over 7 days.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Supports cache restoration and documented branch/merge scope and access settings. Does not establish a particular repository configuration. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12474,11 +13506,11 @@ window.TOPIC_DATA = {
         "id": "gh-actions-concurrency",
         "title": "GitHub Docs: Control the concurrency of workflows and jobs",
         "url": "https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "At most one running job or workflow per concurrency group, cancellation of the pending run by default, cancel-in-progress, and the ci-${{ github.ref }} group example.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Supports default pending-run behavior, documented queue capacity options and conditional running cancellation. A concurrency group alone is not unconditional cancellation. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12486,11 +13518,11 @@ window.TOPIC_DATA = {
         "id": "gh-actions-manual-run",
         "title": "GitHub Docs: Manually running a workflow",
         "url": "https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "The workflow_dispatch requirement, the default branch requirement for that event, and the gh workflow run and gh run watch commands.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "The workflow_dispatch requirement, the default branch requirement for that event, and the gh workflow run and gh run watch commands. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12498,11 +13530,11 @@ window.TOPIC_DATA = {
         "id": "gh-actions-run-history",
         "title": "GitHub Docs: Viewing workflow run history",
         "url": "https://docs.github.com/en/actions/how-tos/monitor-workflows/view-workflow-run-history",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "The gh run list, gh run view RUN_ID and gh run view --job JOB_ID --log commands.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "The gh run list, gh run view RUN_ID and gh run view --job JOB_ID --log commands. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12510,11 +13542,11 @@ window.TOPIC_DATA = {
         "id": "gh-actions-rerun",
         "title": "GitHub Docs: Re-running workflows and jobs",
         "url": "https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "The gh run rerun RUN_ID and gh run rerun RUN_ID --failed commands, re-runs using the same GITHUB_SHA and GITHUB_REF, and the 30 day re-run window.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "The gh run rerun RUN_ID and gh run rerun RUN_ID --failed commands, re-runs using the same GITHUB_SHA and GITHUB_REF, and the 30 day re-run window. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12522,11 +13554,11 @@ window.TOPIC_DATA = {
         "id": "gh-actions-quickstart",
         "title": "GitHub Docs: Quickstart for GitHub Actions",
         "url": "https://docs.github.com/en/actions/get-started/quickstart",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "An example workflow with on: [push], runs-on: ubuntu-latest and actions/checkout@v6, used only for the illustrative YAML in the topic.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "An example workflow with on: [push], runs-on: ubuntu-latest and actions/checkout@v6, used only for the illustrative YAML in the topic. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "GitHub"
       },
@@ -12534,134 +13566,134 @@ window.TOPIC_DATA = {
         "id": "nodejs-about",
         "title": "About Node.js",
         "url": "https://nodejs.org/en/about",
-        "revision": "site read 2026-10-11, site banners v24.21.0 Latest LTS and v26.11.1 Latest Release",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "revision": "scoped claims checked 2026-10-12, site banners v24.21.0 Latest LTS and v26.11.1 Latest Release",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "OpenJS Foundation and Node.js contributors",
-        "contribution": "Describes Node.js as an asynchronous event-driven JavaScript runtime."
+        "contribution": "Describes Node.js as an asynchronous event-driven JavaScript runtime. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "node-packages",
         "title": "Node.js documentation, Modules: Packages",
         "url": "https://nodejs.org/api/packages.html",
         "revision": "Node.js v26.11.1 documentation",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "OpenJS Foundation and Node.js contributors",
-        "contribution": "Documents how the type field, .mjs and .cjs decide ES module or CommonJS treatment, the recommendation to set type explicitly, and exports encapsulation with ERR_PACKAGE_PATH_NOT_EXPORTED."
+        "contribution": "Supports explicit package type and extensions, package subpaths and ambiguous .js syntax detection, enabled by default since Node.js 22.7.0 and 20.19.0. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "node-test-runner",
         "title": "Node.js documentation, Test runner",
         "url": "https://nodejs.org/api/test.html",
         "revision": "Node.js v26.11.1 documentation",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "OpenJS Foundation and Node.js contributors",
-        "contribution": "Documents node --test, its default file patterns including TypeScript equivalents unless --no-strip-types is given, and its Stability 2 status."
+        "contribution": "Documents node --test, its default file patterns including TypeScript equivalents unless --no-strip-types is given, and its Stability 2 status. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "node-typescript",
         "title": "Node.js documentation, Modules: TypeScript",
         "url": "https://nodejs.org/api/typescript.html",
         "revision": "Node.js v26.11.1 documentation",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "OpenJS Foundation and Node.js contributors",
-        "contribution": "Documents type stripping without type checking, that Node.js ignores tsconfig.json, and which TypeScript syntax raises an error."
+        "contribution": "Documents type stripping without type checking, that Node.js ignores tsconfig.json, and which TypeScript syntax raises an error. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "node-releases",
         "title": "Node.js releases",
         "url": "https://nodejs.org/en/about/previous-releases",
-        "revision": "site read 2026-10-11",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "revision": "scoped claims checked 2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "OpenJS Foundation and Node.js contributors",
-        "contribution": "States that production applications should use only Active LTS or Maintenance LTS releases and lists the release phases and dates."
+        "contribution": "States that production applications should use only Active LTS or Maintenance LTS releases and lists the release phases and dates. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "npm-ci",
         "title": "npm Docs, npm ci",
         "url": "https://docs.npmjs.com/cli/v12/commands/npm-ci",
         "revision": "npm CLI 12.2.0 (Latest), page last edited 2025-10-05",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "npm",
-        "contribution": "Documents that npm ci needs an existing package-lock.json, exits with an error on a mismatch with package.json, removes node_modules first and never writes package.json or the lockfile."
+        "contribution": "Documents that npm ci needs an existing package-lock.json, exits with an error on a mismatch with package.json, removes node_modules first and never writes package.json or the lockfile. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "npm-package-json",
         "title": "npm Docs, package.json",
         "url": "https://docs.npmjs.com/cli/v12/configuring-npm/package-json",
         "revision": "npm CLI 12.2.0 (Latest), page last edited 2026-06-18",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "npm",
-        "contribution": "Documents the scripts, dependencies, devDependencies, engines and type fields, and that engines is advisory unless engine-strict is set."
+        "contribution": "Documents the scripts, dependencies, devDependencies, engines and type fields, and that engines is advisory unless engine-strict is set. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "npm-package-lock",
         "title": "npm Docs, package-lock.json",
         "url": "https://docs.npmjs.com/cli/v12/configuring-npm/package-lock-json",
         "revision": "npm CLI 12.2.0 (Latest), page last edited 2025-10-04",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "npm",
-        "contribution": "Documents that package-lock.json describes the exact generated tree and is intended to be committed into source repositories."
+        "contribution": "Documents that package-lock.json describes the exact generated tree and is intended to be committed into source repositories. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "npm-scripts",
         "title": "npm Docs, scripts",
         "url": "https://docs.npmjs.com/cli/v12/using-npm/scripts",
         "revision": "npm CLI 12.2.0 (Latest), page last edited 2026-05-21",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "npm",
-        "contribution": "Documents npm test with pretest and posttest, npm run with pre and post scripts, and the npm start default to node server.js."
+        "contribution": "Documents npm test with pretest and posttest, npm run with pre and post scripts, and the npm start default to node server.js. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "github-actions-nodejs",
         "title": "GitHub Docs, Building and testing Node.js",
         "url": "https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs",
-        "revision": "site read 2026-10-11, examples use actions/checkout@v6 and actions/setup-node@v7",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "revision": "scoped claims checked 2026-10-12, examples use actions/checkout@v6 and actions/setup-node@v7",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "GitHub",
-        "contribution": "Documents the .github/workflows location, the actions/setup-node step, npm ci versus npm install and the example build and test steps."
+        "contribution": "Documents the .github/workflows location, the actions/setup-node step, npm ci versus npm install and the example build and test steps. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "eslint-config-files",
         "title": "ESLint, Configuration Files",
         "url": "https://eslint.org/docs/latest/use/configure/configuration-files",
-        "revision": "site read 2026-10-11, navigation lists v10.12.0 as current",
-        "retrievedOn": "2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
+        "revision": "scoped claims checked 2026-10-12, navigation lists v10.12.0 as current",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
         "kind": "documentation",
         "publisher": "OpenJS Foundation and ESLint contributors",
         "license": "MIT License",
-        "contribution": "Documents the flat config file names and the search from the target file's directory upward."
+        "contribution": "Supports ESLint 10 target-file-based flat config discovery and supported file variants. Earlier versions have different discovery rules. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility."
       },
       {
         "id": "python-docs",
@@ -12681,11 +13713,11 @@ window.TOPIC_DATA = {
         "title": "venv, creation of virtual environments",
         "url": "https://docs.python.org/3/library/venv.html",
         "revision": "3.15.0, page last updated 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Defines a virtual environment as isolated from the base installation by default, documents python -m venv, states that activation is not required when the environment's interpreter is called by its full path, and describes environments as disposable, not movable or copyable and not checked into source control. Since Python 3.13 venv writes a .gitignore file by default.",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Defines a virtual environment as isolated from the base installation by default, documents python -m venv, states that activation is not required when the environment's interpreter is called by its full path, and describes environments as disposable, not movable or copyable and not checked into source control. Since Python 3.13 venv writes a .gitignore file by default. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
         "license": "Python Software Foundation License Version 2",
-        "retrievedOn": "2026-10-11",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Python Software Foundation"
       },
@@ -12694,10 +13726,10 @@ window.TOPIC_DATA = {
         "title": "pip, local project installs",
         "url": "https://pip.pypa.io/en/stable/topics/local-project-installs/",
         "revision": "pip 26.2.1",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Distinguishes regular installs from editable installs, documents python -m pip install -e, states that an editable install adds the source directory to the import path without copying files, and says regular installs should be used in CI systems and for deployments.",
-        "retrievedOn": "2026-10-11",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Supports regular versus editable installs and limits, including metadata changes needing reinstall and compiled extensions needing build steps. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Python Packaging Authority"
       },
@@ -12706,10 +13738,10 @@ window.TOPIC_DATA = {
         "title": "pip, requirements file format",
         "url": "https://pip.pypa.io/en/stable/reference/requirements-file-format/",
         "revision": "pip 26.2.1",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Defines a requirements file as a list of items for pip install, usually named requirements.txt, with one item or pip argument per line and comments starting with #. It does not say whether versions should be pinned.",
-        "retrievedOn": "2026-10-11",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Defines a requirements file as a list of items for pip install, usually named requirements.txt, with one item or pip argument per line and comments starting with #. It does not say whether versions should be pinned. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Python Packaging Authority"
       },
@@ -12718,10 +13750,10 @@ window.TOPIC_DATA = {
         "title": "pip lock",
         "url": "https://pip.pypa.io/en/stable/cli/pip_lock/",
         "revision": "pip 26.2.1",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Documents the experimental pip lock command, which writes pylock.toml by default and whose output is only guaranteed valid for the current Python version and platform. The page does not say that pip install consumes the file.",
-        "retrievedOn": "2026-10-11",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Documents the experimental pip lock command, which writes pylock.toml by default and whose output is only guaranteed valid for the current Python version and platform. The page does not say that pip install consumes the file. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Python Packaging Authority"
       },
@@ -12729,11 +13761,11 @@ window.TOPIC_DATA = {
         "id": "pypa-pyproject-guide",
         "title": "Writing your pyproject.toml",
         "url": "https://packaging.python.org/en/latest/guides/writing-pyproject-toml/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "States that the [build-system] table should always be present regardless of build backend, that [project] holds basic metadata with name and version as required keys, and that [tool] subtables are defined by each tool.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Supports PyPA build-system recommendations and project metadata, including dynamic version and backend-specific metadata alternatives. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Python Packaging Authority"
       },
@@ -12742,10 +13774,10 @@ window.TOPIC_DATA = {
         "title": "pylock.toml specification",
         "url": "https://packaging.python.org/en/latest/specifications/pylock-toml/",
         "revision": "lock-version 1.0, history entries April 2025 and March 2026",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Defines pylock.toml as a format for reproducible installation in a Python environment, originally defined in PEP 751, and requires the file name pylock.toml or a named variant matching the pattern in the specification.",
-        "retrievedOn": "2026-10-11",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Defines pylock.toml as a format for reproducible installation in a Python environment, originally defined in PEP 751, and requires the file name pylock.toml or a named variant matching the pattern in the specification. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "specification",
         "publisher": "Python Packaging Authority"
       },
@@ -12753,11 +13785,11 @@ window.TOPIC_DATA = {
         "id": "pytest-good-practices",
         "title": "pytest, good integration practices",
         "url": "https://docs.pytest.org/en/stable/explanation/goodpractices.html",
-        "revision": "site read 2026-10-11, stable branch",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Documents test discovery, test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method, strongly suggests a src layout, and uses pip install -e . as the editable install step. It does not cover rootdir or conftest behavior.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12, stable branch",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Documents test discovery, test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method, strongly suggests a src layout, and uses pip install -e . as the editable install step. It does not cover rootdir or conftest behavior. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "pytest-dev"
       },
@@ -12765,11 +13797,11 @@ window.TOPIC_DATA = {
         "id": "pytest-customize",
         "title": "pytest, configuration",
         "url": "https://docs.pytest.org/en/stable/reference/customize.html",
-        "revision": "site read 2026-10-11, marks pytest.toml as added in 9.0",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Lists the configuration files pytest searches, pytest.toml, .pytest.toml, pytest.ini, .pytest.ini, pyproject.toml, tox.ini and setup.cfg, names the [tool.pytest.ini_options] and [tool.pytest] tables, states that pytest.ini takes precedence over other files except pytest.toml and .pytest.toml even when empty, and describes how rootdir is determined.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12, marks pytest.toml as added in 9.0",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Supports pytest configuration precedence, pytest.toml added in 9.0, explicit config/rootdir options and fallback rules. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "pytest-dev"
       },
@@ -12777,11 +13809,11 @@ window.TOPIC_DATA = {
         "id": "pytest-ci",
         "title": "pytest, CI pipelines",
         "url": "https://docs.pytest.org/en/stable/explanation/ci.html",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "States that pytest detects CI when the CI or BUILD_NUMBER environment variable is set to a non empty value and then stops truncating the short test summary at the terminal width. Other effects are described as limited.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "States that pytest detects CI when the CI or BUILD_NUMBER environment variable is set to a non empty value and then stops truncating the short test summary at the terminal width. Other effects are described as limited. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "pytest-dev"
       },
@@ -12789,11 +13821,11 @@ window.TOPIC_DATA = {
         "id": "ruff-configuration",
         "title": "Ruff, configuring Ruff",
         "url": "https://docs.astral.sh/ruff/configuration/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "States that Ruff ignores a pyproject.toml without a [tool.ruff] section, that in one directory .ruff.toml takes precedence over ruff.toml and ruff.toml over pyproject.toml, that the closest configuration file is used for each file and settings are not merged across files, and that inheritance uses the extend field.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "States that Ruff ignores a pyproject.toml without a [tool.ruff] section, that in one directory .ruff.toml takes precedence over ruff.toml and ruff.toml over pyproject.toml, that the closest configuration file is used for each file and settings are not merged across files, and that inheritance uses the extend field. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Astral"
       },
@@ -12801,11 +13833,11 @@ window.TOPIC_DATA = {
         "id": "ruff-linter",
         "title": "Ruff, the Ruff linter",
         "url": "https://docs.astral.sh/ruff/linter/",
-        "revision": "site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Documents ruff check and ruff check --fix, states that only safe fixes are applied by default and that unsafe fixes can change runtime behavior or remove comments, and lists exit codes 0, 1 for violations found and 2 for abnormal termination.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Supports explicit --fix behavior and the safe-fix default when fixing is requested. Running ruff check alone does not apply fixes. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Astral"
       },
@@ -12813,11 +13845,11 @@ window.TOPIC_DATA = {
         "id": "ruff-formatter",
         "title": "Ruff, the Ruff formatter",
         "url": "https://docs.astral.sh/ruff/formatter/",
-        "revision": "site read 2026-10-11, pre-commit example uses v0.17.0",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "Documents ruff format and ruff format --check, which does not write files and exits with 1 when a file would be reformatted. Describes the formatter as a drop in replacement for Black with known deviations.",
-        "retrievedOn": "2026-10-11",
+        "revision": "scoped claims checked 2026-10-12, pre-commit example uses v0.17.0",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "Documents ruff format and ruff format --check, which does not write files and exits with 1 when a file would be reformatted. Describes the formatter as a drop in replacement for Black with known deviations. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Astral"
       },
@@ -12825,11 +13857,11 @@ window.TOPIC_DATA = {
         "id": "uv-project-layout",
         "title": "uv, project structure and files",
         "url": "https://docs.astral.sh/uv/concepts/projects/layout/",
-        "revision": "page dated 2026-07-21, site read 2026-10-11",
-        "reviewedOn": "",
-        "status": "needs-review",
-        "contribution": "States that uv requires pyproject.toml to identify the project root, keeps the environment in .venv next to it and advises against committing .venv, and that uv.lock is a cross platform, human readable TOML file that should be checked into version control and not edited manually. uv sync and uv run create or update the environment.",
-        "retrievedOn": "2026-10-11",
+        "revision": "page dated 2026-07-21, scoped claims checked 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "contribution": "States that uv requires pyproject.toml to identify the project root, keeps the environment in .venv next to it and advises against committing .venv, and that uv.lock is a cross platform, human readable TOML file that should be checked into version control and not edited manually. uv sync and uv run create or update the environment. Review scope: the linked factual claims in the five reviewed guides, checked on 2026-10-12. This is not a review of every page statement or project compatibility.",
+        "retrievedOn": "2026-10-12",
         "kind": "documentation",
         "publisher": "Astral"
       },
@@ -12844,6 +13876,150 @@ window.TOPIC_DATA = {
         "retrievedOn": "2026-10-11",
         "kind": "documentation",
         "publisher": "Astral"
+      },
+      {
+        "id": "react-typescript",
+        "title": "React, using TypeScript",
+        "url": "https://react.dev/learn/typescript",
+        "revision": "React documentation 19.3, read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "React",
+        "contribution": "Documents TypeScript support for React, JSX and typed component props. Supports the React and TypeScript works-with link, without confirming a project's dependency versions or configuration."
+      },
+      {
+        "id": "typescript-basics",
+        "title": "TypeScript handbook, the basics",
+        "url": "https://www.typescriptlang.org/docs/handbook/2/basic-types.html",
+        "revision": "Current handbook read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Microsoft",
+        "contribution": "Explains static type checking and erasure of type annotations when producing JavaScript. Supports the separation of language checks and runtime behavior, not any application's correctness."
+      },
+      {
+        "id": "typescript-everyday-types",
+        "title": "TypeScript handbook, everyday types",
+        "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html",
+        "revision": "Current handbook read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Microsoft",
+        "contribution": "States that type assertions are removed at compile time and perform no runtime checking. Supports the warning that an assertion on an API payload does not validate that payload."
+      },
+      {
+        "id": "typescript-no-emit",
+        "title": "TypeScript TSConfig, noEmit",
+        "url": "https://www.typescriptlang.org/tsconfig/noEmit.html",
+        "revision": "Current TSConfig documentation read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Microsoft",
+        "contribution": "Documents that noEmit prevents JavaScript, declarations and source maps being emitted. Supports a possible separate type check, without asserting that a project's build already performs it."
+      },
+      {
+        "id": "vitest-guide",
+        "title": "Vitest, getting started",
+        "url": "https://vitest.dev/guide/",
+        "revision": "Vitest 5 documentation read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Vitest",
+        "contribution": "Documents Vite configuration reuse, dedicated Vitest configuration and a React example. Supports configuration discovery and the React works-with example, without imposing the current Vitest release on a project."
+      },
+      {
+        "id": "vitest-cli",
+        "title": "Vitest, command line interface",
+        "url": "https://vitest.dev/guide/cli.html",
+        "revision": "Vitest 5 documentation read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Vitest",
+        "contribution": "Documents vitest run as a single run without watch mode. Supports the distinction between a development watch session and a completed verification run."
+      },
+      {
+        "id": "vitest-environments",
+        "title": "Vitest, test environment",
+        "url": "https://vitest.dev/guide/environment.html",
+        "revision": "Vitest 5 documentation read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Vitest",
+        "contribution": "Documents Node as the default environment, jsdom and happy-dom as emulated browser environments, and Browser Mode as a separate option. Supports the environment distinction, not equivalence to a real device."
+      },
+      {
+        "id": "playwright-best-practices",
+        "title": "Playwright, best practices",
+        "url": "https://playwright.dev/docs/best-practices",
+        "revision": "Current documentation read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Microsoft",
+        "contribution": "Recommends user visible behavior, isolated tests, controlled data and role or other user facing locators. Supports browser test design and its limits, not a claim that every user journey is covered."
+      },
+      {
+        "id": "playwright-emulation",
+        "title": "Playwright, emulation",
+        "url": "https://playwright.dev/docs/emulation",
+        "revision": "Current documentation read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Microsoft",
+        "contribution": "Documents emulated viewport, touch, device parameters and color scheme. Supports explicit browser configuration, without treating emulation as an observed test on a physical phone."
+      },
+      {
+        "id": "wai-keyboard",
+        "title": "W3C WAI, understanding keyboard access",
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html",
+        "revision": "WCAG 2.2 Understanding guidance read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "W3C",
+        "contribution": "Explains keyboard operability and the exception for functionality whose underlying input depends on the path of movement. Informs checks of the example's select and retry controls, not a whole product accessibility certification."
+      },
+      {
+        "id": "wai-reflow",
+        "title": "W3C WAI, understanding reflow",
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
+        "revision": "WCAG 2.2 Understanding guidance read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "W3C",
+        "contribution": "Explains reflow without loss of information or functionality at narrow equivalent viewport sizes, with exceptions for content requiring a two dimensional layout. Informs a responsive check rather than a blanket prohibition on table scrolling."
+      },
+      {
+        "id": "npm-ci-v11",
+        "title": "npm 11, npm ci",
+        "url": "https://docs.npmjs.com/cli/v11/commands/npm-ci/",
+        "revision": "npm 11.21.0",
+        "retrievedOn": "2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "npm",
+        "contribution": "Supports npm 11 npm ci accepting package-lock.json or npm-shrinkwrap.json, rejecting mismatches and not rewriting lockfiles. Version-specific comparison with npm 12, not verified behavior in a project."
       }
     ],
     "relations": [
@@ -16879,6 +18055,286 @@ window.TOPIC_DATA = {
         ],
         "note": "The uv Docker guide documents a Python project built and run inside a Docker image. It is uv's guide, not a Python or Docker page, so review whether that is enough for the link.",
         "status": "needs-review"
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:react",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:npm",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:vitest",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:playwright",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:react",
+        "type": "explained-by",
+        "to": "topic:react",
+        "sourceRefs": []
+      },
+      {
+        "from": "profile:react",
+        "type": "explained-by",
+        "to": "topic:react",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:javascript",
+        "type": "explained-by",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": []
+      },
+      {
+        "from": "profile:javascript",
+        "type": "explained-by",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:typescript",
+        "type": "explained-by",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": []
+      },
+      {
+        "from": "profile:typescript",
+        "type": "explained-by",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:npm",
+        "type": "explained-by",
+        "to": "topic:npm",
+        "sourceRefs": []
+      },
+      {
+        "from": "profile:npm",
+        "type": "explained-by",
+        "to": "topic:npm",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:vitest",
+        "type": "explained-by",
+        "to": "topic:vitest",
+        "sourceRefs": []
+      },
+      {
+        "from": "profile:vitest",
+        "type": "explained-by",
+        "to": "topic:vitest",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:playwright",
+        "type": "explained-by",
+        "to": "topic:playwright",
+        "sourceRefs": []
+      },
+      {
+        "from": "profile:playwright",
+        "type": "explained-by",
+        "to": "topic:playwright",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:requirements-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:architecture-decisions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:work-breakdown",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:implementation-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:release-operations",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:react",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:nodejs",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:npm",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:vitest",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:playwright",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:github-actions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:react",
+        "type": "related-reading",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:react",
+        "type": "related-reading",
+        "to": "topic:vitest",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:react",
+        "type": "related-reading",
+        "to": "topic:playwright",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "related-reading",
+        "to": "topic:nodejs",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:npm",
+        "type": "related-reading",
+        "to": "topic:nodejs",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:npm",
+        "type": "related-reading",
+        "to": "topic:github-actions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:npm",
+        "type": "related-reading",
+        "to": "topic:pipeline-diagnosis",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:vitest",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:vitest",
+        "type": "related-reading",
+        "to": "topic:playwright",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:playwright",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:playwright",
+        "type": "related-reading",
+        "to": "topic:post-change-checks",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:react",
+        "type": "works-with",
+        "to": "technology:typescript",
+        "sourceRefs": [
+          "react-typescript"
+        ],
+        "status": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "note": "Documents React with TypeScript, not compatibility of arbitrary installed versions."
+      },
+      {
+        "from": "technology:react",
+        "type": "works-with",
+        "to": "technology:vitest",
+        "sourceRefs": [
+          "vitest-guide"
+        ],
+        "status": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "note": "The Vitest guide links a React example. A project still needs its own version and environment checks."
       }
     ],
     "edges": [
@@ -21584,6 +23040,331 @@ window.TOPIC_DATA = {
         "derived": false
       },
       {
+        "from": "topic:user-facing-feature",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:react",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:npm",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:vitest",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:playwright",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "technology:react",
+        "type": "explained-by",
+        "to": "topic:react",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "profile:react",
+        "type": "explained-by",
+        "to": "topic:react",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "technology:javascript",
+        "type": "explained-by",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "profile:javascript",
+        "type": "explained-by",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "technology:typescript",
+        "type": "explained-by",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "profile:typescript",
+        "type": "explained-by",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "technology:npm",
+        "type": "explained-by",
+        "to": "topic:npm",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "profile:npm",
+        "type": "explained-by",
+        "to": "topic:npm",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "technology:vitest",
+        "type": "explained-by",
+        "to": "topic:vitest",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "profile:vitest",
+        "type": "explained-by",
+        "to": "topic:vitest",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "technology:playwright",
+        "type": "explained-by",
+        "to": "topic:playwright",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "profile:playwright",
+        "type": "explained-by",
+        "to": "topic:playwright",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:requirements-workflow",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:architecture-decisions",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:work-breakdown",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:implementation-workflow",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:release-operations",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:react",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:nodejs",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:npm",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:vitest",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:playwright",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "related-reading",
+        "to": "topic:github-actions",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:react",
+        "type": "related-reading",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:react",
+        "type": "related-reading",
+        "to": "topic:vitest",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:react",
+        "type": "related-reading",
+        "to": "topic:playwright",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "related-reading",
+        "to": "topic:nodejs",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:npm",
+        "type": "related-reading",
+        "to": "topic:nodejs",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:npm",
+        "type": "related-reading",
+        "to": "topic:github-actions",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:npm",
+        "type": "related-reading",
+        "to": "topic:pipeline-diagnosis",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:vitest",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:vitest",
+        "type": "related-reading",
+        "to": "topic:playwright",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:playwright",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:playwright",
+        "type": "related-reading",
+        "to": "topic:post-change-checks",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "technology:react",
+        "type": "works-with",
+        "to": "technology:typescript",
+        "sourceRefs": [
+          "react-typescript"
+        ],
+        "status": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "note": "Documents React with TypeScript, not compatibility of arbitrary installed versions.",
+        "derived": false
+      },
+      {
+        "from": "technology:react",
+        "type": "works-with",
+        "to": "technology:vitest",
+        "sourceRefs": [
+          "vitest-guide"
+        ],
+        "status": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "note": "The Vitest guide links a React example. A project still needs its own version and environment checks.",
+        "derived": false
+      },
+      {
         "from": "stage:requirements",
         "type": "default-skill",
         "to": "skill:requirement-refinement",
@@ -22954,6 +24735,47 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "topic:javascript-typescript",
+        "type": "applies-to",
+        "to": "technology:javascript",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "applies-to",
+        "to": "technology:typescript",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "claim:javascript-typescript-1",
+        "type": "evidenced-by",
+        "to": "source:typescript-basics",
+        "sourceRefs": [
+          "typescript-basics"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:javascript-typescript-2",
+        "type": "evidenced-by",
+        "to": "source:typescript-everyday-types",
+        "sourceRefs": [
+          "typescript-everyday-types"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:javascript-typescript-3",
+        "type": "evidenced-by",
+        "to": "source:typescript-no-emit",
+        "sourceRefs": [
+          "typescript-no-emit"
+        ],
+        "derived": true
+      },
+      {
         "from": "topic:jenkins",
         "type": "applies-to",
         "to": "stage:verification",
@@ -23086,7 +24908,31 @@ window.TOPIC_DATA = {
         "type": "evidenced-by",
         "to": "source:npm-ci",
         "sourceRefs": [
-          "npm-ci"
+          "npm-ci",
+          "npm-ci-v11",
+          "npm-package-lock"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:nodejs-8",
+        "type": "evidenced-by",
+        "to": "source:npm-ci-v11",
+        "sourceRefs": [
+          "npm-ci",
+          "npm-ci-v11",
+          "npm-package-lock"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:nodejs-8",
+        "type": "evidenced-by",
+        "to": "source:npm-package-lock",
+        "sourceRefs": [
+          "npm-ci",
+          "npm-ci-v11",
+          "npm-package-lock"
         ],
         "derived": true
       },
@@ -23154,6 +25000,31 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "topic:npm",
+        "type": "applies-to",
+        "to": "technology:npm",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "claim:npm-1",
+        "type": "evidenced-by",
+        "to": "source:npm-ci",
+        "sourceRefs": [
+          "npm-ci"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:npm-2",
+        "type": "evidenced-by",
+        "to": "source:npm-scripts",
+        "sourceRefs": [
+          "npm-scripts"
+        ],
+        "derived": true
+      },
+      {
         "from": "topic:pilot",
         "type": "applies-to",
         "to": "stage:experiment-plan",
@@ -23165,6 +25036,40 @@ window.TOPIC_DATA = {
         "type": "applies-to",
         "to": "recipe:feasibility",
         "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:playwright",
+        "type": "applies-to",
+        "to": "technology:playwright",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "claim:playwright-1",
+        "type": "evidenced-by",
+        "to": "source:playwright-best-practices",
+        "sourceRefs": [
+          "playwright-best-practices"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:playwright-2",
+        "type": "evidenced-by",
+        "to": "source:playwright-emulation",
+        "sourceRefs": [
+          "playwright-emulation"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:playwright-3",
+        "type": "evidenced-by",
+        "to": "source:reference-63",
+        "sourceRefs": [
+          "reference-63"
+        ],
         "derived": true
       },
       {
@@ -23425,6 +25330,31 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "topic:react",
+        "type": "applies-to",
+        "to": "technology:react",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "claim:react-1",
+        "type": "evidenced-by",
+        "to": "source:reference-62",
+        "sourceRefs": [
+          "reference-62"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:react-2",
+        "type": "evidenced-by",
+        "to": "source:reference-62",
+        "sourceRefs": [
+          "reference-62"
+        ],
+        "derived": true
+      },
+      {
         "from": "topic:release-operations",
         "type": "applies-to",
         "to": "stage:release",
@@ -23678,6 +25608,75 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "topic:user-facing-feature",
+        "type": "applies-to",
+        "to": "stage:requirements",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "applies-to",
+        "to": "stage:architecture",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "applies-to",
+        "to": "stage:implementation",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "applies-to",
+        "to": "stage:verification",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "applies-to",
+        "to": "stage:release",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:user-facing-feature",
+        "type": "applies-to",
+        "to": "recipe:feature-delivery",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "claim:user-facing-feature-1",
+        "type": "evidenced-by",
+        "to": "source:wai-keyboard",
+        "sourceRefs": [
+          "wai-keyboard"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:user-facing-feature-2",
+        "type": "evidenced-by",
+        "to": "source:wai-reflow",
+        "sourceRefs": [
+          "wai-reflow"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:user-facing-feature-3",
+        "type": "evidenced-by",
+        "to": "source:reference-63",
+        "sourceRefs": [
+          "reference-63"
+        ],
+        "derived": true
+      },
+      {
         "from": "topic:verdicts",
         "type": "applies-to",
         "to": "stage:verification",
@@ -23703,6 +25702,40 @@ window.TOPIC_DATA = {
         "type": "applies-to",
         "to": "stage:regression",
         "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:vitest",
+        "type": "applies-to",
+        "to": "technology:vitest",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "claim:vitest-1",
+        "type": "evidenced-by",
+        "to": "source:vitest-guide",
+        "sourceRefs": [
+          "vitest-guide"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:vitest-2",
+        "type": "evidenced-by",
+        "to": "source:vitest-cli",
+        "sourceRefs": [
+          "vitest-cli"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:vitest-3",
+        "type": "evidenced-by",
+        "to": "source:vitest-environments",
+        "sourceRefs": [
+          "vitest-environments"
+        ],
         "derived": true
       },
       {
@@ -26868,6 +28901,325 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "topic:workflows",
+        "type": "browses",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "browses",
+        "to": "topic:react",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "browses",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "browses",
+        "to": "topic:npm",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "browses",
+        "to": "topic:vitest",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "browses",
+        "to": "topic:playwright",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:react",
+        "type": "explains",
+        "to": "technology:react",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:react",
+        "type": "explains",
+        "to": "profile:react",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "explains",
+        "to": "technology:javascript",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "explains",
+        "to": "profile:javascript",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "explains",
+        "to": "technology:typescript",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "explains",
+        "to": "profile:typescript",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:npm",
+        "type": "explains",
+        "to": "technology:npm",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:npm",
+        "type": "explains",
+        "to": "profile:npm",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:vitest",
+        "type": "explains",
+        "to": "technology:vitest",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:vitest",
+        "type": "explains",
+        "to": "profile:vitest",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:playwright",
+        "type": "explains",
+        "to": "technology:playwright",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:playwright",
+        "type": "explains",
+        "to": "profile:playwright",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:requirements-workflow",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:architecture-decisions",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:work-breakdown",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:implementation-workflow",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:verification-loops",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:release-operations",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:react",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:nodejs",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:npm",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:vitest",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:playwright",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:github-actions",
+        "type": "related-reading",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:javascript-typescript",
+        "type": "related-reading",
+        "to": "topic:react",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:vitest",
+        "type": "related-reading",
+        "to": "topic:react",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:playwright",
+        "type": "related-reading",
+        "to": "topic:react",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:nodejs",
+        "type": "related-reading",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:verification-loops",
+        "type": "related-reading",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:nodejs",
+        "type": "related-reading",
+        "to": "topic:npm",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:github-actions",
+        "type": "related-reading",
+        "to": "topic:npm",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:pipeline-diagnosis",
+        "type": "related-reading",
+        "to": "topic:npm",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:verification-loops",
+        "type": "related-reading",
+        "to": "topic:vitest",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:playwright",
+        "type": "related-reading",
+        "to": "topic:vitest",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:verification-loops",
+        "type": "related-reading",
+        "to": "topic:playwright",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:post-change-checks",
+        "type": "related-reading",
+        "to": "topic:playwright",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "technology:typescript",
+        "type": "works-with",
+        "to": "technology:react",
+        "sourceRefs": [
+          "react-typescript"
+        ],
+        "derived": true
+      },
+      {
+        "from": "technology:vitest",
+        "type": "works-with",
+        "to": "technology:react",
+        "sourceRefs": [
+          "vitest-guide"
+        ],
+        "derived": true
+      },
+      {
         "from": "skill:requirement-refinement",
         "type": "default-skill-of",
         "to": "stage:requirements",
@@ -28238,6 +30590,47 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "technology:javascript",
+        "type": "applied-by",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "technology:typescript",
+        "type": "applied-by",
+        "to": "topic:javascript-typescript",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "source:typescript-basics",
+        "type": "evidence-for",
+        "to": "claim:javascript-typescript-1",
+        "sourceRefs": [
+          "typescript-basics"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:typescript-everyday-types",
+        "type": "evidence-for",
+        "to": "claim:javascript-typescript-2",
+        "sourceRefs": [
+          "typescript-everyday-types"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:typescript-no-emit",
+        "type": "evidence-for",
+        "to": "claim:javascript-typescript-3",
+        "sourceRefs": [
+          "typescript-no-emit"
+        ],
+        "derived": true
+      },
+      {
         "from": "stage:verification",
         "type": "applied-by",
         "to": "topic:jenkins",
@@ -28370,7 +30763,31 @@ window.TOPIC_DATA = {
         "type": "evidence-for",
         "to": "claim:nodejs-8",
         "sourceRefs": [
-          "npm-ci"
+          "npm-ci",
+          "npm-ci-v11",
+          "npm-package-lock"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:npm-ci-v11",
+        "type": "evidence-for",
+        "to": "claim:nodejs-8",
+        "sourceRefs": [
+          "npm-ci",
+          "npm-ci-v11",
+          "npm-package-lock"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:npm-package-lock",
+        "type": "evidence-for",
+        "to": "claim:nodejs-8",
+        "sourceRefs": [
+          "npm-ci",
+          "npm-ci-v11",
+          "npm-package-lock"
         ],
         "derived": true
       },
@@ -28438,6 +30855,31 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "technology:npm",
+        "type": "applied-by",
+        "to": "topic:npm",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "source:npm-ci",
+        "type": "evidence-for",
+        "to": "claim:npm-1",
+        "sourceRefs": [
+          "npm-ci"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:npm-scripts",
+        "type": "evidence-for",
+        "to": "claim:npm-2",
+        "sourceRefs": [
+          "npm-scripts"
+        ],
+        "derived": true
+      },
+      {
         "from": "stage:experiment-plan",
         "type": "applied-by",
         "to": "topic:pilot",
@@ -28449,6 +30891,40 @@ window.TOPIC_DATA = {
         "type": "applied-by",
         "to": "topic:pilot",
         "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "technology:playwright",
+        "type": "applied-by",
+        "to": "topic:playwright",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "source:playwright-best-practices",
+        "type": "evidence-for",
+        "to": "claim:playwright-1",
+        "sourceRefs": [
+          "playwright-best-practices"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:playwright-emulation",
+        "type": "evidence-for",
+        "to": "claim:playwright-2",
+        "sourceRefs": [
+          "playwright-emulation"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:reference-63",
+        "type": "evidence-for",
+        "to": "claim:playwright-3",
+        "sourceRefs": [
+          "reference-63"
+        ],
         "derived": true
       },
       {
@@ -28709,6 +31185,31 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "technology:react",
+        "type": "applied-by",
+        "to": "topic:react",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "source:reference-62",
+        "type": "evidence-for",
+        "to": "claim:react-1",
+        "sourceRefs": [
+          "reference-62"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:reference-62",
+        "type": "evidence-for",
+        "to": "claim:react-2",
+        "sourceRefs": [
+          "reference-62"
+        ],
+        "derived": true
+      },
+      {
         "from": "stage:release",
         "type": "applied-by",
         "to": "topic:release-operations",
@@ -28962,6 +31463,75 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "stage:requirements",
+        "type": "applied-by",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "stage:architecture",
+        "type": "applied-by",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "stage:implementation",
+        "type": "applied-by",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "stage:verification",
+        "type": "applied-by",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "stage:release",
+        "type": "applied-by",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "recipe:feature-delivery",
+        "type": "applied-by",
+        "to": "topic:user-facing-feature",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "source:wai-keyboard",
+        "type": "evidence-for",
+        "to": "claim:user-facing-feature-1",
+        "sourceRefs": [
+          "wai-keyboard"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:wai-reflow",
+        "type": "evidence-for",
+        "to": "claim:user-facing-feature-2",
+        "sourceRefs": [
+          "wai-reflow"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:reference-63",
+        "type": "evidence-for",
+        "to": "claim:user-facing-feature-3",
+        "sourceRefs": [
+          "reference-63"
+        ],
+        "derived": true
+      },
+      {
         "from": "stage:verification",
         "type": "applied-by",
         "to": "topic:verdicts",
@@ -28987,6 +31557,40 @@ window.TOPIC_DATA = {
         "type": "applied-by",
         "to": "topic:verification-loops",
         "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "technology:vitest",
+        "type": "applied-by",
+        "to": "topic:vitest",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "source:vitest-guide",
+        "type": "evidence-for",
+        "to": "claim:vitest-1",
+        "sourceRefs": [
+          "vitest-guide"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:vitest-cli",
+        "type": "evidence-for",
+        "to": "claim:vitest-2",
+        "sourceRefs": [
+          "vitest-cli"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:vitest-environments",
+        "type": "evidence-for",
+        "to": "claim:vitest-3",
+        "sourceRefs": [
+          "vitest-environments"
+        ],
         "derived": true
       },
       {
@@ -29085,7 +31689,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-3",
         "sectionLabel": "What the file is",
-        "text": "Claude Code targets under 200 lines per CLAUDE.md file.",
+        "text": "Claude Code recommends under 200 lines per CLAUDE.md file.",
         "sourceRefs": [
           "claude-code-memory"
         ],
@@ -29094,7 +31698,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-4",
         "sectionLabel": "What to leave out",
-        "text": "The Claude Code doctor checkup trims directory layouts, dependency lists and architecture overviews and keeps pitfalls, rationale and conventions that differ from tool defaults.",
+        "text": "Claude Code's /doctor checkup proposes trimming discoverable codebase summaries while retaining pitfalls, rationale and unusual conventions.",
         "sourceRefs": [
           "claude-code-memory"
         ],
@@ -29103,7 +31707,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-5",
         "sectionLabel": "What to leave out",
-        "text": "The evaluation below found that repository overviews did not help.",
+        "text": "In the benchmark settings tested, repository overviews did not improve navigation.",
         "sourceRefs": [
           "evaluating-agents-md"
         ],
@@ -29112,7 +31716,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-6",
         "sectionLabel": "What to leave out",
-        "text": "Claude Code sends a multi step procedure to a skill and a partial rule to a path scoped rule.",
+        "text": "Claude Code recommends skills for task procedures and path scoped rules for guidance relevant to only part of the codebase.",
         "sourceRefs": [
           "claude-code-memory"
         ],
@@ -29121,7 +31725,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-7",
         "sectionLabel": "How hosts read it",
-        "text": "Codex takes one file per directory, AGENTS.override.md before AGENTS.md, concatenates them from the root down to the working directory and stops at a default 32 KiB.",
+        "text": "Codex loads global guidance and then at most one instruction file per directory from the project root to the working directory. AGENTS.override.md precedes AGENTS.md, with configured fallback names afterward. The default combined limit is 32 KiB.",
         "sourceRefs": [
           "codex-agents-md"
         ],
@@ -29130,7 +31734,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-8",
         "sectionLabel": "How hosts read it",
-        "text": "Copilot reads AGENTS.md anywhere in the repository and the nearest file takes precedence.",
+        "text": "GitHub's Copilot on GitHub documentation supports AGENTS.md files within the repository, with the nearest file taking precedence. This is not evidence that every Copilot surface and version reads them identically.",
         "sourceRefs": [
           "copilot-repository-instructions",
           "agentsmd"
@@ -29140,7 +31744,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-9",
         "sectionLabel": "How hosts read it",
-        "text": "Claude Code reads AGENTS.md only when no CLAUDE.md or CLAUDE.local.md sits in the working directory or above it, and a CLAUDE.md can import it with an @AGENTS.md line.",
+        "text": "Claude Code direct AGENTS.md loading needs v2.1.277 or later and an enabled supporting session. Its default chooses CLAUDE.md files when those or CLAUDE.local.md exist on the project path. The Project instructions setting can change that behavior, and a CLAUDE.md can import @AGENTS.md.",
         "sourceRefs": [
           "claude-code-memory"
         ],
@@ -29149,7 +31753,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-10",
         "sectionLabel": "What the evidence says",
-        "text": "Developer written files raised success on a new CTXbench set by about 2.4 percent, a gain the authors call marginal and not statistically significant.",
+        "text": "The authors report a 2.4 percent average CTXbench resolution improvement with developer files. The difference from no context file was not statistically significant.",
         "sourceRefs": [
           "evaluating-agents-md"
         ],
@@ -29158,7 +31762,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-11",
         "sectionLabel": "What the evidence says",
-        "text": "Model generated files lowered resolution by 0.5 percent on SWE-bench and 2 percent on CTXbench and raised cost by 20 and 23 percent.",
+        "text": "The authors report average resolution drops of 0.5 and 2 percent with generated files, neither statistically significant, and average cost increases of 20 and 23 percent.",
         "sourceRefs": [
           "evaluating-agents-md"
         ],
@@ -29167,7 +31771,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-12",
         "sectionLabel": "What the evidence says",
-        "text": "Removing the testing section cut cost by about a fifth on CTXbench with no significant change in accuracy.",
+        "text": "Removing testing text reduced cost without a statistically significant accuracy change in the reported ablation.",
         "sourceRefs": [
           "evaluating-agents-md"
         ],
@@ -29185,7 +31789,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-14",
         "sectionLabel": "What the evidence says",
-        "text": "The authors recommend including only what agents need that the README lacks.",
+        "text": "The authors recommend including only what agents need that existing documentation lacks.",
         "sourceRefs": [
           "evaluating-agents-md"
         ],
@@ -29194,7 +31798,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-15",
         "sectionLabel": "Check in your environment",
-        "text": "In Claude Code, /doctor prompt-audit covers AGENTS.md and reports stale references and contradictions without changing files.",
+        "text": "Claude Code v2.1.283 or later supports /doctor prompt-audit for instruction files including AGENTS.md, when its bundled audit skill is enabled. It reports findings without applying changes.",
         "sourceRefs": [
           "claude-code-memory"
         ],
@@ -29203,7 +31807,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:agents-md-16",
         "sectionLabel": "Check in your environment",
-        "text": "Claude Code treats these files as context, not enforced configuration, so a rule that must always hold needs a hook or a setting.",
+        "text": "Claude Code treats instruction files as context rather than enforced configuration. Its settings and appropriate hooks provide enforcement mechanisms.",
         "sourceRefs": [
           "claude-code-memory"
         ],
@@ -29221,7 +31825,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:docker-2",
         "sectionLabel": "Where config lives",
-        "text": "A .dockerignore in the context root trims the context before it is sent to the builder.",
+        "text": "A .dockerignore in the context root excludes matching context files, and a Dockerfile specific ignore file takes precedence when present.",
         "sourceRefs": [
           "docker-build-context"
         ],
@@ -29230,7 +31834,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:docker-3",
         "sectionLabel": "Where config lives",
-        "text": "Compose looks for compose.yaml, compose.yml, docker-compose.yaml or docker-compose.yml in the working directory and prefers compose.yaml.",
+        "text": "Compose supports compose.yaml, compose.yml, docker-compose.yaml and docker-compose.yml, preferring compose.yaml. Without an explicit file selection, it searches the working directory and its parents.",
         "sourceRefs": [
           "docker-compose-model"
         ],
@@ -29315,7 +31919,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:docker-12",
         "sectionLabel": "Where review conventions live",
-        "text": "Violations are warnings by default, so to block on them add # check=error=true to the Dockerfile or set the BUILDKIT_DOCKERFILE_CHECK build argument.",
+        "text": "In a regular build, check violations are warnings by default. To make that build fail on them, use # check=error=true or the corresponding BUILDKIT_DOCKERFILE_CHECK argument. The separate --check command already exits with a non zero status on violations.",
         "sourceRefs": [
           "docker-build-checks"
         ],
@@ -29333,7 +31937,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:docker-14",
         "sectionLabel": "Gotchas",
-        "text": "Everything under the build path except .dockerignore matches reaches the builder and COPY, so node_modules and .git travel unless excluded.",
+        "text": "A filesystem context makes its files available to COPY and ADD after ignore rules. Files are loaded as needed, rather than necessarily all copied into the image. Exclude unnecessary local directories such as node_modules and .git. Git contexts omit .git by default unless configured otherwise.",
         "sourceRefs": [
           "docker-build-context",
           "docker-cache-optimize",
@@ -29344,7 +31948,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:docker-15",
         "sectionLabel": "Gotchas",
-        "text": "Once a layer changes every later layer is rebuilt, so copy package manifests and install dependencies before the rest of the source.",
+        "text": "When a layer changes, downstream layers in that build chain need rebuilding. Copy package manifests and install dependencies before frequently changing source to preserve useful cache entries.",
         "sourceRefs": [
           "docker-build-cache",
           "docker-cache-optimize"
@@ -29354,7 +31958,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:docker-16",
         "sectionLabel": "Gotchas",
-        "text": "FROM or a pull without a tag uses latest, tags are mutable, and a pinned digest receives no fixes on its own.",
+        "text": "An image reference without an explicit tag or digest defaults to latest. Tags are mutable, while a pinned digest does not pick up fixes until it is updated.",
         "sourceRefs": [
           "docker-dockerfile-reference",
           "docker-image-pull",
@@ -29376,7 +31980,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:docker-18",
         "sectionLabel": "Gotchas",
-        "text": "Compose merges compose.yaml with compose.override.yaml from the same directory and applies -f files in the order given, later files overriding earlier ones.",
+        "text": "By default Compose merges compose.yaml with an optional compose.override.yaml. Explicit -f files are applied in order. Later values can replace or append according to each field's merge rule, so inspect the merged configuration rather than assuming a whole file wins.",
         "sourceRefs": [
           "docker-compose-merge",
           "docker-compose-cli"
@@ -29395,7 +31999,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:docker-20",
         "sectionLabel": "Gotchas",
-        "text": "Multi stage builds keep build tools out of the final image, and docker build --target stops at a named stage.",
+        "text": "Multi stage builds let you copy selected artifacts into a final stage without its build tools. This depends on the Dockerfile contents. docker build --target selects a named target stage.",
         "sourceRefs": [
           "docker-multi-stage"
         ],
@@ -29507,7 +32111,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:github-actions-12",
         "sectionLabel": "Gotchas",
-        "text": "Events caused by GITHUB_TOKEN do not create new workflow runs, except workflow_dispatch and repository_dispatch, and a pull request opened by a workflow with that token gets runs that wait for approval.",
+        "text": "GITHUB_TOKEN events normally do not start another workflow. The documented exceptions are workflow_dispatch, repository_dispatch and pull_request opened, synchronize or reopened events. Those pull request runs require approval from a user with write access.",
         "sourceRefs": [
           "gh-actions-github-token",
           "gh-actions-events"
@@ -29517,7 +32121,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:github-actions-13",
         "sectionLabel": "Gotchas",
-        "text": "In pull requests from forks, secrets other than GITHUB_TOKEN are not passed to the runner and GITHUB_TOKEN is read only.",
+        "text": "For the documented pull_request fork flow, secrets other than GITHUB_TOKEN are withheld and the token is read only by default. Repository policy and the selected event matter. pull_request_target has different authority and must not be treated as equivalent.",
         "sourceRefs": [
           "gh-actions-events"
         ],
@@ -29526,7 +32130,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:github-actions-14",
         "sectionLabel": "Gotchas",
-        "text": "Setting any permissions key makes every unlisted permission none, and a new personal repository defaults to read access for contents and packages, with workflows unable to create or approve pull requests.",
+        "text": "When specific permissions are listed, unlisted permissions become none. New personal repositories default to read access for contents and packages and disallow workflow creation or approval of pull requests. Existing and organization repositories can have different settings.",
         "sourceRefs": [
           "gh-actions-workflow-syntax",
           "gh-actions-repo-settings"
@@ -29545,7 +32149,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:github-actions-16",
         "sectionLabel": "Gotchas",
-        "text": "Caches restore only from the current branch, the default branch or a pull request base branch, and unused caches are removed after 7 days.",
+        "text": "Cache access is scoped to the current branch, default branch and, for pull requests, the base branch. Pull request merge caches have narrower reuse. Cache access settings also apply, and entries not accessed in over 7 days are removed by default.",
         "sourceRefs": [
           "gh-actions-caching"
         ],
@@ -29554,7 +32158,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:github-actions-17",
         "sectionLabel": "Gotchas",
-        "text": "A concurrency group runs one job or workflow at a time, queuing a new run cancels the pending one by default, and cancel-in-progress true also cancels the running one.",
+        "text": "A concurrency group allows one running job or workflow. By default a new queued run replaces the pending one, and cancel-in-progress true also cancels the running one. The documented queue option changes pending capacity. Choose cancellation behavior deliberately for deployment work.",
         "sourceRefs": [
           "gh-actions-concurrency"
         ],
@@ -29581,7 +32185,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:nodejs-3",
         "sectionLabel": "Where config lives",
-        "text": "The engines field states which Node.js versions the package works with.",
+        "text": "The engines field declares a supported Node.js version range, rather than proving compatibility.",
         "sourceRefs": [
           "npm-package-json"
         ],
@@ -29599,7 +32203,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:nodejs-5",
         "sectionLabel": "Where config lives",
-        "text": "ESLint reads eslint.config.js, .mjs or .cjs, searching upward from the target file's directory.",
+        "text": "ESLint 10 flat config searches from each target file's directory upward for eslint.config.js, .mjs, .cjs or supported TypeScript variants. Earlier ESLint versions can use different discovery rules.",
         "sourceRefs": [
           "eslint-config-files"
         ],
@@ -29626,16 +32230,18 @@ window.TOPIC_DATA = {
       {
         "id": "claim:nodejs-8",
         "sectionLabel": "Gotchas",
-        "text": "npm ci requires an existing package-lock.json, exits with an error when package.json and the lockfile do not match, removes node_modules first, and never writes to package.json or the lockfile.",
+        "text": "npm ci needs a lockfile accepted by the installed npm version. npm 11 accepts package-lock.json or npm-shrinkwrap.json. npm 12 requires package-lock.json and no longer reads shrinkwrap files. A manifest mismatch fails, existing node_modules is removed first, and package.json and the lockfile are not rewritten.",
         "sourceRefs": [
-          "npm-ci"
+          "npm-ci",
+          "npm-ci-v11",
+          "npm-package-lock"
         ],
         "topicId": "nodejs"
       },
       {
         "id": "claim:nodejs-9",
         "sectionLabel": "Gotchas",
-        "text": "A .js file is CommonJS unless the nearest package.json sets type to module, .mjs is always an ES module and .cjs is always CommonJS, and Node.js recommends setting type explicitly.",
+        "text": "In the reviewed Node.js documentation, .mjs means ES modules and .cjs means CommonJS. An explicit package.json type controls .js files. Without a controlling type, syntax detection can treat an ambiguous .js file as an ES module. Detection is enabled by default since Node.js 22.7.0 and 20.19.0. Set type explicitly.",
         "sourceRefs": [
           "node-packages"
         ],
@@ -29644,7 +32250,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:nodejs-10",
         "sectionLabel": "Gotchas",
-        "text": "An exports field encapsulates a package, so requiring a subpath it does not list throws ERR_PACKAGE_PATH_NOT_EXPORTED.",
+        "text": "An exports field limits imports through package subpaths, so an unlisted subpath throws ERR_PACKAGE_PATH_NOT_EXPORTED. This is not a security boundary against absolute file access.",
         "sourceRefs": [
           "node-packages"
         ],
@@ -29653,7 +32259,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:nodejs-11",
         "sectionLabel": "Gotchas",
-        "text": "The engines field is advisory and only produces warnings unless the engine-strict setting is on.",
+        "text": "npm treats engines as advisory when installing a dependency unless engine-strict is enabled.",
         "sourceRefs": [
           "npm-package-json"
         ],
@@ -29662,7 +32268,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:nodejs-12",
         "sectionLabel": "Gotchas",
-        "text": "npm test runs pretest, test and posttest, and npm run executes any named script with its pre and post scripts.",
+        "text": "By default npm test runs defined pretest, test and posttest scripts, and npm run runs a named script with its matching pre and post scripts. Check script settings before assuming hooks ran.",
         "sourceRefs": [
           "npm-scripts"
         ],
@@ -29671,7 +32277,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:nodejs-13",
         "sectionLabel": "Gotchas",
-        "text": "node --test without arguments runs files matching patterns such as **/*.test.js and **/test/**/*.js, and matches the .ts equivalents unless --no-strip-types is given.",
+        "text": "In the reviewed Node.js 26 documentation, node --test discovers patterns including **/*.test.js and **/test/**/*.js, and TypeScript equivalents unless --no-strip-types is given. Confirm the actual runtime version before relying on these patterns.",
         "sourceRefs": [
           "node-test-runner"
         ],
@@ -29680,7 +32286,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:nodejs-14",
         "sectionLabel": "Gotchas",
-        "text": "Node.js can run .ts files by stripping types without type checking, it ignores tsconfig.json, and syntax that needs transformation such as enum declarations is an error.",
+        "text": "Node.js 26 can run erasable TypeScript by stripping types without type checking. This built-in path ignores tsconfig.json and rejects syntax that needs code generation, such as enums. Earlier releases have different support and flags.",
         "sourceRefs": [
           "node-typescript"
         ],
@@ -29698,7 +32304,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:python-1",
         "sectionLabel": "Where config lives",
-        "text": "Project metadata lives in pyproject.toml, where the [build-system] table should always be present and the [project] table carries the name and version.",
+        "text": "Python packaging can use pyproject.toml. PyPA recommends a [build-system] table for build configuration. A [project] table holds package metadata, with a required name and a version that may be supplied dynamically by the build backend. Some backends use another metadata format.",
         "sourceRefs": [
           "pypa-pyproject-guide"
         ],
@@ -29707,7 +32313,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:python-2",
         "sectionLabel": "Where config lives",
-        "text": "pytest reads pytest.toml, .pytest.toml, pytest.ini, .pytest.ini, pyproject.toml, tox.ini or setup.cfg, and the first match while searching upward sets the rootdir.",
+        "text": "pytest 9 supports pytest.toml and .pytest.toml as well as pytest.ini, .pytest.ini, pyproject.toml, tox.ini and setup.cfg. Its search starts from the common ancestor of supplied paths, or the working directory, and the first matching configuration determines rootdir unless a command option overrides it.",
         "sourceRefs": [
           "pytest-customize"
         ],
@@ -29743,7 +32349,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:python-6",
         "sectionLabel": "Conventional commands",
-        "text": "pip install -e . installs a project without copying files, so source edits take effect without reinstalling.",
+        "text": "An editable pip install exposes project sources without copying them. Python source edits normally take effect without reinstalling, but metadata changes can require reinstallation and compiled extensions still need building.",
         "sourceRefs": [
           "pip-local-installs"
         ],
@@ -29779,7 +32385,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:python-10",
         "sectionLabel": "Gotchas",
-        "text": "pytest collects test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method.",
+        "text": "By default pytest collects test_*.py or *_test.py files, test prefixed functions and Test prefixed classes without an __init__ method. Project configuration can change discovery.",
         "sourceRefs": [
           "pytest-good-practices"
         ],
@@ -29788,7 +32394,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:python-11",
         "sectionLabel": "Gotchas",
-        "text": "Its docs strongly suggest a src layout with an editable install.",
+        "text": "Its good practices guide recommends an editable install for development and strongly suggests a src layout, particularly with the prepend import mode.",
         "sourceRefs": [
           "pytest-good-practices"
         ],
@@ -29797,7 +32403,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:python-12",
         "sectionLabel": "Gotchas",
-        "text": "pytest.ini takes precedence over other configuration files except pytest.toml and .pytest.toml, even when empty.",
+        "text": "In pytest 9, pytest.toml and .pytest.toml take priority over pytest.ini and .pytest.ini. These files match even when empty. Other candidates need their documented configuration sections, with a pyproject.toml fallback when no other match is found.",
         "sourceRefs": [
           "pytest-customize"
         ],
@@ -29806,7 +32412,7 @@ window.TOPIC_DATA = {
       {
         "id": "claim:python-13",
         "sectionLabel": "Gotchas",
-        "text": "Ruff ignores a pyproject.toml without a [tool.ruff] section, uses the closest configuration file and does not merge settings across files.",
+        "text": "Ruff ignores a pyproject.toml without a [tool.ruff] section and uses the closest configuration file. It does not implicitly merge ancestor settings, but its extend field supports explicit inheritance.",
         "sourceRefs": [
           "ruff-configuration"
         ],
@@ -29842,12 +32448,156 @@ window.TOPIC_DATA = {
       {
         "id": "claim:python-17",
         "sectionLabel": "Gotchas",
-        "text": "ruff check applies only safe fixes by default, and ruff format --check exits with 1 when a file would be reformatted.",
+        "text": "ruff check reports violations and needs --fix to apply fixes. Fixing applies only safe fixes by default. ruff format --check writes nothing and exits with 1 when formatting would change.",
         "sourceRefs": [
           "ruff-linter",
           "ruff-formatter"
         ],
         "topicId": "python"
+      },
+      {
+        "id": "claim:user-facing-feature-1",
+        "sectionLabel": "Accessibility and mobile limits",
+        "text": "W3C keyboard guidance concerns operating functionality through a keyboard interface.",
+        "sourceRefs": [
+          "wai-keyboard"
+        ],
+        "topicId": "user-facing-feature"
+      },
+      {
+        "id": "claim:user-facing-feature-2",
+        "sectionLabel": "Accessibility and mobile limits",
+        "text": "W3C reflow guidance includes exceptions for content that needs a two dimensional layout.",
+        "sourceRefs": [
+          "wai-reflow"
+        ],
+        "topicId": "user-facing-feature"
+      },
+      {
+        "id": "claim:user-facing-feature-3",
+        "sectionLabel": "Accessibility and mobile limits",
+        "text": "Automated accessibility checks find only some problems.",
+        "sourceRefs": [
+          "reference-63"
+        ],
+        "topicId": "user-facing-feature"
+      },
+      {
+        "id": "claim:javascript-typescript-1",
+        "sectionLabel": "What type checks establish",
+        "text": "TypeScript checks code before it runs, and type annotations are removed when JavaScript is produced.",
+        "sourceRefs": [
+          "typescript-basics"
+        ],
+        "topicId": "javascript-typescript"
+      },
+      {
+        "id": "claim:javascript-typescript-2",
+        "sectionLabel": "What type checks establish",
+        "text": "A type assertion does not validate an API response at runtime.",
+        "sourceRefs": [
+          "typescript-everyday-types"
+        ],
+        "topicId": "javascript-typescript"
+      },
+      {
+        "id": "claim:javascript-typescript-3",
+        "sectionLabel": "What type checks establish",
+        "text": "The noEmit option suppresses JavaScript, declaration and source map output.",
+        "sourceRefs": [
+          "typescript-no-emit"
+        ],
+        "topicId": "javascript-typescript"
+      },
+      {
+        "id": "claim:react-1",
+        "sectionLabel": "Documented foundation",
+        "text": "React describes building an interface through component responsibilities, visual states and data flow.",
+        "sourceRefs": [
+          "reference-62"
+        ],
+        "topicId": "react"
+      },
+      {
+        "id": "claim:react-2",
+        "sectionLabel": "Documented foundation",
+        "text": "Values calculated from props or state do not need a second state variable, and shared state can live in a common parent.",
+        "sourceRefs": [
+          "reference-62"
+        ],
+        "topicId": "react"
+      },
+      {
+        "id": "claim:npm-1",
+        "sectionLabel": "Documented behavior",
+        "text": "The npm 12 documentation states that npm ci requires an existing package-lock.json, fails on a package.json mismatch, removes node_modules before installing and does not write either manifest or lockfile.",
+        "sourceRefs": [
+          "npm-ci"
+        ],
+        "topicId": "npm"
+      },
+      {
+        "id": "claim:npm-2",
+        "sectionLabel": "Documented behavior",
+        "text": "npm run executes a named script from package.json.",
+        "sourceRefs": [
+          "npm-scripts"
+        ],
+        "topicId": "npm"
+      },
+      {
+        "id": "claim:vitest-1",
+        "sectionLabel": "Documented behavior",
+        "text": "Vitest can reuse Vite configuration or use a dedicated vitest.config file.",
+        "sourceRefs": [
+          "vitest-guide"
+        ],
+        "topicId": "vitest"
+      },
+      {
+        "id": "claim:vitest-2",
+        "sectionLabel": "Documented behavior",
+        "text": "vitest run performs one run without watch mode.",
+        "sourceRefs": [
+          "vitest-cli"
+        ],
+        "topicId": "vitest"
+      },
+      {
+        "id": "claim:vitest-3",
+        "sectionLabel": "Documented behavior",
+        "text": "Node is the default environment, jsdom and happy-dom emulate browser environments, and Browser Mode is separate.",
+        "sourceRefs": [
+          "vitest-environments"
+        ],
+        "topicId": "vitest"
+      },
+      {
+        "id": "claim:playwright-1",
+        "sectionLabel": "Documented guidance",
+        "text": "Playwright recommends user visible behavior, isolated tests, controlled data and user facing locators.",
+        "sourceRefs": [
+          "playwright-best-practices"
+        ],
+        "topicId": "playwright"
+      },
+      {
+        "id": "claim:playwright-2",
+        "sectionLabel": "Documented guidance",
+        "text": "Playwright can emulate viewport, touch, device parameters and color scheme.",
+        "sourceRefs": [
+          "playwright-emulation"
+        ],
+        "topicId": "playwright"
+      },
+      {
+        "id": "claim:playwright-3",
+        "sectionLabel": "Documented guidance",
+        "text": "Automated accessibility testing detects only some problems.",
+        "sourceRefs": [
+          "reference-63"
+        ],
+        "topicId": "playwright"
       }
     ],
     "definitions": [
@@ -30312,12 +33062,15 @@ window.TOPIC_DATA = {
         "id": "react",
         "label": "React and browser behavior",
         "summary": "",
-        "explainedBy": null,
-        "revision": "2.0.1",
-        "reviewedOn": "",
+        "explainedBy": "react",
+        "revision": "2.0.2",
+        "reviewedOn": "2026-10-12",
         "sourceRefs": [
           "reference-62",
-          "reference-63"
+          "react-typescript",
+          "reference-63",
+          "wai-keyboard",
+          "wai-reflow"
         ]
       },
       {
@@ -30395,7 +33148,7 @@ window.TOPIC_DATA = {
         "id": "react",
         "label": "React",
         "summary": "",
-        "explainedBy": null,
+        "explainedBy": "react",
         "revision": "2.0.1",
         "reviewedOn": "",
         "sourceRefs": [],
@@ -30407,7 +33160,7 @@ window.TOPIC_DATA = {
         "id": "typescript",
         "label": "TypeScript",
         "summary": "",
-        "explainedBy": null,
+        "explainedBy": "javascript-typescript",
         "revision": "2.0.1",
         "reviewedOn": "",
         "sourceRefs": [],
@@ -30419,7 +33172,7 @@ window.TOPIC_DATA = {
         "id": "javascript",
         "label": "JavaScript",
         "summary": "",
-        "explainedBy": null,
+        "explainedBy": "javascript-typescript",
         "revision": "2.0.1",
         "reviewedOn": "",
         "sourceRefs": [],
@@ -30716,7 +33469,7 @@ window.TOPIC_DATA = {
         "label": "Repository instructions for agents",
         "summary": "Keep one short AGENTS.md at the repository root with the commands, structure, conventions, testing guidance and boundaries that the README does not cover.",
         "explainedBy": "agents-md",
-        "revision": "1.0.0",
+        "revision": "1.0.1",
         "reviewedOn": "",
         "sourceRefs": [
           "agentsmd",
@@ -30817,6 +33570,134 @@ window.TOPIC_DATA = {
           "pytest-good-practices",
           "python-venv"
         ]
+      },
+      {
+        "ref": "profile:javascript",
+        "type": "profile",
+        "id": "javascript",
+        "label": "JavaScript runtime behavior",
+        "summary": "",
+        "explainedBy": "javascript-typescript",
+        "revision": "1.0.0",
+        "reviewedOn": "2026-10-12",
+        "sourceRefs": [
+          "typescript-basics"
+        ],
+        "basis": "Recommended project questions grounded in scoped official documentation",
+        "confidenceLevel": "proposed"
+      },
+      {
+        "ref": "profile:typescript",
+        "type": "profile",
+        "id": "typescript",
+        "label": "TypeScript checks and runtime boundaries",
+        "summary": "",
+        "explainedBy": "javascript-typescript",
+        "revision": "1.0.0",
+        "reviewedOn": "2026-10-12",
+        "sourceRefs": [
+          "typescript-basics",
+          "typescript-everyday-types",
+          "typescript-no-emit"
+        ],
+        "basis": "Recommended project questions grounded in scoped official documentation",
+        "confidenceLevel": "proposed"
+      },
+      {
+        "ref": "profile:npm",
+        "type": "profile",
+        "id": "npm",
+        "label": "npm installation and scripts",
+        "summary": "",
+        "explainedBy": "npm",
+        "revision": "1.0.0",
+        "reviewedOn": "2026-10-12",
+        "sourceRefs": [
+          "npm-ci",
+          "npm-scripts"
+        ],
+        "basis": "Recommended project questions grounded in scoped official documentation",
+        "confidenceLevel": "proposed"
+      },
+      {
+        "ref": "profile:vitest",
+        "type": "profile",
+        "id": "vitest",
+        "label": "Vitest focused checks",
+        "summary": "",
+        "explainedBy": "vitest",
+        "revision": "1.0.0",
+        "reviewedOn": "2026-10-12",
+        "sourceRefs": [
+          "vitest-guide",
+          "vitest-cli",
+          "vitest-environments"
+        ],
+        "basis": "Recommended project questions grounded in scoped official documentation",
+        "confidenceLevel": "proposed"
+      },
+      {
+        "ref": "profile:playwright",
+        "type": "profile",
+        "id": "playwright",
+        "label": "Playwright browser journeys",
+        "summary": "",
+        "explainedBy": "playwright",
+        "revision": "1.0.0",
+        "reviewedOn": "2026-10-12",
+        "sourceRefs": [
+          "playwright-best-practices",
+          "playwright-emulation",
+          "reference-63"
+        ],
+        "basis": "Recommended project questions grounded in scoped official documentation",
+        "confidenceLevel": "proposed"
+      },
+      {
+        "ref": "technology:npm",
+        "type": "technology",
+        "id": "npm",
+        "label": "npm",
+        "summary": "",
+        "explainedBy": "npm",
+        "revision": "1.0.0",
+        "reviewedOn": "2026-10-12",
+        "sourceRefs": [
+          "npm-ci",
+          "npm-scripts"
+        ],
+        "category": "build-test"
+      },
+      {
+        "ref": "technology:vitest",
+        "type": "technology",
+        "id": "vitest",
+        "label": "Vitest",
+        "summary": "",
+        "explainedBy": "vitest",
+        "revision": "1.0.0",
+        "reviewedOn": "2026-10-12",
+        "sourceRefs": [
+          "vitest-guide",
+          "vitest-cli",
+          "vitest-environments"
+        ],
+        "category": "build-test"
+      },
+      {
+        "ref": "technology:playwright",
+        "type": "technology",
+        "id": "playwright",
+        "label": "Playwright",
+        "summary": "",
+        "explainedBy": "playwright",
+        "revision": "1.0.0",
+        "reviewedOn": "2026-10-12",
+        "sourceRefs": [
+          "playwright-best-practices",
+          "playwright-emulation"
+        ],
+        "category": "build-test"
       }
     ],
     "clusterDigests": [
@@ -30825,7 +33706,7 @@ window.TOPIC_DATA = {
         "short": "Workflows",
         "title": "Workflows & orchestration",
         "summary": "Use explicit stages and acceptance criteria, with models performing analysis inside the process.",
-        "topicCount": 25,
+        "topicCount": 26,
         "topicIds": [
           "architecture",
           "architecture-decisions",
@@ -30850,6 +33731,7 @@ window.TOPIC_DATA = {
           "study-scenarios",
           "study-ticket-wording",
           "task-contract",
+          "user-facing-feature",
           "work-breakdown",
           "workflow-patterns"
         ]
@@ -30859,7 +33741,7 @@ window.TOPIC_DATA = {
         "short": "Toolchain",
         "title": "Tools and integrations",
         "summary": "Assign existing systems concrete responsibilities and verify actual integration boundaries.",
-        "topicCount": 21,
+        "topicCount": 26,
         "topicIds": [
           "amazon-neptune",
           "apache-jena-fuseki",
@@ -30870,18 +33752,23 @@ window.TOPIC_DATA = {
           "github-actions",
           "information-retrieval",
           "intellij",
+          "javascript-typescript",
           "jenkins",
           "jira",
           "neo4j-data",
           "neptune-stack",
           "nodejs",
+          "npm",
           "permissions",
+          "playwright",
           "postgresql-data",
           "python",
+          "react",
           "retrieval-example",
           "retrieval-options",
           "retrieve-and-validate",
-          "rovo"
+          "rovo",
+          "vitest"
         ]
       },
       {
@@ -31036,9 +33923,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "practice",
           "radius": 7.35,
-          "x": 843.11,
-          "y": 697.79,
-          "labelRank": 140
+          "x": 843.23,
+          "y": 697.83,
+          "labelRank": 150
         },
         {
           "id": "practice:evidence-wiki",
@@ -31046,9 +33933,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "practice",
           "radius": 7.35,
-          "x": 1134.22,
-          "y": 1592.22,
-          "labelRank": 141
+          "x": 1136.64,
+          "y": 1596.28,
+          "labelRank": 151
         },
         {
           "id": "practice:minimum-change",
@@ -31056,9 +33943,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "practice",
           "radius": 7.35,
-          "x": 1165.29,
-          "y": 1593.96,
-          "labelRank": 142
+          "x": 1167.87,
+          "y": 1593.49,
+          "labelRank": 152
         },
         {
           "id": "practice:portable-behavior",
@@ -31066,9 +33953,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "practice",
           "radius": 6,
-          "x": 1135.9,
-          "y": 1622.32,
-          "labelRank": 147
+          "x": 1131.97,
+          "y": 1628.11,
+          "labelRank": 158
         },
         {
           "id": "practice:progressive-context",
@@ -31076,9 +33963,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "practice",
           "radius": 7.35,
-          "x": 1147.31,
-          "y": 1562.74,
-          "labelRank": 143
+          "x": 1147.15,
+          "y": 1563.48,
+          "labelRank": 153
         },
         {
           "id": "practice:specification-first",
@@ -31086,9 +33973,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "practice",
           "radius": 7.35,
-          "x": 1174.77,
-          "y": 1625.37,
-          "labelRank": 144
+          "x": 1174.09,
+          "y": 1626.93,
+          "labelRank": 154
         },
         {
           "id": "practice:validated-retrieval",
@@ -31096,9 +33983,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "practice",
           "radius": 7.35,
-          "x": 1104.24,
-          "y": 1603.89,
-          "labelRank": 145
+          "x": 1104.97,
+          "y": 1605.86,
+          "labelRank": 155
         },
         {
           "id": "technology:angular",
@@ -31106,9 +33993,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1183.3,
-          "y": 1566.18,
-          "labelRank": 148
+          "x": 1180.67,
+          "y": 1563.77,
+          "labelRank": 48
         },
         {
           "id": "technology:aws",
@@ -31116,9 +34003,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1150.23,
-          "y": 1648.46,
-          "labelRank": 149
+          "x": 1152.44,
+          "y": 1651.12,
+          "labelRank": 49
         },
         {
           "id": "technology:docker",
@@ -31126,9 +34013,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 8.7,
-          "x": 253.69,
-          "y": 860.29,
-          "labelRank": 131
+          "x": 249.41,
+          "y": 856.27,
+          "labelRank": 137
         },
         {
           "id": "technology:dotnet",
@@ -31136,9 +34023,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1111.58,
-          "y": 1569.58,
-          "labelRank": 150
+          "x": 1113.79,
+          "y": 1571.2,
+          "labelRank": 159
         },
         {
           "id": "technology:github",
@@ -31146,9 +34033,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 7.91,
-          "x": 1199.28,
-          "y": 1598.18,
-          "labelRank": 137
+          "x": 1200.46,
+          "y": 1602.98,
+          "labelRank": 47
         },
         {
           "id": "technology:github-actions",
@@ -31156,9 +34043,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 7.91,
-          "x": 286.13,
-          "y": 801.05,
-          "labelRank": 138
+          "x": 283.01,
+          "y": 801.63,
+          "labelRank": 146
         },
         {
           "id": "technology:go",
@@ -31166,9 +34053,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1106.46,
-          "y": 1636.8,
-          "labelRank": 151
+          "x": 1100.69,
+          "y": 1640.53,
+          "labelRank": 50
         },
         {
           "id": "technology:graphql",
@@ -31176,9 +34063,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1166.88,
-          "y": 1537.31,
-          "labelRank": 152
+          "x": 1164.16,
+          "y": 1533.24,
+          "labelRank": 160
         },
         {
           "id": "technology:java",
@@ -31186,19 +34073,19 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1180.85,
-          "y": 1658.55,
-          "labelRank": 153
+          "x": 1185.16,
+          "y": 1660.12,
+          "labelRank": 161
         },
         {
           "id": "technology:javascript",
           "definitionRef": "technology:javascript",
-          "clusterId": "factory",
+          "clusterId": "toolchain",
           "kind": "technology",
-          "radius": 7.35,
-          "x": 1077.36,
-          "y": 1580.92,
-          "labelRank": 46
+          "radius": 7.91,
+          "x": 293.47,
+          "y": 867.98,
+          "labelRank": 147
         },
         {
           "id": "technology:jena-fuseki",
@@ -31206,9 +34093,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 8.34,
-          "x": 1219.71,
-          "y": 1567.29,
-          "labelRank": 43
+          "x": 1078.51,
+          "y": 1580.73,
+          "labelRank": 45
         },
         {
           "id": "technology:kotlin",
@@ -31216,9 +34103,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1123.25,
-          "y": 1666.5,
-          "labelRank": 47
+          "x": 1213.22,
+          "y": 1569.94,
+          "labelRank": 162
         },
         {
           "id": "technology:neo4j",
@@ -31226,9 +34113,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 8.34,
-          "x": 1122.36,
-          "y": 1535.87,
-          "labelRank": 44
+          "x": 1121.68,
+          "y": 1669,
+          "labelRank": 142
         },
         {
           "id": "technology:neptune",
@@ -31236,9 +34123,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 9.57,
-          "x": 1212.11,
-          "y": 1634.03,
-          "labelRank": 31
+          "x": 1126.24,
+          "y": 1532.23,
+          "labelRank": 33
         },
         {
           "id": "technology:nodejs",
@@ -31246,9 +34133,29 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 8.7,
-          "x": 290.79,
-          "y": 871.78,
-          "labelRank": 132
+          "x": 240.31,
+          "y": 823.77,
+          "labelRank": 138
+        },
+        {
+          "id": "technology:npm",
+          "definitionRef": "technology:npm",
+          "clusterId": "toolchain",
+          "kind": "technology",
+          "radius": 7.35,
+          "x": 312.22,
+          "y": 814.37,
+          "labelRank": 156
+        },
+        {
+          "id": "technology:playwright",
+          "definitionRef": "technology:playwright",
+          "clusterId": "toolchain",
+          "kind": "technology",
+          "radius": 7.35,
+          "x": 265.76,
+          "y": 881.53,
+          "labelRank": 157
         },
         {
           "id": "technology:postgresql",
@@ -31256,9 +34163,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 8.7,
-          "x": 1072.22,
-          "y": 1621.01,
-          "labelRank": 42
+          "x": 1213.82,
+          "y": 1638.09,
+          "labelRank": 44
         },
         {
           "id": "technology:python",
@@ -31266,9 +34173,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 7.91,
-          "x": 238.55,
-          "y": 827.22,
-          "labelRank": 139
+          "x": 252.52,
+          "y": 794.2,
+          "labelRank": 148
         },
         {
           "id": "technology:rdf",
@@ -31276,19 +34183,19 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 8.34,
-          "x": 1201.47,
-          "y": 1534.26,
-          "labelRank": 45
+          "x": 1071.24,
+          "y": 1619.46,
+          "labelRank": 46
         },
         {
           "id": "technology:react",
           "definitionRef": "technology:react",
-          "clusterId": "factory",
+          "clusterId": "toolchain",
           "kind": "technology",
-          "radius": 6,
-          "x": 1154.79,
-          "y": 1681.19,
-          "labelRank": 154
+          "radius": 8.34,
+          "x": 316.91,
+          "y": 847.1,
+          "labelRank": 143
         },
         {
           "id": "technology:rust",
@@ -31296,9 +34203,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1087.77,
-          "y": 1546.73,
-          "labelRank": 155
+          "x": 1198.7,
+          "y": 1536.65,
+          "labelRank": 163
         },
         {
           "id": "technology:sparql",
@@ -31306,9 +34213,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 9.02,
-          "x": 1236.94,
-          "y": 1602.41,
-          "labelRank": 39
+          "x": 1158.03,
+          "y": 1685.82,
+          "labelRank": 40
         },
         {
           "id": "technology:spring-boot",
@@ -31316,19 +34223,29 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1089.14,
-          "y": 1664.38,
-          "labelRank": 156
+          "x": 1091.6,
+          "y": 1546.54,
+          "labelRank": 164
         },
         {
           "id": "technology:typescript",
           "definitionRef": "technology:typescript",
-          "clusterId": "factory",
+          "clusterId": "toolchain",
           "kind": "technology",
-          "radius": 7.35,
-          "x": 1147.99,
-          "y": 1509.63,
-          "labelRank": 146
+          "radius": 8.34,
+          "x": 218.31,
+          "y": 854.71,
+          "labelRank": 144
+        },
+        {
+          "id": "technology:vitest",
+          "definitionRef": "technology:vitest",
+          "clusterId": "toolchain",
+          "kind": "technology",
+          "radius": 7.91,
+          "x": 308.11,
+          "y": 778.06,
+          "labelRank": 149
         },
         {
           "id": "technology:vue",
@@ -31336,9 +34253,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1210.81,
-          "y": 1670.57,
-          "labelRank": 48
+          "x": 1234.02,
+          "y": 1597.82,
+          "labelRank": 165
         },
         {
           "id": "topic:adverse-audits",
@@ -31346,9 +34263,9 @@ window.TOPIC_DATA = {
           "clusterId": "talos",
           "kind": "topic",
           "radius": 9.02,
-          "x": 1469.7,
-          "y": 666.19,
-          "labelRank": 96
+          "x": 1469.8,
+          "y": 665.96,
+          "labelRank": 103
         },
         {
           "id": "topic:agent-roles",
@@ -31356,9 +34273,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.31,
-          "x": 881.64,
-          "y": 638.89,
-          "labelRank": 82
+          "x": 882.1,
+          "y": 639.04,
+          "labelRank": 87
         },
         {
           "id": "topic:agents-md",
@@ -31366,9 +34283,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.02,
-          "x": 894.62,
-          "y": 702.54,
-          "labelRank": 35
+          "x": 894.98,
+          "y": 702.24,
+          "labelRank": 37
         },
         {
           "id": "topic:amazon-neptune",
@@ -31376,9 +34293,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 8.34,
-          "x": 316.98,
-          "y": 816.16,
-          "labelRank": 133
+          "x": 293.61,
+          "y": 901.95,
+          "labelRank": 139
         },
         {
           "id": "topic:answer-contract",
@@ -31386,7 +34303,7 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 11.4,
-          "x": 1745.53,
+          "x": 1745.54,
           "y": 1281.85,
           "labelRank": 13
         },
@@ -31396,9 +34313,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 8.34,
-          "x": 260.31,
-          "y": 891.35,
-          "labelRank": 134
+          "x": 218.34,
+          "y": 792.82,
+          "labelRank": 140
         },
         {
           "id": "topic:applicability",
@@ -31407,8 +34324,8 @@ window.TOPIC_DATA = {
           "kind": "topic",
           "radius": 10.48,
           "x": 896.66,
-          "y": 234.03,
-          "labelRank": 52
+          "y": 233.87,
+          "labelRank": 57
         },
         {
           "id": "topic:architect-proposal",
@@ -31418,7 +34335,7 @@ window.TOPIC_DATA = {
           "radius": 9.31,
           "x": 1407.11,
           "y": 246.42,
-          "labelRank": 83
+          "labelRank": 88
         },
         {
           "id": "topic:architecture",
@@ -31426,18 +34343,18 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.05,
-          "x": 520.66,
-          "y": 334.62,
-          "labelRank": 58
+          "x": 521.02,
+          "y": 334.8,
+          "labelRank": 63
         },
         {
           "id": "topic:architecture-decisions",
           "topicId": "architecture-decisions",
           "clusterId": "workflows",
           "kind": "topic",
-          "radius": 10.05,
-          "x": 480.12,
-          "y": 394,
+          "radius": 10.27,
+          "x": 484.31,
+          "y": 394.25,
           "labelRank": 59
         },
         {
@@ -31446,8 +34363,8 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 9.82,
-          "x": 547.24,
-          "y": 1202.76,
+          "x": 547.77,
+          "y": 1202.56,
           "labelRank": 26
         },
         {
@@ -31456,9 +34373,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 8.7,
-          "x": 254.64,
-          "y": 795.69,
-          "labelRank": 111
+          "x": 346.38,
+          "y": 825.34,
+          "labelRank": 118
         },
         {
           "id": "topic:budgets",
@@ -31466,9 +34383,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 9.57,
-          "x": 588.57,
-          "y": 1266.85,
-          "labelRank": 72
+          "x": 588.38,
+          "y": 1266.94,
+          "labelRank": 77
         },
         {
           "id": "topic:candidate-isolation",
@@ -31476,8 +34393,8 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 10.27,
-          "x": 1713.12,
-          "y": 1211.76,
+          "x": 1713.07,
+          "y": 1211.8,
           "labelRank": 19
         },
         {
@@ -31486,9 +34403,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.82,
-          "x": 320.28,
-          "y": 850.41,
-          "labelRank": 64
+          "x": 228.37,
+          "y": 889.8,
+          "labelRank": 27
         },
         {
           "id": "topic:ci-skill",
@@ -31496,9 +34413,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 8.7,
-          "x": 834.03,
+          "x": 834.07,
           "y": 661.98,
-          "labelRank": 112
+          "labelRank": 119
         },
         {
           "id": "topic:confidence-summary",
@@ -31506,9 +34423,9 @@ window.TOPIC_DATA = {
           "clusterId": "evaluation",
           "kind": "topic",
           "radius": 9.82,
-          "x": 1476.75,
-          "y": 204.59,
-          "labelRank": 65
+          "x": 1476.78,
+          "y": 204.62,
+          "labelRank": 68
         },
         {
           "id": "topic:confluence",
@@ -31516,9 +34433,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.02,
-          "x": 220.56,
-          "y": 859.06,
-          "labelRank": 97
+          "x": 274.59,
+          "y": 766.88,
+          "labelRank": 104
         },
         {
           "id": "topic:construct-study",
@@ -31526,9 +34443,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.87,
-          "x": 480.08,
-          "y": 321.98,
-          "labelRank": 14
+          "x": 482.92,
+          "y": 319.83,
+          "labelRank": 16
         },
         {
           "id": "topic:context-selection",
@@ -31536,9 +34453,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 9.57,
-          "x": 516.63,
-          "y": 1246.01,
-          "labelRank": 73
+          "x": 516.73,
+          "y": 1246.97,
+          "labelRank": 78
         },
         {
           "id": "topic:cost-per-result",
@@ -31546,9 +34463,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 10.87,
-          "x": 590.32,
-          "y": 1215.31,
-          "labelRank": 49
+          "x": 590.88,
+          "y": 1216.07,
+          "labelRank": 51
         },
         {
           "id": "topic:coverage",
@@ -31556,9 +34473,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 9.57,
-          "x": 1770.3,
-          "y": 341.88,
-          "labelRank": 74
+          "x": 1770.31,
+          "y": 341.85,
+          "labelRank": 79
         },
         {
           "id": "topic:curation-workflow",
@@ -31566,9 +34483,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.31,
-          "x": 532.74,
-          "y": 371.24,
-          "labelRank": 84
+          "x": 532.88,
+          "y": 372.02,
+          "labelRank": 89
         },
         {
           "id": "topic:data-query-verification",
@@ -31576,9 +34493,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.82,
-          "x": 912.62,
-          "y": 663.95,
-          "labelRank": 66
+          "x": 913.18,
+          "y": 663.92,
+          "labelRank": 69
         },
         {
           "id": "topic:debt",
@@ -31596,9 +34513,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1782.25,
-          "y": 390.65,
-          "labelRank": 40
+          "x": 1782.3,
+          "y": 390.69,
+          "labelRank": 41
         },
         {
           "id": "topic:decomposition",
@@ -31606,9 +34523,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 9.31,
-          "x": 1804.61,
+          "x": 1804.65,
           "y": 318.34,
-          "labelRank": 85
+          "labelRank": 90
         },
         {
           "id": "topic:deterministic-control",
@@ -31616,9 +34533,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.31,
-          "x": 451.99,
-          "y": 371.65,
-          "labelRank": 86
+          "x": 454.72,
+          "y": 373.24,
+          "labelRank": 91
         },
         {
           "id": "topic:discovery",
@@ -31626,9 +34543,9 @@ window.TOPIC_DATA = {
           "clusterId": "requirements",
           "kind": "topic",
           "radius": 9.31,
-          "x": 813.7,
+          "x": 813.74,
           "y": 237.31,
-          "labelRank": 87
+          "labelRank": 92
         },
         {
           "id": "topic:docker",
@@ -31636,9 +34553,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 8.7,
-          "x": 312.82,
-          "y": 779.74,
-          "labelRank": 113
+          "x": 324.63,
+          "y": 885.43,
+          "labelRank": 120
         },
         {
           "id": "topic:durable-execution",
@@ -31646,9 +34563,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.57,
-          "x": 512.44,
-          "y": 301.92,
-          "labelRank": 75
+          "x": 516.02,
+          "y": 301.45,
+          "labelRank": 80
         },
         {
           "id": "topic:dynamic-workflows",
@@ -31656,9 +34573,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.57,
-          "x": 512.7,
-          "y": 402.69,
-          "labelRank": 76
+          "x": 516.24,
+          "y": 405.7,
+          "labelRank": 81
         },
         {
           "id": "topic:eager-skills",
@@ -31666,9 +34583,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.02,
-          "x": 863.56,
-          "y": 728.38,
-          "labelRank": 98
+          "x": 864.03,
+          "y": 728.2,
+          "labelRank": 105
         },
         {
           "id": "topic:economy",
@@ -31687,8 +34604,8 @@ window.TOPIC_DATA = {
           "kind": "topic",
           "radius": 9.02,
           "x": 1779.86,
-          "y": 1240.88,
-          "labelRank": 99
+          "y": 1240.95,
+          "labelRank": 106
         },
         {
           "id": "topic:eval-corpus",
@@ -31696,9 +34613,9 @@ window.TOPIC_DATA = {
           "clusterId": "evaluation",
           "kind": "topic",
           "radius": 9.31,
-          "x": 1462.08,
-          "y": 270.72,
-          "labelRank": 32
+          "x": 1462.17,
+          "y": 270.68,
+          "labelRank": 34
         },
         {
           "id": "topic:eval-metrics",
@@ -31706,9 +34623,9 @@ window.TOPIC_DATA = {
           "clusterId": "evaluation",
           "kind": "topic",
           "radius": 10.27,
-          "x": 1406.32,
+          "x": 1406.44,
           "y": 206.15,
-          "labelRank": 55
+          "labelRank": 60
         },
         {
           "id": "topic:evaluation",
@@ -31726,9 +34643,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.57,
-          "x": 446.25,
-          "y": 337.94,
-          "labelRank": 77
+          "x": 451.36,
+          "y": 337.38,
+          "labelRank": 82
         },
         {
           "id": "topic:finding-contract",
@@ -31736,19 +34653,19 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 10.05,
-          "x": 1837.02,
-          "y": 386.63,
-          "labelRank": 60
+          "x": 1837.04,
+          "y": 386.61,
+          "labelRank": 64
         },
         {
           "id": "topic:github-actions",
           "topicId": "github-actions",
           "clusterId": "toolchain",
           "kind": "topic",
-          "radius": 9.31,
-          "x": 291.68,
-          "y": 909.82,
-          "labelRank": 88
+          "radius": 9.82,
+          "x": 203.23,
+          "y": 825.55,
+          "labelRank": 70
         },
         {
           "id": "topic:grader-design",
@@ -31756,9 +34673,9 @@ window.TOPIC_DATA = {
           "clusterId": "evaluation",
           "kind": "topic",
           "radius": 9.31,
-          "x": 1423.87,
-          "y": 282.29,
-          "labelRank": 89
+          "x": 1423.96,
+          "y": 282.25,
+          "labelRank": 93
         },
         {
           "id": "topic:graphrag-option",
@@ -31766,9 +34683,9 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1708.46,
-          "y": 1261.87,
-          "labelRank": 114
+          "x": 1708.47,
+          "y": 1261.91,
+          "labelRank": 121
         },
         {
           "id": "topic:handoffs",
@@ -31776,9 +34693,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 9.02,
-          "x": 507.9,
-          "y": 1207.25,
-          "labelRank": 100
+          "x": 508.56,
+          "y": 1208.11,
+          "labelRank": 107
         },
         {
           "id": "topic:holiday-example",
@@ -31786,9 +34703,9 @@ window.TOPIC_DATA = {
           "clusterId": "requirements",
           "kind": "topic",
           "radius": 9.31,
-          "x": 846.45,
-          "y": 193,
-          "labelRank": 33
+          "x": 846.66,
+          "y": 192.96,
+          "labelRank": 35
         },
         {
           "id": "topic:impact-skill",
@@ -31796,19 +34713,19 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.31,
-          "x": 844.99,
-          "y": 624.55,
-          "labelRank": 90
+          "x": 845.49,
+          "y": 624.67,
+          "labelRank": 94
         },
         {
           "id": "topic:implementation-workflow",
           "topicId": "implementation-workflow",
           "clusterId": "workflows",
           "kind": "topic",
-          "radius": 10.68,
-          "x": 556.17,
-          "y": 339.12,
-          "labelRank": 50
+          "radius": 10.87,
+          "x": 555.88,
+          "y": 338.09,
+          "labelRank": 52
         },
         {
           "id": "topic:information-retrieval",
@@ -31816,8 +34733,8 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 10.05,
-          "x": 218.68,
-          "y": 794.82,
+          "x": 340.78,
+          "y": 790.16,
           "labelRank": 24
         },
         {
@@ -31826,9 +34743,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.02,
-          "x": 353.62,
-          "y": 828.4,
-          "labelRank": 101
+          "x": 259.6,
+          "y": 912.26,
+          "labelRank": 108
         },
         {
           "id": "topic:jacoco-counters",
@@ -31836,9 +34753,19 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 8.34,
-          "x": 1748.09,
+          "x": 1748.16,
           "y": 373.72,
-          "labelRank": 135
+          "labelRank": 141
+        },
+        {
+          "id": "topic:javascript-typescript",
+          "topicId": "javascript-typescript",
+          "clusterId": "toolchain",
+          "kind": "topic",
+          "radius": 9.57,
+          "x": 237.59,
+          "y": 759.71,
+          "labelRank": 83
         },
         {
           "id": "topic:jenkins",
@@ -31846,9 +34773,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.82,
-          "x": 223.35,
-          "y": 898.4,
-          "labelRank": 27
+          "x": 350.1,
+          "y": 860.7,
+          "labelRank": 71
         },
         {
           "id": "topic:jev",
@@ -31866,9 +34793,9 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 8.7,
-          "x": 2024.96,
+          "x": 2025,
           "y": 876.48,
-          "labelRank": 115
+          "labelRank": 122
         },
         {
           "id": "topic:jev-confidence",
@@ -31876,9 +34803,9 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 9.31,
-          "x": 1994.82,
-          "y": 804.55,
-          "labelRank": 91
+          "x": 1994.83,
+          "y": 804.53,
+          "labelRank": 95
         },
         {
           "id": "topic:jev-judgments",
@@ -31886,9 +34813,9 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 9.02,
-          "x": 2061.74,
-          "y": 840.23,
-          "labelRank": 102
+          "x": 2061.73,
+          "y": 840.25,
+          "labelRank": 109
         },
         {
           "id": "topic:jev-languages",
@@ -31896,9 +34823,9 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 9.02,
-          "x": 1988.1,
-          "y": 866.86,
-          "labelRank": 36
+          "x": 1988.12,
+          "y": 866.9,
+          "labelRank": 38
         },
         {
           "id": "topic:jev-limitations",
@@ -31906,9 +34833,9 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 8.7,
-          "x": 2029.98,
-          "y": 789.61,
-          "labelRank": 116
+          "x": 2030.02,
+          "y": 789.65,
+          "labelRank": 123
         },
         {
           "id": "topic:jev-mapping",
@@ -31916,9 +34843,9 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 9.02,
-          "x": 2063.45,
-          "y": 879.1,
-          "labelRank": 103
+          "x": 2063.49,
+          "y": 879.12,
+          "labelRank": 110
         },
         {
           "id": "topic:jev-shadow",
@@ -31926,9 +34853,9 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 9.82,
-          "x": 1967.33,
-          "y": 833.05,
-          "labelRank": 67
+          "x": 1967.39,
+          "y": 833.08,
+          "labelRank": 72
         },
         {
           "id": "topic:jev-support",
@@ -31936,8 +34863,8 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 9.82,
-          "x": 2067.63,
-          "y": 801.19,
+          "x": 2067.67,
+          "y": 801.21,
           "labelRank": 28
         },
         {
@@ -31946,9 +34873,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.02,
-          "x": 276.38,
-          "y": 764.26,
-          "labelRank": 104
+          "x": 188.95,
+          "y": 872,
+          "labelRank": 111
         },
         {
           "id": "topic:knowledge",
@@ -31966,9 +34893,9 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1783.81,
-          "y": 1290.98,
-          "labelRank": 117
+          "x": 1783.8,
+          "y": 1291.05,
+          "labelRank": 124
         },
         {
           "id": "topic:llm-wiki",
@@ -31976,9 +34903,9 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 9.02,
-          "x": 1680.63,
-          "y": 1235.21,
-          "labelRank": 105
+          "x": 1680.61,
+          "y": 1235.29,
+          "labelRank": 112
         },
         {
           "id": "topic:model-inheritance",
@@ -31986,9 +34913,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 8.7,
-          "x": 619.59,
-          "y": 1243.3,
-          "labelRank": 118
+          "x": 620,
+          "y": 1244.22,
+          "labelRank": 125
         },
         {
           "id": "topic:model-prices",
@@ -31996,9 +34923,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 9.02,
-          "x": 533.13,
-          "y": 1281.82,
-          "labelRank": 106
+          "x": 533.65,
+          "y": 1282.56,
+          "labelRank": 113
         },
         {
           "id": "topic:mutation-testing",
@@ -32006,9 +34933,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1842.13,
-          "y": 325.33,
-          "labelRank": 119
+          "x": 1842.17,
+          "y": 325.34,
+          "labelRank": 126
         },
         {
           "id": "topic:neo4j-data",
@@ -32016,9 +34943,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 8.7,
-          "x": 325.12,
-          "y": 887.78,
-          "labelRank": 120
+          "x": 301.65,
+          "y": 741,
+          "labelRank": 127
         },
         {
           "id": "topic:neptune-stack",
@@ -32026,19 +34953,29 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 10.27,
-          "x": 196.56,
-          "y": 829.93,
-          "labelRank": 56
+          "x": 307.84,
+          "y": 935.41,
+          "labelRank": 20
         },
         {
           "id": "topic:nodejs",
           "topicId": "nodejs",
           "clusterId": "toolchain",
           "kind": "topic",
-          "radius": 9.02,
-          "x": 348.21,
-          "y": 790.6,
-          "labelRank": 37
+          "radius": 9.82,
+          "x": 178.58,
+          "y": 796.35,
+          "labelRank": 29
+        },
+        {
+          "id": "topic:npm",
+          "topicId": "npm",
+          "clusterId": "toolchain",
+          "kind": "topic",
+          "radius": 9.31,
+          "x": 377.2,
+          "y": 800.64,
+          "labelRank": 96
         },
         {
           "id": "topic:overview",
@@ -32056,9 +34993,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 8.7,
-          "x": 932.95,
-          "y": 697.79,
-          "labelRank": 121
+          "x": 933.34,
+          "y": 697.86,
+          "labelRank": 128
         },
         {
           "id": "topic:parallelism",
@@ -32066,9 +35003,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 8.7,
-          "x": 448.78,
-          "y": 409.36,
-          "labelRank": 122
+          "x": 455.41,
+          "y": 411.52,
+          "labelRank": 129
         },
         {
           "id": "topic:permissions",
@@ -32076,9 +35013,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 10.27,
-          "x": 254.2,
-          "y": 928.15,
-          "labelRank": 20
+          "x": 227.88,
+          "y": 932.07,
+          "labelRank": 61
         },
         {
           "id": "topic:pilot",
@@ -32086,8 +35023,8 @@ window.TOPIC_DATA = {
           "clusterId": "evaluation",
           "kind": "topic",
           "radius": 10.27,
-          "x": 1441.23,
-          "y": 183.55,
+          "x": 1441.32,
+          "y": 183.49,
           "labelRank": 21
         },
         {
@@ -32095,20 +35032,30 @@ window.TOPIC_DATA = {
           "topicId": "pipeline-diagnosis",
           "clusterId": "skills",
           "kind": "topic",
+          "radius": 9.82,
+          "x": 805.51,
+          "y": 689.74,
+          "labelRank": 73
+        },
+        {
+          "id": "topic:playwright",
+          "topicId": "playwright",
+          "clusterId": "toolchain",
+          "kind": "topic",
           "radius": 9.57,
-          "x": 805.62,
-          "y": 689.6,
-          "labelRank": 78
+          "x": 263.42,
+          "y": 729.97,
+          "labelRank": 32
         },
         {
           "id": "topic:post-change-checks",
           "topicId": "post-change-checks",
           "clusterId": "talos",
           "kind": "topic",
-          "radius": 10.87,
-          "x": 1416.06,
-          "y": 714.15,
-          "labelRank": 15
+          "radius": 11.05,
+          "x": 1415.74,
+          "y": 714.27,
+          "labelRank": 14
         },
         {
           "id": "topic:postgresql-data",
@@ -32116,9 +35063,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 8.7,
-          "x": 237.95,
-          "y": 760.26,
-          "labelRank": 123
+          "x": 369.69,
+          "y": 890.86,
+          "labelRank": 42
         },
         {
           "id": "topic:prioritization",
@@ -32126,9 +35073,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1810.81,
-          "y": 416.3,
-          "labelRank": 124
+          "x": 1810.88,
+          "y": 416.31,
+          "labelRank": 130
         },
         {
           "id": "topic:provenance",
@@ -32136,9 +35083,9 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 10.27,
-          "x": 1774.59,
-          "y": 1201.49,
-          "labelRank": 57
+          "x": 1774.62,
+          "y": 1201.56,
+          "labelRank": 62
         },
         {
           "id": "topic:python",
@@ -32146,9 +35093,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.02,
-          "x": 357.44,
-          "y": 866.86,
-          "labelRank": 38
+          "x": 168.4,
+          "y": 839.23,
+          "labelRank": 39
         },
         {
           "id": "topic:qa-packet",
@@ -32156,8 +35103,8 @@ window.TOPIC_DATA = {
           "clusterId": "talos",
           "kind": "topic",
           "radius": 10.27,
-          "x": 1403.15,
-          "y": 641.95,
+          "x": 1403.29,
+          "y": 641.82,
           "labelRank": 22
         },
         {
@@ -32166,9 +35113,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 9.82,
-          "x": 1768.39,
-          "y": 301.65,
-          "labelRank": 29
+          "x": 1768.45,
+          "y": 301.62,
+          "labelRank": 30
         },
         {
           "id": "topic:rdf-skill",
@@ -32176,19 +35123,29 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.82,
-          "x": 917.65,
-          "y": 622.39,
-          "labelRank": 30
+          "x": 917.98,
+          "y": 622.32,
+          "labelRank": 31
+        },
+        {
+          "id": "topic:react",
+          "topicId": "react",
+          "clusterId": "toolchain",
+          "kind": "topic",
+          "radius": 9.31,
+          "x": 338.34,
+          "y": 752.62,
+          "labelRank": 97
         },
         {
           "id": "topic:release-operations",
           "topicId": "release-operations",
           "clusterId": "workflows",
           "kind": "topic",
-          "radius": 10.48,
-          "x": 482.27,
-          "y": 279.86,
-          "labelRank": 53
+          "radius": 10.68,
+          "x": 484.76,
+          "y": 278.44,
+          "labelRank": 54
         },
         {
           "id": "topic:requirement-status",
@@ -32196,9 +35153,9 @@ window.TOPIC_DATA = {
           "clusterId": "requirements",
           "kind": "topic",
           "radius": 9.57,
-          "x": 878.61,
-          "y": 271.05,
-          "labelRank": 79
+          "x": 878.86,
+          "y": 271.01,
+          "labelRank": 84
         },
         {
           "id": "topic:requirements",
@@ -32216,19 +35173,19 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 8.7,
-          "x": 900.94,
-          "y": 740.27,
-          "labelRank": 41
+          "x": 901.43,
+          "y": 740,
+          "labelRank": 43
         },
         {
           "id": "topic:requirements-workflow",
           "topicId": "requirements-workflow",
           "clusterId": "workflows",
           "kind": "topic",
-          "radius": 10.68,
-          "x": 549.47,
-          "y": 407.54,
-          "labelRank": 16
+          "radius": 10.87,
+          "x": 552.08,
+          "y": 408.12,
+          "labelRank": 17
         },
         {
           "id": "topic:retries",
@@ -32236,9 +35193,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.57,
-          "x": 413.51,
-          "y": 359.55,
-          "labelRank": 80
+          "x": 419.98,
+          "y": 357.05,
+          "labelRank": 85
         },
         {
           "id": "topic:retrieval",
@@ -32246,9 +35203,9 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 10.05,
-          "x": 1708.97,
-          "y": 1302.01,
-          "labelRank": 61
+          "x": 1709.01,
+          "y": 1302.05,
+          "labelRank": 65
         },
         {
           "id": "topic:retrieval-diagnosis",
@@ -32256,9 +35213,9 @@ window.TOPIC_DATA = {
           "clusterId": "evaluation",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1489.45,
-          "y": 242.45,
-          "labelRank": 125
+          "x": 1489.56,
+          "y": 242.43,
+          "labelRank": 131
         },
         {
           "id": "topic:retrieval-example",
@@ -32266,9 +35223,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 7.91,
-          "x": 189.66,
-          "y": 876.68,
-          "labelRank": 136
+          "x": 270.47,
+          "y": 945.59,
+          "labelRank": 145
         },
         {
           "id": "topic:retrieval-options",
@@ -32276,9 +35233,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 10.68,
-          "x": 310.21,
-          "y": 741.83,
-          "labelRank": 17
+          "x": 197.98,
+          "y": 759.17,
+          "labelRank": 18
         },
         {
           "id": "topic:retrieve-and-validate",
@@ -32286,9 +35243,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.82,
-          "x": 326.81,
-          "y": 926.17,
-          "labelRank": 68
+          "x": 383.15,
+          "y": 840.68,
+          "labelRank": 74
         },
         {
           "id": "topic:revision-cache",
@@ -32296,9 +35253,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 8.7,
-          "x": 576.88,
-          "y": 1177.09,
-          "labelRank": 126
+          "x": 578.06,
+          "y": 1177.65,
+          "labelRank": 132
         },
         {
           "id": "topic:routing",
@@ -32306,8 +35263,8 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 10.27,
-          "x": 568.61,
-          "y": 1301.81,
+          "x": 569.27,
+          "y": 1302.34,
           "labelRank": 23
         },
         {
@@ -32316,9 +35273,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.31,
-          "x": 181.08,
-          "y": 792.18,
-          "labelRank": 92
+          "x": 194.5,
+          "y": 909.47,
+          "labelRank": 98
         },
         {
           "id": "topic:skill-definition",
@@ -32326,9 +35283,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.82,
-          "x": 805.61,
-          "y": 636.21,
-          "labelRank": 69
+          "x": 806,
+          "y": 635.86,
+          "labelRank": 75
         },
         {
           "id": "topic:skills",
@@ -32346,9 +35303,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1863.21,
-          "y": 357.29,
-          "labelRank": 127
+          "x": 1863.26,
+          "y": 357.3,
+          "labelRank": 133
         },
         {
           "id": "topic:source-conflicts",
@@ -32356,9 +35313,9 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 9.31,
-          "x": 1739.17,
-          "y": 1181.35,
-          "labelRank": 34
+          "x": 1739.19,
+          "y": 1181.45,
+          "labelRank": 36
         },
         {
           "id": "topic:source-evidence-verification",
@@ -32366,9 +35323,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.02,
-          "x": 822.89,
-          "y": 728.1,
-          "labelRank": 107
+          "x": 823.38,
+          "y": 728.35,
+          "labelRank": 114
         },
         {
           "id": "topic:source-skill",
@@ -32376,9 +35333,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.02,
-          "x": 877.69,
-          "y": 600.91,
-          "labelRank": 108
+          "x": 878.15,
+          "y": 601.02,
+          "labelRank": 115
         },
         {
           "id": "topic:study-baseline",
@@ -32386,9 +35343,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.31,
-          "x": 549.88,
-          "y": 298.97,
-          "labelRank": 93
+          "x": 553.14,
+          "y": 297.19,
+          "labelRank": 99
         },
         {
           "id": "topic:study-contract",
@@ -32396,9 +35353,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.48,
-          "x": 485.62,
-          "y": 433.67,
-          "labelRank": 54
+          "x": 487.89,
+          "y": 435.72,
+          "labelRank": 58
         },
         {
           "id": "topic:study-decision",
@@ -32406,9 +35363,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.31,
-          "x": 446.22,
-          "y": 300.65,
-          "labelRank": 94
+          "x": 448.68,
+          "y": 299.59,
+          "labelRank": 100
         },
         {
           "id": "topic:study-economics",
@@ -32416,9 +35373,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.82,
-          "x": 573.13,
-          "y": 373.04,
-          "labelRank": 70
+          "x": 573.19,
+          "y": 371.84,
+          "labelRank": 76
         },
         {
           "id": "topic:study-experiment",
@@ -32426,9 +35383,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.31,
-          "x": 413.48,
-          "y": 398.28,
-          "labelRank": 95
+          "x": 422.66,
+          "y": 397.21,
+          "labelRank": 101
         },
         {
           "id": "topic:study-quality",
@@ -32436,9 +35393,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.68,
-          "x": 523.47,
-          "y": 265.32,
-          "labelRank": 18
+          "x": 525.69,
+          "y": 264.27,
+          "labelRank": 55
         },
         {
           "id": "topic:study-runtime",
@@ -32446,9 +35403,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.05,
-          "x": 525.95,
-          "y": 441.37,
-          "labelRank": 62
+          "x": 528.69,
+          "y": 443.17,
+          "labelRank": 66
         },
         {
           "id": "topic:study-scenarios",
@@ -32456,9 +35413,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.57,
-          "x": 410.9,
-          "y": 319.41,
-          "labelRank": 81
+          "x": 414.35,
+          "y": 318.3,
+          "labelRank": 86
         },
         {
           "id": "topic:study-ticket-wording",
@@ -32466,9 +35423,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 8.7,
-          "x": 585.72,
-          "y": 316.28,
-          "labelRank": 128
+          "x": 587.23,
+          "y": 317.92,
+          "labelRank": 134
         },
         {
           "id": "topic:talos",
@@ -32486,9 +35443,9 @@ window.TOPIC_DATA = {
           "clusterId": "talos",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1390.3,
-          "y": 681.2,
-          "labelRank": 129
+          "x": 1390.24,
+          "y": 680.97,
+          "labelRank": 135
         },
         {
           "id": "topic:task-contract",
@@ -32496,8 +35453,8 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 11.88,
-          "x": 445.55,
-          "y": 448.33,
+          "x": 446.09,
+          "y": 448.9,
           "labelRank": 12
         },
         {
@@ -32506,19 +35463,19 @@ window.TOPIC_DATA = {
           "clusterId": "requirements",
           "kind": "topic",
           "radius": 9.02,
-          "x": 886.93,
-          "y": 194.42,
-          "labelRank": 109
+          "x": 887.14,
+          "y": 194.22,
+          "labelRank": 116
         },
         {
           "id": "topic:toolchain",
           "topicId": "toolchain",
           "clusterId": "toolchain",
           "kind": "topic",
-          "radius": 11.57,
+          "radius": 12.33,
           "x": 278,
           "y": 836,
-          "labelRank": 3
+          "labelRank": 2
         },
         {
           "id": "topic:traceability",
@@ -32526,9 +35483,19 @@ window.TOPIC_DATA = {
           "clusterId": "requirements",
           "kind": "topic",
           "radius": 10.05,
-          "x": 837.4,
-          "y": 271.64,
+          "x": 837.61,
+          "y": 271.59,
           "labelRank": 25
+        },
+        {
+          "id": "topic:user-facing-feature",
+          "topicId": "user-facing-feature",
+          "clusterId": "workflows",
+          "kind": "topic",
+          "radius": 11.05,
+          "x": 447.82,
+          "y": 259.94,
+          "labelRank": 15
         },
         {
           "id": "topic:verdicts",
@@ -32536,19 +35503,29 @@ window.TOPIC_DATA = {
           "clusterId": "talos",
           "kind": "topic",
           "radius": 9.02,
-          "x": 1444.03,
-          "y": 635.08,
-          "labelRank": 110
+          "x": 1444.14,
+          "y": 635.06,
+          "labelRank": 117
         },
         {
           "id": "topic:verification-loops",
           "topicId": "verification-loops",
           "clusterId": "talos",
           "kind": "topic",
-          "radius": 10.05,
-          "x": 1458.29,
-          "y": 706.01,
-          "labelRank": 63
+          "radius": 10.87,
+          "x": 1458.87,
+          "y": 706.43,
+          "labelRank": 53
+        },
+        {
+          "id": "topic:vitest",
+          "topicId": "vitest",
+          "clusterId": "toolchain",
+          "kind": "topic",
+          "radius": 9.31,
+          "x": 343.01,
+          "y": 918.35,
+          "labelRank": 102
         },
         {
           "id": "topic:wikidata-statements",
@@ -32556,19 +35533,19 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1810.21,
-          "y": 1262.2,
-          "labelRank": 130
+          "x": 1810.2,
+          "y": 1262.27,
+          "labelRank": 136
         },
         {
           "id": "topic:work-breakdown",
           "topicId": "work-breakdown",
           "clusterId": "workflows",
           "kind": "topic",
-          "radius": 9.82,
-          "x": 446.64,
-          "y": 262.16,
-          "labelRank": 71
+          "radius": 10.05,
+          "x": 591.27,
+          "y": 407.51,
+          "labelRank": 67
         },
         {
           "id": "topic:workflow-patterns",
@@ -32576,19 +35553,19 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.68,
-          "x": 589.02,
-          "y": 410.48,
-          "labelRank": 51
+          "x": 387.21,
+          "y": 377.98,
+          "labelRank": 56
         },
         {
           "id": "topic:workflows",
           "topicId": "workflows",
           "clusterId": "workflows",
           "kind": "topic",
-          "radius": 12.04,
+          "radius": 12.19,
           "x": 494,
           "y": 359,
-          "labelRank": 2
+          "labelRank": 3
         }
       ],
       "clusters": [
@@ -32660,14 +35637,14 @@ window.TOPIC_DATA = {
           "label": "Toolchain",
           "x": 278,
           "y": 836,
-          "topicCount": 21
+          "topicCount": 26
         },
         {
           "id": "workflows",
           "label": "Workflows",
           "x": 494,
           "y": 359,
-          "topicCount": 25
+          "topicCount": 26
         }
       ],
       "edges": [
@@ -33022,6 +35999,27 @@ window.TOPIC_DATA = {
         },
         {
           "from": "technology:javascript",
+          "to": "topic:javascript-typescript",
+          "family": "applies",
+          "relations": [
+            {
+              "from": "technology:javascript",
+              "type": "applied-by",
+              "to": "topic:javascript-typescript",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:javascript-typescript",
+              "type": "applies-to",
+              "to": "technology:javascript",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:javascript",
           "to": "technology:nodejs",
           "family": "reading",
           "relations": [
@@ -33042,6 +36040,27 @@ window.TOPIC_DATA = {
                 "nodejs-about"
               ],
               "derived": false
+            }
+          ]
+        },
+        {
+          "from": "technology:javascript",
+          "to": "topic:javascript-typescript",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:javascript",
+              "type": "explained-by",
+              "to": "topic:javascript-typescript",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:javascript-typescript",
+              "type": "explains",
+              "to": "technology:javascript",
+              "sourceRefs": [],
+              "derived": true
             }
           ]
         },
@@ -33461,6 +36480,90 @@ window.TOPIC_DATA = {
           ]
         },
         {
+          "from": "technology:npm",
+          "to": "topic:npm",
+          "family": "applies",
+          "relations": [
+            {
+              "from": "technology:npm",
+              "type": "applied-by",
+              "to": "topic:npm",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:npm",
+              "type": "applies-to",
+              "to": "technology:npm",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:npm",
+          "to": "topic:npm",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:npm",
+              "type": "explained-by",
+              "to": "topic:npm",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:npm",
+              "type": "explains",
+              "to": "technology:npm",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:playwright",
+          "to": "topic:playwright",
+          "family": "applies",
+          "relations": [
+            {
+              "from": "technology:playwright",
+              "type": "applied-by",
+              "to": "topic:playwright",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:playwright",
+              "type": "applies-to",
+              "to": "technology:playwright",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:playwright",
+          "to": "topic:playwright",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:playwright",
+              "type": "explained-by",
+              "to": "topic:playwright",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:playwright",
+              "type": "explains",
+              "to": "technology:playwright",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
           "from": "technology:postgresql",
           "to": "topic:postgresql-data",
           "family": "applies",
@@ -33654,6 +36757,104 @@ window.TOPIC_DATA = {
           ]
         },
         {
+          "from": "technology:react",
+          "to": "topic:react",
+          "family": "applies",
+          "relations": [
+            {
+              "from": "technology:react",
+              "type": "applied-by",
+              "to": "topic:react",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:react",
+              "type": "applies-to",
+              "to": "technology:react",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:react",
+          "to": "technology:typescript",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:react",
+              "type": "works-with",
+              "to": "technology:typescript",
+              "sourceRefs": [
+                "react-typescript"
+              ],
+              "status": "reviewed",
+              "reviewedOn": "2026-10-12",
+              "note": "Documents React with TypeScript, not compatibility of arbitrary installed versions.",
+              "derived": false
+            },
+            {
+              "from": "technology:typescript",
+              "type": "works-with",
+              "to": "technology:react",
+              "sourceRefs": [
+                "react-typescript"
+              ],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:react",
+          "to": "technology:vitest",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:react",
+              "type": "works-with",
+              "to": "technology:vitest",
+              "sourceRefs": [
+                "vitest-guide"
+              ],
+              "status": "reviewed",
+              "reviewedOn": "2026-10-12",
+              "note": "The Vitest guide links a React example. A project still needs its own version and environment checks.",
+              "derived": false
+            },
+            {
+              "from": "technology:vitest",
+              "type": "works-with",
+              "to": "technology:react",
+              "sourceRefs": [
+                "vitest-guide"
+              ],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:react",
+          "to": "topic:react",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:react",
+              "type": "explained-by",
+              "to": "topic:react",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:react",
+              "type": "explains",
+              "to": "technology:react",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
           "from": "technology:sparql",
           "to": "topic:candidate-isolation",
           "family": "applies",
@@ -33753,6 +36954,90 @@ window.TOPIC_DATA = {
               "from": "topic:retrieval",
               "type": "applies-to",
               "to": "technology:sparql",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:typescript",
+          "to": "topic:javascript-typescript",
+          "family": "applies",
+          "relations": [
+            {
+              "from": "technology:typescript",
+              "type": "applied-by",
+              "to": "topic:javascript-typescript",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:javascript-typescript",
+              "type": "applies-to",
+              "to": "technology:typescript",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:typescript",
+          "to": "topic:javascript-typescript",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:typescript",
+              "type": "explained-by",
+              "to": "topic:javascript-typescript",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:javascript-typescript",
+              "type": "explains",
+              "to": "technology:typescript",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:vitest",
+          "to": "topic:vitest",
+          "family": "applies",
+          "relations": [
+            {
+              "from": "technology:vitest",
+              "type": "applied-by",
+              "to": "topic:vitest",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:vitest",
+              "type": "applies-to",
+              "to": "technology:vitest",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:vitest",
+          "to": "topic:vitest",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:vitest",
+              "type": "explained-by",
+              "to": "topic:vitest",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:vitest",
+              "type": "explains",
+              "to": "technology:vitest",
               "sourceRefs": [],
               "derived": true
             }
@@ -35071,6 +38356,27 @@ window.TOPIC_DATA = {
               "to": "topic:architecture-decisions",
               "sourceRefs": [],
               "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:architecture-decisions",
+          "to": "topic:user-facing-feature",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:architecture-decisions",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:architecture-decisions",
+              "sourceRefs": [],
+              "derived": false
             }
           ]
         },
@@ -39528,6 +42834,27 @@ window.TOPIC_DATA = {
         },
         {
           "from": "topic:github-actions",
+          "to": "topic:npm",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:github-actions",
+              "type": "related-reading",
+              "to": "topic:npm",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:npm",
+              "type": "related-reading",
+              "to": "topic:github-actions",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:github-actions",
           "to": "topic:pipeline-diagnosis",
           "family": "reading",
           "relations": [
@@ -39565,6 +42892,27 @@ window.TOPIC_DATA = {
               "to": "topic:github-actions",
               "sourceRefs": [],
               "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:github-actions",
+          "to": "topic:user-facing-feature",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:github-actions",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:github-actions",
+              "sourceRefs": [],
+              "derived": false
             }
           ]
         },
@@ -40032,6 +43380,27 @@ window.TOPIC_DATA = {
         },
         {
           "from": "topic:implementation-workflow",
+          "to": "topic:user-facing-feature",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:implementation-workflow",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:implementation-workflow",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:implementation-workflow",
           "to": "topic:verification-loops",
           "family": "reading",
           "relations": [
@@ -40377,6 +43746,111 @@ window.TOPIC_DATA = {
               "to": "topic:jacoco-counters",
               "sourceRefs": [],
               "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:javascript-typescript",
+          "to": "topic:nodejs",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:javascript-typescript",
+              "type": "related-reading",
+              "to": "topic:nodejs",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:nodejs",
+              "type": "related-reading",
+              "to": "topic:javascript-typescript",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:javascript-typescript",
+          "to": "topic:react",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:javascript-typescript",
+              "type": "related-reading",
+              "to": "topic:react",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:react",
+              "type": "related-reading",
+              "to": "topic:javascript-typescript",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:javascript-typescript",
+          "to": "topic:user-facing-feature",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:javascript-typescript",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:javascript-typescript",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:javascript-typescript",
+          "to": "topic:verification-loops",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:javascript-typescript",
+              "type": "related-reading",
+              "to": "topic:verification-loops",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:verification-loops",
+              "type": "related-reading",
+              "to": "topic:javascript-typescript",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:javascript-typescript",
+          "to": "topic:toolchain",
+          "family": "structure",
+          "relations": [
+            {
+              "from": "topic:javascript-typescript",
+              "type": "browse-under",
+              "to": "topic:toolchain",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:toolchain",
+              "type": "browses",
+              "to": "topic:javascript-typescript",
+              "sourceRefs": [],
+              "derived": true
             }
           ]
         },
@@ -41642,6 +45116,27 @@ window.TOPIC_DATA = {
         },
         {
           "from": "topic:nodejs",
+          "to": "topic:npm",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:nodejs",
+              "type": "related-reading",
+              "to": "topic:npm",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:npm",
+              "type": "related-reading",
+              "to": "topic:nodejs",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:nodejs",
           "to": "topic:pipeline-diagnosis",
           "family": "reading",
           "relations": [
@@ -41684,6 +45179,27 @@ window.TOPIC_DATA = {
         },
         {
           "from": "topic:nodejs",
+          "to": "topic:user-facing-feature",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:nodejs",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:nodejs",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:nodejs",
           "to": "topic:verification-loops",
           "family": "reading",
           "relations": [
@@ -41719,6 +45235,69 @@ window.TOPIC_DATA = {
               "from": "topic:toolchain",
               "type": "browses",
               "to": "topic:nodejs",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:npm",
+          "to": "topic:pipeline-diagnosis",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:npm",
+              "type": "related-reading",
+              "to": "topic:pipeline-diagnosis",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:pipeline-diagnosis",
+              "type": "related-reading",
+              "to": "topic:npm",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:npm",
+          "to": "topic:user-facing-feature",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:npm",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:npm",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:npm",
+          "to": "topic:toolchain",
+          "family": "structure",
+          "relations": [
+            {
+              "from": "topic:npm",
+              "type": "browse-under",
+              "to": "topic:toolchain",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:toolchain",
+              "type": "browses",
+              "to": "topic:npm",
               "sourceRefs": [],
               "derived": true
             }
@@ -42313,6 +45892,132 @@ window.TOPIC_DATA = {
           ]
         },
         {
+          "from": "topic:playwright",
+          "to": "topic:post-change-checks",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:playwright",
+              "type": "related-reading",
+              "to": "topic:post-change-checks",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:post-change-checks",
+              "type": "related-reading",
+              "to": "topic:playwright",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:playwright",
+          "to": "topic:react",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:playwright",
+              "type": "related-reading",
+              "to": "topic:react",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:react",
+              "type": "related-reading",
+              "to": "topic:playwright",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:playwright",
+          "to": "topic:user-facing-feature",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:playwright",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:playwright",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:playwright",
+          "to": "topic:verification-loops",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:playwright",
+              "type": "related-reading",
+              "to": "topic:verification-loops",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:verification-loops",
+              "type": "related-reading",
+              "to": "topic:playwright",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:playwright",
+          "to": "topic:vitest",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:playwright",
+              "type": "related-reading",
+              "to": "topic:vitest",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:vitest",
+              "type": "related-reading",
+              "to": "topic:playwright",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:playwright",
+          "to": "topic:toolchain",
+          "family": "structure",
+          "relations": [
+            {
+              "from": "topic:playwright",
+              "type": "browse-under",
+              "to": "topic:toolchain",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:toolchain",
+              "type": "browses",
+              "to": "topic:playwright",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
           "from": "topic:post-change-checks",
           "to": "topic:python",
           "family": "reading",
@@ -42817,6 +46522,69 @@ window.TOPIC_DATA = {
           ]
         },
         {
+          "from": "topic:react",
+          "to": "topic:user-facing-feature",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:react",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:react",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:react",
+          "to": "topic:vitest",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:react",
+              "type": "related-reading",
+              "to": "topic:vitest",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:vitest",
+              "type": "related-reading",
+              "to": "topic:react",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:react",
+          "to": "topic:toolchain",
+          "family": "structure",
+          "relations": [
+            {
+              "from": "topic:react",
+              "type": "browse-under",
+              "to": "topic:toolchain",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:toolchain",
+              "type": "browses",
+              "to": "topic:react",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
           "from": "topic:release-operations",
           "to": "topic:study-contract",
           "family": "reading",
@@ -42834,6 +46602,27 @@ window.TOPIC_DATA = {
               "to": "topic:release-operations",
               "sourceRefs": [],
               "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:release-operations",
+          "to": "topic:user-facing-feature",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:release-operations",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:release-operations",
+              "sourceRefs": [],
+              "derived": false
             }
           ]
         },
@@ -43107,6 +46896,27 @@ window.TOPIC_DATA = {
               "to": "topic:requirements-workflow",
               "sourceRefs": [],
               "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:requirements-workflow",
+          "to": "topic:user-facing-feature",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:requirements-workflow",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:requirements-workflow",
+              "sourceRefs": [],
+              "derived": false
             }
           ]
         },
@@ -44385,6 +48195,27 @@ window.TOPIC_DATA = {
           ]
         },
         {
+          "from": "topic:toolchain",
+          "to": "topic:vitest",
+          "family": "structure",
+          "relations": [
+            {
+              "from": "topic:toolchain",
+              "type": "browses",
+              "to": "topic:vitest",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:vitest",
+              "type": "browse-under",
+              "to": "topic:toolchain",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
           "from": "topic:traceability",
           "to": "topic:work-breakdown",
           "family": "reading",
@@ -44400,6 +48231,111 @@ window.TOPIC_DATA = {
               "from": "topic:work-breakdown",
               "type": "related-reading",
               "to": "topic:traceability",
+              "sourceRefs": [],
+              "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:user-facing-feature",
+          "to": "topic:verification-loops",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:verification-loops",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:verification-loops",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:user-facing-feature",
+          "to": "topic:vitest",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:vitest",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:vitest",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:user-facing-feature",
+          "to": "topic:work-breakdown",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:user-facing-feature",
+              "type": "related-reading",
+              "to": "topic:work-breakdown",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:work-breakdown",
+              "type": "related-reading",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:user-facing-feature",
+          "to": "topic:workflows",
+          "family": "structure",
+          "relations": [
+            {
+              "from": "topic:user-facing-feature",
+              "type": "browse-under",
+              "to": "topic:workflows",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:workflows",
+              "type": "browses",
+              "to": "topic:user-facing-feature",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:verification-loops",
+          "to": "topic:vitest",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:verification-loops",
+              "type": "related-reading",
+              "to": "topic:vitest",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:vitest",
+              "type": "related-reading",
+              "to": "topic:verification-loops",
               "sourceRefs": [],
               "derived": false
             }

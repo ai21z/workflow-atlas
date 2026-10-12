@@ -1,12 +1,12 @@
 {
   "id": "agents-md",
   "title": "Repository instructions for agents",
-  "summary": "Keep one short AGENTS.md at the repository root for what the README does not say, and point host files at it.",
+  "summary": "Keep project instructions short and specific. Share a root AGENTS.md where the chosen host supports it, and verify how that host loads additional guidance.",
   "sections": [
     {
       "type": "p",
       "label": "What the file is",
-      "text": "AGENTS.md is plain Markdown at the repository root with no required fields. The agents.md site calls it a README for agents and lists Codex, Copilot, Cursor and Gemini CLI as readers. Claude Code targets under 200 lines per CLAUDE.md file. This practice adopts that limit."
+      "text": "AGENTS.md is plain Markdown at the repository root with no required fields. The agents.md site calls it a README for agents and lists Codex, Copilot, Cursor and Gemini CLI as readers. Claude Code recommends under 200 lines per CLAUDE.md file. This practice uses that as an editorial target, not a universal limit or proven optimum."
     },
     {
       "type": "list",
@@ -23,17 +23,17 @@
     {
       "type": "p",
       "label": "What to leave out",
-      "text": "The Claude Code doctor checkup trims directory layouts, dependency lists and architecture overviews and keeps pitfalls, rationale and conventions that differ from tool defaults. The evaluation below found that repository overviews did not help. Claude Code sends a multi step procedure to a skill and a partial rule to a path scoped rule."
+      "text": "Keep instructions focused on details the agent cannot reliably discover. Claude Code's /doctor checkup proposes trimming discoverable codebase summaries while retaining pitfalls, rationale and unusual conventions. In the benchmark settings tested, repository overviews did not improve navigation. Claude Code recommends skills for task procedures and path scoped rules for guidance relevant to only part of the codebase."
     },
     {
       "type": "p",
       "label": "How hosts read it",
-      "text": "Codex takes one file per directory, AGENTS.override.md before AGENTS.md, concatenates them from the root down to the working directory and stops at a default 32 KiB. Copilot reads AGENTS.md anywhere in the repository and the nearest file takes precedence. Claude Code reads AGENTS.md only when no CLAUDE.md or CLAUDE.local.md sits in the working directory or above it, and a CLAUDE.md can import it with an @AGENTS.md line. Keep host specific files as pointers, not copies."
+      "text": "Codex loads global guidance and then at most one instruction file per directory from the project root to the working directory. AGENTS.override.md precedes AGENTS.md, with configured fallback names afterward. The default combined limit is 32 KiB. GitHub's Copilot on GitHub documentation supports AGENTS.md files within the repository, with the nearest file taking precedence. This is not evidence that every Copilot surface and version reads them identically. Claude Code direct AGENTS.md loading needs v2.1.277 or later and an enabled supporting session. Its default chooses CLAUDE.md files when those or CLAUDE.local.md exist on the project path. The Project instructions setting can change that behavior, and a CLAUDE.md can import @AGENTS.md. Use documented host loading or import rules, a plain Markdown link alone does not guarantee inclusion."
     },
     {
       "type": "p",
       "label": "What the evidence says",
-      "text": "Developer written files raised success on a new CTXbench set by about 2.4 percent, a gain the authors call marginal and not statistically significant. Model generated files lowered resolution by 0.5 percent on SWE-bench and 2 percent on CTXbench and raised cost by 20 and 23 percent. Removing the testing section cut cost by about a fifth on CTXbench with no significant change in accuracy. File length showed no clear dependency with success or cost. The authors recommend including only what agents need that the README lacks. One study with particular agents and models does not predict your project."
+      "text": "The reviewed arXiv v3 study tested particular coding agents on SWE-bench and CTXbench. The authors report a 2.4 percent average CTXbench resolution improvement with developer files and average resolution drops of 0.5 and 2 percent with generated files. None of those differences from no context file were statistically significant. Generated files increased average cost by 20 and 23 percent. Removing testing text reduced cost without a significant accuracy change in the reported ablation. File length showed no clear dependency with success or cost. The authors recommend including only what agents need that existing documentation lacks. These results do not establish a universal file length or justify skipping project tests."
     },
     {
       "type": "p",
@@ -43,7 +43,12 @@
     {
       "type": "p",
       "label": "Check in your environment",
-      "text": "Confirm which host reads the file and whether a CLAUDE.md or copilot-instructions.md shadows it. Run every listed command and remove any that fails. In Claude Code, /doctor prompt-audit covers AGENTS.md and reports stale references and contradictions without changing files. Claude Code treats these files as context, not enforced configuration, so a rule that must always hold needs a hook or a setting."
+      "text": "Confirm the host, version and instruction files actually loaded. Check each listed command in the intended environment. A failure can reveal a real defect or missing access, so record and investigate it rather than deleting a valid check. Claude Code v2.1.283 or later supports /doctor prompt-audit for instruction files including AGENTS.md, when its bundled audit skill is enabled. It reports findings without applying changes. Claude Code treats instruction files as context rather than enforced configuration. Its settings and appropriate hooks provide enforcement mechanisms."
+    },
+    {
+      "type": "p",
+      "label": "Review scope",
+      "text": "Scoped host claims checked on 2026-10-12 against the linked host documentation. Research statements refer to arXiv 2602.11988 v3, not a universal improvement estimate. The content checklist and short file target are editorial recommendations. Host behavior must be confirmed in the intended surface and version."
     }
   ],
   "refs": [
@@ -53,8 +58,8 @@
     "copilot-repository-instructions",
     "evaluating-agents-md"
   ],
-  "basis": "Documented host behavior, research findings and proposed practice",
-  "confidence": "Host behavior and study figures have scoped sources read on 2026-10-11. The content list and the line limit are a proposed practice, not a measured result.",
+  "basis": "Scoped host documentation, scoped research findings and proposed practice",
+  "confidence": "The listed factual claims were checked against their sources on 2026-10-12 within the stated version and host scope. Recommendations and example commands do not prove suitability or execution in a particular project.",
   "catalog": {
     "kind": "practice",
     "domains": [
@@ -67,11 +72,11 @@
       "context file",
       "repository instructions"
     ],
-    "revision": "1",
+    "revision": "2",
     "applicability": "Use when a repository is worked on by coding agents and needs one shared place for commands, conventions and boundaries.",
     "limits": "The file is written context for an agent. It does not configure a host, grant a permission or prove that its instructions were followed.",
-    "sourceStatus": "needs-review",
-    "reviewedOn": "",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
     "claims": [
       {
         "sectionLabel": "What the file is",
@@ -89,42 +94,42 @@
       },
       {
         "sectionLabel": "What the file is",
-        "text": "Claude Code targets under 200 lines per CLAUDE.md file.",
+        "text": "Claude Code recommends under 200 lines per CLAUDE.md file.",
         "sourceRefs": [
           "claude-code-memory"
         ]
       },
       {
         "sectionLabel": "What to leave out",
-        "text": "The Claude Code doctor checkup trims directory layouts, dependency lists and architecture overviews and keeps pitfalls, rationale and conventions that differ from tool defaults.",
+        "text": "Claude Code's /doctor checkup proposes trimming discoverable codebase summaries while retaining pitfalls, rationale and unusual conventions.",
         "sourceRefs": [
           "claude-code-memory"
         ]
       },
       {
         "sectionLabel": "What to leave out",
-        "text": "The evaluation below found that repository overviews did not help.",
+        "text": "In the benchmark settings tested, repository overviews did not improve navigation.",
         "sourceRefs": [
           "evaluating-agents-md"
         ]
       },
       {
         "sectionLabel": "What to leave out",
-        "text": "Claude Code sends a multi step procedure to a skill and a partial rule to a path scoped rule.",
+        "text": "Claude Code recommends skills for task procedures and path scoped rules for guidance relevant to only part of the codebase.",
         "sourceRefs": [
           "claude-code-memory"
         ]
       },
       {
         "sectionLabel": "How hosts read it",
-        "text": "Codex takes one file per directory, AGENTS.override.md before AGENTS.md, concatenates them from the root down to the working directory and stops at a default 32 KiB.",
+        "text": "Codex loads global guidance and then at most one instruction file per directory from the project root to the working directory. AGENTS.override.md precedes AGENTS.md, with configured fallback names afterward. The default combined limit is 32 KiB.",
         "sourceRefs": [
           "codex-agents-md"
         ]
       },
       {
         "sectionLabel": "How hosts read it",
-        "text": "Copilot reads AGENTS.md anywhere in the repository and the nearest file takes precedence.",
+        "text": "GitHub's Copilot on GitHub documentation supports AGENTS.md files within the repository, with the nearest file taking precedence. This is not evidence that every Copilot surface and version reads them identically.",
         "sourceRefs": [
           "copilot-repository-instructions",
           "agentsmd"
@@ -132,28 +137,28 @@
       },
       {
         "sectionLabel": "How hosts read it",
-        "text": "Claude Code reads AGENTS.md only when no CLAUDE.md or CLAUDE.local.md sits in the working directory or above it, and a CLAUDE.md can import it with an @AGENTS.md line.",
+        "text": "Claude Code direct AGENTS.md loading needs v2.1.277 or later and an enabled supporting session. Its default chooses CLAUDE.md files when those or CLAUDE.local.md exist on the project path. The Project instructions setting can change that behavior, and a CLAUDE.md can import @AGENTS.md.",
         "sourceRefs": [
           "claude-code-memory"
         ]
       },
       {
         "sectionLabel": "What the evidence says",
-        "text": "Developer written files raised success on a new CTXbench set by about 2.4 percent, a gain the authors call marginal and not statistically significant.",
+        "text": "The authors report a 2.4 percent average CTXbench resolution improvement with developer files. The difference from no context file was not statistically significant.",
         "sourceRefs": [
           "evaluating-agents-md"
         ]
       },
       {
         "sectionLabel": "What the evidence says",
-        "text": "Model generated files lowered resolution by 0.5 percent on SWE-bench and 2 percent on CTXbench and raised cost by 20 and 23 percent.",
+        "text": "The authors report average resolution drops of 0.5 and 2 percent with generated files, neither statistically significant, and average cost increases of 20 and 23 percent.",
         "sourceRefs": [
           "evaluating-agents-md"
         ]
       },
       {
         "sectionLabel": "What the evidence says",
-        "text": "Removing the testing section cut cost by about a fifth on CTXbench with no significant change in accuracy.",
+        "text": "Removing testing text reduced cost without a statistically significant accuracy change in the reported ablation.",
         "sourceRefs": [
           "evaluating-agents-md"
         ]
@@ -167,21 +172,21 @@
       },
       {
         "sectionLabel": "What the evidence says",
-        "text": "The authors recommend including only what agents need that the README lacks.",
+        "text": "The authors recommend including only what agents need that existing documentation lacks.",
         "sourceRefs": [
           "evaluating-agents-md"
         ]
       },
       {
         "sectionLabel": "Check in your environment",
-        "text": "In Claude Code, /doctor prompt-audit covers AGENTS.md and reports stale references and contradictions without changing files.",
+        "text": "Claude Code v2.1.283 or later supports /doctor prompt-audit for instruction files including AGENTS.md, when its bundled audit skill is enabled. It reports findings without applying changes.",
         "sourceRefs": [
           "claude-code-memory"
         ]
       },
       {
         "sectionLabel": "Check in your environment",
-        "text": "Claude Code treats these files as context, not enforced configuration, so a rule that must always hold needs a hook or a setting.",
+        "text": "Claude Code treats instruction files as context rather than enforced configuration. Its settings and appropriate hooks provide enforcement mechanisms.",
         "sourceRefs": [
           "claude-code-memory"
         ]

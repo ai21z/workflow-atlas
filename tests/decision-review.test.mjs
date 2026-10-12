@@ -47,13 +47,14 @@ test('summaries distinguish outcome, answers, notes, omitted prerequisites and r
 
 test('component technology and command changes get specific labels without pretending to execute checks', () => {
   const baseline = createExample();
+  baseline.components[0].commands.test = 'fixture-test';
   const current = clone(baseline);
   current.components[0].commands.test = 'npm run check:search';
-  current.components[0].technologies[0].version = '20';
+  current.components[0].technologies.find(technology => technology.id === 'react').version = '20';
   current.components[0].path = 'apps/search';
   const review = createDecisionReview(baseline, current);
   const command = find(review, 'components.web.commands.test');
-  assert.equal(command.before, 'npm test -- --run');
+  assert.equal(command.before, 'fixture-test');
   assert.equal(command.after, 'npm run check:search');
   assert.match(command.label, /test command/);
   assert.match(command.summary, /recorded, not run/);

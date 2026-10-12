@@ -66,6 +66,8 @@ Drag empty map space to pan. Use the zoom buttons, then **Fit map** to see every
 
 Want a smaller reading list? Choose a **Browse a subject** card on the home page, or choose a subject in Topics. Search and **Topic type** narrow that list further. In the 2D map, **Highlight a subject** uses the same selection. Its articles are highlighted and all nodes stay available. **All subjects** removes the subject filter. Read the group's limits, a topic count does not mean complete coverage. The original 3D map and topic hierarchy stay the same.
 
+For a concrete feature journey, choose **Change a user facing feature** as a subject or guided path. The matching **Browse examples**, **Build a feature** draft carries its proposed acceptance cases into the editor and exports. Reading alone does not select its example stack or change the project.
+
 Use **Highlighted articles** to choose a subject article by name. On a phone, **Map key** explains the numbered clusters. Zoom in to see their names on the map.
 
 Reading alone changes nothing. An applicable topic can offer **Review for my workflow**. Inspect its proposed decisions and affected files before choosing **Apply to my workflow**. Cancel keeps the project unchanged. Undo reverses an applied action.

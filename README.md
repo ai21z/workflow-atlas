@@ -20,6 +20,8 @@ Project content stays in your tab and is not uploaded by the hosted app. Downloa
 4. Choose **Preview files** from Brief or Workflow. Inspect the selected output. Unknown details stay unresolved.
 5. Choose **Download**. Start with a blueprint for a team discussion, or choose a skill or full pack for an AI assistant. Open the download to continue later.
 
+For a worked example, open **Browse examples**, then **Build a feature**. It plans an Open/All status filter with loading, empty, error, keyboard and narrow screen cases. Real paths, versions and commands remain unresolved until you supply them. The matching guided path in Knowledge map explains each decision and its optional reference stack.
+
 Follow the [quick start](docs/quick-start.md) for the full journey. Read [JEV setup](docs/jev/integration.md) only when you want suggestions.
 
 ## Current workspace

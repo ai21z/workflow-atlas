@@ -36,7 +36,7 @@ test('search ranks a topic by its own words and explains every match', () => {
   assert.equal(first.ref, 'topic:github-actions')
   assert.ok(first.matched.length >= 3)
   for (const match of first.matched) assert.ok(['title', 'aliases', 'applicability', 'summary', 'body'].includes(match.field))
-  assert.equal(first.sourceLine, 'Not yet reviewed, 14 sources')
+  assert.equal(first.sourceLine, 'Reviewed 2026-10-12, 14 sources')
   const retries = query.search('retry stopping rule correction')
   assert.ok(retries.slice(0, 3).some(hit => hit.ref === 'topic:retries'))
   assert.deepEqual(query.search('   '), [])
