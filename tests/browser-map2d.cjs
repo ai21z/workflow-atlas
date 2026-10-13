@@ -465,7 +465,23 @@ async function run() {
       assert.equal(await page.evaluate(() => location.hash), hash)
       assert.match(await page.locator('#subject-context').innerText(), /Docker/)
       await page.locator('#zoom-in').click()
-      await page.locator('.map2d-label[data-record="topic:docker"]').click()
+      await page.locator('#map-2d svg').scrollIntoViewIfNeeded()
+      await settleMap()
+      // Glyphs intentionally take pointer priority over overlapping text.
+      // Click an exposed part of the label, not its possibly covered center.
+      const labelPoint = await page.locator('.map2d-label[data-record="topic:docker"]').evaluate(label => {
+        const bounds = label.getBoundingClientRect()
+        const header = document.querySelector('.topbar').getBoundingClientRect()
+        for (const vertical of [.5, .3, .7]) for (const horizontal of [.5, .25, .75, .1, .9]) {
+          const x = bounds.left + bounds.width * horizontal, y = bounds.top + bounds.height * vertical
+          if (x < 2 || x > innerWidth - 2 || y < header.bottom + 2 || y > innerHeight - 2) continue
+          const clear = [-1, 0, 1].every(dx => [-1, 0, 1].every(dy => document.elementFromPoint(x + dx, y + dy)?.closest('.map2d-label') === label))
+          if (clear) return { x, y, record: label.dataset.record }
+        }
+        return null
+      })
+      assert.ok(labelPoint, 'A visible part of the Docker label must remain clickable below the sticky header')
+      await page.mouse.click(labelPoint.x, labelPoint.y)
       assert.equal(await node('topic:docker').getAttribute('aria-pressed'), 'true', 'Clicking a highlighted article label selects its node')
       await page.locator('#map-record-read').click()
       assert.equal(await page.locator('#topic-subject').inputValue(), 'containers')
