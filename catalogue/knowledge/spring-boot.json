@@ -1,0 +1,181 @@
+{
+  "id": "spring-boot",
+  "title": "Spring Boot API and persistence boundaries",
+  "summary": "Check input, access, transactions and the real behavior behind a service endpoint.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this guide",
+      "text": "Use when the affected application uses Spring Boot. The reviewed reference is Spring Boot 4.1.1 with Spring Framework 7.0.9. Use the documentation for the actual installed release and dependencies. Java, Maven, PostgreSQL and Docker remain optional project choices."
+    },
+    {
+      "type": "p",
+      "label": "Documented version and validation scope",
+      "text": "Spring Boot 4.1.1 requires Java 17 or later, lists compatibility through Java 26 and explicit Maven support from 3.6.3. Other dependencies may have higher requirements. Spring MVC applies Bean Validation to supported controller arguments and method constraints, with behavior depending on the method signature and configuration. Validating a request body does not authorize a caller."
+    },
+    {
+      "type": "list",
+      "label": "Find the project facts",
+      "items": [
+        "Boot and Framework releases, servlet or reactive stack, actual build settings and endpoint contract.",
+        "Request constraints, failure mapping and the implemented caller and data scope rules. Confirm whether method security is enabled if the design relies on it.",
+        "Existing JDBC, repository or remote API boundary, transaction manager and persistence ownership.",
+        "Actual controller, service and integration tests, database version and cleanup. Do not substitute a mock or an embedded database for real access evidence."
+      ]
+    },
+    {
+      "type": "steps",
+      "label": "Check one service change",
+      "items": [
+        "Map the existing endpoint to its service and approved data interface. Reuse that structure when it satisfies the requirement.",
+        "Define accepted input, invalid input and safe failure responses. Check authorization independently for reading and saving.",
+        "Keep retrieval completeness, business validation and persistence permission explicit. Choose ordinary code unless a bounded model task is justified.",
+        "Confirm transaction behavior at the actual call boundary and failure paths. Do not assume a database transaction covers remote APIs.",
+        "Use focused controller and service tests for relevant behavior, then an actual server and database check where required. Record fixtures, identity, version, cleanup and candidate revision."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Security and transaction limits",
+      "text": "Spring Security documents that the security starter does not enable method authorization by default. Spring Framework documents that default proxy transaction interception applies to calls through the proxy, not a method calling another method on the same target. Check the actual configuration and boundary instead of relying on annotation presence."
+    },
+    {
+      "type": "p",
+      "label": "Choose the data interface",
+      "text": "Spring Boot documents JDBC and repository approaches, plus DataSource configuration for database connections. Choose the existing approved abstraction rather than adding JPA, generated SQL or a model simply because the framework supports them. Record connection settings through the approved secret source, never by copying credentials into the pack."
+    },
+    {
+      "type": "table",
+      "label": "Saved selection example",
+      "headers": [
+        "Question",
+        "Expected evidence to obtain"
+      ],
+      "rows": [
+        [
+          "Does a malformed request fail?",
+          "Controller behavior matches the input contract and calls no save operation."
+        ],
+        [
+          "Does a denied save stay denied?",
+          "The actual authorization boundary rejects the caller, independently of request validity."
+        ],
+        [
+          "Does persistence fail part way through?",
+          "The agreed transaction or recovery behavior is observed with the relevant database and failure."
+        ],
+        [
+          "Was a real server tested?",
+          "Record whether the test used a mock environment or a running server, and how server-side data was cleaned up."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Documented test boundaries",
+      "text": "@SpringBootTest uses MOCK by default and does not start an embedded server. Without a web environment on the classpath, it uses a non-web application context. RANDOM_PORT starts a server. When a test uses a running server, the client and server execute in separate threads and transactions, so a transaction rolled back on the test side does not roll back the server transaction."
+    },
+    {
+      "type": "p",
+      "label": "Useful result",
+      "text": "A contract and evidence plan that identifies validation, authorization, service logic, transaction and cleanup boundaries. The fictional selection save has expected checks only. Real versions, paths, credentials and commands remain unresolved, and no server or database test is claimed to have run."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas changes",
+      "text": "Selecting Spring Boot adds endpoint, test layer, access and transaction questions to generated skill references. It does not create a controller, security configuration, database connection or executable service."
+    }
+  ],
+  "refs": [
+    "spring-boot-requirements",
+    "spring-mvc-validation",
+    "spring-method-security",
+    "spring-transactions",
+    "spring-boot-sql",
+    "spring-boot-tests"
+  ],
+  "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+  "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools",
+      "information-retrieval",
+      "verification"
+    ],
+    "aliases": [
+      "spring boot",
+      "spring mvc",
+      "controller",
+      "bean validation",
+      "transaction boundary",
+      "mockmvc",
+      "spring service"
+    ],
+    "revision": "1",
+    "applicability": "Use when an actual Spring Boot component exposes or changes an API or persistence behavior. Confirm the version, stack and configuration before applying the documented details.",
+    "limits": "Use actual project versions, approved interfaces and repository configuration. The procedure and expected examples do not establish configured access, runtime enforcement, compatibility or passing evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
+    "claims": [
+      {
+        "sectionLabel": "Documented version and validation scope",
+        "text": "Spring Boot 4.1.1 lists Java 17 as its minimum, compatibility through Java 26 and Maven support from 3.6.3, with possible additional third party requirements.",
+        "sourceRefs": [
+          "spring-boot-requirements"
+        ]
+      },
+      {
+        "sectionLabel": "Documented version and validation scope",
+        "text": "Spring MVC supports Bean Validation on supported controller arguments and method constraints, subject to signature and configuration.",
+        "sourceRefs": [
+          "spring-mvc-validation"
+        ]
+      },
+      {
+        "sectionLabel": "Security and transaction limits",
+        "text": "The Spring Security starter does not activate method-level authorization by default.",
+        "sourceRefs": [
+          "spring-method-security"
+        ]
+      },
+      {
+        "sectionLabel": "Security and transaction limits",
+        "text": "Default Spring proxy transaction interception does not apply to self-invocation on the target object.",
+        "sourceRefs": [
+          "spring-transactions"
+        ]
+      },
+      {
+        "sectionLabel": "Choose the data interface",
+        "text": "Spring Boot documents JDBC, repository approaches and DataSource configuration for SQL databases.",
+        "sourceRefs": [
+          "spring-boot-sql"
+        ]
+      },
+      {
+        "sectionLabel": "Documented test boundaries",
+        "text": "@SpringBootTest defaults to MOCK without starting an embedded server. Running-server tests use separate client and server transactions, so test-side rollback does not roll back server-side work.",
+        "sourceRefs": [
+          "spring-boot-tests"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "technologies": [
+        "spring-boot"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

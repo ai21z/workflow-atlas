@@ -704,6 +704,14 @@ async function run() {
       await findMapRecord('practice:agents-md', 'AGENTS.md')
       assert.match(await page.locator('#map-selected-kind').innerText(), /Practice/)
       await findMapRecord('technology:spring-boot', 'Spring Boot')
+      assert.doesNotMatch(await page.locator('#map-selected-kind').innerText(), /No guide recorded/)
+      await page.locator('#map-open-details').click()
+      assert.equal(await page.locator('#map-record-read').isVisible(), true)
+      assert.match(await page.locator('#map-record-read').innerText(), /Read explanation/)
+      await page.locator('#map-record-read').click()
+      assert.equal(await page.locator('#reader-title').innerText(), 'Spring Boot API and persistence boundaries')
+      await openMap()
+      await findMapRecord('technology:vue', 'Vue')
       assert.match(await page.locator('#map-selected-kind').innerText(), /No guide recorded/)
       await page.locator('#map-open-details').click()
       assert.equal(await page.locator('#map-record-read').isVisible(), false)
@@ -782,7 +790,7 @@ async function run() {
       await page.locator('.map-show-connections').press('Enter')
       for (const family of ['structure', 'applies', 'reading']) assert.equal(await page.locator('#map-family-' + family).isChecked(), true)
       assert.ok(await page.locator('#map-neighbours [data-map-record]').count() > 0)
-      await findMapRecord('technology:spring-boot', 'Spring Boot')
+      await findMapRecord('technology:vue', 'Vue')
       await page.locator('#map-open-details').click()
       assert.match(await page.locator('#map-neighbours').innerText(), /Catalogue name only/)
       assert.equal(await page.locator('.map-show-connections').count(), 0, 'An isolated item does not offer to reveal invented connections')
@@ -898,7 +906,7 @@ async function run() {
 
     await check('07f-mismatched-relation-cannot-invent-a-guide', async () => {
       const malformed = structuredClone(current)
-      const explanation = { from: 'technology:spring-boot', to: 'topic:docker', type: 'explained-by', sourceRefs: [] }
+      const explanation = { from: 'technology:vue', to: 'topic:docker', type: 'explained-by', sourceRefs: [] }
       malformed.catalog.layout2d.edges.push(
         { from: 'technology:docker', to: 'topic:docker', family: 'reading', relations: [explanation] },
         { from: explanation.from, to: explanation.to, family: 'unknown', relations: [explanation] },
@@ -907,7 +915,7 @@ async function run() {
       actual.relations = actual.relations.map(relation => ({ ...relation, sourceRefs: { malformed: true } }))
       await fresh({ fixture: malformed })
       await page.locator('#map-family-reading').check()
-      await findMapRecord('technology:spring-boot', 'Spring Boot')
+      await findMapRecord('technology:vue', 'Vue')
       assert.match(await page.locator('#map-selected-kind').innerText(), /No guide recorded/)
       await page.locator('#map-open-details').click()
       assert.equal(await page.locator('#map-record-read').isVisible(), false, 'A relation nested under different endpoints or an unsupported family cannot fabricate a reading target')

@@ -1,0 +1,223 @@
+{
+  "id": "api-stored-data",
+  "title": "Build an API and stored data workflow",
+  "summary": "Turn a request into permitted retrieval, checked results and a separately authorized save.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this path",
+      "text": "Use when an application reads stored information, applies a rule and may save a result. Begin with approved interfaces and ordinary application code. An agent is optional when interpretation or selection needs one. Java, Spring Boot, Maven, PostgreSQL and Docker are one reference stack, not requirements."
+    },
+    {
+      "type": "list",
+      "label": "Find the project facts",
+      "items": [
+        "Required outcome, accepted inputs, result fields and examples of valid, empty, invalid and denied outcomes.",
+        "Actual API or repository contract, permitted environment, caller identity, data scope and separate read and write permissions.",
+        "Paging, stable ordering, freshness and consistency across pages. Decide what incomplete retrieval means for the result.",
+        "Duration, page, item, payload, retry and optional model budgets. Record the stop outcome and the owner for unresolved cases.",
+        "Persistence boundary, duplicate request handling, concurrent updates, migrations and recovery. Keep real commands, paths and versions unresolved until supplied."
+      ]
+    },
+    {
+      "type": "steps",
+      "label": "From request to reported outcome",
+      "items": [
+        "Agree input, output and failure examples. Decide whether success means a read result or a confirmed saved result.",
+        "Validate input structure and business rules, then authorize the caller for the relevant operation and data scope. A valid input does not grant access.",
+        "Retrieve through the approved API, SDK or repository interface. Follow its paging contract within an explicit budget and check completeness and freshness.",
+        "Apply the agreed rule. If a model is justified, give it a bounded task and treat its result and retrieved text as untrusted input.",
+        "Check result structure, permitted identifiers, business rules and the evidence needed to accept it. Route a missing requirement to its owner.",
+        "For a save, enforce write authorization and concurrency or duplicate controls at the persistence boundary. Keep multi-step writes within the agreed transaction or recovery design.",
+        "Report the observed outcome: completed, rejected, incomplete, failed or write outcome unknown. A generated proposal or an accepted background job is not confirmation that data was saved."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Documented contract and retry boundaries",
+      "text": "OpenAPI 3.2.1 describes operation parameters, request bodies, responses and security requirements. It describes an interface, not an implementation of access checks. RFC 9110 distinguishes an idempotent request by its intended effect when repeated. It advises against automatic retries of non-idempotent requests without knowing they are safe to repeat or were not applied. A 202 response means processing was accepted, not completed."
+    },
+    {
+      "type": "table",
+      "label": "Fictional saved selection examples",
+      "headers": [
+        "Case",
+        "Expected behavior to agree"
+      ],
+      "rows": [
+        [
+          "Valid subject area",
+          "Retrieve permitted matching topics, check the selection and save it through the approved write operation. Report success only after confirmation."
+        ],
+        [
+          "Unknown or malformed subject area",
+          "Reject with an actionable input error. Do not fetch or save."
+        ],
+        [
+          "Read denied",
+          "Stop. Do not widen credentials, change the interface or ask the model to bypass the decision."
+        ],
+        [
+          "A later page fails or the limit is reached",
+          "Report an incomplete result. This example requires complete retrieval before saving."
+        ],
+        [
+          "No matching topics",
+          "Return a clear empty outcome. This example proposes no save for an empty selection. Confirm that rule with the owner."
+        ],
+        [
+          "Selection contains an unapproved identifier",
+          "Fail the result check. Do not save it."
+        ],
+        [
+          "Write denied",
+          "Stop and report that the requested save was not authorized. A valid selection is not successful completion."
+        ],
+        [
+          "Connection lost during save",
+          "Check the operation outcome using the agreed duplicate or status contract before retrying. Do not claim either success or no write without evidence."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Paging and consistency",
+      "text": "A complete result means complete for the agreed authorized scope and consistency policy, not every record in the database. A stable unique order is needed for predictable paging, but order alone does not freeze changing data. Decide whether the interface provides a snapshot, a versioned cursor or explicitly live results. Test additions and deletions between pages. Stop if the required consistency cannot be established."
+    },
+    {
+      "type": "table",
+      "label": "Failure and iteration plan",
+      "headers": [
+        "Finding",
+        "Recommended route"
+      ],
+      "rows": [
+        [
+          "Bad input or missing requirement",
+          "Return to the user or owner. Repeated model calls do not supply an authoritative business rule."
+        ],
+        [
+          "Temporary read failure",
+          "Retry only under the agreed request semantics and a fixed count and time budget. Record the exhausted outcome."
+        ],
+        [
+          "Invalid optional model result",
+          "The editable example proposes at most two correction attempts. Revalidate each changed candidate, then stop for review at the limit. The team chooses and tests the actual limit."
+        ],
+        [
+          "Partial or uncertain write",
+          "Reconcile against the operation identifier and persistence contract. A database transaction does not undo a separate remote service call."
+        ],
+        [
+          "Schema change",
+          "Review migration compatibility and recovery before shipment. Do not assume reverting application code restores changed data."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Choose an integration the team can approve",
+      "text": "A typed direct API wrapper is a valid approach. MCP is an optional tool protocol, not a prerequisite or a trust exemption. The MCP 2026-07-28 tools specification defines input and optional output schemas, and warns that tool annotations are untrusted unless supplied by a trusted server. If a server is blocked, resolve the approval or use a separately approved interface. Do not use curl or a different transport to evade the same restriction."
+    },
+    {
+      "type": "p",
+      "label": "Access checks belong in the application",
+      "text": "OWASP recommends access control at each non-public REST endpoint. Apply the actual caller, tenant or equivalent data scope and operation rules in the implementation. A model instruction, a valid schema, an API description or a tool hint does not confer write permission."
+    },
+    {
+      "type": "p",
+      "label": "A useful draft output",
+      "text": "Fictional goal: save a permitted topic selection for a subject area. Proposed approach: reuse approved read and save interfaces, require complete retrieval, validate identifiers and persist only with write authority. Planned evidence: invalid input, denied read and write, empty data, paging changes, malformed result and an uncertain save response. Open: actual contracts, identities, consistency and duplicate rules, versions, commands, paths and release owner. No test has run in this example."
+    },
+    {
+      "type": "p",
+      "label": "Use it in Atlas",
+      "text": "Start from the API and stored data example, then edit the reference choices and process to fit the real environment. Keep contracts, acceptance examples, checks and failure routes connected to their process steps. Read the generated workflow, contract and verification files before use. Reading this topic alone changes nothing. Atlas does not call your backend or database, and the pack does not implement authorization or retries."
+    },
+    {
+      "type": "p",
+      "label": "When a read is enough",
+      "text": "For a read-only task, remove persistence and its write gates from the design. Confirm that the task outcome is the checked read result. Do not silently treat a requested save as optional merely because read access is available."
+    }
+  ],
+  "refs": [
+    "openapi-operations",
+    "http-semantics",
+    "mcp-tools-contract",
+    "rest-endpoint-access"
+  ],
+  "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+  "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "workflow-design",
+      "information-retrieval",
+      "verification"
+    ],
+    "aliases": [
+      "api workflow",
+      "backend workflow",
+      "stored data",
+      "saved selection",
+      "pagination",
+      "idempotency",
+      "read and write",
+      "request validation"
+    ],
+    "revision": "1",
+    "applicability": "Use for designing a bounded application process that reads stored data and may persist a result through approved interfaces. The reference stack and optional model are editable choices.",
+    "limits": "Use actual project versions, approved interfaces and repository configuration. The procedure and expected examples do not establish configured access, runtime enforcement, compatibility or passing evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
+    "claims": [
+      {
+        "sectionLabel": "Documented contract and retry boundaries",
+        "text": "OpenAPI 3.2.1 describes operation parameters, request bodies, responses and security requirements.",
+        "sourceRefs": [
+          "openapi-operations"
+        ]
+      },
+      {
+        "sectionLabel": "Documented contract and retry boundaries",
+        "text": "RFC 9110 defines idempotency by intended repeated effect and advises against automatically retrying non-idempotent requests without suitable knowledge of their semantics or outcome.",
+        "sourceRefs": [
+          "http-semantics"
+        ]
+      },
+      {
+        "sectionLabel": "Documented contract and retry boundaries",
+        "text": "HTTP 202 indicates acceptance for processing rather than completed processing.",
+        "sourceRefs": [
+          "http-semantics"
+        ]
+      },
+      {
+        "sectionLabel": "Choose an integration the team can approve",
+        "text": "MCP 2026-07-28 tools define input and optional output schemas, with tool annotations untrusted unless supplied by trusted servers.",
+        "sourceRefs": [
+          "mcp-tools-contract"
+        ]
+      },
+      {
+        "sectionLabel": "Access checks belong in the application",
+        "text": "OWASP recommends access control at each non-public REST endpoint.",
+        "sourceRefs": [
+          "rest-endpoint-access"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {},
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

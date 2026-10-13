@@ -15,6 +15,7 @@ import { APP_VERSION } from './version.mjs'
 import { createProcessDesigner } from './process-designer.mjs'
 import { GOAL_STARTERS, createGoalProject } from './starter-goals.mjs'
 import { mountBriefSuggestions } from './brief-suggestions-view.mjs'
+import { updateIntentReview } from './intent-review.mjs'
 
 const { CATALOG, TOOL_ALIASES, createRecipe, createExample, selectRecipe, getStages, getEffectiveSkills, compileStandaloneSkill, compile, validate, parseImport, serializeProject } = engine
 const $ = selector => document.querySelector(selector)
@@ -2103,7 +2104,7 @@ function applyRoute() {
 window.addEventListener('hashchange', applyRoute)
 window.addEventListener('popstate', applyRoute)
 window.addEventListener('resize',()=>document.documentElement.style.setProperty('--workspace-header-height',`${$('.studio-header').getBoundingClientRect().height}px`))
-$('#example-options').innerHTML = CATALOG.recipes.map((item, index) => `<button type="button" data-example="${item.id}"><span class="example-icon" aria-hidden="true">${['◈','◎','◇'][index]}</span><div><strong>${escape(labelOf(item))}</strong><p>${escape(item.description)}</p><small>${item.stageIds.length} stages · Fictional project</small></div><span aria-hidden="true">→</span></button>`).join('')
+$('#example-options').innerHTML = [...CATALOG.recipes, { id: 'api-data', label: 'Change an API and stored data', description: 'Retrieve permitted topics, check a selection and authorize its save. Includes editable connections and an optional reference stack.', stageIds: CATALOG.recipes.find(recipe => recipe.id === 'feature-delivery').stageIds }].map((item, index) => `<button type="button" data-example="${item.id}"><span class="example-icon" aria-hidden="true">${['◈','◎','◇','▤'][index]}</span><div><strong>${escape(labelOf(item))}</strong><p>${escape(item.description)}</p><small>${item.stageIds.length} stages${item.id === 'api-data' ? ' and a connected application design' : ''} · Fictional project</small></div><span aria-hidden="true">→</span></button>`).join('')
 $('#legacy-notice').hidden = !legacyDraft
 jevView = mountJevView(assistance, { onCreate: createAssistedProject, onChange: renderSession })
 briefIdeas = mountBriefSuggestions({
@@ -2111,6 +2112,32 @@ briefIdeas = mountBriefSuggestions({
   getContext: () => ({ brief: config ? config.project.purpose : assistance.getState().draft.userBrief, config }),
   onRead: topicId => openKnowledge(topicId),
   onReview: (actionId, topicId) => previewPractice(actionId, topicId, 'brief'),
+  onClarify: change => {
+    if (!config) return
+    try {
+      config = updateIntentReview(config, change)
+      changed()
+    } catch {
+      toast('The text changed. Review the question again before choosing.')
+    }
+  },
+  onEditBrief: (clause, sourcePart = null) => {
+    if (!config) return
+    const questions = CATALOG.recipes.find(item => item.id === config.workflow.recipe)?.questions || []
+    const sourceQuestion = sourcePart?.field?.startsWith('answer:') && questions.find(item => `answer:${item.id}` === sourcePart.field)
+    const question = sourcePart ? sourceQuestion && !getIntentAnswer(config, sourceQuestion.id).inherited && sourceQuestion
+      : !config.project.purpose.includes(clause || '') && questions.find(item => getIntentAnswer(config, item.id).text.includes(clause || ''))
+    // The source answer may be on a different Project details tab. Locate it in
+    // project data before rendering and focusing the original editable field.
+    goTo('intent', false)
+    const field = question ? document.querySelector(`[data-field="workflow.answers.${question.id}"]`) : $('#project-purpose')
+    if (!field) return
+    for (let parent = field.parentElement; parent; parent = parent.parentElement) if (parent.tagName === 'DETAILS') parent.open = true
+    field.focus()
+    field.scrollIntoView({ block: 'center', behavior: 'instant' })
+    const start = clause ? field.value.indexOf(clause) : -1
+    if (start >= 0 && field.setSelectionRange) field.setSelectionRange(start, start + clause.length)
+  },
 })
 setTheme(theme)
 renderStudio()

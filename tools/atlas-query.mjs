@@ -71,7 +71,7 @@ export async function run(argv, { rootDir = repository } = {}) {
       if (options.positional.length) throw new Error('propose accepts options, not positional terms. Use --brief for text.')
       if (!options.brief && !options.technology.length && !options.stage.length && !options.recipe && !options.host) throw new Error('propose needs --brief or at least one project fact.')
       for (const ref of [...options.technology.map(id => `technology:${id}`), ...options.stage.map(id => `stage:${id}`), ...(options.recipe ? [`recipe:${options.recipe}`] : []), ...(options.host ? [`host:${options.host}`] : [])]) if (!query.get(ref)) throw new Error(`Unknown project fact: ${ref}`)
-      const input = { brief: options.brief || '', technologies: options.technology, stages: options.stage, recipe: options.recipe || null, host: options.host || null }
+      const input = { brief: options.brief || '', technologies: options.technology, ...(options.stage.length ? { stages: options.stage } : {}), recipe: options.recipe || null, host: options.host || null }
       return { command, input, results: query.propose({ ...input, limit: options.limit || 5 }), constraints: query.proposalContext(input), note: 'Deterministic catalogue retrieval. No model was consulted. Explicit exclusions use limited lexical rules. Source lines report recorded review status, not correctness.' }
     }
     default:

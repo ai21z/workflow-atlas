@@ -1,6 +1,6 @@
-import { FROZEN_DEFINITIONS, DEFINITION_DIGEST } from './jev-definitions.mjs'
+import { FROZEN_DEFINITIONS, DEFINITION_DIGEST, SHARED_DEFINITION_VERSION, PRACTICE_DEFINITION_VERSIONS } from './jev-definitions.mjs'
 
-export { DEFINITION_DIGEST, FROZEN_DEFINITIONS }
+export { DEFINITION_DIGEST, FROZEN_DEFINITIONS, SHARED_DEFINITION_VERSION, PRACTICE_DEFINITION_VERSIONS }
 export const MODEL = FROZEN_DEFINITIONS.model
 export const PROMPT_VERSION = FROZEN_DEFINITIONS.promptVersion
 export const CONTRACT_VERSION = '1.0.0'
@@ -13,8 +13,10 @@ export const DEFINITION_METADATA = Object.freeze({
   promptVersion: PROMPT_VERSION,
   contractVersion: CONTRACT_VERSION,
   definitionDigest: DEFINITION_DIGEST,
-  inferenceDefinitionVersion: 'v8-frozen-catalog-2.0.1',
-  frozenOn: '2026-10-05',
+  inferenceDefinitionVersion: 'v9-minimum-change-concrete-work',
+  sharedDefinitionVersion: SHARED_DEFINITION_VERSION,
+  practiceDefinitionVersions: PRACTICE_DEFINITION_VERSIONS,
+  frozenOn: '2026-10-12',
 })
 
 // A plain JSON record excludes arrays, class instances, accessors and dangerous keys.

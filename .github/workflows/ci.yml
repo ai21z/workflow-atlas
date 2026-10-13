@@ -56,7 +56,7 @@ jobs:
     name: Check the browser and public bundle
     needs: checks
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - name: Check out the project
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -103,6 +103,26 @@ jobs:
           path: |
             local-knowledge/retests/jev-integration/**/*.json
             local-knowledge/retests/jev-integration/**/*.png
+            local-knowledge/retests/ranking-exclusions/**/*.json
+            local-knowledge/retests/ranking-exclusions/**/*.png
+            local-knowledge/retests/intent-clarification/**/*.json
+            local-knowledge/retests/intent-clarification/**/*.png
+            local-knowledge/retests/intent-separation/**/*.json
+            local-knowledge/retests/intent-separation/**/*.png
+            local-knowledge/retests/clarification-recovery/**/*.json
+            local-knowledge/retests/clarification-recovery/**/*.png
+            local-knowledge/retests/compound-intent/**/*.json
+            local-knowledge/retests/compound-intent/**/*.png
+            local-knowledge/retests/compound-regression/**/*.json
+            local-knowledge/retests/compound-regression/**/*.png
+            local-knowledge/retests/wording-recovery/**/*.json
+            local-knowledge/retests/wording-recovery/**/*.png
+            local-knowledge/retests/brief-suggestions/**/*.json
+            local-knowledge/retests/brief-suggestions/**/*.png
+            local-knowledge/retests/feature-path/**/*.json
+            local-knowledge/retests/feature-path/**/*.png
+            local-knowledge/retests/api-path/**/*.json
+            local-knowledge/retests/api-path/**/*.png
             local-knowledge/retests/artifact-beta/**/*.json
             local-knowledge/retests/artifact-beta/**/*.png
             local-knowledge/retests/output-choice/**/*.json

@@ -20,7 +20,15 @@ Project content stays in your tab and is not uploaded by the hosted app. Downloa
 4. Choose **Preview files** from Brief or Workflow. Inspect the selected output. Unknown details stay unresolved.
 5. Choose **Download**. Start with a blueprint for a team discussion, or choose a skill or full pack for an AI assistant. Open the download to continue later.
 
-For a worked example, open **Browse examples**, then **Build a feature**. It plans an Open/All status filter with loading, empty, error, keyboard and narrow screen cases. Real paths, versions and commands remain unresolved until you supply them. The matching guided path in Knowledge map explains each decision and its optional reference stack.
+When a sentence needs clarification, Brief can offer one explicit meaning to confirm. Keep product rules, background and input handling limits separate without retyping them. Detailed choices stay under **Refine matching**.
+
+If the deliverable is undecided, **What should we plan now?** lets you choose the work or keep **Not decided yet**. Mentioned alternatives stay out of practice matching. Compatible input restrictions can be confirmed together while JEV checks stay paused.
+
+Supported historical omissions and shared product outcomes can be confirmed as complete sentences. An unresolved privacy exception pauses both practice ideas and JEV checks. Keep an accurate rule and continue planning manually rather than weakening it to obtain suggestions.
+
+For a worked example, open **Browse examples**, then **Feature delivery**. It plans an Open/All status filter with loading, empty, error, keyboard and narrow screen cases. Real paths, versions and commands remain unresolved until you supply them. The matching guided path in Knowledge map explains each decision and its optional reference stack.
+
+For backend work, choose **Change an API and stored data** in Browse examples. It plans a topic selection, validation, permitted retrieval, result checks and a separately authorized save. Edit the connected application process in Workflow and inspect its contracts and planned checks before downloading. The reference Java, Spring Boot, Maven, PostgreSQL and Docker choices are optional. MCP and a model are not required.
 
 Follow the [quick start](docs/quick-start.md) for the full journey. Read [JEV setup](docs/jev/integration.md) only when you want suggestions.
 
@@ -41,6 +49,8 @@ The goal picker offers ten editable starting plans for features, service connect
 Use **Open pack** to continue a supported download or **Browse examples** for explicitly fictional worked projects. Template roles and practices are editable defaults. A blank project leaves the Copilot host and source control unchosen.
 
 Return to **Brief** to edit the outcome, record acceptance examples and add project context. Detailed components, boundaries, sources and optional runtime design stay available without dominating the opening question. Unknown details can stay blank. Editing an outcome keeps separately recorded answers and does not silently regenerate the workflow.
+
+Use **Refine matching** to identify the task and its separate need for an ongoing source reference. **Separate tasks and rules** records what each complete sentence means, with a scope for restrictions. Local clarifications preserve your original wording and travel in downloads. They guide practice ideas without adding them automatically or changing what JEV receives.
 
 In **Workflow**, select a stage and edit its owner, skills, inputs, notes and evidence in one panel. Assign people, selected agents or external systems. An existing artifact can satisfy a prerequisite without repeating earlier work. Drag assignments or use the equivalent controls. Undo and redo support project changes.
 
@@ -126,7 +136,7 @@ Read the [JEV guide](docs/jev/index.html) for its intended role, local API usage
 
 Brief offers JEV through the local Node server. Describe work, select Suggest my workflow, review the proposal and Create this draft. Confirm wording for any answers that need recording. Template roles and skills remain editable defaults. The compiler creates the files from the accepted configuration. Read [integrated usage](docs/jev/integration.md).
 
-The historical v7 local synthetic run matched 97 of 100 complete expected decision outcomes, with primary p95 of 693 ms. The repeated answered question gate failed on two cases. These are not measurements of the new integrated UI or general human reliability. The [measurement definitions](docs/jev/metrics.md) preserve their denominators and failures. The integrated contract freezes v8 and its catalog definitions separately.
+The historical v7 local synthetic run matched 97 of 100 complete expected decision outcomes, with primary p95 of 693 ms. The repeated answered question gate failed on two cases. These are not measurements of the new integrated UI or general human reliability. The [measurement definitions](docs/jev/metrics.md) preserve their denominators and failures. The integrated contract keeps shared questions and two profiles at v8, with a separately versioned minimum-change v9 profile. Historical results do not establish the new profile's accuracy.
 
 The [historical integrated test guide](docs/index.html#jev-integrated-trial) retains steps for the earlier interface, including Files and Project details. Replay requires its matching frozen build, original protocol copy and verified manifest. The current three-view workspace needs an updated human-trial protocol and a new frozen round. Use the [quick start](docs/quick-start.md) and [integration guide](docs/jev/integration.md) for current usage. Keep earlier manifests and evidence unchanged. A prepared guide contains no completed human results.
 

@@ -381,6 +381,7 @@ test('invalid envelopes never expose a proposal and unsafe provider text is not 
     value => { value.requestId = 'wrong request' },
     value => { value.metadata.model = 'jev-latest' },
     value => { value.metadata.definitionDigest = 'different' },
+    value => { value.metadata.promptVersion = 'pilot-v8-practice-need-separate-from-completeness'; value.metadata.definitionDigest = 'c3b01ec1c71acf5d16527d14927398aa4dbca1ecb9b4c8ac2429673d330ebebe' },
     value => { delete value.decision.allCoverage.bugfix },
     value => { value.decision.allCoverage['feature-delivery'].acceptance.choice = 'invented' },
     value => { value.metadata.usage.input_tokens = -1 },

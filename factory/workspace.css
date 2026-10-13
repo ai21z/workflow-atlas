@@ -12,3 +12,52 @@
 @media(max-width:760px){.atlas-navigation{width:auto;margin-left:auto}.atlas-navigation #open-help{margin-left:0}}
 @media(max-width:1100px){#inspector{z-index:auto}#inspector .inspector-heading{position:static}}
 @media(max-width:650px){.project-heading{padding:4px 0 8px;margin:0}.project-heading-label{margin-bottom:4px}.project-heading input{min-height:44px}.workspace-toolbar{padding:8px 0}.view-heading{margin:12px 0 18px}.view-heading h1{margin:8px 0}}
+
+/* Keep intent questions compact, readable and operable on narrow screens. */
+.brief-clarification{min-width:0;margin:18px 0;padding:16px;border:1px solid var(--control-line,var(--line));border-radius:12px;background:var(--soft);overflow-wrap:anywhere}
+.brief-clarification legend{max-width:100%;padding:0 6px;font-weight:700;font-size:16px}
+.brief-clarification p{line-height:1.55;margin:8px 0}
+.brief-clarification blockquote{margin:10px 0 16px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--panel,var(--bg));line-height:1.6;white-space:pre-wrap}
+.brief-clarification-options{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.brief-clarification :is(button,select,summary){min-height:44px}
+.brief-clarification button{max-width:100%;white-space:normal;text-align:left;line-height:1.4}
+.brief-clarification button[aria-pressed=true]{outline:2px solid var(--accent);outline-offset:2px}
+.brief-clarification details{margin:12px 0}
+.brief-clarification summary{display:flex;align-items:center;cursor:pointer}
+.brief-clarification label{display:block;margin:12px 0;font-weight:600}
+.brief-clarification select{display:block;width:100%;max-width:440px;margin:6px 0;font:inherit}
+.brief-clarification-error:empty{display:none}
+.brief-recorded-clarifications{overflow-wrap:anywhere}
+.brief-recorded-clarifications li{margin:10px 0}
+.brief-recorded-clarifications li p{margin:4px 0;color:var(--muted)}
+.brief-matching{margin:12px 0 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:4px 0}
+.brief-matching>summary::before{content:'▸';margin-right:8px;color:var(--accent)}
+.brief-matching[open]>summary::before{content:'▾'}
+.brief-matching>.hint{max-width:75ch;margin:6px 0 12px}
+.brief-matching .brief-clarification{margin:12px 0}
+.brief-matching-conflict{padding:12px;border-left:3px solid var(--accent);background:var(--soft);line-height:1.6}
+@media(max-width:650px){.brief-clarification{padding:12px}.brief-clarification-options{flex-direction:column}.brief-clarification-options button{width:100%}.brief-clarification blockquote{padding:8px 10px}}
+.brief-clarification summary::before{content:'▸';margin-right:8px;color:var(--accent)}
+.brief-clarification details[open]>summary::before{content:'▾'}
+.brief-separation{margin:12px 0;border-top:1px solid var(--line);padding-top:4px}
+.brief-separation>summary::before{content:'▸';margin-right:8px;color:var(--accent)}
+.brief-separation[open]>summary::before{content:'▾'}
+.brief-separation>p{max-width:72ch;margin:6px 0}
+.brief-separation .brief-clarification{margin-top:8px}
+.brief-separation select{max-width:100%;min-width:0;text-overflow:ellipsis}
+.brief-separation :is(select,input):focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.brief-part-source{margin-bottom:0!important}
+.brief-part-practices{min-width:0;margin:16px 0;padding:8px 12px;border:1px solid var(--control-line,var(--line));border-radius:8px}
+.brief-part-practices legend{font-size:14px}
+.brief-part-practices label{display:flex;align-items:center;gap:10px;min-height:44px;margin:4px 0;cursor:pointer;font-weight:500}
+.brief-part-practices input{flex:none;width:20px;height:20px;min-height:20px;margin:0;accent-color:var(--accent)}
+.brief-part-status{font-size:13px;color:var(--muted)}
+.brief-part-status:focus{outline:2px solid var(--accent);outline-offset:4px}
+.brief-quick-meaning h3{font-size:16px;line-height:1.5;margin:0 0 6px}
+.brief-quick-meaning>.hint{margin:4px 0}
+.brief-part-feedback{margin:10px 0;font-size:13px;line-height:1.6;color:var(--muted)}
+.brief-part-feedback button{min-height:44px;margin-left:4px}
+.brief-recorded-parts li{padding:10px 0;border-top:1px solid var(--line)}
+.brief-recorded-parts q{white-space:pre-wrap}
+@media(max-width:650px){.brief-separation .inline-actions{align-items:stretch}.brief-separation .inline-actions>button{width:100%}.brief-part-practices{padding:8px}.brief-part-practices label{align-items:flex-start;padding:8px 0}.brief-part-practices input{margin-top:1px}}
+@media(max-width:650px){.impact-tray{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}.impact-tray>.icon-button{grid-column:2;grid-row:1}.impact-tray .impact-files{grid-column:1/-1;grid-row:2;min-width:0;gap:6px}.impact-tray .impact-files button{min-height:44px;max-width:100%;overflow-wrap:anywhere}}

@@ -1,0 +1,128 @@
+{
+  "id": "java",
+  "title": "Java service changes",
+  "summary": "Separate language and build compatibility from runtime input, access and business checks.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this guide",
+      "text": "Use when the affected service uses Java. Keep its current framework and build tool unless a separate migration is required. The facts below use the Java SE 25 compiler documentation as a pinned reference, not a requirement to install that version."
+    },
+    {
+      "type": "p",
+      "label": "Documented compiler boundary",
+      "text": "javac compiles Java source into class files for the Java Virtual Machine. Its --release option targets a supported Java SE release and its platform API. That setting does not establish compatibility of third party libraries, deployment configuration or the behavior of external input."
+    },
+    {
+      "type": "list",
+      "label": "Find the project facts",
+      "items": [
+        "JDK vendor and version for compilation, tests, Maven or another build tool, and the deployed service.",
+        "Actual release or toolchain settings, framework and driver versions, modules and generated sources.",
+        "Where external input becomes a request object, which validation runs and where read and write authority is checked.",
+        "Existing test fixtures, runtime checks and build commands. Keep unconfirmed paths and commands blank."
+      ]
+    },
+    {
+      "type": "steps",
+      "label": "Check the changed boundary",
+      "items": [
+        "Inspect the affected module and existing request, service and persistence code before adding a new abstraction.",
+        "Confirm compilation and test toolchains. Maven toolchains can select a build JDK different from the JDK running Maven, so do not infer one from the other.",
+        "Represent the accepted input and output explicitly. Validate external values and permitted identifiers, then apply access and business rules in the appropriate layer.",
+        "Check the changed rule with small fixtures and the relevant interface and persistence tests. Record which dependencies were replaced by mocks.",
+        "Record compilation and runtime results separately, with actual versions and the candidate revision."
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Saved selection example",
+      "headers": [
+        "Check",
+        "Expected example outcome"
+      ],
+      "rows": [
+        [
+          "Code compiles",
+          "Types and configured compiler rules pass. The input and save authorization still need their own checks."
+        ],
+        [
+          "Subject identifier is unknown",
+          "Return the agreed validation failure without reading or saving."
+        ],
+        [
+          "Write is not permitted",
+          "Stop before persistence even if the selection object has the expected Java type."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Useful result",
+      "text": "A boundary note naming the confirmed toolchains, accepted values, validation and permission owners, plus planned fixtures. This fictional example has no observed compilation or test result. An unavailable dependency repository or test service remains an environment blocker."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas changes",
+      "text": "Selecting Java adds toolchain, runtime boundary and verification questions to generated skill references. Reading this guide does not select a JDK, configure the compiler or prove that a request is valid."
+    }
+  ],
+  "refs": [
+    "java-javac-25",
+    "maven-toolchains"
+  ],
+  "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+  "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools",
+      "verification"
+    ],
+    "aliases": [
+      "java",
+      "jdk",
+      "jvm",
+      "javac",
+      "release target",
+      "java service"
+    ],
+    "revision": "1",
+    "applicability": "Use for a Java component when compiler, runtime and external input boundaries need separate evidence.",
+    "limits": "Use actual project versions, approved interfaces and repository configuration. The procedure and expected examples do not establish configured access, runtime enforcement, compatibility or passing evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
+    "claims": [
+      {
+        "sectionLabel": "Documented compiler boundary",
+        "text": "The Java SE 25 javac documentation describes compiling Java source into JVM class files and targeting a supported platform release and API through --release.",
+        "sourceRefs": [
+          "java-javac-25"
+        ]
+      },
+      {
+        "sectionLabel": "Check the changed boundary",
+        "text": "Maven toolchains can select a build JDK independently of the JDK running Maven.",
+        "sourceRefs": [
+          "maven-toolchains"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "technologies": [
+        "java"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

@@ -8930,7 +8930,7 @@ window.TOPIC_DATA = {
     {
       "id": "postgresql-data",
       "title": "PostgreSQL",
-      "summary": "A relational database option using SQL.",
+      "summary": "Check relational queries, authorized scope, paging, transactions and data recovery.",
       "sections": [
         {
           "type": "p",
@@ -8940,19 +8940,97 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "What Atlas provides",
-          "text": "Selecting PostgreSQL records the technology and version. Atlas currently adds generic component questions, not a PostgreSQL connection or a specialist query generator."
+          "text": "Selecting PostgreSQL records the technology and version and adds PostgreSQL query, access, transaction and recovery questions to generated skill references. It does not configure a connection or generate a verified query."
         },
         {
           "type": "p",
           "label": "Check in your environment",
           "text": "Confirm the actual version, supported interface, permissions, data model and expected query results. Compare alternatives using your constraints."
+        },
+        {
+          "type": "p",
+          "label": "Review scope",
+          "text": "The added factual claims use PostgreSQL 18 documentation reviewed on 2026-10-12. The original tutorial reference is retained. Actual project versions, database policies, queries and recovery results require separate evidence."
+        },
+        {
+          "type": "list",
+          "label": "Find the project facts",
+          "items": [
+            "Actual database and driver versions, schema, migration owner, supported application interface and permitted test environment.",
+            "Read and write identity, grants, any row security policies, and how the application applies the caller data scope.",
+            "Accepted query parameters, expected identifiers, unique ordering, page limits, consistency and freshness requirements.",
+            "Transaction and duplicate handling, concurrent updates, migration compatibility, backup and restore evidence. Record only credential sources, never secrets."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Documented paging and isolation",
+          "text": "PostgreSQL 18 recommends a unique ORDER BY for a predictable LIMIT or OFFSET subset. The default Read Committed isolation gives a SELECT its query-start snapshot, and successive SELECT statements can see different committed data, even within one transaction. A stable sort therefore does not establish one snapshot across pages. Choose and test the consistency policy the interface actually provides."
+        },
+        {
+          "type": "p",
+          "label": "Documented transaction and access scope",
+          "text": "PostgreSQL transactions group steps into an all-or-nothing operation. Row security, when enabled, can restrict the visible or modifiable rows. Superusers and roles with BYPASSRLS bypass it, and table owners normally do too. A successful test with an administrative identity does not establish the behavior of the application identity."
+        },
+        {
+          "type": "steps",
+          "label": "Check the data boundary",
+          "items": [
+            "Read the actual schema, approved data interface and migration history. Reuse parameterized operations for values and explicitly permitted query choices.",
+            "Check normal, empty and denied reads with the relevant identity. Verify ordering and the agreed consistency while data changes between pages.",
+            "Check result identifiers, permitted scope and completeness before preparing any write. Keep write authorization distinct from query validity.",
+            "Test the agreed atomic, duplicate and concurrent update behavior. Reconcile an uncertain save before retrying it.",
+            "For a schema change, assess old and new application compatibility and the recovery plan. Obtain restoration evidence where required, rather than treating backup existence as proof.",
+            "Record actual query or API results, identity, fixtures, database version, cleanup and candidate revision. State which checks remain blocked."
+          ]
+        },
+        {
+          "type": "table",
+          "label": "Saved selection example",
+          "headers": [
+            "Case",
+            "Expected behavior to agree"
+          ],
+          "rows": [
+            [
+              "More matching topics than one page",
+              "Follow the approved paging contract and save only after the required complete selection is established."
+            ],
+            [
+              "Data changes between pages",
+              "Honor the agreed snapshot or live-result policy. Do not describe stable ordering alone as snapshot consistency."
+            ],
+            [
+              "Read allowed, write denied",
+              "Stop before persistence and report the save was not authorized."
+            ],
+            [
+              "Save response is lost",
+              "Use the agreed operation or duplicate contract to establish whether the write occurred before deciding on a retry."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Migration and recovery",
+          "text": "PostgreSQL documents SQL dumps, file system backups and continuous archiving as different backup approaches. The team must choose the applicable method and test its recovery requirements. An application rollback does not automatically reverse a data migration, and a transaction in one database does not undo a remote service call."
+        },
+        {
+          "type": "p",
+          "label": "Useful result",
+          "text": "A query and persistence contract with expected fixtures for authorized scope, empty data, paging changes, duplicate requests and failed saves. This fictional example proposes a complete permitted selection before saving. Real schema, identifiers, consistency, commands and recovery evidence remain unresolved. No database check or restoration has run."
         }
       ],
       "refs": [
-        "postgresql-tutorial"
+        "postgresql-tutorial",
+        "postgresql-pagination",
+        "postgresql-isolation",
+        "postgresql-transactions",
+        "postgresql-row-security",
+        "postgresql-backup"
       ],
-      "basis": "Source references and Atlas guidance",
-      "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+      "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+      "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, database access and any query or recovery outcome remain unverified.",
       "catalog": {
         "kind": "technology",
         "domains": [
@@ -8962,13 +9040,18 @@ window.TOPIC_DATA = {
           "postgres",
           "sql database",
           "relational database",
-          "sql"
+          "sql",
+          "postgresql paging",
+          "database transaction",
+          "row security",
+          "database migration",
+          "restore evidence"
         ],
-        "revision": "1",
-        "applicability": "Use this technology example when your data is relational and queried with SQL. Atlas records the technology and version and adds generic component questions, not a PostgreSQL connection or a specialist query generator.",
+        "revision": "2",
+        "applicability": "Use when a PostgreSQL data boundary needs checks for query behavior, permitted scope, paging consistency, transactions or recovery. Selection adds project questions without configuring a connection.",
         "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
         "sourceStatus": "reviewed",
-        "reviewedOn": "2026-10-05",
+        "reviewedOn": "2026-10-12",
         "claims": [
           {
             "id": "claim:postgresql-data-1",
@@ -8977,14 +9060,55 @@ window.TOPIC_DATA = {
             "sourceRefs": [
               "postgresql-tutorial"
             ]
+          },
+          {
+            "id": "claim:postgresql-data-2",
+            "sectionLabel": "Documented paging and isolation",
+            "text": "PostgreSQL 18 recommends a unique ordering for predictable LIMIT or OFFSET results.",
+            "sourceRefs": [
+              "postgresql-pagination"
+            ]
+          },
+          {
+            "id": "claim:postgresql-data-3",
+            "sectionLabel": "Documented paging and isolation",
+            "text": "At default Read Committed isolation, successive SELECT statements may see different committed data, including within one transaction.",
+            "sourceRefs": [
+              "postgresql-isolation"
+            ]
+          },
+          {
+            "id": "claim:postgresql-data-4",
+            "sectionLabel": "Documented transaction and access scope",
+            "text": "PostgreSQL transactions group steps into an all-or-nothing operation.",
+            "sourceRefs": [
+              "postgresql-transactions"
+            ]
+          },
+          {
+            "id": "claim:postgresql-data-5",
+            "sectionLabel": "Documented transaction and access scope",
+            "text": "PostgreSQL row security can restrict visible or modifiable rows. Superusers and BYPASSRLS roles bypass it, and table owners normally do too.",
+            "sourceRefs": [
+              "postgresql-row-security"
+            ]
+          },
+          {
+            "id": "claim:postgresql-data-6",
+            "sectionLabel": "Migration and recovery",
+            "text": "PostgreSQL documents SQL dumps, file system backups and continuous archiving as distinct backup approaches.",
+            "sourceRefs": [
+              "postgresql-backup"
+            ]
           }
         ],
         "evidence": {
           "basisKinds": [
             "documented",
-            "proposed"
+            "recommended",
+            "illustrative"
           ],
-          "confidenceLevel": "established"
+          "confidenceLevel": "proposed"
         },
         "applies": {
           "technologies": [
@@ -8993,7 +9117,8 @@ window.TOPIC_DATA = {
         },
         "guidance": "reading",
         "definitionRefs": [
-          "technology:postgresql"
+          "technology:postgresql",
+          "profile:postgresql"
         ]
       },
       "parent": "retrieval-options",
@@ -10716,7 +10841,7 @@ window.TOPIC_DATA = {
         {
           "type": "p",
           "label": "Use it in Atlas",
-          "text": "Open Browse examples and choose Build a feature. The fictional draft carries the acceptance examples and reference stack into editable project fields. Technology selection adds profile questions and checks to the generated skill references. Inspect WORKFLOW.md and the requirement and verification templates before using the pack. Opening this reading topic alone changes nothing in the draft."
+          "text": "Open Browse examples and choose Feature delivery. The fictional draft carries the acceptance examples and reference stack into editable project fields. Technology selection adds profile questions and checks to the generated skill references. Inspect WORKFLOW.md and the requirement and verification templates before using the pack. Opening this reading topic alone changes nothing in the draft."
         },
         {
           "type": "p",
@@ -10750,7 +10875,7 @@ window.TOPIC_DATA = {
           "responsive",
           "frontend feature"
         ],
-        "revision": "1",
+        "revision": "2",
         "applicability": "Use when a proposed feature changes a user interface or user journey. The fictional status filter demonstrates the path without choosing tools for the reader.",
         "limits": "This is a recommended workflow with fictional inputs and expected outcomes. It is not an observed implementation, a required stack, a conformance audit or an executable workflow.",
         "sourceStatus": "reviewed",
@@ -11474,6 +11599,735 @@ window.TOPIC_DATA = {
         "verification-loops",
         "post-change-checks"
       ]
+    },
+    {
+      "id": "api-stored-data",
+      "title": "Build an API and stored data workflow",
+      "summary": "Turn a request into permitted retrieval, checked results and a separately authorized save.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Use this path",
+          "text": "Use when an application reads stored information, applies a rule and may save a result. Begin with approved interfaces and ordinary application code. An agent is optional when interpretation or selection needs one. Java, Spring Boot, Maven, PostgreSQL and Docker are one reference stack, not requirements."
+        },
+        {
+          "type": "list",
+          "label": "Find the project facts",
+          "items": [
+            "Required outcome, accepted inputs, result fields and examples of valid, empty, invalid and denied outcomes.",
+            "Actual API or repository contract, permitted environment, caller identity, data scope and separate read and write permissions.",
+            "Paging, stable ordering, freshness and consistency across pages. Decide what incomplete retrieval means for the result.",
+            "Duration, page, item, payload, retry and optional model budgets. Record the stop outcome and the owner for unresolved cases.",
+            "Persistence boundary, duplicate request handling, concurrent updates, migrations and recovery. Keep real commands, paths and versions unresolved until supplied."
+          ]
+        },
+        {
+          "type": "steps",
+          "label": "From request to reported outcome",
+          "items": [
+            "Agree input, output and failure examples. Decide whether success means a read result or a confirmed saved result.",
+            "Validate input structure and business rules, then authorize the caller for the relevant operation and data scope. A valid input does not grant access.",
+            "Retrieve through the approved API, SDK or repository interface. Follow its paging contract within an explicit budget and check completeness and freshness.",
+            "Apply the agreed rule. If a model is justified, give it a bounded task and treat its result and retrieved text as untrusted input.",
+            "Check result structure, permitted identifiers, business rules and the evidence needed to accept it. Route a missing requirement to its owner.",
+            "For a save, enforce write authorization and concurrency or duplicate controls at the persistence boundary. Keep multi-step writes within the agreed transaction or recovery design.",
+            "Report the observed outcome: completed, rejected, incomplete, failed or write outcome unknown. A generated proposal or an accepted background job is not confirmation that data was saved."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Documented contract and retry boundaries",
+          "text": "OpenAPI 3.2.1 describes operation parameters, request bodies, responses and security requirements. It describes an interface, not an implementation of access checks. RFC 9110 distinguishes an idempotent request by its intended effect when repeated. It advises against automatic retries of non-idempotent requests without knowing they are safe to repeat or were not applied. A 202 response means processing was accepted, not completed."
+        },
+        {
+          "type": "table",
+          "label": "Fictional saved selection examples",
+          "headers": [
+            "Case",
+            "Expected behavior to agree"
+          ],
+          "rows": [
+            [
+              "Valid subject area",
+              "Retrieve permitted matching topics, check the selection and save it through the approved write operation. Report success only after confirmation."
+            ],
+            [
+              "Unknown or malformed subject area",
+              "Reject with an actionable input error. Do not fetch or save."
+            ],
+            [
+              "Read denied",
+              "Stop. Do not widen credentials, change the interface or ask the model to bypass the decision."
+            ],
+            [
+              "A later page fails or the limit is reached",
+              "Report an incomplete result. This example requires complete retrieval before saving."
+            ],
+            [
+              "No matching topics",
+              "Return a clear empty outcome. This example proposes no save for an empty selection. Confirm that rule with the owner."
+            ],
+            [
+              "Selection contains an unapproved identifier",
+              "Fail the result check. Do not save it."
+            ],
+            [
+              "Write denied",
+              "Stop and report that the requested save was not authorized. A valid selection is not successful completion."
+            ],
+            [
+              "Connection lost during save",
+              "Check the operation outcome using the agreed duplicate or status contract before retrying. Do not claim either success or no write without evidence."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Paging and consistency",
+          "text": "A complete result means complete for the agreed authorized scope and consistency policy, not every record in the database. A stable unique order is needed for predictable paging, but order alone does not freeze changing data. Decide whether the interface provides a snapshot, a versioned cursor or explicitly live results. Test additions and deletions between pages. Stop if the required consistency cannot be established."
+        },
+        {
+          "type": "table",
+          "label": "Failure and iteration plan",
+          "headers": [
+            "Finding",
+            "Recommended route"
+          ],
+          "rows": [
+            [
+              "Bad input or missing requirement",
+              "Return to the user or owner. Repeated model calls do not supply an authoritative business rule."
+            ],
+            [
+              "Temporary read failure",
+              "Retry only under the agreed request semantics and a fixed count and time budget. Record the exhausted outcome."
+            ],
+            [
+              "Invalid optional model result",
+              "The editable example proposes at most two correction attempts. Revalidate each changed candidate, then stop for review at the limit. The team chooses and tests the actual limit."
+            ],
+            [
+              "Partial or uncertain write",
+              "Reconcile against the operation identifier and persistence contract. A database transaction does not undo a separate remote service call."
+            ],
+            [
+              "Schema change",
+              "Review migration compatibility and recovery before shipment. Do not assume reverting application code restores changed data."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Choose an integration the team can approve",
+          "text": "A typed direct API wrapper is a valid approach. MCP is an optional tool protocol, not a prerequisite or a trust exemption. The MCP 2026-07-28 tools specification defines input and optional output schemas, and warns that tool annotations are untrusted unless supplied by a trusted server. If a server is blocked, resolve the approval or use a separately approved interface. Do not use curl or a different transport to evade the same restriction."
+        },
+        {
+          "type": "p",
+          "label": "Access checks belong in the application",
+          "text": "OWASP recommends access control at each non-public REST endpoint. Apply the actual caller, tenant or equivalent data scope and operation rules in the implementation. A model instruction, a valid schema, an API description or a tool hint does not confer write permission."
+        },
+        {
+          "type": "p",
+          "label": "A useful draft output",
+          "text": "Fictional goal: save a permitted topic selection for a subject area. Proposed approach: reuse approved read and save interfaces, require complete retrieval, validate identifiers and persist only with write authority. Planned evidence: invalid input, denied read and write, empty data, paging changes, malformed result and an uncertain save response. Open: actual contracts, identities, consistency and duplicate rules, versions, commands, paths and release owner. No test has run in this example."
+        },
+        {
+          "type": "p",
+          "label": "Use it in Atlas",
+          "text": "Start from the API and stored data example, then edit the reference choices and process to fit the real environment. Keep contracts, acceptance examples, checks and failure routes connected to their process steps. Read the generated workflow, contract and verification files before use. Reading this topic alone changes nothing. Atlas does not call your backend or database, and the pack does not implement authorization or retries."
+        },
+        {
+          "type": "p",
+          "label": "When a read is enough",
+          "text": "For a read-only task, remove persistence and its write gates from the design. Confirm that the task outcome is the checked read result. Do not silently treat a requested save as optional merely because read access is available."
+        }
+      ],
+      "refs": [
+        "openapi-operations",
+        "http-semantics",
+        "mcp-tools-contract",
+        "rest-endpoint-access"
+      ],
+      "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+      "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+      "catalog": {
+        "kind": "procedure",
+        "domains": [
+          "workflow-design",
+          "information-retrieval",
+          "verification"
+        ],
+        "aliases": [
+          "api workflow",
+          "backend workflow",
+          "stored data",
+          "saved selection",
+          "pagination",
+          "idempotency",
+          "read and write",
+          "request validation"
+        ],
+        "revision": "1",
+        "applicability": "Use for designing a bounded application process that reads stored data and may persist a result through approved interfaces. The reference stack and optional model are editable choices.",
+        "limits": "Use actual project versions, approved interfaces and repository configuration. The procedure and expected examples do not establish configured access, runtime enforcement, compatibility or passing evidence.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "claims": [
+          {
+            "id": "claim:api-stored-data-1",
+            "sectionLabel": "Documented contract and retry boundaries",
+            "text": "OpenAPI 3.2.1 describes operation parameters, request bodies, responses and security requirements.",
+            "sourceRefs": [
+              "openapi-operations"
+            ]
+          },
+          {
+            "id": "claim:api-stored-data-2",
+            "sectionLabel": "Documented contract and retry boundaries",
+            "text": "RFC 9110 defines idempotency by intended repeated effect and advises against automatically retrying non-idempotent requests without suitable knowledge of their semantics or outcome.",
+            "sourceRefs": [
+              "http-semantics"
+            ]
+          },
+          {
+            "id": "claim:api-stored-data-3",
+            "sectionLabel": "Documented contract and retry boundaries",
+            "text": "HTTP 202 indicates acceptance for processing rather than completed processing.",
+            "sourceRefs": [
+              "http-semantics"
+            ]
+          },
+          {
+            "id": "claim:api-stored-data-4",
+            "sectionLabel": "Choose an integration the team can approve",
+            "text": "MCP 2026-07-28 tools define input and optional output schemas, with tool annotations untrusted unless supplied by trusted servers.",
+            "sourceRefs": [
+              "mcp-tools-contract"
+            ]
+          },
+          {
+            "id": "claim:api-stored-data-5",
+            "sectionLabel": "Access checks belong in the application",
+            "text": "OWASP recommends access control at each non-public REST endpoint.",
+            "sourceRefs": [
+              "rest-endpoint-access"
+            ]
+          }
+        ],
+        "evidence": {
+          "basisKinds": [
+            "documented",
+            "recommended",
+            "illustrative"
+          ],
+          "confidenceLevel": "proposed"
+        },
+        "applies": {},
+        "scope": {
+          "generality": "general"
+        },
+        "guidance": "reading",
+        "definitionRefs": []
+      },
+      "parent": "workflows",
+      "related": [
+        "requirements-workflow",
+        "architecture-decisions",
+        "retrieve-and-validate",
+        "task-contract",
+        "verification-loops",
+        "release-operations",
+        "java",
+        "spring-boot",
+        "maven",
+        "postgresql-data",
+        "docker"
+      ]
+    },
+    {
+      "id": "java",
+      "title": "Java service changes",
+      "summary": "Separate language and build compatibility from runtime input, access and business checks.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Use this guide",
+          "text": "Use when the affected service uses Java. Keep its current framework and build tool unless a separate migration is required. The facts below use the Java SE 25 compiler documentation as a pinned reference, not a requirement to install that version."
+        },
+        {
+          "type": "p",
+          "label": "Documented compiler boundary",
+          "text": "javac compiles Java source into class files for the Java Virtual Machine. Its --release option targets a supported Java SE release and its platform API. That setting does not establish compatibility of third party libraries, deployment configuration or the behavior of external input."
+        },
+        {
+          "type": "list",
+          "label": "Find the project facts",
+          "items": [
+            "JDK vendor and version for compilation, tests, Maven or another build tool, and the deployed service.",
+            "Actual release or toolchain settings, framework and driver versions, modules and generated sources.",
+            "Where external input becomes a request object, which validation runs and where read and write authority is checked.",
+            "Existing test fixtures, runtime checks and build commands. Keep unconfirmed paths and commands blank."
+          ]
+        },
+        {
+          "type": "steps",
+          "label": "Check the changed boundary",
+          "items": [
+            "Inspect the affected module and existing request, service and persistence code before adding a new abstraction.",
+            "Confirm compilation and test toolchains. Maven toolchains can select a build JDK different from the JDK running Maven, so do not infer one from the other.",
+            "Represent the accepted input and output explicitly. Validate external values and permitted identifiers, then apply access and business rules in the appropriate layer.",
+            "Check the changed rule with small fixtures and the relevant interface and persistence tests. Record which dependencies were replaced by mocks.",
+            "Record compilation and runtime results separately, with actual versions and the candidate revision."
+          ]
+        },
+        {
+          "type": "table",
+          "label": "Saved selection example",
+          "headers": [
+            "Check",
+            "Expected example outcome"
+          ],
+          "rows": [
+            [
+              "Code compiles",
+              "Types and configured compiler rules pass. The input and save authorization still need their own checks."
+            ],
+            [
+              "Subject identifier is unknown",
+              "Return the agreed validation failure without reading or saving."
+            ],
+            [
+              "Write is not permitted",
+              "Stop before persistence even if the selection object has the expected Java type."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Useful result",
+          "text": "A boundary note naming the confirmed toolchains, accepted values, validation and permission owners, plus planned fixtures. This fictional example has no observed compilation or test result. An unavailable dependency repository or test service remains an environment blocker."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas changes",
+          "text": "Selecting Java adds toolchain, runtime boundary and verification questions to generated skill references. Reading this guide does not select a JDK, configure the compiler or prove that a request is valid."
+        }
+      ],
+      "refs": [
+        "java-javac-25",
+        "maven-toolchains"
+      ],
+      "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+      "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools",
+          "verification"
+        ],
+        "aliases": [
+          "java",
+          "jdk",
+          "jvm",
+          "javac",
+          "release target",
+          "java service"
+        ],
+        "revision": "1",
+        "applicability": "Use for a Java component when compiler, runtime and external input boundaries need separate evidence.",
+        "limits": "Use actual project versions, approved interfaces and repository configuration. The procedure and expected examples do not establish configured access, runtime enforcement, compatibility or passing evidence.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "claims": [
+          {
+            "id": "claim:java-1",
+            "sectionLabel": "Documented compiler boundary",
+            "text": "The Java SE 25 javac documentation describes compiling Java source into JVM class files and targeting a supported platform release and API through --release.",
+            "sourceRefs": [
+              "java-javac-25"
+            ]
+          },
+          {
+            "id": "claim:java-2",
+            "sectionLabel": "Check the changed boundary",
+            "text": "Maven toolchains can select a build JDK independently of the JDK running Maven.",
+            "sourceRefs": [
+              "maven-toolchains"
+            ]
+          }
+        ],
+        "evidence": {
+          "basisKinds": [
+            "documented",
+            "recommended",
+            "illustrative"
+          ],
+          "confidenceLevel": "proposed"
+        },
+        "applies": {
+          "technologies": [
+            "java"
+          ]
+        },
+        "scope": {
+          "generality": "general"
+        },
+        "guidance": "reading",
+        "definitionRefs": [
+          "profile:java",
+          "technology:java"
+        ]
+      },
+      "parent": "toolchain",
+      "related": []
+    },
+    {
+      "id": "spring-boot",
+      "title": "Spring Boot API and persistence boundaries",
+      "summary": "Check input, access, transactions and the real behavior behind a service endpoint.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Use this guide",
+          "text": "Use when the affected application uses Spring Boot. The reviewed reference is Spring Boot 4.1.1 with Spring Framework 7.0.9. Use the documentation for the actual installed release and dependencies. Java, Maven, PostgreSQL and Docker remain optional project choices."
+        },
+        {
+          "type": "p",
+          "label": "Documented version and validation scope",
+          "text": "Spring Boot 4.1.1 requires Java 17 or later, lists compatibility through Java 26 and explicit Maven support from 3.6.3. Other dependencies may have higher requirements. Spring MVC applies Bean Validation to supported controller arguments and method constraints, with behavior depending on the method signature and configuration. Validating a request body does not authorize a caller."
+        },
+        {
+          "type": "list",
+          "label": "Find the project facts",
+          "items": [
+            "Boot and Framework releases, servlet or reactive stack, actual build settings and endpoint contract.",
+            "Request constraints, failure mapping and the implemented caller and data scope rules. Confirm whether method security is enabled if the design relies on it.",
+            "Existing JDBC, repository or remote API boundary, transaction manager and persistence ownership.",
+            "Actual controller, service and integration tests, database version and cleanup. Do not substitute a mock or an embedded database for real access evidence."
+          ]
+        },
+        {
+          "type": "steps",
+          "label": "Check one service change",
+          "items": [
+            "Map the existing endpoint to its service and approved data interface. Reuse that structure when it satisfies the requirement.",
+            "Define accepted input, invalid input and safe failure responses. Check authorization independently for reading and saving.",
+            "Keep retrieval completeness, business validation and persistence permission explicit. Choose ordinary code unless a bounded model task is justified.",
+            "Confirm transaction behavior at the actual call boundary and failure paths. Do not assume a database transaction covers remote APIs.",
+            "Use focused controller and service tests for relevant behavior, then an actual server and database check where required. Record fixtures, identity, version, cleanup and candidate revision."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Security and transaction limits",
+          "text": "Spring Security documents that the security starter does not enable method authorization by default. Spring Framework documents that default proxy transaction interception applies to calls through the proxy, not a method calling another method on the same target. Check the actual configuration and boundary instead of relying on annotation presence."
+        },
+        {
+          "type": "p",
+          "label": "Choose the data interface",
+          "text": "Spring Boot documents JDBC and repository approaches, plus DataSource configuration for database connections. Choose the existing approved abstraction rather than adding JPA, generated SQL or a model simply because the framework supports them. Record connection settings through the approved secret source, never by copying credentials into the pack."
+        },
+        {
+          "type": "table",
+          "label": "Saved selection example",
+          "headers": [
+            "Question",
+            "Expected evidence to obtain"
+          ],
+          "rows": [
+            [
+              "Does a malformed request fail?",
+              "Controller behavior matches the input contract and calls no save operation."
+            ],
+            [
+              "Does a denied save stay denied?",
+              "The actual authorization boundary rejects the caller, independently of request validity."
+            ],
+            [
+              "Does persistence fail part way through?",
+              "The agreed transaction or recovery behavior is observed with the relevant database and failure."
+            ],
+            [
+              "Was a real server tested?",
+              "Record whether the test used a mock environment or a running server, and how server-side data was cleaned up."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Documented test boundaries",
+          "text": "@SpringBootTest uses MOCK by default and does not start an embedded server. Without a web environment on the classpath, it uses a non-web application context. RANDOM_PORT starts a server. When a test uses a running server, the client and server execute in separate threads and transactions, so a transaction rolled back on the test side does not roll back the server transaction."
+        },
+        {
+          "type": "p",
+          "label": "Useful result",
+          "text": "A contract and evidence plan that identifies validation, authorization, service logic, transaction and cleanup boundaries. The fictional selection save has expected checks only. Real versions, paths, credentials and commands remain unresolved, and no server or database test is claimed to have run."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas changes",
+          "text": "Selecting Spring Boot adds endpoint, test layer, access and transaction questions to generated skill references. It does not create a controller, security configuration, database connection or executable service."
+        }
+      ],
+      "refs": [
+        "spring-boot-requirements",
+        "spring-mvc-validation",
+        "spring-method-security",
+        "spring-transactions",
+        "spring-boot-sql",
+        "spring-boot-tests"
+      ],
+      "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+      "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools",
+          "information-retrieval",
+          "verification"
+        ],
+        "aliases": [
+          "spring boot",
+          "spring mvc",
+          "controller",
+          "bean validation",
+          "transaction boundary",
+          "mockmvc",
+          "spring service"
+        ],
+        "revision": "1",
+        "applicability": "Use when an actual Spring Boot component exposes or changes an API or persistence behavior. Confirm the version, stack and configuration before applying the documented details.",
+        "limits": "Use actual project versions, approved interfaces and repository configuration. The procedure and expected examples do not establish configured access, runtime enforcement, compatibility or passing evidence.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "claims": [
+          {
+            "id": "claim:spring-boot-1",
+            "sectionLabel": "Documented version and validation scope",
+            "text": "Spring Boot 4.1.1 lists Java 17 as its minimum, compatibility through Java 26 and Maven support from 3.6.3, with possible additional third party requirements.",
+            "sourceRefs": [
+              "spring-boot-requirements"
+            ]
+          },
+          {
+            "id": "claim:spring-boot-2",
+            "sectionLabel": "Documented version and validation scope",
+            "text": "Spring MVC supports Bean Validation on supported controller arguments and method constraints, subject to signature and configuration.",
+            "sourceRefs": [
+              "spring-mvc-validation"
+            ]
+          },
+          {
+            "id": "claim:spring-boot-3",
+            "sectionLabel": "Security and transaction limits",
+            "text": "The Spring Security starter does not activate method-level authorization by default.",
+            "sourceRefs": [
+              "spring-method-security"
+            ]
+          },
+          {
+            "id": "claim:spring-boot-4",
+            "sectionLabel": "Security and transaction limits",
+            "text": "Default Spring proxy transaction interception does not apply to self-invocation on the target object.",
+            "sourceRefs": [
+              "spring-transactions"
+            ]
+          },
+          {
+            "id": "claim:spring-boot-5",
+            "sectionLabel": "Choose the data interface",
+            "text": "Spring Boot documents JDBC, repository approaches and DataSource configuration for SQL databases.",
+            "sourceRefs": [
+              "spring-boot-sql"
+            ]
+          },
+          {
+            "id": "claim:spring-boot-6",
+            "sectionLabel": "Documented test boundaries",
+            "text": "@SpringBootTest defaults to MOCK without starting an embedded server. Running-server tests use separate client and server transactions, so test-side rollback does not roll back server-side work.",
+            "sourceRefs": [
+              "spring-boot-tests"
+            ]
+          }
+        ],
+        "evidence": {
+          "basisKinds": [
+            "documented",
+            "recommended",
+            "illustrative"
+          ],
+          "confidenceLevel": "proposed"
+        },
+        "applies": {
+          "technologies": [
+            "spring-boot"
+          ]
+        },
+        "scope": {
+          "generality": "general"
+        },
+        "guidance": "reading",
+        "definitionRefs": [
+          "profile:spring-boot",
+          "technology:spring-boot"
+        ]
+      },
+      "parent": "toolchain",
+      "related": []
+    },
+    {
+      "id": "maven",
+      "title": "Maven build and test evidence",
+      "summary": "Find the actual lifecycle, modules, profiles and checks behind a successful build.",
+      "sections": [
+        {
+          "type": "p",
+          "label": "Use this guide",
+          "text": "Use when the repository uses Maven. Preserve its modules, wrapper and profiles unless a reviewed change needs them altered. The reviewed Maven guides describe lifecycle and plugin behavior, not the commands already configured in your repository."
+        },
+        {
+          "type": "p",
+          "label": "Documented lifecycle behavior",
+          "text": "Invoking a phase in Maven runs earlier phases of that lifecycle first. Bound goals depend on packaging and configured plugins. Failsafe runs integration tests and verifies their results in separate phases, allowing teardown between them. Its guide recommends verify rather than stopping at integration-test. An integration-test invocation can finish before failure verification and cleanup."
+        },
+        {
+          "type": "list",
+          "label": "Find the project facts",
+          "items": [
+            "Root and affected module POMs, packaging, parent, active profiles and actual plugin executions.",
+            "Maven and build JDK versions, wrapper configuration and dependency repository access.",
+            "Which tests Surefire and Failsafe or alternatives actually discover. Identify skips and environment requirements.",
+            "Existing install, test, integration and package commands. Record their source instead of inventing a familiar command."
+          ]
+        },
+        {
+          "type": "steps",
+          "label": "Prepare useful build evidence",
+          "items": [
+            "Read the affected POM and its parent or shared configuration. Identify the module, active profiles and bound checks.",
+            "Check the approved wrapper and distribution if present. A wrapper may download Maven, so repository and distribution access are separate setup facts.",
+            "Confirm toolchains. A configured build JDK can differ from the JDK running Maven.",
+            "Use the actual repository command that covers the change and required verification phase. Inspect discovered tests, skipped checks and cleanup rather than recording only exit code zero.",
+            "Record versions, command, module, profiles, actual reports, failures and unrun work against the candidate revision."
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Documented wrapper and toolchain scope",
+          "text": "The Maven Wrapper uses the Maven distribution selected by its configuration and can download it when needed. Maven toolchains let participating plugins use a specified JDK independently of the JDK running Maven. Neither mechanism by itself configures the right tests or establishes service compatibility."
+        },
+        {
+          "type": "table",
+          "label": "Saved selection example",
+          "headers": [
+            "Observation",
+            "Interpretation to check"
+          ],
+          "rows": [
+            [
+              "Unit tests pass",
+              "The saved-selection service rule may be covered. Actual endpoint permissions and database behavior still need the agreed checks."
+            ],
+            [
+              "No integration tests run",
+              "Check configured discovery, profiles and skips. A successful build does not establish database integration coverage."
+            ],
+            [
+              "Private repository is unavailable",
+              "Record an environment blocker. Do not replace approved dependencies or claim the feature itself failed."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "label": "Useful result",
+          "text": "A build evidence note naming the confirmed module, profiles, toolchains and discovered checks, with actual reports when available. In this fictional example the commands and versions are unknown, and neither a successful build nor a database test has been observed."
+        },
+        {
+          "type": "p",
+          "label": "What Atlas changes",
+          "text": "Selecting Maven adds lifecycle, toolchain, discovery and environment questions to generated skill references. It does not run Maven, download a distribution, supply repository credentials or configure Failsafe."
+        }
+      ],
+      "refs": [
+        "maven-lifecycle",
+        "maven-failsafe",
+        "maven-wrapper",
+        "maven-toolchains"
+      ],
+      "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+      "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+      "catalog": {
+        "kind": "technology",
+        "domains": [
+          "engineering-tools",
+          "verification"
+        ],
+        "aliases": [
+          "maven",
+          "pom",
+          "mvn",
+          "mvnw",
+          "failsafe",
+          "surefire",
+          "integration test lifecycle"
+        ],
+        "revision": "1",
+        "applicability": "Use when a Maven build needs evidence about the actual lifecycle bindings, modules, profiles, discovered checks and environment.",
+        "limits": "Use actual project versions, approved interfaces and repository configuration. The procedure and expected examples do not establish configured access, runtime enforcement, compatibility or passing evidence.",
+        "sourceStatus": "reviewed",
+        "reviewedOn": "2026-10-12",
+        "claims": [
+          {
+            "id": "claim:maven-1",
+            "sectionLabel": "Documented lifecycle behavior",
+            "text": "Maven runs earlier phases in the invoked lifecycle before the selected phase, while bound goals depend on packaging and configured plugins.",
+            "sourceRefs": [
+              "maven-lifecycle"
+            ]
+          },
+          {
+            "id": "claim:maven-2",
+            "sectionLabel": "Documented lifecycle behavior",
+            "text": "Failsafe separates integration test execution from result verification and recommends invoking verify so teardown and verification can complete.",
+            "sourceRefs": [
+              "maven-failsafe"
+            ]
+          },
+          {
+            "id": "claim:maven-3",
+            "sectionLabel": "Documented wrapper and toolchain scope",
+            "text": "Maven Wrapper uses a configured Maven distribution and can download it, while Maven toolchains can select a build JDK independently of the JDK running Maven.",
+            "sourceRefs": [
+              "maven-wrapper",
+              "maven-toolchains"
+            ]
+          }
+        ],
+        "evidence": {
+          "basisKinds": [
+            "documented",
+            "recommended",
+            "illustrative"
+          ],
+          "confidenceLevel": "proposed"
+        },
+        "applies": {
+          "technologies": [
+            "maven"
+          ]
+        },
+        "scope": {
+          "generality": "general"
+        },
+        "guidance": "reading",
+        "definitionRefs": [
+          "profile:maven",
+          "technology:maven"
+        ]
+      },
+      "parent": "toolchain",
+      "related": []
     }
   ],
   "sources": {
@@ -12072,11 +12926,91 @@ window.TOPIC_DATA = {
     "npm-ci-v11": [
       "npm 11, npm ci",
       "https://docs.npmjs.com/cli/v11/commands/npm-ci/"
+    ],
+    "openapi-operations": [
+      "OpenAPI Specification, operation and security objects",
+      "https://spec.openapis.org/oas/v3.2.1.html"
+    ],
+    "http-semantics": [
+      "RFC 9110, HTTP semantics",
+      "https://www.rfc-editor.org/rfc/rfc9110.html"
+    ],
+    "mcp-tools-contract": [
+      "MCP, tools specification",
+      "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+    ],
+    "rest-endpoint-access": [
+      "OWASP, REST security cheat sheet",
+      "https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html"
+    ],
+    "java-javac-25": [
+      "Java SE 25, javac command",
+      "https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html"
+    ],
+    "spring-boot-requirements": [
+      "Spring Boot, system requirements",
+      "https://docs.spring.io/spring-boot/system-requirements.html"
+    ],
+    "spring-mvc-validation": [
+      "Spring Framework, controller validation",
+      "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html"
+    ],
+    "spring-method-security": [
+      "Spring Security, method security",
+      "https://docs.spring.io/spring-security/reference/servlet/authorization/method-security.html"
+    ],
+    "spring-transactions": [
+      "Spring Framework, using Transactional",
+      "https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html"
+    ],
+    "spring-boot-sql": [
+      "Spring Boot, SQL databases",
+      "https://docs.spring.io/spring-boot/reference/data/sql.html"
+    ],
+    "spring-boot-tests": [
+      "Spring Boot, testing applications",
+      "https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html"
+    ],
+    "maven-lifecycle": [
+      "Apache Maven, build lifecycle",
+      "https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html"
+    ],
+    "maven-failsafe": [
+      "Apache Maven Failsafe, introduction",
+      "https://maven.apache.org/surefire/maven-failsafe-plugin/"
+    ],
+    "maven-wrapper": [
+      "Apache Maven Wrapper",
+      "https://maven.apache.org/tools/wrapper/"
+    ],
+    "maven-toolchains": [
+      "Apache Maven, using toolchains",
+      "https://maven.apache.org/guides/mini/guide-using-toolchains.html"
+    ],
+    "postgresql-pagination": [
+      "PostgreSQL, LIMIT and OFFSET",
+      "https://www.postgresql.org/docs/18/queries-limit.html"
+    ],
+    "postgresql-isolation": [
+      "PostgreSQL, transaction isolation",
+      "https://www.postgresql.org/docs/18/transaction-iso.html"
+    ],
+    "postgresql-transactions": [
+      "PostgreSQL, transactions tutorial",
+      "https://www.postgresql.org/docs/18/tutorial-transactions.html"
+    ],
+    "postgresql-row-security": [
+      "PostgreSQL, row security policies",
+      "https://www.postgresql.org/docs/18/ddl-rowsecurity.html"
+    ],
+    "postgresql-backup": [
+      "PostgreSQL, backup and restore",
+      "https://www.postgresql.org/docs/18/backup.html"
     ]
   },
   "catalog": {
     "schemaVersion": "1.1",
-    "version": "2.2.0",
+    "version": "2.3.0",
     "reviewCycleDays": 180,
     "domains": [
       {
@@ -12340,6 +13274,25 @@ window.TOPIC_DATA = {
           "github-actions",
           "release-operations"
         ]
+      },
+      {
+        "id": "api-stored-data",
+        "title": "Change an API and stored data",
+        "summary": "Plan a validated request, permitted data access, checked results and a separately authorized save.",
+        "limits": "One fictional saved topic selection with optional Java, Spring Boot, Maven, PostgreSQL and Docker. Read-only alternatives remain valid. Actual interfaces, access, commands and observations are unresolved. No runtime or MCP connection is installed.",
+        "nodeIds": [
+          "api-stored-data",
+          "requirements-workflow",
+          "architecture-decisions",
+          "task-contract",
+          "java",
+          "spring-boot",
+          "maven",
+          "postgresql-data",
+          "docker",
+          "verification-loops",
+          "release-operations"
+        ]
       }
     ],
     "collections": [
@@ -12436,6 +13389,23 @@ window.TOPIC_DATA = {
           "vitest",
           "playwright",
           "github-actions",
+          "release-operations"
+        ]
+      },
+      {
+        "id": "api-stored-data",
+        "title": "Change an API and stored data",
+        "nodeIds": [
+          "api-stored-data",
+          "requirements-workflow",
+          "architecture-decisions",
+          "task-contract",
+          "java",
+          "spring-boot",
+          "maven",
+          "postgresql-data",
+          "docker",
+          "verification-loops",
           "release-operations"
         ]
       }
@@ -14020,6 +14990,246 @@ window.TOPIC_DATA = {
         "kind": "documentation",
         "publisher": "npm",
         "contribution": "Supports npm 11 npm ci accepting package-lock.json or npm-shrinkwrap.json, rejecting mismatches and not rewriting lockfiles. Version-specific comparison with npm 12, not verified behavior in a project."
+      },
+      {
+        "id": "openapi-operations",
+        "title": "OpenAPI Specification, operation and security objects",
+        "url": "https://spec.openapis.org/oas/v3.2.1.html",
+        "revision": "OpenAPI 3.2.1, 2026-09-10",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "specification",
+        "publisher": "OpenAPI Initiative",
+        "contribution": "Defines operation parameters, request bodies, responses and security requirements. Supports an interface description, not runtime enforcement or a claim that Atlas emits executable OpenAPI."
+      },
+      {
+        "id": "http-semantics",
+        "title": "RFC 9110, HTTP semantics",
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+        "revision": "RFC 9110, June 2022, sections 9.2.2 and 15.3.3",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "specification",
+        "publisher": "IETF",
+        "contribution": "Defines intended-effect idempotency, conditions for retrying non-idempotent requests and HTTP 202 acceptance without completed processing. Retry budgets and operation identifiers are project design recommendations."
+      },
+      {
+        "id": "mcp-tools-contract",
+        "title": "MCP, tools specification",
+        "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools",
+        "revision": "MCP specification 2026-07-28",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "specification",
+        "publisher": "Model Context Protocol",
+        "contribution": "Defines tool input and optional output schemas and the trust limitation of tool annotations. Does not establish server approval, application authorization or configured MCP support."
+      },
+      {
+        "id": "rest-endpoint-access",
+        "title": "OWASP, REST security cheat sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html",
+        "revision": "Access Control section read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "OWASP",
+        "contribution": "Recommends access control at every non-public REST endpoint. Atlas applies that guidance as a design question, without claiming the exported instructions enforce it."
+      },
+      {
+        "id": "java-javac-25",
+        "title": "Java SE 25, javac command",
+        "url": "https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html",
+        "revision": "Java SE 25, javac and --release sections",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Oracle",
+        "contribution": "Documents compilation to JVM class files and --release targeting a supported language and platform API release. Does not prove third party compatibility or runtime input validity."
+      },
+      {
+        "id": "spring-boot-requirements",
+        "title": "Spring Boot, system requirements",
+        "url": "https://docs.spring.io/spring-boot/system-requirements.html",
+        "revision": "Spring Boot 4.1.1",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Spring",
+        "contribution": "Lists Java minimum 17, compatibility through 26, explicit Maven support from 3.6.3 and possible higher third party requirements. These version facts are not selected defaults."
+      },
+      {
+        "id": "spring-mvc-validation",
+        "title": "Spring Framework, controller validation",
+        "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html",
+        "revision": "Spring Framework 7.0.9",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Spring",
+        "contribution": "Explains controller argument and method Bean Validation, signature conditions and related errors. Validation is not caller authorization."
+      },
+      {
+        "id": "spring-method-security",
+        "title": "Spring Security, method security",
+        "url": "https://docs.spring.io/spring-security/reference/servlet/authorization/method-security.html",
+        "revision": "Method Security documentation read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Spring",
+        "contribution": "States that the Boot security starter does not enable method-level authorization by default. The project must establish actual enabling and access rules."
+      },
+      {
+        "id": "spring-transactions",
+        "title": "Spring Framework, using Transactional",
+        "url": "https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html",
+        "revision": "Spring Framework 7.0.9, proxy semantics",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Spring",
+        "contribution": "Documents default proxy interception and self-invocation limitations. Supports checking the actual transaction boundary, not an assumption that remote calls roll back."
+      },
+      {
+        "id": "spring-boot-sql",
+        "title": "Spring Boot, SQL databases",
+        "url": "https://docs.spring.io/spring-boot/reference/data/sql.html",
+        "revision": "Spring Boot 4.1.1",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Spring",
+        "contribution": "Documents JDBC and repository alternatives and DataSource configuration, including PostgreSQL DataSource support. Does not establish configured access or recommend one persistence abstraction universally."
+      },
+      {
+        "id": "spring-boot-tests",
+        "title": "Spring Boot, testing applications",
+        "url": "https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html",
+        "revision": "Spring Boot 4.1.1",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Spring",
+        "contribution": "Documents mock and running-server environments and the separation of client and server transactions. Test-side rollback does not clean up a server-side transaction."
+      },
+      {
+        "id": "maven-lifecycle",
+        "title": "Apache Maven, build lifecycle",
+        "url": "https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html",
+        "revision": "Lifecycle guide read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Apache Software Foundation",
+        "contribution": "Explains phase order and packaging or configured plugin bindings. Does not establish which tests a particular project discovers."
+      },
+      {
+        "id": "maven-failsafe",
+        "title": "Apache Maven Failsafe, introduction",
+        "url": "https://maven.apache.org/surefire/maven-failsafe-plugin/",
+        "revision": "Failsafe guide read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Apache Software Foundation",
+        "contribution": "Documents separate integration-test and verify phases and recommends verify so cleanup and failure checking complete. No project plugin configuration is assumed."
+      },
+      {
+        "id": "maven-wrapper",
+        "title": "Apache Maven Wrapper",
+        "url": "https://maven.apache.org/tools/wrapper/",
+        "revision": "Wrapper documentation read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Apache Software Foundation",
+        "contribution": "Documents configured Maven distribution download and reuse. Reading it does not approve download sources, credentials or arbitrary build execution."
+      },
+      {
+        "id": "maven-toolchains",
+        "title": "Apache Maven, using toolchains",
+        "url": "https://maven.apache.org/guides/mini/guide-using-toolchains.html",
+        "revision": "Toolchains guide read 2026-10-12",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "Apache Software Foundation",
+        "contribution": "Documents participating plugins using a build JDK independently of the JDK running Maven. Actual project configuration and versions remain to be established."
+      },
+      {
+        "id": "postgresql-pagination",
+        "title": "PostgreSQL, LIMIT and OFFSET",
+        "url": "https://www.postgresql.org/docs/18/queries-limit.html",
+        "revision": "PostgreSQL 18, section 7.6",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "PostgreSQL Global Development Group",
+        "contribution": "Explains unique ordering for predictable LIMIT and OFFSET subsets and the cost of skipped rows. Does not promise a stable snapshot across pages."
+      },
+      {
+        "id": "postgresql-isolation",
+        "title": "PostgreSQL, transaction isolation",
+        "url": "https://www.postgresql.org/docs/18/transaction-iso.html",
+        "revision": "PostgreSQL 18, section 13.2",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "PostgreSQL Global Development Group",
+        "contribution": "Documents default Read Committed query snapshots and possible changes between successive SELECT statements. An API paging consistency policy is a separate design choice."
+      },
+      {
+        "id": "postgresql-transactions",
+        "title": "PostgreSQL, transactions tutorial",
+        "url": "https://www.postgresql.org/docs/18/tutorial-transactions.html",
+        "revision": "PostgreSQL 18, section 3.4",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "PostgreSQL Global Development Group",
+        "contribution": "Explains all-or-nothing database transactions. Does not claim that a transaction undoes a separate remote service call or authorizes a write."
+      },
+      {
+        "id": "postgresql-row-security",
+        "title": "PostgreSQL, row security policies",
+        "url": "https://www.postgresql.org/docs/18/ddl-rowsecurity.html",
+        "revision": "PostgreSQL 18, section 5.9",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "PostgreSQL Global Development Group",
+        "contribution": "Documents row restrictions when enabled, superuser and BYPASSRLS bypass and normal owner bypass. Actual application identity and policy behavior require tests."
+      },
+      {
+        "id": "postgresql-backup",
+        "title": "PostgreSQL, backup and restore",
+        "url": "https://www.postgresql.org/docs/18/backup.html",
+        "revision": "PostgreSQL 18, chapter 25",
+        "reviewedOn": "2026-10-12",
+        "retrievedOn": "2026-10-12",
+        "status": "reviewed",
+        "kind": "documentation",
+        "publisher": "PostgreSQL Global Development Group",
+        "contribution": "Describes SQL dump, file system backup and continuous archiving as distinct approaches. Does not establish that any project has a usable or tested backup."
       }
     ],
     "relations": [
@@ -18335,6 +19545,192 @@ window.TOPIC_DATA = {
         "status": "reviewed",
         "reviewedOn": "2026-10-12",
         "note": "The Vitest guide links a React example. A project still needs its own version and environment checks."
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:java",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:spring-boot",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:maven",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:java",
+        "type": "explained-by",
+        "to": "topic:java",
+        "sourceRefs": []
+      },
+      {
+        "from": "profile:java",
+        "type": "explained-by",
+        "to": "topic:java",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:java",
+        "type": "uses-definition",
+        "to": "profile:java",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:spring-boot",
+        "type": "explained-by",
+        "to": "topic:spring-boot",
+        "sourceRefs": []
+      },
+      {
+        "from": "profile:spring-boot",
+        "type": "explained-by",
+        "to": "topic:spring-boot",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:spring-boot",
+        "type": "uses-definition",
+        "to": "profile:spring-boot",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:maven",
+        "type": "explained-by",
+        "to": "topic:maven",
+        "sourceRefs": []
+      },
+      {
+        "from": "profile:maven",
+        "type": "explained-by",
+        "to": "topic:maven",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:maven",
+        "type": "uses-definition",
+        "to": "profile:maven",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:postgresql",
+        "type": "explained-by",
+        "to": "topic:postgresql-data",
+        "sourceRefs": []
+      },
+      {
+        "from": "profile:postgresql",
+        "type": "explained-by",
+        "to": "topic:postgresql-data",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:postgresql-data",
+        "type": "uses-definition",
+        "to": "profile:postgresql",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:requirements-workflow",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:architecture-decisions",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:retrieve-and-validate",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:release-operations",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:java",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:spring-boot",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:maven",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:postgresql-data",
+        "sourceRefs": []
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:docker",
+        "sourceRefs": []
+      },
+      {
+        "from": "technology:java",
+        "type": "works-with",
+        "to": "technology:spring-boot",
+        "sourceRefs": [
+          "spring-boot-requirements"
+        ]
+      },
+      {
+        "from": "technology:maven",
+        "type": "works-with",
+        "to": "technology:spring-boot",
+        "sourceRefs": [
+          "spring-boot-requirements"
+        ]
+      },
+      {
+        "from": "technology:postgresql",
+        "type": "works-with",
+        "to": "technology:spring-boot",
+        "sourceRefs": [
+          "spring-boot-sql"
+        ]
       }
     ],
     "edges": [
@@ -23365,6 +24761,222 @@ window.TOPIC_DATA = {
         "derived": false
       },
       {
+        "from": "topic:api-stored-data",
+        "type": "browse-under",
+        "to": "topic:workflows",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:java",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:spring-boot",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:maven",
+        "type": "browse-under",
+        "to": "topic:toolchain",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "technology:java",
+        "type": "explained-by",
+        "to": "topic:java",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "profile:java",
+        "type": "explained-by",
+        "to": "topic:java",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:java",
+        "type": "uses-definition",
+        "to": "profile:java",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "technology:spring-boot",
+        "type": "explained-by",
+        "to": "topic:spring-boot",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "profile:spring-boot",
+        "type": "explained-by",
+        "to": "topic:spring-boot",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:spring-boot",
+        "type": "uses-definition",
+        "to": "profile:spring-boot",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "technology:maven",
+        "type": "explained-by",
+        "to": "topic:maven",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "profile:maven",
+        "type": "explained-by",
+        "to": "topic:maven",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:maven",
+        "type": "uses-definition",
+        "to": "profile:maven",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "technology:postgresql",
+        "type": "explained-by",
+        "to": "topic:postgresql-data",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "profile:postgresql",
+        "type": "explained-by",
+        "to": "topic:postgresql-data",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:postgresql-data",
+        "type": "uses-definition",
+        "to": "profile:postgresql",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:requirements-workflow",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:architecture-decisions",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:retrieve-and-validate",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:task-contract",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:verification-loops",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:release-operations",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:java",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:spring-boot",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:maven",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:postgresql-data",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "topic:api-stored-data",
+        "type": "related-reading",
+        "to": "topic:docker",
+        "sourceRefs": [],
+        "derived": false
+      },
+      {
+        "from": "technology:java",
+        "type": "works-with",
+        "to": "technology:spring-boot",
+        "sourceRefs": [
+          "spring-boot-requirements"
+        ],
+        "derived": false
+      },
+      {
+        "from": "technology:maven",
+        "type": "works-with",
+        "to": "technology:spring-boot",
+        "sourceRefs": [
+          "spring-boot-requirements"
+        ],
+        "derived": false
+      },
+      {
+        "from": "technology:postgresql",
+        "type": "works-with",
+        "to": "technology:spring-boot",
+        "sourceRefs": [
+          "spring-boot-sql"
+        ],
+        "derived": false
+      },
+      {
         "from": "stage:requirements",
         "type": "default-skill",
         "to": "skill:requirement-refinement",
@@ -24003,6 +25615,51 @@ window.TOPIC_DATA = {
         "to": "source:jena-fuseki",
         "sourceRefs": [
           "jena-fuseki"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:api-stored-data-1",
+        "type": "evidenced-by",
+        "to": "source:openapi-operations",
+        "sourceRefs": [
+          "openapi-operations"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:api-stored-data-2",
+        "type": "evidenced-by",
+        "to": "source:http-semantics",
+        "sourceRefs": [
+          "http-semantics"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:api-stored-data-3",
+        "type": "evidenced-by",
+        "to": "source:http-semantics",
+        "sourceRefs": [
+          "http-semantics"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:api-stored-data-4",
+        "type": "evidenced-by",
+        "to": "source:mcp-tools-contract",
+        "sourceRefs": [
+          "mcp-tools-contract"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:api-stored-data-5",
+        "type": "evidenced-by",
+        "to": "source:rest-endpoint-access",
+        "sourceRefs": [
+          "rest-endpoint-access"
         ],
         "derived": true
       },
@@ -24735,6 +26392,31 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "topic:java",
+        "type": "applies-to",
+        "to": "technology:java",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "claim:java-1",
+        "type": "evidenced-by",
+        "to": "source:java-javac-25",
+        "sourceRefs": [
+          "java-javac-25"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:java-2",
+        "type": "evidenced-by",
+        "to": "source:maven-toolchains",
+        "sourceRefs": [
+          "maven-toolchains"
+        ],
+        "derived": true
+      },
+      {
         "from": "topic:javascript-typescript",
         "type": "applies-to",
         "to": "technology:javascript",
@@ -24787,6 +26469,51 @@ window.TOPIC_DATA = {
         "type": "applies-to",
         "to": "stage:experiment-plan",
         "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:maven",
+        "type": "applies-to",
+        "to": "technology:maven",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "claim:maven-1",
+        "type": "evidenced-by",
+        "to": "source:maven-lifecycle",
+        "sourceRefs": [
+          "maven-lifecycle"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:maven-2",
+        "type": "evidenced-by",
+        "to": "source:maven-failsafe",
+        "sourceRefs": [
+          "maven-failsafe"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:maven-3",
+        "type": "evidenced-by",
+        "to": "source:maven-wrapper",
+        "sourceRefs": [
+          "maven-wrapper",
+          "maven-toolchains"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:maven-3",
+        "type": "evidenced-by",
+        "to": "source:maven-toolchains",
+        "sourceRefs": [
+          "maven-wrapper",
+          "maven-toolchains"
+        ],
         "derived": true
       },
       {
@@ -25106,6 +26833,51 @@ window.TOPIC_DATA = {
         "to": "source:postgresql-tutorial",
         "sourceRefs": [
           "postgresql-tutorial"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:postgresql-data-2",
+        "type": "evidenced-by",
+        "to": "source:postgresql-pagination",
+        "sourceRefs": [
+          "postgresql-pagination"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:postgresql-data-3",
+        "type": "evidenced-by",
+        "to": "source:postgresql-isolation",
+        "sourceRefs": [
+          "postgresql-isolation"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:postgresql-data-4",
+        "type": "evidenced-by",
+        "to": "source:postgresql-transactions",
+        "sourceRefs": [
+          "postgresql-transactions"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:postgresql-data-5",
+        "type": "evidenced-by",
+        "to": "source:postgresql-row-security",
+        "sourceRefs": [
+          "postgresql-row-security"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:postgresql-data-6",
+        "type": "evidenced-by",
+        "to": "source:postgresql-backup",
+        "sourceRefs": [
+          "postgresql-backup"
         ],
         "derived": true
       },
@@ -25485,6 +27257,67 @@ window.TOPIC_DATA = {
         "to": "source:input-validation",
         "sourceRefs": [
           "input-validation"
+        ],
+        "derived": true
+      },
+      {
+        "from": "topic:spring-boot",
+        "type": "applies-to",
+        "to": "technology:spring-boot",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "claim:spring-boot-1",
+        "type": "evidenced-by",
+        "to": "source:spring-boot-requirements",
+        "sourceRefs": [
+          "spring-boot-requirements"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:spring-boot-2",
+        "type": "evidenced-by",
+        "to": "source:spring-mvc-validation",
+        "sourceRefs": [
+          "spring-mvc-validation"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:spring-boot-3",
+        "type": "evidenced-by",
+        "to": "source:spring-method-security",
+        "sourceRefs": [
+          "spring-method-security"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:spring-boot-4",
+        "type": "evidenced-by",
+        "to": "source:spring-transactions",
+        "sourceRefs": [
+          "spring-transactions"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:spring-boot-5",
+        "type": "evidenced-by",
+        "to": "source:spring-boot-sql",
+        "sourceRefs": [
+          "spring-boot-sql"
+        ],
+        "derived": true
+      },
+      {
+        "from": "claim:spring-boot-6",
+        "type": "evidenced-by",
+        "to": "source:spring-boot-tests",
+        "sourceRefs": [
+          "spring-boot-tests"
         ],
         "derived": true
       },
@@ -29220,6 +31053,222 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "topic:workflows",
+        "type": "browses",
+        "to": "topic:api-stored-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "browses",
+        "to": "topic:java",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "browses",
+        "to": "topic:spring-boot",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:toolchain",
+        "type": "browses",
+        "to": "topic:maven",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:java",
+        "type": "explains",
+        "to": "technology:java",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:java",
+        "type": "explains",
+        "to": "profile:java",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "profile:java",
+        "type": "used-by",
+        "to": "topic:java",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:spring-boot",
+        "type": "explains",
+        "to": "technology:spring-boot",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:spring-boot",
+        "type": "explains",
+        "to": "profile:spring-boot",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "profile:spring-boot",
+        "type": "used-by",
+        "to": "topic:spring-boot",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:maven",
+        "type": "explains",
+        "to": "technology:maven",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:maven",
+        "type": "explains",
+        "to": "profile:maven",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "profile:maven",
+        "type": "used-by",
+        "to": "topic:maven",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:postgresql-data",
+        "type": "explains",
+        "to": "technology:postgresql",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:postgresql-data",
+        "type": "explains",
+        "to": "profile:postgresql",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "profile:postgresql",
+        "type": "used-by",
+        "to": "topic:postgresql-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:requirements-workflow",
+        "type": "related-reading",
+        "to": "topic:api-stored-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:architecture-decisions",
+        "type": "related-reading",
+        "to": "topic:api-stored-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:retrieve-and-validate",
+        "type": "related-reading",
+        "to": "topic:api-stored-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:task-contract",
+        "type": "related-reading",
+        "to": "topic:api-stored-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:verification-loops",
+        "type": "related-reading",
+        "to": "topic:api-stored-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:release-operations",
+        "type": "related-reading",
+        "to": "topic:api-stored-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:java",
+        "type": "related-reading",
+        "to": "topic:api-stored-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:spring-boot",
+        "type": "related-reading",
+        "to": "topic:api-stored-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:maven",
+        "type": "related-reading",
+        "to": "topic:api-stored-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:postgresql-data",
+        "type": "related-reading",
+        "to": "topic:api-stored-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "topic:docker",
+        "type": "related-reading",
+        "to": "topic:api-stored-data",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "technology:spring-boot",
+        "type": "works-with",
+        "to": "technology:java",
+        "sourceRefs": [
+          "spring-boot-requirements"
+        ],
+        "derived": true
+      },
+      {
+        "from": "technology:spring-boot",
+        "type": "works-with",
+        "to": "technology:maven",
+        "sourceRefs": [
+          "spring-boot-requirements"
+        ],
+        "derived": true
+      },
+      {
+        "from": "technology:spring-boot",
+        "type": "works-with",
+        "to": "technology:postgresql",
+        "sourceRefs": [
+          "spring-boot-sql"
+        ],
+        "derived": true
+      },
+      {
         "from": "skill:requirement-refinement",
         "type": "default-skill-of",
         "to": "stage:requirements",
@@ -29858,6 +31907,51 @@ window.TOPIC_DATA = {
         "to": "claim:apache-jena-fuseki-1",
         "sourceRefs": [
           "jena-fuseki"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:openapi-operations",
+        "type": "evidence-for",
+        "to": "claim:api-stored-data-1",
+        "sourceRefs": [
+          "openapi-operations"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:http-semantics",
+        "type": "evidence-for",
+        "to": "claim:api-stored-data-2",
+        "sourceRefs": [
+          "http-semantics"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:http-semantics",
+        "type": "evidence-for",
+        "to": "claim:api-stored-data-3",
+        "sourceRefs": [
+          "http-semantics"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:mcp-tools-contract",
+        "type": "evidence-for",
+        "to": "claim:api-stored-data-4",
+        "sourceRefs": [
+          "mcp-tools-contract"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:rest-endpoint-access",
+        "type": "evidence-for",
+        "to": "claim:api-stored-data-5",
+        "sourceRefs": [
+          "rest-endpoint-access"
         ],
         "derived": true
       },
@@ -30590,6 +32684,31 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "technology:java",
+        "type": "applied-by",
+        "to": "topic:java",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "source:java-javac-25",
+        "type": "evidence-for",
+        "to": "claim:java-1",
+        "sourceRefs": [
+          "java-javac-25"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:maven-toolchains",
+        "type": "evidence-for",
+        "to": "claim:java-2",
+        "sourceRefs": [
+          "maven-toolchains"
+        ],
+        "derived": true
+      },
+      {
         "from": "technology:javascript",
         "type": "applied-by",
         "to": "topic:javascript-typescript",
@@ -30642,6 +32761,51 @@ window.TOPIC_DATA = {
         "type": "applied-by",
         "to": "topic:jev-shadow",
         "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "technology:maven",
+        "type": "applied-by",
+        "to": "topic:maven",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "source:maven-lifecycle",
+        "type": "evidence-for",
+        "to": "claim:maven-1",
+        "sourceRefs": [
+          "maven-lifecycle"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:maven-failsafe",
+        "type": "evidence-for",
+        "to": "claim:maven-2",
+        "sourceRefs": [
+          "maven-failsafe"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:maven-wrapper",
+        "type": "evidence-for",
+        "to": "claim:maven-3",
+        "sourceRefs": [
+          "maven-wrapper",
+          "maven-toolchains"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:maven-toolchains",
+        "type": "evidence-for",
+        "to": "claim:maven-3",
+        "sourceRefs": [
+          "maven-wrapper",
+          "maven-toolchains"
+        ],
         "derived": true
       },
       {
@@ -30961,6 +33125,51 @@ window.TOPIC_DATA = {
         "to": "claim:postgresql-data-1",
         "sourceRefs": [
           "postgresql-tutorial"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:postgresql-pagination",
+        "type": "evidence-for",
+        "to": "claim:postgresql-data-2",
+        "sourceRefs": [
+          "postgresql-pagination"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:postgresql-isolation",
+        "type": "evidence-for",
+        "to": "claim:postgresql-data-3",
+        "sourceRefs": [
+          "postgresql-isolation"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:postgresql-transactions",
+        "type": "evidence-for",
+        "to": "claim:postgresql-data-4",
+        "sourceRefs": [
+          "postgresql-transactions"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:postgresql-row-security",
+        "type": "evidence-for",
+        "to": "claim:postgresql-data-5",
+        "sourceRefs": [
+          "postgresql-row-security"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:postgresql-backup",
+        "type": "evidence-for",
+        "to": "claim:postgresql-data-6",
+        "sourceRefs": [
+          "postgresql-backup"
         ],
         "derived": true
       },
@@ -31344,6 +33553,67 @@ window.TOPIC_DATA = {
         "derived": true
       },
       {
+        "from": "technology:spring-boot",
+        "type": "applied-by",
+        "to": "topic:spring-boot",
+        "sourceRefs": [],
+        "derived": true
+      },
+      {
+        "from": "source:spring-boot-requirements",
+        "type": "evidence-for",
+        "to": "claim:spring-boot-1",
+        "sourceRefs": [
+          "spring-boot-requirements"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:spring-mvc-validation",
+        "type": "evidence-for",
+        "to": "claim:spring-boot-2",
+        "sourceRefs": [
+          "spring-mvc-validation"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:spring-method-security",
+        "type": "evidence-for",
+        "to": "claim:spring-boot-3",
+        "sourceRefs": [
+          "spring-method-security"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:spring-transactions",
+        "type": "evidence-for",
+        "to": "claim:spring-boot-4",
+        "sourceRefs": [
+          "spring-transactions"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:spring-boot-sql",
+        "type": "evidence-for",
+        "to": "claim:spring-boot-5",
+        "sourceRefs": [
+          "spring-boot-sql"
+        ],
+        "derived": true
+      },
+      {
+        "from": "source:spring-boot-tests",
+        "type": "evidence-for",
+        "to": "claim:spring-boot-6",
+        "sourceRefs": [
+          "spring-boot-tests"
+        ],
+        "derived": true
+      },
+      {
         "from": "stage:current-process",
         "type": "applied-by",
         "to": "topic:study-baseline",
@@ -31638,6 +33908,51 @@ window.TOPIC_DATA = {
         "text": "The PostgreSQL tutorial introduces relational data and SQL queries.",
         "sourceRefs": [
           "postgresql-tutorial"
+        ],
+        "topicId": "postgresql-data"
+      },
+      {
+        "id": "claim:postgresql-data-2",
+        "sectionLabel": "Documented paging and isolation",
+        "text": "PostgreSQL 18 recommends a unique ordering for predictable LIMIT or OFFSET results.",
+        "sourceRefs": [
+          "postgresql-pagination"
+        ],
+        "topicId": "postgresql-data"
+      },
+      {
+        "id": "claim:postgresql-data-3",
+        "sectionLabel": "Documented paging and isolation",
+        "text": "At default Read Committed isolation, successive SELECT statements may see different committed data, including within one transaction.",
+        "sourceRefs": [
+          "postgresql-isolation"
+        ],
+        "topicId": "postgresql-data"
+      },
+      {
+        "id": "claim:postgresql-data-4",
+        "sectionLabel": "Documented transaction and access scope",
+        "text": "PostgreSQL transactions group steps into an all-or-nothing operation.",
+        "sourceRefs": [
+          "postgresql-transactions"
+        ],
+        "topicId": "postgresql-data"
+      },
+      {
+        "id": "claim:postgresql-data-5",
+        "sectionLabel": "Documented transaction and access scope",
+        "text": "PostgreSQL row security can restrict visible or modifiable rows. Superusers and BYPASSRLS roles bypass it, and table owners normally do too.",
+        "sourceRefs": [
+          "postgresql-row-security"
+        ],
+        "topicId": "postgresql-data"
+      },
+      {
+        "id": "claim:postgresql-data-6",
+        "sectionLabel": "Migration and recovery",
+        "text": "PostgreSQL documents SQL dumps, file system backups and continuous archiving as distinct backup approaches.",
+        "sourceRefs": [
+          "postgresql-backup"
         ],
         "topicId": "postgresql-data"
       },
@@ -32598,6 +34913,151 @@ window.TOPIC_DATA = {
           "reference-63"
         ],
         "topicId": "playwright"
+      },
+      {
+        "id": "claim:api-stored-data-1",
+        "sectionLabel": "Documented contract and retry boundaries",
+        "text": "OpenAPI 3.2.1 describes operation parameters, request bodies, responses and security requirements.",
+        "sourceRefs": [
+          "openapi-operations"
+        ],
+        "topicId": "api-stored-data"
+      },
+      {
+        "id": "claim:api-stored-data-2",
+        "sectionLabel": "Documented contract and retry boundaries",
+        "text": "RFC 9110 defines idempotency by intended repeated effect and advises against automatically retrying non-idempotent requests without suitable knowledge of their semantics or outcome.",
+        "sourceRefs": [
+          "http-semantics"
+        ],
+        "topicId": "api-stored-data"
+      },
+      {
+        "id": "claim:api-stored-data-3",
+        "sectionLabel": "Documented contract and retry boundaries",
+        "text": "HTTP 202 indicates acceptance for processing rather than completed processing.",
+        "sourceRefs": [
+          "http-semantics"
+        ],
+        "topicId": "api-stored-data"
+      },
+      {
+        "id": "claim:api-stored-data-4",
+        "sectionLabel": "Choose an integration the team can approve",
+        "text": "MCP 2026-07-28 tools define input and optional output schemas, with tool annotations untrusted unless supplied by trusted servers.",
+        "sourceRefs": [
+          "mcp-tools-contract"
+        ],
+        "topicId": "api-stored-data"
+      },
+      {
+        "id": "claim:api-stored-data-5",
+        "sectionLabel": "Access checks belong in the application",
+        "text": "OWASP recommends access control at each non-public REST endpoint.",
+        "sourceRefs": [
+          "rest-endpoint-access"
+        ],
+        "topicId": "api-stored-data"
+      },
+      {
+        "id": "claim:java-1",
+        "sectionLabel": "Documented compiler boundary",
+        "text": "The Java SE 25 javac documentation describes compiling Java source into JVM class files and targeting a supported platform release and API through --release.",
+        "sourceRefs": [
+          "java-javac-25"
+        ],
+        "topicId": "java"
+      },
+      {
+        "id": "claim:java-2",
+        "sectionLabel": "Check the changed boundary",
+        "text": "Maven toolchains can select a build JDK independently of the JDK running Maven.",
+        "sourceRefs": [
+          "maven-toolchains"
+        ],
+        "topicId": "java"
+      },
+      {
+        "id": "claim:spring-boot-1",
+        "sectionLabel": "Documented version and validation scope",
+        "text": "Spring Boot 4.1.1 lists Java 17 as its minimum, compatibility through Java 26 and Maven support from 3.6.3, with possible additional third party requirements.",
+        "sourceRefs": [
+          "spring-boot-requirements"
+        ],
+        "topicId": "spring-boot"
+      },
+      {
+        "id": "claim:spring-boot-2",
+        "sectionLabel": "Documented version and validation scope",
+        "text": "Spring MVC supports Bean Validation on supported controller arguments and method constraints, subject to signature and configuration.",
+        "sourceRefs": [
+          "spring-mvc-validation"
+        ],
+        "topicId": "spring-boot"
+      },
+      {
+        "id": "claim:spring-boot-3",
+        "sectionLabel": "Security and transaction limits",
+        "text": "The Spring Security starter does not activate method-level authorization by default.",
+        "sourceRefs": [
+          "spring-method-security"
+        ],
+        "topicId": "spring-boot"
+      },
+      {
+        "id": "claim:spring-boot-4",
+        "sectionLabel": "Security and transaction limits",
+        "text": "Default Spring proxy transaction interception does not apply to self-invocation on the target object.",
+        "sourceRefs": [
+          "spring-transactions"
+        ],
+        "topicId": "spring-boot"
+      },
+      {
+        "id": "claim:spring-boot-5",
+        "sectionLabel": "Choose the data interface",
+        "text": "Spring Boot documents JDBC, repository approaches and DataSource configuration for SQL databases.",
+        "sourceRefs": [
+          "spring-boot-sql"
+        ],
+        "topicId": "spring-boot"
+      },
+      {
+        "id": "claim:spring-boot-6",
+        "sectionLabel": "Documented test boundaries",
+        "text": "@SpringBootTest defaults to MOCK without starting an embedded server. Running-server tests use separate client and server transactions, so test-side rollback does not roll back server-side work.",
+        "sourceRefs": [
+          "spring-boot-tests"
+        ],
+        "topicId": "spring-boot"
+      },
+      {
+        "id": "claim:maven-1",
+        "sectionLabel": "Documented lifecycle behavior",
+        "text": "Maven runs earlier phases in the invoked lifecycle before the selected phase, while bound goals depend on packaging and configured plugins.",
+        "sourceRefs": [
+          "maven-lifecycle"
+        ],
+        "topicId": "maven"
+      },
+      {
+        "id": "claim:maven-2",
+        "sectionLabel": "Documented lifecycle behavior",
+        "text": "Failsafe separates integration test execution from result verification and recommends invoking verify so teardown and verification can complete.",
+        "sourceRefs": [
+          "maven-failsafe"
+        ],
+        "topicId": "maven"
+      },
+      {
+        "id": "claim:maven-3",
+        "sectionLabel": "Documented wrapper and toolchain scope",
+        "text": "Maven Wrapper uses a configured Maven distribution and can download it, while Maven toolchains can select a build JDK independently of the JDK running Maven.",
+        "sourceRefs": [
+          "maven-wrapper",
+          "maven-toolchains"
+        ],
+        "topicId": "maven"
       }
     ],
     "definitions": [
@@ -33046,15 +35506,22 @@ window.TOPIC_DATA = {
         "ref": "profile:spring-boot",
         "type": "profile",
         "id": "spring-boot",
-        "label": "Spring Boot and APIs",
+        "label": "Spring Boot API and persistence boundaries",
         "summary": "",
-        "explainedBy": null,
-        "revision": "2.0.1",
-        "reviewedOn": "",
+        "explainedBy": "spring-boot",
+        "revision": "2.0.2",
+        "reviewedOn": "2026-10-12",
         "sourceRefs": [
           "reference-60",
-          "reference-61"
-        ]
+          "reference-61",
+          "spring-boot-requirements",
+          "spring-mvc-validation",
+          "spring-method-security",
+          "spring-transactions",
+          "spring-boot-tests"
+        ],
+        "basis": "Recommended project questions grounded in scoped official documentation",
+        "confidenceLevel": "proposed"
       },
       {
         "ref": "profile:react",
@@ -33184,7 +35651,7 @@ window.TOPIC_DATA = {
         "id": "java",
         "label": "Java",
         "summary": "",
-        "explainedBy": null,
+        "explainedBy": "java",
         "revision": "2.0.1",
         "reviewedOn": "",
         "sourceRefs": [],
@@ -33196,7 +35663,7 @@ window.TOPIC_DATA = {
         "id": "spring-boot",
         "label": "Spring Boot",
         "summary": "",
-        "explainedBy": null,
+        "explainedBy": "spring-boot",
         "revision": "2.0.1",
         "reviewedOn": "",
         "sourceRefs": [],
@@ -33352,7 +35819,7 @@ window.TOPIC_DATA = {
         "id": "postgresql",
         "label": "PostgreSQL",
         "summary": "",
-        "explainedBy": null,
+        "explainedBy": "postgresql-data",
         "revision": "2.0.1",
         "reviewedOn": "",
         "sourceRefs": [],
@@ -33698,6 +36165,75 @@ window.TOPIC_DATA = {
           "playwright-emulation"
         ],
         "category": "build-test"
+      },
+      {
+        "ref": "technology:maven",
+        "type": "technology",
+        "id": "maven",
+        "label": "Maven",
+        "summary": "",
+        "explainedBy": "maven",
+        "revision": "1.0.0",
+        "reviewedOn": "2026-10-12",
+        "sourceRefs": [
+          "maven-lifecycle",
+          "maven-failsafe",
+          "maven-wrapper"
+        ],
+        "category": "build-test"
+      },
+      {
+        "ref": "profile:java",
+        "type": "profile",
+        "id": "java",
+        "label": "Java toolchains and service boundaries",
+        "summary": "",
+        "explainedBy": "java",
+        "revision": "1.0.0",
+        "reviewedOn": "2026-10-12",
+        "sourceRefs": [
+          "java-javac-25",
+          "maven-toolchains"
+        ],
+        "basis": "Recommended project questions grounded in scoped official documentation",
+        "confidenceLevel": "proposed"
+      },
+      {
+        "ref": "profile:maven",
+        "type": "profile",
+        "id": "maven",
+        "label": "Maven lifecycle and test discovery",
+        "summary": "",
+        "explainedBy": "maven",
+        "revision": "1.0.0",
+        "reviewedOn": "2026-10-12",
+        "sourceRefs": [
+          "maven-lifecycle",
+          "maven-failsafe",
+          "maven-wrapper",
+          "maven-toolchains"
+        ],
+        "basis": "Recommended project questions grounded in scoped official documentation",
+        "confidenceLevel": "proposed"
+      },
+      {
+        "ref": "profile:postgresql",
+        "type": "profile",
+        "id": "postgresql",
+        "label": "PostgreSQL query and persistence evidence",
+        "summary": "",
+        "explainedBy": "postgresql-data",
+        "revision": "1.0.0",
+        "reviewedOn": "2026-10-12",
+        "sourceRefs": [
+          "postgresql-pagination",
+          "postgresql-isolation",
+          "postgresql-transactions",
+          "postgresql-row-security",
+          "postgresql-backup"
+        ],
+        "basis": "Recommended project questions grounded in scoped official documentation",
+        "confidenceLevel": "proposed"
       }
     ],
     "clusterDigests": [
@@ -33706,8 +36242,9 @@ window.TOPIC_DATA = {
         "short": "Workflows",
         "title": "Workflows & orchestration",
         "summary": "Use explicit stages and acceptance criteria, with models performing analysis inside the process.",
-        "topicCount": 26,
+        "topicCount": 27,
         "topicIds": [
+          "api-stored-data",
           "architecture",
           "architecture-decisions",
           "construct-study",
@@ -33741,7 +36278,7 @@ window.TOPIC_DATA = {
         "short": "Toolchain",
         "title": "Tools and integrations",
         "summary": "Assign existing systems concrete responsibilities and verify actual integration boundaries.",
-        "topicCount": 26,
+        "topicCount": 29,
         "topicIds": [
           "amazon-neptune",
           "apache-jena-fuseki",
@@ -33752,9 +36289,11 @@ window.TOPIC_DATA = {
           "github-actions",
           "information-retrieval",
           "intellij",
+          "java",
           "javascript-typescript",
           "jenkins",
           "jira",
+          "maven",
           "neo4j-data",
           "neptune-stack",
           "nodejs",
@@ -33768,6 +36307,7 @@ window.TOPIC_DATA = {
           "retrieval-options",
           "retrieve-and-validate",
           "rovo",
+          "spring-boot",
           "vitest"
         ]
       },
@@ -33923,9 +36463,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "practice",
           "radius": 7.35,
-          "x": 843.23,
-          "y": 697.83,
-          "labelRank": 150
+          "x": 843.37,
+          "y": 697.92,
+          "labelRank": 157
         },
         {
           "id": "practice:evidence-wiki",
@@ -33933,9 +36473,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "practice",
           "radius": 7.35,
-          "x": 1136.64,
-          "y": 1596.28,
-          "labelRank": 151
+          "x": 1137.45,
+          "y": 1593.51,
+          "labelRank": 158
         },
         {
           "id": "practice:minimum-change",
@@ -33943,9 +36483,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "practice",
           "radius": 7.35,
-          "x": 1167.87,
-          "y": 1593.49,
-          "labelRank": 152
+          "x": 1170.08,
+          "y": 1597.81,
+          "labelRank": 159
         },
         {
           "id": "practice:portable-behavior",
@@ -33953,9 +36493,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "practice",
           "radius": 6,
-          "x": 1131.97,
-          "y": 1628.11,
-          "labelRank": 158
+          "x": 1135.63,
+          "y": 1626.18,
+          "labelRank": 165
         },
         {
           "id": "practice:progressive-context",
@@ -33963,9 +36503,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "practice",
           "radius": 7.35,
-          "x": 1147.15,
-          "y": 1563.48,
-          "labelRank": 153
+          "x": 1148.02,
+          "y": 1562.37,
+          "labelRank": 160
         },
         {
           "id": "practice:specification-first",
@@ -33973,9 +36513,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "practice",
           "radius": 7.35,
-          "x": 1174.09,
-          "y": 1626.93,
-          "labelRank": 154
+          "x": 1176.59,
+          "y": 1630.62,
+          "labelRank": 161
         },
         {
           "id": "practice:validated-retrieval",
@@ -33983,9 +36523,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "practice",
           "radius": 7.35,
-          "x": 1104.97,
-          "y": 1605.86,
-          "labelRank": 155
+          "x": 1106.47,
+          "y": 1604.08,
+          "labelRank": 162
         },
         {
           "id": "technology:angular",
@@ -33993,9 +36533,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1180.67,
-          "y": 1563.77,
-          "labelRank": 48
+          "x": 1181.22,
+          "y": 1567.44,
+          "labelRank": 166
         },
         {
           "id": "technology:aws",
@@ -34003,9 +36543,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1152.44,
-          "y": 1651.12,
-          "labelRank": 49
+          "x": 1152.11,
+          "y": 1654.03,
+          "labelRank": 167
         },
         {
           "id": "technology:docker",
@@ -34013,9 +36553,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 8.7,
-          "x": 249.41,
-          "y": 856.27,
-          "labelRank": 137
+          "x": 247.21,
+          "y": 853.89,
+          "labelRank": 139
         },
         {
           "id": "technology:dotnet",
@@ -34023,9 +36563,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1113.79,
-          "y": 1571.2,
-          "labelRank": 159
+          "x": 1113.6,
+          "y": 1567.69,
+          "labelRank": 49
         },
         {
           "id": "technology:github",
@@ -34033,8 +36573,8 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 7.91,
-          "x": 1200.46,
-          "y": 1602.98,
+          "x": 1205.36,
+          "y": 1606.33,
           "labelRank": 47
         },
         {
@@ -34043,9 +36583,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 7.91,
-          "x": 283.01,
-          "y": 801.63,
-          "labelRank": 146
+          "x": 285.71,
+          "y": 802.15,
+          "labelRank": 48
         },
         {
           "id": "technology:go",
@@ -34053,9 +36593,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1100.69,
-          "y": 1640.53,
-          "labelRank": 50
+          "x": 1104.22,
+          "y": 1638.87,
+          "labelRank": 168
         },
         {
           "id": "technology:graphql",
@@ -34063,19 +36603,19 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1164.16,
-          "y": 1533.24,
-          "labelRank": 160
+          "x": 1163.72,
+          "y": 1532.42,
+          "labelRank": 169
         },
         {
           "id": "technology:java",
           "definitionRef": "technology:java",
-          "clusterId": "factory",
+          "clusterId": "toolchain",
           "kind": "technology",
-          "radius": 6,
-          "x": 1185.16,
-          "y": 1660.12,
-          "labelRank": 161
+          "radius": 7.91,
+          "x": 293.09,
+          "y": 867.31,
+          "labelRank": 152
         },
         {
           "id": "technology:javascript",
@@ -34083,9 +36623,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 7.91,
-          "x": 293.47,
-          "y": 867.98,
-          "labelRank": 147
+          "x": 234.68,
+          "y": 825.88,
+          "labelRank": 153
         },
         {
           "id": "technology:jena-fuseki",
@@ -34093,9 +36633,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 8.34,
-          "x": 1078.51,
-          "y": 1580.73,
-          "labelRank": 45
+          "x": 1184.91,
+          "y": 1667.28,
+          "labelRank": 148
         },
         {
           "id": "technology:kotlin",
@@ -34103,9 +36643,19 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1213.22,
-          "y": 1569.94,
-          "labelRank": 162
+          "x": 1082.13,
+          "y": 1578.68,
+          "labelRank": 170
+        },
+        {
+          "id": "technology:maven",
+          "definitionRef": "technology:maven",
+          "clusterId": "toolchain",
+          "kind": "technology",
+          "radius": 7.91,
+          "x": 314.18,
+          "y": 819.37,
+          "labelRank": 154
         },
         {
           "id": "technology:neo4j",
@@ -34113,9 +36663,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 8.34,
-          "x": 1121.68,
-          "y": 1669,
-          "labelRank": 142
+          "x": 1216.77,
+          "y": 1571.06,
+          "labelRank": 45
         },
         {
           "id": "technology:neptune",
@@ -34123,9 +36673,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 9.57,
-          "x": 1126.24,
-          "y": 1532.23,
-          "labelRank": 33
+          "x": 1120.87,
+          "y": 1671.72,
+          "labelRank": 32
         },
         {
           "id": "technology:nodejs",
@@ -34133,9 +36683,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 8.7,
-          "x": 240.31,
-          "y": 823.77,
-          "labelRank": 138
+          "x": 265.03,
+          "y": 879.75,
+          "labelRank": 140
         },
         {
           "id": "technology:npm",
@@ -34143,9 +36693,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 7.35,
-          "x": 312.22,
-          "y": 814.37,
-          "labelRank": 156
+          "x": 253.01,
+          "y": 802.94,
+          "labelRank": 163
         },
         {
           "id": "technology:playwright",
@@ -34153,19 +36703,19 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 7.35,
-          "x": 265.76,
-          "y": 881.53,
-          "labelRank": 157
+          "x": 317.17,
+          "y": 849.42,
+          "labelRank": 164
         },
         {
           "id": "technology:postgresql",
           "definitionRef": "technology:postgresql",
-          "clusterId": "factory",
+          "clusterId": "toolchain",
           "kind": "technology",
-          "radius": 8.7,
-          "x": 1213.82,
-          "y": 1638.09,
-          "labelRank": 44
+          "radius": 9.02,
+          "x": 213.51,
+          "y": 855.24,
+          "labelRank": 121
         },
         {
           "id": "technology:python",
@@ -34173,9 +36723,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 7.91,
-          "x": 252.52,
-          "y": 794.2,
-          "labelRank": 148
+          "x": 310.1,
+          "y": 784.96,
+          "labelRank": 155
         },
         {
           "id": "technology:rdf",
@@ -34183,8 +36733,8 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 8.34,
-          "x": 1071.24,
-          "y": 1619.46,
+          "x": 1125.39,
+          "y": 1533.14,
           "labelRank": 46
         },
         {
@@ -34193,9 +36743,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 8.34,
-          "x": 316.91,
-          "y": 847.1,
-          "labelRank": 143
+          "x": 289.22,
+          "y": 902.5,
+          "labelRank": 149
         },
         {
           "id": "technology:rust",
@@ -34203,9 +36753,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1198.7,
-          "y": 1536.65,
-          "labelRank": 163
+          "x": 1210.39,
+          "y": 1640.99,
+          "labelRank": 50
         },
         {
           "id": "technology:sparql",
@@ -34213,19 +36763,19 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 9.02,
-          "x": 1158.03,
-          "y": 1685.82,
-          "labelRank": 40
+          "x": 1072.75,
+          "y": 1618.98,
+          "labelRank": 41
         },
         {
           "id": "technology:spring-boot",
           "definitionRef": "technology:spring-boot",
-          "clusterId": "factory",
+          "clusterId": "toolchain",
           "kind": "technology",
-          "radius": 6,
-          "x": 1091.6,
-          "y": 1546.54,
-          "labelRank": 164
+          "radius": 8.7,
+          "x": 217.61,
+          "y": 795.92,
+          "labelRank": 141
         },
         {
           "id": "technology:typescript",
@@ -34233,9 +36783,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 8.34,
-          "x": 218.31,
-          "y": 854.71,
-          "labelRank": 144
+          "x": 347.7,
+          "y": 831.72,
+          "labelRank": 150
         },
         {
           "id": "technology:vitest",
@@ -34243,9 +36793,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "technology",
           "radius": 7.91,
-          "x": 308.11,
-          "y": 778.06,
-          "labelRank": 149
+          "x": 232.63,
+          "y": 885.73,
+          "labelRank": 156
         },
         {
           "id": "technology:vue",
@@ -34253,9 +36803,9 @@ window.TOPIC_DATA = {
           "clusterId": "factory",
           "kind": "technology",
           "radius": 6,
-          "x": 1234.02,
-          "y": 1597.82,
-          "labelRank": 165
+          "x": 1197.65,
+          "y": 1539.19,
+          "labelRank": 51
         },
         {
           "id": "topic:adverse-audits",
@@ -34263,9 +36813,9 @@ window.TOPIC_DATA = {
           "clusterId": "talos",
           "kind": "topic",
           "radius": 9.02,
-          "x": 1469.8,
-          "y": 665.96,
-          "labelRank": 103
+          "x": 1469.84,
+          "y": 665.95,
+          "labelRank": 105
         },
         {
           "id": "topic:agent-roles",
@@ -34273,9 +36823,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.31,
-          "x": 882.1,
-          "y": 639.04,
-          "labelRank": 87
+          "x": 882.5,
+          "y": 639.17,
+          "labelRank": 90
         },
         {
           "id": "topic:agents-md",
@@ -34283,8 +36833,8 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.02,
-          "x": 894.98,
-          "y": 702.24,
+          "x": 895.16,
+          "y": 702.09,
           "labelRank": 37
         },
         {
@@ -34293,9 +36843,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 8.34,
-          "x": 293.61,
-          "y": 901.95,
-          "labelRank": 139
+          "x": 272.88,
+          "y": 774.65,
+          "labelRank": 142
         },
         {
           "id": "topic:answer-contract",
@@ -34303,8 +36853,8 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 11.4,
-          "x": 1745.54,
-          "y": 1281.85,
+          "x": 1745.53,
+          "y": 1281.86,
           "labelRank": 13
         },
         {
@@ -34313,9 +36863,19 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 8.34,
-          "x": 218.34,
-          "y": 792.82,
-          "labelRank": 140
+          "x": 319.22,
+          "y": 884.74,
+          "labelRank": 143
+        },
+        {
+          "id": "topic:api-stored-data",
+          "topicId": "api-stored-data",
+          "clusterId": "workflows",
+          "kind": "topic",
+          "radius": 10.68,
+          "x": 522.78,
+          "y": 334.42,
+          "labelRank": 58
         },
         {
           "id": "topic:applicability",
@@ -34324,8 +36884,8 @@ window.TOPIC_DATA = {
           "kind": "topic",
           "radius": 10.48,
           "x": 896.66,
-          "y": 233.87,
-          "labelRank": 57
+          "y": 233.75,
+          "labelRank": 60
         },
         {
           "id": "topic:architect-proposal",
@@ -34334,8 +36894,8 @@ window.TOPIC_DATA = {
           "kind": "topic",
           "radius": 9.31,
           "x": 1407.11,
-          "y": 246.42,
-          "labelRank": 88
+          "y": 246.43,
+          "labelRank": 91
         },
         {
           "id": "topic:architecture",
@@ -34343,19 +36903,19 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.05,
-          "x": 521.02,
-          "y": 334.8,
-          "labelRank": 63
+          "x": 485.43,
+          "y": 394.46,
+          "labelRank": 65
         },
         {
           "id": "topic:architecture-decisions",
           "topicId": "architecture-decisions",
           "clusterId": "workflows",
           "kind": "topic",
-          "radius": 10.27,
-          "x": 484.31,
-          "y": 394.25,
-          "labelRank": 59
+          "radius": 10.48,
+          "x": 483.57,
+          "y": 323.65,
+          "labelRank": 18
         },
         {
           "id": "topic:billing-boundaries",
@@ -34363,9 +36923,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 9.82,
-          "x": 547.77,
-          "y": 1202.56,
-          "labelRank": 26
+          "x": 548.07,
+          "y": 1202.45,
+          "labelRank": 27
         },
         {
           "id": "topic:bitbucket",
@@ -34373,9 +36933,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 8.7,
-          "x": 346.38,
-          "y": 825.34,
-          "labelRank": 118
+          "x": 197.89,
+          "y": 824.97,
+          "labelRank": 122
         },
         {
           "id": "topic:budgets",
@@ -34383,9 +36943,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 9.57,
-          "x": 588.38,
-          "y": 1266.94,
-          "labelRank": 77
+          "x": 588.26,
+          "y": 1267,
+          "labelRank": 79
         },
         {
           "id": "topic:candidate-isolation",
@@ -34393,9 +36953,9 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 10.27,
-          "x": 1713.07,
-          "y": 1211.8,
-          "labelRank": 19
+          "x": 1713,
+          "y": 1211.86,
+          "labelRank": 20
         },
         {
           "id": "topic:capability-inventory",
@@ -34403,9 +36963,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.82,
-          "x": 228.37,
-          "y": 889.8,
-          "labelRank": 27
+          "x": 343.12,
+          "y": 797.4,
+          "labelRank": 70
         },
         {
           "id": "topic:ci-skill",
@@ -34413,9 +36973,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 8.7,
-          "x": 834.07,
-          "y": 661.98,
-          "labelRank": 119
+          "x": 834.03,
+          "y": 662.09,
+          "labelRank": 123
         },
         {
           "id": "topic:confidence-summary",
@@ -34423,9 +36983,9 @@ window.TOPIC_DATA = {
           "clusterId": "evaluation",
           "kind": "topic",
           "radius": 9.82,
-          "x": 1476.78,
-          "y": 204.62,
-          "labelRank": 68
+          "x": 1476.8,
+          "y": 204.64,
+          "labelRank": 71
         },
         {
           "id": "topic:confluence",
@@ -34433,9 +36993,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.02,
-          "x": 274.59,
-          "y": 766.88,
-          "labelRank": 104
+          "x": 256.7,
+          "y": 913.63,
+          "labelRank": 106
         },
         {
           "id": "topic:construct-study",
@@ -34443,9 +37003,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.87,
-          "x": 482.92,
-          "y": 319.83,
-          "labelRank": 16
+          "x": 531.72,
+          "y": 374.95,
+          "labelRank": 54
         },
         {
           "id": "topic:context-selection",
@@ -34453,9 +37013,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 9.57,
-          "x": 516.73,
-          "y": 1246.97,
-          "labelRank": 78
+          "x": 516.8,
+          "y": 1247.53,
+          "labelRank": 80
         },
         {
           "id": "topic:cost-per-result",
@@ -34463,9 +37023,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 10.87,
-          "x": 590.88,
-          "y": 1216.07,
-          "labelRank": 51
+          "x": 591.22,
+          "y": 1216.55,
+          "labelRank": 55
         },
         {
           "id": "topic:coverage",
@@ -34473,9 +37033,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 9.57,
-          "x": 1770.31,
-          "y": 341.85,
-          "labelRank": 79
+          "x": 1770.32,
+          "y": 341.83,
+          "labelRank": 81
         },
         {
           "id": "topic:curation-workflow",
@@ -34483,9 +37043,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.31,
-          "x": 532.88,
-          "y": 372.02,
-          "labelRank": 89
+          "x": 456.09,
+          "y": 370.81,
+          "labelRank": 92
         },
         {
           "id": "topic:data-query-verification",
@@ -34493,9 +37053,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.82,
-          "x": 913.18,
+          "x": 913.63,
           "y": 663.92,
-          "labelRank": 69
+          "labelRank": 72
         },
         {
           "id": "topic:debt",
@@ -34513,9 +37073,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1782.3,
-          "y": 390.69,
-          "labelRank": 41
+          "x": 1782.33,
+          "y": 390.72,
+          "labelRank": 42
         },
         {
           "id": "topic:decomposition",
@@ -34523,9 +37083,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 9.31,
-          "x": 1804.65,
-          "y": 318.34,
-          "labelRank": 90
+          "x": 1804.68,
+          "y": 318.35,
+          "labelRank": 93
         },
         {
           "id": "topic:deterministic-control",
@@ -34533,9 +37093,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.31,
-          "x": 454.72,
-          "y": 373.24,
-          "labelRank": 91
+          "x": 514.39,
+          "y": 298.67,
+          "labelRank": 94
         },
         {
           "id": "topic:discovery",
@@ -34543,19 +37103,19 @@ window.TOPIC_DATA = {
           "clusterId": "requirements",
           "kind": "topic",
           "radius": 9.31,
-          "x": 813.74,
-          "y": 237.31,
-          "labelRank": 92
+          "x": 813.78,
+          "y": 237.41,
+          "labelRank": 95
         },
         {
           "id": "topic:docker",
           "topicId": "docker",
           "clusterId": "toolchain",
           "kind": "topic",
-          "radius": 8.7,
-          "x": 324.63,
-          "y": 885.43,
-          "labelRank": 120
+          "radius": 9.02,
+          "x": 238.85,
+          "y": 769.32,
+          "labelRank": 38
         },
         {
           "id": "topic:durable-execution",
@@ -34563,9 +37123,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.57,
-          "x": 516.02,
-          "y": 301.45,
-          "labelRank": 80
+          "x": 515.73,
+          "y": 409.08,
+          "labelRank": 82
         },
         {
           "id": "topic:dynamic-workflows",
@@ -34573,9 +37133,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.57,
-          "x": 516.24,
-          "y": 405.7,
-          "labelRank": 81
+          "x": 448.84,
+          "y": 332.64,
+          "labelRank": 83
         },
         {
           "id": "topic:eager-skills",
@@ -34583,9 +37143,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.02,
-          "x": 864.03,
+          "x": 864.34,
           "y": 728.2,
-          "labelRank": 105
+          "labelRank": 107
         },
         {
           "id": "topic:economy",
@@ -34604,8 +37164,8 @@ window.TOPIC_DATA = {
           "kind": "topic",
           "radius": 9.02,
           "x": 1779.86,
-          "y": 1240.95,
-          "labelRank": 106
+          "y": 1241.01,
+          "labelRank": 108
         },
         {
           "id": "topic:eval-corpus",
@@ -34613,9 +37173,9 @@ window.TOPIC_DATA = {
           "clusterId": "evaluation",
           "kind": "topic",
           "radius": 9.31,
-          "x": 1462.17,
-          "y": 270.68,
-          "labelRank": 34
+          "x": 1462.23,
+          "y": 270.66,
+          "labelRank": 33
         },
         {
           "id": "topic:eval-metrics",
@@ -34623,9 +37183,9 @@ window.TOPIC_DATA = {
           "clusterId": "evaluation",
           "kind": "topic",
           "radius": 10.27,
-          "x": 1406.44,
-          "y": 206.15,
-          "labelRank": 60
+          "x": 1406.53,
+          "y": 206.16,
+          "labelRank": 61
         },
         {
           "id": "topic:evaluation",
@@ -34643,9 +37203,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.57,
-          "x": 451.36,
-          "y": 337.38,
-          "labelRank": 82
+          "x": 557.15,
+          "y": 345.32,
+          "labelRank": 84
         },
         {
           "id": "topic:finding-contract",
@@ -34653,9 +37213,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 10.05,
-          "x": 1837.04,
-          "y": 386.61,
-          "labelRank": 64
+          "x": 1837.05,
+          "y": 386.59,
+          "labelRank": 66
         },
         {
           "id": "topic:github-actions",
@@ -34663,9 +37223,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.82,
-          "x": 203.23,
-          "y": 825.55,
-          "labelRank": 70
+          "x": 349.31,
+          "y": 865.97,
+          "labelRank": 28
         },
         {
           "id": "topic:grader-design",
@@ -34673,9 +37233,9 @@ window.TOPIC_DATA = {
           "clusterId": "evaluation",
           "kind": "topic",
           "radius": 9.31,
-          "x": 1423.96,
-          "y": 282.25,
-          "labelRank": 93
+          "x": 1424.03,
+          "y": 282.23,
+          "labelRank": 96
         },
         {
           "id": "topic:graphrag-option",
@@ -34683,9 +37243,9 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1708.47,
-          "y": 1261.91,
-          "labelRank": 121
+          "x": 1708.46,
+          "y": 1261.93,
+          "labelRank": 124
         },
         {
           "id": "topic:handoffs",
@@ -34693,9 +37253,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 9.02,
-          "x": 508.56,
-          "y": 1208.11,
-          "labelRank": 107
+          "x": 508.94,
+          "y": 1208.62,
+          "labelRank": 109
         },
         {
           "id": "topic:holiday-example",
@@ -34703,9 +37263,9 @@ window.TOPIC_DATA = {
           "clusterId": "requirements",
           "kind": "topic",
           "radius": 9.31,
-          "x": 846.66,
-          "y": 192.96,
-          "labelRank": 35
+          "x": 846.89,
+          "y": 192.92,
+          "labelRank": 34
         },
         {
           "id": "topic:impact-skill",
@@ -34713,9 +37273,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.31,
-          "x": 845.49,
-          "y": 624.67,
-          "labelRank": 94
+          "x": 845.87,
+          "y": 624.9,
+          "labelRank": 97
         },
         {
           "id": "topic:implementation-workflow",
@@ -34723,9 +37283,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.87,
-          "x": 555.88,
-          "y": 338.09,
-          "labelRank": 52
+          "x": 453.61,
+          "y": 411.17,
+          "labelRank": 56
         },
         {
           "id": "topic:information-retrieval",
@@ -34733,8 +37293,8 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 10.05,
-          "x": 340.78,
-          "y": 790.16,
+          "x": 196.62,
+          "y": 887.56,
           "labelRank": 24
         },
         {
@@ -34743,9 +37303,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.02,
-          "x": 259.6,
-          "y": 912.26,
-          "labelRank": 108
+          "x": 299.09,
+          "y": 752.48,
+          "labelRank": 110
         },
         {
           "id": "topic:jacoco-counters",
@@ -34753,9 +37313,19 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 8.34,
-          "x": 1748.16,
-          "y": 373.72,
-          "labelRank": 141
+          "x": 1748.21,
+          "y": 373.73,
+          "labelRank": 144
+        },
+        {
+          "id": "topic:java",
+          "topicId": "java",
+          "clusterId": "toolchain",
+          "kind": "topic",
+          "radius": 8.34,
+          "x": 316.85,
+          "y": 921.19,
+          "labelRank": 145
         },
         {
           "id": "topic:javascript-typescript",
@@ -34763,9 +37333,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.57,
-          "x": 237.59,
-          "y": 759.71,
-          "labelRank": 83
+          "x": 179.74,
+          "y": 790.59,
+          "labelRank": 85
         },
         {
           "id": "topic:jenkins",
@@ -34773,9 +37343,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.82,
-          "x": 350.1,
-          "y": 860.7,
-          "labelRank": 71
+          "x": 380.07,
+          "y": 810.24,
+          "labelRank": 73
         },
         {
           "id": "topic:jev",
@@ -34793,9 +37363,9 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 8.7,
-          "x": 2025,
-          "y": 876.48,
-          "labelRank": 122
+          "x": 2025.02,
+          "y": 876.47,
+          "labelRank": 125
         },
         {
           "id": "topic:jev-confidence",
@@ -34805,7 +37375,7 @@ window.TOPIC_DATA = {
           "radius": 9.31,
           "x": 1994.83,
           "y": 804.53,
-          "labelRank": 95
+          "labelRank": 98
         },
         {
           "id": "topic:jev-judgments",
@@ -34814,8 +37384,8 @@ window.TOPIC_DATA = {
           "kind": "topic",
           "radius": 9.02,
           "x": 2061.73,
-          "y": 840.25,
-          "labelRank": 109
+          "y": 840.27,
+          "labelRank": 111
         },
         {
           "id": "topic:jev-languages",
@@ -34824,8 +37394,8 @@ window.TOPIC_DATA = {
           "kind": "topic",
           "radius": 9.02,
           "x": 1988.12,
-          "y": 866.9,
-          "labelRank": 38
+          "y": 866.95,
+          "labelRank": 39
         },
         {
           "id": "topic:jev-limitations",
@@ -34833,9 +37403,9 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 8.7,
-          "x": 2030.02,
-          "y": 789.65,
-          "labelRank": 123
+          "x": 2030.03,
+          "y": 789.68,
+          "labelRank": 126
         },
         {
           "id": "topic:jev-mapping",
@@ -34843,9 +37413,9 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 9.02,
-          "x": 2063.49,
-          "y": 879.12,
-          "labelRank": 110
+          "x": 2063.5,
+          "y": 879.14,
+          "labelRank": 112
         },
         {
           "id": "topic:jev-shadow",
@@ -34853,9 +37423,9 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 9.82,
-          "x": 1967.39,
-          "y": 833.08,
-          "labelRank": 72
+          "x": 1967.42,
+          "y": 833.11,
+          "labelRank": 74
         },
         {
           "id": "topic:jev-support",
@@ -34863,9 +37433,9 @@ window.TOPIC_DATA = {
           "clusterId": "jev",
           "kind": "topic",
           "radius": 9.82,
-          "x": 2067.67,
-          "y": 801.21,
-          "labelRank": 28
+          "x": 2067.69,
+          "y": 801.24,
+          "labelRank": 29
         },
         {
           "id": "topic:jira",
@@ -34873,9 +37443,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.02,
-          "x": 188.95,
-          "y": 872,
-          "labelRank": 111
+          "x": 220.47,
+          "y": 919.77,
+          "labelRank": 40
         },
         {
           "id": "topic:knowledge",
@@ -34893,9 +37463,9 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1783.8,
-          "y": 1291.05,
-          "labelRank": 124
+          "x": 1783.77,
+          "y": 1291.13,
+          "labelRank": 127
         },
         {
           "id": "topic:llm-wiki",
@@ -34903,9 +37473,19 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 9.02,
-          "x": 1680.61,
-          "y": 1235.29,
-          "labelRank": 112
+          "x": 1680.56,
+          "y": 1235.37,
+          "labelRank": 113
+        },
+        {
+          "id": "topic:maven",
+          "topicId": "maven",
+          "clusterId": "toolchain",
+          "kind": "topic",
+          "radius": 8.34,
+          "x": 263.04,
+          "y": 743.05,
+          "labelRank": 146
         },
         {
           "id": "topic:model-inheritance",
@@ -34913,9 +37493,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 8.7,
-          "x": 620,
-          "y": 1244.22,
-          "labelRank": 125
+          "x": 620.24,
+          "y": 1244.79,
+          "labelRank": 128
         },
         {
           "id": "topic:model-prices",
@@ -34923,9 +37503,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 9.02,
-          "x": 533.65,
-          "y": 1282.56,
-          "labelRank": 113
+          "x": 533.98,
+          "y": 1283,
+          "labelRank": 114
         },
         {
           "id": "topic:mutation-testing",
@@ -34933,9 +37513,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1842.17,
-          "y": 325.34,
-          "labelRank": 126
+          "x": 1842.2,
+          "y": 325.35,
+          "labelRank": 129
         },
         {
           "id": "topic:neo4j-data",
@@ -34943,9 +37523,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 8.7,
-          "x": 301.65,
-          "y": 741,
-          "labelRank": 127
+          "x": 349.84,
+          "y": 903.16,
+          "labelRank": 43
         },
         {
           "id": "topic:neptune-stack",
@@ -34953,9 +37533,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 10.27,
-          "x": 307.84,
-          "y": 935.41,
-          "labelRank": 20
+          "x": 173.5,
+          "y": 857.22,
+          "labelRank": 62
         },
         {
           "id": "topic:nodejs",
@@ -34963,9 +37543,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.82,
-          "x": 178.58,
-          "y": 796.35,
-          "labelRank": 29
+          "x": 336.56,
+          "y": 760.87,
+          "labelRank": 75
         },
         {
           "id": "topic:npm",
@@ -34973,9 +37553,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.31,
-          "x": 377.2,
-          "y": 800.64,
-          "labelRank": 96
+          "x": 285.14,
+          "y": 940.91,
+          "labelRank": 99
         },
         {
           "id": "topic:overview",
@@ -34993,9 +37573,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 8.7,
-          "x": 933.34,
-          "y": 697.86,
-          "labelRank": 128
+          "x": 933.54,
+          "y": 698,
+          "labelRank": 130
         },
         {
           "id": "topic:parallelism",
@@ -35003,9 +37583,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 8.7,
-          "x": 455.41,
-          "y": 411.52,
-          "labelRank": 129
+          "x": 477.15,
+          "y": 290.99,
+          "labelRank": 131
         },
         {
           "id": "topic:permissions",
@@ -35013,9 +37593,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 10.27,
-          "x": 227.88,
-          "y": 932.07,
-          "labelRank": 61
+          "x": 201.18,
+          "y": 758.96,
+          "labelRank": 63
         },
         {
           "id": "topic:pilot",
@@ -35023,8 +37603,8 @@ window.TOPIC_DATA = {
           "clusterId": "evaluation",
           "kind": "topic",
           "radius": 10.27,
-          "x": 1441.32,
-          "y": 183.49,
+          "x": 1441.38,
+          "y": 183.46,
           "labelRank": 21
         },
         {
@@ -35033,9 +37613,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.82,
-          "x": 805.51,
-          "y": 689.74,
-          "labelRank": 73
+          "x": 805.64,
+          "y": 689.96,
+          "labelRank": 76
         },
         {
           "id": "topic:playwright",
@@ -35043,9 +37623,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.57,
-          "x": 263.42,
-          "y": 729.97,
-          "labelRank": 32
+          "x": 383.69,
+          "y": 847.74,
+          "labelRank": 86
         },
         {
           "id": "topic:post-change-checks",
@@ -35053,7 +37633,7 @@ window.TOPIC_DATA = {
           "clusterId": "talos",
           "kind": "topic",
           "radius": 11.05,
-          "x": 1415.74,
+          "x": 1415.72,
           "y": 714.27,
           "labelRank": 14
         },
@@ -35062,10 +37642,10 @@ window.TOPIC_DATA = {
           "topicId": "postgresql-data",
           "clusterId": "toolchain",
           "kind": "topic",
-          "radius": 8.7,
-          "x": 369.69,
-          "y": 890.86,
-          "labelRank": 42
+          "radius": 9.02,
+          "x": 182.46,
+          "y": 921.63,
+          "labelRank": 115
         },
         {
           "id": "topic:prioritization",
@@ -35073,9 +37653,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1810.88,
-          "y": 416.31,
-          "labelRank": 130
+          "x": 1810.92,
+          "y": 416.33,
+          "labelRank": 132
         },
         {
           "id": "topic:provenance",
@@ -35084,8 +37664,8 @@ window.TOPIC_DATA = {
           "kind": "topic",
           "radius": 10.27,
           "x": 1774.62,
-          "y": 1201.56,
-          "labelRank": 62
+          "y": 1201.62,
+          "labelRank": 64
         },
         {
           "id": "topic:python",
@@ -35093,9 +37673,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.02,
-          "x": 168.4,
-          "y": 839.23,
-          "labelRank": 39
+          "x": 286.93,
+          "y": 716.1,
+          "labelRank": 116
         },
         {
           "id": "topic:qa-packet",
@@ -35103,8 +37683,8 @@ window.TOPIC_DATA = {
           "clusterId": "talos",
           "kind": "topic",
           "radius": 10.27,
-          "x": 1403.29,
-          "y": 641.82,
+          "x": 1403.33,
+          "y": 641.8,
           "labelRank": 22
         },
         {
@@ -35113,8 +37693,8 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 9.82,
-          "x": 1768.45,
-          "y": 301.62,
+          "x": 1768.5,
+          "y": 301.6,
           "labelRank": 30
         },
         {
@@ -35123,8 +37703,8 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.82,
-          "x": 917.98,
-          "y": 622.32,
+          "x": 918.27,
+          "y": 622.29,
           "labelRank": 31
         },
         {
@@ -35133,19 +37713,19 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.31,
-          "x": 338.34,
-          "y": 752.62,
-          "labelRank": 97
+          "x": 347.37,
+          "y": 940.73,
+          "labelRank": 100
         },
         {
           "id": "topic:release-operations",
           "topicId": "release-operations",
           "clusterId": "workflows",
           "kind": "topic",
-          "radius": 10.68,
-          "x": 484.76,
-          "y": 278.44,
-          "labelRank": 54
+          "radius": 10.87,
+          "x": 552.19,
+          "y": 412.25,
+          "labelRank": 57
         },
         {
           "id": "topic:requirement-status",
@@ -35153,9 +37733,9 @@ window.TOPIC_DATA = {
           "clusterId": "requirements",
           "kind": "topic",
           "radius": 9.57,
-          "x": 878.86,
+          "x": 879.13,
           "y": 271.01,
-          "labelRank": 84
+          "labelRank": 87
         },
         {
           "id": "topic:requirements",
@@ -35173,19 +37753,19 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 8.7,
-          "x": 901.43,
-          "y": 740,
-          "labelRank": 43
+          "x": 901.78,
+          "y": 739.84,
+          "labelRank": 44
         },
         {
           "id": "topic:requirements-workflow",
           "topicId": "requirements-workflow",
           "clusterId": "workflows",
           "kind": "topic",
-          "radius": 10.87,
-          "x": 552.08,
-          "y": 408.12,
-          "labelRank": 17
+          "radius": 11.05,
+          "x": 420.68,
+          "y": 358.89,
+          "labelRank": 52
         },
         {
           "id": "topic:retries",
@@ -35193,9 +37773,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.57,
-          "x": 419.98,
-          "y": 357.05,
-          "labelRank": 85
+          "x": 553.11,
+          "y": 307.6,
+          "labelRank": 88
         },
         {
           "id": "topic:retrieval",
@@ -35204,8 +37784,8 @@ window.TOPIC_DATA = {
           "kind": "topic",
           "radius": 10.05,
           "x": 1709.01,
-          "y": 1302.05,
-          "labelRank": 65
+          "y": 1302.08,
+          "labelRank": 67
         },
         {
           "id": "topic:retrieval-diagnosis",
@@ -35213,9 +37793,9 @@ window.TOPIC_DATA = {
           "clusterId": "evaluation",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1489.56,
+          "x": 1489.63,
           "y": 242.43,
-          "labelRank": 131
+          "labelRank": 133
         },
         {
           "id": "topic:retrieval-example",
@@ -35223,9 +37803,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 7.91,
-          "x": 270.47,
-          "y": 945.59,
-          "labelRank": 145
+          "x": 160.89,
+          "y": 822.12,
+          "labelRank": 151
         },
         {
           "id": "topic:retrieval-options",
@@ -35233,19 +37813,19 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 10.68,
-          "x": 197.98,
-          "y": 759.17,
-          "labelRank": 18
+          "x": 374.73,
+          "y": 770.53,
+          "labelRank": 16
         },
         {
           "id": "topic:retrieve-and-validate",
           "topicId": "retrieve-and-validate",
           "clusterId": "toolchain",
           "kind": "topic",
-          "radius": 9.82,
-          "x": 383.15,
-          "y": 840.68,
-          "labelRank": 74
+          "radius": 10.05,
+          "x": 245.89,
+          "y": 950.46,
+          "labelRank": 25
         },
         {
           "id": "topic:revision-cache",
@@ -35253,9 +37833,9 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 8.7,
-          "x": 578.06,
-          "y": 1177.65,
-          "labelRank": 132
+          "x": 578.74,
+          "y": 1178.02,
+          "labelRank": 134
         },
         {
           "id": "topic:routing",
@@ -35263,8 +37843,8 @@ window.TOPIC_DATA = {
           "clusterId": "economy",
           "kind": "topic",
           "radius": 10.27,
-          "x": 569.27,
-          "y": 1302.34,
+          "x": 569.7,
+          "y": 1302.66,
           "labelRank": 23
         },
         {
@@ -35273,9 +37853,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.31,
-          "x": 194.5,
-          "y": 909.47,
-          "labelRank": 98
+          "x": 228.65,
+          "y": 730.79,
+          "labelRank": 35
         },
         {
           "id": "topic:skill-definition",
@@ -35283,9 +37863,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.82,
-          "x": 806,
-          "y": 635.86,
-          "labelRank": 75
+          "x": 806.29,
+          "y": 635.62,
+          "labelRank": 77
         },
         {
           "id": "topic:skills",
@@ -35303,9 +37883,9 @@ window.TOPIC_DATA = {
           "clusterId": "debt",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1863.26,
+          "x": 1863.3,
           "y": 357.3,
-          "labelRank": 133
+          "labelRank": 135
         },
         {
           "id": "topic:source-conflicts",
@@ -35313,8 +37893,8 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 9.31,
-          "x": 1739.19,
-          "y": 1181.45,
+          "x": 1739.17,
+          "y": 1181.54,
           "labelRank": 36
         },
         {
@@ -35323,9 +37903,9 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.02,
-          "x": 823.38,
-          "y": 728.35,
-          "labelRank": 114
+          "x": 823.69,
+          "y": 728.53,
+          "labelRank": 117
         },
         {
           "id": "topic:source-skill",
@@ -35333,9 +37913,19 @@ window.TOPIC_DATA = {
           "clusterId": "skills",
           "kind": "topic",
           "radius": 9.02,
-          "x": 878.15,
-          "y": 601.02,
-          "labelRank": 115
+          "x": 878.43,
+          "y": 601.13,
+          "labelRank": 118
+        },
+        {
+          "id": "topic:spring-boot",
+          "topicId": "spring-boot",
+          "clusterId": "toolchain",
+          "kind": "topic",
+          "radius": 8.34,
+          "x": 382.35,
+          "y": 885.83,
+          "labelRank": 147
         },
         {
           "id": "topic:study-baseline",
@@ -35343,9 +37933,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.31,
-          "x": 553.14,
-          "y": 297.19,
-          "labelRank": 99
+          "x": 487.44,
+          "y": 434.89,
+          "labelRank": 101
         },
         {
           "id": "topic:study-contract",
@@ -35353,9 +37943,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.48,
-          "x": 487.89,
-          "y": 435.72,
-          "labelRank": 58
+          "x": 438.78,
+          "y": 294.19,
+          "labelRank": 19
         },
         {
           "id": "topic:study-decision",
@@ -35363,9 +37953,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.31,
-          "x": 448.68,
-          "y": 299.59,
-          "labelRank": 100
+          "x": 573.11,
+          "y": 376.61,
+          "labelRank": 102
         },
         {
           "id": "topic:study-economics",
@@ -35373,9 +37963,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.82,
-          "x": 573.19,
-          "y": 371.84,
-          "labelRank": 76
+          "x": 418.09,
+          "y": 399.95,
+          "labelRank": 78
         },
         {
           "id": "topic:study-experiment",
@@ -35383,9 +37973,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.31,
-          "x": 422.66,
-          "y": 397.21,
-          "labelRank": 101
+          "x": 502.2,
+          "y": 261.97,
+          "labelRank": 103
         },
         {
           "id": "topic:study-quality",
@@ -35393,9 +37983,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.68,
-          "x": 525.69,
-          "y": 264.27,
-          "labelRank": 55
+          "x": 526.96,
+          "y": 447.17,
+          "labelRank": 17
         },
         {
           "id": "topic:study-runtime",
@@ -35403,9 +37993,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.05,
-          "x": 528.69,
-          "y": 443.17,
-          "labelRank": 66
+          "x": 408.61,
+          "y": 320.5,
+          "labelRank": 68
         },
         {
           "id": "topic:study-scenarios",
@@ -35413,9 +38003,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 9.57,
-          "x": 414.35,
-          "y": 318.3,
-          "labelRank": 86
+          "x": 589.37,
+          "y": 325.46,
+          "labelRank": 89
         },
         {
           "id": "topic:study-ticket-wording",
@@ -35423,9 +38013,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 8.7,
-          "x": 587.23,
-          "y": 317.92,
-          "labelRank": 134
+          "x": 451.52,
+          "y": 449.43,
+          "labelRank": 136
         },
         {
           "id": "topic:talos",
@@ -35443,18 +38033,18 @@ window.TOPIC_DATA = {
           "clusterId": "talos",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1390.24,
-          "y": 680.97,
-          "labelRank": 135
+          "x": 1390.25,
+          "y": 680.95,
+          "labelRank": 137
         },
         {
           "id": "topic:task-contract",
           "topicId": "task-contract",
           "clusterId": "workflows",
           "kind": "topic",
-          "radius": 11.88,
-          "x": 446.09,
-          "y": 448.9,
+          "radius": 12.04,
+          "x": 459.32,
+          "y": 255.96,
           "labelRank": 12
         },
         {
@@ -35463,16 +38053,16 @@ window.TOPIC_DATA = {
           "clusterId": "requirements",
           "kind": "topic",
           "radius": 9.02,
-          "x": 887.14,
-          "y": 194.22,
-          "labelRank": 116
+          "x": 887.37,
+          "y": 194.05,
+          "labelRank": 119
         },
         {
           "id": "topic:toolchain",
           "topicId": "toolchain",
           "clusterId": "toolchain",
           "kind": "topic",
-          "radius": 12.33,
+          "radius": 12.75,
           "x": 278,
           "y": 836,
           "labelRank": 2
@@ -35483,9 +38073,9 @@ window.TOPIC_DATA = {
           "clusterId": "requirements",
           "kind": "topic",
           "radius": 10.05,
-          "x": 837.61,
-          "y": 271.59,
-          "labelRank": 25
+          "x": 837.85,
+          "y": 271.61,
+          "labelRank": 26
         },
         {
           "id": "topic:user-facing-feature",
@@ -35493,8 +38083,8 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 11.05,
-          "x": 447.82,
-          "y": 259.94,
+          "x": 592.82,
+          "y": 411.05,
           "labelRank": 15
         },
         {
@@ -35503,18 +38093,18 @@ window.TOPIC_DATA = {
           "clusterId": "talos",
           "kind": "topic",
           "radius": 9.02,
-          "x": 1444.14,
-          "y": 635.06,
-          "labelRank": 117
+          "x": 1444.18,
+          "y": 635.07,
+          "labelRank": 120
         },
         {
           "id": "topic:verification-loops",
           "topicId": "verification-loops",
           "clusterId": "talos",
           "kind": "topic",
-          "radius": 10.87,
-          "x": 1458.87,
-          "y": 706.43,
+          "radius": 11.05,
+          "x": 1459.03,
+          "y": 706.58,
           "labelRank": 53
         },
         {
@@ -35523,9 +38113,9 @@ window.TOPIC_DATA = {
           "clusterId": "toolchain",
           "kind": "topic",
           "radius": 9.31,
-          "x": 343.01,
-          "y": 918.35,
-          "labelRank": 102
+          "x": 325.91,
+          "y": 724.86,
+          "labelRank": 104
         },
         {
           "id": "topic:wikidata-statements",
@@ -35533,9 +38123,9 @@ window.TOPIC_DATA = {
           "clusterId": "knowledge",
           "kind": "topic",
           "radius": 8.7,
-          "x": 1810.2,
-          "y": 1262.27,
-          "labelRank": 136
+          "x": 1810.18,
+          "y": 1262.36,
+          "labelRank": 138
         },
         {
           "id": "topic:work-breakdown",
@@ -35543,9 +38133,9 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.05,
-          "x": 591.27,
-          "y": 407.51,
-          "labelRank": 67
+          "x": 385.38,
+          "y": 375.89,
+          "labelRank": 69
         },
         {
           "id": "topic:workflow-patterns",
@@ -35553,16 +38143,16 @@ window.TOPIC_DATA = {
           "clusterId": "workflows",
           "kind": "topic",
           "radius": 10.68,
-          "x": 387.21,
-          "y": 377.98,
-          "labelRank": 56
+          "x": 542.88,
+          "y": 269.49,
+          "labelRank": 59
         },
         {
           "id": "topic:workflows",
           "topicId": "workflows",
           "clusterId": "workflows",
           "kind": "topic",
-          "radius": 12.19,
+          "radius": 12.33,
           "x": 494,
           "y": 359,
           "labelRank": 3
@@ -35637,14 +38227,14 @@ window.TOPIC_DATA = {
           "label": "Toolchain",
           "x": 278,
           "y": 836,
-          "topicCount": 26
+          "topicCount": 29
         },
         {
           "id": "workflows",
           "label": "Workflows",
           "x": 494,
           "y": 359,
-          "topicCount": 26
+          "topicCount": 27
         }
       ],
       "edges": [
@@ -35998,6 +38588,73 @@ window.TOPIC_DATA = {
           ]
         },
         {
+          "from": "technology:java",
+          "to": "topic:java",
+          "family": "applies",
+          "relations": [
+            {
+              "from": "technology:java",
+              "type": "applied-by",
+              "to": "topic:java",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:java",
+              "type": "applies-to",
+              "to": "technology:java",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:java",
+          "to": "technology:spring-boot",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:java",
+              "type": "works-with",
+              "to": "technology:spring-boot",
+              "sourceRefs": [
+                "spring-boot-requirements"
+              ],
+              "derived": false
+            },
+            {
+              "from": "technology:spring-boot",
+              "type": "works-with",
+              "to": "technology:java",
+              "sourceRefs": [
+                "spring-boot-requirements"
+              ],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:java",
+          "to": "topic:java",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:java",
+              "type": "explained-by",
+              "to": "topic:java",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:java",
+              "type": "explains",
+              "to": "technology:java",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
           "from": "technology:javascript",
           "to": "topic:javascript-typescript",
           "family": "applies",
@@ -36148,6 +38805,73 @@ window.TOPIC_DATA = {
               "sourceRefs": [
                 "jena-fuseki"
               ],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:maven",
+          "to": "topic:maven",
+          "family": "applies",
+          "relations": [
+            {
+              "from": "technology:maven",
+              "type": "applied-by",
+              "to": "topic:maven",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:maven",
+              "type": "applies-to",
+              "to": "technology:maven",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:maven",
+          "to": "technology:spring-boot",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:maven",
+              "type": "works-with",
+              "to": "technology:spring-boot",
+              "sourceRefs": [
+                "spring-boot-requirements"
+              ],
+              "derived": false
+            },
+            {
+              "from": "technology:spring-boot",
+              "type": "works-with",
+              "to": "technology:maven",
+              "sourceRefs": [
+                "spring-boot-requirements"
+              ],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:maven",
+          "to": "topic:maven",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:maven",
+              "type": "explained-by",
+              "to": "topic:maven",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:maven",
+              "type": "explains",
+              "to": "technology:maven",
+              "sourceRefs": [],
               "derived": true
             }
           ]
@@ -36607,6 +39331,31 @@ window.TOPIC_DATA = {
         },
         {
           "from": "technology:postgresql",
+          "to": "technology:spring-boot",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:postgresql",
+              "type": "works-with",
+              "to": "technology:spring-boot",
+              "sourceRefs": [
+                "spring-boot-sql"
+              ],
+              "derived": false
+            },
+            {
+              "from": "technology:spring-boot",
+              "type": "works-with",
+              "to": "technology:postgresql",
+              "sourceRefs": [
+                "spring-boot-sql"
+              ],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:postgresql",
           "to": "topic:information-retrieval",
           "family": "reading",
           "relations": [
@@ -36637,8 +39386,22 @@ window.TOPIC_DATA = {
           "relations": [
             {
               "from": "technology:postgresql",
+              "type": "explained-by",
+              "to": "topic:postgresql-data",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "technology:postgresql",
               "type": "used-by",
               "to": "topic:postgresql-data",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:postgresql-data",
+              "type": "explains",
+              "to": "technology:postgresql",
               "sourceRefs": [],
               "derived": true
             },
@@ -36954,6 +39717,48 @@ window.TOPIC_DATA = {
               "from": "topic:retrieval",
               "type": "applies-to",
               "to": "technology:sparql",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:spring-boot",
+          "to": "topic:spring-boot",
+          "family": "applies",
+          "relations": [
+            {
+              "from": "technology:spring-boot",
+              "type": "applied-by",
+              "to": "topic:spring-boot",
+              "sourceRefs": [],
+              "derived": true
+            },
+            {
+              "from": "topic:spring-boot",
+              "type": "applies-to",
+              "to": "technology:spring-boot",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "technology:spring-boot",
+          "to": "topic:spring-boot",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "technology:spring-boot",
+              "type": "explained-by",
+              "to": "topic:spring-boot",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:spring-boot",
+              "type": "explains",
+              "to": "technology:spring-boot",
               "sourceRefs": [],
               "derived": true
             }
@@ -37857,6 +40662,258 @@ window.TOPIC_DATA = {
               "from": "topic:retrieval-options",
               "type": "browses",
               "to": "topic:apache-jena-fuseki",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:api-stored-data",
+          "to": "topic:architecture-decisions",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:api-stored-data",
+              "type": "related-reading",
+              "to": "topic:architecture-decisions",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:architecture-decisions",
+              "type": "related-reading",
+              "to": "topic:api-stored-data",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:api-stored-data",
+          "to": "topic:docker",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:api-stored-data",
+              "type": "related-reading",
+              "to": "topic:docker",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:docker",
+              "type": "related-reading",
+              "to": "topic:api-stored-data",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:api-stored-data",
+          "to": "topic:java",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:api-stored-data",
+              "type": "related-reading",
+              "to": "topic:java",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:java",
+              "type": "related-reading",
+              "to": "topic:api-stored-data",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:api-stored-data",
+          "to": "topic:maven",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:api-stored-data",
+              "type": "related-reading",
+              "to": "topic:maven",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:maven",
+              "type": "related-reading",
+              "to": "topic:api-stored-data",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:api-stored-data",
+          "to": "topic:postgresql-data",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:api-stored-data",
+              "type": "related-reading",
+              "to": "topic:postgresql-data",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:postgresql-data",
+              "type": "related-reading",
+              "to": "topic:api-stored-data",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:api-stored-data",
+          "to": "topic:release-operations",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:api-stored-data",
+              "type": "related-reading",
+              "to": "topic:release-operations",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:release-operations",
+              "type": "related-reading",
+              "to": "topic:api-stored-data",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:api-stored-data",
+          "to": "topic:requirements-workflow",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:api-stored-data",
+              "type": "related-reading",
+              "to": "topic:requirements-workflow",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:requirements-workflow",
+              "type": "related-reading",
+              "to": "topic:api-stored-data",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:api-stored-data",
+          "to": "topic:retrieve-and-validate",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:api-stored-data",
+              "type": "related-reading",
+              "to": "topic:retrieve-and-validate",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:retrieve-and-validate",
+              "type": "related-reading",
+              "to": "topic:api-stored-data",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:api-stored-data",
+          "to": "topic:spring-boot",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:api-stored-data",
+              "type": "related-reading",
+              "to": "topic:spring-boot",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:spring-boot",
+              "type": "related-reading",
+              "to": "topic:api-stored-data",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:api-stored-data",
+          "to": "topic:task-contract",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:api-stored-data",
+              "type": "related-reading",
+              "to": "topic:task-contract",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:task-contract",
+              "type": "related-reading",
+              "to": "topic:api-stored-data",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:api-stored-data",
+          "to": "topic:verification-loops",
+          "family": "reading",
+          "relations": [
+            {
+              "from": "topic:api-stored-data",
+              "type": "related-reading",
+              "to": "topic:verification-loops",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:verification-loops",
+              "type": "related-reading",
+              "to": "topic:api-stored-data",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
+          "from": "topic:api-stored-data",
+          "to": "topic:workflows",
+          "family": "structure",
+          "relations": [
+            {
+              "from": "topic:api-stored-data",
+              "type": "browse-under",
+              "to": "topic:workflows",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:workflows",
+              "type": "browses",
+              "to": "topic:api-stored-data",
               "sourceRefs": [],
               "derived": true
             }
@@ -43750,6 +46807,27 @@ window.TOPIC_DATA = {
           ]
         },
         {
+          "from": "topic:java",
+          "to": "topic:toolchain",
+          "family": "structure",
+          "relations": [
+            {
+              "from": "topic:java",
+              "type": "browse-under",
+              "to": "topic:toolchain",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:toolchain",
+              "type": "browses",
+              "to": "topic:java",
+              "sourceRefs": [],
+              "derived": true
+            }
+          ]
+        },
+        {
           "from": "topic:javascript-typescript",
           "to": "topic:nodejs",
           "family": "reading",
@@ -44880,6 +47958,27 @@ window.TOPIC_DATA = {
               "to": "topic:knowledge",
               "sourceRefs": [],
               "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:maven",
+          "to": "topic:toolchain",
+          "family": "structure",
+          "relations": [
+            {
+              "from": "topic:maven",
+              "type": "browse-under",
+              "to": "topic:toolchain",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:toolchain",
+              "type": "browses",
+              "to": "topic:maven",
+              "sourceRefs": [],
+              "derived": true
             }
           ]
         },
@@ -47526,6 +50625,27 @@ window.TOPIC_DATA = {
               "to": "topic:source-evidence-verification",
               "sourceRefs": [],
               "derived": false
+            }
+          ]
+        },
+        {
+          "from": "topic:spring-boot",
+          "to": "topic:toolchain",
+          "family": "structure",
+          "relations": [
+            {
+              "from": "topic:spring-boot",
+              "type": "browse-under",
+              "to": "topic:toolchain",
+              "sourceRefs": [],
+              "derived": false
+            },
+            {
+              "from": "topic:toolchain",
+              "type": "browses",
+              "to": "topic:spring-boot",
+              "sourceRefs": [],
+              "derived": true
             }
           ]
         },

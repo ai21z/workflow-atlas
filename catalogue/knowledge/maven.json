@@ -1,0 +1,144 @@
+{
+  "id": "maven",
+  "title": "Maven build and test evidence",
+  "summary": "Find the actual lifecycle, modules, profiles and checks behind a successful build.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this guide",
+      "text": "Use when the repository uses Maven. Preserve its modules, wrapper and profiles unless a reviewed change needs them altered. The reviewed Maven guides describe lifecycle and plugin behavior, not the commands already configured in your repository."
+    },
+    {
+      "type": "p",
+      "label": "Documented lifecycle behavior",
+      "text": "Invoking a phase in Maven runs earlier phases of that lifecycle first. Bound goals depend on packaging and configured plugins. Failsafe runs integration tests and verifies their results in separate phases, allowing teardown between them. Its guide recommends verify rather than stopping at integration-test. An integration-test invocation can finish before failure verification and cleanup."
+    },
+    {
+      "type": "list",
+      "label": "Find the project facts",
+      "items": [
+        "Root and affected module POMs, packaging, parent, active profiles and actual plugin executions.",
+        "Maven and build JDK versions, wrapper configuration and dependency repository access.",
+        "Which tests Surefire and Failsafe or alternatives actually discover. Identify skips and environment requirements.",
+        "Existing install, test, integration and package commands. Record their source instead of inventing a familiar command."
+      ]
+    },
+    {
+      "type": "steps",
+      "label": "Prepare useful build evidence",
+      "items": [
+        "Read the affected POM and its parent or shared configuration. Identify the module, active profiles and bound checks.",
+        "Check the approved wrapper and distribution if present. A wrapper may download Maven, so repository and distribution access are separate setup facts.",
+        "Confirm toolchains. A configured build JDK can differ from the JDK running Maven.",
+        "Use the actual repository command that covers the change and required verification phase. Inspect discovered tests, skipped checks and cleanup rather than recording only exit code zero.",
+        "Record versions, command, module, profiles, actual reports, failures and unrun work against the candidate revision."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Documented wrapper and toolchain scope",
+      "text": "The Maven Wrapper uses the Maven distribution selected by its configuration and can download it when needed. Maven toolchains let participating plugins use a specified JDK independently of the JDK running Maven. Neither mechanism by itself configures the right tests or establishes service compatibility."
+    },
+    {
+      "type": "table",
+      "label": "Saved selection example",
+      "headers": [
+        "Observation",
+        "Interpretation to check"
+      ],
+      "rows": [
+        [
+          "Unit tests pass",
+          "The saved-selection service rule may be covered. Actual endpoint permissions and database behavior still need the agreed checks."
+        ],
+        [
+          "No integration tests run",
+          "Check configured discovery, profiles and skips. A successful build does not establish database integration coverage."
+        ],
+        [
+          "Private repository is unavailable",
+          "Record an environment blocker. Do not replace approved dependencies or claim the feature itself failed."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Useful result",
+      "text": "A build evidence note naming the confirmed module, profiles, toolchains and discovered checks, with actual reports when available. In this fictional example the commands and versions are unknown, and neither a successful build nor a database test has been observed."
+    },
+    {
+      "type": "p",
+      "label": "What Atlas changes",
+      "text": "Selecting Maven adds lifecycle, toolchain, discovery and environment questions to generated skill references. It does not run Maven, download a distribution, supply repository credentials or configure Failsafe."
+    }
+  ],
+  "refs": [
+    "maven-lifecycle",
+    "maven-failsafe",
+    "maven-wrapper",
+    "maven-toolchains"
+  ],
+  "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+  "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, example decisions and any test outcome remain unverified.",
+  "catalog": {
+    "kind": "technology",
+    "domains": [
+      "engineering-tools",
+      "verification"
+    ],
+    "aliases": [
+      "maven",
+      "pom",
+      "mvn",
+      "mvnw",
+      "failsafe",
+      "surefire",
+      "integration test lifecycle"
+    ],
+    "revision": "1",
+    "applicability": "Use when a Maven build needs evidence about the actual lifecycle bindings, modules, profiles, discovered checks and environment.",
+    "limits": "Use actual project versions, approved interfaces and repository configuration. The procedure and expected examples do not establish configured access, runtime enforcement, compatibility or passing evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-12",
+    "claims": [
+      {
+        "sectionLabel": "Documented lifecycle behavior",
+        "text": "Maven runs earlier phases in the invoked lifecycle before the selected phase, while bound goals depend on packaging and configured plugins.",
+        "sourceRefs": [
+          "maven-lifecycle"
+        ]
+      },
+      {
+        "sectionLabel": "Documented lifecycle behavior",
+        "text": "Failsafe separates integration test execution from result verification and recommends invoking verify so teardown and verification can complete.",
+        "sourceRefs": [
+          "maven-failsafe"
+        ]
+      },
+      {
+        "sectionLabel": "Documented wrapper and toolchain scope",
+        "text": "Maven Wrapper uses a configured Maven distribution and can download it, while Maven toolchains can select a build JDK independently of the JDK running Maven.",
+        "sourceRefs": [
+          "maven-wrapper",
+          "maven-toolchains"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "technologies": [
+        "maven"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

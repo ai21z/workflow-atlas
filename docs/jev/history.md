@@ -59,6 +59,12 @@ The implementation checks and bounded synthetic live smoke are functional eviden
 
 The [integrated trial](integrated-trial.md) is a new protocol. Freeze it after the interface is stable, then keep each human or simulated execution separate. Earlier seven-card rounds stay historical.
 
+## Minimum change definition revision, 12 October 2026
+
+Version `pilot-v9-minimum-change-concrete-work` changes only Smallest necessary change. Its separately versioned questions clarify that a concrete software feature, fault investigation, repair, change plan or software construction study establishes need without requiring the user to mention reuse. The criteria classify pure reading, translation or reporting as outside its scope. The policy gives explicit practice refusals priority, but the model can still misinterpret them. Dependency and technology constraints remain compatible with the practice.
+
+Shared intent and coverage questions, Requirements before implementation, Source backed project wiki and decision ordering retain their v8 definitions. The original v8 module and historical response fixtures remain intact. Tests compare unchanged request text and criterion order and verify the new complete definition digest. These checks do not establish v9 model accuracy. New measurements need fresh cases frozen before inference, with the version recorded.
+
 ## Review of the answer journey, 5 October 2026
 
 A subsequent user walkthrough found that optional answer typing could enter exported requirements even after Continue without this. It also found that covered information became a blank question after creating the draft, unsupported requests used a misleading status, and a disappearing question could lose keyboard focus.
@@ -66,3 +72,35 @@ A subsequent user walkthrough found that optional answer typing could enter expo
 The corrections separate pending edits from recorded answers, carry the wording review into the editor, give unsupported and unclear requests distinct explanations, and move focus to the next useful control after an answer action. A previous recorded answer survives a discarded replacement. Model assessments stay session only and are cleared when the project outcome or workflow changes.
 
 The revised trial retains the same six fictional inputs and uses a new frozen round. The browser regressions exercise exported bytes, wording reuse and keyboard actions with controlled responses. Those checks assess application behavior. They do not add model accuracy results or human participants to the retained evidence.
+
+
+## Local clarification review, 12 October 2026
+
+A separate local retrieval change added whole sentence confirmations for supported conditional requirements, dated history and explicit knowledge-only scope. It did not change JEV questions or send those clarifications to the provider.
+
+On the previously exposed cases, seven targeted missed recommendations were recovered after scripted user answers. The count rose from 21 to 28 of 32 eligible relevant practices. The four remaining recommendations were still withheld for explicit inference restrictions or unclear storage scope. This is development regression evidence.
+
+A new 24-case synthetic set was authored before the implementation was frozen. One ambiguity case was reported separately. In the 23 main cases, surfaced relevant practices rose from 3 to 10 of 39 after scripted clarification. Automatic retrieval found none on this deliberately condition-heavy set. No labeled irrelevant or insufficient-context practices were offered. Unfamiliar history and scope wording, until/unless conditions and maintained-reference requests still exposed substantial coverage gaps. These results are not human comprehension or JEV accuracy measurements.
+
+The same fresh run found an inappropriate generic clarification for a universal retention restriction. A subsequent guard-only correction blocks retention wording from that shortcut. The original frozen result remains the fresh measurement. Checks after that correction are regression checks, not a new holdout.
+
+Browser journeys separately checked actual downloads, legacy clarification records, source edits and reopening. A live functional assessment confirmed the unchanged original-input transport. Neither establishes a latency percentile or general reliability. The next improvement needs broader task understanding without relaxing genuine restrictions, followed by another fresh evaluation and human use.
+
+## Structured clarification and knowledge needs, 13 October 2026
+
+Brief now offers an optional Refine matching section. It separates the kind of work from the need for an ongoing source backed reference. Software work can need both. A one-time output or an undecided knowledge need withholds the wiki suggestion. Supported unless and until requirements, and selected past-version statements, can be confirmed as complete original statements. Old confirmations keep their interpretation policy until explicitly reviewed.
+
+A new 24-case fictional set was sealed before the implementation was frozen and labels were reviewed before outcomes. It includes 12 ordinary and 12 stress cases. One current-instruction conflict remains sensitivity only. The 23 main cases contain 35 relevant, stage-eligible practice labels across the three supported practices. This is an authored sample, not a population accuracy estimate.
+
+| Condition | Before | First frozen change | After restriction correction |
+| --- | --- | --- | --- |
+| Automatic suggestions | 4 / 35 | 5 / 35 | 3 / 35 |
+| After visible scripted questions | 10 / 35 | 14 / 35 | 12 / 35 |
+| After optional scripted refinements | 10 / 35 | 18 / 35 | 15 / 35 |
+| Assessment offered despite an explicit inference prohibition | 1 / 2 cases | 1 / 2 cases | 0 / 2 cases |
+
+The first frozen run exposed a preexisting miss for a negative subject, such as “Nothing in this description may be sent to an external model service.” The practice panel still offered an assessment. No provider request ran. A subsequent restriction correction preserves the whole statement and prevents generic clarification from dismissing it. The original results remain retained. The final column is a regression on the now exposed cases, not another fresh result. Useful suggestions withheld by restrictions remain in the denominator.
+
+No labeled irrelevant, insufficient-context or stage-ineligible practice was offered in these runs. That does not establish general safety. That tested version still missed 20 of 35 useful eligible suggestions after scripted answers. Thirteen main cases stopped for wording that the application could not clarify through its offered controls. Optional refinements require additional user input, and their discoverability has not been established with people.
+
+All 144 per-phase project JSON round trips in each run preserved original intent and the existing request drafts. Separate browser journeys checked actual downloads, file chooser reopening, legacy records, keyboard behavior and narrow layouts. These are functional checks, not human comprehension or live model measurements. The JEV contract, questions and provider payload remain unchanged. Local guards in the practice panel are not a general transport permission system. The next design question is how to represent ambiguous task and requirement scope more clearly without treating a restriction as harmless background.

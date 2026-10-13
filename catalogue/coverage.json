@@ -239,6 +239,61 @@
         "Useful result"
       ],
       "scope": "Recommended browser evidence plan. Emulation, mocks and automated accessibility checks do not establish physical device coverage, real service access or whole product conformance."
+    },
+    {
+      "topicId": "api-stored-data",
+      "task": "Design permitted retrieval, checked processing and a separately authorized save",
+      "procedureSection": "From request to reported outcome",
+      "outputSection": "A useful draft output",
+      "exampleSections": [
+        "Fictional saved selection examples",
+        "A useful draft output"
+      ],
+      "scope": "Neutral recommended procedure with optional tools and a fictional saved-selection example. Budgets, permissions, contracts and outcomes must be established by the project."
+    },
+    {
+      "topicId": "java",
+      "task": "Separate Java compilation from runtime input and permission checks",
+      "procedureSection": "Check the changed boundary",
+      "outputSection": "Useful result",
+      "exampleSections": [
+        "Saved selection example",
+        "Useful result"
+      ],
+      "scope": "Java SE 25 compiler reference and recommended boundary checks. Actual project toolchains, paths, commands and outcomes remain unresolved."
+    },
+    {
+      "topicId": "spring-boot",
+      "task": "Verify a Spring Boot endpoint and its persistence boundary",
+      "procedureSection": "Check one service change",
+      "outputSection": "Useful result",
+      "exampleSections": [
+        "Saved selection example",
+        "Useful result"
+      ],
+      "scope": "Scoped Spring Boot 4.1.1 and Framework 7.0.9 facts. Actual security, transactions, database and running-server behavior require project evidence."
+    },
+    {
+      "topicId": "maven",
+      "task": "Identify Maven lifecycle bindings and actual test evidence",
+      "procedureSection": "Prepare useful build evidence",
+      "outputSection": "Useful result",
+      "exampleSections": [
+        "Saved selection example",
+        "Useful result"
+      ],
+      "scope": "Recommended build evidence procedure based on official Maven lifecycle, Failsafe, wrapper and toolchain guides. No command or successful check is assumed."
+    },
+    {
+      "topicId": "postgresql-data",
+      "task": "Check PostgreSQL scope, paging consistency, writes and recovery",
+      "procedureSection": "Check the data boundary",
+      "outputSection": "Useful result",
+      "exampleSections": [
+        "Saved selection example",
+        "Useful result"
+      ],
+      "scope": "PostgreSQL 18 factual claims plus a recommended procedure. Identity, consistency, migration and recovery behavior remain project facts to verify."
     }
   ]
 }

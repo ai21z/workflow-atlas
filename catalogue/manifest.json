@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "projectSchemaVersion": "3.0",
   "reviewedOn": "2026-10-02",
   "topicOrder": [
@@ -134,7 +134,11 @@
     "react",
     "npm",
     "vitest",
-    "playwright"
+    "playwright",
+    "api-stored-data",
+    "java",
+    "spring-boot",
+    "maven"
   ],
   "sourceAliases": {
     "agents": "reference-65",

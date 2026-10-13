@@ -261,6 +261,25 @@
         "github-actions",
         "release-operations"
       ]
+    },
+    {
+      "id": "api-stored-data",
+      "title": "Change an API and stored data",
+      "summary": "Plan a validated request, permitted data access, checked results and a separately authorized save.",
+      "limits": "One fictional saved topic selection with optional Java, Spring Boot, Maven, PostgreSQL and Docker. Read-only alternatives remain valid. Actual interfaces, access, commands and observations are unresolved. No runtime or MCP connection is installed.",
+      "nodeIds": [
+        "api-stored-data",
+        "requirements-workflow",
+        "architecture-decisions",
+        "task-contract",
+        "java",
+        "spring-boot",
+        "maven",
+        "postgresql-data",
+        "docker",
+        "verification-loops",
+        "release-operations"
+      ]
     }
   ],
   "collections": [
@@ -357,6 +376,23 @@
         "vitest",
         "playwright",
         "github-actions",
+        "release-operations"
+      ]
+    },
+    {
+      "id": "api-stored-data",
+      "title": "Change an API and stored data",
+      "nodeIds": [
+        "api-stored-data",
+        "requirements-workflow",
+        "architecture-decisions",
+        "task-contract",
+        "java",
+        "spring-boot",
+        "maven",
+        "postgresql-data",
+        "docker",
+        "verification-loops",
         "release-operations"
       ]
     }

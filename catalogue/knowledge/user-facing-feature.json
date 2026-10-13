@@ -103,7 +103,7 @@
     {
       "type": "p",
       "label": "Use it in Atlas",
-      "text": "Open Browse examples and choose Build a feature. The fictional draft carries the acceptance examples and reference stack into editable project fields. Technology selection adds profile questions and checks to the generated skill references. Inspect WORKFLOW.md and the requirement and verification templates before using the pack. Opening this reading topic alone changes nothing in the draft."
+      "text": "Open Browse examples and choose Feature delivery. The fictional draft carries the acceptance examples and reference stack into editable project fields. Technology selection adds profile questions and checks to the generated skill references. Inspect WORKFLOW.md and the requirement and verification templates before using the pack. Opening this reading topic alone changes nothing in the draft."
     },
     {
       "type": "p",
@@ -137,7 +137,7 @@
       "responsive",
       "frontend feature"
     ],
-    "revision": "1",
+    "revision": "2",
     "applicability": "Use when a proposed feature changes a user interface or user journey. The fictional status filter demonstrates the path without choosing tools for the reader.",
     "limits": "This is a recommended workflow with fictional inputs and expected outcomes. It is not an observed implementation, a required stack, a conformance audit or an executable workflow.",
     "sourceStatus": "reviewed",

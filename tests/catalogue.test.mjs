@@ -36,6 +36,7 @@ test('catalogue retains historical routes, source references, related reading an
   for (const [id, source] of Object.entries(baseline.sources)) assert.deepEqual(result.atlas.sources[id], source)
   for (const [group, definitions] of Object.entries(baseline.definitions)) for (const old of definitions) {
     // React's profile was deliberately completed with the feature reference path.
+    // Spring Boot keeps its original positional questions and adds scoped API guidance.
     // Every other historical definition still must match its preservation baseline.
     if (group === 'technologyProfiles' && old.id === 'react') {
       const react = result.catalog.technologyProfiles.find(record => record.id === 'react')
@@ -43,6 +44,18 @@ test('catalogue retains historical routes, source references, related reading an
       assert.deepEqual(react.technologies, ['react'])
       assert.ok(react.questions.some(question => /loading.*empty.*failed/i.test(question)))
       assert.ok(react.checks.some(check => /keyboard/i.test(check)))
+      continue
+    }
+    if (group === 'technologyProfiles' && old.id === 'spring-boot') {
+      const spring = result.catalog.technologyProfiles.find(record => record.id === 'spring-boot')
+      assert.equal(result.catalog.definitionMetadata['profile:spring-boot'].revision, '2.0.2')
+      assert.deepEqual(spring.technologies, ['spring-boot'])
+      assert.deepEqual(spring.questions.slice(0, 3), [
+        'Which API contracts and validation rules apply?',
+        'Which unit, focused controller and actual server checks are relevant?',
+        'What are the failure and transaction boundaries?',
+      ])
+      assert.ok(spring.questions.length > 3)
       continue
     }
     assert.equal(digest(result.catalog[group].find(record => record.id === old.id)), old.hash, `definition changed: ${group}/${old.id}`)

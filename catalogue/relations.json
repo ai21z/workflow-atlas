@@ -4311,5 +4311,191 @@
     "status": "reviewed",
     "reviewedOn": "2026-10-12",
     "note": "The Vitest guide links a React example. A project still needs its own version and environment checks."
+  },
+  {
+    "from": "topic:api-stored-data",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:java",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:spring-boot",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:maven",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:java",
+    "type": "explained-by",
+    "to": "topic:java",
+    "sourceRefs": []
+  },
+  {
+    "from": "profile:java",
+    "type": "explained-by",
+    "to": "topic:java",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:java",
+    "type": "uses-definition",
+    "to": "profile:java",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:spring-boot",
+    "type": "explained-by",
+    "to": "topic:spring-boot",
+    "sourceRefs": []
+  },
+  {
+    "from": "profile:spring-boot",
+    "type": "explained-by",
+    "to": "topic:spring-boot",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:spring-boot",
+    "type": "uses-definition",
+    "to": "profile:spring-boot",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:maven",
+    "type": "explained-by",
+    "to": "topic:maven",
+    "sourceRefs": []
+  },
+  {
+    "from": "profile:maven",
+    "type": "explained-by",
+    "to": "topic:maven",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:maven",
+    "type": "uses-definition",
+    "to": "profile:maven",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:postgresql",
+    "type": "explained-by",
+    "to": "topic:postgresql-data",
+    "sourceRefs": []
+  },
+  {
+    "from": "profile:postgresql",
+    "type": "explained-by",
+    "to": "topic:postgresql-data",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:postgresql-data",
+    "type": "uses-definition",
+    "to": "profile:postgresql",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:api-stored-data",
+    "type": "related-reading",
+    "to": "topic:requirements-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:api-stored-data",
+    "type": "related-reading",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:api-stored-data",
+    "type": "related-reading",
+    "to": "topic:retrieve-and-validate",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:api-stored-data",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:api-stored-data",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:api-stored-data",
+    "type": "related-reading",
+    "to": "topic:release-operations",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:api-stored-data",
+    "type": "related-reading",
+    "to": "topic:java",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:api-stored-data",
+    "type": "related-reading",
+    "to": "topic:spring-boot",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:api-stored-data",
+    "type": "related-reading",
+    "to": "topic:maven",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:api-stored-data",
+    "type": "related-reading",
+    "to": "topic:postgresql-data",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:api-stored-data",
+    "type": "related-reading",
+    "to": "topic:docker",
+    "sourceRefs": []
+  },
+  {
+    "from": "technology:java",
+    "type": "works-with",
+    "to": "technology:spring-boot",
+    "sourceRefs": [
+      "spring-boot-requirements"
+    ]
+  },
+  {
+    "from": "technology:maven",
+    "type": "works-with",
+    "to": "technology:spring-boot",
+    "sourceRefs": [
+      "spring-boot-requirements"
+    ]
+  },
+  {
+    "from": "technology:postgresql",
+    "type": "works-with",
+    "to": "technology:spring-boot",
+    "sourceRefs": [
+      "spring-boot-sql"
+    ]
   }
 ]

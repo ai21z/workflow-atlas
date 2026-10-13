@@ -1,6 +1,6 @@
 // Compiled from catalogue/. Edit source records and run npm run build:catalogue.
 export const SCHEMA_VERSION = "3.0";
-export const DEFINITION_VERSION = "2.2.0";
+export const DEFINITION_VERSION = "2.3.0";
 export const REVIEW_DATE = "2026-10-02";
 export const SOURCES = Object.freeze({
   "agents": "https://docs.github.com/en/copilot/reference/custom-agents-configuration",
@@ -21,7 +21,7 @@ export const TOOL_ALIASES = Object.freeze([
 function deepFreeze(value) { if (value && typeof value === 'object') { Object.values(value).forEach(deepFreeze); Object.freeze(value); } return value; }
 export const CATALOG = deepFreeze({
   "schemaVersion": "3.0",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "reviewedOn": "2026-10-02",
   "stages": [
     {
@@ -1072,23 +1072,32 @@ export const CATALOG = deepFreeze({
     },
     {
       "id": "spring-boot",
-      "label": "Spring Boot and APIs",
+      "label": "Spring Boot API and persistence boundaries",
       "technologies": [
         "spring-boot"
       ],
       "questions": [
         "Which API contracts and validation rules apply?",
         "Which unit, focused controller and actual server checks are relevant?",
-        "What are the failure and transaction boundaries?"
+        "What are the failure and transaction boundaries?",
+        "Which Boot and Framework versions and servlet or reactive stack apply to this endpoint?",
+        "Which separate read and write access rules are actually implemented, and how are server-side data and test identities cleaned up?",
+        "Do the actual transaction proxy and remote API boundaries support the intended failed or uncertain save behavior?"
       ],
       "checks": [
-        "Record request and response examples, invalid input and observed integration results.",
-        "Confirm the actual project test setup and version before selecting a test layer."
+        "Record request and response examples, denied access, paging and observed integration results.",
+        "Confirm actual security configuration and transaction interception instead of relying on annotation presence.",
+        "Identify mock versus running-server evidence and server-side cleanup."
       ],
-      "limits": "Questions inform review. The profile does not infer commands, deployment settings or API correctness.",
+      "limits": "Questions inform design and review. They do not infer versions, paths, commands or credentials, configure integrations, enforce permissions or establish passing evidence.",
       "source": "https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html",
       "sources": [
-        "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html"
+        "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html",
+        "https://docs.spring.io/spring-boot/system-requirements.html",
+        "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html",
+        "https://docs.spring.io/spring-security/reference/servlet/authorization/method-security.html",
+        "https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html",
+        "https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html"
       ]
     },
     {
@@ -1341,6 +1350,76 @@ export const CATALOG = deepFreeze({
         "https://playwright.dev/docs/emulation",
         "https://playwright.dev/docs/accessibility-testing"
       ]
+    },
+    {
+      "id": "java",
+      "label": "Java toolchains and service boundaries",
+      "technologies": [
+        "java"
+      ],
+      "questions": [
+        "Which JDK vendor and version compile, test and run this service, and what release or toolchain configuration applies?",
+        "Which external values require runtime validation and which layer enforces read and write authority?",
+        "Which actual module checks cover the affected behavior, and which dependencies or interfaces are mocked?"
+      ],
+      "checks": [
+        "Record compiler and runtime behavior evidence separately against the candidate revision.",
+        "Check invalid input and denied access without treating Java types as runtime permission checks."
+      ],
+      "limits": "Questions inform design and review. They do not infer versions, paths, commands or credentials, configure integrations, enforce permissions or establish passing evidence.",
+      "source": "https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html",
+      "sources": [
+        "https://maven.apache.org/guides/mini/guide-using-toolchains.html"
+      ]
+    },
+    {
+      "id": "maven",
+      "label": "Maven lifecycle and test discovery",
+      "technologies": [
+        "maven"
+      ],
+      "questions": [
+        "Which module, parent POM, active profiles and plugin bindings govern the changed component?",
+        "Which actual wrapper or Maven command covers required checks, and what tests, skips and cleanup does it discover?",
+        "Which Maven distribution, build toolchain and approved dependency repository access are required?"
+      ],
+      "checks": [
+        "Record command, module, profiles, versions, discovered tests and reports rather than exit code alone.",
+        "Confirm required integration verification and cleanup completed. Keep unrun checks and environment blockers explicit."
+      ],
+      "limits": "Questions inform design and review. They do not infer versions, paths, commands or credentials, configure integrations, enforce permissions or establish passing evidence.",
+      "source": "https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html",
+      "sources": [
+        "https://maven.apache.org/surefire/maven-failsafe-plugin/",
+        "https://maven.apache.org/tools/wrapper/",
+        "https://maven.apache.org/guides/mini/guide-using-toolchains.html"
+      ]
+    },
+    {
+      "id": "postgresql",
+      "label": "PostgreSQL query and persistence evidence",
+      "technologies": [
+        "postgresql"
+      ],
+      "questions": [
+        "Which schema, driver, database version, approved interface and real application identity apply?",
+        "What permitted data scope, unique ordering, paging consistency and completeness are required?",
+        "Which transaction, duplicate and concurrency controls handle a failed or uncertain save?",
+        "If data changes, what migration compatibility, cleanup and restoration evidence is needed?"
+      ],
+      "checks": [
+        "Record normal, empty, denied and changing-page results with the relevant identity and database version.",
+        "Keep result validation separate from write permission. Check uncertain save reconciliation before retrying.",
+        "State actual migration or restoration evidence and unresolved recovery decisions."
+      ],
+      "limits": "Questions inform design and review. They do not infer versions, paths, commands or credentials, configure integrations, enforce permissions or establish passing evidence.",
+      "source": "https://www.postgresql.org/docs/18/queries-limit.html",
+      "sources": [
+        "https://www.postgresql.org/docs/18/transaction-iso.html",
+        "https://www.postgresql.org/docs/18/tutorial-transactions.html",
+        "https://www.postgresql.org/docs/18/ddl-rowsecurity.html",
+        "https://www.postgresql.org/docs/18/backup.html"
+      ]
     }
   ],
   "runtimeControls": [
@@ -1489,6 +1568,15 @@ export const CATALOG = deepFreeze({
       "source": "https://playwright.dev/docs/best-practices",
       "sources": [
         "https://playwright.dev/docs/emulation"
+      ]
+    },
+    {
+      "id": "maven",
+      "label": "Maven",
+      "source": "https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html",
+      "sources": [
+        "https://maven.apache.org/surefire/maven-failsafe-plugin/",
+        "https://maven.apache.org/tools/wrapper/"
       ]
     }
   ],
@@ -1789,12 +1877,19 @@ export const CATALOG = deepFreeze({
       ]
     },
     "profile:spring-boot": {
-      "revision": "2.0.1",
-      "reviewedOn": "",
+      "revision": "2.0.2",
+      "reviewedOn": "2026-10-12",
       "sourceRefs": [
         "reference-60",
-        "reference-61"
-      ]
+        "reference-61",
+        "spring-boot-requirements",
+        "spring-mvc-validation",
+        "spring-method-security",
+        "spring-transactions",
+        "spring-boot-tests"
+      ],
+      "basis": "Recommended project questions grounded in scoped official documentation",
+      "confidenceLevel": "proposed"
     },
     "profile:react": {
       "revision": "2.0.2",
@@ -2150,6 +2245,51 @@ export const CATALOG = deepFreeze({
         "playwright-emulation"
       ],
       "category": "build-test"
+    },
+    "technology:maven": {
+      "revision": "1.0.0",
+      "reviewedOn": "2026-10-12",
+      "sourceRefs": [
+        "maven-lifecycle",
+        "maven-failsafe",
+        "maven-wrapper"
+      ],
+      "category": "build-test"
+    },
+    "profile:java": {
+      "revision": "1.0.0",
+      "reviewedOn": "2026-10-12",
+      "sourceRefs": [
+        "java-javac-25",
+        "maven-toolchains"
+      ],
+      "basis": "Recommended project questions grounded in scoped official documentation",
+      "confidenceLevel": "proposed"
+    },
+    "profile:maven": {
+      "revision": "1.0.0",
+      "reviewedOn": "2026-10-12",
+      "sourceRefs": [
+        "maven-lifecycle",
+        "maven-failsafe",
+        "maven-wrapper",
+        "maven-toolchains"
+      ],
+      "basis": "Recommended project questions grounded in scoped official documentation",
+      "confidenceLevel": "proposed"
+    },
+    "profile:postgresql": {
+      "revision": "1.0.0",
+      "reviewedOn": "2026-10-12",
+      "sourceRefs": [
+        "postgresql-pagination",
+        "postgresql-isolation",
+        "postgresql-transactions",
+        "postgresql-row-security",
+        "postgresql-backup"
+      ],
+      "basis": "Recommended project questions grounded in scoped official documentation",
+      "confidenceLevel": "proposed"
     }
   }
 });

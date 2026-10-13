@@ -1,7 +1,7 @@
 {
   "id": "postgresql-data",
   "title": "PostgreSQL",
-  "summary": "A relational database option using SQL.",
+  "summary": "Check relational queries, authorized scope, paging, transactions and data recovery.",
   "sections": [
     {
       "type": "p",
@@ -11,19 +11,97 @@
     {
       "type": "p",
       "label": "What Atlas provides",
-      "text": "Selecting PostgreSQL records the technology and version. Atlas currently adds generic component questions, not a PostgreSQL connection or a specialist query generator."
+      "text": "Selecting PostgreSQL records the technology and version and adds PostgreSQL query, access, transaction and recovery questions to generated skill references. It does not configure a connection or generate a verified query."
     },
     {
       "type": "p",
       "label": "Check in your environment",
       "text": "Confirm the actual version, supported interface, permissions, data model and expected query results. Compare alternatives using your constraints."
+    },
+    {
+      "type": "p",
+      "label": "Review scope",
+      "text": "The added factual claims use PostgreSQL 18 documentation reviewed on 2026-10-12. The original tutorial reference is retained. Actual project versions, database policies, queries and recovery results require separate evidence."
+    },
+    {
+      "type": "list",
+      "label": "Find the project facts",
+      "items": [
+        "Actual database and driver versions, schema, migration owner, supported application interface and permitted test environment.",
+        "Read and write identity, grants, any row security policies, and how the application applies the caller data scope.",
+        "Accepted query parameters, expected identifiers, unique ordering, page limits, consistency and freshness requirements.",
+        "Transaction and duplicate handling, concurrent updates, migration compatibility, backup and restore evidence. Record only credential sources, never secrets."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Documented paging and isolation",
+      "text": "PostgreSQL 18 recommends a unique ORDER BY for a predictable LIMIT or OFFSET subset. The default Read Committed isolation gives a SELECT its query-start snapshot, and successive SELECT statements can see different committed data, even within one transaction. A stable sort therefore does not establish one snapshot across pages. Choose and test the consistency policy the interface actually provides."
+    },
+    {
+      "type": "p",
+      "label": "Documented transaction and access scope",
+      "text": "PostgreSQL transactions group steps into an all-or-nothing operation. Row security, when enabled, can restrict the visible or modifiable rows. Superusers and roles with BYPASSRLS bypass it, and table owners normally do too. A successful test with an administrative identity does not establish the behavior of the application identity."
+    },
+    {
+      "type": "steps",
+      "label": "Check the data boundary",
+      "items": [
+        "Read the actual schema, approved data interface and migration history. Reuse parameterized operations for values and explicitly permitted query choices.",
+        "Check normal, empty and denied reads with the relevant identity. Verify ordering and the agreed consistency while data changes between pages.",
+        "Check result identifiers, permitted scope and completeness before preparing any write. Keep write authorization distinct from query validity.",
+        "Test the agreed atomic, duplicate and concurrent update behavior. Reconcile an uncertain save before retrying it.",
+        "For a schema change, assess old and new application compatibility and the recovery plan. Obtain restoration evidence where required, rather than treating backup existence as proof.",
+        "Record actual query or API results, identity, fixtures, database version, cleanup and candidate revision. State which checks remain blocked."
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Saved selection example",
+      "headers": [
+        "Case",
+        "Expected behavior to agree"
+      ],
+      "rows": [
+        [
+          "More matching topics than one page",
+          "Follow the approved paging contract and save only after the required complete selection is established."
+        ],
+        [
+          "Data changes between pages",
+          "Honor the agreed snapshot or live-result policy. Do not describe stable ordering alone as snapshot consistency."
+        ],
+        [
+          "Read allowed, write denied",
+          "Stop before persistence and report the save was not authorized."
+        ],
+        [
+          "Save response is lost",
+          "Use the agreed operation or duplicate contract to establish whether the write occurred before deciding on a retry."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Migration and recovery",
+      "text": "PostgreSQL documents SQL dumps, file system backups and continuous archiving as different backup approaches. The team must choose the applicable method and test its recovery requirements. An application rollback does not automatically reverse a data migration, and a transaction in one database does not undo a remote service call."
+    },
+    {
+      "type": "p",
+      "label": "Useful result",
+      "text": "A query and persistence contract with expected fixtures for authorized scope, empty data, paging changes, duplicate requests and failed saves. This fictional example proposes a complete permitted selection before saving. Real schema, identifiers, consistency, commands and recovery evidence remain unresolved. No database check or restoration has run."
     }
   ],
   "refs": [
-    "postgresql-tutorial"
+    "postgresql-tutorial",
+    "postgresql-pagination",
+    "postgresql-isolation",
+    "postgresql-transactions",
+    "postgresql-row-security",
+    "postgresql-backup"
   ],
-  "basis": "Source references and Atlas guidance",
-  "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
+  "basis": "Scoped documented facts, recommended procedure and illustrative examples",
+  "confidence": "High for the listed factual claims reviewed on 2026-10-12. Project fit, database access and any query or recovery outcome remain unverified.",
   "catalog": {
     "kind": "technology",
     "domains": [
@@ -33,13 +111,18 @@
       "postgres",
       "sql database",
       "relational database",
-      "sql"
+      "sql",
+      "postgresql paging",
+      "database transaction",
+      "row security",
+      "database migration",
+      "restore evidence"
     ],
-    "revision": "1",
-    "applicability": "Use this technology example when your data is relational and queried with SQL. Atlas records the technology and version and adds generic component questions, not a PostgreSQL connection or a specialist query generator.",
+    "revision": "2",
+    "applicability": "Use when a PostgreSQL data boundary needs checks for query behavior, permitted scope, paging consistency, transactions or recovery. Selection adds project questions without configuring a connection.",
     "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
     "sourceStatus": "reviewed",
-    "reviewedOn": "2026-10-05",
+    "reviewedOn": "2026-10-12",
     "claims": [
       {
         "sectionLabel": "Documented role",
@@ -47,14 +130,50 @@
         "sourceRefs": [
           "postgresql-tutorial"
         ]
+      },
+      {
+        "sectionLabel": "Documented paging and isolation",
+        "text": "PostgreSQL 18 recommends a unique ordering for predictable LIMIT or OFFSET results.",
+        "sourceRefs": [
+          "postgresql-pagination"
+        ]
+      },
+      {
+        "sectionLabel": "Documented paging and isolation",
+        "text": "At default Read Committed isolation, successive SELECT statements may see different committed data, including within one transaction.",
+        "sourceRefs": [
+          "postgresql-isolation"
+        ]
+      },
+      {
+        "sectionLabel": "Documented transaction and access scope",
+        "text": "PostgreSQL transactions group steps into an all-or-nothing operation.",
+        "sourceRefs": [
+          "postgresql-transactions"
+        ]
+      },
+      {
+        "sectionLabel": "Documented transaction and access scope",
+        "text": "PostgreSQL row security can restrict visible or modifiable rows. Superusers and BYPASSRLS roles bypass it, and table owners normally do too.",
+        "sourceRefs": [
+          "postgresql-row-security"
+        ]
+      },
+      {
+        "sectionLabel": "Migration and recovery",
+        "text": "PostgreSQL documents SQL dumps, file system backups and continuous archiving as distinct backup approaches.",
+        "sourceRefs": [
+          "postgresql-backup"
+        ]
       }
     ],
     "evidence": {
       "basisKinds": [
         "documented",
-        "proposed"
+        "recommended",
+        "illustrative"
       ],
-      "confidenceLevel": "established"
+      "confidenceLevel": "proposed"
     },
     "applies": {
       "technologies": [

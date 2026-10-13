@@ -4,6 +4,28 @@ Release notes describe application changes. Project schema and guidance versions
 
 ## Unreleased
 
+- Recover supported historical omissions and shared product outcomes after confirmation. Preserve older meanings until reconfirmed. Pause ideas for unresolved privacy exceptions and partially recognized practice exclusions, while keeping complete wording in downloads and JEV requests unchanged.
+
+- Keep compatible compound input restrictions together and pause JEV checks before confirmation. Ask what to plan when the deliverable is undecided, without turning mentioned alternatives into practice suggestions.
+- Respect supported fronted and combined practice omissions before clarification. Ask for a source correction when a recorded answer cancels implementation requested in the description.
+
+- Confirm supported sentence meanings with one action. Separate input handling from product behavior, retain older interpretation policies and avoid suggesting smallest-change work for a broad replacement without a bounded slice.
+
+- Separate complete task statements, product rules, background and scoped restrictions. Preserve original text, older clarifications and download recovery. Pause optional JEV checks independently from local ideas when a sending limit can be separated.
+
+- Refine task and ongoing knowledge needs separately. Keep complete supported conditions and past-version context, preserve older clarification records and avoid treating a wiki topic mention as a maintenance request.
+
+- Clarify supported conditional requirements, dated history and knowledge-only scope with a whole sentence confirmation. Preserve older downloads, require reconfirmation for newly supported meanings and keep the inference request unchanged.
+
+- Ask short local questions when task wording or restrictions are unclear. Keep requirements, background and named practice exclusions separate, preserve choices in downloads and invalidate them after source edits. Keep JEV requests unchanged.
+
+- Match practice ideas to their own intent, recognize named omissions and bounded offline or rejected-record requirements, and retain unresolved restrictions. Version the minimum-change inference profile separately while preserving shared questions and the inference boundary.
+
+- Keep bounded acceptance such as "Rejected selections are not saved" as a requirement to verify, without pausing independent practice ideas or turning its negated outcome into a search match. Preserve unclear restrictions, exact exported wording and the inference boundary.
+- Bound recipe and stage influence in local suggestions, respect explicitly selected stages and match the full article text. Keep reading tied to useful task wording or the recorded environment. Recognize a bare No MCP boundary without hiding independent advice, and show unresolved restrictions before optional practice assessment. Keep catalogue text outside inference requests.
+- Add the API and stored data reference path with useful Java, Spring Boot, Maven and PostgreSQL guidance, editable stack questions and a fictional saved topic selection. Keep MCP and models optional, distinguish partial retrieval from completion and reconcile uncertain saves without replaying writes.
+- Export application contracts for any recorded custom application process, carrying supplied context, results, checks, approvals and routes into blueprint and full packs. Keep evidence unresolved and execution outside the beta. Advance catalogue content to 2.3.0 and exporter to 3.2.0 without changing project or workflow schemas.
+
 - Complete the first feature reference path with useful React, JavaScript and TypeScript, npm, Vitest and Playwright guides, stack questions and a fictional status filter draft. Keep actual commands, paths, versions and test results unresolved until supplied.
 - Review scoped claims in Node.js, Python, Docker, GitHub Actions and repository instructions, correcting version and host assumptions without claiming project compatibility.
 - Separate structural coverage, indirect reading, task procedures, worked examples, scoped review and export questions in the maintainer report. Reject missing section references and retain the visible gaps.

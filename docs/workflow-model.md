@@ -1,6 +1,6 @@
 # Workflow model
 
-Implemented locally on 5 October 2026. Project schema `3.0`, workflow model `1.0`, pattern definitions `1.0` and exporter `3.1.0`.
+Implemented locally on 5 October 2026, with application contract exports added on 12 October 2026. Project schema `3.0`, workflow model `1.0`, pattern definitions `1.0` and exporter `3.2.0`.
 
 The model records what needs to happen, what passes between steps and where each outcome leads. It describes work. It does not run it.
 
@@ -102,6 +102,8 @@ Count each entry into a correction attempt after the initial candidate, includin
 A changed candidate needs all its declared checks and any required approval again before completion. This version does not model exemptions for checks unaffected by a change. Earlier evidence stays historical. An evidence link with a different recorded candidate version is flagged. Matching versions only associate supplied records. They do not prove validity or automatically approve anything.
 
 Transport retry and uncertain write recovery are separate from correction. The backend fixture routes an uncertain write to reconciliation without repeating the write. This model cannot inspect whether the eventual implementation follows that action description.
+
+The **Change an API and stored data** example in Browse examples includes an editable application process beside its development recipe. Its saved selection passes result checks and a separate save decision before persistence and confirmation. Two correction attempts are a proposed example limit, not a universal recommendation. Real approval authority remains unresolved. `templates/CONTRACTS.md` carries application steps, result descriptions, checks, approval and routes into blueprint and full pack exports. These are recorded design requirements, not working endpoints, permission checks or an execution engine.
 
 ## What validation establishes
 

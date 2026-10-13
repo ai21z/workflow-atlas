@@ -22,6 +22,43 @@ Entered wording stays in the current session when you visit Knowledge map or swi
 
 **Browse examples** offers fictional worked projects. The configuration-service feasibility example uses synthetic names, paths, commands, sources and decisions. **Open pack** restores a supported download. Replacing unfinished work requires a deliberate choice, with an opportunity to download the current project.
 
+## Separate tasks, product rules and limits
+
+In **Brief**, a short question can show one complete sentence with a suggested meaning. Select **Keep as a product rule**, **Keep as background** or the offered restriction choice if it matches what you meant. This records your confirmation, without rewriting the sentence or adding a practice. **Choose another meaning** opens the detailed controls. **Edit wording** takes you to the original field.
+
+If your description leaves the deliverable undecided, Atlas asks **What should we plan now?** Choose software work, ongoing source knowledge, another kind of work or **Not decided yet**. While undecided, related reading stays available and practice ideas wait. Choosing software does not select a wiki just because it was another option in the description. The choice stays in your download. It does not rewrite answers or bypass a separate restriction.
+
+If the description requests software work but a recorded answer says implementation was cancelled for a one-time output, update the text to agree. A task choice does not decide which source is authoritative. Supported named omissions, including lists joined by **plus**, keep those practices out before you confirm the sentence's meaning.
+
+For other sentences, open **Refine matching**, then **Separate tasks and rules**. If an instruction needs clarification, **Separate this sentence** opens the same controls.
+
+1. Choose the sentence. Atlas shows its full wording and where it came from.
+2. Choose **Current task**, **Product requirement**, **Background** or **Restriction**.
+3. For a restriction, choose what it limits. You can select several practices to leave out, a product behavior limit, sending text to AI, **Handling project input**, or **Not sure**.
+4. Select **Keep this meaning**. Check the status below it. A recorded meaning can still need review if the sentence mixes instructions or its scope remains unclear.
+
+For example, the task might be “Build the invoice API.” A product rule might be “Invalid invoice edits must not be stored.” A separate restriction might be “Do not send this description to JEV.” The product rule stays in the plan for verification. A supported sending restriction can allow local ideas while keeping the optional JEV practice check paused.
+
+“Project input may be stored only in our approved workspace” is an input handling limit. Confirming it keeps local ideas available and the optional JEV check paused. Atlas does not establish whether a provider satisfies that limit. A coordinated product rule or a list of excluded practices can stay in one sentence when Atlas supports the complete wording. A second command, conflicting rule or unclear exception still needs review.
+
+Compatible limits can stay together. For example, “Process the source inputs only on the approved local workstation, and erase temporary copies when this session ends.” Confirm **Keep this input handling limit** to resume local ideas while the JEV practice check stays paused. Atlas keeps both clauses in the original sentence. It does not process or erase files. A new permission, an exception or an unrelated command still needs clearer wording. Recognized input limits pause the optional check even before you confirm their meaning.
+
+Supported historical wording can also stay together. “The original player never checked cue identifiers and omitted the paused position” can be confirmed as background. “The duplicate must keep the title and start without assignees” can be confirmed as one product rule. These confirmations keep the complete sentence in your downloads. They do not turn past omissions into current restrictions or verify a requirement.
+
+**Clarify the privacy exception** means Atlas found a handling limit with an exception it cannot apply. For example, “Keep all project input private, but use an outside service if the team thinks it is needed.” Both practice ideas and the optional JEV check pause before you classify that sentence. Choosing Background, Task or another label cannot grant permission. Keep an accurate rule and continue editing the workflow manually. Edit the wording only if it does not describe your intended limit. Conditional permission is not automatically supported merely because you name a service or an approver.
+
+An exclusion list with one recognized practice and another unknown name also pauses ideas. Use the actual practice names or identifiers from the Knowledge map. Atlas does not guess an unknown name or recommend the recognized practice you asked to omit.
+
+An older download keeps its previous interpretation rules. Atlas can offer reconfirmation when a newer rule supports its wording. Only the sentence you confirm moves to that newer rule. A broad subsystem replacement does not automatically receive the smallest-change practice. Describe a concrete bounded slice when that is the work you want to plan.
+
+Each choice applies to that occurrence in that source field. An answer inherited from the description does not need a second classification. Separately entered answers remain separate even if their words match. A recorded meaning stays visible if that answer later inherits the same description. Line breaks keep a condition with its rule. End one statement with a full stop before starting another. Split conflicting or mixed instructions in the original field if Atlas cannot separate them.
+
+An earlier clarification can still control the same wording. If a new meaning conflicts with it, Atlas marks the new choice for review. Open **Your clarifications**, then **Review these choices again** to clear the recorded clarifications before choosing again.
+
+These choices do not select practices or prove a requirement works. Excluding a practice keeps it out of new ideas and does not remove it from an existing project. **Remove this meaning** returns a sentence to ordinary matching. Editing the description, recipe or its answers makes previous clarifications inactive. Stage changes only recheck eligibility.
+
+Download to keep the choices. Open the ZIP, project JSON or readable project HTML to restore them. Workflow and requirement files retain the source text and recorded meaning. Atlas does not enforce these limits when a workflow runs. The JEV check still receives only the original description and supported answers, never these local classifications.
+
 ## Find the right view
 
 | Destination or control | Use it to |
@@ -47,6 +84,24 @@ For a recipe project, Project Atlas and the downloaded HTML begin with four ques
 The first two enabled recipe stages identify planned owners. They are not progress or completed work. The brief identifies empty intent and approach fields. A filled field does not resolve questions inside its notes, and the brief does not interpret every unresolved question in free text. Expand recorded context and technical details or the richer project views for specialist information. All views use the same configuration.
 
 A project with custom processes and no active recipe shows its recorded outcome, process purposes, each process's planned entry owner and model findings. Processes have separate starting points. Their card order does not start one after another. **More project detail** counts the actual planned custom steps and assignments. Retained inactive recipe answers do not supply a purpose or owner for these processes.
+
+### Answer a short clarification
+
+Under **Ideas for your workflow**, Atlas may ask **What kind of work is this?** Choose software work, maintaining source backed knowledge, other work or **Not sure yet**. This supplies local context for practice suggestions. It does not select practices or change the workflow stages.
+
+When a negative sentence is unclear, Atlas quotes it and asks **What does this sentence mean?** Choose a rule for what you are building, background information, or a named practice to leave out. For an exclusion, open **A practice to leave out**, choose the practice and select **Keep this practice out**. Conflicting instructions and restrictions on sending your text need clearer wording instead of this shortcut. Use **Edit the wording instead** or **Edit my description** to reach the original field.
+
+For a supported conditional rule, Atlas asks **Is this a rule for what you are building?** Choose **Yes, keep the whole requirement** to retain the condition as part of the rule. A single supported if, when, unless or until condition stays with its outcome. For explicitly dated behavior or a supported reference to an earlier version, **Yes, keep it as background** records history without treating it as a current task. An explicit knowledge-only scope can use **Yes, keep this scope**.
+
+These questions offer only the meaning that the recognized sentence structure supports. Use **Edit the wording instead** if that meaning is wrong. Unrecognized conditions, exceptions, broad operation bans and conflicting instructions still need clearer wording. If the recorded task conflicts with an explicit no-software scope, Atlas asks which kind of work fits and pauses practice ideas until that conflict is resolved.
+
+Atlas asks one sentence clarification at a time. Review each practice before adding it. **Your clarifications** shows recorded choices and lets you edit the original statement or start the review again. The original description and answers stay unchanged until you edit them. A requirement is something to verify, not a completed check.
+
+Open **Refine matching** to choose the kind of work and whether it needs an ongoing reference. These are separate choices. A software change can also need sources and decisions maintained over time. Choose **Yes, an ongoing reference**, **One-time output** or **Not sure yet**. The latter two withhold the wiki suggestion. Nothing is selected or sent automatically. Exclusions and current stage choices still take precedence. Conflicting knowledge choices stay visible so you can correct them. A mention of a wiki button or a one-time summary alone does not establish a maintained knowledge task.
+
+These choices stay in the current tab and in downloaded project JSON, packs and project HTML. Workflow, requirements and standalone skill references retain them. Exports identify them as recorded choices, not proof that each classification is currently used for matching. Check that status in Brief. Reopen a download to continue. Changing the description, a recipe answer or the recipe makes the old clarification inactive. Changing stages keeps the clarification, but suggestions still follow the current stages. Older downloads stay readable. A formerly unsupported conditional or historical meaning needs confirmation again under the current rules, even if another choice in the project was updated.
+
+Clarifications are used only by local retrieval. They are not sent to JEV. An optional JEV check still reads the original description and recorded answers, so it may ask for context even after you clarify the meaning locally.
 
 ### Review decisions and guidance
 
@@ -97,6 +152,12 @@ Suggestions are deliberately conservative. A clear practice name or specific wor
 Choose **Review practice**, inspect the proposed edit and affected files, then **Apply to my workflow** if you want to keep it. Cancel changes nothing. Undo can reverse an applied edit. Suggestions alone do not change the workflow or downloaded files.
 
 **Read topic** opens related guidance. Technology pages and specialist examples remain reading, rather than practices to apply. With no project, choose a starting workflow before reviewing practices for it. Local matching recognizes limited named exclusions and does not understand every instruction or conflict in a description.
+
+Related reading follows your words and recorded environment. A recipe's default stages do not override the stages you selected. Removing every stage keeps them removed, including after a download is reopened.
+
+**Requirements from your text** keeps recognized outcomes such as "Rejected selections are not saved" available to verify. This wording does not pause independent practice ideas or turn saving into a positive search match. Keep your accurate acceptance text. It stays in the project, `WORKFLOW.md` and `templates/REQUIREMENTS.md` when you download and reopen a feature pack. Suggestions do not establish that a requirement is satisfied.
+
+**Restrictions from your text** explains a recognized boundary such as **No MCP**, or quotes wording that needs clarification. Independent practice ideas remain available for a bare MCP restriction. Broad operation bans, exceptions and unsupported conditions can still pause practice ideas and their optional JEV check. A short question may clarify a supported product condition, dated history or explicit knowledge-only scope. You can still edit, download, read guidance or review a practice manually from the Knowledge map. Atlas does not enforce requirements or restrictions when a workflow runs.
 
 With the local JEV setup, **Check fit with JEV** can assess the highest eligible candidate among its three supported practices. Read its actual outcome, including a rejection or need for context. Other candidates remain **Not assessed by JEV**. This optional request does not send catalogue summaries, topic bodies or node digests. JEV assesses fit, it does not verify the sources or apply the suggestion. Changing relevant choices invalidates the old assessment.
 
@@ -245,7 +306,7 @@ A blueprint with no enabled agent assignments omits the default guidance about p
 | Format checked | Generated files pass factory structural rules |
 | Host and behavior | The factory has not established discovery, task behavior or improved outcomes |
 
-The full ZIP contains configuration, readable Project Atlas, workflow, facts, evidence, selected skills and profiles, reports and templates. Blueprint and full outputs include `RUNTIME-DESIGN.md` and `templates/CONTRACTS.md` when optional runtime design is enabled.
+The full ZIP contains configuration, readable Project Atlas, workflow, facts, evidence, selected skills and profiles, reports and templates. Blueprint and full outputs include `templates/CONTRACTS.md` when a custom application process is recorded or optional runtime design is enabled. Application contracts include supplied process and result details, checks, approvals and routes. They do not configure an API or enforce access. `RUNTIME-DESIGN.md` appears only when optional runtime design is enabled.
 
 Readable HTML is for offline reading and sharing. It carries the chosen output files and configuration for reopening. Editing continues in the workspace. JSON keeps settings alone. The separate **Download standalone skill** control in Roles and skills keeps one complete procedure and its resources, without the full editable project. Download a selected output or JSON to keep those project decisions.
 

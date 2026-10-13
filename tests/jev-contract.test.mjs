@@ -4,41 +4,74 @@ import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import {
   MODEL, PROMPT_VERSION, CONTRACT_VERSION, DEFINITION_DIGEST, DEFINITION_METADATA,
+  SHARED_DEFINITION_VERSION, PRACTICE_DEFINITION_VERSIONS,
   FROZEN_DEFINITIONS, PRIORITIES, ANSWER_IDS, SUPPORTED_RECIPES, SUPPORTED_PRACTICES,
   makeRequest, validateResponse, decide, allCoverage, coverageForRecipe,
 } from '../factory/jev-contract.mjs'
+import { FROZEN_DEFINITIONS as V8_DEFINITIONS, DEFINITION_DIGEST as V8_DIGEST } from '../factory/jev-definitions-v8.mjs'
 
 const parity = JSON.parse(await readFile(new URL('./fixtures/jev-v8-parity.json', import.meta.url), 'utf8'))
 const retained = JSON.parse(await readFile(new URL('./fixtures/jev-v8-responses.json', import.meta.url), 'utf8'))
 const f01 = retained.cases.find(item => item.id === 'F01')
 const copy = value => structuredClone(value)
 
-test('promoted requests exactly preserve full retained v8 requests, state and criterion order', () => {
+test('shared and unchanged practice requests preserve retained v8 text, state and criterion order', () => {
   for (const fixture of parity.cases) {
     const request = makeRequest(fixture.item, fixture.reverse)
-    assert.deepEqual(request, fixture.request, fixture.id)
-    assert.equal(JSON.stringify(request), JSON.stringify(fixture.request), `${fixture.id} serialization and order`)
+    const unchanged = copy(request)
+    const retainedRequest = copy(fixture.request)
+    if (fixture.item.practice?.id === 'minimum-change') {
+      for (const key of ['practice', 'practice_need', 'practice_boundary']) {
+        delete unchanged.questions[key]
+        delete retainedRequest.questions[key]
+      }
+    }
+    assert.deepEqual(unchanged, retainedRequest, fixture.id)
+    assert.equal(JSON.stringify(unchanged), JSON.stringify(retainedRequest), `${fixture.id} serialization and order`)
     assert.equal(Object.keys(request.questions).length, fixture.item.practice ? 13 : 10)
     assert.deepEqual(request.state.suppliedProjectAnswers, fixture.item.projectAnswers)
   }
   assert.equal(MODEL, 'jev-1.13.0')
-  assert.equal(PROMPT_VERSION, 'pilot-v8-practice-need-separate-from-completeness')
+  assert.equal(PROMPT_VERSION, 'pilot-v9-minimum-change-concrete-work')
 })
 
 test('definition digest covers every frozen inference definition independently of the live catalog', async () => {
   const digest = createHash('sha256').update(JSON.stringify(FROZEN_DEFINITIONS)).digest('hex')
   assert.equal(digest, DEFINITION_DIGEST)
-  assert.equal(digest, parity.definitionDigest)
+  assert.equal(digest, '7946f8cc387008833b8a5b58f94714805ea4813bfa8b160d05df45edd86b7f0e')
+  assert.notEqual(digest, parity.definitionDigest)
   assert.deepEqual(DEFINITION_METADATA, {
     model: MODEL, promptVersion: PROMPT_VERSION, contractVersion: CONTRACT_VERSION,
-    definitionDigest: digest, inferenceDefinitionVersion: 'v8-frozen-catalog-2.0.1', frozenOn: '2026-10-05',
+    definitionDigest: digest, inferenceDefinitionVersion: 'v9-minimum-change-concrete-work',
+    sharedDefinitionVersion: 'v8-frozen-catalog-2.0.1',
+    practiceDefinitionVersions: PRACTICE_DEFINITION_VERSIONS, frozenOn: '2026-10-12',
   })
   assert.ok(Object.isFrozen(FROZEN_DEFINITIONS.questions.intent.criteria))
   assert.ok(Object.isFrozen(PRIORITIES.feasibility))
-  for (const file of ['jev-contract.mjs', 'jev-definitions.mjs']) {
+  for (const file of ['jev-contract.mjs', 'jev-definitions.mjs', 'jev-definitions-v8.mjs', 'jev-minimum-change-v9.mjs']) {
     const source = await readFile(new URL(`../factory/${file}`, import.meta.url), 'utf8')
     assert.doesNotMatch(source, /(?:from|import)\s*['"].*(?:local-knowledge|catalog\.mjs)/)
   }
+})
+
+test('only minimum-change semantics are revised and the original v8 profile remains reproducible', () => {
+  const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex')
+  assert.equal(hash(V8_DEFINITIONS), V8_DIGEST)
+  assert.equal(V8_DIGEST, parity.definitionDigest)
+  assert.equal(JSON.stringify(FROZEN_DEFINITIONS.questions), JSON.stringify(V8_DEFINITIONS.questions))
+  assert.equal(JSON.stringify(FROZEN_DEFINITIONS.priorities), JSON.stringify(V8_DEFINITIONS.priorities))
+  for (const id of ['specification-first', 'evidence-wiki']) {
+    assert.equal(JSON.stringify(FROZEN_DEFINITIONS.practiceQuestions[id]), JSON.stringify(V8_DEFINITIONS.practiceQuestions[id]))
+    assert.equal(PRACTICE_DEFINITION_VERSIONS[id], 'v8-practice-need-separate-from-completeness')
+  }
+  assert.equal(SHARED_DEFINITION_VERSION, 'v8-frozen-catalog-2.0.1')
+  assert.equal(PRACTICE_DEFINITION_VERSIONS['minimum-change'], 'minimum-change-v9-concrete-software-work')
+  assert.notEqual(hash(FROZEN_DEFINITIONS.practiceQuestions['minimum-change']), hash(V8_DEFINITIONS.practiceQuestions['minimum-change']))
+  assert.ok(Object.isFrozen(PRACTICE_DEFINITION_VERSIONS))
+  assert.ok(Object.isFrozen(FROZEN_DEFINITIONS.practiceQuestions['minimum-change'].practice_need.criteria))
+  const request = makeRequest({ brief: 'Repair the export button. Keep the current stack and dependencies.', projectAnswers: {}, practice: { id: 'minimum-change' } })
+  assert.deepEqual(Object.keys(request.state), ['userBrief', 'suppliedProjectAnswers'])
+  assert.deepEqual(Object.keys(request), ['model', 'state', 'questions'])
 })
 
 test('building a request cannot mutate definitions or supplied text and never adds application metadata', () => {
@@ -60,7 +93,7 @@ test('building a request cannot mutate definitions or supplied text and never ad
   assert.throws(() => makeRequest({ brief: 'A task', projectAnswers: { hiddenSecret: 'Never accepted' } }), /Unsupported project answers/)
 })
 
-test('retained synthetic responses validate and preserve authored successes as exposed regressions', () => {
+test('historical v8 responses retain structural validation and decision policy, without claiming v9 model accuracy', () => {
   for (const fixture of retained.cases.filter(item => !item.knownFailure)) {
     const original = copy(fixture.recordedResponse)
     assert.equal(validateResponse(fixture.recordedResponse, makeRequest(fixture.item)), null, fixture.id)

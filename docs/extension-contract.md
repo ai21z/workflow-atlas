@@ -1,6 +1,6 @@
 # Extension contract
 
-Project schema: `3.0`. Workflow model: `1.0`. Catalogue content version: `2.1.0`. Catalogue authoring schema: `1.0`. Exporter: `3.1.0`. Contract documentation updated on 5 October 2026. Source review dates remain in their individual records. See the [workflow model](workflow-model.md) for explicit process records and current editing limits.
+Project schema: `3.0`. Workflow model: `1.0`. Catalogue content version: `2.3.0`. Catalogue authoring schema: `1.1`. Exporter: `3.2.0`. Contract documentation updated on 12 October 2026. Source review dates remain in their individual records. See the [workflow model](workflow-model.md) for explicit process records and current editing limits.
 
 The date above records this contract revision. The inherited global definition review date remains 2 October 2026. Individual definitions and source claims may record a later review. Migrating content into the catalogue or editing metadata does not establish a new upstream source review.
 
@@ -145,7 +145,7 @@ The compiler returns files with `path`, `content`, `why`, `stages`, `roles`, `so
 
 The metadata explains an artifact's contribution. It does not authenticate a source or imply that the described task was executed.
 
-The complete pack contains configuration, workflow, project facts, evidence, installation, sources, validation and manifest records. Relevant stages add requirement, decision, verification and evaluation templates. Custom steps also produce an evaluation template with planned outcome cases, exhaustion cases and checks or approval after candidate changes. Every derived case starts as `NOT RUN`. The optional backend design adds `RUNTIME-DESIGN.md` and `templates/CONTRACTS.md`. Its fixed architecture remains illustrative.
+The complete pack contains configuration, workflow, project facts, evidence, installation, sources, validation and manifest records. Relevant stages add requirement, decision, verification and evaluation templates. Custom steps also produce an evaluation template with planned outcome cases, exhaustion cases and checks or approval after candidate changes. Every derived case starts as `NOT RUN`. A custom application process adds `templates/CONTRACTS.md` with its recorded steps, results, checks, routes and approvals. These are supplied design decisions, not implemented interfaces or permission enforcement. The optional backend design separately adds `RUNTIME-DESIGN.md` and the contracts scaffold. Its fixed architecture remains illustrative.
 
 Agents link only skills bound to their assigned recipe stages or matching custom development and manual steps. Extra library skills are exported without automatically binding them to every role. Existing selected tool lists remain unchanged. Unknown capabilities or missing requested tools remain findings. Generating a profile does not grant those tools or configure a service.
 
@@ -197,7 +197,19 @@ A practice needs its exact contribution, applicability and source limits. A sour
 
 A target adapter needs documented paths, fields, tools and installation behavior. Preserve unsupported settings as findings. Check the [Copilot configuration reference](https://docs.github.com/en/copilot/reference/custom-agents-configuration) before changing its adapter. A model recorded in evidence is separate from host model configuration.
 
-Catalogue availability does not imply JEV support. The frozen v8 inference definitions, supported IDs and digest remain independent of live catalogue additions. New questions can be recorded manually but are excluded from inference requests until a reviewed profile supports them. Response coverage is validated against that frozen profile, not every live catalogue recipe.
+Catalogue availability does not imply JEV support. The versioned inference definitions, supported IDs and digest remain independent of live catalogue additions. Shared questions and two practices retain v8, while minimum-change has a separately versioned v9 profile. New questions can be recorded manually but are excluded from inference requests until a reviewed profile supports them. Response coverage is validated against that frozen profile, not every live catalogue recipe.
+
+### Retrieval and intent matching
+
+`factory/knowledge-query.mjs` provides deterministic reading and proposal queries. A topic indexes its own text and its linked practice labels and summaries. Linked stage descriptions do not become its text. `factory/brief-suggestions.mjs` then checks action eligibility, current selections and support for each candidate. With a supplied brief, stage links constrain eligibility rather than establishing the need for an unrelated practice. Minimum-change has a phrase or software cue gate. Other practices combine their own lexical matches with bounded positive cues for requirements, maintained knowledge or validated retrieval. Reasons describe those matches, not measured confidence or source correctness.
+
+Intent handling uses finite wording rules. Exact named omit and exclude requests support lists separated by commas or the word and. Every target must resolve to a practice name or identifier through a recorded topic link. Unknown, unlinked or ambiguous targets pause selectable suggestions. Complete status-qualified save, store or persist outcomes can contain short domain object names and an optional approved, accepted or confirmed result. Recognized offline capabilities remain requirements to verify. Recognized missing-input and undecided whether statements remain unknown information. None becomes a positive retrieval signal, an implemented check or a runtime permission. The [catalogue guide](catalogue.md) gives the supported forms and remaining limits.
+
+Complete requests of the form "Leave NAME out of the pack" use the same named practice resolution, including workflow and instruction scopes. The whole sentence is checked before clause splitting. Bounded explanations remain original user text and do not supply positive matches. Embedded reports, conflicting directives, negated leave-out wording and unsupported forms remain unresolved. Tests added after a pilot exposes a phrase are regression checks, not fresh evidence of recommendation accuracy. Preserve the frozen pilot inputs and outcomes separately from later fixes.
+
+Preserve the original user text when classifying these forms. Exclusions affect proposals, not existing project selections or ordinary reading searches. A separate unresolved restriction still pauses selectable suggestions and their optional assessment. Do not interpret a recognized requirement as permission to ignore another restriction. Reading-only and historical filters cover known forms and do not establish complete natural language understanding.
+
+This matching layer does not send catalogue bodies, summaries, weights, retrieval reasons or parsed constraints to JEV. The existing supported practice path sends the original user brief and supported authored answers. The server selects its fixed, versioned practice questions. Adding a catalogue alias or changing a retrieval weight does not change those questions, but it can change which candidate the user is offered. Check the final surfaced actions and their reasons as well as the inference request boundary when extending retrieval.
 
 ## Validation boundaries
 

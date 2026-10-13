@@ -189,7 +189,9 @@ async function main() {
       assert.ok(count > 0 && count <= 3)
       assert.match(await page.locator('#brief-suggestions').innerText(), /Matched locally. Review before adding/)
       const reasons = await page.locator('#brief-suggestions .brief-idea-reason').allTextContents()
-      assert.ok(reasons.some(reason => reason.startsWith('Your text mentions “') && reason.endsWith('.')), 'The visible reason is a sentence quoting supplied words')
+      assert.ok(reasons.every(reason => reason.startsWith('Your text ') && reason.endsWith('.')), 'Each visible reason is a sentence tied to the supplied text')
+      assert.match(await page.locator('[data-practice-suggestion="minimum-change"] .brief-idea-reason').innerText(), /software change|smallest necessary change/u, 'The minimum-change reason explains this software task')
+      assert.match(await page.locator('[data-practice-suggestion="specification-first"] .brief-idea-reason').innerText(), /requirements/u, 'The requirements reason explains the selected practice')
       assert.equal(await page.locator('[data-practice-suggestion="specification-first"] .brief-idea-source').innerText(), 'No sources recorded. No claim review recorded.', 'A topic with no sources must not claim retained references')
       assert.equal(received, 0)
       return { count, titles: await page.locator('#brief-suggestions h3').allTextContents(), reasons, providerRequests: received }
@@ -279,6 +281,7 @@ async function main() {
         await briefView(page)
         await page.locator('#project-purpose').fill(`${wanted} Explain the chosen change.`)
         await page.locator('#brief-suggestions').waitFor({ state: 'visible' })
+        await page.waitForFunction(() => document.querySelector('#brief-suggestions')?.getAttribute('aria-busy') === 'false')
       }
       mode = 'slow'
       releaseSlow = null
@@ -353,6 +356,13 @@ async function main() {
       }
       await page.setViewportSize({ width: 1440, height: 1000 })
       await page.locator('#project-purpose').focus()
+      await page.keyboard.press('Tab')
+      const matchingSummary = page.locator('#brief-suggestions [data-detail="matching"] > summary')
+      assert.equal(await matchingSummary.evaluate(element => element === document.activeElement), true)
+      await page.keyboard.press('Enter')
+      assert.equal(await page.locator('#brief-suggestions [data-knowledge-question]').isVisible(), true)
+      await page.keyboard.press('Enter')
+      assert.equal(await page.locator('#brief-suggestions [data-knowledge-question]').isVisible(), false)
       await page.keyboard.press('Tab')
       assert.equal(await page.locator('#brief-suggestions [data-review-idea]').first().evaluate(element => element === document.activeElement), true)
       const title = await page.locator('#brief-suggestions h3').first().innerText()
