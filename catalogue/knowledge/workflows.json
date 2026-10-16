@@ -22,6 +22,16 @@
       "type": "p",
       "label": "Apply proportionately",
       "text": "Distinguish the work of developing a capability from what the finished application does for each request. A study may end in a decision package. It does not require building an execution platform."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Choose proportionate orchestration from actual task dependencies and recovery requirements.",
+        "Record each step's input, output, actor and failure destination.",
+        "Compare existing automation with any proposed durable runner using observed requirements.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -35,7 +45,7 @@
       "workflow-design"
     ],
     "aliases": [],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -43,9 +53,17 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "options",
+        "breakdown"
+      ]
     }
   }
 }

@@ -22,6 +22,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Use actual check outputs and appropriate evidence retention. If adapting a local procedure into a hosted runtime, review authentication, application access, event processing, idempotency, and job recovery separately."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Review an inspected procedure's assumptions before adapting it into another runtime.",
+        "Distinguish a contract-text test from evidence that the gate executed.",
+        "Check authentication, side effects and trace retention in the target environment.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -43,7 +53,7 @@
       "copilot skills",
       "hosted runtime"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Talos example when adapting procedures, runbooks or test definitions from a source repository into your own workflow. A document or contract test can describe a gate without proving it ran, so check the assumptions, environment and evidence behind the source first.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -59,6 +69,12 @@
     "scope": {
       "generality": "example",
       "context": "talos"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "verification"
+      ]
     }
   }
 }

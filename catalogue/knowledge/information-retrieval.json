@@ -27,6 +27,16 @@
       "type": "p",
       "label": "Coverage",
       "text": "The technology entries below illustrate relational and graph approaches. This is a growing selection, not an exhaustive list or a ranking."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Architecture and impact, Tests and review. Use to state the required information and permitted scope, choose a proportionate approved interface and verify the returned result. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Record required fields, caller scope, source freshness and expected outcomes for valid, empty and denied requests.",
+        "Check output to obtain: Document why the existing API or structured filter is sufficient, or what bounded contribution an optional model must demonstrate.",
+        "Check output to obtain: Keep input validity, access permission and returned-data correctness as separate observed checks."
+      ]
     }
   ],
   "refs": [
@@ -47,7 +57,7 @@
       "retrieval",
       "approved api"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when designing how an application finds existing information through a suitable interface and checks that the result answers the request. Reuse an approved API first and add a model step only when interpretation or variable decisions contribute something useful.",
     "limits": "This is design guidance. It does not connect to a service or prove that a result is correct.",
     "sourceStatus": "reviewed",
@@ -67,6 +77,13 @@
         "proposed"
       ],
       "confidenceLevel": "established"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "architecture",
+        "verification"
+      ]
     }
   }
 }

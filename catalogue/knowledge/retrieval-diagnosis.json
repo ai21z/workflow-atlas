@@ -38,6 +38,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Fix missing evidence or wrong selection before assuming a larger model will resolve every unsupported answer."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Locate whether an unsupported result failed at retrieval, selection, generation or applicability.",
+        "Record the needed source passage and whether retrieval returned it.",
+        "Compare support of the final claim with the selected passage and required scope.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -58,7 +68,7 @@
       "retrieval failure",
       "wrong passage"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when an answer is unsupported and you need to tell whether the evidence was never found, the wrong passage or version was selected, the generation misused it, or the claim falls outside the required scope, before reaching for a larger model.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -66,9 +76,17 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "diagnosis",
+        "experiment-plan",
+        "verification"
+      ]
     }
   }
 }

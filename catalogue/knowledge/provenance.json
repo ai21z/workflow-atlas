@@ -23,6 +23,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "A past answer or finding can be reproduced from its input versions and process evidence."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Tests and review, Observe and improve. Use when recording the evidence behind a requirement, reviewing a result and correcting dependent knowledge after its sources or process change. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Produce a result-to-source record with exact input revisions, supporting passages and derivation activity.",
+        "Check output to obtain: Reconstruct one past conclusion from the recorded inputs and identify any missing artifact.",
+        "Check output to obtain: Distinguish source publication, execution, review and approval timestamps, with the actual responsible owner."
+      ]
     }
   ],
   "refs": [
@@ -43,7 +53,7 @@
       "lineage",
       "approval record"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when you need to record what an assertion, answer or analysis was derived from, which input versions affected it and who approved it. Apply PROV-O principles to existing mechanisms, since an ontology rewrite is not a prerequisite.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -54,6 +64,13 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "verification",
+        "operations"
+      ]
     }
   }
 }

@@ -2,13 +2,21 @@
 
 The catalogue supplies the Knowledge Atlas and the instruction factory from versioned JSON in `catalogue/`. Edit those sources, validate them and rebuild the two static projections. The browser reads the generated files without a database service.
 
-Catalogue content is version `2.3.0`. Its authoring schema is `1.1`. Project configuration remains schema `3.0`, with workflow model `1.0`. These versions describe different contracts.
+Catalogue content is version `2.5.0`. Its authoring schema is `1.2`. Project configuration remains schema `3.0`, with workflow model `1.0`. These versions describe different contracts.
 
 ## Current coverage
 
-The catalogue contains 135 topics, 169 source records, 10 browsing clusters, ten subjects and eight guided paths. All 109 earlier topics remain. Existing retrieval and specialist examples stay available alongside the feature and API paths.
+The catalogue contains 150 topics, 220 source records, 10 browsing clusters, 13 subjects and 12 guided paths. All 135 earlier topics remain. Existing retrieval and specialist examples stay available alongside the feature and API paths.
 
-Node.js, Python, GitHub Actions, Docker and Repository instructions for agents have dated, scoped claim reviews from 12 October 2026. Corrections include version dependent Node.js and npm behavior, Python environment commands, Docker build checks, GitHub token exceptions and host specific instruction loading. Review does not establish that example commands ran or fit a particular project. Older topics retain their recorded status, 109 are legacy and four still need review. The 22 reviewed topics include procedures with proposed examples. Their badges refer to the listed factual claims, not to approval of every recommendation or a verified implementation.
+Fifteen reading topics add repository references and procedures for customer research, business analysis, decisions, repository tasks, context handoffs, document ingestion, evaluation, maintained knowledge, software investigation, public-source access, bounded experiments, typed decisions, scoped development and OpenSpec change specifications. Each procedure declares applicable workflow stages, useful outputs, checks and explicitly illustrative examples. The repository reference page groups 27 repositories or patterns by their contribution. Names are optional sources, not installed integrations or required dependencies.
+
+Workflow step panels offer **Reference workflows for this step**, derived from each procedure's declared stage applicability. Opening a link reads the guide without changing project decisions. Existing stage definitions, skills, technology choices and export behavior remain. These reading procedures are not new selectable practices or automatically exported skills.
+
+The repository reference table links each project name to its upstream repository or idea file. **Reviewed source** opens the exact inspected documentation. The workflow column opens the corresponding Atlas guide and keeps qualifications such as optional, conditional or experimental visible. Search matches names, useful steps and checks. The workflow filter intersects with search, and the result count and clear control make the current selection explicit. Filters remain available when returning from a guide in the same tab. The same table works in the embedded reader and the offline export. External material requires a connection when opened.
+
+The three new subjects are **Repositories and useful workflows**, **Research and business decisions**, and **Knowledge and evaluation**. Four new paths connect research to decisions, investigation to software changes, sources to maintained knowledge, and evaluation to bounded improvement. Source claims were reviewed against scoped primary repository files on 15 October 2026. This does not establish successful use, comparative superiority or complete review of every upstream repository.
+
+Node.js, Python, GitHub Actions, Docker and Repository instructions for agents have dated, scoped claim reviews from 12 October 2026. Corrections include version dependent Node.js and npm behavior, Python environment commands, Docker build checks, GitHub token exceptions and host specific instruction loading. Review does not establish that example commands ran or fit a particular project. The [15 October gap review](knowledge-gap-review.md) appended recommended workflow use, concrete checks and narrowly verified source contributions to 116 entries while preserving original guide text. There are now 78 topics with scoped claim reviews, 70 legacy topics and two still needing review. These badges concern the listed claims, not every earlier assertion, recommendation or implementation.
 
 Six new guides complete the first reference path: Deliver a user-facing feature, JavaScript and TypeScript, React, npm, Vitest and Playwright. They explain project facts to find, a procedure, useful outputs, expected examples and limits. The language guide distinguishes JavaScript runtime behavior from TypeScript checks. Technology guides match their recorded technologies, rather than treating any development stage as a reason to choose that stack.
 
@@ -43,9 +51,9 @@ Subject membership does not change topic parents, cluster identities, graph posi
 
 ### Explore the 2D map
 
-**Explore the map** opens the new **2D map** by default. **Topic cards** and the preserved **3D map** remain available in both the workspace and standalone Atlas. The 2D map draws 135 reading topics, seven practice definitions and 28 technology definitions. Circles are topics, rounded squares are practices and hexagons are technology names. A topic and its corresponding definition remain separate records.
+**Explore the map** opens the new **2D map** by default. **Topic cards** and the preserved **3D map** remain available in both the workspace and standalone Atlas. The 2D map draws 150 reading topics, seven practice definitions and 28 technology definitions. Circles are topics, rounded squares are practices and hexagons are technology names. A topic and its corresponding definition remain separate records.
 
-Use **Find on map** to search all 170 displayed records, independently of the subject and topic filters used for reading. Results distinguish **Guide**, **Practice** and **Technology**. Choose **Show on map** to stay in Explore, bring the node into view and reveal its name above the canvas. Article search remains a separate way to open reading directly. **Browse all map nodes as a list** also includes every displayed record.
+Use **Find on map** to search all 185 displayed records, independently of the subject and topic filters used for reading. Results distinguish **Guide**, **Practice** and **Technology**. Choose **Show on map** to stay in Explore, bring the node into view and reveal its name above the canvas. Article search remains a separate way to open reading directly. **Browse all map nodes as a list** also includes every displayed record.
 
 Select **Details and connections** beside the selected name to reach its summary, recorded review information, source links and **Connected topics and tools** below the map. The number on that button counts connected items in the enabled connection groups. **Back to map** returns to the selected name. Choosing a connected item selects it and brings its node into view. Choosing an article from the sidebar while exploring also brings that node into view.
 
@@ -65,6 +73,16 @@ The browser reads the generated layout and changes the viewport when panning or 
 
 The map adds no layout library or inference request. A missing or unsupported layout falls back to Topic cards. Neither map browsing nor the layout projection changes factory definitions, project decisions or generated instructions.
 
+## Browse all knowledge
+
+**All knowledge** opens a table of every catalogue entry, including guides, references, concepts and worked examples. It sits beside **Read**, **Explore** and **Sources**, and uses the same records as the reader and map. Entries are sorted by title. Each row links directly to its guide and shows its type, summary, topic area, declared workflow steps and original sources. Multiple sources expand within the row.
+
+Search matches titles, aliases, guide text, recorded classifications and source titles or publishers. **Workflow step**, **Topic area** and **Source** intersect with search. Topic areas are the ten existing clusters, plus Overview. A source filter selects an exact source record, not every page from the same website. The live count shows the selected entries, and **Clear filters** restores the complete table. Press `/` to focus its search and Escape to clear its filters.
+
+The current 150 entries include 149 with recommended workflow steps and 149 with linked sources. **No recorded step** and **No linked source** retain the local product overview as an explicit exception. That cross-topic entry needs version-specific implementation evidence, rather than a generic external citation or a forced stage. The table does not infer applicability from prose or treat missing metadata as a negative quality judgment. Source-review labels distinguish scoped reviewed claims, earlier claims not rechecked and source review still needed. The exact source options are derived from references actually used by entries. Other records remain accessible in the source library.
+
+Opening a guide and returning with browser Back preserves the table filters. Guide links can also open in a separate tab. The embedded workspace remembers this view when reopened, and browsing leaves project decisions intact. The self-contained export includes the table and filters for offline reading. External source links still need a connection.
+
 ## Source files
 
 | File | Authored content |
@@ -78,6 +96,8 @@ The map adds no layout library or inference request. A missing or unsupported la
 | `catalogue/navigation.json` | Domains, browsing clusters, optional subject groups and ordered guided collections |
 | `catalogue/coverage.json` | Maintainer slots, indirect reading and explicit task, output and example sections, kept separate from review and export support |
 | `catalogue/catalogue.schema.json` | JSON Schema for the assembled authoring model |
+
+`atlas/knowledge-index.js` derives the table rows and filter memberships from the compiled catalogue. It does not maintain a separate inventory or write project data.
 
 Topic kinds are `concept`, `capability`, `technology`, `practice`, `example`, `reference` and `procedure`. Factory definition types are `stage`, `skill`, `role`, `practice`, `recipe`, `profile`, `control`, `technology` and `host`. A capability topic explains an intended ability. A stage's capability aliases describe requested host tools. These records have different purposes.
 
@@ -104,6 +124,14 @@ Relationship records contain `from`, `type`, `to` and `sourceRefs`. Endpoints us
 Browsing and related reading do not assign workflow prerequisites. A `provides-capability` link records a sourced catalogue claim. It does not establish that a user's installation supplies that capability. Workflow assignments, target tool mappings and observed results remain separate.
 
 A relationship can carry an optional `note`, a `status` from the same vocabulary as sources and a `reviewedOn` date. A reviewed relationship needs a date.
+
+## Schema 1.2, linked reading tables
+
+Table sections retain string `headers` and `rows` for reading, search and retrieval. Optional `cellLinks` provide zero-based `row` and `column`, a visible `label`, and exactly one target: `href` for an HTTPS upstream link, `sourceRef` for an existing source, or `topicId` for an Atlas article. Each source link must also appear in the topic's `refs`. The build rejects missing targets, unsafe URLs and coordinates outside the table.
+
+Optional `tools` declare `searchLabel`, `filterColumn`, `filterLabel` and `itemLabel`. Search covers row text and link labels. The filter uses linked guide IDs in its column, or the plain cell value where there are no links. Both controls affect only the table. Internal links support ordinary browser navigation and offline reading. Link metadata does not add graph relationships or change workflow decisions.
+
+Schema `1.2` adds only these optional presentation fields to `1.1`. Existing records remain valid with the updated version constant.
 
 ## Schema 1.1, the graph fields
 

@@ -19,9 +19,26 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Improvement is demonstrated on held-out cases. The model and question versions are recorded and changes trigger re-evaluation."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Use the existing experiment-plan mapping to compare proposed judgments without changing publication behavior.",
+        "Reserve comparison cases that were not used to tune the question or threshold.",
+        "Prove the trial has no live publication effect and retain reviewer labels and disagreement.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Anthropic distinguishes task criteria, repeated trials, grading and the final environment outcome, and recommends inspecting results beyond an agent's success claim. This scoped source fact was checked on 15 October 2026. The guide's broader workflow and examples remain Atlas proposals, not demonstrated outcomes."
     }
   ],
-  "refs": [],
+  "refs": [
+    "evals"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -37,15 +54,25 @@
       "utility llm",
       "re-evaluation"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Jev example when you want to test Jev on a narrow task, such as holiday scope-support checking, without changing publication behavior. Compare it with existing rules, a constrained utility LLM and the current reviewer process on reviewed examples, and record the model and question versions.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Anthropic distinguishes task criteria, repeated trials, grading and the final environment outcome, and recommends inspecting results beyond an agent's success claim.",
+        "sourceRefs": [
+          "evals"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended",
+        "documented"
       ],
       "confidenceLevel": "proposed"
     },

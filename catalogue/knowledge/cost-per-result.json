@@ -27,9 +27,30 @@
       "type": "p",
       "label": "Denominator and evidence",
       "text": "Use all-attempt cost for one workload/window divided by accepted task artifacts counted once. Report zero accepted outcomes explicitly. Separate first-pass/repaired acceptance and observations/forecasts. Workplace savings are unmeasured."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Define acceptance and cost collection when planning evidence, use the resulting ledger in a go or no-go recommendation, then track changes during Observe and improve. The workflow placement and checks are Atlas recommendations. Only the source contribution below was verified on 15 October 2026, not every original assertion or project outcome."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "An all-attempt ledger reconciles inference, connector, runner and review costs for one defined workload and time window.",
+        "An acceptance register counts each accepted artifact once and separates first pass, repaired, rejected and partial outcomes.",
+        "The calculation retains numerator, denominator and missing components, reporting an undefined ratio when accepted results are zero."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Anthropic describes tracking latency, token usage, cost per task and error rates on a fixed set of evaluation tasks. The source supports collecting per-task metrics. The accepted-result formula and accounting boundary are Atlas proposals, with no measured savings or universal threshold established. Review date: 15 October 2026. This review covers this source contribution only, not the whole guide."
     }
   ],
-  "refs": [],
+  "refs": [
+    "evals"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -45,17 +66,32 @@
       "baseline measurement",
       "cost per task"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when measuring whether an AI workflow earns its cost, so that rejected runs, retries, connector and runner time and human correction are counted against accepted results. Do not claim a savings percentage before measuring the baseline.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Anthropic describes tracking latency, token usage, cost per task and error rates on a fixed set of evaluation tasks.",
+        "sourceRefs": [
+          "evals"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan",
+        "recommendation",
+        "operations"
+      ]
     }
   }
 }

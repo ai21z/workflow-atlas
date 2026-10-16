@@ -33,6 +33,16 @@
       "type": "p",
       "label": "Evidence basis",
       "text": "Adapted from supplied study material. Internal ticket identifiers are omitted. The wording and division of work are recommendations, not observed workplace outcomes."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Refine the supplied study deliverables without asserting a new production implementation requirement.",
+        "Separate supplied scope from proposed wording and obtain the actual owner's decision.",
+        "Link each recommendation to observed results or a clearly labeled unresolved assumption.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -54,7 +64,7 @@
       "study scope",
       "evidence requirements"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when a time-boxed feasibility ticket needs acceptance wording that requires explicit evidence, such as representative examples, measured versus estimated results and a go, conditional go or no-go recommendation. The wording is a recommendation, not an observed workplace outcome.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -74,6 +84,10 @@
     "applies": {
       "recipes": [
         "feasibility"
+      ],
+      "stages": [
+        "feasibility-scope",
+        "recommendation"
       ]
     }
   }

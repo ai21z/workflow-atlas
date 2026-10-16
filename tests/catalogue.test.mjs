@@ -8,6 +8,7 @@ import { createRecipe, compile, parseImport } from '../factory/core.mjs'
 
 const data = await readCatalogue()
 const baseline = JSON.parse(await readFile(new URL('./fixtures/catalogue-legacy.json', import.meta.url), 'utf8'))
+const gapReview = JSON.parse(await readFile(new URL('../catalogue/gap-review.json', import.meta.url), 'utf8'))
 const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value
 const digest = value => createHash('sha256').update(JSON.stringify(canonical(value))).digest('hex')
 const content = node => ({ title: node.title, summary: node.summary, sections: node.sections, basis: node.basis, confidence: node.confidence })
@@ -20,6 +21,26 @@ test('catalogue validates and committed projections exactly match the source rec
   assert.deepEqual(compileCatalogue(data).catalog, CATALOG)
 })
 
+test('linked reading tables reject missing targets, unsafe URLs and out of range coordinates', () => {
+  const tableFor = input => input.topics.find(topic => topic.id === 'repository-workflow-references').sections.find(section => section.type === 'table')
+  const rejected = [
+    [table => { table.cellLinks.find(link => link.topicId).topicId = 'missing-reading-guide' }, /unknown reference topic:missing-reading-guide/],
+    [table => { table.cellLinks.find(link => link.sourceRef).sourceRef = 'missing-reading-source' }, /unknown reference source:missing-reading-source/],
+    [table => { table.cellLinks.find(link => link.sourceRef).sourceRef = data.sources.find(source => !data.topics.find(topic => topic.id === 'repository-workflow-references').refs.includes(source.id)).id }, /table source must be visible/],
+    [table => { table.cellLinks[0].row = table.rows.length }, /table link is outside/],
+    [table => { table.cellLinks[0].column = table.headers.length }, /table link is outside/],
+    [table => { table.cellLinks.find(link => link.href).href = 'https://user:secret@example.com/source' }, /unsafe table URL/],
+    [table => { table.cellLinks.find(link => link.href).href = 'javascript:alert(1)' }, /Catalogue shape is invalid/],
+    [table => { table.cellLinks[0].topicId = 'overview' }, /Catalogue shape is invalid/],
+    [table => { table.tools.filterColumn = table.headers.length }, /table filter column is outside/],
+  ]
+  for (const [mutate, message] of rejected) {
+    const input = copy()
+    mutate(tableFor(input))
+    assert.throws(() => validateCatalogue(input), message)
+  }
+})
+
 test('catalogue retains historical routes, source references, related reading and factory definitions', () => {
   const result = compileCatalogue(data)
   const originalIds = new Set(baseline.topics.map(node => node.id))
@@ -29,9 +50,10 @@ test('catalogue retains historical routes, source references, related reading an
   for (const old of baseline.topics) {
     const current = result.atlas.nodes.find(node => node.id === old.id)
     assert.equal(current.parent, specializedParents[old.id] || old.parent, old.id)
-    assert.deepEqual(current.refs, old.refs, old.id)
+    assert.deepEqual(current.refs.slice(0, old.refs.length), old.refs, old.id)
     for (const id of old.related) assert.ok(current.related.includes(id), `${old.id} lost ${id}`)
-    if (!revisedReading.has(old.id)) assert.equal(digest(content(current)), old.contentHash, `reading content changed: ${old.id}`)
+    const review = gapReview.records.find(record => record.id === old.id)
+    if (!revisedReading.has(old.id)) assert.equal(digest(content(review ? { ...current, sections: current.sections.slice(0, review.before.sectionCount) } : current)), old.contentHash, `original reading content changed: ${old.id}`)
   }
   for (const [id, source] of Object.entries(baseline.sources)) assert.deepEqual(result.atlas.sources[id], source)
   for (const [group, definitions] of Object.entries(baseline.definitions)) for (const old of definitions) {
@@ -73,12 +95,12 @@ test('reusable procedures lead to scoped examples without inventing generated sk
     assert.equal(entry.catalog.kind, 'procedure')
     assert.equal(entry.catalog.guidance, 'reading')
     assert.deepEqual(entry.catalog.definitionRefs, [])
-    assert.equal(entry.catalog.sourceStatus, 'needs-review')
-    assert.equal(entry.catalog.reviewedOn, '')
+    assert.equal(entry.catalog.sourceStatus, generic === 'source-evidence-verification' ? 'needs-review' : 'reviewed')
+    assert.equal(entry.catalog.reviewedOn, generic === 'source-evidence-verification' ? '' : '2026-10-15')
     assert.ok(entry.related.includes(specialist))
     assert.ok(byId(specialist).related.includes(generic))
-    assert.equal(byId(specialist).catalog.sourceStatus, 'legacy')
-    assert.equal(byId(specialist).catalog.reviewedOn, '')
+    assert.equal(byId(specialist).catalog.sourceStatus, specialist === 'rdf-skill' ? 'legacy' : 'reviewed')
+    assert.equal(byId(specialist).catalog.reviewedOn, specialist === 'rdf-skill' ? '' : '2026-10-15')
   }
   assert.equal(byId('ci-skill').catalog.kind, 'example')
   assert.equal(byId('source-skill').catalog.kind, 'example')

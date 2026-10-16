@@ -59,6 +59,16 @@
       "type": "p",
       "label": "Explore by kind",
       "text": "Use the topic type filter to find concepts, practices, technologies or examples. Follow Retrieve and check information for a short path from an outcome to written workflow checks."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: This is the local product and navigation overview, not a guide assigned to one delivery step. No external source is attached merely to make the table look complete.",
+        "Open the described reader, map and export routes and compare them with the local implementation.",
+        "Keep claims about the user's repository, integration readiness and benefits unresolved until project evidence exists.",
+        "Source gap remains: local product descriptions need version-specific implementation evidence, while proposed examples do not establish measured outcomes. No single workflow step is assigned to this cross-topic overview."
+      ]
     }
   ],
   "refs": [],
@@ -76,17 +86,21 @@
       "atlas map",
       "knowledge map"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
+    "sourceStatus": "needs-review",
     "reviewedOn": "",
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "research"
+        "research",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": []
     }
   }
 }

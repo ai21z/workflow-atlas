@@ -43,9 +43,26 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Include failures and retries in spend. Report important subsets separately so one strong average does not conceal weak tasks or languages."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Use the existing experiment-plan mapping to define task-specific metrics before observing results.",
+        "Specify the accepted-outcome denominator and count failed attempts in total effort.",
+        "Report important task or language subsets and record uncertainty from small samples.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Anthropic distinguishes task criteria, repeated trials, grading and the final environment outcome, and recommends inspecting results beyond an agent's success claim. This scoped source fact was checked on 15 October 2026. The guide's broader workflow and examples remain Atlas proposals, not demonstrated outcomes."
     }
   ],
-  "refs": [],
+  "refs": [
+    "evals"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -61,15 +78,25 @@
       "false positives",
       "latency"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when choosing what to measure for a specific workflow such as ticket refinement, debt investigation, implementation, source review or knowledge answers. It pairs quality measures with the economics of an accepted result and counts failures and retries in spend.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Anthropic distinguishes task criteria, repeated trials, grading and the final environment outcome, and recommends inspecting results beyond an agent's success claim.",
+        "sourceRefs": [
+          "evals"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended",
+        "documented"
       ],
       "confidenceLevel": "proposed"
     },

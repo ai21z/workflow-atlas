@@ -24,9 +24,26 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Information narrowed by a source qualifier remains narrow through ingestion, graph representation, serving, and documentation."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Development, Tests and review. Use when defining a scoped assertion, carrying its qualifiers through the implementation and verifying that narrower information stays narrow. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Produce an applicability record containing the relevant region, population, version or effective period and the supporting passage.",
+        "Check output to obtain: Trace one qualified assertion through ingestion, stored representation and serving output.",
+        "Check output to obtain: Exercise matching, nonmatching and missing-scope examples, retaining the agreed unknown outcome."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Reviewed on 2026-10-15: Wikidata qualifiers can constrain a statement’s validity, application or time. This is one documented representation example. The complete Atlas field list and the project’s authority or approval rules remain proposed and require their own evidence. Only this added factual contribution was checked in this review. Earlier sections retain their stated proposed or illustrative basis."
     }
   ],
-  "refs": [],
+  "refs": [
+    "wikidata-qualifiers"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -42,21 +59,32 @@
       "classification scheme",
       "effective period"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a source statement is narrowed by jurisdiction, region, population, period or classification scheme, and that narrowing must survive ingestion, graph representation, serving and documentation. Use it also before designing a schema or integration around unfamiliar project terminology.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Wikidata qualifiers can constrain a statement’s validity, application or time.",
+        "sourceRefs": [
+          "wikidata-qualifiers"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "documented"
       ],
       "confidenceLevel": "proposed"
     },
     "applies": {
       "stages": [
-        "requirements"
+        "requirements",
+        "implementation",
+        "verification"
       ]
     }
   }

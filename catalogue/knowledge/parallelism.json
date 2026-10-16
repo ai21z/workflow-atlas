@@ -17,9 +17,26 @@
       "type": "p",
       "label": "Cost discipline",
       "text": "Add an agent for a separable task or justified review perspective. Agent count and model agreement are not quality metrics."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Split independent investigations and combine their evidence under one owner.",
+        "Assign disjoint tasks and identify the shared evidence or revision each needs.",
+        "Resolve conflicting findings before a single owner changes overlapping files.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Anthropic describes parallelization by independent subtasks and separates it from collecting multiple judgments. Its article also notes that tooling has changed since publication. This scoped source fact was checked on 15 October 2026. The guide's broader workflow and examples remain Atlas proposals, not demonstrated outcomes."
     }
   ],
-  "refs": [],
+  "refs": [
+    "simple-agents"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -35,17 +52,34 @@
       "independent work",
       "agent count"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when independent investigations can run at the same time and that improves speed or evidence quality. One owner merges the findings and controls the implementation, and concurrent edits of the same files are avoided.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Anthropic describes parallelization by independent subtasks and separates it from collecting multiple judgments. Its article also notes that tooling has changed since publication.",
+        "sourceRefs": [
+          "simple-agents"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended",
+        "documented"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "breakdown",
+        "diagnosis",
+        "verification"
+      ]
     }
   }
 }

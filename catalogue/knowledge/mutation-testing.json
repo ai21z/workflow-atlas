@@ -17,6 +17,17 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The experiment improves useful assertion strength without drowning reviewers in irrelevant mutations."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Plan the evidence, Tests and review. These links are recommendations based on the guide content, not required product or process choices.",
+        "A bounded pilot plan names the critical changed logic, runner budget, mutation operators and independent usefulness criteria.",
+        "A surviving mutation review distinguishes a missing assertion, equivalent mutation, unreachable code and unresolved classification with evidence.",
+        "The comparison reports useful findings, reviewer effort and actual runner cost. A mutation score alone does not decide adoption.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -36,7 +47,7 @@
       "mutation pilot",
       "google mutation testing"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when coverage looks high but you doubt that the assertions on important changed logic would catch a real fault. It proposes a bounded pilot that inspects surviving mutations and bounds scope and runner cost before any broader adoption.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -47,6 +58,12 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan",
+        "verification"
+      ]
     }
   }
 }

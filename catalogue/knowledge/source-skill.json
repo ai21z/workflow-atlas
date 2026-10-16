@@ -27,9 +27,30 @@
       "type": "p",
       "label": "Acceptance checks",
       "text": "The assertion retains the applicable jurisdiction, population, classifications and effective period. Supporting passages and conflicts remain visible. A qualified reviewer records any approval separately."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Use this country data example to preserve scoped source evidence when defining a requirement and to review the resulting assertion against the actual authority. The workflow placement and checks are Atlas recommendations. Only the source contribution below was verified on 15 October 2026, not every original assertion or project outcome."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "An assertion record retains source/version, exact supporting passage, jurisdiction, population, classification and relevant dates.",
+        "The review links derivation and contradictory or missing evidence, separating publication, effective, retrieval and approval dates.",
+        "A qualified review record identifies the reviewer finding and unresolved authority, with any publication decision recorded separately."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "W3C PROV-O provides derivation, quotation, revision and primary source relations for recording how one entity relates to another. This supports provenance representation only. No country specific authority, effective rule or legal correctness was established in this review. The Jev option remains unevaluated for this example. Review date: 15 October 2026. This review covers this source contribution only, not the whole guide."
     }
   ],
-  "refs": [],
+  "refs": [
+    "prov"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -46,12 +67,20 @@
       "country regulations",
       "domain assertion"
     ],
-    "revision": "2",
+    "revision": "2.gap1",
     "applicability": "Use this specialist example for country regulations, labour agreements or other domain assertions where jurisdiction, classifications and effective dates affect applicability.",
     "limits": "This example does not determine legal correctness, establish source truth, publish a claim or authorize a write. Domain evidence and reviewer authority must come from the actual project.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "W3C PROV-O provides derivation, quotation, revision and primary source relations for recording how one entity relates to another.",
+        "sourceRefs": [
+          "prov"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
@@ -61,6 +90,12 @@
     "scope": {
       "generality": "example",
       "context": "country-data"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "verification"
+      ]
     }
   }
 }

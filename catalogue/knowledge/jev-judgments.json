@@ -37,6 +37,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Define boundary cases and include insufficient evidence or none-of-these. The controller owns permissible actions and combines the result with deterministic checks."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Define allowed judgments and boundary cases before checking their observed accuracy.",
+        "Include insufficient evidence and none-of-these outcomes in reviewed cases.",
+        "Test that the controller rejects a decision outside the permitted action set.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -57,7 +67,7 @@
       "workflow routing",
       "none of these"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Jev example when framing a question for Jev, so that it has a precise question and a small, explicit answer space. Include insufficient evidence or none-of-these as answers and keep permissible actions with the controller.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -65,13 +75,21 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
     },
     "scope": {
       "generality": "example",
       "context": "jev-typesafe"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "experiment-plan",
+        "verification"
+      ]
     }
   }
 }

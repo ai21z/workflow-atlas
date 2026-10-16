@@ -33,6 +33,16 @@
       "type": "p",
       "label": "Specialist example",
       "text": "Country-source review adds jurisdiction, classification, effective dates and domain approval to these general evidence questions. It is relevant when those qualifiers affect the work, rather than a mandatory step for every project."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Tests and review, Recommend go or no-go. Use when deciding what a requirement is supported by, checking a claimed result or preparing an evidence-based recommendation. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Produce an atomic claim record linking the exact passage, source revision, derivation and relevant scope.",
+        "Check output to obtain: Record one passage-to-claim comparison for supporting and contradictory evidence, including missing qualifiers.",
+        "Check output to obtain: Label unsupported or inferred conclusions explicitly and name the decision owner. The original proposed procedure is not newly certified by this stage review."
+      ]
     }
   ],
   "refs": [
@@ -54,7 +64,7 @@
       "claim record",
       "cited passage"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a workflow depends on assertions from documents, research, requirements or other sources. Apply only the qualifiers relevant to the claim.",
     "limits": "This is a proposed reading procedure. It does not select an exportable skill, configure access, run checks or establish a successful result.",
     "sourceStatus": "needs-review",
@@ -65,6 +75,13 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "verification",
+        "recommendation"
+      ]
     }
   }
 }

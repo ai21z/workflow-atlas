@@ -24,6 +24,20 @@
       "type": "p",
       "label": "Limit",
       "text": "A skill does not enforce permissions, persist a job, or prove that its instructions were followed successfully."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Define the skill boundary during Architecture and impact, write the reusable procedure during Development and review its contract with representative cases. This mapping and checklist do not reverify every existing Agent Skills specification or host behavior claim. A package is not evidence that its procedure executed or that permissions are enforced."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "The skill contract names a trigger, required inputs, procedure, outputs, checks and failure or escalation conditions.",
+        "Referenced scripts and resources resolve at the intended revision, with runtime permissions and tool dependencies named separately.",
+        "Representative trigger, missing input and failure cases produce reviewed expected outputs or remain explicitly untested."
+      ]
     }
   ],
   "refs": [
@@ -44,7 +58,7 @@
       "skill contents",
       "repository instructions"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when writing or reviewing a skill, so that it states its trigger, required inputs, procedure, expected output, acceptance checks, failure conditions and supporting resources. A skill does not enforce permissions, persist a job or prove that its instructions were followed.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -55,6 +69,13 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification"
+      ]
     }
   }
 }

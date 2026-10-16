@@ -22,9 +22,30 @@
       "type": "p",
       "label": "Failure condition",
       "text": "Missing authority or conflicting requirements must remain unresolved; the skill must not invent a decision."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Use the existing Requirements and evidence connection to write a brief that links intended behavior and verification to the actual source authority. The workflow placement and checks are Atlas recommendations. Only the source contribution below was verified on 15 October 2026, not every original assertion or project outcome."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "Each material requirement has a stable identifier, source location, scope, owner and explicit status.",
+        "The brief connects requirements to checkable examples and names the proposed verification evidence.",
+        "Conflicting or missing authority remains unresolved with an owner and next decision, rather than becoming an invented requirement."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "NASA Appendix D recommends a verification matrix that uniquely identifies each shall requirement included in the matrix, records its source document and defines how it is verified. This source supports traceability and verification planning. The Atlas brief structure is an adaptation and does not impose NASA policy or establish the truth of project requirements. Review date: 15 October 2026. This review covers this source contribution only, not the whole guide."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gap-nasa-verification-matrix"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -39,12 +60,20 @@
       "requirement status",
       "missing decisions"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a request needs a traceable brief that states the intended behavior, its sources, acceptance scenarios and the decisions still missing. Missing authority or conflicting requirements stay unresolved, the skill does not invent a decision.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "NASA Appendix D recommends a verification matrix that uniquely identifies each shall requirement included in the matrix, records its source document and defines how it is verified.",
+        "sourceRefs": [
+          "gap-nasa-verification-matrix"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"

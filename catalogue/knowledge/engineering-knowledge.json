@@ -22,6 +22,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Relationships have provenance and versions. Model-extracted suggestions remain distinguishable from confirmed dependencies."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Architecture and impact, Tests and review. Use when connecting a requirement to affected implementation and then to observed verification evidence, using links the project actually maintains. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Produce a small traceability table linking one required behavior, affected component and meaningful check.",
+        "Check output to obtain: Follow the links in both directions at recorded revisions and identify broken or stale locations.",
+        "Check output to obtain: Label model-suggested dependencies as proposed until an implementation or reviewer check confirms them."
+      ]
     }
   ],
   "refs": [
@@ -42,7 +52,7 @@
       "bitbucket",
       "requirement links"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when you want to represent links between requirements, components, checks and recorded results. Start from a traceability table or existing metadata and add a development knowledge graph only when actual queries and maintenance needs justify it.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -53,6 +63,13 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "architecture",
+        "verification"
+      ]
     }
   }
 }

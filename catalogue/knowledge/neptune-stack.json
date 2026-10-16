@@ -17,6 +17,17 @@
       "type": "p",
       "label": "Critical checks",
       "text": "Measure query plans and latency, preserve provenance and scope, and verify candidate isolation because Neptune’s default graph unions named graphs."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Architecture and impact, Development, Tests and review. These links are recommendations based on the guide content, not required product or process choices.",
+        "A fixture record identifies the engine, query and RDF data revisions, with explicit graph selection and provenance.",
+        "A candidate isolation check verifies which named graphs contribute to the actual query result in the serving environment.",
+        "The evidence packet separates local structural checks from observed Neptune correctness, explain output and latency. Engine equivalence remains unverified without a comparison.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -39,7 +50,7 @@
       "query plans",
       "sparql"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this RDF4J and Neptune example when an RDF application is checked with local RDF4J fixtures and served from Neptune, and graph behavior must be verified in the actual serving environment. It is not the default database architecture for every workflow.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -60,6 +71,11 @@
         "neptune",
         "rdf",
         "sparql"
+      ],
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification"
       ]
     }
   }

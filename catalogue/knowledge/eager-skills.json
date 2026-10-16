@@ -17,6 +17,20 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The agent has enough procedural guidance without every project runbook appearing in every session."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Assess procedural context dependencies when choosing an architecture, then plan a small comparison of the actual host loading behavior and useful guidance. The existing progressive-loading, eager injection and child inheritance statements were not reaudited in this gap review. The behavior must be confirmed for the actual host and version."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A role-by-skill inventory records which procedure is needed, why it is needed and the selected host/version.",
+        "An observed startup or context record distinguishes loaded instructions from discoverable resources and unsupported inheritance assumptions.",
+        "A comparable task report checks retained requirements and usable outputs alongside context usage, without inferring savings from file count."
+      ]
     }
   ],
   "refs": [
@@ -38,7 +52,7 @@
       "agent skills specification",
       "custom agent skills"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when assigning skills to agents or custom agents, since the Copilot SDK injects explicitly assigned skills in full at startup and children do not inherit every parent skill. Assign only the skills each role needs and inspect the actual prompt and context usage.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -49,6 +63,12 @@
         "documented"
       ],
       "confidenceLevel": "established"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "experiment-plan"
+      ]
     }
   }
 }

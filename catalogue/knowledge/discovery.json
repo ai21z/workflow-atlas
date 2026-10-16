@@ -24,9 +24,26 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The investigation produces a concrete decision or implementable task. The discovered facts are distinguishable from suggestions and remaining unknowns."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Understand the current process, Architecture and impact. Use to clarify the problem, follow a representative current case and prepare an impact decision from observed sources and implementation facts. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Produce one input-to-result case record with actual source locations and current behavior.",
+        "Check output to obtain: List constraints, unsupported assumptions and the owner who can resolve each material gap.",
+        "Check output to obtain: Write an acceptance example and a bounded next decision or task. Keep suggested improvements separate from discovered facts."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Reviewed on 2026-10-15: GOV.UK discovery guidance investigates users, context and constraints before a decision about further work. The source describes government service discovery. The detailed repository investigation sequence and its use in other projects are Atlas recommendations, with project fit unverified. Only this added factual contribution was checked in this review. Earlier sections retain their stated proposed or illustrative basis."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gov-discovery"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -41,21 +58,32 @@
       "acceptance scenarios",
       "bounded capability"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this procedure when you need to investigate one bounded capability before writing tickets or changing code, following its data, components, interfaces and tests with actual evidence. The result is an implementation brief or a concrete decision with facts kept apart from suggestions and unknowns.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "GOV.UK discovery guidance investigates users, context and constraints before a decision about further work.",
+        "sourceRefs": [
+          "gov-discovery"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "documented"
       ],
       "confidenceLevel": "proposed"
     },
     "applies": {
       "stages": [
-        "requirements"
+        "requirements",
+        "current-process",
+        "architecture"
       ]
     }
   }

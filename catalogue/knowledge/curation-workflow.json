@@ -19,6 +19,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The resulting assertion preserves the source’s meaning and applicability, and its derivation is recorded. Candidate data does not leak into ordinary serving queries."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Preserve scope in candidate assertions, validate them and hand them to the existing approved publication process.",
+        "Compare jurisdiction, population and effective dates with the cited passage.",
+        "Prove serving queries cannot read unapproved candidate records before publication.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -40,7 +50,7 @@
       "domain review",
       "jev"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when proposed data assertions must be compared with source evidence and pass deterministic parsing, datatype, shape and temporal checks before they become approved domain data. Candidate data stays out of ordinary serving queries until it is published.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -48,13 +58,22 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
     },
     "scope": {
       "generality": "example",
       "context": "country-data"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "implementation",
+        "verification",
+        "release"
+      ]
     }
   }
 }

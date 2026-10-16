@@ -23,9 +23,30 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Routing is backed by held-out task results, cost, latency, and review effort rather than model reputation alone."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Compare feasible routes for the task, plan held out evaluation cases and choose the route from observed acceptance, resource use and escalation behavior. The workflow placement and checks are Atlas recommendations. Only the source contribution below was verified on 15 October 2026, not every original assertion or project outcome."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A routing policy records the task classes, acceptance thresholds, deterministic path and explicit escalation conditions.",
+        "A held out result table compares candidates on the same inputs and reports failures, cost, latency and review effort.",
+        "A recommendation states supported task scope and unresolved limits, with an escalation example checked or explicitly unrun."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Anthropic distinguishes task success criteria, repeated trials, grading logic and final outcomes, and describes tracking cost and latency on evaluation tasks. The source supports evaluation design and metrics. It does not prove the proposed routing tiers, a cheapest acceptable model or superiority for the project workload. Review date: 15 October 2026. This review covers this source contribution only, not the whole guide."
     }
   ],
-  "refs": [],
+  "refs": [
+    "evals"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -41,17 +62,32 @@
       "model tiers",
       "deterministic code"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when deciding which work goes to deterministic code, a utility model, the main implementation model or a stronger model, and on which condition to escalate. Back the routing with held out task results, cost, latency and review effort rather than model reputation.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Anthropic distinguishes task success criteria, repeated trials, grading logic and final outcomes, and describes tracking cost and latency on evaluation tasks.",
+        "sourceRefs": [
+          "evals"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "options",
+        "experiment-plan",
+        "recommendation"
+      ]
     }
   }
 }

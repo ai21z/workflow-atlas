@@ -9,7 +9,7 @@ async function run() {
   const root = path.resolve(__dirname, '..')
   const { createAtlasServer } = await import(pathToFileURL(path.join(root, 'tools/serve.mjs')).href)
   const { unzipTextFiles } = await import(pathToFileURL(path.join(root, 'factory/zip.mjs')).href)
-  const { createExample, getTechnologyProfiles } = await import(pathToFileURL(path.join(root, 'factory/core.mjs')).href)
+  const { createExample, getTechnologyProfiles, CATALOG } = await import(pathToFileURL(path.join(root, 'factory/core.mjs')).href)
   const expected = createExample('feature-delivery')
   const profiles = getTechnologyProfiles(expected)
   const output = path.join(root, 'local-knowledge/retests/feature-path', new Date().toISOString().replace(/[:.]/g, '-'))
@@ -94,6 +94,19 @@ async function run() {
     }
 
     await page.setViewportSize({ width: 1440, height: 1000 })
+    await workflowView(page)
+    await page.locator('[data-select-stage="verification"]').first().click()
+    const stepReading = page.locator('[data-detail="stage-reading-verification"]')
+    await stepReading.locator('summary').click()
+    assert.equal(await stepReading.locator('[data-reference-topic="repository-task-workflow"]').count(), 0, 'Task planning is not presented as verification-step guidance')
+    await stepReading.locator('[data-reference-topic="evaluation-workflow"]').click()
+    const evaluationTitle = CATALOG.stageReading.verification.find(topic => topic.id === 'evaluation-workflow').title
+    await knowledge.locator('#reader-title').filter({ hasText: evaluationTitle }).waitFor()
+    assert.equal(await knowledge.locator('#reader-title').innerText(), evaluationTitle)
+    assert.equal(await knowledge.locator('#reader-content ol').count() > 0, true)
+    await workflowView(page)
+    assert.equal(await page.locator('[data-field="workflow.notes.verification"]').inputValue(), expected.workflow.notes.verification)
+    report.checks.push('Verification-step reading opens the declared evaluation procedure without showing unrelated task-planning guidance or changing project notes. Subsequent downloads verify the complete project remains unchanged.')
     await briefView(page, 'project')
     const recordedAnswer = 'Proposed project follow up. Inspect the actual selection type and validate external status values at the data boundary. No implementation has been inspected.'
     await page.locator('[data-detail="profile-typescript"] > summary').click()

@@ -33,9 +33,26 @@
       "type": "p",
       "label": "Acceptance",
       "text": "A brief or generated Jira ticket identifies the status of each substantive claim. Unsupported assumptions do not silently become acceptance criteria."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Define the proposed outcome, Recommend go or no-go. Use when drafting a requirement or proposed outcome and when writing a recommendation that must distinguish evidence from suggested next steps. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Assign a status and evidence or decision link to every material statement in the brief.",
+        "Check output to obtain: Keep observation records distinct from inferred intent and proposed acceptance rules.",
+        "Check output to obtain: List unresolved decisions and owners before handoff. An unsupported assumption must not become a confirmed acceptance criterion."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Reviewed on 2026-10-15: GOV.UK analysis guidance distinguishes observed behavior, interpreted findings and chosen actions. This supports separating evidence from interpretation and decisions. The four Atlas statuses are a local proposed convention, not a status taxonomy defined by the source. Only this added factual contribution was checked in this review. Earlier sections retain their stated proposed or illustrative basis."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gov-research-analysis"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -51,21 +68,32 @@
       "unresolved",
       "claim status"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when writing a brief or generating a ticket and each substantive claim needs a label of confirmed, observed, proposed or unresolved, so that unsupported assumptions do not silently become acceptance criteria.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "GOV.UK analysis guidance distinguishes observed behavior, interpreted findings and chosen actions.",
+        "sourceRefs": [
+          "gov-research-analysis"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "documented"
       ],
       "confidenceLevel": "proposed"
     },
     "applies": {
       "stages": [
-        "requirements"
+        "requirements",
+        "feasibility-scope",
+        "recommendation"
       ]
     }
   }

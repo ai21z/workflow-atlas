@@ -70,6 +70,17 @@
       "type": "p",
       "label": "What Atlas changes",
       "text": "Selecting Maven adds lifecycle, toolchain, discovery and environment questions to generated skill references. It does not run Maven, download a distribution, supply repository credentials or configure Failsafe."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Development, Tests and review, Release and production. These links are recommendations based on the guide content, not required product or process choices.",
+        "A build note identifies the actual module, parent configuration, profiles, plugin bindings and JDK toolchain.",
+        "The run evidence names discovered and skipped checks, reports and cleanup, with integration execution distinguished from failure verification.",
+        "The candidate revision links the approved wrapper and actual command result. Registry or distribution access failures remain environment blockers.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -95,7 +106,7 @@
       "surefire",
       "integration test lifecycle"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a Maven build needs evidence about the actual lifecycle bindings, modules, profiles, discovered checks and environment.",
     "limits": "Use actual project versions, approved interfaces and repository configuration. The procedure and expected examples do not establish configured access, runtime enforcement, compatibility or passing evidence.",
     "sourceStatus": "reviewed",
@@ -135,6 +146,11 @@
     "applies": {
       "technologies": [
         "maven"
+      ],
+      "stages": [
+        "implementation",
+        "verification",
+        "release"
       ]
     },
     "scope": {

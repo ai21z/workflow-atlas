@@ -51,6 +51,17 @@
       "type": "p",
       "label": "Review scope",
       "text": "Scoped claims checked on 2026-10-12 against Node.js 26.11.1, npm 11.21.0 and 12.2.0, ESLint 10 documentation and the linked GitHub tutorial. Runtime features and discovery can differ on earlier versions. Example commands are not executed evidence and do not apply to projects that use another package manager."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Development, Tests and review, Release and production. These links are recommendations based on the guide content, not required product or process choices.",
+        "An environment note names the actual Node.js and package manager versions, package directory, scripts and module settings.",
+        "The chosen repository commands link to discovered tests and actual outputs, including hooks and skipped work. Example commands remain illustrative until confirmed.",
+        "The release evidence records dependency tree and build results for the candidate revision. Version declarations alone do not establish runtime compatibility.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -81,7 +92,7 @@
       "package.json",
       "npm ci"
     ],
-    "revision": "2",
+    "revision": "2.gap1",
     "applicability": "Use when a project installs, tests or builds through package.json and npm scripts on Node.js.",
     "limits": "Catalogue inclusion is not an installed runtime, a verified command set or confirmed compatibility with any project.",
     "sourceStatus": "reviewed",
@@ -205,6 +216,11 @@
     "applies": {
       "technologies": [
         "nodejs"
+      ],
+      "stages": [
+        "implementation",
+        "verification",
+        "release"
       ]
     },
     "scope": {

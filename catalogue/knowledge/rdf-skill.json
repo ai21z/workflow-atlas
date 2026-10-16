@@ -22,6 +22,20 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Report engine, dataset, query, expected result, actual result, and limitations. Structural validity does not establish source truth."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Apply RDF specific checks during Tests and review and repeat the affected query and structural cases when verifying a repair. Existing Neptune diagnostic and SHACL links remain scoped technology references. No live endpoint, engine compatibility or passing RDF verification was established by this gap review."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "The report identifies engine, dataset, ontology and shapes revisions, query text and expected versus observed results.",
+        "The structural result is retained with positive, negative, missing data, named graph and temporal cases selected for the change.",
+        "Performance findings cite measured target engine diagnostics and workload, while source truth and unrun cases remain separate."
+      ]
     }
   ],
   "refs": [
@@ -45,7 +59,7 @@
       "execution plans",
       "graph verification"
     ],
-    "revision": "2",
+    "revision": "2.gap1",
     "applicability": "Use this RDF and SPARQL procedure when the workflow uses RDF data and SPARQL. Supply the actual engine, graph scope, vocabulary, fixtures and structural rules, and use Neptune execution plans only for a Neptune deployment.",
     "limits": "SQL and property graph procedures need their own checks. Neptune diagnostics apply only to Neptune. Reading this procedure does not run a query, install an integration or verify source truth.",
     "sourceStatus": "legacy",
@@ -66,6 +80,10 @@
         "rdf",
         "sparql",
         "neptune"
+      ],
+      "stages": [
+        "verification",
+        "regression"
       ]
     }
   }

@@ -22,6 +22,20 @@
       "type": "p",
       "label": "Author from evidence",
       "text": "Create a skill when a useful procedure repeats or an observed failure reveals missing guidance. Supply actual inputs, expected outputs and acceptance checks. Confirm the fit of the procedure before using it in your environment."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Choose repeatable task procedures while designing the approach, then assign scoped procedure outputs and role responsibilities in the delivery plan. The existing skill reference is retained. This gap review does not install skills, audit every host capability or establish that an example matches the current workplace."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A task-to-procedure list records the repeated job or observed failure each proposed skill addresses.",
+        "The plan distinguishes a reading guide, supported exportable skill, specialist example and role assignment.",
+        "Each selected procedure has actual required inputs, a reviewable output and acceptance owner, with host support unresolved where untested."
+      ]
     }
   ],
   "refs": [
@@ -41,7 +55,7 @@
       "exported skills",
       "procedures"
     ],
-    "revision": "2",
+    "revision": "2.gap1",
     "applicability": "Use this cluster to distinguish reusable task procedures, specialist reading examples and supported generated instructions.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -52,6 +66,12 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "breakdown"
+      ]
     }
   }
 }

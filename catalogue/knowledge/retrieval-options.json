@@ -43,6 +43,16 @@
       "type": "p",
       "label": "Your existing tool",
       "text": "In Factory, record your component technology and its version. A custom technology is allowed when it is absent from the list. Generic guidance remains available without a specialist compatibility claim."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Architecture and impact, Compare feasible approaches, Plan the evidence. Use when an information need requires an interface or data-model decision, comparing feasible alternatives and planning a bounded comparison. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Record the existing approved interface, required result and missing capability before considering a replacement.",
+        "Check output to obtain: For each relevant alternative, document its actual data model, query contract and project constraints without claiming drop-in compatibility.",
+        "Check output to obtain: Define representative queries, expected results and cost or maintenance measurements before collecting observations."
+      ]
     }
   ],
   "refs": [
@@ -66,7 +76,7 @@
       "relational or graph",
       "custom technology"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when choosing between an existing approved API and a relational, RDF or property graph store for a retrieval need. Record the interface contract and validation needs first, a database replacement is a separate architecture decision.",
     "limits": "This is design guidance. It does not connect to a service or prove that a result is correct.",
     "sourceStatus": "reviewed",
@@ -96,6 +106,11 @@
         "neptune",
         "jena-fuseki",
         "neo4j"
+      ],
+      "stages": [
+        "architecture",
+        "options",
+        "experiment-plan"
       ]
     }
   }

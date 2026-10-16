@@ -28,6 +28,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "A run can end with a useful partial finding rather than fabricate completion. The reviewer can inspect attempted actions and remaining blockers."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Set bounded attempts and distinguish retries from corrections and uncertain completed writes.",
+        "Count attempts using an explicit rule and demonstrate the stopping outcome.",
+        "Replay a request after a simulated lost response and inspect the actual effect before retrying.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -48,7 +58,7 @@
       "partial finding",
       "uncertain write"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when defining how often an operation may be repeated or a result corrected, and what happens when the limit is reached. A retry repeats a failed operation, a correction changes an unacceptable result, and both need a counted limit and a stopping outcome.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -56,9 +66,18 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification",
+        "operations"
+      ]
     }
   }
 }

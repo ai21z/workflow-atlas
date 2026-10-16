@@ -1,6 +1,6 @@
 // Compiled from catalogue/. Edit source records and run npm run build:catalogue.
 export const SCHEMA_VERSION = "3.0";
-export const DEFINITION_VERSION = "2.3.0";
+export const DEFINITION_VERSION = "2.5.0";
 export const REVIEW_DATE = "2026-10-02";
 export const SOURCES = Object.freeze({
   "agents": "https://docs.github.com/en/copilot/reference/custom-agents-configuration",
@@ -21,7 +21,7 @@ export const TOOL_ALIASES = Object.freeze([
 function deepFreeze(value) { if (value && typeof value === 'object') { Object.values(value).forEach(deepFreeze); Object.freeze(value); } return value; }
 export const CATALOG = deepFreeze({
   "schemaVersion": "3.0",
-  "version": "2.3.0",
+  "version": "2.5.0",
   "reviewedOn": "2026-10-02",
   "stages": [
     {
@@ -2291,5 +2291,357 @@ export const CATALOG = deepFreeze({
       "basis": "Recommended project questions grounded in scoped official documentation",
       "confidenceLevel": "proposed"
     }
+  },
+  "stageReading": {
+    "requirements": [
+      {
+        "id": "requirements-skill",
+        "title": "Requirements skill"
+      },
+      {
+        "id": "source-evidence-verification",
+        "title": "Verify sources and evidence"
+      },
+      {
+        "id": "user-facing-feature",
+        "title": "Deliver a user-facing feature"
+      },
+      {
+        "id": "api-stored-data",
+        "title": "Build an API and stored data workflow"
+      },
+      {
+        "id": "research-access-workflow",
+        "title": "Retrieve public research evidence"
+      },
+      {
+        "id": "scoped-development-workflow",
+        "title": "Choose a proportionate development procedure"
+      },
+      {
+        "id": "openspec-change-specifications",
+        "title": "Maintain scoped change specifications"
+      },
+      {
+        "id": "customer-research-workflow",
+        "title": "Research customer needs"
+      },
+      {
+        "id": "document-ingestion-workflow",
+        "title": "Extract documents with evidence checks"
+      }
+    ],
+    "architecture": [
+      {
+        "id": "impact-skill",
+        "title": "Change-impact skill"
+      },
+      {
+        "id": "user-facing-feature",
+        "title": "Deliver a user-facing feature"
+      },
+      {
+        "id": "api-stored-data",
+        "title": "Build an API and stored data workflow"
+      },
+      {
+        "id": "software-investigation-workflow",
+        "title": "Investigate existing software"
+      },
+      {
+        "id": "openspec-change-specifications",
+        "title": "Maintain scoped change specifications"
+      },
+      {
+        "id": "decision-record-workflow",
+        "title": "Record and confirm a decision"
+      },
+      {
+        "id": "repository-context-workflow",
+        "title": "Prepare repository context"
+      }
+    ],
+    "breakdown": [
+      {
+        "id": "scoped-development-workflow",
+        "title": "Choose a proportionate development procedure"
+      },
+      {
+        "id": "openspec-change-specifications",
+        "title": "Maintain scoped change specifications"
+      },
+      {
+        "id": "repository-task-workflow",
+        "title": "Track repository work with evidence"
+      }
+    ],
+    "implementation": [
+      {
+        "id": "user-facing-feature",
+        "title": "Deliver a user-facing feature"
+      },
+      {
+        "id": "api-stored-data",
+        "title": "Build an API and stored data workflow"
+      },
+      {
+        "id": "scoped-development-workflow",
+        "title": "Choose a proportionate development procedure"
+      },
+      {
+        "id": "openspec-change-specifications",
+        "title": "Maintain scoped change specifications"
+      },
+      {
+        "id": "repository-task-workflow",
+        "title": "Track repository work with evidence"
+      },
+      {
+        "id": "repository-context-workflow",
+        "title": "Prepare repository context"
+      }
+    ],
+    "verification": [
+      {
+        "id": "data-query-verification",
+        "title": "Verify data and query results"
+      },
+      {
+        "id": "rdf-skill",
+        "title": "RDF/SPARQL verification procedure"
+      },
+      {
+        "id": "source-evidence-verification",
+        "title": "Verify sources and evidence"
+      },
+      {
+        "id": "packet-skill",
+        "title": "Review-packet skill"
+      },
+      {
+        "id": "user-facing-feature",
+        "title": "Deliver a user-facing feature"
+      },
+      {
+        "id": "api-stored-data",
+        "title": "Build an API and stored data workflow"
+      },
+      {
+        "id": "bounded-experiment-workflow",
+        "title": "Run a bounded improvement experiment"
+      },
+      {
+        "id": "scoped-development-workflow",
+        "title": "Choose a proportionate development procedure"
+      },
+      {
+        "id": "openspec-change-specifications",
+        "title": "Maintain scoped change specifications"
+      },
+      {
+        "id": "document-ingestion-workflow",
+        "title": "Extract documents with evidence checks"
+      },
+      {
+        "id": "evaluation-workflow",
+        "title": "Evaluate a workflow change"
+      }
+    ],
+    "release": [
+      {
+        "id": "packet-skill",
+        "title": "Review-packet skill"
+      },
+      {
+        "id": "user-facing-feature",
+        "title": "Deliver a user-facing feature"
+      }
+    ],
+    "operations": [
+      {
+        "id": "bounded-experiment-workflow",
+        "title": "Run a bounded improvement experiment"
+      },
+      {
+        "id": "evaluation-workflow",
+        "title": "Evaluate a workflow change"
+      },
+      {
+        "id": "maintained-knowledge-workflow",
+        "title": "Maintain source-backed knowledge"
+      }
+    ],
+    "current-process": [
+      {
+        "id": "software-investigation-workflow",
+        "title": "Investigate existing software"
+      },
+      {
+        "id": "research-access-workflow",
+        "title": "Retrieve public research evidence"
+      },
+      {
+        "id": "customer-research-workflow",
+        "title": "Research customer needs"
+      },
+      {
+        "id": "business-analysis-workflow",
+        "title": "Analyze a business question"
+      },
+      {
+        "id": "document-ingestion-workflow",
+        "title": "Extract documents with evidence checks"
+      }
+    ],
+    "feasibility-scope": [
+      {
+        "id": "customer-research-workflow",
+        "title": "Research customer needs"
+      }
+    ],
+    "options": [
+      {
+        "id": "software-investigation-workflow",
+        "title": "Investigate existing software"
+      },
+      {
+        "id": "typed-decision-workflow",
+        "title": "Evaluate typed decision routing"
+      },
+      {
+        "id": "business-analysis-workflow",
+        "title": "Analyze a business question"
+      },
+      {
+        "id": "decision-record-workflow",
+        "title": "Record and confirm a decision"
+      }
+    ],
+    "experiment-plan": [
+      {
+        "id": "research-access-workflow",
+        "title": "Retrieve public research evidence"
+      },
+      {
+        "id": "bounded-experiment-workflow",
+        "title": "Run a bounded improvement experiment"
+      },
+      {
+        "id": "typed-decision-workflow",
+        "title": "Evaluate typed decision routing"
+      },
+      {
+        "id": "evaluation-workflow",
+        "title": "Evaluate a workflow change"
+      }
+    ],
+    "recommendation": [
+      {
+        "id": "source-evidence-verification",
+        "title": "Verify sources and evidence"
+      },
+      {
+        "id": "research-access-workflow",
+        "title": "Retrieve public research evidence"
+      },
+      {
+        "id": "typed-decision-workflow",
+        "title": "Evaluate typed decision routing"
+      },
+      {
+        "id": "business-analysis-workflow",
+        "title": "Analyze a business question"
+      },
+      {
+        "id": "decision-record-workflow",
+        "title": "Record and confirm a decision"
+      },
+      {
+        "id": "maintained-knowledge-workflow",
+        "title": "Maintain source-backed knowledge"
+      }
+    ],
+    "reproduction": [
+      {
+        "id": "pipeline-diagnosis",
+        "title": "Diagnose a pipeline failure"
+      }
+    ],
+    "diagnosis": [
+      {
+        "id": "pipeline-diagnosis",
+        "title": "Diagnose a pipeline failure"
+      },
+      {
+        "id": "software-investigation-workflow",
+        "title": "Investigate existing software"
+      },
+      {
+        "id": "repository-context-workflow",
+        "title": "Prepare repository context"
+      }
+    ],
+    "bug-fix": [
+      {
+        "id": "scoped-development-workflow",
+        "title": "Choose a proportionate development procedure"
+      },
+      {
+        "id": "openspec-change-specifications",
+        "title": "Maintain scoped change specifications"
+      },
+      {
+        "id": "repository-task-workflow",
+        "title": "Track repository work with evidence"
+      }
+    ],
+    "regression": [
+      {
+        "id": "pipeline-diagnosis",
+        "title": "Diagnose a pipeline failure"
+      },
+      {
+        "id": "data-query-verification",
+        "title": "Verify data and query results"
+      },
+      {
+        "id": "rdf-skill",
+        "title": "RDF/SPARQL verification procedure"
+      },
+      {
+        "id": "bounded-experiment-workflow",
+        "title": "Run a bounded improvement experiment"
+      },
+      {
+        "id": "openspec-change-specifications",
+        "title": "Maintain scoped change specifications"
+      },
+      {
+        "id": "evaluation-workflow",
+        "title": "Evaluate a workflow change"
+      }
+    ],
+    "bug-review": [
+      {
+        "id": "packet-skill",
+        "title": "Review-packet skill"
+      },
+      {
+        "id": "scoped-development-workflow",
+        "title": "Choose a proportionate development procedure"
+      },
+      {
+        "id": "openspec-change-specifications",
+        "title": "Maintain scoped change specifications"
+      },
+      {
+        "id": "repository-context-workflow",
+        "title": "Prepare repository context"
+      },
+      {
+        "id": "maintained-knowledge-workflow",
+        "title": "Maintain source-backed knowledge"
+      }
+    ]
   }
 });

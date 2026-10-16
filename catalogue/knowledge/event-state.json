@@ -17,9 +17,26 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Replaying the same event does not create another ticket or PR. A retry reuses valid completed work and clearly identifies which input changed."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Design event identity and state transitions, then test duplicate and uncertain write outcomes.",
+        "Replay the same event identifier and compare the count of resulting external effects.",
+        "Reconcile a timeout after a possible write before attempting another write.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "AWS describes caller-provided request identifiers for distinguishing retries, with atomic recording of the identifier and related side effects. This scoped source fact was checked on 15 October 2026. The guide's broader workflow and examples remain Atlas proposals, not demonstrated outcomes."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gap-aws-idempotency"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -35,17 +52,35 @@
       "terminal status",
       "automation loops"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when retries or duplicate event deliveries could create repeated tickets, pull requests or other external writes. Record task and run identity, completed steps, input versions and terminal status so a replay reuses valid work.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "AWS describes caller-provided request identifiers for distinguishing retries, with atomic recording of the identifier and related side effects.",
+        "sourceRefs": [
+          "gap-aws-idempotency"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended",
+        "documented"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification",
+        "operations"
+      ]
     }
   }
 }

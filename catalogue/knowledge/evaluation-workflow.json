@@ -1,0 +1,121 @@
+{
+  "id": "evaluation-workflow",
+  "title": "Evaluate a workflow change",
+  "summary": "Compare a candidate with the current approach using representative cases, explicit scoring and inspectable failures.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use and inputs",
+      "text": "Use when an experiment plan, verification, regression review or operations decision needs evidence about a prompt, model, retrieval step or agent procedure. Inputs are a defined task, the current approach, the candidate change, representative cases, reviewed expected outcomes, acceptance thresholds and available execution resources. Missing expected outcomes or access remain gaps in the evaluation plan."
+    },
+    {
+      "type": "p",
+      "label": "Promptfoo option",
+      "text": "The reviewed Promptfoo test-case documentation defines evaluation cases with variables, assertions and metadata, and includes per-case repeats and provider filtering. Consider this configuration approach when cases and expected output checks can express the comparison."
+    },
+    {
+      "type": "p",
+      "label": "Inspect option",
+      "text": "The reviewed Inspect task documentation defines a task as a dataset, solver and scorer, with additional options including epochs, sample limits and model settings. Consider this Python task approach when the evaluation needs an explicit solving procedure as well as data and scoring."
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Define the behavior being improved and the decision the evaluation will support. Set acceptance thresholds and cost, latency or resource budgets before inspecting candidate scores.",
+        "Select cases representing normal work, important variations, missing inputs, conflicting evidence and previous failures. Record selection limits and keep tuning cases separate from final comparison cases.",
+        "Write reviewed expected outcomes and scoring rules. Use executable checks where they match the requirement. If using a model grader, compare its judgments with reviewed examples and retain disagreements.",
+        "Choose an existing runner that fits the task. Record framework, dataset, prompt, model, provider and configuration versions, available dependencies, execution limits and run identifiers.",
+        "Run the current approach and candidate on comparable inputs and conditions. Record repeat behavior and caching where relevant. Preserve failed or interrupted cases as part of the result.",
+        "Inspect per-case outputs, source support and any resulting artifacts or state. Compare performance by important case group as well as in aggregate, and check requirements that the main score does not measure.",
+        "Record accept, revise or reject with supporting results and unresolved limits. Add reviewed failures to regression coverage. Specify when later changes or operational evidence require reevaluation."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Outputs",
+      "text": "An evaluation specification, versioned cases and scoring rules, comparable run records, per-case results and errors, reviewed failures, measured resource use where required, and a decision with its scope and remaining uncertainty."
+    },
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "The task, baseline, candidate, case selection and thresholds are recorded. The same evidence allows a reviewer to reproduce or explain the comparison.",
+        "Expected outcomes and grading rules were reviewed. A score measures the intended behavior and does not stand in for unmeasured requirements, source correctness or resulting-state checks.",
+        "Missing credentials, dependencies, unavailable providers, timeouts and invalid inputs have explicit statuses. They are not silently removed, treated as correct answers or counted as successful runs.",
+        "Results include case counts, important groups, failures and repeat settings. A favorable average cannot hide a critical regression or support a population-wide claim from a selected set.",
+        "The decision follows the stated acceptance rules or records a reviewed exception. Unrun cases and illustrative expectations remain separate from observed evidence."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Illustrative example, not run",
+      "text": "A proposed evaluation compares two procedures for answering questions from a document corpus. Cases include an answerable question, a missing source and contradictory versions. Checks require a supported answer or an explicit unresolved result, valid source anchors and no loss of required qualifiers. No runner has executed this example and no performance difference is asserted."
+    },
+    {
+      "type": "p",
+      "label": "Limits",
+      "text": "This is a recommended Atlas evaluation procedure, not a benchmark or a claim that either framework is best. Framework selection does not create reliable cases or graders. Reading the topic does not install a runner, provision model access, run evaluations or add an execution integration to an exported workflow."
+    }
+  ],
+  "refs": [
+    "repo-promptfoo",
+    "repo-inspect-ai"
+  ],
+  "basis": "Inspected upstream documentation and recommended Atlas procedure",
+  "confidence": "High for the scoped documented evaluation structures. Moderate for the procedure until representative cases and results are reviewed.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "evaluation",
+      "verification"
+    ],
+    "aliases": [
+      "Promptfoo",
+      "Inspect AI",
+      "evaluation runner",
+      "baseline comparison",
+      "test cases",
+      "scoring",
+      "regression evaluation"
+    ],
+    "revision": "1",
+    "applicability": "Use during experiment planning, verification, regression and operations when adopting a workflow change needs a recorded comparison with the current approach.",
+    "limits": "Reviewed documentation supports the framework structures only. The Atlas procedure is recommended and its example unrun. No runner, provider connection or passing evidence is configured here.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Promptfoo option",
+        "text": "Promptfoo test cases support variables, assertions, metadata, per-case repeats and provider filtering.",
+        "sourceRefs": [
+          "repo-promptfoo"
+        ]
+      },
+      {
+        "sectionLabel": "Inspect option",
+        "text": "Inspect tasks combine a dataset, solver and scorer, with options including epochs, sample limits and model settings.",
+        "sourceRefs": [
+          "repo-inspect-ai"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "inspected",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan",
+        "verification",
+        "regression",
+        "operations"
+      ]
+    }
+  }
+}

@@ -23,6 +23,17 @@
       "type": "p",
       "label": "Acceptance",
       "text": "An agent cannot exceed its assigned access by following a prompt. Output does not expose evidence inaccessible to the intended reader."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Architecture and impact, Development, Tests and review. These links are recommendations based on the guide content, not required product or process choices.",
+        "An action matrix names the actor, resource, permitted operation and enforced credential or policy boundary for each tool and direct code path.",
+        "An approved negative case confirms that a denied read or write is rejected before protected data is exposed or mutated. An unrun case stays marked planned.",
+        "The evidence review checks access to cited material for the intended reader and records any untested enforcement boundary. A prompt instruction alone is not evidence of enforcement.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -44,7 +55,7 @@
       "actor identity",
       "runtime controls"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when assigning tools, credentials and write actions to an agent or workflow step, so that allowed actions are enforced by scoped credentials and runtime controls rather than by the prompt. Record the identity performing each action and filter retrieval by access rights before generating output.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -55,6 +66,13 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification"
+      ]
     }
   }
 }

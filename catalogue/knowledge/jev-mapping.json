@@ -17,6 +17,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Evaluate semantic mapping errors, especially neighboring concepts and missing correct alternatives. Domain review and deterministic schema checks still apply."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Evaluate mapping into a supplied candidate set while preserving explicit uncertainty.",
+        "Test adjacent concepts and a case whose correct concept is absent.",
+        "Record the passage and candidate-set revision for each reviewed mapping.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -37,7 +47,7 @@
       "schema checks",
       "terminology"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Jev example when mapping source terminology to a bounded candidate list of supplied concepts with definitions and scope constraints. Shortlist candidates with existing retrieval and keep new-concept proposals separate from mappings to approved concepts.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -45,13 +55,21 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
     },
     "scope": {
       "generality": "example",
       "context": "jev-typesafe"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "experiment-plan",
+        "verification"
+      ]
     }
   }
 }

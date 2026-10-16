@@ -24,6 +24,17 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Every proposed integration has a tested execution path. A feature announced for one client is not treated as available in every client."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Understand the current process, Define the proposed outcome, Architecture and impact. These links are recommendations based on the guide content, not required product or process choices.",
+        "An inventory names the client, plugin, runtime and integration versions, with the source used to confirm each.",
+        "For each proposed action, a capability matrix records the actor, access boundary and an observed bounded probe, or explicitly marks the path untested.",
+        "The design decision references only demonstrated capabilities and names an owner for each unresolved dependency or billing boundary.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -46,7 +57,7 @@
       "supported integrations",
       "execution path"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this before choosing an architecture or proposing an integration, to record which clients, models, tools, access and budgets your organization can actually run. A feature announced for one client counts as available only where its execution path has been tested.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -57,6 +68,13 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "current-process",
+        "feasibility-scope",
+        "architecture"
+      ]
     }
   }
 }

@@ -18,6 +18,20 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The context contains enough evidence for the decision without unrelated repository/wiki material. Smaller context is useful only when necessary meaning remains intact."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Select the passages needed to define requirements, assess affected contracts and investigate a cause. Record why the selected context fits that decision. The earlier context engineering reference was not reaudited for every assertion. No optimal context size or token saving is established by this mapping."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A context manifest identifies task, revisions, selected source locations, omitted material and the reason for each selection.",
+        "The brief retains material constraints, counterevidence and unresolved questions from the inspected sources.",
+        "A reviewer can resolve the manifest links and recover the evidence needed for the specific requirement, design or diagnosis."
+      ]
     }
   ],
   "refs": [
@@ -38,7 +52,7 @@
       "evidence selection",
       "module map"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when preparing the context for an agent task, so that it holds a compact brief, the affected module map and the relevant passages, decisions, symbols and tests instead of the whole repository or wiki. A smaller context is useful only while the necessary meaning stays intact.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -49,6 +63,13 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "architecture",
+        "diagnosis"
+      ]
     }
   }
 }

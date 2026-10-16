@@ -138,6 +138,16 @@
       "type": "p",
       "label": "When a read is enough",
       "text": "For a read-only task, remove persistence and its write gates from the design. Confirm that the task outcome is the checked read result. Do not silently treat a requested save as optional merely because read access is available."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Architecture and impact, Development, Tests and review. Use across the request, interface decision, implementation and verification of a read or save operation over existing stored information. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Write distinct expected outcomes for valid, empty, malformed, denied and incomplete reads, and for a denied or uncertain save.",
+        "Check output to obtain: Record the actual paging, consistency, duplicate and write-authorization contracts before claiming a complete saved result.",
+        "Check output to obtain: Collect observed results with identity, fixtures and candidate revision. An accepted request or generated selection is not confirmed persistence."
+      ]
     }
   ],
   "refs": [
@@ -165,7 +175,7 @@
       "read and write",
       "request validation"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use for designing a bounded application process that reads stored data and may persist a result through approved interfaces. The reference stack and optional model are editable choices.",
     "limits": "Use actual project versions, approved interfaces and repository configuration. The procedure and expected examples do not establish configured access, runtime enforcement, compatibility or passing evidence.",
     "sourceStatus": "reviewed",
@@ -215,7 +225,14 @@
       ],
       "confidenceLevel": "proposed"
     },
-    "applies": {},
+    "applies": {
+      "stages": [
+        "requirements",
+        "architecture",
+        "implementation",
+        "verification"
+      ]
+    },
     "scope": {
       "generality": "general"
     }

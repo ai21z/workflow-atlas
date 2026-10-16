@@ -17,6 +17,16 @@
       "type": "p",
       "label": "Check in your environment",
       "text": "Confirm the actual version, supported interface, permissions, data model and expected query results. Compare alternatives using your constraints."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Architecture and impact, Development, Tests and review. Use for an affected Neo4j property-graph interface when choosing the model, implementing the query boundary and checking actual results. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Record actual Neo4j and driver versions, graph model, approved interface and caller scope.",
+        "Check output to obtain: Compare expected nodes and relationships with observed Cypher results for bounded normal, empty and denied cases.",
+        "Check output to obtain: Record unresolved compatibility explicitly. Do not substitute RDF or SPARQL expectations for the actual property-graph contract."
+      ]
     }
   ],
   "refs": [
@@ -35,7 +45,7 @@
       "graph database",
       "property graph"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this technology example when your data is a property graph queried with Cypher. Atlas records the technology and version and adds generic component questions, the RDF and SPARQL profile is not applied just because Neo4j is a graph database.",
     "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
     "sourceStatus": "reviewed",
@@ -59,6 +69,11 @@
     "applies": {
       "technologies": [
         "neo4j"
+      ],
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification"
       ]
     }
   }

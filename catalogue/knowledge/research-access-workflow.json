@@ -1,0 +1,119 @@
+{
+  "id": "research-access-workflow",
+  "title": "Retrieve public research evidence",
+  "summary": "Choose an available source interface and verify that it returned the requested content before using it as evidence.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this workflow",
+      "text": "Use when a research question needs public repository discussions, articles, community reports or other permitted sources. Agent Reach supplies routing and setup guidance for upstream access tools. Use an existing working interface where it meets the need."
+    },
+    {
+      "type": "list",
+      "label": "Inputs",
+      "items": [
+        "Research question, source scope and inclusion criteria.",
+        "Available interfaces, versions and any explicitly configured access.",
+        "Source identifiers, known dates and a place to retain evidence and retrieval failures."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Repository contributions",
+      "text": "Agent Reach documents upstream backends and setup levels for individual platforms. Its inspected WebChannel reports an OK health status without probing a target and uses Jina Reader to read pages. A health status is not evidence that the requested page was returned."
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Choose sources for the user question, including actual-use reports and contrary evidence.",
+        "Check the selected interface and platform prerequisites. Do not treat broad internet access as established.",
+        "Retrieve permitted public content through the available backend.",
+        "Inspect the returned title, body and expected content. Classify a login wall, error, challenge page or empty result as unavailable or blocked.",
+        "Record original URL, date if verified, access completeness, authorship relationship and a concise supported observation.",
+        "Deduplicate repeated threads, preserve disagreement and distinguish reported use from benefit or comparative superiority. Use another permitted source or leave the gap explicit."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Outputs",
+      "text": "A traceable evidence set with retrieved content, source-level observations and explicit blocked or missing sources."
+    },
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "Returned content belongs to the intended source and contains relevant material.",
+        "Transport success and doctor status are not counted as successful content retrieval.",
+        "A report, promotional claim and local observation remain distinct.",
+        "Selected public reports are not presented as population preferences or failure rates."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Illustrative example",
+      "text": "For a task-management comparison, retrieve repository issues and practitioner discussions about actual use. A Reddit login page is a blocked source, even when a reader returned text. Expected output is a sourced comparison with the access gap retained. This example is proposed, not an observed study."
+    }
+  ],
+  "refs": [
+    "repo-agent-reach",
+    "repo-agent-reach-web"
+  ],
+  "basis": "Inspected repository documentation and recommended Atlas procedure. Examples are illustrative.",
+  "confidence": "Moderate for the scoped source contributions. Project fit and workflow outcomes remain unverified.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "knowledge",
+      "information-retrieval"
+    ],
+    "aliases": [
+      "Agent Reach",
+      "Agent-Reach",
+      "public user research",
+      "source access",
+      "login wall",
+      "content retrieval"
+    ],
+    "revision": "1",
+    "applicability": "Choose an available source interface and verify that it returned the requested content before using it as evidence.",
+    "limits": "Reading guidance does not install a repository, select a tool, execute a workflow or establish a passing result. Use actual project versions, commands and evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Repository contributions",
+        "text": "Agent Reach documents per-platform upstream access backends and setup levels.",
+        "sourceRefs": [
+          "repo-agent-reach"
+        ]
+      },
+      {
+        "sectionLabel": "Repository contributions",
+        "text": "The inspected WebChannel returns an OK health status without a network probe and reads pages through Jina Reader.",
+        "sourceRefs": [
+          "repo-agent-reach-web"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "current-process",
+        "requirements",
+        "experiment-plan",
+        "recommendation"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

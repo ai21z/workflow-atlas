@@ -66,6 +66,20 @@
       "type": "p",
       "label": "Not a ranking",
       "text": "These are starting candidates, not measured recommendations for your tasks. RDF, Java, React, source-language and review work are example benchmark areas. Evaluate the tasks your project actually needs."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Use this dated candidate table as an entry point when comparing options and planning a costed experiment, after refreshing the applicable rates and access. The 2 October 2026 prices, candidate availability and model labels in the original table were not reaudited in this gap review. They must not be treated as verified current quotations or performance rankings."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A refreshed rate sheet names provider/product, model identifier, account scope, currency, unit and retrieval date.",
+        "The experiment estimate includes applicable input, output, cache and other charge categories, with exclusions visible.",
+        "A sampled usage report checks actual access and consumption, with unavailable pricing or billing attribution marked unknown."
+      ]
     }
   ],
   "refs": [
@@ -87,7 +101,7 @@
       "model candidates",
       "benchmark roles"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Copilot example when estimating spend from the published Copilot per token rates for candidate models. Refresh the snapshot first, the table excludes cache and long context tiers and the candidates are starting points rather than measured recommendations.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -103,6 +117,12 @@
     "scope": {
       "generality": "example",
       "context": "copilot"
+    },
+    "applies": {
+      "stages": [
+        "options",
+        "experiment-plan"
+      ]
     }
   }
 }

@@ -4497,5 +4497,1832 @@
     "sourceRefs": [
       "spring-boot-sql"
     ]
+  },
+  {
+    "from": "topic:software-investigation-workflow",
+    "type": "browse-under",
+    "to": "topic:toolchain",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:software-investigation-workflow",
+    "type": "related-reading",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture-decisions",
+    "type": "related-reading",
+    "to": "topic:software-investigation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:software-investigation-workflow",
+    "type": "related-reading",
+    "to": "topic:finding-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:finding-contract",
+    "type": "related-reading",
+    "to": "topic:software-investigation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:software-investigation-workflow",
+    "type": "related-reading",
+    "to": "topic:study-baseline",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-baseline",
+    "type": "related-reading",
+    "to": "topic:software-investigation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:software-investigation-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-context-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-context-workflow",
+    "type": "related-reading",
+    "to": "topic:software-investigation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:software-investigation-workflow",
+    "type": "uses-definition",
+    "to": "stage:current-process",
+    "sourceRefs": [
+      "repo-understand-anything",
+      "repo-groma",
+      "repo-serena",
+      "repo-rea",
+      "repo-ghidra"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:software-investigation-workflow",
+    "type": "uses-definition",
+    "to": "stage:architecture",
+    "sourceRefs": [
+      "repo-understand-anything",
+      "repo-groma",
+      "repo-serena",
+      "repo-rea",
+      "repo-ghidra"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:software-investigation-workflow",
+    "type": "uses-definition",
+    "to": "stage:diagnosis",
+    "sourceRefs": [
+      "repo-understand-anything",
+      "repo-groma",
+      "repo-serena",
+      "repo-rea",
+      "repo-ghidra"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:software-investigation-workflow",
+    "type": "uses-definition",
+    "to": "stage:options",
+    "sourceRefs": [
+      "repo-understand-anything",
+      "repo-groma",
+      "repo-serena",
+      "repo-rea",
+      "repo-ghidra"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:software-investigation-workflow",
+    "type": "related-reading",
+    "to": "topic:study-runtime",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-runtime",
+    "type": "related-reading",
+    "to": "topic:software-investigation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "browse-under",
+    "to": "topic:knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "related-reading",
+    "to": "topic:customer-research-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "related-reading",
+    "to": "topic:research-access-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "related-reading",
+    "to": "topic:business-analysis-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "related-reading",
+    "to": "topic:research-access-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "related-reading",
+    "to": "topic:retrieve-and-validate",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:retrieve-and-validate",
+    "type": "related-reading",
+    "to": "topic:research-access-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "related-reading",
+    "to": "topic:source-evidence-verification",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-evidence-verification",
+    "type": "related-reading",
+    "to": "topic:research-access-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "uses-definition",
+    "to": "stage:current-process",
+    "sourceRefs": [
+      "repo-agent-reach",
+      "repo-agent-reach-web"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "related-reading",
+    "to": "topic:study-baseline",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-baseline",
+    "type": "related-reading",
+    "to": "topic:research-access-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "uses-definition",
+    "to": "stage:requirements",
+    "sourceRefs": [
+      "repo-agent-reach",
+      "repo-agent-reach-web"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "related-reading",
+    "to": "topic:requirements",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements",
+    "type": "related-reading",
+    "to": "topic:research-access-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "uses-definition",
+    "to": "stage:experiment-plan",
+    "sourceRefs": [
+      "repo-agent-reach",
+      "repo-agent-reach-web"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "related-reading",
+    "to": "topic:study-experiment",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-experiment",
+    "type": "related-reading",
+    "to": "topic:research-access-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "uses-definition",
+    "to": "stage:recommendation",
+    "sourceRefs": [
+      "repo-agent-reach",
+      "repo-agent-reach-web"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "related-reading",
+    "to": "topic:study-decision",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-decision",
+    "type": "related-reading",
+    "to": "topic:research-access-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bounded-experiment-workflow",
+    "type": "browse-under",
+    "to": "topic:evaluation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bounded-experiment-workflow",
+    "type": "related-reading",
+    "to": "topic:study-experiment",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-experiment",
+    "type": "related-reading",
+    "to": "topic:bounded-experiment-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bounded-experiment-workflow",
+    "type": "related-reading",
+    "to": "topic:evaluation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation-workflow",
+    "type": "related-reading",
+    "to": "topic:bounded-experiment-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bounded-experiment-workflow",
+    "type": "related-reading",
+    "to": "topic:eval-corpus",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-corpus",
+    "type": "related-reading",
+    "to": "topic:bounded-experiment-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bounded-experiment-workflow",
+    "type": "related-reading",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-metrics",
+    "type": "related-reading",
+    "to": "topic:bounded-experiment-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bounded-experiment-workflow",
+    "type": "uses-definition",
+    "to": "stage:experiment-plan",
+    "sourceRefs": [
+      "repo-autoresearch"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:bounded-experiment-workflow",
+    "type": "uses-definition",
+    "to": "stage:verification",
+    "sourceRefs": [
+      "repo-autoresearch"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:bounded-experiment-workflow",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verification-loops",
+    "type": "related-reading",
+    "to": "topic:bounded-experiment-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bounded-experiment-workflow",
+    "type": "uses-definition",
+    "to": "stage:regression",
+    "sourceRefs": [
+      "repo-autoresearch"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:bounded-experiment-workflow",
+    "type": "uses-definition",
+    "to": "stage:operations",
+    "sourceRefs": [
+      "repo-autoresearch"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:typed-decision-workflow",
+    "type": "browse-under",
+    "to": "topic:jev",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:typed-decision-workflow",
+    "type": "related-reading",
+    "to": "topic:study-runtime",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-runtime",
+    "type": "related-reading",
+    "to": "topic:typed-decision-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:typed-decision-workflow",
+    "type": "related-reading",
+    "to": "topic:study-decision",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-decision",
+    "type": "related-reading",
+    "to": "topic:typed-decision-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:typed-decision-workflow",
+    "type": "related-reading",
+    "to": "topic:jev-confidence",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:jev-confidence",
+    "type": "related-reading",
+    "to": "topic:typed-decision-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:typed-decision-workflow",
+    "type": "related-reading",
+    "to": "topic:evaluation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation-workflow",
+    "type": "related-reading",
+    "to": "topic:typed-decision-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:typed-decision-workflow",
+    "type": "uses-definition",
+    "to": "stage:options",
+    "sourceRefs": [
+      "repo-laya"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:typed-decision-workflow",
+    "type": "uses-definition",
+    "to": "stage:experiment-plan",
+    "sourceRefs": [
+      "repo-laya"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:typed-decision-workflow",
+    "type": "related-reading",
+    "to": "topic:study-experiment",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-experiment",
+    "type": "related-reading",
+    "to": "topic:typed-decision-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:typed-decision-workflow",
+    "type": "uses-definition",
+    "to": "stage:recommendation",
+    "sourceRefs": [
+      "repo-laya"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "related-reading",
+    "to": "topic:requirements",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements",
+    "type": "related-reading",
+    "to": "topic:scoped-development-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "related-reading",
+    "to": "topic:work-breakdown",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:work-breakdown",
+    "type": "related-reading",
+    "to": "topic:scoped-development-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "related-reading",
+    "to": "topic:implementation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "related-reading",
+    "to": "topic:scoped-development-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verification-loops",
+    "type": "related-reading",
+    "to": "topic:scoped-development-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:post-change-checks",
+    "type": "related-reading",
+    "to": "topic:scoped-development-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "uses-definition",
+    "to": "stage:requirements",
+    "sourceRefs": [
+      "repo-spec-kit-current",
+      "repo-superpowers-current",
+      "repo-ponytail-current",
+      "repo-agentrc-current",
+      "repo-apm-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "uses-definition",
+    "to": "stage:breakdown",
+    "sourceRefs": [
+      "repo-spec-kit-current",
+      "repo-superpowers-current",
+      "repo-ponytail-current",
+      "repo-agentrc-current",
+      "repo-apm-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "uses-definition",
+    "to": "stage:implementation",
+    "sourceRefs": [
+      "repo-spec-kit-current",
+      "repo-superpowers-current",
+      "repo-ponytail-current",
+      "repo-agentrc-current",
+      "repo-apm-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "uses-definition",
+    "to": "stage:bug-fix",
+    "sourceRefs": [
+      "repo-spec-kit-current",
+      "repo-superpowers-current",
+      "repo-ponytail-current",
+      "repo-agentrc-current",
+      "repo-apm-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "uses-definition",
+    "to": "stage:verification",
+    "sourceRefs": [
+      "repo-spec-kit-current",
+      "repo-superpowers-current",
+      "repo-ponytail-current",
+      "repo-agentrc-current",
+      "repo-apm-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "uses-definition",
+    "to": "stage:bug-review",
+    "sourceRefs": [
+      "repo-spec-kit-current",
+      "repo-superpowers-current",
+      "repo-ponytail-current",
+      "repo-agentrc-current",
+      "repo-apm-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "related-reading",
+    "to": "topic:requirements-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements-workflow",
+    "type": "related-reading",
+    "to": "topic:openspec-change-specifications",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "related-reading",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture-decisions",
+    "type": "related-reading",
+    "to": "topic:openspec-change-specifications",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "related-reading",
+    "to": "topic:work-breakdown",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:work-breakdown",
+    "type": "related-reading",
+    "to": "topic:openspec-change-specifications",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "related-reading",
+    "to": "topic:implementation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "related-reading",
+    "to": "topic:openspec-change-specifications",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verification-loops",
+    "type": "related-reading",
+    "to": "topic:openspec-change-specifications",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:post-change-checks",
+    "type": "related-reading",
+    "to": "topic:openspec-change-specifications",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "related-reading",
+    "to": "topic:scoped-development-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "related-reading",
+    "to": "topic:openspec-change-specifications",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "uses-definition",
+    "to": "stage:requirements",
+    "sourceRefs": [
+      "repo-openspec",
+      "repo-openspec-existing-projects",
+      "repo-openspec-schema",
+      "repo-openspec-verify",
+      "repo-spec-kit-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "related-reading",
+    "to": "topic:requirements",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements",
+    "type": "related-reading",
+    "to": "topic:openspec-change-specifications",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "uses-definition",
+    "to": "stage:architecture",
+    "sourceRefs": [
+      "repo-openspec",
+      "repo-openspec-existing-projects",
+      "repo-openspec-schema",
+      "repo-openspec-verify",
+      "repo-spec-kit-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "uses-definition",
+    "to": "stage:breakdown",
+    "sourceRefs": [
+      "repo-openspec",
+      "repo-openspec-existing-projects",
+      "repo-openspec-schema",
+      "repo-openspec-verify",
+      "repo-spec-kit-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "uses-definition",
+    "to": "stage:implementation",
+    "sourceRefs": [
+      "repo-openspec",
+      "repo-openspec-existing-projects",
+      "repo-openspec-schema",
+      "repo-openspec-verify",
+      "repo-spec-kit-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "uses-definition",
+    "to": "stage:verification",
+    "sourceRefs": [
+      "repo-openspec",
+      "repo-openspec-existing-projects",
+      "repo-openspec-schema",
+      "repo-openspec-verify",
+      "repo-spec-kit-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "uses-definition",
+    "to": "stage:bug-fix",
+    "sourceRefs": [
+      "repo-openspec",
+      "repo-openspec-existing-projects",
+      "repo-openspec-schema",
+      "repo-openspec-verify",
+      "repo-spec-kit-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "uses-definition",
+    "to": "stage:regression",
+    "sourceRefs": [
+      "repo-openspec",
+      "repo-openspec-existing-projects",
+      "repo-openspec-schema",
+      "repo-openspec-verify",
+      "repo-spec-kit-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "uses-definition",
+    "to": "stage:bug-review",
+    "sourceRefs": [
+      "repo-openspec",
+      "repo-openspec-existing-projects",
+      "repo-openspec-schema",
+      "repo-openspec-verify",
+      "repo-spec-kit-current"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "browse-under",
+    "to": "topic:skills",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:software-investigation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:software-investigation-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:research-access-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:research-access-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:bounded-experiment-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:bounded-experiment-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:typed-decision-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:typed-decision-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:scoped-development-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:scoped-development-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:openspec-change-specifications",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:openspec-change-specifications",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:customer-research-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:business-analysis-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:decision-record-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:repository-task-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-task-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:repository-context-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-context-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:document-ingestion-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:document-ingestion-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:evaluation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-workflow-references",
+    "type": "related-reading",
+    "to": "topic:maintained-knowledge-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:maintained-knowledge-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-workflow-references",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "browse-under",
+    "to": "topic:requirements-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "related-reading",
+    "to": "topic:requirements-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements-workflow",
+    "type": "related-reading",
+    "to": "topic:customer-research-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "related-reading",
+    "to": "topic:requirement-status",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirement-status",
+    "type": "related-reading",
+    "to": "topic:customer-research-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "related-reading",
+    "to": "topic:source-evidence-verification",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-evidence-verification",
+    "type": "related-reading",
+    "to": "topic:customer-research-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "related-reading",
+    "to": "topic:business-analysis-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "related-reading",
+    "to": "topic:customer-research-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "related-reading",
+    "to": "topic:decision-record-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "related-reading",
+    "to": "topic:customer-research-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "related-reading",
+    "to": "topic:study-baseline",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-baseline",
+    "type": "related-reading",
+    "to": "topic:customer-research-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "uses-definition",
+    "to": "stage:current-process",
+    "sourceRefs": [
+      "repo-marketingskills",
+      "repo-knowledge-research"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "uses-definition",
+    "to": "stage:requirements",
+    "sourceRefs": [
+      "repo-marketingskills",
+      "repo-knowledge-research"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "related-reading",
+    "to": "topic:requirements",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements",
+    "type": "related-reading",
+    "to": "topic:customer-research-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "uses-definition",
+    "to": "stage:feasibility-scope",
+    "sourceRefs": [
+      "repo-marketingskills",
+      "repo-knowledge-research"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:customer-research-workflow",
+    "type": "related-reading",
+    "to": "topic:study-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-contract",
+    "type": "related-reading",
+    "to": "topic:customer-research-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "browse-under",
+    "to": "topic:workflows",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "related-reading",
+    "to": "topic:source-evidence-verification",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-evidence-verification",
+    "type": "related-reading",
+    "to": "topic:business-analysis-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "related-reading",
+    "to": "topic:decision-record-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "related-reading",
+    "to": "topic:business-analysis-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "related-reading",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-metrics",
+    "type": "related-reading",
+    "to": "topic:business-analysis-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "related-reading",
+    "to": "topic:study-baseline",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-baseline",
+    "type": "related-reading",
+    "to": "topic:business-analysis-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "related-reading",
+    "to": "topic:study-runtime",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-runtime",
+    "type": "related-reading",
+    "to": "topic:business-analysis-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "related-reading",
+    "to": "topic:study-decision",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-decision",
+    "type": "related-reading",
+    "to": "topic:business-analysis-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "uses-definition",
+    "to": "stage:current-process",
+    "sourceRefs": [
+      "repo-knowledge-analysis",
+      "repo-knowledge-validation"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "uses-definition",
+    "to": "stage:options",
+    "sourceRefs": [
+      "repo-knowledge-analysis",
+      "repo-knowledge-validation"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:business-analysis-workflow",
+    "type": "uses-definition",
+    "to": "stage:recommendation",
+    "sourceRefs": [
+      "repo-knowledge-analysis",
+      "repo-knowledge-validation"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "browse-under",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "related-reading",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture-decisions",
+    "type": "related-reading",
+    "to": "topic:decision-record-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "related-reading",
+    "to": "topic:source-evidence-verification",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-evidence-verification",
+    "type": "related-reading",
+    "to": "topic:decision-record-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-task-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-task-workflow",
+    "type": "related-reading",
+    "to": "topic:decision-record-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "related-reading",
+    "to": "topic:study-runtime",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-runtime",
+    "type": "related-reading",
+    "to": "topic:decision-record-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "related-reading",
+    "to": "topic:study-decision",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-decision",
+    "type": "related-reading",
+    "to": "topic:decision-record-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "related-reading",
+    "to": "topic:traceability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:traceability",
+    "type": "related-reading",
+    "to": "topic:decision-record-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "uses-definition",
+    "to": "stage:architecture",
+    "sourceRefs": [
+      "repo-madr"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "uses-definition",
+    "to": "stage:options",
+    "sourceRefs": [
+      "repo-madr"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:decision-record-workflow",
+    "type": "uses-definition",
+    "to": "stage:recommendation",
+    "sourceRefs": [
+      "repo-madr"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:repository-task-workflow",
+    "type": "browse-under",
+    "to": "topic:work-breakdown",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-task-workflow",
+    "type": "related-reading",
+    "to": "topic:work-breakdown",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:work-breakdown",
+    "type": "related-reading",
+    "to": "topic:repository-task-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-task-workflow",
+    "type": "related-reading",
+    "to": "topic:task-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:task-contract",
+    "type": "related-reading",
+    "to": "topic:repository-task-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-task-workflow",
+    "type": "related-reading",
+    "to": "topic:implementation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-task-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-task-workflow",
+    "type": "related-reading",
+    "to": "topic:traceability",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:traceability",
+    "type": "related-reading",
+    "to": "topic:repository-task-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-task-workflow",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verification-loops",
+    "type": "related-reading",
+    "to": "topic:repository-task-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-task-workflow",
+    "type": "uses-definition",
+    "to": "stage:breakdown",
+    "sourceRefs": [
+      "repo-backlog-md",
+      "repo-backlog-finalization"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:repository-task-workflow",
+    "type": "uses-definition",
+    "to": "stage:implementation",
+    "sourceRefs": [
+      "repo-backlog-md",
+      "repo-backlog-finalization"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:repository-task-workflow",
+    "type": "uses-definition",
+    "to": "stage:bug-fix",
+    "sourceRefs": [
+      "repo-backlog-md",
+      "repo-backlog-finalization"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:repository-context-workflow",
+    "type": "browse-under",
+    "to": "topic:handoffs",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-context-workflow",
+    "type": "related-reading",
+    "to": "topic:architecture-decisions",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:architecture-decisions",
+    "type": "related-reading",
+    "to": "topic:repository-context-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-context-workflow",
+    "type": "related-reading",
+    "to": "topic:implementation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:implementation-workflow",
+    "type": "related-reading",
+    "to": "topic:repository-context-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-context-workflow",
+    "type": "related-reading",
+    "to": "topic:finding-contract",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:finding-contract",
+    "type": "related-reading",
+    "to": "topic:repository-context-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-context-workflow",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:post-change-checks",
+    "type": "related-reading",
+    "to": "topic:repository-context-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:repository-context-workflow",
+    "type": "uses-definition",
+    "to": "stage:architecture",
+    "sourceRefs": [
+      "repo-repomix"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:repository-context-workflow",
+    "type": "uses-definition",
+    "to": "stage:implementation",
+    "sourceRefs": [
+      "repo-repomix"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:repository-context-workflow",
+    "type": "uses-definition",
+    "to": "stage:diagnosis",
+    "sourceRefs": [
+      "repo-repomix"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:repository-context-workflow",
+    "type": "uses-definition",
+    "to": "stage:bug-review",
+    "sourceRefs": [
+      "repo-repomix"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:document-ingestion-workflow",
+    "type": "browse-under",
+    "to": "topic:knowledge-assets",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:document-ingestion-workflow",
+    "type": "related-reading",
+    "to": "topic:requirements",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:requirements",
+    "type": "related-reading",
+    "to": "topic:document-ingestion-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:document-ingestion-workflow",
+    "type": "related-reading",
+    "to": "topic:study-baseline",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-baseline",
+    "type": "related-reading",
+    "to": "topic:document-ingestion-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:document-ingestion-workflow",
+    "type": "related-reading",
+    "to": "topic:source-evidence-verification",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:source-evidence-verification",
+    "type": "related-reading",
+    "to": "topic:document-ingestion-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:document-ingestion-workflow",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verification-loops",
+    "type": "related-reading",
+    "to": "topic:document-ingestion-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:document-ingestion-workflow",
+    "type": "uses-definition",
+    "to": "stage:current-process",
+    "sourceRefs": [
+      "repo-docling",
+      "repo-markitdown"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:document-ingestion-workflow",
+    "type": "uses-definition",
+    "to": "stage:requirements",
+    "sourceRefs": [
+      "repo-docling",
+      "repo-markitdown"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:document-ingestion-workflow",
+    "type": "uses-definition",
+    "to": "stage:verification",
+    "sourceRefs": [
+      "repo-docling",
+      "repo-markitdown"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:evaluation-workflow",
+    "type": "browse-under",
+    "to": "topic:evaluation",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation-workflow",
+    "type": "related-reading",
+    "to": "topic:study-experiment",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-experiment",
+    "type": "related-reading",
+    "to": "topic:evaluation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation-workflow",
+    "type": "related-reading",
+    "to": "topic:verification-loops",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:verification-loops",
+    "type": "related-reading",
+    "to": "topic:evaluation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation-workflow",
+    "type": "related-reading",
+    "to": "topic:eval-corpus",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-corpus",
+    "type": "related-reading",
+    "to": "topic:evaluation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation-workflow",
+    "type": "related-reading",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-metrics",
+    "type": "related-reading",
+    "to": "topic:evaluation-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:evaluation-workflow",
+    "type": "uses-definition",
+    "to": "stage:experiment-plan",
+    "sourceRefs": [
+      "repo-promptfoo",
+      "repo-inspect-ai"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:evaluation-workflow",
+    "type": "uses-definition",
+    "to": "stage:verification",
+    "sourceRefs": [
+      "repo-promptfoo",
+      "repo-inspect-ai"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:evaluation-workflow",
+    "type": "uses-definition",
+    "to": "stage:regression",
+    "sourceRefs": [
+      "repo-promptfoo",
+      "repo-inspect-ai"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:evaluation-workflow",
+    "type": "uses-definition",
+    "to": "stage:operations",
+    "sourceRefs": [
+      "repo-promptfoo",
+      "repo-inspect-ai"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:maintained-knowledge-workflow",
+    "type": "browse-under",
+    "to": "topic:knowledge",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:maintained-knowledge-workflow",
+    "type": "related-reading",
+    "to": "topic:llm-wiki",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:llm-wiki",
+    "type": "related-reading",
+    "to": "topic:maintained-knowledge-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:maintained-knowledge-workflow",
+    "type": "related-reading",
+    "to": "topic:study-decision",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:study-decision",
+    "type": "related-reading",
+    "to": "topic:maintained-knowledge-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:maintained-knowledge-workflow",
+    "type": "related-reading",
+    "to": "topic:eval-metrics",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:eval-metrics",
+    "type": "related-reading",
+    "to": "topic:maintained-knowledge-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:maintained-knowledge-workflow",
+    "type": "related-reading",
+    "to": "topic:post-change-checks",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:post-change-checks",
+    "type": "related-reading",
+    "to": "topic:maintained-knowledge-workflow",
+    "sourceRefs": []
+  },
+  {
+    "from": "topic:maintained-knowledge-workflow",
+    "type": "uses-definition",
+    "to": "stage:recommendation",
+    "sourceRefs": [
+      "repo-llm-wiki-pattern",
+      "repo-microsoft-wiki-qa"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:maintained-knowledge-workflow",
+    "type": "uses-definition",
+    "to": "stage:operations",
+    "sourceRefs": [
+      "repo-llm-wiki-pattern",
+      "repo-microsoft-wiki-qa"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
+  },
+  {
+    "from": "topic:maintained-knowledge-workflow",
+    "type": "uses-definition",
+    "to": "stage:bug-review",
+    "sourceRefs": [
+      "repo-llm-wiki-pattern",
+      "repo-microsoft-wiki-qa"
+    ],
+    "note": "Recommended reading for this step. This relationship does not make the repository a prerequisite or a selected tool.",
+    "status": "needs-review"
   }
 ]

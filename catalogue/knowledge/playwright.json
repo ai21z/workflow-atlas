@@ -48,6 +48,17 @@
       "type": "p",
       "label": "What Atlas changes",
       "text": "Selecting Playwright adds browser, data, environment and evidence questions to generated skill references. Atlas does not install browser binaries, start the application, connect credentials or turn a planned check into observed evidence."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Tests and review, Verify the repair. These links are recommendations based on the guide content, not required product or process choices.",
+        "A journey record names the application URL, candidate revision, browser project, identity, controlled data and mocked responses.",
+        "Observed assertions cover the agreed interaction and relevant empty or failure feedback, with the keyboard and narrow layout result recorded.",
+        "The report distinguishes real browser observations, emulation and physical device testing. Unrun accessibility or service permission checks remain visible.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -73,7 +84,7 @@
       "keyboard",
       "browser journey"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use for accepted user journeys in a project that uses Playwright, with an approved target, controlled data and known browser configuration.",
     "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
     "sourceStatus": "reviewed",
@@ -112,6 +123,10 @@
     "applies": {
       "technologies": [
         "playwright"
+      ],
+      "stages": [
+        "verification",
+        "regression"
       ]
     },
     "scope": {

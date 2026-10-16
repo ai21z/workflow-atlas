@@ -91,6 +91,26 @@ The eight-topic retrieval slice connects a capability, a practice, technology ex
 
 Atlas records requirements and links to implementation and observations. Exporting a limit or control does not enforce it.
 
+## Repository workflows reviewed on 15 October 2026
+
+The [repository workflow reference](../atlas/#repository-workflow-references) groups 27 repositories or patterns by their useful step and retained checks. Fifteen new reading topics connect these options to existing workflow stages. **Reference workflows for this step** opens the declared procedures from a Workflow step panel. Reading does not select a practice, change project decisions or install a tool.
+
+| Work | Optional references | Checks to retain |
+| --- | --- | --- |
+| Research needs and analyze evidence | Marketing Skills and selected Knowledge Work Plugins | Source scope, shared context, contradictions, calculation checks and uncertainty |
+| Record decisions and plan delivery | MADR and Backlog.md | Reasons, alternatives, ownership, prerequisites, acceptance and observed completion |
+| Investigate software and transfer context | Understand Anything, Groma.md, Serena, REA, Ghidra and Repomix | Target revision, source anchors, map fidelity, provider limits and handoff scope |
+| Extract and maintain knowledge | Docling, MarkItDown, LLM Wiki and selected Microsoft Deep Wiki guidance | Original sources, extraction fidelity, claim support and maintenance |
+| Evaluate and improve a candidate | Promptfoo, Inspect AI and the autoresearch experiment pattern | Reviewed cases, equivalent conditions, frozen evaluators, preserved requirements and observed outcomes |
+| Choose a development procedure | Spec Kit, Superpowers, Ponytail, AgentRC and APM | Relevant scope, host assumptions, generated facts, requirement completeness and bounded review |
+| Maintain a scoped behavior change | OpenSpec | Reviewed scenarios, structural validation, independent code and behavior checks, and inspected archive results |
+
+The catalogue records exact primary source files and inspected revisions. Scoped documentation claims are reviewed. Procedures, stage applicability and illustrative examples remain Atlas recommendations. No productivity, cost saving, general accuracy or universal compatibility result is established by the source review.
+
+OpenSpec was evaluated separately in a disposable existing-project fixture using version 1.14.2. Artifact validation and completion status were insufficient to establish implemented behavior. The guide therefore separates structural checks, actual behavior tests, requirement review and the accepted specification after archive. This fixture does not establish performance or correctness on a user's project. Both OpenSpec and Spec Kit support existing-project work. A comparison must use the actual task rather than upstream competitor descriptions.
+
+Agent Reach remains an optional access reference with a real-content check. Laya remains an experimental typed-decision option requiring comparison against representative project cases. Anthropic Skills has per-item reuse terms, including source-available document skills. Gists and public source without a recorded license are not treated as permissively licensed packages.
+
 ## Maintaining source records
 
 For adopted guidance, keep a stable identifier, source URL, review date, known revision, applicability, exact contribution and limitations. Link a claim to supporting evidence rather than treating every source as support for every instruction.

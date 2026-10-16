@@ -17,6 +17,17 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Prioritized findings have actual impact, owner, evidence, and verification beyond the rule label."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Investigate the cause, Recommend go or no-go, Tests and review. These links are recommendations based on the guide content, not required product or process choices.",
+        "A metric note names the actual Sonar product, configured rules, analyzed revision, exclusions and displayed remediation estimate.",
+        "Triage links each accepted finding to an observed consequence and owner rather than relying on the rule label or metric total.",
+        "The verification packet records the agreed quality gate and meaningful behavior evidence. Sonar remediation time is not substituted for delivery effort or total project debt.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -38,7 +49,7 @@
       "new code",
       "technical debt metric"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Sonar example when a displayed remediation cost or technical debt figure is about to be read as the project's whole debt or as a delivery estimate. It explains what the metric covers and how to use rule findings as evidence to investigate.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -54,6 +65,13 @@
     "scope": {
       "generality": "example",
       "context": "atlassian-jenkins"
+    },
+    "applies": {
+      "stages": [
+        "diagnosis",
+        "recommendation",
+        "verification"
+      ]
     }
   }
 }

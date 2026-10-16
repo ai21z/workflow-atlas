@@ -72,6 +72,16 @@
       "type": "p",
       "label": "Criteria and limitations",
       "text": "Product/domain and technical owners define usability and unacceptable errors. The generator's success claim is insufficient. Model grading is optional and needs reviewed calibration. State sample counts/coverage; a small chosen set does not guarantee production reliability. No arbitrary acceptance percentage or sample size is supplied here."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Plan and inspect mechanical, meaning and interaction checks for the study's actual artifacts.",
+        "Demonstrate a format-valid but semantically wrong candidate is rejected by an independent check.",
+        "Separate first-pass acceptance, repaired acceptance and rejected or unresolved outcomes.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -95,7 +105,7 @@
       "diagnostic cases",
       "model grading"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when a study must judge whether generated artifacts are usable and not only schema valid. Separate first-pass usable, usable after repair, rejected and incorrect but passed checks, and let product and technical owners define usability and unacceptable errors.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -115,6 +125,10 @@
     "applies": {
       "recipes": [
         "feasibility"
+      ],
+      "stages": [
+        "experiment-plan",
+        "verification"
       ]
     }
   }

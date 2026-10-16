@@ -154,7 +154,8 @@ async function run() {
     }
     assert.equal(await page.locator('#tour-bar').isVisible(), false)
     await page.locator('#topic-scope summary').click()
-    assert.match(await page.locator('#topic-scope-content').innerText(), /Illustrative or unreviewed guidance/)
+    assert.match(await page.locator('#topic-scope-content').innerText(), /Fictional example, not evidence of a working integration/)
+    assert.match(await page.locator('#topic-scope-content').innerText(), /Scoped claims reviewed/)
     await page.locator('.sidebar [data-clear-topics]').click()
     await page.locator('[data-mode="explore"]').click()
     await page.locator('[data-view="2d"]').click()
@@ -186,7 +187,7 @@ async function run() {
       await page.locator(`#reader-related [data-topic="${specialist}"]`).click()
       assert.equal(await page.locator('#reader-meta .topic-kind-badge').innerText(), label)
       await page.locator('#topic-scope summary').click()
-      assert.match(await page.locator('#topic-scope-content').innerText(), /migration did not recheck their claims/)
+      assert.match(await page.locator('#topic-scope-content').innerText(), specialist === 'rdf-skill' ? /migration did not recheck their claims/ : /Scoped claims reviewed/)
       if (specialist === 'rdf-skill') assert.match(await page.locator('#reader-content').innerText(), /For an Amazon Neptune deployment/)
       await page.locator('#breadcrumbs [data-topic="skills"]').click()
     }

@@ -12,9 +12,26 @@
       "type": "p",
       "label": "Correctness",
       "text": "Retrieval relevance, citation validity, semantic support, and applicability are different checks. A generated wiki or another graph framework does not solve them automatically."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Architecture and impact, Tests and review, Observe and improve. Use when designing evidence retrieval, reviewing what an answer actually supports and maintaining source-linked knowledge after new findings. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Record which assets contain original sources, derived summaries and reviewed decisions, with owners and versions.",
+        "Check output to obtain: Audit a sample answer separately for evidence retrieval, passage support and applicability to its intended scope.",
+        "Check output to obtain: Keep failed checks and source changes visible in the knowledge update record rather than treating a generated page as approval."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Reviewed on 2026-10-15: PROV-O represents source-to-derived-entity relationships. This supports the provenance aspect only. Retrieval design, semantic review and authority decisions remain Atlas recommendations that require project evidence. Only this added factual contribution was checked in this review. Earlier sections retain their stated proposed or illustrative basis."
     }
   ],
-  "refs": [],
+  "refs": [
+    "prov"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -29,17 +46,33 @@
       "citation validity",
       "domain graph"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "PROV-O represents source-to-derived-entity relationships.",
+        "sourceRefs": [
+          "prov"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "documented"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "verification",
+        "operations"
+      ]
     }
   }
 }

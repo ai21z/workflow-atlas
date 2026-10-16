@@ -18,9 +18,30 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The receiving agent can retrieve underlying evidence and continue without inheriting irrelevant conversation or silently losing constraints."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Use compact handoffs to allocate reviewable delivery work and to transfer a repair with its evidence into the normal release process. The workflow placement and checks are Atlas recommendations. Only the source contribution below was verified on 15 October 2026, not every original assertion or project outcome."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "The handoff identifies task, input and output revisions, artifact locations, executed actions and actual verification results.",
+        "A recipient can open the underlying evidence and distinguish observations from hypotheses and unresolved decisions.",
+        "A continuity check confirms that constraints, failed or skipped checks and the next owner remain visible after the transfer."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Anthropic describes subagents persisting outputs independently and passing lightweight artifact references to the coordinator. This supports an inspected artifact handoff pattern, not the completeness or reliability of a particular Atlas handoff. Receiving access and revision validity still require checks. Review date: 15 October 2026. This review covers this source contribution only, not the whole guide."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gap-anthropic-multiagent"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -35,17 +56,31 @@
       "delegation output",
       "evidence identifiers"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when one agent passes work to another, so that the receiving agent gets the task and revision identity, confirmed observations, labeled inferences, executed actions and open questions instead of the whole conversation.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Anthropic describes subagents persisting outputs independently and passing lightweight artifact references to the coordinator.",
+        "sourceRefs": [
+          "gap-anthropic-multiagent"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "breakdown",
+        "bug-review"
+      ]
     }
   }
 }

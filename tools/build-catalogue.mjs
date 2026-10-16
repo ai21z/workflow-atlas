@@ -70,6 +70,22 @@ export function validateCatalogue(data) {
   const appliesTypes = { stages: 'stage', recipes: 'recipe', technologies: 'technology', hosts: 'host' }
   for (const topic of data.topics) {
     requireSources(topic.refs)
+    for (const section of topic.sections.filter(section => section.type === 'table')) {
+      if (section.tools && section.tools.filterColumn >= section.headers.length) fail(`table filter column is outside the table: ${topic.id}`)
+      for (const link of section.cellLinks || []) {
+        if (!section.rows[link.row] || link.column >= section.rows[link.row].length || link.column >= section.headers.length) fail(`table link is outside the table: ${topic.id}`)
+        if (link.topicId) requireRef(`topic:${link.topicId}`)
+        if (link.sourceRef) {
+          requireRef(`source:${link.sourceRef}`)
+          if (!topic.refs.includes(link.sourceRef)) fail(`table source must be visible in topic references: ${topic.id}`)
+        }
+        if (link.href) {
+          let url
+          try { url = new URL(link.href) } catch { fail(`unsafe table URL in ${topic.id}`) }
+          if (url.protocol !== 'https:' || url.username || url.password) fail(`unsafe table URL in ${topic.id}`)
+        }
+      }
+    }
     if (topic.catalog.domains.some(id => !domains.has(id))) fail(`unknown domain in ${topic.id}`)
     for (const claim of topic.catalog.claims) {
       requireSources(claim.sourceRefs)
@@ -255,7 +271,8 @@ export function compileCatalogue(data) {
     sources: Object.fromEntries(data.sources.map(item => [item.id, [item.title, item.url]])),
     catalog: { schemaVersion: data.manifest.schemaVersion, version: data.manifest.version, reviewCycleDays: REVIEW_CYCLE_DAYS, ...data.navigation, sources: data.sources, relations: data.relations, edges, claims, definitions: definitionRecords, clusterDigests, layout2d },
   }
-  const catalog = { schemaVersion: data.manifest.projectSchemaVersion, version: data.manifest.version, reviewedOn: data.manifest.reviewedOn, ...definitions, factStatuses: data.manifest.factStatuses, evidenceStatuses: data.manifest.evidenceStatuses, controlStatuses: data.manifest.controlStatuses, practiceActions: data.actions, definitionMetadata }
+  const stageReading = Object.fromEntries(definitions.stages.map(stage => [stage.id, nodes.filter(node => node.catalog.kind === 'procedure' && node.catalog.applies?.stages?.includes(stage.id)).map(node => ({ id: node.id, title: node.title }))]))
+  const catalog = { schemaVersion: data.manifest.projectSchemaVersion, version: data.manifest.version, reviewedOn: data.manifest.reviewedOn, ...definitions, factStatuses: data.manifest.factStatuses, evidenceStatuses: data.manifest.evidenceStatuses, controlStatuses: data.manifest.controlStatuses, practiceActions: data.actions, definitionMetadata, stageReading }
   const factory = `// Compiled from catalogue/. Edit source records and run npm run build:catalogue.\nexport const SCHEMA_VERSION = ${JSON.stringify(data.manifest.projectSchemaVersion)};\nexport const DEFINITION_VERSION = ${JSON.stringify(data.manifest.version)};\nexport const REVIEW_DATE = ${JSON.stringify(data.manifest.reviewedOn)};\nexport const SOURCES = Object.freeze(${serialize(Object.fromEntries(Object.entries(data.manifest.sourceAliases).map(([key, id]) => [key, url(id)])))});\nexport const TOOL_ALIASES = Object.freeze(${serialize(data.manifest.toolAliases)});\nfunction deepFreeze(value) { if (value && typeof value === 'object') { Object.values(value).forEach(deepFreeze); Object.freeze(value); } return value; }\nexport const CATALOG = deepFreeze(${serialize(catalog)});\n`
   return { files: { 'atlas/data.js': `// Compiled from catalogue/. Edit source records and run npm run build:catalogue.\nwindow.TOPIC_DATA = ${serialize(atlas)};\n`, 'factory/catalog.mjs': factory }, atlas, catalog }
 }

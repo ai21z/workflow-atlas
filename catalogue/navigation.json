@@ -280,6 +280,56 @@
         "verification-loops",
         "release-operations"
       ]
+    },
+    {
+      "id": "repository-workflows",
+      "title": "Repositories and useful workflows",
+      "summary": "Choose repository references by task, output and checks.",
+      "limits": "Optional sources and recommended procedures. This does not install tools, rank popularity or establish project compatibility.",
+      "nodeIds": [
+        "repository-workflow-references",
+        "software-investigation-workflow",
+        "research-access-workflow",
+        "bounded-experiment-workflow",
+        "typed-decision-workflow",
+        "scoped-development-workflow",
+        "openspec-change-specifications",
+        "customer-research-workflow",
+        "business-analysis-workflow",
+        "decision-record-workflow",
+        "repository-task-workflow",
+        "repository-context-workflow",
+        "document-ingestion-workflow",
+        "evaluation-workflow",
+        "maintained-knowledge-workflow"
+      ]
+    },
+    {
+      "id": "research-and-business",
+      "title": "Research and business decisions",
+      "summary": "Gather evidence, analyze it and record a supported decision.",
+      "limits": "Public reports and examples require scope, source and uncertainty checks. No business outcome is established by reading.",
+      "nodeIds": [
+        "customer-research-workflow",
+        "research-access-workflow",
+        "business-analysis-workflow",
+        "decision-record-workflow",
+        "source-evidence-verification"
+      ]
+    },
+    {
+      "id": "knowledge-and-evaluation",
+      "title": "Knowledge and evaluation",
+      "summary": "Prepare source material, maintain knowledge and check useful results.",
+      "limits": "Representative content and task checks remain necessary. Extraction, generation and evaluator scores do not establish truth.",
+      "nodeIds": [
+        "document-ingestion-workflow",
+        "repository-context-workflow",
+        "maintained-knowledge-workflow",
+        "evaluation-workflow",
+        "bounded-experiment-workflow",
+        "typed-decision-workflow"
+      ]
     }
   ],
   "collections": [
@@ -394,6 +444,51 @@
         "docker",
         "verification-loops",
         "release-operations"
+      ]
+    },
+    {
+      "id": "research-to-decision",
+      "title": "From research to a decision",
+      "nodeIds": [
+        "customer-research-workflow",
+        "research-access-workflow",
+        "business-analysis-workflow",
+        "decision-record-workflow",
+        "repository-task-workflow"
+      ]
+    },
+    {
+      "id": "investigate-and-change",
+      "title": "Investigate and change existing software",
+      "nodeIds": [
+        "software-investigation-workflow",
+        "repository-context-workflow",
+        "decision-record-workflow",
+        "openspec-change-specifications",
+        "repository-task-workflow",
+        "scoped-development-workflow",
+        "evaluation-workflow"
+      ]
+    },
+    {
+      "id": "sources-to-knowledge",
+      "title": "From sources to maintained knowledge",
+      "nodeIds": [
+        "research-access-workflow",
+        "document-ingestion-workflow",
+        "maintained-knowledge-workflow",
+        "source-evidence-verification",
+        "evaluation-workflow"
+      ]
+    },
+    {
+      "id": "compare-and-improve",
+      "title": "Compare and improve a candidate",
+      "nodeIds": [
+        "evaluation-workflow",
+        "bounded-experiment-workflow",
+        "typed-decision-workflow",
+        "decision-record-workflow"
       ]
     }
   ]

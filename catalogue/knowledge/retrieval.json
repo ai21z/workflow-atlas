@@ -22,6 +22,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The needed evidence is retrieved, permitted, current for the question, and accessible for verification. Measure retrieval separately from answer generation."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Architecture and impact, Plan the evidence, Tests and review. Use to choose evidence-retrieval routes, plan a comparison and verify retrieved support separately from answer generation. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Record the corpus revision, permitted scope and expected supporting passages for representative questions.",
+        "Check output to obtain: Compare exact, semantic or structured routes only where applicable, keeping retrieval and answer-quality results separate.",
+        "Check output to obtain: Record missing evidence, stale versions and denied sources as explicit outcomes. Add reranking only after observing a useful improvement."
+      ]
     }
   ],
   "refs": [
@@ -42,7 +52,7 @@
       "sparql",
       "candidate set"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when choosing how to retrieve evidence for a question by combining exact search, semantic search, structured queries such as SPARQL over RDF, and access or version filters. Retrieve a bounded candidate set, verify relevance and applicability, and measure retrieval separately from answer generation.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -58,6 +68,11 @@
       "technologies": [
         "rdf",
         "sparql"
+      ],
+      "stages": [
+        "architecture",
+        "experiment-plan",
+        "verification"
       ]
     }
   }

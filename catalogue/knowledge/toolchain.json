@@ -17,9 +17,27 @@
       "type": "p",
       "label": "Integration check",
       "text": "Inventory client/plugin versions, active harnesses, models, organization policies, tools, credentials, and supported write actions before implementation."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Understand the current process, Define the proposed outcome, Architecture and impact. These links are recommendations based on the guide content, not required product or process choices.",
+        "A responsibility map identifies the actual system of record for requests, decisions, source, checks and operations, with confirmed locations.",
+        "For each integration, a capability record identifies versions, supported action, actor, credential source and observed execution path, or marks it untested.",
+        "The design decision explains any added integration and unresolved access or ownership dependencies. The workplace example is not treated as a required product stack.",
+        "Only the added source contribution was fact checked in this pass. Earlier statements retain their original basis and confidence. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Jenkins documents a Pipeline definition in a Jenkinsfile that can be committed to source control. This provides one inspectable place to assign build and verification responsibilities when Jenkins is used. The source does not establish this project's file locations, commands or integration availability. Checked against the linked primary source on 2026-10-15. This review covers this contribution only."
     }
   ],
-  "refs": [],
+  "refs": [
+    "jenkins-pipeline"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -34,17 +52,32 @@
       "integration check",
       "engineering tools"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Jenkins documents a Pipeline definition in a Jenkinsfile that can be committed to source control. This provides one inspectable place to assign build and verification responsibilities when Jenkins is used. The source does not establish this project's file locations, commands or integration availability.",
+        "sourceRefs": [
+          "jenkins-pipeline"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "current-process",
+        "feasibility-scope",
+        "architecture"
+      ]
     }
   }
 }

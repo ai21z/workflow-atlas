@@ -51,9 +51,26 @@
       "type": "p",
       "label": "reference-to-configuration unknowns",
       "text": "The supplied example establishes study scope, not output quality, portability, access policy or savings. The case-study branch separates recommendations from the supplied scenario."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: State the strength and limits of evidence when planning measurements and recommending a next step.",
+        "Label each conclusion as observed, documented, proposed or unknown.",
+        "Attach the evaluated population, date and version to any measured conclusion.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "NIST AI RMF Measure calls for documented evaluation methods, metrics and test sets, including uncertainty and limitations of generalization. This scoped source fact was checked on 15 October 2026. The guide's broader workflow and examples remain Atlas proposals, not demonstrated outcomes."
     }
   ],
-  "refs": [],
+  "refs": [
+    "nist-core"
+  ],
   "basis": "Research limits",
   "confidence": "Explicit by area",
   "catalog": {
@@ -69,17 +86,33 @@
       "verified facts",
       "unmeasured outcomes"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when deciding how much to rely on a claim in this map. It states which areas rest on inspected documentation, which are proposed fit, and which remain unknown until a benchmark, repository investigation or shadow evaluation is done.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "NIST AI RMF Measure calls for documented evaluation methods, metrics and test sets, including uncertainty and limitations of generalization.",
+        "sourceRefs": [
+          "nist-core"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "research"
+        "research",
+        "recommended",
+        "documented"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan",
+        "recommendation"
+      ]
     }
   }
 }

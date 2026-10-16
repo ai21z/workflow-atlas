@@ -65,6 +65,17 @@
       "type": "p",
       "label": "What Atlas changes",
       "text": "Selecting Java adds toolchain, runtime boundary and verification questions to generated skill references. Reading this guide does not select a JDK, configure the compiler or prove that a request is valid."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Development, Tests and review, Make a scoped repair. These links are recommendations based on the guide content, not required product or process choices.",
+        "A toolchain note records the actual compiler, build and runtime JDKs plus release settings. Third party compatibility remains a separate check.",
+        "A boundary fixture records the accepted input, unknown identifier and denied write outcomes before persistence.",
+        "The result links actual compilation and relevant runtime checks to the candidate revision, with mocks and unavailable dependencies identified.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -87,7 +98,7 @@
       "release target",
       "java service"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use for a Java component when compiler, runtime and external input boundaries need separate evidence.",
     "limits": "Use actual project versions, approved interfaces and repository configuration. The procedure and expected examples do not establish configured access, runtime enforcement, compatibility or passing evidence.",
     "sourceStatus": "reviewed",
@@ -119,6 +130,11 @@
     "applies": {
       "technologies": [
         "java"
+      ],
+      "stages": [
+        "implementation",
+        "verification",
+        "bug-fix"
       ]
     },
     "scope": {

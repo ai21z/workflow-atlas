@@ -120,6 +120,16 @@
       "type": "p",
       "label": "Source and adaptation",
       "text": "Anthropic describes chains with programmatic gates and an evaluator-optimizer loop using model feedback. The broader person, code and agent examples here are proposed Atlas adaptations. A runtime must implement and enforce the designed behavior."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Design explicit routes, review gates and bounded correction loops before a runtime implements them.",
+        "Trace pass, repairable, missing-input and exhausted-limit outcomes using a sample candidate.",
+        "Verify changed candidates return through applicable checks rather than inheriting a prior pass.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -141,7 +151,7 @@
       "correction loop",
       "approval outcomes"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when designing how steps, checks and approvals connect and what happens when a result passes, needs correction or cannot continue. Choose a sequence, a review gate or a bounded correction loop, and define the stopping rule and the route for missing input.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -150,9 +160,18 @@
     "evidence": {
       "basisKinds": [
         "documented",
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "breakdown",
+        "implementation",
+        "verification"
+      ]
     }
   }
 }

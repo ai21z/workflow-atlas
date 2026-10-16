@@ -1,0 +1,155 @@
+{
+  "id": "software-investigation-workflow",
+  "title": "Investigate existing software",
+  "summary": "Choose a focused source, architecture or binary investigation and retain the evidence behind each explanation.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this workflow",
+      "text": "Use before changing an unfamiliar system, investigating behavior or diagnosing a defect. Begin with a question and target revision. Read source directly when sufficient. A graph or native analysis provider is an optional way to obtain evidence."
+    },
+    {
+      "type": "list",
+      "label": "Inputs",
+      "items": [
+        "Question, expected behavior and permitted target.",
+        "Repository revision or binary identity, relevant platform and available tools.",
+        "Time or token budget and the evidence needed to choose the next action."
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Repository contributions",
+      "headers": [
+        "Option",
+        "Useful job",
+        "Check before relying on it"
+      ],
+      "rows": [
+        [
+          "Understand Anything",
+          "Explore generated code relationships and explanations.",
+          "Sample nodes, dependency edges and summaries against the same source revision."
+        ],
+        [
+          "Groma.md",
+          "Curate architectural responsibilities and relationships as C4/OKF Markdown.",
+          "Review the first scan, boundaries and ownership. Reconcile the map after refactors."
+        ],
+        [
+          "Serena",
+          "Navigate symbols and references when the host lacks an equivalent semantic tool.",
+          "Confirm the language/backend and inspect returned definitions and call sites."
+        ],
+        [
+          "REA with an available provider",
+          "Investigate application artifacts, behavior and native binaries.",
+          "Check the selected provider, target identity, limits and incomplete results."
+        ],
+        [
+          "Ghidra",
+          "Disassemble and decompile compiled code.",
+          "Inspect inferred types, addresses and pseudocode. Reproduced behavior remains separate."
+        ]
+      ]
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "State one behavior or ownership question and pin the target.",
+        "Inspect the entry point and relevant path using the smallest sufficient available tool.",
+        "Record file/symbol or binary-address evidence, observations and inferred explanations separately.",
+        "If using a generated graph or architecture map, check a sample of relationships and omitted boundaries against source.",
+        "Investigate contradictions and missing evidence before proposing a change. Stop at unavailable inputs or the agreed budget.",
+        "Deliver the explanation, affected responsibilities, supporting anchors and unresolved questions to the next step."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Outputs",
+      "text": "A source-linked investigation note and, where useful, a reviewed map or impact list tied to the inspected revision."
+    },
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "Every material explanation identifies observed source or binary evidence.",
+        "Generated descriptions and decompiled code are not labelled original source or complete architecture.",
+        "Partial analysis, timeouts and uninspected boundaries remain visible.",
+        "A diagnosis is distinguished from a tested repair."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Illustrative example",
+      "text": "To investigate a saved-filter bug, trace the request from UI to persistence, then check whether the default filter is dropped on reload. A graph may help locate the path. Expected output is an anchored explanation and a reproduction plan. No investigation or repair has run in this example."
+    }
+  ],
+  "refs": [
+    "repo-understand-anything",
+    "repo-groma",
+    "repo-serena",
+    "repo-rea",
+    "repo-ghidra"
+  ],
+  "basis": "Inspected repository documentation and recommended Atlas procedure. Examples are illustrative.",
+  "confidence": "Moderate for the scoped source contributions. Project fit and workflow outcomes remain unverified.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "engineering-tools",
+      "workflow-design"
+    ],
+    "aliases": [
+      "Understand Anything",
+      "Groma",
+      "Groma.md",
+      "Serena",
+      "REA",
+      "Ghidra",
+      "reverse engineering",
+      "codebase investigation"
+    ],
+    "revision": "1",
+    "applicability": "Choose a focused source, architecture or binary investigation and retain the evidence behind each explanation.",
+    "limits": "Reading guidance does not install a repository, select a tool, execute a workflow or establish a passing result. Use actual project versions, commands and evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Repository contributions",
+        "text": "Ghidra documents disassembly, decompilation, graphing and scripting for compiled-code analysis.",
+        "sourceRefs": [
+          "repo-ghidra"
+        ]
+      },
+      {
+        "sectionLabel": "Repository contributions",
+        "text": "Groma documents a scanned and curated C4 architecture map stored as OKF Markdown.",
+        "sourceRefs": [
+          "repo-groma"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "current-process",
+        "architecture",
+        "diagnosis",
+        "options"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

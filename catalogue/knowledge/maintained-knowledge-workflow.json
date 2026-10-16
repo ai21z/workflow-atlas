@@ -1,0 +1,120 @@
+{
+  "id": "maintained-knowledge-workflow",
+  "title": "Maintain source-backed knowledge",
+  "summary": "Update derived pages as evidence changes while preserving original sources, conflicts and review state.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use and inputs",
+      "text": "Use during recommendation, operations or bug review when findings need to remain available across tasks. Inputs are the original sources and versions, existing derived pages, the question or update trigger, page conventions, an owner, and review criteria. Identify missing originals, unresolved conflicts and stale source links before treating an existing summary as current."
+    },
+    {
+      "type": "p",
+      "label": "LLM Wiki pattern",
+      "text": "Andrej Karpathy's reviewed LLM Wiki idea file describes three layers: immutable raw sources, generated Markdown wiki pages, and a schema defining conventions. It proposes ingest, query and lint operations with an index and chronological log. It explicitly describes a pattern whose implementation depends on the user and domain."
+    },
+    {
+      "type": "p",
+      "label": "Source-grounded code guidance",
+      "text": "Microsoft's reviewed Deep Wiki Q&A skill directs repository answers to use actual source files, cite file locations, and state when evidence is insufficient. Those instructions are a useful reference for code-derived pages. Atlas adopts the source and gap checks here without requiring its plugin, publishing stack or presentation conventions."
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Define the page's purpose, audience and source scope. Record the source versions, page owner, review state and last verification date using conventions suited to the project.",
+        "Keep original material available and distinct from derived text. Check extraction quality before using converted documents and inspect actual source files for code claims.",
+        "Identify the new or changed evidence and affected pages. Separate duplicate reports from independent evidence, and preserve different conclusions, versions and time periods.",
+        "Draft the update with source anchors for material factual claims. Label inferences, proposals and unanswered questions, and preserve conflicting evidence until it is resolved.",
+        "Review whether each source supports the claim and whether its scope and date fit the current question. Follow derived citations to original evidence rather than using another generated page as final authority.",
+        "Update affected cross-references, the index and the change log. Check for broken links, orphan pages, stale statements and unresolved review requests.",
+        "Publish or retain the page at its recorded review state. Revisit it when source versions, decisions or operational observations change, and record what was checked rather than implying continuous verification."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Outputs",
+      "text": "Updated derived pages with original-source anchors, versions, owner and review state, an index and change record, and a visible list of conflicts, missing evidence and follow-up reviews. These outputs support later work without replacing its acceptance decision."
+    },
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "A reader can distinguish original evidence, derived statements, reviewed decisions and proposals, and trace material factual claims to the relevant original passage or code revision.",
+        "Sources support the wording and qualifiers used. Valid links and agreement between generated pages alone cannot establish a fact.",
+        "Changed and conflicting sources have been considered for affected pages. Newer material is not assumed to supersede older material without checking scope and authority.",
+        "Missing source access, absent originals, extraction failures and unanswered questions remain explicit. A page with unresolved critical support is not labeled verified.",
+        "Index and cross-references resolve, the change log identifies the update, and owner, review state and verification date match the review actually performed."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Illustrative example, not run",
+      "text": "A proposed bug-review page initially describes retries from an old configuration. A later source revision changes the limit. The maintainer links both revisions, updates the applicable statement, records the change, and leaves observed production behavior unresolved until logs are inspected. This is an unrun example, not an account of a verified change."
+    },
+    {
+      "type": "p",
+      "label": "Limits",
+      "text": "The LLM Wiki source is an idea file, not a runnable wiki service or evidence of maintenance cost or accuracy. The Microsoft source is guidance, not proof of a result. This recommended Atlas procedure has not been benchmarked and does not install skills, configure search, maintain pages automatically or confer approval on derived claims."
+    }
+  ],
+  "refs": [
+    "repo-llm-wiki-pattern",
+    "repo-microsoft-wiki-qa"
+  ],
+  "basis": "Inspected upstream pattern and skill guidance with recommended Atlas procedure",
+  "confidence": "High for what the reviewed pattern and skill prescribe. Moderate for maintaining accurate project knowledge using the proposed procedure.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "knowledge"
+    ],
+    "aliases": [
+      "LLM Wiki",
+      "Karpathy",
+      "Deep Wiki",
+      "Microsoft Skills",
+      "knowledge maintenance",
+      "source-backed wiki",
+      "ingest query lint",
+      "derived pages"
+    ],
+    "revision": "1",
+    "applicability": "Use during recommendation, operations and bug review when retained findings or generated pages must stay traceable as original sources and decisions change.",
+    "limits": "The reviewed sources describe a pattern and instructions. The Atlas procedure is recommended with an unrun example, not an automated maintenance service or demonstrated accuracy result.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "LLM Wiki pattern",
+        "text": "Karpathy's LLM Wiki idea file describes raw sources, derived Markdown pages and schema conventions, with ingest, query and lint operations, an index and a log. It leaves implementation to the user and domain.",
+        "sourceRefs": [
+          "repo-llm-wiki-pattern"
+        ]
+      },
+      {
+        "sectionLabel": "Source-grounded code guidance",
+        "text": "Microsoft's Deep Wiki Q&A skill instructs repository answers to use actual source files, cite file locations and state when evidence is insufficient.",
+        "sourceRefs": [
+          "repo-microsoft-wiki-qa"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "inspected",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "recommendation",
+        "operations",
+        "bug-review"
+      ]
+    }
+  }
+}

@@ -27,9 +27,30 @@
       "type": "p",
       "label": "Acceptance",
       "text": "A claimed impact links to a source relationship, code reference, contract, or executed observation."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Use the existing Architecture and impact connection to trace the proposed change against the baseline and affected consumer contracts. The workflow placement and checks are Atlas recommendations. Only the source contribution below was verified on 15 October 2026, not every original assertion or project outcome."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "An impact map links each claimed affected component or contract to an inspected reference and its revision.",
+        "The assessment lists migration and consumer verification needs, separating direct evidence from indirect hypotheses.",
+        "A reviewer checks the baseline and approves, rejects or leaves unresolved each material impact before implementation."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "NASA describes assessing requirements changes against a documented baseline before approval and implementation. The source supports the change assessment practice. It does not establish the actual dependencies, required approvals or effects of this project. Review date: 15 October 2026. This review covers this source contribution only, not the whole guide."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gap-nasa-change-impact"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -44,12 +65,20 @@
       "affected components",
       "consumer contracts"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a proposed change needs its affected components, migrations, consumer contracts and test scenarios traced and the needed verification identified. Label indirect impacts as hypotheses until a source relationship, code reference, contract or executed observation supports them.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "NASA describes assessing requirements changes against a documented baseline before approval and implementation.",
+        "sourceRefs": [
+          "gap-nasa-change-impact"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"

@@ -22,9 +22,30 @@
       "type": "p",
       "label": "Acceptance",
       "text": "A proposed cause is supported by the actual failure. Repeated retries stop when no new evidence appears."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Use this Jenkins example to capture a failing run during reproduction, investigate its first supported cause during diagnosis and check the repaired candidate during regression. The workflow placement and checks are Atlas recommendations. Only the source contribution below was verified on 15 October 2026, not every original assertion or project outcome."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "The finding records the job and run identifier, candidate revision, failed stage and an accessible log excerpt.",
+        "The cause assessment separates observed evidence from implementation, fixture, dependency, access and infrastructure hypotheses.",
+        "A correction report names the rerun and corrected revision, its actual result and any checks not executed."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Jenkins documents opening a particular run from Build History and reading its full output through Console Output. This verifies an evidence access path only. It does not establish a failure cause, reproduce a workplace job or prove a repair. Review date: 15 October 2026. This review covers this source contribution only, not the whole guide."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gap-jenkins-run-output"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -41,12 +62,20 @@
       "first actionable error",
       "ci failure"
     ],
-    "revision": "2",
+    "revision": "2.gap1",
     "applicability": "Use this specialist example when the failing pipeline runs in Jenkins and approved run/log access is available.",
     "limits": "This reading example does not supply Jenkins credentials, a configured client, commands for your repository or a verified correction.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Jenkins documents opening a particular run from Build History and reading its full output through Console Output.",
+        "sourceRefs": [
+          "gap-jenkins-run-output"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
@@ -56,6 +85,13 @@
     "scope": {
       "generality": "example",
       "context": "atlassian-jenkins"
+    },
+    "applies": {
+      "stages": [
+        "reproduction",
+        "diagnosis",
+        "regression"
+      ]
     }
   }
 }

@@ -39,9 +39,26 @@
       "type": "p",
       "label": "Useful result",
       "text": "A release plan and, after execution, evidence of the deployed candidate, observed behavior and operating owner. A passing check or a generated plan alone does not establish deployment."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Use the existing release and operations mappings to bind approval and recovery to the actual candidate.",
+        "Identify the candidate revision and inspect relevant tests of that same candidate.",
+        "Record the operating owner and rehearse the applicable recovery path and its limitations.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Google's release-engineering chapter connects candidate revision identity, reproducible builds, release tests and archived evidence. This scoped source fact was checked on 15 October 2026. The guide's broader workflow and examples remain Atlas proposals, not demonstrated outcomes."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gap-google-release"
+  ],
   "basis": "Proposed practice",
   "confidence": "Moderate. Release procedures are project specific",
   "catalog": {
@@ -57,15 +74,25 @@
       "operating owner",
       "forward correction"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a software or data change is moving into an operating environment and needs a release plan, a chosen recovery path and an operating owner. A study that ends with a recommendation or a pilot of a new automation is a separate decision.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Google's release-engineering chapter connects candidate revision identity, reproducible builds, release tests and archived evidence.",
+        "sourceRefs": [
+          "gap-google-release"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended",
+        "documented"
       ],
       "confidenceLevel": "proposed"
     },

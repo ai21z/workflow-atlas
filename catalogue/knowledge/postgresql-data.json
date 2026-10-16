@@ -90,6 +90,16 @@
       "type": "p",
       "label": "Useful result",
       "text": "A query and persistence contract with expected fixtures for authorized scope, empty data, paging changes, duplicate requests and failed saves. This fictional example proposes a complete permitted selection before saving. Real schema, identifiers, consistency, commands and recovery evidence remain unresolved. No database check or restoration has run."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Architecture and impact, Development, Tests and review. Use when deciding and implementing an affected SQL read or persistence boundary and collecting evidence for its paging, access and transaction behavior. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Record the actual schema and driver revisions, application identity, ordering and cross-page consistency contract.",
+        "Check output to obtain: Observe permitted, empty and denied results, including a fixture where data changes between pages.",
+        "Check output to obtain: Verify the relevant duplicate, concurrent-save and partial-failure outcomes. Keep planned recovery or restoration checks marked unrun until evidence exists."
+      ]
     }
   ],
   "refs": [
@@ -118,7 +128,7 @@
       "database migration",
       "restore evidence"
     ],
-    "revision": "2",
+    "revision": "2.gap1",
     "applicability": "Use when a PostgreSQL data boundary needs checks for query behavior, permitted scope, paging consistency, transactions or recovery. Selection adds project questions without configuring a connection.",
     "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
     "sourceStatus": "reviewed",
@@ -178,6 +188,11 @@
     "applies": {
       "technologies": [
         "postgresql"
+      ],
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification"
       ]
     }
   }

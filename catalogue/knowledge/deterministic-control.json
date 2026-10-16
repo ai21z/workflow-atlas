@@ -37,6 +37,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Models cannot turn an unsupported claim into approved data by expressing certainty. Every resulting action remains constrained by the controller’s rules."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Allocate exact calculations and enforced invariants to code, then test the boundary with model judgments.",
+        "Use independent expected values for dates, rates and identifiers.",
+        "Show that an unsupported model result cannot bypass the action or publication guard.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -57,7 +67,7 @@
       "code or model",
       "controller rules"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when deciding which parts of a process a model may perform and which must stay in code, such as exact calculations, access rules, identity checks and schema validation. A model expressing certainty never turns an unsupported claim into approved data.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -65,9 +75,17 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification"
+      ]
     }
   }
 }

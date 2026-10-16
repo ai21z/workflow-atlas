@@ -17,6 +17,17 @@
       "type": "p",
       "label": "Implementation path",
       "text": "Use supervised IDE work or an approved runner that can operate on Bitbucket and your established pipelines. Repository migration is not a prerequisite of this proposal."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Architecture and impact, Development, Tests and review, Review and hand off. These links are recommendations based on the guide content, not required product or process choices.",
+        "A repository evidence record names the affected commit and, where present, exact submodule commits. Review links resolve to those revisions.",
+        "A capability note identifies the actual IDE or runner route and its permitted actions. A GitHub cloud capability is not inferred for a Bitbucket checkout.",
+        "A review packet links the scoped diff, executed checks and unresolved access or environment blockers.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -36,7 +47,7 @@
       "submodule revisions",
       "copilot cloud agent"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Bitbucket example when source, tests and review evidence live in a Bitbucket repository and you need to know which agent route applies. GitHub Copilot cloud agent works with GitHub hosted repositories, so a Bitbucket checkout relies on supervised IDE work or an approved runner.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -56,6 +67,12 @@
     "applies": {
       "hosts": [
         "jetbrains"
+      ],
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification",
+        "bug-review"
       ]
     }
   }

@@ -12,9 +12,27 @@
       "type": "p",
       "label": "Operating method",
       "text": "Collect specific findings, deduplicate, prioritize consequences and break remediation into reviewable outcomes. Avoid flooding the issue tracker with every static-analysis finding."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Understand the current process, Investigate the cause, Recommend go or no-go, Stories and delivery plan. These links are recommendations based on the guide content, not required product or process choices.",
+        "A candidate register links each proposed debt item to a specific revision, observed consequence and reproducible evidence, or labels it unconfirmed.",
+        "The triage record groups duplicates, identifies owners and explains whether the item is debt, a defect or another problem.",
+        "An accepted remediation item includes a bounded scope, acceptance evidence and remaining uncertainty. No whole-project debt quantity is inferred from this plan.",
+        "Only the added source contribution was fact checked in this pass. Earlier statements retain their original basis and confidence. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "The SEI describes consolidating candidate debt items and ranking them using evidence about defects, changes and code churn. That research approach supports gathering project evidence before ranking. It does not establish this project's actual debt or a calibrated remediation estimate. Checked against the linked primary source on 2026-10-15. This review covers this contribution only."
     }
   ],
-  "refs": [],
+  "refs": [
+    "sei-debt-analytics"
+  ],
   "basis": "Proposed audit plan",
   "confidence": "Unknown actual debt",
   "catalog": {
@@ -30,17 +48,33 @@
       "investigation plan",
       "findings"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "The SEI describes consolidating candidate debt items and ranking them using evidence about defects, changes and code churn. That research approach supports gathering project evidence before ranking. It does not establish this project's actual debt or a calibrated remediation estimate.",
+        "sourceRefs": [
+          "sei-debt-analytics"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
       ],
       "confidenceLevel": "speculative"
+    },
+    "applies": {
+      "stages": [
+        "current-process",
+        "diagnosis",
+        "recommendation",
+        "breakdown"
+      ]
     }
   }
 }

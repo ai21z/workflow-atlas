@@ -24,6 +24,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Adverse cases are tested before expanding use. A confident answer cannot override structural, access, or publication rules."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Use documented weaknesses to choose diagnostic cases and enforce exact logic outside the model.",
+        "Pin the evaluated model and question version.",
+        "Include numeric, temporal, misleading-context and missing-information negative controls.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -44,7 +54,7 @@
       "adversarial content",
       "model pinning"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Jev example when deciding what to keep outside semantic judgment, such as counting, date comparison, multi-hop questions or enforceable rules. Implement calculations, dates and invariants in code and test adverse cases before expanding use.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -52,13 +62,21 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "documented"
+        "documented",
+        "recommended"
       ],
-      "confidenceLevel": "established"
+      "confidenceLevel": "proposed"
     },
     "scope": {
       "generality": "example",
       "context": "jev-typesafe"
+    },
+    "applies": {
+      "stages": [
+        "options",
+        "experiment-plan",
+        "verification"
+      ]
     }
   }
 }

@@ -17,6 +17,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Performance and escalation rules are justified for the languages actually used. A high aggregate result does not conceal a weak language subset."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Assess the languages and terminology actually used by the task.",
+        "Retain original passages and mark where translation was introduced.",
+        "Inspect qualifier and date preservation and report errors separately for each tested language.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -37,7 +47,7 @@
       "source language",
       "typesafe"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Jev example when your official sources are not in English or use domain-specific terminology. Stratify reviewed examples by language and task so a high aggregate result does not conceal a weak language subset.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -45,13 +55,20 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
     },
     "scope": {
       "generality": "example",
       "context": "jev-typesafe"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan",
+        "verification"
+      ]
     }
   }
 }

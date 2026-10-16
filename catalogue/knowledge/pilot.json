@@ -53,9 +53,26 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Expand only where quality and accepted-result economics improve. Select durable infrastructure from demonstrated execution requirements."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Use the existing experiment-plan mapping to define a bounded trial and a reviewable expansion decision.",
+        "Record the current process, trial scope and agreed acceptance before collecting outcomes.",
+        "Separate a documented next-phase decision from any claimed production deployment.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "GOV.UK discovery guidance connects problem definition, constraints and success measures to the decision about a next phase. This scoped source fact was checked on 15 October 2026. The guide's broader workflow and examples remain Atlas proposals, not demonstrated outcomes."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gov-discovery"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -71,15 +88,25 @@
       "staged adoption",
       "expansion"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when deciding how to introduce an automation and expand it in steps, from a baseline and bounded trial through controlled use to measured expansion, with acceptance criteria agreed with the owners before results are collected.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "GOV.UK discovery guidance connects problem definition, constraints and success measures to the decision about a next phase.",
+        "sourceRefs": [
+          "gov-discovery"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended",
+        "documented"
       ],
       "confidenceLevel": "proposed"
     },

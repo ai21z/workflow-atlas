@@ -1,0 +1,156 @@
+{
+  "id": "scoped-development-workflow",
+  "title": "Choose a proportionate development procedure",
+  "summary": "Select useful clarification, planning, implementation and review procedures without importing an entire tool library as policy.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this workflow",
+      "text": "Use when adopting agent guidance for a feature or repair. Keep the request, existing repository conventions and acceptance criteria authoritative."
+    },
+    {
+      "type": "list",
+      "label": "Inputs",
+      "items": [
+        "Agreed outcome, repository revision, constraints and relevant existing instructions.",
+        "One proposed procedure and its source revision.",
+        "Expected deliverable, actual checks and a bounded review policy."
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Repository contributions",
+      "headers": [
+        "Reference",
+        "Useful contribution",
+        "Acceptance limit"
+      ],
+      "rows": [
+        [
+          "Spec Kit",
+          "Specifications connected to plans and tasks, with distinct bug and idea processes.",
+          "Use the process that fits the task. Inspect specification drift and unnecessary ceremony."
+        ],
+        [
+          "Superpowers",
+          "Composable clarification, planning, debugging and review procedures.",
+          "Adopt selected procedures. Preserve scope and bound correction/review cycles."
+        ],
+        [
+          "Ponytail",
+          "Inspect existing capabilities and make the smallest sufficient implementation.",
+          "Check required behavior and maintainability before line count or token claims."
+        ],
+        [
+          "AgentRC",
+          "Experimental repository-context generation and evaluation.",
+          "Inspect generated facts and compare task outcomes before adopting them."
+        ],
+        [
+          "APM",
+          "Manifests and locked dependencies for sharing agent configuration.",
+          "Useful when shared dependency/version management is needed. Installation and permissions remain separate."
+        ]
+      ]
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Identify the missing procedure and compare doing the task with current instructions.",
+        "Read one selected upstream contribution at a recorded revision and identify host assumptions.",
+        "Adapt the relevant steps and checks to the current repository. Do not adopt unrelated rules automatically.",
+        "Run a small task with explicit acceptance criteria and the configured checks when authorized.",
+        "Review requirement completeness, source accuracy, scope, failures and actual effort. Smaller output alone is not success.",
+        "Keep or revise the procedure based on observed results. Record limits and an owner for later source drift."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Outputs",
+      "text": "A scoped instruction or procedure, supporting source revision and evidence from the chosen task."
+    },
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "Requested behavior and existing conventions remain intact.",
+        "Generated context identifies actual files and commands rather than invented project facts.",
+        "Correction loops have a stop condition and do not expand acceptance criteria.",
+        "A selected instruction does not supply integrations or runtime permissions."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Illustrative example",
+      "text": "For a status-filter repair, adopt only the diagnosis, scoped-change and regression steps needed for that defect. An unrelated full product design process is unnecessary. Expected output is a small repair packet with observed checks. This example has not been implemented or tested."
+    }
+  ],
+  "refs": [
+    "repo-spec-kit-current",
+    "repo-superpowers-current",
+    "repo-ponytail-current",
+    "repo-agentrc-current",
+    "repo-apm-current"
+  ],
+  "basis": "Inspected repository documentation and recommended Atlas procedure. Examples are illustrative.",
+  "confidence": "Moderate for the scoped source contributions. Project fit and workflow outcomes remain unverified.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "instructions",
+      "workflow-design"
+    ],
+    "aliases": [
+      "Spec Kit",
+      "Superpowers",
+      "Ponytail",
+      "AgentRC",
+      "APM",
+      "minimal implementation",
+      "agent procedures"
+    ],
+    "revision": "1",
+    "applicability": "Select useful clarification, planning, implementation and review procedures without importing an entire tool library as policy.",
+    "limits": "Reading guidance does not install a repository, select a tool, execute a workflow or establish a passing result. Use actual project versions, commands and evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Repository contributions",
+        "text": "Spec Kit documents distinct specification, bug-fixing and idea-assessment processes.",
+        "sourceRefs": [
+          "repo-spec-kit-current"
+        ]
+      },
+      {
+        "sectionLabel": "Repository contributions",
+        "text": "Ponytail instructs preserving requested behavior and relevant checks while minimizing unnecessary implementation.",
+        "sourceRefs": [
+          "repo-ponytail-current"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "breakdown",
+        "implementation",
+        "bug-fix",
+        "verification",
+        "bug-review"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "1.1",
-  "version": "2.3.0",
+  "schemaVersion": "1.2",
+  "version": "2.5.0",
   "projectSchemaVersion": "3.0",
   "reviewedOn": "2026-10-02",
   "topicOrder": [
@@ -138,7 +138,22 @@
     "api-stored-data",
     "java",
     "spring-boot",
-    "maven"
+    "maven",
+    "software-investigation-workflow",
+    "research-access-workflow",
+    "bounded-experiment-workflow",
+    "typed-decision-workflow",
+    "scoped-development-workflow",
+    "openspec-change-specifications",
+    "repository-workflow-references",
+    "customer-research-workflow",
+    "business-analysis-workflow",
+    "decision-record-workflow",
+    "repository-task-workflow",
+    "repository-context-workflow",
+    "document-ingestion-workflow",
+    "evaluation-workflow",
+    "maintained-knowledge-workflow"
   ],
   "sourceAliases": {
     "agents": "reference-65",

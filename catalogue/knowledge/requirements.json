@@ -12,6 +12,16 @@
       "type": "p",
       "label": "Trace",
       "text": "Source or decision → required behavior → affected components → meaningful checks → delivery evidence. Preserve enough links to move from the requirement to its verification and back."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Stories and delivery plan, Tests and review. Use when defining required behavior, connecting delivery tasks to acceptance checks and reviewing the resulting evidence against intent. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Produce a source-or-decision to requirement to task to check trace for a bounded behavior.",
+        "Check output to obtain: Review the trace in both directions and record missing or stale links at the candidate revision.",
+        "Check output to obtain: Keep current code observations separate from approved intent, and retain unresolved acceptance decisions."
+      ]
     }
   ],
   "refs": [
@@ -30,7 +40,7 @@
       "observed behavior",
       "unresolved questions"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -41,6 +51,13 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "breakdown",
+        "verification"
+      ]
     }
   }
 }

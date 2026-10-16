@@ -17,9 +17,27 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Do not replace missing product decisions with invented requirements. Preserve confirmed/proposed/unresolved distinctions. Review findings before converting a large scan into tickets."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Requirements and evidence, Stories and delivery plan, Observe and improve. These links are recommendations based on the guide content, not required product or process choices.",
+        "The work item links the requirement, accepted examples, owner decisions and still unanswered questions without inventing acceptance criteria.",
+        "A dependency and duplicate review records the relevant linked items and confirms the configured link meaning.",
+        "A proposed mutation records the actual actor and permission path. Ticket creation follows owner triage of supported findings.",
+        "Only the added source contribution was fact checked in this pass. Earlier statements retain their original basis and confidence. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Jira Cloud documents work item linking controlled by administrators, configurable link types and a required Link Work Items permission. Such links can carry dependencies or duplicates when configured. They do not supply missing product decisions or prove that a user can modify the tenant. Checked against the linked primary source on 2026-10-15. This review covers this contribution only."
     }
   ],
-  "refs": [],
+  "refs": [
+    "jira-work-linking"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -34,12 +52,20 @@
       "task contracts",
       "debt findings"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Jira example when task contracts, acceptance criteria, ownership and reviewed findings are tracked in Jira and you want automation to flag gaps, draft briefs or link evidence. Do not replace missing product decisions with invented requirements.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Jira Cloud documents work item linking controlled by administrators, configurable link types and a required Link Work Items permission. Such links can carry dependencies or duplicates when configured. They do not supply missing product decisions or prove that a user can modify the tenant.",
+        "sourceRefs": [
+          "jira-work-linking"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
@@ -49,6 +75,13 @@
     "scope": {
       "generality": "example",
       "context": "atlassian-jenkins"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "breakdown",
+        "operations"
+      ]
     }
   }
 }

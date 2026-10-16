@@ -17,6 +17,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Measure missed scope errors and false alarms on reviewed examples. Quote/source existence checks and semantic-support judgments are separate components; neither alone proves applicability."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Check whether a cited passage supports the assertion's actual scope, using reviewed comparison cases.",
+        "Separate source existence, quotation fidelity and semantic support checks.",
+        "Measure scope errors and false alarms without claiming the hypothetical example is a workplace defect.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -36,7 +46,7 @@
       "citation check",
       "reviewer finding"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Jev example when checking whether an original source passage supports a proposed assertion and its scope. Keep quote and source existence checks separate from the semantic-support judgment, and measure missed scope errors and false alarms on reviewed examples.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -44,13 +54,20 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
     },
     "scope": {
       "generality": "example",
       "context": "jev-typesafe"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan",
+        "verification"
+      ]
     }
   }
 }

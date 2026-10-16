@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="map2d.css">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
   <script defer src="data.js"></script>
+  <script defer src="knowledge-index.js"></script>
   <script defer src="map2d.js"></script>
   <script defer src="app.js"></script>
 </head>
@@ -19,7 +20,7 @@
   <header class="topbar">
     <button id="knowledge-back" type="button" hidden>← Back to workspace</button>
     <a class="brand" href="#overview" aria-label="Workflow Atlas overview"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 9L24 7L21 24L7 9M7 9L8 25L21 24"/><circle cx="7" cy="9" r="3"/><circle cx="24" cy="7" r="3"/><circle cx="21" cy="24" r="3"/></svg><span><strong>Workflow Atlas</strong><small>Workflow knowledge</small></span></a>
-    <nav class="mode-nav" aria-label="Atlas views"><button type="button" data-mode="read" aria-pressed="true">Read</button><button type="button" data-mode="explore" aria-pressed="false">Explore <span class="desktop-label">the map</span></button><button type="button" data-mode="sources" aria-pressed="false">Sources</button></nav>
+    <nav class="mode-nav" aria-label="Atlas views"><button type="button" data-mode="knowledge" aria-pressed="false">All knowledge</button><button type="button" data-mode="read" aria-pressed="true">Read</button><button type="button" data-mode="explore" aria-pressed="false">Explore <span class="desktop-label">the map</span></button><button type="button" data-mode="sources" aria-pressed="false">Sources</button></nav>
     <div class="topbar-actions"><a data-factory-link href="../factory/" style="font-size:12px;color:inherit;text-underline-offset:4px;white-space:nowrap">Build a pack ↗</a><span id="atlas-count"></span><button type="button" id="theme-toggle" class="theme-switch" role="switch" aria-label="Dark mode" aria-checked="false"><span class="theme-switch-label">Dark mode</span><span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-thumb"></span></span></button><button type="button" id="mobile-topics" aria-haspopup="dialog" aria-controls="topics-dialog">Search topics</button></div>
   </header>
   <main class="workspace">
@@ -45,6 +46,19 @@
         <div class="map-selection"><div><small>SELECTED TOPIC</small><strong id="map-selection-title"></strong><p id="map-selection-summary"></p><span id="map-selection-evidence"></span></div><button type="button" id="read-selection">Read topic →</button></div>
         <details class="map-index"><summary>Browse all topics as a list</summary><div id="map-topic-list"></div></details>
         <p class="map-legend"><span class="legend-line" aria-hidden="true"></span> Solid lines group topics. <span class="legend-line related" aria-hidden="true"></span> Dashed lines connect related topics. These connections do not represent executed workflows or verified evidence.</p>
+      </section>
+      <section class="knowledge-library" id="knowledge-library" aria-label="All knowledge" hidden>
+        <header class="library-header"><span class="overline">Find a guide</span><h1 tabindex="-1" id="knowledge-title">All knowledge</h1><p>Search every guide, reference and worked example. Combine filters to find the recorded workflow steps, topic areas and sources that matter to your task.</p></header>
+        <div class="knowledge-tools">
+          <label class="knowledge-search" for="knowledge-search"><span>Search all knowledge</span><input id="knowledge-search" type="search" autocomplete="off" placeholder="Title, alias, guidance or source…" aria-describedby="knowledge-help"></label>
+          <label for="knowledge-stage"><span>Workflow step</span><select id="knowledge-stage"><option value="">All steps</option><option value="__none__">No recorded step</option></select></label>
+          <label for="knowledge-topic"><span>Topic area</span><select id="knowledge-topic"><option value="">All topic areas</option></select></label>
+          <label for="knowledge-source"><span>Source</span><select id="knowledge-source"><option value="">All sources</option><option value="__none__">No linked source</option></select></label>
+        </div>
+        <p id="knowledge-help" class="knowledge-help">Workflow steps show recommended applicability, not verified project fit. Source review badges cover scoped claims, not every statement in a guide. Proposed checks are not passing results. Entries without a recorded step or source remain available. These filters apply only to this table.</p>
+        <div class="knowledge-results"><p id="knowledge-count" role="status" aria-live="polite"></p><button id="knowledge-clear" type="button" class="table-clear" hidden>Clear filters</button></div>
+        <p id="knowledge-empty" class="empty-search" hidden>No entries match. Try another term or clear the filters.</p>
+        <div id="knowledge-table-wrap" class="table-wrap" role="region" aria-label="All knowledge table; scroll horizontally if needed" tabindex="0"><table id="knowledge-table" aria-label="All knowledge"><thead><tr><th scope="col">Guide</th><th scope="col">Topic area</th><th scope="col">Workflow steps</th><th scope="col">Sources</th></tr></thead><tbody></tbody></table></div>
       </section>
       <section class="source-library" id="source-library" aria-label="Source library" hidden>
         <div class="library-header"><span class="overline">Follow the evidence</span><h1 tabindex="-1" id="source-title">The source library</h1><p>Open an original source, then see where it is used. Source type describes its format; it is not a quality rating.</p></div>

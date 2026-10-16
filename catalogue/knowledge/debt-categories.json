@@ -53,9 +53,27 @@
       "type": "p",
       "label": "Classification",
       "text": "A wrong requirement or data defect is not automatically technical debt. Classify the finding by actual cause and ownership."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Understand the current process, Investigate the cause, Stories and delivery plan. These links are recommendations based on the guide content, not required product or process choices.",
+        "Each candidate finding records its affected revision, observed consequence, evidence location and proposed cause. Unsupported causes remain hypotheses.",
+        "A classification table distinguishes defects, missing requirements, environment problems and possible debt, with an owner for unresolved classifications.",
+        "The remediation plan links each accepted finding to a verifiable outcome and dependencies. Duplicate warnings are grouped by supported cause.",
+        "Only the added source contribution was fact checked in this pass. Earlier statements retain their original basis and confidence. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "The SEI technical debt project combines code-oriented analysis with architectural analysis and issue tracker data. This supports investigating beyond isolated code warnings. The specific categories in this guide remain an Atlas recommendation, not an SEI taxonomy. Checked against the linked primary source on 2026-10-15. This review covers this contribution only."
     }
   ],
-  "refs": [],
+  "refs": [
+    "sei-debt-analytics"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -71,17 +89,32 @@
       "investigation categories",
       "debt taxonomy"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when planning a debt investigation and you want evidence categories beyond code smells, covering structure, verification, data and ontology, queries, CI and release, documentation and agent workflows. Use it also to classify a finding by actual cause and ownership before calling it debt.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "The SEI technical debt project combines code-oriented analysis with architectural analysis and issue tracker data. This supports investigating beyond isolated code warnings. The specific categories in this guide remain an Atlas recommendation, not an SEI taxonomy.",
+        "sourceRefs": [
+          "sei-debt-analytics"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "current-process",
+        "diagnosis",
+        "breakdown"
+      ]
     }
   }
 }

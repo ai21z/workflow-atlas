@@ -505,6 +505,18 @@ export function createKnowledgeQuery(data) {
       }
     }
     const seeds = new Map(context.seeds.map(ref => [ref, null]))
+    const stageExplanations = new Map()
+    for (const seed of seeds.keys()) {
+      if (!seed.startsWith('stage:')) continue
+      const explainedBy = byRef.get(seed)?.explainedBy
+      if (explainedBy) stageExplanations.set(explainedBy.startsWith('topic:') ? explainedBy : `topic:${explainedBy}`, 2)
+      for (const edge of outgoing.get(seed) || []) {
+        if (edge.type === 'explained-by' && !stageExplanations.has(edge.to)) stageExplanations.set(edge.to, 1)
+      }
+    }
+    const selectedTechnologies = new Set(technologies.map(id => `technology:${id}`))
+    const technologyMatches = record => record.definitionRefs.some(ref => selectedTechnologies.has(ref))
+      || (outgoing.get(record.ref) || []).some(edge => selectedTechnologies.has(edge.to) && ['applies-to', 'explains', 'uses-definition'].includes(edge.type))
     if (context.recipeStageFallback) for (const seed of seeds.keys()) if (seed.startsWith('stage:')) seeds.set(seed, `recipe ${byRef.get(`recipe:${recipe}`)?.title || recipe}`)
     for (const [seed, recipeOrigin] of seeds) {
       const seedRecord = byRef.get(seed)
@@ -537,6 +549,9 @@ export function createKnowledgeQuery(data) {
         }
       }
     }
+    // A reading-stage link does not select a technology. Preserve direct lexical
+    // requests and explicit environment evidence, without borrowing a stack from
+    // shared development stages or a works-with relationship.
     const ranked = [...candidates.values()].map(entry => {
       const totals = { workflow: 0, environment: 0, related: 0 }
       for (const [key, value] of entry.contributions) {
@@ -546,7 +561,9 @@ export function createKnowledgeQuery(data) {
       }
       const scoreParts = { lexical: entry.contributions.get('lexical') || 0, ...Object.fromEntries(Object.entries(totals).map(([key, value]) => [key, Math.min(value, GRAPH_CAPS[key])])) }
       return { ...entry, scoreParts, score: Object.values(scoreParts).reduce((sum, value) => sum + value, 0) }
-    }).filter(entry => entry.readingFit || entry.record.selectable).sort((a, b) => b.score - a.score || a.record.title.localeCompare(b.record.title)).slice(0, limit)
+    }).filter(entry => (entry.readingFit || entry.record.selectable)
+      && (entry.record.kind !== 'technology' || technologyMatches(entry.record) || entry.readingFit && entry.contributions.has('lexical')))
+      .sort((a, b) => b.score - a.score || (stageExplanations.get(b.record.ref) || 0) - (stageExplanations.get(a.record.ref) || 0) || a.record.title.localeCompare(b.record.title)).slice(0, limit)
     return ranked.map(({ record, score, scoreParts, reasons, graphReasons, readingFit, readingReason }) => ({ ...describe(record), score: Math.round(score * 1000) / 1000, scoreParts, readingFit, readingReason: readingReason || reasons[0], reasons, graphReasons, practiceRef: record.definitionRefs.find(ref => ref.startsWith('practice:')) || null, confirmation: 'not checked' }))
   }
 

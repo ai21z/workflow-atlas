@@ -24,9 +24,27 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Each task has a verifiable outcome and known dependencies, while the end-to-end scenario remains represented."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Stories and delivery plan. These links are recommendations based on the guide content, not required product or process choices.",
+        "A dependency list orders the proposed changes and identifies which can be independently reviewed.",
+        "Each change names one coherent outcome, its acceptance check and the evidence needed by its reviewer.",
+        "The combined plan retains an end-to-end scenario and any migration or rollback dependency. Intermediate states are checked for continued operation.",
+        "Only the added source contribution was fact checked in this pass. Earlier statements retain their original basis and confidence. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Google's published developer review guidance describes a self-contained change with related test code and recommends planning the split of dependent changes. The sequence in this guide remains a recommendation to adapt to the repository and reviewer. Checked against the linked primary source on 2026-10-15. This review covers this contribution only."
     }
   ],
-  "refs": [],
+  "refs": [
+    "google-small-changes"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -42,12 +60,20 @@
       "refactor sequence",
       "split findings"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a debt finding or correction is too large for one review and you need to split it into tasks in dependency order, each with a verifiable outcome, while the end-to-end scenario stays represented.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Google's published developer review guidance describes a self-contained change with related test code and recommends planning the split of dependent changes. The sequence in this guide remains a recommendation to adapt to the repository and reviewer.",
+        "sourceRefs": [
+          "google-small-changes"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"

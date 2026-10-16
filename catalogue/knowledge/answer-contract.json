@@ -23,9 +23,26 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The reader can reproduce the evidential basis. Missing support leads to a useful uncertainty statement rather than a fabricated answer."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Tests and review, Recommend go or no-go. Use when drafting evidence requirements, reviewing claim support and writing a recommendation that exposes remaining uncertainty. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Produce a claim table with a status, exact passage, source version and relevant scope for each substantive conclusion.",
+        "Check output to obtain: Sample a supported, contradicted and unsupported claim. Record the source-to-claim comparison rather than only link availability.",
+        "Check output to obtain: Keep unanswered claims and their decision owner visible in the recommendation."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Reviewed on 2026-10-15: PROV-O defines derivation, primary-source and quotation relationships. This vocabulary supports traceable evidence links. The answer contract, claim statuses and acceptance policy remain Atlas recommendations, not requirements imposed by PROV-O. Only this added factual contribution was checked in this review. Earlier sections retain their stated proposed or illustrative basis."
     }
   ],
-  "refs": [],
+  "refs": [
+    "prov"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -41,17 +58,33 @@
       "source support",
       "verification layers"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when an answer or finding must carry support for each substantive claim, with its status, exact source, scope and uncertainty. A working link, a relevant passage and a supported claim are different layers, and missing support should produce an uncertainty statement rather than a fabricated answer.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "PROV-O defines derivation, primary-source and quotation relationships.",
+        "sourceRefs": [
+          "prov"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "documented"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "verification",
+        "recommendation"
+      ]
     }
   }
 }

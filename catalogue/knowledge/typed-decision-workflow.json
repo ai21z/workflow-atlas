@@ -1,0 +1,108 @@
+{
+  "id": "typed-decision-workflow",
+  "title": "Evaluate typed decision routing",
+  "summary": "Define the decision, representative cases and uncertain-result behavior before choosing a model-backed route.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this workflow",
+      "text": "Use when a process needs a bounded choice, score or yes/no-style assessment. A deterministic rule or human decision may be sufficient. Laya is an optional model candidate, not a replacement selected by Atlas."
+    },
+    {
+      "type": "list",
+      "label": "Inputs",
+      "items": [
+        "Question, allowed outcomes, decision owner and cost of each error.",
+        "Representative labelled cases, incomplete inputs and language/domain scope.",
+        "Pinned model/checkpoint, actual deployment interface and routing limits."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Repository contributions",
+      "text": "Laya documents typed choice, score and yes/no-style assessments and a router that selects checkpoints. A typed result or confidence value does not establish correctness, calibration or permission to execute an action."
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Write the decision and expected result for concrete normal, ambiguous and failed cases.",
+        "Compare a simple rule, current approach and selected model only where each can perform the same task.",
+        "Pin the checkpoint and input/outcome format. Inspect truncation and option handling on representative inputs.",
+        "Measure each important error class and uncertainty behavior, not only aggregate accuracy.",
+        "Define what happens for missing evidence or an uncertain result. Keep action authorization separate from the predicted choice.",
+        "Retain a conditional recommendation and the evidence. Do not replace an existing backend until its own relevant cases have been compared."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Outputs",
+      "text": "A decision contract, comparison cases, observed errors and a routing recommendation with explicit limits."
+    },
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "Expected outcomes were reviewed independently of candidate predictions.",
+        "Relevant languages, domains, ambiguous states and denied actions were included.",
+        "A score or probability is interpreted according to its actual contract.",
+        "An untested model choice is labelled proposed."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Illustrative example",
+      "text": "For billing triage, agree the permitted department labels and when a human must review an ambiguous complaint. Compare predictions with reviewed labels before proposing automatic routing. No Laya or Atlas backend comparison has run in this example."
+    }
+  ],
+  "refs": [
+    "repo-laya"
+  ],
+  "basis": "Inspected repository documentation and recommended Atlas procedure. Examples are illustrative.",
+  "confidence": "Moderate for the scoped source contributions. Project fit and workflow outcomes remain unverified.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "model-decisions",
+      "evaluation"
+    ],
+    "aliases": [
+      "Laya",
+      "typed decisions",
+      "classification routing",
+      "choice score yes no"
+    ],
+    "revision": "1",
+    "applicability": "Define the decision, representative cases and uncertain-result behavior before choosing a model-backed route.",
+    "limits": "Reading guidance does not install a repository, select a tool, execute a workflow or establish a passing result. Use actual project versions, commands and evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Repository contributions",
+        "text": "Laya documents typed choice, score and yes/no-style assessments with checkpoint routing.",
+        "sourceRefs": [
+          "repo-laya"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "options",
+        "experiment-plan",
+        "recommendation"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

@@ -831,6 +831,7 @@ function stageCard(stage, index) {
   const enabled = config.workflow.enabledStages.includes(stage.id)
   const binding = config.workflow.bindings[stage.id]
   const base = `workflow.bindings.${stage.id}`
+  const reading = CATALOG.stageReading?.[stage.id] || []
   return `<div class="stage-card ${enabled ? '' : 'is-off'}" data-stage-card="${escape(stage.id)}">
     <div class="stage-top"><span>${String(index + 1).padStart(2, '0')}</span><label class="stage-toggle"><div><strong>Include this stage</strong><small>${escape(stage.purpose)}</small></div><input type="checkbox" data-stage="${escape(stage.id)}" ${enabled ? 'checked' : ''} aria-label="Include ${escape(labelOf(stage))}"></label></div>
     <div class="field-grid stage-assignment">${selectField('Responsible actor', `${base}.actorType`, binding.actorType, [{ id: 'human', label: 'Person' }, { id: 'agent', label: 'Agent profile' }, { id: 'external', label: 'External system' }])}${binding.actorType === 'agent' ? selectField('Agent role', `${base}.actorId`, binding.actorId, [{ id: '', label: 'Choose an enabled role' }, ...config.agents.map(agent => CATALOG.roles.find(role => role.id === agent.role))]) : field(binding.actorType === 'external' ? 'System or service' : 'Person or team', `${base}.actorName`, binding.actorName, binding.actorType === 'external' ? 'e.g. CI pipeline' : 'Name or owner')}</div>
@@ -839,7 +840,8 @@ function stageCard(stage, index) {
     <details data-detail="stage-skills-${escape(stage.id)}"><summary>Relevant skills · ${binding.skills.length} selected</summary><fieldset class="skill-bindings"><legend class="sr-only">Relevant skills</legend>${CATALOG.skills.map(skill => `<label class="tool-toggle"><input type="checkbox" data-binding-skill="${escape(skill.id)}" data-stage-id="${escape(stage.id)}" ${binding.skills.includes(skill.id) ? 'checked' : ''}>${escape(labelOf(skill))}</label>`).join('')}</fieldset></details>
     ${list(stage.dependsOn).map(id => field(`Existing ${named(CATALOG.stages, id)} output`, `workflow.suppliedInputs.${id}`, config.workflow.suppliedInputs[id], 'Path or source reference', 'Supply an existing artifact to satisfy this input without repeating the earlier stage.')).join('')}
     <details data-detail="stage-reference-${escape(stage.id)}"><summary>Stage inputs, outputs and checks</summary><dl class="stage-facts">${fact('Required inputs', stage.inputs)}${fact('Expected outputs', stage.outputs)}${fact('Acceptance and evidence', stage.checks)}${fact('Capabilities if assigned to an agent', stage.capabilities)}</dl></details>
-    <div class="stage-actions"><button type="button" class="text-button" data-action="add-stage-evidence" data-stage-id="${escape(stage.id)}">+ Record an acceptance check</button>${atlasLink(stage.atlasTopic || 'task-contract', 'Read related guidance')}</div></div>`
+    <div class="stage-actions"><button type="button" class="text-button" data-action="add-stage-evidence" data-stage-id="${escape(stage.id)}">+ Record an acceptance check</button>${atlasLink(stage.atlasTopic || 'task-contract', 'Read related guidance')}</div>
+    ${reading.length ? `<details data-detail="stage-reading-${escape(stage.id)}"><summary>Reference workflows for this step</summary><ul class="compact-list">${reading.map(topic => `<li>${atlasLink(topic.id, topic.title)}</li>`).join('')}</ul></details>` : ''}</div>`
 }
 
 function renderRuntime() {
@@ -1864,7 +1866,7 @@ window.addEventListener('message', event => {
   if (event.data?.type === 'workflow-atlas:close-knowledge') closeKnowledge()
   if (event.data?.type === 'workflow-atlas:theme' && event.data.theme !== theme) setTheme(event.data.theme)
   if (event.data?.type === 'workflow-atlas:knowledge-ready') {sendPracticeContext();setTheme(theme)}
-  if (event.data?.type === 'workflow-atlas:knowledge-state' && typeof event.data.topicId === 'string' && ['read','explore','sources'].includes(event.data.mode)) {
+  if (event.data?.type === 'workflow-atlas:knowledge-state' && typeof event.data.topicId === 'string' && ['read','explore','sources','knowledge'].includes(event.data.mode)) {
     knowledgeState={topicId:event.data.topicId,mode:event.data.mode,mapView:event.data.mapView}
     const hash=`#knowledge/${encodeURIComponent(knowledgeState.topicId)}/${knowledgeState.mode}`
     if (!routing && location.hash !== hash) {

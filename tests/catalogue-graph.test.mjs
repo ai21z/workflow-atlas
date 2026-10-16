@@ -67,6 +67,18 @@ test('record level evidence fields reach metadata without changing compiled spec
   assert.equal(compileCatalogue(input).catalog.definitionMetadata['technology:example-tech'].category, undefined, 'absent fields stay absent')
 })
 
+test('step reading follows explicit procedure applicability without assigning tools or changing stages', () => {
+  const input = copy()
+  const candidate = input.topics.find(item => item.id === 'retries')
+  candidate.catalog.kind = 'procedure'
+  candidate.catalog.applies = { stages: ['architecture'] }
+  const result = compileCatalogue(input).catalog
+  assert.ok(result.stageReading.architecture.some(topic => topic.id === candidate.id && topic.title === candidate.title))
+  assert.ok(!result.stageReading.operations.some(topic => topic.id === candidate.id))
+  assert.deepEqual(result.stages, compileCatalogue(data).catalog.stages)
+  assert.deepEqual(result.practiceActions, data.actions)
+})
+
 test('generated edge types, unlabeled examples, unsourced stacks, misdirected evidence and requires cycles are rejected', () => {
   const rejected = [
     [input => input.relations.push({ from: 'topic:retries', type: 'applies-to', to: 'stage:implementation', sourceRefs: [] }), /invalid/],

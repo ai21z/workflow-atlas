@@ -33,9 +33,30 @@
       "type": "p",
       "label": "Choose the relevant environment",
       "text": "Jenkins diagnosis is one specialist example. Use the same evidence questions with another pipeline system, then supply that system's actual run identifiers, access path and commands. Atlas does not invent or connect those interfaces."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Capture a failing run during reproduction, test possible causes during diagnosis and rerun the affected checks for the repaired candidate during regression. The workflow placement and checks are Atlas recommendations. Only the source contribution below was verified on 15 October 2026, not every original assertion or project outcome."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A failure record preserves run identity, candidate revision, first actionable error and source locations.",
+        "A hypothesis record states what observation would support or reject each plausible cause and names the bounded next action.",
+        "A correction record compares expected and observed rerun results for the changed candidate, retaining untested assumptions."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Jenkins documents selecting an individual Pipeline run and viewing its full Console Output. This is one concrete pipeline evidence access example. Other systems need their actual supported interfaces. The source does not validate an inferred cause or a repair. Review date: 15 October 2026. This review covers this source contribution only, not the whole guide."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gap-jenkins-run-output"
+  ],
   "basis": "Proposed procedure",
   "confidence": "Moderate. Validate the procedure in your environment",
   "catalog": {
@@ -53,17 +74,32 @@
       "first actionable failure",
       "ci failure"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when an automated pipeline fails and a team needs an evidence based diagnosis. A pipeline system or AI agent is not prescribed.",
     "limits": "This is a proposed reading procedure. It does not select an exportable skill, configure access, run checks or establish a successful result.",
-    "sourceStatus": "needs-review",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Jenkins documents selecting an individual Pipeline run and viewing its full Console Output.",
+        "sourceRefs": [
+          "gap-jenkins-run-output"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "reproduction",
+        "diagnosis",
+        "regression"
+      ]
     }
   }
 }

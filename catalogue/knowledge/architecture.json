@@ -45,6 +45,16 @@
       "type": "p",
       "label": "Design boundary",
       "text": "A prompt can describe a rule. The runtime must enforce permissions, state changes, and budget controls. A skill does not create durable execution or prove successful completion."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Separate controller, harness and instruction responsibilities while choosing the design.",
+        "Identify which runtime component enforces each permission, state transition and budget.",
+        "Keep any enforcement described only in a prompt marked unimplemented.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -65,7 +75,7 @@
       "agent runtime",
       "layered architecture"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when deciding which layer owns execution state, permissions and budget controls in an agent setup. A prompt or skill can describe a rule, but the runtime has to enforce it.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -73,9 +83,16 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "options"
+      ]
     }
   }
 }

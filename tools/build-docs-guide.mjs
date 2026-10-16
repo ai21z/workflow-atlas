@@ -17,6 +17,7 @@ const definitions = [
   { id: 'atlas-preservation', title: 'Atlas preservation', group: 'Project reference', description: 'Review the retained Knowledge Atlas and migration boundaries.' },
   { id: 'extension-contract', title: 'Extension contract', group: 'Extend Atlas', description: 'Understand schema, shared definitions and export adapters.' },
   { id: 'catalogue', title: 'Knowledge catalogue', group: 'Extend Atlas', description: 'Understand topic types, source scope and how to maintain shared catalogue records.' },
+  { id: 'knowledge-gap-review', title: 'Knowledge gap review', group: 'Project reference', description: 'Inspect verified source additions, recommended workflow mappings, checks and remaining uncertainty.' },
   { id: 'workflow-model', title: 'Workflow model', group: 'Extend Atlas', description: 'Read process records, bounded correction rules and migration behavior.' },
   ...JEV_DEFINITIONS.map((page) => ({
     ...page,

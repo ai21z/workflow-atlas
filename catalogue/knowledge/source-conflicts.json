@@ -17,9 +17,26 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The answer or review packet identifies the competing evidence and unresolved decision. The approved process determines whether one source supersedes another."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Tests and review, Recommend go or no-go. Use when competing evidence affects a requirement, a result review or a recommendation that cannot yet be resolved. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Produce a side-by-side claim record with source passages, versions and applicable scopes for each competing assertion.",
+        "Check output to obtain: Check whether the disagreement is factual, temporal, scoped or only a wording difference.",
+        "Check output to obtain: Record the unresolved decision, owner and approved resolution rule. Model agreement must not be substituted for missing evidence."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Reviewed on 2026-10-15: Wikidata permits conflicting perspectives represented with additional values, sources and qualifiers. This is a concrete representation example. Wikidata consensus rules do not establish source precedence for another project, and the Atlas conflict-resolution procedure remains recommended guidance. Only this added factual contribution was checked in this review. Earlier sections retain their stated proposed or illustrative basis."
     }
   ],
-  "refs": [],
+  "refs": [
+    "wikidata-qualifiers"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -35,17 +52,33 @@
       "supersedes",
       "unresolved decision"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when sources disagree or the evidence is insufficient to answer. Preserve the competing evidence and the unresolved decision in the answer or review packet, and let the approved process decide whether one source supersedes another.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Wikidata permits conflicting perspectives represented with additional values, sources and qualifiers.",
+        "sourceRefs": [
+          "wikidata-qualifiers"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "documented"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "verification",
+        "recommendation"
+      ]
     }
   }
 }

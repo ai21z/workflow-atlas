@@ -1,0 +1,64 @@
+{
+  "id": "business-analysis-workflow",
+  "title": "Analyze a business question",
+  "summary": "Define a measurable question, verify the data and compare options without overstating the evidence.",
+  "sections": [
+    {"type": "p", "label": "When to use", "text": "Use during current process investigation, options comparison or recommendation when a decision depends on usage, cost, conversion, support demand or another business measure. Start with the question and definitions rather than a preferred chart or conclusion."},
+    {"type": "p", "label": "Inputs", "text": "The decision, metric definitions, target population, baseline, comparison period, timezone, source snapshots or queryable data, and relevant qualitative findings. Record access, freshness, exclusions and the allowed scope of analysis. A repository reference does not establish a connected warehouse or permission to retrieve data."},
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "State the decision and a question the data can answer. Define the unit of analysis, eligible population, numerator, denominator, period and comparison before calculating results.",
+        "Locate authoritative inputs and record their versions or retrieval times. Inspect schema and sample records. Document missing periods, nulls, duplicated identifiers and known exclusions.",
+        "Prepare reproducible transformations or queries. Check row counts before and after joins, aggregation grain, timezone boundaries and denominator changes. Preserve raw inputs and the transformation used.",
+        "Calculate the baseline and compare relevant segments and options. Use the same definitions and comparable periods. Separate observed association from a causal explanation and distinguish measured results from estimated benefits.",
+        "Recalculate key results independently and reconcile totals or explain overlap. Check sensitivity to plausible assumptions and missing data. Inspect charts against their underlying values and labels.",
+        "Present the finding, options, recommendation and uncertainty separately. Attach the supporting calculations and remaining gaps. State which additional evidence could change the recommendation and how the eventual result will be checked."
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Optional reference examples",
+      "headers": ["Reference", "Useful steps", "Contribution and check"],
+      "rows": [
+        ["Knowledge Work Plugins, Analyze", "1 to 4", "Question framing, data gathering and analysis structure. Check the actual schema, access and metric definitions before using any example query."],
+        ["Knowledge Work Plugins, Validate Data", "3 to 6", "Review of method, bias, calculations and conclusions. Record the checks actually performed and the discrepancies still unresolved."]
+      ]
+    },
+    {"type": "p", "label": "Source contribution", "text": "Knowledge Work Plugins' Analyze procedure distinguishes a metric lookup, full analysis and formal report, and includes row count, null, magnitude, continuity and aggregation checks. Its Validate Data procedure examines population and metric definitions, comparison fairness, join inflation, denominator changes and whether conclusions follow from the data. These documented checks inform this proposal without certifying a particular dataset or analysis."},
+    {"type": "p", "label": "Outputs", "text": "A reproducible analysis packet containing the question, definitions, source identifiers, transformations, results, independent checks, assumptions and limitations. The recommendation links each option to the evidence and identifies a decision owner and follow-up measure."},
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "A reviewer can reproduce every decision-relevant number from the recorded inputs and calculation, including the denominator and exclusions.",
+        "Comparable periods, population rules and timezones are explicit. Join and duplicate handling has been checked at the intended grain.",
+        "At least the key result has an independent recalculation or source reconciliation. Discrepancies have an explanation or remain a blocker.",
+        "Observed values, estimates, causal hypotheses and recommendations have distinct labels. No unmeasured benefit is presented as a verified outcome."
+      ]
+    },
+    {"type": "p", "label": "Illustrative worked example, not run", "text": "Suppose 240 of 1,000 eligible accounts complete setup in one complete month and 270 of 1,500 in the next. Completion count rises by 30, while completion rate falls from 24% to 18%, a decline of 6 percentage points. The proposed analysis checks unchanged eligibility and segment mix before recommending an intervention. This fictional calculation is illustrative, and no product dataset, query or intervention has been executed."},
+    {"type": "p", "label": "Failure and uncertainty", "text": "If missing data, incompatible definitions or unresolved join inflation can change the decision, label the analysis as needing revision and isolate the affected results. Supply a reproducible plan when access is unavailable. If alternative explanations remain plausible, recommend a targeted investigation or experiment rather than claiming a cause."}
+  ],
+  "refs": ["repo-knowledge-analysis", "repo-knowledge-validation"],
+  "basis": "Inspected primary analysis procedures with a proposed Atlas adaptation and an unrun fictional example",
+  "confidence": "High for the inspected source contents and illustrative arithmetic. Moderate for the proposed procedure. Business effects require project evidence.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": ["workflow-design", "evaluation", "verification"],
+    "aliases": ["business analysis", "metric definitions", "data validation", "analysis QA", "Knowledge Work Plugins", "validate data"],
+    "revision": "1",
+    "applicability": "Use at current process, options and recommendation steps when a business choice depends on data. Adapt the depth of analysis to the question and decision risk.",
+    "limits": "This proposed reading procedure does not select an exportable skill, connect a data warehouse, retrieve data, run queries or establish verified business benefits. Documentation review covers the stated procedure contents only.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {"sectionLabel": "Source contribution", "text": "Analyze distinguishes metric lookup, full analysis and formal report and includes row count, null, magnitude, continuity and aggregation checks.", "sourceRefs": ["repo-knowledge-analysis"]},
+      {"sectionLabel": "Source contribution", "text": "Validate Data examines population and metric definitions, comparison fairness, join inflation, denominator changes and whether conclusions follow from the data.", "sourceRefs": ["repo-knowledge-validation"]}
+    ],
+    "evidence": {"basisKinds": ["inspected", "proposed", "illustrative"], "confidenceLevel": "proposed"},
+    "applies": {"stages": ["current-process", "options", "recommendation"]},
+    "scope": {"generality": "general"}
+  }
+}

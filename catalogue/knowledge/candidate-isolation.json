@@ -17,6 +17,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Candidate-only assertions do not appear through ordinary REST/UI serving before the approved publication process. Include a regression scenario for this boundary."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Architecture and impact, Tests and review, Release and production. Use when designing candidate-data isolation, testing serving paths and reviewing a proposed promotion into an approved serving dataset. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Record the actual candidate and approved dataset boundaries, every relevant serving query and the proposed promotion owner.",
+        "Check output to obtain: Insert a candidate-only fixture in a permitted test environment and verify it is absent from each ordinary serving path.",
+        "Check output to obtain: Record promotion and reversal evidence under the actual release process. A named-graph label alone is not an isolation test."
+      ]
     }
   ],
   "refs": [
@@ -37,7 +47,7 @@
       "serving queries",
       "sparql"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when candidate assertions are stored in a Neptune named graph next to approved data and serving queries use SPARQL. The default graph is the union of named graphs, so use a separate candidate store or enforce explicit approved datasets and audit every serving path.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -58,6 +68,11 @@
       "technologies": [
         "neptune",
         "sparql"
+      ],
+      "stages": [
+        "architecture",
+        "verification",
+        "release"
       ]
     }
   }

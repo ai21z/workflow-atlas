@@ -52,6 +52,17 @@
       "type": "p",
       "label": "What Atlas changes",
       "text": "Selecting React adds the React profile questions and checks to generated skill project references. The profile prompts state ownership, visible states, keyboard and responsive evidence. It neither reads the component tree nor configures React or its tests."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Architecture and impact, Development, Make a scoped repair, Tests and review. These links are recommendations based on the guide content, not required product or process choices.",
+        "A design note names the existing state owner, data source and paging contract, including whether filtering changes the API request.",
+        "The accepted fixture covers loading, empty, failed and successful states without maintaining an unnecessary second copy of derived data.",
+        "Focused behavior results and observed keyboard, focus and narrow layout results are recorded separately for the candidate revision. Simulated DOM results remain identified.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -73,7 +84,7 @@
       "component tree",
       "frontend"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use for a feature or repair in an existing React interface, after confirming the actual rendering setup and versions.",
     "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
     "sourceStatus": "reviewed",
@@ -105,6 +116,12 @@
     "applies": {
       "technologies": [
         "react"
+      ],
+      "stages": [
+        "architecture",
+        "implementation",
+        "bug-fix",
+        "verification"
       ]
     },
     "scope": {

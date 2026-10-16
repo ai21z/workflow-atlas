@@ -29,6 +29,16 @@
       "type": "p",
       "label": "Example source: Talos QA material",
       "text": "The inspected Talos manual QA runbook describes fresh workspaces, confusing filenames, protected markers, approval lanes, traces, and final diffs. Its budget test definitions cover timeouts and stalled or repetitive streams. The runbook and test definitions were inspected, not executed."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Design adverse cases, inspect observed run outcomes and repeat the relevant cases after a change.",
+        "Record the expected failure class and compare it with the trace and resulting state.",
+        "Retain a denied-access or unavailable-source case and mark checks that did not run.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -50,7 +60,7 @@
       "stalled streams",
       "fabricated completion"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when auditing whether a workflow run reported the right outcome under failure and uncertainty cases, by comparing its claims with traces, tool results, approvals and the actual resulting state. Choose cases that challenge the assumptions of your workflow, such as stale sources, duplicate events or denied access.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -59,9 +69,17 @@
     "evidence": {
       "basisKinds": [
         "proposed",
-        "inspected"
+        "inspected",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan",
+        "verification",
+        "regression"
+      ]
     }
   }
 }

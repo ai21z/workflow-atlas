@@ -41,9 +41,26 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Every derived asset can identify its source and version. Execution state does not accidentally become shared domain authority."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Architecture and impact, Observe and improve. Use when choosing which knowledge assets to maintain and when correcting or refreshing those assets as evidence changes. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Produce an asset inventory with owner, purpose, source revision and review state for each derived item.",
+        "Check output to obtain: Follow a sampled summary or index record back to its original source and derivation record.",
+        "Check output to obtain: Show how a changed or withdrawn source is reflected in dependent assets, keeping run state distinct from approved domain assertions."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Reviewed on 2026-10-15: PROV-O distinguishes entities, activities and agents, and relates derived entities to inputs. This vocabulary supports derivation records. The six asset categories and their authority boundaries are Atlas design choices, not a PROV-O architecture requirement. Only this added factual contribution was checked in this review. Earlier sections retain their stated proposed or illustrative basis."
     }
   ],
-  "refs": [],
+  "refs": [
+    "prov"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -59,17 +76,32 @@
       "domain graph",
       "asset types"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when deciding which knowledge assets a project needs and how to keep source material, approved assertions, indexes, summaries and workflow state apart. Every derived asset should identify its source and version, and execution state should not become shared domain authority.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "PROV-O distinguishes entities, activities and agents, and relates derived entities to inputs.",
+        "sourceRefs": [
+          "prov"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "documented"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "operations"
+      ]
     }
   }
 }

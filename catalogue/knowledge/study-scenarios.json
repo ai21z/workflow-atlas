@@ -55,6 +55,16 @@
       "type": "p",
       "label": "Adapt to actual formats",
       "text": "Convert relevant cases into reviewed checks. Separate diagnostic failures from the sample estimating routine performance."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Adapt the illustrative cases into reviewed diagnostic checks for the actual formats and failure outcomes.",
+        "Record expected clarification, conflict and timeout outcomes before running the cases.",
+        "Keep diagnostic case counts separate from routine-workload performance estimates.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -77,7 +87,7 @@
       "duplicate effects",
       "worked cases"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when you want to explain a proposed service's behaviour case by case, such as a complete reference, a missing detail, a conflict, a timeout or a retried save, without claiming workplace results. Convert the relevant cases into reviewed checks for the actual formats.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -97,6 +107,10 @@
     "applies": {
       "recipes": [
         "feasibility"
+      ],
+      "stages": [
+        "experiment-plan",
+        "verification"
       ]
     }
   }

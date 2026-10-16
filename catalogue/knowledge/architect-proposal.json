@@ -28,9 +28,26 @@
       "type": "p",
       "label": "Reviewable next result",
       "text": "A capability map, sample evidence packet, evaluation cases, and measured small pilot that informs the next scope decision."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Frame a bounded proposal, compare alternatives and produce a decision package.",
+        "Show the current approach and at least one feasible alternative against the same acceptance evidence.",
+        "Name the decision owner and identify assumptions that need an experiment.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "GOV.UK discovery guidance connects problem definition, constraints and success measures to the decision about a next phase. This scoped source fact was checked on 15 October 2026. The guide's broader workflow and examples remain Atlas proposals, not demonstrated outcomes."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gov-discovery"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -46,21 +63,36 @@
       "bounded alternative",
       "scope decision"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when preparing a proposal for an architect or decision owner that compares the current approach with one bounded alternative. It lists the decisions to resolve, such as task owner, available clients and models, acceptance evidence and data boundaries, before a small measured pilot.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "GOV.UK discovery guidance connects problem definition, constraints and success measures to the decision about a next phase.",
+        "sourceRefs": [
+          "gov-discovery"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended",
+        "documented"
       ],
       "confidenceLevel": "proposed"
     },
     "applies": {
       "recipes": [
         "feasibility"
+      ],
+      "stages": [
+        "feasibility-scope",
+        "options",
+        "recommendation"
       ]
     }
   }

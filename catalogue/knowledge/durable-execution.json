@@ -22,6 +22,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Failure recovery and resumption are tested with real side effects and recorded state. An in-memory chat history is not durable orchestration."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Choose and test restart recovery only where the actual process requires persistent execution.",
+        "Restart the runner during a representative task and inspect the resumed state.",
+        "Verify a resumed external write does not repeat a completed effect.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -42,7 +52,7 @@
       "long-running workflows",
       "workflow recovery"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a process must survive restarts, wait days for an approval or external data, or resume without repeating external writes. Evaluate persistent orchestration against those requirements rather than adding it to the stack by default.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -50,9 +60,17 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "experiment-plan",
+        "operations"
+      ]
     }
   }
 }

@@ -48,6 +48,17 @@
       "type": "p",
       "label": "What Atlas changes",
       "text": "Selecting JavaScript or TypeScript adds its own language profile questions and checks to generated skill references. Select the actual language used. Selecting Node.js separately describes a runtime, while selecting React describes an interface library. The shared reading guide does not make those choices for you."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Development, Tests and review, Make a scoped repair. These links are recommendations based on the guide content, not required product or process choices.",
+        "A configuration note identifies the actual language, runtime, module setup and whether a separate type check exists.",
+        "A runtime fixture covers agreed values, malformed external data and the approved recovery for unexpected values.",
+        "Static, runtime and browser results are recorded separately for the candidate revision. Transpilation alone is not recorded as a type check.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -73,7 +84,7 @@
       "runtime validation",
       "tsconfig"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use for JavaScript or TypeScript changes where runtime behavior and, when configured, static checks need different evidence.",
     "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
     "sourceStatus": "reviewed",
@@ -113,6 +124,11 @@
       "technologies": [
         "javascript",
         "typescript"
+      ],
+      "stages": [
+        "implementation",
+        "verification",
+        "bug-fix"
       ]
     },
     "scope": {

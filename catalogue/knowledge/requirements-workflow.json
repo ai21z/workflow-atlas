@@ -28,9 +28,26 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Every asserted requirement has supporting evidence or is explicitly proposed. Missing context remains visible rather than guessed."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Use the existing requirements mapping to turn evidence and unresolved questions into an implementation brief.",
+        "Trace each asserted requirement to a source or a visibly proposed decision.",
+        "Check acceptance scenarios against the agreed outcome and record missing constraints.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "GOV.UK discovery guidance connects problem definition, constraints and success measures to the decision about a next phase. This scoped source fact was checked on 15 October 2026. The guide's broader workflow and examples remain Atlas proposals, not demonstrated outcomes."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gov-discovery"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -46,15 +63,25 @@
       "request analysis",
       "jira"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a request must become a reviewed implementation brief before tickets are written. Every asserted requirement needs supporting evidence or an explicit proposal label, and missing context stays visible instead of being guessed.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "GOV.UK discovery guidance connects problem definition, constraints and success measures to the decision about a next phase.",
+        "sourceRefs": [
+          "gov-discovery"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended",
+        "documented"
       ],
       "confidenceLevel": "proposed"
     },

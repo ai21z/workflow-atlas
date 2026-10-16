@@ -22,6 +22,16 @@
       "type": "p",
       "label": "Decision",
       "text": "Try a small, versioned workflow with fixed inputs and recorded outputs. Compare its maintainability and recovery behavior with existing Jenkins/Atlassian automation."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Assess the documented candidate in the actual client and compare it with existing automation.",
+        "Record the installed client, feature access and organization policy separately from the article.",
+        "Run a bounded workflow and retain actual state, permission and recovery observations.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -42,7 +52,7 @@
       "github copilot",
       "public preview"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when evaluating Copilot's code-defined workflow option for a pilot. Check the actual client, enterprise policy, credit limits and runner permissions first, then compare a small versioned workflow with existing automation.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -51,13 +61,21 @@
     "evidence": {
       "basisKinds": [
         "documented",
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
     },
     "scope": {
       "generality": "example",
       "context": "copilot"
+    },
+    "applies": {
+      "stages": [
+        "options",
+        "experiment-plan",
+        "architecture"
+      ]
     }
   }
 }

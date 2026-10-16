@@ -17,6 +17,17 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Record the effective client, plugin, harness, model, and permitted tools. Verify execution evidence against the resulting revision."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Investigate the cause, Development, Tests and review. These links are recommendations based on the guide content, not required product or process choices.",
+        "An environment record names the effective IDE, extension, harness and reported model where applicable. Unobserved routing remains unknown.",
+        "The scoped change is linked to the inspected checkout revision and the relevant neighboring implementation.",
+        "The evidence packet records actual local check output, permitted tools and unresolved environment issues against the resulting revision.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -37,7 +48,7 @@
       "session model",
       "built in subagents"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this IntelliJ example when repository investigation and bounded changes happen in a supervised IDE checkout with Copilot. Record the effective client, plugin, harness, model and permitted tools, since independent per agent routing in the IDE still depends on the harness.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -56,6 +67,11 @@
     "applies": {
       "hosts": [
         "jetbrains"
+      ],
+      "stages": [
+        "diagnosis",
+        "implementation",
+        "verification"
       ]
     }
   }

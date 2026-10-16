@@ -38,9 +38,30 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Roles have distinct useful work. The controller decides permissible actions and acceptance, not a majority vote between agents."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Design role boundaries during Architecture and impact, then assign distinct reviewable work during Stories and delivery plan. The workflow placement and checks are Atlas recommendations. Only the source contribution below was verified on 15 October 2026, not every original assertion or project outcome."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A role contract names its task, input revisions, permitted tools, output location and acceptance owner.",
+        "The work split records which role produces and which role reviews each artifact, with overlaps and gaps resolved.",
+        "The acceptance record links the resulting evidence and identifies the controller decision, rather than treating agreement between agents as proof."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Anthropic describes subagent assignments with an objective, output format, tool and source guidance, and explicit task boundaries. This supports the bounded assignment pattern only. Atlas role names, permission enforcement and their usefulness remain recommendations requiring a project trial. Review date: 15 October 2026. This review covers this source contribution only, not the whole guide."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gap-anthropic-multiagent"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -56,17 +77,31 @@
       "role contract",
       "controller"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when splitting agent work into roles such as investigator, implementer, reviewer and documentation writer, each with its own task, evidence inputs, permitted tools and output contract. The controller decides permissible actions and acceptance, not a vote between agents.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Anthropic describes subagent assignments with an objective, output format, tool and source guidance, and explicit task boundaries.",
+        "sourceRefs": [
+          "gap-anthropic-multiagent"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "breakdown"
+      ]
     }
   }
 }

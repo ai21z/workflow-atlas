@@ -17,6 +17,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The alternative improves needed-evidence retrieval or answer quality enough to justify indexing cost, maintenance, and version handling."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Compare feasible approaches, Plan the evidence, Recommend go or no-go. Use when comparing GraphRAG with a simpler retrieval baseline, planning representative evidence cases and deciding whether its added work is justified. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Record the baseline, actual query strategy, corpus and index revisions, and expected evidence for each question.",
+        "Check output to obtain: Compare retrieved support, answer quality, indexing effort and query cost on the same permitted cases.",
+        "Check output to obtain: Publish a decision with observed advantages, failure cases and unmeasured claims. Inclusion does not establish a performance improvement."
+      ]
     }
   ],
   "refs": [
@@ -37,7 +47,7 @@
       "local search",
       "retrieval baseline"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when considering Microsoft GraphRAG or another graph retrieval approach for your project. Measure a simpler retrieval baseline first, and include relevant SPARQL queries in the comparison if a curated RDF graph already exists.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -49,6 +59,13 @@
         "proposed"
       ],
       "confidenceLevel": "speculative"
+    },
+    "applies": {
+      "stages": [
+        "options",
+        "experiment-plan",
+        "recommendation"
+      ]
     }
   }
 }

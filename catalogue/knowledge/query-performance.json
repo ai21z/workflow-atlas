@@ -17,6 +17,17 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The optimization preserves expected results and improves the measured target. A query that looks complicated is not automatically slow, and local engine timing is not Neptune evidence."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Reproduce the observed problem, Investigate the cause, Plan the evidence, Tests and review. These links are recommendations based on the guide content, not required product or process choices.",
+        "A baseline record retains the query, dataset, engine, parameters, repeated latency observations and relevant explain output.",
+        "A controlled comparison states the target improvement and checks identical expected results before evaluating performance.",
+        "The conclusion reports actual measurements and environment differences. Local timing is not labeled Neptune evidence, and an unrun optimization stays proposed.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -37,7 +48,7 @@
       "query optimization",
       "execution plan"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Neptune and SPARQL example when a query is suspected to be slow and you need measured latency, the query version, dataset, engine and Neptune explain output before proposing a change. Local engine timing is not Neptune evidence, and a complicated query is not automatically slow.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -57,6 +68,12 @@
       "technologies": [
         "sparql",
         "neptune"
+      ],
+      "stages": [
+        "reproduction",
+        "diagnosis",
+        "experiment-plan",
+        "verification"
       ]
     }
   }

@@ -17,6 +17,20 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The intended route and observed route agree, and their cost/performance are measured."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Resolve host routing support while comparing options, plan a bounded routing probe and verify the effective model and effort in the actual run. Existing Copilot SDK and JetBrains routing claims were not reaudited in this gap review. Client support, policy and effective inheritance remain unresolved until checked for the selected environment."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A configuration record names host/version, requested parent and child model/effort, and the official support reference.",
+        "An observed trace records the effective route or marks it unavailable, including rejected or ignored settings.",
+        "A representative task comparison ties acceptance, latency and consumption to the observed route."
+      ]
     }
   ],
   "refs": [
@@ -38,7 +52,7 @@
       "session model",
       "model override"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a workflow assigns different models or effort settings to subagents and you need to know what the Copilot SDK, the JetBrains IDE or another harness actually supports. Verify the effective model in the real run and measure the cost and performance of the observed route.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -53,6 +67,11 @@
     "applies": {
       "hosts": [
         "jetbrains"
+      ],
+      "stages": [
+        "options",
+        "experiment-plan",
+        "verification"
       ]
     }
   }

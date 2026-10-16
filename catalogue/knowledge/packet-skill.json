@@ -17,6 +17,20 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Descriptions reflect the final change. Actual executed results are distinguishable from intended checks, and skipped/unsupported checks remain visible."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Assemble the evidence packet during Tests and review, use it for repair handoff and carry the accepted result into release preparation. The retained Talos packet remains an example. This gap review does not establish that a project uses that template or that any command or release check passed."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "The packet identifies the final revision, concrete behavior change, diff, requirement and evidence links.",
+        "Every reported executed check has a matching command or pipeline result for that revision, with skipped and unsupported checks visible.",
+        "The verdict follows the acceptance evidence and lists remaining issues and the responsible release decision owner."
+      ]
     }
   ],
   "refs": [
@@ -36,7 +50,7 @@
       "verdict",
       "evidence links"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a finished change needs a concise review result that points to the final revision, diff, executed reports, findings and evidence links. Executed results stay distinguishable from intended checks and skipped or unsupported checks remain visible.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -47,6 +61,13 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "verification",
+        "bug-review",
+        "release"
+      ]
     }
   }
 }

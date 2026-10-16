@@ -17,9 +17,27 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Generated prose becomes reviewed project knowledge through the normal ownership process. A summary is a navigation aid; its citations must lead back to underlying evidence."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Requirements and evidence, Architecture and impact, Observe and improve. These links are recommendations based on the guide content, not required product or process choices.",
+        "A reviewed document record links its exact source locations, content version, owner and last factual verification date.",
+        "A comparison note lists any conflict between the document and accepted implementation, with the decision owner and resolution status.",
+        "The intended reader can open the cited evidence. Publication or change history alone is not recorded as factual approval.",
+        "Only the added source contribution was fact checked in this pass. Earlier statements retain their original basis and confidence. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Confluence Cloud documents a change history macro that displays version number, author, date and comment for page or live document updates. That history can identify which document version was examined, but it does not establish factual review or approval. Checked against the linked primary source on 2026-10-15. This review covers this contribution only."
     }
   ],
-  "refs": [],
+  "refs": [
+    "confluence-change-history"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -34,12 +52,20 @@
       "decision records",
       "stale references"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Confluence example when reviewed decisions, requirements, runbooks and explanations live in Confluence and you want automation to draft or check documentation from accepted changes. Generated prose becomes project knowledge only through the normal ownership process.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Confluence Cloud documents a change history macro that displays version number, author, date and comment for page or live document updates. That history can identify which document version was examined, but it does not establish factual review or approval.",
+        "sourceRefs": [
+          "confluence-change-history"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
@@ -49,6 +75,13 @@
     "scope": {
       "generality": "example",
       "context": "atlassian-jenkins"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "architecture",
+        "operations"
+      ]
     }
   }
 }

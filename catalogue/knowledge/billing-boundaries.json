@@ -22,6 +22,20 @@
       "type": "p",
       "label": "Production model access",
       "text": "A documented SDK server-to-server route exists. Check organization enablement, permissions, runtime support and billing attribution; IDE access does not establish this organization's eligibility."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Identify the paying accounts and available allowances when defining the proposed outcome, plan a bounded usage sample, then reconcile consumption during Observe and improve. Existing credit conversions, pooling, Rovo rules and production access statements were not reaudited in this gap review. Refresh the official billing pages and actual tenant settings before relying on them."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A dated cost boundary sheet identifies each provider, billing entity, unit, allowance and report used.",
+        "A sample run ledger reconciles measured usage with the relevant account reports and marks unavailable attribution explicitly.",
+        "The estimate records applicable rates, exclusions and refresh date, with forecasts separated from actual charges."
+      ]
     }
   ],
   "refs": [
@@ -44,7 +58,7 @@
       "billing attribution",
       "server to server"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Copilot example when a workflow spans Copilot and Rovo and can consume more than one allowance, such as pooled Copilot Business credits and Rovo credits for Teamwork Graph context. Read measured reports from each system and do not equate an Atlassian API token, a model token and an AI credit.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -59,6 +73,13 @@
     "scope": {
       "generality": "example",
       "context": "copilot"
+    },
+    "applies": {
+      "stages": [
+        "feasibility-scope",
+        "experiment-plan",
+        "operations"
+      ]
     }
   }
 }

@@ -84,6 +84,16 @@
       "type": "p",
       "label": "What Atlas changes",
       "text": "Selecting Spring Boot adds endpoint, test layer, access and transaction questions to generated skill references. It does not create a controller, security configuration, database connection or executable service."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Architecture and impact, Development, Tests and review. Use when an affected Spring Boot endpoint or persistence behavior needs an interface decision, implementation change and boundary-specific verification. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Record the actual Boot, Framework and dependency releases, endpoint stack and security or transaction configuration.",
+        "Check output to obtain: Observe malformed-input and denied-save behavior independently through the intended application boundary.",
+        "Check output to obtain: Identify whether each test uses a mock or running server, how data is cleaned up and which database or transaction failure paths remain unrun."
+      ]
     }
   ],
   "refs": [
@@ -112,7 +122,7 @@
       "mockmvc",
       "spring service"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when an actual Spring Boot component exposes or changes an API or persistence behavior. Confirm the version, stack and configuration before applying the documented details.",
     "limits": "Use actual project versions, approved interfaces and repository configuration. The procedure and expected examples do not establish configured access, runtime enforcement, compatibility or passing evidence.",
     "sourceStatus": "reviewed",
@@ -172,6 +182,11 @@
     "applies": {
       "technologies": [
         "spring-boot"
+      ],
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification"
       ]
     },
     "scope": {

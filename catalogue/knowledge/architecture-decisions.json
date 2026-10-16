@@ -33,9 +33,26 @@
       "type": "p",
       "label": "Useful result",
       "text": "A decision record and component or interface sketch that another developer can explain and challenge. A list of fashionable tools is not enough to establish architectural fit."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Use the existing architecture mapping to make the selected design and its confirmation reviewable.",
+        "Record the chosen option, rejected alternatives, owner and unresolved constraints.",
+        "Link each material design claim to repository evidence or an explicitly proposed assumption.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "The MADR template records context, considered options, a decision and consequences, with an optional confirmation section for checking the decision. This scoped source fact was checked on 15 October 2026. The guide's broader workflow and examples remain Atlas proposals, not demonstrated outcomes."
     }
   ],
-  "refs": [],
+  "refs": [
+    "repo-madr"
+  ],
   "basis": "Proposed practice",
   "confidence": "Moderate. Project constraints require investigation",
   "catalog": {
@@ -51,15 +68,25 @@
       "compare approaches",
       "interface sketch"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a design choice must be made from agreed behavior, existing systems and evidence, and someone needs to accept it. Record the selected approach, its reasons, the alternatives, the owner and the unresolved questions.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "The MADR template records context, considered options, a decision and consequences, with an optional confirmation section for checking the decision.",
+        "sourceRefs": [
+          "repo-madr"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended",
+        "documented"
       ],
       "confidenceLevel": "proposed"
     },

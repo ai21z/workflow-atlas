@@ -28,6 +28,16 @@
       "type": "p",
       "label": "What still needs work",
       "text": "Your team supplies the real interface, credentials, commands, fixtures and acceptance decisions. The downloaded instructions do not enforce these checks."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Development, Tests and review. Use when defining the read contract, implementing its validation boundary and recording observed normal and failure outcomes. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Produce a contract with required fields, accepted values, permitted data scope and resource limits.",
+        "Check output to obtain: Record results for normal, empty, invalid, denied and unavailable cases using the actual interface.",
+        "Check output to obtain: Keep the result validation and access decisions separate. A selected Atlas practice supplies written guidance, not an enforced connection or passing test."
+      ]
     }
   ],
   "refs": [
@@ -48,7 +58,7 @@
       "validated retrieval",
       "scope checks"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a workflow step reads existing information and you want written checks for the approved interface, expected results, permitted scope and the normal, empty, invalid and unavailable cases. Add retrieval checks selects this practice in a Factory project, your team still supplies the real interface, fixtures and acceptance decisions.",
     "limits": "This is design guidance. It does not connect to a service or prove that a result is correct.",
     "sourceStatus": "reviewed",
@@ -68,6 +78,13 @@
         "proposed"
       ],
       "confidenceLevel": "established"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "implementation",
+        "verification"
+      ]
     }
   }
 }

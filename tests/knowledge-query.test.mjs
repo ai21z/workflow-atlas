@@ -123,6 +123,46 @@ test('definitions explain their topics and recipes reach topic explanations thro
   assert.ok(bug.some(item => item.ref === 'topic:implementation-workflow'))
 })
 
+test('stage reading links do not select a named technology while explicit facts and reading requests still work', () => {
+  const topic = (id, title, kind, definitionRefs = []) => ({ id, title, summary: '', parent: 'reading', refs: [], sections: [], catalog: { kind, aliases: [], definitionRefs } })
+  const independent = createKnowledgeQuery({
+    nodes: [topic('language-guide', 'Fixture language', 'technology'), topic('neutral-guide', 'Neutral result checks', 'procedure')],
+    catalog: {
+      definitions: [{ ref: 'stage:verification', id: 'verification', type: 'stage', label: 'Verification' }, { ref: 'technology:fixture-language', id: 'fixture-language', type: 'technology', label: 'Fixture language' }, { ref: 'technology:unrelated', id: 'unrelated', type: 'technology', label: 'Unrelated technology' }],
+      edges: [
+        { from: 'stage:verification', type: 'applied-by', to: 'topic:language-guide', derived: true },
+        { from: 'stage:verification', type: 'applied-by', to: 'topic:neutral-guide', derived: true },
+        { from: 'topic:language-guide', type: 'applies-to', to: 'technology:fixture-language' },
+        { from: 'technology:fixture-language', type: 'applied-by', to: 'topic:language-guide', derived: true },
+        { from: 'technology:unrelated', type: 'works-with', to: 'technology:fixture-language' },
+      ],
+    },
+  })
+  assert.deepEqual(independent.propose({ stages: ['verification'] }).map(item => item.id), ['neutral-guide'])
+  assert.deepEqual(independent.propose({ technologies: ['unrelated'], stages: ['verification'] }).map(item => item.id), ['neutral-guide'])
+  assert.ok(independent.propose({ technologies: ['fixture-language'], stages: ['verification'] }).some(item => item.id === 'language-guide' && item.graphReasons.some(reason => reason.includes('technology Fixture language'))))
+  assert.ok(independent.propose({ brief: 'Fixture language', stages: ['verification'] }).some(item => item.id === 'language-guide' && item.reasons[0].includes('Your text mentions')))
+  assert.equal(independent.search('Fixture language')[0].id, 'language-guide')
+})
+
+test('canonical stage explanations win graph-only ties against generic applicable reading', () => {
+  const topic = (id, title) => ({ id, title, summary: '', parent: 'reading', refs: [], sections: [], catalog: { kind: 'procedure', definitionRefs: [] } })
+  const nodes = [topic('applicable', 'A general guide'), topic('canonical', 'Z canonical stage guide')]
+  for (const metadata of [true, false]) {
+    const independent = createKnowledgeQuery({ nodes, catalog: {
+      definitions: [{ ref: 'stage:verification', id: 'verification', type: 'stage', label: 'Verification', ...(metadata ? { explainedBy: 'canonical' } : {}) }],
+      edges: [
+        { from: 'stage:verification', type: 'applied-by', to: 'topic:applicable', derived: true },
+        { from: 'stage:verification', type: 'explained-by', to: 'topic:canonical' },
+      ],
+    } })
+    const reading = independent.propose({ stages: ['verification'] })
+    assert.equal(reading[0].id, 'canonical', `canonical ${metadata ? 'definition' : 'relationship'} takes precedence`)
+    assert.equal(reading[0].score, reading[1].score, 'the tie preference does not invent extra graph evidence')
+    assert.equal(independent.propose({ brief: 'A general guide', stages: ['verification'] })[0].id, 'applicable', 'specific reading intent still outranks a generic stage explanation')
+  }
+})
+
 test('repeated project facts cannot change rankings, scores or explanations', () => {
   const unique = { brief: 'Implement a scoped change and test it', technologies: ['nodejs', 'docker'], stages: ['implementation', 'verification'], recipe: 'feature-delivery' }
   const repeated = { ...unique, technologies: ['nodejs', 'docker', 'nodejs', 'docker'], stages: ['implementation', 'verification', 'implementation', 'verification'] }
@@ -157,7 +197,8 @@ test('API task relevance wins over generic recipe links with an auditable score'
   const results = query.propose({ brief: 'Fetch topics by subject from an approved API, validate the selection and save only after human approval.', technologies: ['java', 'spring-boot', 'postgresql'], recipe: 'feature-delivery', limit: 20 })
   assert.equal(results[0].id, 'api-stored-data')
   assert.ok(results[0].reasons[0].includes('“api”'))
-  assert.equal(results[0].scoreParts.workflow, 0, 'no broad API applicability is invented to improve rank')
+  assert.equal(results[0].scoreParts.workflow, 0.2, 'the reviewed step mapping contributes only the bounded workflow score')
+  assert.ok(data.nodes.find(node => node.id === 'api-stored-data').catalog.applies.stages.includes('verification'), 'workflow relevance has an explicit authored mapping')
   for (const item of results) {
     assert.ok(item.scoreParts.workflow <= 0.2)
     assert.ok(item.scoreParts.environment <= 0.4)

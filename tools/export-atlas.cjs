@@ -11,6 +11,6 @@ const modules={
 const safe=s=>s.replace(/<\/script/gi,'<\\/script');
 let html=read('index.html').replace('<link rel="stylesheet" href="styles.css">','<style>'+read('styles.css')+'</style>').replace('<link rel="stylesheet" href="map2d.css">','<style>'+read('map2d.css')+'</style>').replace(/<a data-factory-link[^>]*>.*?<\/a>/,'');
 html=html.replace(/<script type="importmap">.*?<\/script>/,'<script type="importmap">'+JSON.stringify({imports:modules})+'</script>');
-html=html.replace(/  <script defer src="(?:data|map2d|app)\.js"><\/script>\r?\n/g,'');
-html=html.replace('</body>','<!-- Three.js r180 and OrbitControls are bundled under the MIT license.\n'+read('vendor/THREE-LICENSE.txt')+'\n--><script>'+safe(read('data.js'))+'</script><script>'+safe(read('map2d.js'))+'</script><script>'+safe(read('app.js').replace("import('./graph.mjs')","import('atlas-graph')"))+'</script>\n</body>');
+html=html.replace(/  <script defer src="(?:data|knowledge-index|map2d|app)\.js"><\/script>\r?\n/g,'');
+html=html.replace('</body>','<!-- Three.js r180 and OrbitControls are bundled under the MIT license.\n'+read('vendor/THREE-LICENSE.txt')+'\n--><script>'+safe(read('data.js'))+'</script><script>'+safe(read('knowledge-index.js'))+'</script><script>'+safe(read('map2d.js'))+'</script><script>'+safe(read('app.js').replace("import('./graph.mjs')","import('atlas-graph')"))+'</script>\n</body>');
 const output=path.resolve(__dirname,'../exports/Workflow Atlas.html');fs.mkdirSync(path.dirname(output),{recursive:true});fs.writeFileSync(output,html);console.log(JSON.stringify({file:output,bytes:Buffer.byteLength(html)}));

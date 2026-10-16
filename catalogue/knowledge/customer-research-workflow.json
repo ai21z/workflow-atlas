@@ -1,0 +1,88 @@
+{
+  "id": "customer-research-workflow",
+  "title": "Research customer needs",
+  "summary": "Turn customer accounts and observed behavior into scoped findings, research gaps and proposed requirements.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "When to use",
+      "text": "Use during current process investigation, requirements or feasibility review when a decision depends on what a defined customer segment does, needs or finds difficult. Agree the research question before collecting more material."
+    },
+    {
+      "type": "p",
+      "label": "Inputs",
+      "text": "A decision to inform, a defined segment and time window, available interviews, support cases, surveys or public accounts, and any observed product usage. Keep source URLs or document identifiers, dates, participant or case identifiers, access limits and collection method. Record which evidence is firsthand, proxy evidence or supplied context."
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Write one research question and the decision it can change. Define who belongs to the segment, the time window and which missing evidence would block a recommendation.",
+        "Inventory existing material. Choose assets, public accounts or new interviews to address specific gaps. Record unavailable sources and recruitment or platform bias. Do not count a blocked page, search excerpt or copied account as a complete independent interview.",
+        "Create one evidence record per participant or case. Capture the task, trigger, current workaround, desired outcome and alternatives. Separate stated preferences from observed behavior. Preserve exact source locations and label paraphrases.",
+        "Group observations into candidate themes. Count supporting and contradicting cases within each segment with the denominator visible. Deduplicate reposts and repeated comments by the same case before counting.",
+        "Challenge each theme using negative cases, competing explanations and available behavior data. Keep segment differences visible. A repeated complaint can identify a research question without establishing its population prevalence.",
+        "Translate supported findings into proposed requirements or further research. Link each proposal to evidence, expected benefit, uncertainty and an acceptance scenario. Identify who can accept the scope and which finding would reverse it."
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Optional reference examples",
+      "headers": ["Reference", "Useful steps", "Contribution and check"],
+      "rows": [
+        ["Marketing Skills, Customer Research", "2 to 4", "Extraction prompts for tasks, pains, triggers and alternatives. Check the original account before accepting a quote or inferred profile."],
+        ["Knowledge Work Plugins, Synthesize Research", "3 to 6", "A structure for attributed findings, contradictions, confidence and recommendations. Check that a proposed requirement remains distinct from the underlying observation."]
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Source contribution",
+      "text": "Marketing Skills' Customer Research procedure distinguishes analysis of existing assets, public signal and primary research, and includes theme, segment and sample bias checks. Knowledge Work Plugins' Synthesize Research procedure separates observations from findings and asks for attributed evidence, frequency, impact, confidence and open questions. These are documented procedure contents, not evidence that either repository improves research outcomes."
+    },
+    {
+      "type": "p",
+      "label": "Outputs",
+      "text": "An evidence ledger, scoped theme synthesis with denominators and counterexamples, proposed requirements or research actions, and a gap register. Each recommendation names its segment, supporting evidence, confidence and acceptance scenario."
+    },
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "A reviewer can trace every material finding to original passages or observed records and can distinguish quotes, paraphrases and inferences.",
+        "Counts use independent cases with an explicit denominator. Access gaps, missing segments and sampling limits remain visible.",
+        "Conflicting accounts and evidence against the proposed requirement are retained. No persona, customer profile or population percentage is invented.",
+        "Requirements remain proposed until accepted by the responsible owner. The procedure records actual checks performed and checks still pending."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Illustrative worked example, not run",
+      "text": "Suppose six independent support cases from first time administrators contain four accounts of losing setup progress and two unrelated access problems. The synthesis records four of six sampled cases, links their passages and proposes investigating save and resume behavior. It does not claim that two thirds of all administrators need that feature. A proposed scenario asks whether an interrupted administrator can resume the agreed setup state. These fictional records and checks have not been collected or executed."
+    },
+    {
+      "type": "p",
+      "label": "Failure and uncertainty",
+      "text": "If sources are inaccessible, duplicates cannot be resolved or the target segment is missing, report insufficient evidence and specify the next collection step. If public sentiment and observed usage disagree, report both and investigate their populations and definitions. Do not convert a sparse qualitative sample into a universal ranking."
+    }
+  ],
+  "refs": ["repo-marketingskills", "repo-knowledge-research"],
+  "basis": "Inspected primary procedure contents with a proposed Atlas adaptation and an unrun fictional example",
+  "confidence": "High for the inspected source contents. Moderate for the proposed procedure. Comparative effectiveness is unknown.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": ["workflow-design", "requirements", "knowledge"],
+    "aliases": ["customer research", "voice of customer", "user interviews", "research synthesis", "Marketing Skills", "Knowledge Work Plugins"],
+    "revision": "1",
+    "applicability": "Use at current process, requirements and feasibility steps when customer evidence can change the scope or recommendation. Choose references that fit the evidence actually available.",
+    "limits": "This proposed reading procedure does not select a skill, install a repository, configure a connector, collect customer data or establish an executed result. Source review verifies the scoped documentation claims, not repository superiority or the effectiveness of this adaptation.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {"sectionLabel": "Source contribution", "text": "Customer Research distinguishes existing assets, public signal and primary research and includes thematic, segment and sample bias checks.", "sourceRefs": ["repo-marketingskills"]},
+      {"sectionLabel": "Source contribution", "text": "Synthesize Research separates observations from findings and asks for attributed evidence, frequency, impact, confidence and open questions.", "sourceRefs": ["repo-knowledge-research"]}
+    ],
+    "evidence": {"basisKinds": ["inspected", "proposed", "illustrative"], "confidenceLevel": "proposed"},
+    "applies": {"stages": ["current-process", "requirements", "feasibility-scope"]},
+    "scope": {"generality": "general"}
+  }
+}

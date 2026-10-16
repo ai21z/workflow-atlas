@@ -22,9 +22,26 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Grouping has an evaluated downstream purpose and preserves jurisdiction, time, and scheme distinctions. Similar wording does not establish interchangeable statutory meaning."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Assess bounded pair or category judgments as one optional part of a defined grouping experiment.",
+        "Retain neighboring but non-equivalent concepts and none-of-these cases.",
+        "Compare downstream grouping errors against a reviewed baseline without treating similar wording as shared scope.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "TypeSafe documents weaknesses in Jev 1.13, including numeric and date tasks, misleading context and complex reasoning. This scoped source fact was checked on 15 October 2026. The guide's broader workflow and examples remain Atlas proposals, not demonstrated outcomes."
     }
   ],
-  "refs": [],
+  "refs": [
+    "jevlimits"
+  ],
   "basis": "Proposed exploration",
   "confidence": "Unknown",
   "catalog": {
@@ -39,21 +56,37 @@
       "grouping",
       "candidate pairs"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Jev example when you are deciding whether to group duplicate candidate assertions, reconcile terminology across sources or group source changes. Define the objective first, since Jev judges bounded candidate pairs or categories and is not a general embedding or clustering engine.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "TypeSafe documents weaknesses in Jev 1.13, including numeric and date tasks, misleading context and complex reasoning.",
+        "sourceRefs": [
+          "jevlimits"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended",
+        "documented"
       ],
-      "confidenceLevel": "speculative"
+      "confidenceLevel": "proposed"
     },
     "scope": {
       "generality": "example",
       "context": "jev-typesafe"
+    },
+    "applies": {
+      "stages": [
+        "options",
+        "experiment-plan"
+      ]
     }
   }
 }

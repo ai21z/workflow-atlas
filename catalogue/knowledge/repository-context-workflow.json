@@ -1,0 +1,107 @@
+{
+  "id": "repository-context-workflow",
+  "title": "Prepare repository context",
+  "summary": "Give an investigation or implementation step a bounded code snapshot with its revision, coverage and gaps.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use and inputs",
+      "text": "Use before architecture review, implementation, diagnosis or bug review when another person or agent needs repository context. Start with the question, repository revision, relevant working changes, candidate entry points, tests and configuration, and the recipient's context limit. If the repository or affected behavior is unknown, record that gap before preparing a snapshot."
+    },
+    {
+      "type": "p",
+      "label": "Repository option",
+      "text": "The reviewed Repomix README documents repository packing, file and total token counts, configurable inclusion and exclusion, and respect for .gitignore, .ignore and .repomixignore. These capabilities can prepare a selected context package. They do not establish that its contents are sufficient to answer the question."
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "State the question and what the recipient must decide or produce. Identify the behavior and constraints that must survive the handoff.",
+        "Record the repository URL or local identity, commit, working changes and time of collection. A commit alone does not identify uncommitted inputs.",
+        "Locate the relevant implementation, callers, interfaces, configuration and tests. Record why each belongs in the context and which dependencies remain outside it.",
+        "Choose direct file reading when the scope is small. If a packed snapshot helps, use Repomix or an equivalent existing tool with explicit inclusion, exclusion and output settings.",
+        "Inspect the file inventory and generated content. Check expected files, omitted files, generated or binary material, duplication, and content that should not be shared with the recipient.",
+        "Compare the package size with the recipient's limit. If reducing or compressing content, record what was removed and retain access to complete source for unresolved code paths.",
+        "Attach a brief with the question, revision, included scope, exclusions, source anchors, known gaps and next checks. Refresh the context when relevant source changes."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Outputs",
+      "text": "A context package or file list, a revision and working-change record, an inclusion and exclusion inventory, and a handoff brief that separates inspected behavior, inferred behavior and unanswered questions."
+    },
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "A recipient can retrieve the cited source at the recorded revision and identify any working changes used.",
+        "The package contains the relevant entry point, at least the affected path's dependencies and applicable tests, or names each missing input and its effect on the investigation.",
+        "An inspected sample of the package matches the original files. Compression, truncation and exclusions remain visible and are not mistaken for complete coverage.",
+        "The package fits the receiving context, and excluded or inappropriate content has been reviewed. A token count or automatic secret scan alone is not an acceptance result.",
+        "A missing repository, unreadable file, packaging error or unknown revision is recorded as blocked or incomplete. An empty snapshot cannot count as a completed handoff."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Illustrative example, not run",
+      "text": "For an investigation of a duplicate notification, a proposed package contains the event handler, retry configuration, notification adapter and relevant tests. Its brief records the selected commit, notes that production delivery logs are missing, and asks the recipient to distinguish duplicate handler calls from duplicate provider delivery. No package has been generated or behavior verified in this example."
+    },
+    {
+      "type": "p",
+      "label": "Limits",
+      "text": "This Atlas procedure is recommended guidance, not a benchmarked improvement or a guarantee of complete context. Repomix is an optional reference. Reading this topic does not install it, connect a repository, run a packer or add a selectable skill to the exported workflow."
+    }
+  ],
+  "refs": [
+    "repo-repomix"
+  ],
+  "basis": "Inspected upstream documentation and recommended Atlas procedure",
+  "confidence": "High for the scoped documented capabilities. Moderate for the procedure's suitability, which needs project evidence.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "engineering-tools",
+      "knowledge"
+    ],
+    "aliases": [
+      "Repomix",
+      "repository snapshot",
+      "code context",
+      "context package",
+      "repository handoff",
+      "include and exclude"
+    ],
+    "revision": "1",
+    "applicability": "Use during architecture, implementation, diagnosis or bug review when a bounded repository snapshot or file list helps the next person or agent inspect actual source.",
+    "limits": "Source review establishes the documented packing options only. The procedure is recommended and its example is unrun. Atlas does not package repositories or configure the optional tool.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Repository option",
+        "text": "Repomix documents repository packing, file and total token counts, configurable inclusion and exclusion, and respect for .gitignore, .ignore and .repomixignore.",
+        "sourceRefs": [
+          "repo-repomix"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "inspected",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "implementation",
+        "diagnosis",
+        "bug-review"
+      ]
+    }
+  }
+}

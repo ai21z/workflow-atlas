@@ -17,6 +17,16 @@
       "type": "p",
       "label": "Check in your environment",
       "text": "Confirm the actual version, supported interface, permissions, data model and expected query results. Compare alternatives using your constraints."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Architecture and impact, Development, Tests and review. Use for an affected Neptune RDF interface when choosing the query boundary, implementing that boundary and verifying engine-specific results. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Record the actual engine version, approved endpoint, caller scope and intended graph dataset in the interface decision.",
+        "Check output to obtain: Compare a permitted fixture and a named-graph boundary fixture with their expected bindings using the application identity.",
+        "Check output to obtain: Preserve observed query output and any blocked permission or environment check separately from planned expectations."
+      ]
     }
   ],
   "refs": [
@@ -36,7 +46,7 @@
       "rdf database",
       "managed graph database"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this technology example when your data is RDF and you query it with SPARQL in a managed graph database. Confirm the actual version, supported interface, permissions and engine specific behavior before relying on it.",
     "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
     "sourceStatus": "reviewed",
@@ -60,6 +70,11 @@
     "applies": {
       "technologies": [
         "neptune"
+      ],
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification"
       ]
     }
   }

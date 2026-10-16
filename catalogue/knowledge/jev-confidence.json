@@ -17,6 +17,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Routing thresholds achieve acceptable measured missed-error/false-alarm behavior. Two agreeing models remain two judgments, not independent source evidence."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Evaluate confidence thresholds on the exact primitive, language and task before using them for routing.",
+        "Compare threshold decisions with independently reviewed labels.",
+        "Report missed errors and false alarms by language and difficult case subset.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -37,7 +47,7 @@
       "noul",
       "routing thresholds"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Jev example when you set or interpret Choice and Score confidence thresholds for routing. Evaluate calibration over relevant examples instead of treating one confidence value as a certificate attached to one result.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -46,13 +56,21 @@
     "evidence": {
       "basisKinds": [
         "documented",
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
     },
     "scope": {
       "generality": "example",
       "context": "jev-typesafe"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan",
+        "verification",
+        "recommendation"
+      ]
     }
   }
 }

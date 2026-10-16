@@ -17,6 +17,16 @@
       "type": "p",
       "label": "Check in your environment",
       "text": "Confirm the actual version, supported interface, permissions, data model and expected query results. Compare alternatives using your constraints."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Architecture and impact, Development, Tests and review. Use when an affected application reads or updates RDF through Fuseki and its actual server and dataset configuration must be understood. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Record the installed release, dataset, configured query or update endpoint and application identity.",
+        "Check output to obtain: Obtain expected bindings for a bounded permitted query and observed rejection for a disallowed operation.",
+        "Check output to obtain: Keep transport success, query correctness and authorization results separate in the verification record."
+      ]
     }
   ],
   "refs": [
@@ -36,7 +46,7 @@
       "sparql server",
       "sparql update"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this technology example when you need a SPARQL server for RDF data that runs on its own or inside an application. Select RDF or SPARQL as well in Atlas when their review questions apply, Atlas does not install or configure the server.",
     "limits": "Catalogue inclusion is not a recommendation, configured access or verified compatibility.",
     "sourceStatus": "reviewed",
@@ -60,6 +70,11 @@
     "applies": {
       "technologies": [
         "jena-fuseki"
+      ],
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification"
       ]
     }
   }

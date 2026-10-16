@@ -23,9 +23,26 @@
       "type": "p",
       "label": "Verification",
       "text": "Check the whole semantic path, not only that a valid date and label are present."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Tests and review, Verify the repair. Use this fictional scoped-data scenario to draft acceptance examples and exercise the same semantic boundary after an implementation or repair. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Prepare an explicitly fictional fixture with a regional assertion, its effective period and a separate unknown-scope case.",
+        "Check output to obtain: Record expected and observed matching-region, other-region and missing-scope results across the semantic path.",
+        "Check output to obtain: Preserve a regression case for qualifier loss. No real holiday, law or project data is established by this example."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Reviewed on 2026-10-15: Wikidata documents qualifiers that constrain a value’s application or validity. The citation supports qualifier mechanics only. This holiday, its regional meaning, the fixture and every test result remain illustrative and unverified. Only this added factual contribution was checked in this review. Earlier sections retain their stated proposed or illustrative basis."
     }
   ],
-  "refs": [],
+  "refs": [
+    "wikidata-qualifiers"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -41,15 +58,24 @@
       "semantic path",
       "hypothetical requirement"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this country-data example when you want hypothetical acceptance scenarios that check a regional scope survives source ingestion, RDF storage, API output and frontend presentation. It illustrates the method and is not a finding about your data.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Wikidata documents qualifiers that constrain a value’s application or validity.",
+        "sourceRefs": [
+          "wikidata-qualifiers"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "documented"
       ],
       "confidenceLevel": "proposed"
     },
@@ -59,7 +85,9 @@
     },
     "applies": {
       "stages": [
-        "requirements"
+        "requirements",
+        "verification",
+        "regression"
       ]
     }
   }

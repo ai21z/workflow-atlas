@@ -21,7 +21,7 @@ const report = {
   limits: 'Functional browser simulation, not a human comprehension study, live model quality evaluation, screen reader audit or real touch device test. Synthetic request timing is not JEV performance.',
   checks: [], errors: [], downloads: [], requests: [], providerRequests: [], storageWrites: [],
 }
-let browser, context, page, server, base, contract, unzipTextFiles
+let browser, context, page, server, base, contract, unzipTextFiles, projection, sourceLine
 let mode = 'relevant', keyAvailable = true, received = 0, clockOffset = 0, releaseSlow = null
 
 function mockPayload(request, outcome) {
@@ -168,6 +168,8 @@ async function main() {
   await fs.mkdir(output, { recursive: true })
   contract = await import(pathToFileURL(path.join(root, 'factory/jev-contract.mjs')).href)
   ;({ unzipTextFiles } = await import(pathToFileURL(path.join(root, 'factory/zip.mjs')).href))
+  ;({ sourceLine } = await import(pathToFileURL(path.join(root, 'factory/knowledge-query.mjs')).href))
+  projection = await (await import(pathToFileURL(path.join(root, 'tools/atlas-query.mjs')).href)).loadProjection(root)
   const { createAtlasServer } = await import(pathToFileURL(path.join(root, 'tools/serve.mjs')).href)
   server = await createAtlasServer({ rootDir: root, getApiKey: () => keyAvailable ? 'synthetic-local-trial-key' : '', transport: provider, now: () => performance.now() + clockOffset })
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
@@ -192,7 +194,12 @@ async function main() {
       assert.ok(reasons.every(reason => reason.startsWith('Your text ') && reason.endsWith('.')), 'Each visible reason is a sentence tied to the supplied text')
       assert.match(await page.locator('[data-practice-suggestion="minimum-change"] .brief-idea-reason').innerText(), /software change|smallest necessary change/u, 'The minimum-change reason explains this software task')
       assert.match(await page.locator('[data-practice-suggestion="specification-first"] .brief-idea-reason').innerText(), /requirements/u, 'The requirements reason explains the selected practice')
-      assert.equal(await page.locator('[data-practice-suggestion="specification-first"] .brief-idea-source').innerText(), 'No sources recorded. No claim review recorded.', 'A topic with no sources must not claim retained references')
+      // Expect the recorded status of the topic behind the practice, so a later source review does not stale this check.
+      const specificationTopic = await page.locator('[data-practice-suggestion="specification-first"] [data-review-idea]').getAttribute('data-review-idea')
+      const specificationNode = projection.nodes.find(node => node.id === specificationTopic)
+      assert.equal(await page.locator('[data-practice-suggestion="specification-first"] .brief-idea-source').innerText(), sourceLine({ ...specificationNode.catalog, sourceRefs: specificationNode.refs }), 'The source line repeats the recorded review status of the practice topic')
+      const sourceLines = await page.locator('#brief-suggestions .brief-idea-source').allTextContents()
+      assert.ok(sourceLines.every(line => !/without claim review, 0 sources/u.test(line)), 'A topic with no sources must not claim retained references')
       assert.equal(received, 0)
       return { count, titles: await page.locator('#brief-suggestions h3').allTextContents(), reasons, providerRequests: received }
     })

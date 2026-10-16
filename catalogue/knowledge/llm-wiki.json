@@ -27,6 +27,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The wiki helps locate and explain knowledge while authoritative source material and approval remain identifiable."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Architecture and impact, Observe and improve. Use when deciding whether maintained derived pages aid navigation and when refreshing or correcting those pages after their original evidence changes. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Produce a page inventory with original anchors, source revisions, owner, review state and last verification date.",
+        "Check output to obtain: Follow a sampled page through every derived citation until an original source or reviewed decision is reached.",
+        "Check output to obtain: Record a stale-source or conflicting-source update and expose remaining uncertainty. The idea file does not establish a deployed service or successful result."
+      ]
     }
   ],
   "refs": [
@@ -47,7 +57,7 @@
       "generated summaries",
       "review status"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when generated summary pages or an LLM maintained wiki help people navigate knowledge. Keep source anchors, owner, review status and verification date visible, and follow links back to original evidence rather than letting one generated page establish a fact by citing another.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -58,6 +68,12 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "operations"
+      ]
     }
   }
 }

@@ -48,6 +48,17 @@
       "type": "p",
       "label": "What Atlas changes",
       "text": "Selecting Vitest adds environment, discovery, fixtures and completed run questions to generated skill references. Atlas does not add a dependency, create test configuration or declare the test result."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Development, Tests and review, Verify the repair. These links are recommendations based on the guide content, not required product or process choices.",
+        "A test plan names the installed Vitest version, configuration, discovery, environment and actual completion command.",
+        "A small fixture records expected valid, empty and agreed invalid input behavior. Mocks state the simulated contract.",
+        "The run evidence names discovered tests, observed results and candidate revision, with browser and real integration checks listed separately. An unrun example remains illustrative.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -71,7 +82,7 @@
       "browser mode",
       "fixtures"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use for focused checks in a project that uses Vitest, after confirming the installed version, discovery and environment.",
     "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
     "sourceStatus": "reviewed",
@@ -110,6 +121,11 @@
     "applies": {
       "technologies": [
         "vitest"
+      ],
+      "stages": [
+        "implementation",
+        "verification",
+        "regression"
       ]
     },
     "scope": {

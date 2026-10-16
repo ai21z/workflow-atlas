@@ -1,0 +1,134 @@
+{
+  "id": "openspec-change-specifications",
+  "title": "Maintain scoped change specifications",
+  "summary": "Describe a behavior delta, implement against reviewed scenarios and merge accepted changes into maintained specifications.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this workflow",
+      "text": "Use when a scoped change to an existing system needs reviewable behavior requirements and an accepted specification that stays current. OpenSpec is one optional implementation of this process. Spec Kit also supports existing projects. Choose by the actual task and artifact needs."
+    },
+    {
+      "type": "list",
+      "label": "Inputs",
+      "items": [
+        "Affected source and tests, current behavior and existing specifications.",
+        "Change objective, constraints and authority to accept the result.",
+        "Actual project check commands and relevant scenarios."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Repository contributions",
+      "text": "OpenSpec documents beginning with the touched slice of an existing system and using ADDED, MODIFIED, REMOVED or RENAMED behavior deltas. Its verify-change procedure separately reviews completeness, correctness and coherence."
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Inspect current code, tests and specifications for the affected slice. Keep observations separate from assumptions.",
+        "Create one scoped proposal with the intended behavior and relevant capability names.",
+        "Write the behavior delta and concrete scenarios. Retain complete affected requirement blocks when modifying them.",
+        "Record design decisions where needed and tasks with their verification commands. Resolve questions that change the approach.",
+        "Validate the artifact structure using the actual installed version. Artifact completion and checked task boxes do not establish implementation correctness.",
+        "Implement the reviewed tasks, preserve unrelated behavior, and run the relevant behavior checks. Map each requirement to code and evidence.",
+        "Review acceptance separately from structural validation. Mark unavailable or unrun checks explicitly.",
+        "After acceptance, archive the change, inspect the merged maintained specifications and validate the resulting spec and task records."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Outputs",
+      "text": "A scoped proposal, behavior delta, relevant design and tasks, observed verification evidence and reviewed maintained specifications."
+    },
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "Scenarios describe observable behavior and cover the affected boundaries.",
+        "Strict specification validation is recorded separately from actual behavior-test results.",
+        "Required behavior has code and evidence, including failures and unverified checks.",
+        "The merged specification matches accepted behavior after archive."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Illustrative example",
+      "text": "An existing list gains an optional status filter while preserving its default behavior. Specify the all-items and filtered cases, test them against the existing implementation, make the change and inspect the merged requirements. This is an illustrative workflow, not evidence that an Atlas user project has passed."
+    },
+    {
+      "type": "p",
+      "label": "Choice and limits",
+      "text": "OpenSpec is a candidate when maintained behavior deltas suit the project. Compare it with the current process and Spec Kit on the same scoped change. This guide does not establish universal superiority, create an installable OpenSpec pack or configure an agent integration."
+    }
+  ],
+  "refs": [
+    "repo-openspec",
+    "repo-openspec-existing-projects",
+    "repo-openspec-schema",
+    "repo-openspec-verify",
+    "repo-spec-kit-current"
+  ],
+  "basis": "Inspected repository documentation and recommended Atlas procedure. Examples are illustrative.",
+  "confidence": "Moderate for the scoped source contributions. Project fit and workflow outcomes remain unverified.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "workflow-design",
+      "requirements",
+      "verification"
+    ],
+    "aliases": [
+      "OpenSpec",
+      "change proposals",
+      "delta specifications",
+      "ADDED MODIFIED REMOVED",
+      "specification archive"
+    ],
+    "revision": "1",
+    "applicability": "Describe a behavior delta, implement against reviewed scenarios and merge accepted changes into maintained specifications.",
+    "limits": "Reading guidance does not install a repository, select a tool, execute a workflow or establish a passing result. Use actual project versions, commands and evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Repository contributions",
+        "text": "OpenSpec documents beginning with the touched slice of an existing system and using behavior deltas.",
+        "sourceRefs": [
+          "repo-openspec-existing-projects",
+          "repo-openspec-schema"
+        ]
+      },
+      {
+        "sectionLabel": "Repository contributions",
+        "text": "OpenSpec verify-change separately reviews completeness, correctness and coherence.",
+        "sourceRefs": [
+          "repo-openspec-verify"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "architecture",
+        "breakdown",
+        "implementation",
+        "verification",
+        "bug-fix",
+        "regression",
+        "bug-review"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

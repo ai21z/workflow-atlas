@@ -33,9 +33,26 @@
       "type": "p",
       "label": "Limits",
       "text": "This is an illustrative design. No endpoint, test result, company policy or database schema has been verified. A model or MCP server is optional and requires its own justification."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Architecture and impact, Tests and review. Use this fictional subject-selection scenario to draft retrieval outcomes, choose the approved operation and plan meaningful result checks. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Name the real interface and caller scope when adapting the example. Until supplied, leave them unresolved.",
+        "Check output to obtain: Prepare separate expected fixtures for the two permitted topics, an empty result, malformed selection, denied access and service failure.",
+        "Check output to obtain: Record actual results only after running the supplied project checks. The illustrative endpoint, schema and test outcome are not verified."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Reviewed on 2026-10-15: OWASP separates syntax and semantic validation from authorization. This supports the validation boundary only. The subject-selection request, two-topic fixture and proposed procedure remain illustrative and have not been run against an application. Only this added factual contribution was checked in this review. Earlier sections retain their stated proposed or illustrative basis."
     }
   ],
-  "refs": [],
+  "refs": [
+    "input-validation"
+  ],
   "basis": "Illustrative example",
   "confidence": "Documented facts have scoped sources. Suitability for a particular project remains unverified.",
   "catalog": {
@@ -50,17 +67,33 @@
       "matching topics",
       "worked example"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this fictional example to see how a retrieval request becomes validated input, a call to an approved operation, a checked result and recorded acceptance examples. It illustrates the design only, no endpoint, test result, policy or schema has been verified.",
     "limits": "Fictional example, not evidence of a working integration.",
-    "sourceStatus": "needs-review",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "OWASP separates syntax and semantic validation from authorization.",
+        "sourceRefs": [
+          "input-validation"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
-        "illustrative"
+        "illustrative",
+        "documented"
       ],
       "confidenceLevel": "established"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "architecture",
+        "verification"
+      ]
     }
   }
 }

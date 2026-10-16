@@ -49,6 +49,16 @@
       "type": "p",
       "label": "Forecast",
       "text": "Use volume assumptions and ranges that show what changes the recommendation. Measurements and estimates can coexist. A cheaper model helps only when total accepted-outcome evidence supports it."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Compare complete accepted-artifact cost with the measured baseline and explicitly labeled demand assumptions.",
+        "Count failed and repaired attempts in cost while counting each accepted artifact once.",
+        "Report zero accepted outcomes without division and keep engineer minutes distinct from currency.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -73,7 +83,7 @@
       "cost forecast",
       "repair cost"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this when a study must compare the cost of a proposed automated process with the existing one. Count every attempt, validation, review and repair in the cost, count an accepted artifact once, and label measured results separately from estimates.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -93,6 +103,11 @@
     "applies": {
       "recipes": [
         "feasibility"
+      ],
+      "stages": [
+        "current-process",
+        "options",
+        "recommendation"
       ]
     }
   }

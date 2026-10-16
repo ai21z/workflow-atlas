@@ -1,0 +1,56 @@
+{
+  "id": "decision-record-workflow",
+  "title": "Record and confirm a decision",
+  "summary": "Compare options, preserve the reason for a choice and define how its implementation will be confirmed.",
+  "sections": [
+    {"type": "p", "label": "When to use", "text": "Use during architecture, options comparison or recommendation when a consequential choice needs a durable rationale. Keep a short record for a small decision and add detail where tradeoffs or uncertainty warrant it."},
+    {"type": "p", "label": "Inputs", "text": "The problem and scope, decision owner, constraints and decision drivers, feasible options including the current approach where relevant, source evidence and unresolved questions. Record the system or document revisions the decision relies on."},
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Create a proposed record with a stable identifier, date, decision owner and explicit scope. State the question and what is outside the decision.",
+        "List the decision drivers and any hard constraints. Mark each as an accepted requirement, measured observation, assumption or unresolved choice and attach its supporting source.",
+        "Compare feasible options against the same drivers. Record meaningful advantages, disadvantages and operational consequences, including migration, recovery and ongoing ownership where relevant.",
+        "Investigate uncertainties that could reverse the choice. Record experiment or review evidence and distinguish measured results from estimates. If essential evidence is missing, keep the record proposed.",
+        "Write the selected option, rationale, negative consequences and remaining questions. Obtain acceptance from the responsible owner under the project's established process and record the status accurately.",
+        "Define confirmation before implementation closes. Link checks to the decision drivers, name the responsible actor and record observed results or pending checks. Revisit on a stated trigger and link any superseding decision."
+      ]
+    },
+    {"type": "p", "label": "Optional reference example", "text": "MADR is a format reference for steps 1, 3, 5 and 6. Use its context, options, outcome, consequences and confirmation prompts if they fit the project. The format does not choose an architecture, accept a decision or verify an implementation."},
+    {"type": "p", "label": "Source contribution", "text": "The inspected MADR template includes context and problem statement, considered options and decision outcome, with optional decision drivers, consequences, confirmation and status metadata. Its confirmation prompt asks how implementation or compliance can be checked. Atlas recommends making that confirmation explicit for consequential choices. That recommendation is an adaptation rather than a requirement imposed by the template."},
+    {"type": "p", "label": "Outputs", "text": "A decision record with scope, drivers, source links, options, chosen outcome, rationale, consequences, status, owner and confirmation plan. Accepted decisions connect to affected work items. Unresolved choices and later superseding records remain linked."},
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "A reviewer can explain why the chosen option fits the stated drivers and why the main alternatives were not chosen.",
+        "Accepted requirements and observed results have evidence. Assumptions, estimates and unanswered questions remain labeled.",
+        "Status and decision owner reflect an actual decision process. A complete template is not treated as acceptance.",
+        "Confirmation states what will be inspected or executed and what outcome would contradict the decision. Pending checks are distinct from observed passing results."
+      ]
+    },
+    {"type": "p", "label": "Illustrative worked example, not run", "text": "A fictional team compares extending an existing export endpoint with introducing a queued export job. A proposed record lists request duration, user feedback and failure recovery as drivers, then notes missing evidence about large exports. A timing experiment and recovery scenario are planned before acceptance. No option is declared superior until the team's actual constraints and results support it. The decision and checks in this example have not been run."},
+    {"type": "p", "label": "Failure and uncertainty", "text": "If drivers conflict, evidence is missing or the decision owner has not accepted the outcome, retain a proposed status and name the unresolved choice. If confirmation fails, record the result and decide whether to correct the implementation or supersede the decision. Preserve the earlier rationale so later readers can understand the change."}
+  ],
+  "refs": ["repo-madr"],
+  "basis": "Inspected primary decision record template with a proposed Atlas adaptation and an unrun fictional example",
+  "confidence": "High for the inspected template contents. Moderate for adaptation to a project's decision process.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": ["workflow-design", "knowledge", "verification"],
+    "aliases": ["decision record", "architecture decision record", "ADR", "MADR", "decision rationale", "decision confirmation"],
+    "revision": "1",
+    "applicability": "Use at architecture, options and recommendation steps when a choice needs traceable rationale, consequences and confirmation. Apply proportionate detail and the project's actual acceptance process.",
+    "limits": "This proposed reading procedure and format reference do not select a skill, choose a design, accept a decision, enforce compliance or establish executed checks. The inspected source contents are reviewed, while the Atlas adaptation remains proposed.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {"sectionLabel": "Source contribution", "text": "The MADR template includes context and problem statement, considered options and decision outcome, with optional decision drivers, consequences, confirmation and status metadata.", "sourceRefs": ["repo-madr"]},
+      {"sectionLabel": "Source contribution", "text": "MADR's confirmation prompt asks how implementation or compliance can be checked.", "sourceRefs": ["repo-madr"]}
+    ],
+    "evidence": {"basisKinds": ["inspected", "proposed", "illustrative"], "confidenceLevel": "proposed"},
+    "applies": {"stages": ["architecture", "options", "recommendation"]},
+    "scope": {"generality": "general"}
+  }
+}

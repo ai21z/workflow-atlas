@@ -19,6 +19,17 @@
       "type": "p",
       "label": "Acceptance",
       "text": "The finding is actionable and reproducible or clearly states its evidential limits. The owner can distinguish a defect, missing requirement, environment problem, or audit-design issue."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Reproduce the observed problem, Investigate the cause, Stories and delivery plan, Observe and improve. These links are recommendations based on the guide content, not required product or process choices.",
+        "A finding record names the expected invariant, observed behavior, revision and exact reproduction evidence, or states why reproduction is unavailable.",
+        "The record distinguishes confirmed cause from hypotheses and names the affected owner and exposure.",
+        "A proposed correction has a measurable acceptance check, duplicate check and dependency list. Estimated effort is labeled with uncertainty.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -39,7 +50,7 @@
       "ticket evidence",
       "remediation proposal"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when recording an audit or debt finding that another person must confirm and act on. It lists the fields that make a finding actionable and reproducible, or explicit about its evidential limits.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -50,6 +61,14 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "reproduction",
+        "diagnosis",
+        "breakdown",
+        "operations"
+      ]
     }
   }
 }

@@ -19,6 +19,8 @@
     "test:handoff": "node tests/browser-handoff.cjs",
     "test:static-browser": "node tests/browser-static.cjs",
     "test:catalogue-browser": "node tests/browser-catalogue.cjs && node tests/browser-subjects.cjs && node tests/browser-map2d.cjs",
+    "test:repository-browser": "node tests/browser-repository-links.cjs",
+    "test:knowledge-browser": "node tests/browser-knowledge-table.cjs",
     "build:catalogue": "node tools/build-catalogue.mjs",
     "check:catalogue": "node tools/build-catalogue.mjs --check",
     "build:docs": "node tools/build-docs-guide.mjs",

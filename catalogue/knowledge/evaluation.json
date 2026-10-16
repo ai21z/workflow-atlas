@@ -12,6 +12,16 @@
       "type": "p",
       "label": "Rollout",
       "text": "Measure the current approach, try a bounded task, inspect outcomes and expand only where evidence supports it. Use shadow evaluation when comparing a new decision component without changing live behavior. A Jev source-support experiment is one optional example."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Build a baseline, inspect outcomes and decide whether a bounded rollout is supported.",
+        "Freeze representative cases and acceptance criteria before comparing candidates.",
+        "Retain traces and end-state evidence, including failures and unrun checks.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
     }
   ],
   "refs": [
@@ -31,7 +41,7 @@
       "rollout",
       "historical tasks"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this explanation to inform decisions. Confirm its fit with your actual environment.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -39,9 +49,17 @@
     "claims": [],
     "evidence": {
       "basisKinds": [
-        "proposed"
+        "proposed",
+        "recommended"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan",
+        "verification",
+        "recommendation"
+      ]
     }
   }
 }

@@ -30,7 +30,7 @@
       ],
       "properties": {
         "schemaVersion": {
-          "const": "1.1"
+          "const": "1.2"
         },
         "version": {
           "type": "string",
@@ -230,6 +230,38 @@
                         "items": {
                           "type": "string"
                         }
+                      }
+                    },
+                    "cellLinks": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": ["row", "column", "label"],
+                        "properties": {
+                          "row": { "type": "integer", "minimum": 0 },
+                          "column": { "type": "integer", "minimum": 0 },
+                          "label": { "type": "string", "minLength": 1 },
+                          "href": { "type": "string", "pattern": "^https://" },
+                          "sourceRef": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+                          "topicId": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+                        },
+                        "oneOf": [
+                          { "properties": { "href": {} }, "required": ["href"] },
+                          { "properties": { "sourceRef": {} }, "required": ["sourceRef"] },
+                          { "properties": { "topicId": {} }, "required": ["topicId"] }
+                        ]
+                      }
+                    },
+                    "tools": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["searchLabel", "filterColumn", "filterLabel", "itemLabel"],
+                      "properties": {
+                        "searchLabel": { "type": "string", "minLength": 1 },
+                        "filterColumn": { "type": "integer", "minimum": 0 },
+                        "filterLabel": { "type": "string", "minLength": 1 },
+                        "itemLabel": { "type": "string", "minLength": 1 }
                       }
                     }
                   }

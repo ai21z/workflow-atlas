@@ -54,6 +54,17 @@
       "type": "p",
       "label": "Review scope",
       "text": "Scoped claims checked on 2026-10-12 against Python 3.15, pip 26.2.1, pytest 9 configuration and the linked current PyPA and Astral documentation. pytest.toml needs pytest 9. Tool choices and example commands are proposed conventions, not verified project settings."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Development, Tests and review, Release and production. These links are recommendations based on the guide content, not required product or process choices.",
+        "An environment record names the interpreter, environment path, package manager, actual configuration discovery and locked dependencies where present.",
+        "The evidence record names the repository's actual installation, pytest and lint commands, their discovered scope and outputs. Example commands remain unexecuted conventions.",
+        "The candidate revision links CI or deployment installation evidence separately from editable development setup, with unavailable indexes and unrun checks explicit.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -86,7 +97,7 @@
       "ruff",
       "uv"
     ],
-    "revision": "2",
+    "revision": "2.gap1",
     "applicability": "Use when a coding agent or reviewer works in a repository with a pyproject.toml, a requirements file or pytest tests and needs the file and command conventions before running anything.",
     "limits": "Catalogue inclusion is not an installed interpreter, a chosen package manager, a working command or verified compatibility.",
     "sourceStatus": "reviewed",
@@ -223,6 +234,11 @@
     "applies": {
       "technologies": [
         "python"
+      ],
+      "stages": [
+        "implementation",
+        "verification",
+        "release"
       ]
     },
     "scope": {

@@ -55,9 +55,30 @@
       "type": "p",
       "label": "Specializations",
       "text": "The RDF/SPARQL procedure is available below. PostgreSQL, Neptune, Fuseki and Neo4j pages explain different technology examples. Their presence does not imply interchangeable queries or a working integration."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Collect expected versus observed results during Tests and review, and repeat the relevant cases when verifying a repair. Choose checks for the actual data family and engine. The workflow placement and checks are Atlas recommendations. Only the source contribution below was verified on 15 October 2026, not every original assertion or project outcome."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A check record identifies engine/version, dataset or fixture revision, query or request, permitted scope and expected versus actual values.",
+        "Positive, empty, missing or invalid cases have explicit outcomes, with omitted cases marked untested.",
+        "Any structural validation report remains separate from source truth, authorization and query behavior evidence."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "W3C SHACL validation takes a data graph and a shapes graph as inputs and produces a validation report. This source contribution applies to the RDF specialization only. It does not define SQL or property graph semantics, prove source truth or validate an untested target engine. Review date: 15 October 2026. This review covers this source contribution only, not the whole guide."
     }
   ],
-  "refs": [],
+  "refs": [
+    "shacl"
+  ],
   "basis": "Proposed procedure",
   "confidence": "Moderate. Engine specific checks need local validation",
   "catalog": {
@@ -75,12 +96,20 @@
       "data verification",
       "expected results"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when verifying a data transformation, query or retrieval API. Select the actual data model and engine before applying specialist checks.",
     "limits": "This is a proposed reading procedure. It does not select an exportable skill, configure access, run checks or establish a successful result.",
-    "sourceStatus": "needs-review",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "W3C SHACL validation takes a data graph and a shapes graph as inputs and produces a validation report.",
+        "sourceRefs": [
+          "shacl"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
@@ -89,7 +118,8 @@
     },
     "applies": {
       "stages": [
-        "verification"
+        "verification",
+        "regression"
       ]
     }
   }

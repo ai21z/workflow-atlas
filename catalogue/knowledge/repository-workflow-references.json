@@ -1,0 +1,841 @@
+{
+  "id": "repository-workflow-references",
+  "title": "Repositories by useful workflow step",
+  "summary": "Find a source repository by the work it helps with, then inspect the procedure, outputs and checks before choosing it.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this reference",
+      "text": "Start with the task and existing project. Select a repository or pattern name to open its upstream project, Reviewed source to inspect the exact evidence, or a workflow link to read the Atlas procedure and checks. These named repositories are reference options, not installed integrations or mandatory dependencies."
+    },
+    {
+      "type": "table",
+      "label": "Repository options by useful step",
+      "headers": [
+        "Repository or pattern",
+        "Useful step",
+        "Atlas workflow",
+        "Check to retain"
+      ],
+      "rows": [
+        [
+          "Marketing Skills",
+          "Research customer needs and proposed requirements",
+          "Customer research",
+          "Source traceability, shared product context and reviewed claims."
+        ],
+        [
+          "Knowledge Work Plugins",
+          "Research, analyze and recommend",
+          "Customer research and business analysis",
+          "Check facts, calculations, contradictions and output fit."
+        ],
+        [
+          "MADR",
+          "Choose and record an approach",
+          "Decision records",
+          "Context, alternatives, rationale, consequences and owner."
+        ],
+        [
+          "Backlog.md",
+          "Break down and track work",
+          "Repository task tracking",
+          "Acceptance, prerequisites, ownership and observed completion."
+        ],
+        [
+          "Repomix",
+          "Hand context to another person or tool",
+          "Repository context handoff",
+          "Revision, selected files, exclusions and recipient needs."
+        ],
+        [
+          "Docling",
+          "Extract structured document content",
+          "Document ingestion",
+          "Inspect original headings, numbers and table associations."
+        ],
+        [
+          "MarkItDown",
+          "Extract text for analysis",
+          "Document ingestion",
+          "Check extraction fidelity for representative files."
+        ],
+        [
+          "Promptfoo",
+          "Compare prompts or model-backed outputs",
+          "Evaluation",
+          "Reviewed cases, explicit assertions and observed failures."
+        ],
+        [
+          "Inspect AI",
+          "Evaluate agent/model tasks and inspect results",
+          "Evaluation",
+          "Dataset, solver, scorer, environment and actual task evidence."
+        ],
+        [
+          "Karpathy LLM Wiki",
+          "Maintain reusable knowledge",
+          "Maintained source-linked knowledge",
+          "Original sources, support for derived claims and maintenance."
+        ],
+        [
+          "Understand Anything",
+          "Explore unfamiliar source and dependencies",
+          "Software investigation",
+          "Sample graph edges and explanations against source."
+        ],
+        [
+          "Groma.md",
+          "Curate architecture and affected responsibilities",
+          "Software investigation",
+          "Review boundaries, ownership and reconciliation after changes."
+        ],
+        [
+          "Serena",
+          "Navigate symbols and references",
+          "Software investigation",
+          "Language/backend support and actual definitions/call sites."
+        ],
+        [
+          "REA",
+          "Investigate applications and binaries",
+          "Software investigation",
+          "Target identity, provider, evidence and incomplete analysis."
+        ],
+        [
+          "Ghidra",
+          "Inspect compiled code",
+          "Software investigation",
+          "Addresses, inferred signatures and decompilation limits."
+        ],
+        [
+          "Spec Kit",
+          "Specify, plan and implement, or choose another supported process",
+          "Scoped development",
+          "Scope, specification drift and actual implementation checks."
+        ],
+        [
+          "Superpowers",
+          "Use selected clarification, debugging and review procedures",
+          "Scoped development",
+          "Frozen acceptance criteria and bounded review rounds."
+        ],
+        [
+          "Ponytail",
+          "Reuse capabilities and simplify implementation",
+          "Scoped development, optional",
+          "Required behavior and maintainability before size claims."
+        ],
+        [
+          "AgentRC",
+          "Inspect and generate repository context",
+          "Scoped development, experimental",
+          "Verify generated facts and compare task outcomes."
+        ],
+        [
+          "APM",
+          "Share versioned agent configuration when needed",
+          "Scoped development, optional",
+          "Pin dependencies and inspect host-specific deployment."
+        ],
+        [
+          "Awesome Copilot",
+          "Discover an applicable procedure",
+          "Selective library curation",
+          "Review one item, its source, host assumptions and checks."
+        ],
+        [
+          "Anthropic Skills",
+          "Learn from selected task procedures",
+          "Selective library curation",
+          "Inspect per-item license, instructions and output checks."
+        ],
+        [
+          "Microsoft Skills",
+          "Use relevant technical or Deep Wiki guidance",
+          "Selective library curation and maintained knowledge",
+          "Match the actual stack and verify source citations."
+        ],
+        [
+          "Agent Reach",
+          "Retrieve public evidence through an available backend",
+          "Research access, conditional",
+          "Inspect actual returned content, including login/error pages."
+        ],
+        [
+          "Laya",
+          "Evaluate bounded model-backed choices",
+          "Typed decision routing, experimental",
+          "Representative Atlas cases, uncertainty and independent labels."
+        ],
+        [
+          "autoresearch",
+          "Run a repeatable improvement experiment",
+          "Bounded experiments, conditional",
+          "Freeze the evaluator, preserve unmeasured requirements and review retained changes."
+        ],
+        [
+          "OpenSpec",
+          "Describe and maintain scoped behavior changes",
+          "Scoped change specifications, optional",
+          "Independent code review and behavior tests before archive."
+        ]
+      ],
+      "cellLinks": [
+        {
+          "row": 0,
+          "column": 0,
+          "label": "Marketing Skills",
+          "href": "https://github.com/coreyhaines31/marketingskills"
+        },
+        {
+          "row": 0,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-marketingskills"
+        },
+        {
+          "row": 0,
+          "column": 2,
+          "label": "Customer research",
+          "topicId": "customer-research-workflow"
+        },
+        {
+          "row": 1,
+          "column": 0,
+          "label": "Knowledge Work Plugins",
+          "href": "https://github.com/anthropics/knowledge-work-plugins"
+        },
+        {
+          "row": 1,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-knowledge-research"
+        },
+        {
+          "row": 1,
+          "column": 2,
+          "label": "Customer research",
+          "topicId": "customer-research-workflow"
+        },
+        {
+          "row": 1,
+          "column": 2,
+          "label": "Business analysis",
+          "topicId": "business-analysis-workflow"
+        },
+        {
+          "row": 2,
+          "column": 0,
+          "label": "MADR",
+          "href": "https://github.com/adr/madr"
+        },
+        {
+          "row": 2,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-madr"
+        },
+        {
+          "row": 2,
+          "column": 2,
+          "label": "Decision records",
+          "topicId": "decision-record-workflow"
+        },
+        {
+          "row": 3,
+          "column": 0,
+          "label": "Backlog.md",
+          "href": "https://github.com/MrLesk/Backlog.md"
+        },
+        {
+          "row": 3,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-backlog-md"
+        },
+        {
+          "row": 3,
+          "column": 2,
+          "label": "Repository task tracking",
+          "topicId": "repository-task-workflow"
+        },
+        {
+          "row": 4,
+          "column": 0,
+          "label": "Repomix",
+          "href": "https://github.com/yamadashy/repomix"
+        },
+        {
+          "row": 4,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-repomix"
+        },
+        {
+          "row": 4,
+          "column": 2,
+          "label": "Repository context",
+          "topicId": "repository-context-workflow"
+        },
+        {
+          "row": 5,
+          "column": 0,
+          "label": "Docling",
+          "href": "https://github.com/docling-project/docling"
+        },
+        {
+          "row": 5,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-docling"
+        },
+        {
+          "row": 5,
+          "column": 2,
+          "label": "Document ingestion",
+          "topicId": "document-ingestion-workflow"
+        },
+        {
+          "row": 6,
+          "column": 0,
+          "label": "MarkItDown",
+          "href": "https://github.com/microsoft/markitdown"
+        },
+        {
+          "row": 6,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-markitdown"
+        },
+        {
+          "row": 6,
+          "column": 2,
+          "label": "Document ingestion",
+          "topicId": "document-ingestion-workflow"
+        },
+        {
+          "row": 7,
+          "column": 0,
+          "label": "Promptfoo",
+          "href": "https://github.com/promptfoo/promptfoo"
+        },
+        {
+          "row": 7,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-promptfoo"
+        },
+        {
+          "row": 7,
+          "column": 2,
+          "label": "Evaluation",
+          "topicId": "evaluation-workflow"
+        },
+        {
+          "row": 8,
+          "column": 0,
+          "label": "Inspect AI",
+          "href": "https://github.com/UKGovernmentBEIS/inspect_ai"
+        },
+        {
+          "row": 8,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-inspect-ai"
+        },
+        {
+          "row": 8,
+          "column": 2,
+          "label": "Evaluation",
+          "topicId": "evaluation-workflow"
+        },
+        {
+          "row": 9,
+          "column": 0,
+          "label": "Karpathy LLM Wiki",
+          "href": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
+        },
+        {
+          "row": 9,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-llm-wiki-pattern"
+        },
+        {
+          "row": 9,
+          "column": 2,
+          "label": "Maintained knowledge",
+          "topicId": "maintained-knowledge-workflow"
+        },
+        {
+          "row": 10,
+          "column": 0,
+          "label": "Understand Anything",
+          "href": "https://github.com/Egonex-AI/Understand-Anything"
+        },
+        {
+          "row": 10,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-understand-anything"
+        },
+        {
+          "row": 10,
+          "column": 2,
+          "label": "Software investigation",
+          "topicId": "software-investigation-workflow"
+        },
+        {
+          "row": 11,
+          "column": 0,
+          "label": "Groma.md",
+          "href": "https://github.com/MrLesk/Groma.md"
+        },
+        {
+          "row": 11,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-groma"
+        },
+        {
+          "row": 11,
+          "column": 2,
+          "label": "Software investigation",
+          "topicId": "software-investigation-workflow"
+        },
+        {
+          "row": 12,
+          "column": 0,
+          "label": "Serena",
+          "href": "https://github.com/oraios/serena"
+        },
+        {
+          "row": 12,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-serena"
+        },
+        {
+          "row": 12,
+          "column": 2,
+          "label": "Software investigation",
+          "topicId": "software-investigation-workflow"
+        },
+        {
+          "row": 13,
+          "column": 0,
+          "label": "REA",
+          "href": "https://github.com/morluto/rea"
+        },
+        {
+          "row": 13,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-rea"
+        },
+        {
+          "row": 13,
+          "column": 2,
+          "label": "Software investigation",
+          "topicId": "software-investigation-workflow"
+        },
+        {
+          "row": 14,
+          "column": 0,
+          "label": "Ghidra",
+          "href": "https://github.com/NationalSecurityAgency/ghidra"
+        },
+        {
+          "row": 14,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-ghidra"
+        },
+        {
+          "row": 14,
+          "column": 2,
+          "label": "Software investigation",
+          "topicId": "software-investigation-workflow"
+        },
+        {
+          "row": 15,
+          "column": 0,
+          "label": "Spec Kit",
+          "href": "https://github.com/github/spec-kit"
+        },
+        {
+          "row": 15,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-spec-kit-current"
+        },
+        {
+          "row": 15,
+          "column": 2,
+          "label": "Scoped development",
+          "topicId": "scoped-development-workflow"
+        },
+        {
+          "row": 16,
+          "column": 0,
+          "label": "Superpowers",
+          "href": "https://github.com/obra/superpowers"
+        },
+        {
+          "row": 16,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-superpowers-current"
+        },
+        {
+          "row": 16,
+          "column": 2,
+          "label": "Scoped development",
+          "topicId": "scoped-development-workflow"
+        },
+        {
+          "row": 17,
+          "column": 0,
+          "label": "Ponytail",
+          "href": "https://github.com/DietrichGebert/ponytail"
+        },
+        {
+          "row": 17,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-ponytail-current"
+        },
+        {
+          "row": 17,
+          "column": 2,
+          "label": "Scoped development",
+          "topicId": "scoped-development-workflow"
+        },
+        {
+          "row": 18,
+          "column": 0,
+          "label": "AgentRC",
+          "href": "https://github.com/microsoft/agentrc"
+        },
+        {
+          "row": 18,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-agentrc-current"
+        },
+        {
+          "row": 18,
+          "column": 2,
+          "label": "Scoped development",
+          "topicId": "scoped-development-workflow"
+        },
+        {
+          "row": 19,
+          "column": 0,
+          "label": "APM",
+          "href": "https://github.com/microsoft/apm"
+        },
+        {
+          "row": 19,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-apm-current"
+        },
+        {
+          "row": 19,
+          "column": 2,
+          "label": "Scoped development",
+          "topicId": "scoped-development-workflow"
+        },
+        {
+          "row": 20,
+          "column": 0,
+          "label": "Awesome Copilot",
+          "href": "https://github.com/github/awesome-copilot"
+        },
+        {
+          "row": 20,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-awesome-copilot-current"
+        },
+        {
+          "row": 20,
+          "column": 2,
+          "label": "Scoped development",
+          "topicId": "scoped-development-workflow"
+        },
+        {
+          "row": 21,
+          "column": 0,
+          "label": "Anthropic Skills",
+          "href": "https://github.com/anthropics/skills"
+        },
+        {
+          "row": 21,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-anthropic-skills"
+        },
+        {
+          "row": 21,
+          "column": 2,
+          "label": "Scoped development",
+          "topicId": "scoped-development-workflow"
+        },
+        {
+          "row": 22,
+          "column": 0,
+          "label": "Microsoft Skills",
+          "href": "https://github.com/microsoft/skills"
+        },
+        {
+          "row": 22,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-microsoft-skills"
+        },
+        {
+          "row": 22,
+          "column": 2,
+          "label": "Scoped development",
+          "topicId": "scoped-development-workflow"
+        },
+        {
+          "row": 22,
+          "column": 2,
+          "label": "Maintained knowledge",
+          "topicId": "maintained-knowledge-workflow"
+        },
+        {
+          "row": 23,
+          "column": 0,
+          "label": "Agent Reach",
+          "href": "https://github.com/Panniantong/agent-reach"
+        },
+        {
+          "row": 23,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-agent-reach"
+        },
+        {
+          "row": 23,
+          "column": 2,
+          "label": "Research access",
+          "topicId": "research-access-workflow"
+        },
+        {
+          "row": 24,
+          "column": 0,
+          "label": "Laya",
+          "href": "https://github.com/NandhaKishorM/laya"
+        },
+        {
+          "row": 24,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-laya"
+        },
+        {
+          "row": 24,
+          "column": 2,
+          "label": "Typed decisions",
+          "topicId": "typed-decision-workflow"
+        },
+        {
+          "row": 25,
+          "column": 0,
+          "label": "autoresearch",
+          "href": "https://github.com/karpathy/autoresearch"
+        },
+        {
+          "row": 25,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-autoresearch"
+        },
+        {
+          "row": 25,
+          "column": 2,
+          "label": "Bounded experiments",
+          "topicId": "bounded-experiment-workflow"
+        },
+        {
+          "row": 26,
+          "column": 0,
+          "label": "OpenSpec",
+          "href": "https://github.com/Fission-AI/OpenSpec"
+        },
+        {
+          "row": 26,
+          "column": 0,
+          "label": "Reviewed source",
+          "sourceRef": "repo-openspec"
+        },
+        {
+          "row": 26,
+          "column": 2,
+          "label": "Change specifications",
+          "topicId": "openspec-change-specifications"
+        }
+      ],
+      "tools": {
+        "searchLabel": "Search repositories and patterns",
+        "filterColumn": 2,
+        "filterLabel": "Workflow",
+        "itemLabel": "entries"
+      }
+    },
+    {
+      "type": "p",
+      "label": "Repository contributions",
+      "text": "Awesome Copilot documents a collection of agents, instructions, skills and plugins. Anthropic Skills explicitly distinguishes open-source examples from source-available document skills."
+    },
+    {
+      "type": "list",
+      "label": "Choose a contribution",
+      "items": [
+        "Read one relevant procedure and its pinned sources rather than installing a whole collection.",
+        "Keep a generic workflow separate from an optional tool and host formatting.",
+        "Record actual versions, capabilities, paths and commands before use.",
+        "Retain original evidence, blocked sources, unrun checks and unresolved choices.",
+        "A documented capability, user report, local observation and proposed Atlas practice are different kinds of evidence."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Coverage limits",
+      "text": "This is a curated reference set. It is not a popularity ranking, a compatibility certification or proof that the procedures improve every task. Laya, AgentRC and autonomous experiment patterns need a task-specific comparison. Library and gist reuse terms are recorded per inspected source. No repository is activated by reading this page."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Use the repository directory when comparing feasible approaches, then plan a bounded trial of the selected workflow and its checks before adoption. A stage connection is a reading recommendation. It does not install a repository, establish comparative superiority or turn a directory entry into a verified project integration."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A shortlist records the specific job, candidate revision, reviewed contribution, license constraints and reason for considering each option.",
+        "The trial plan links the relevant Atlas procedure and defines expected artifacts, representative inputs and acceptance checks.",
+        "The adoption decision records actual trial evidence or states not run, with conditional and experimental qualifications retained."
+      ]
+    }
+  ],
+  "refs": [
+    "repo-rea",
+    "repo-ghidra",
+    "repo-understand-anything",
+    "repo-groma",
+    "repo-serena",
+    "repo-agent-reach",
+    "repo-agent-reach-web",
+    "repo-laya",
+    "repo-autoresearch",
+    "repo-ponytail-current",
+    "repo-spec-kit-current",
+    "repo-superpowers-current",
+    "repo-agentrc-current",
+    "repo-apm-current",
+    "repo-awesome-copilot-current",
+    "repo-anthropic-skills",
+    "repo-microsoft-skills",
+    "repo-openspec",
+    "repo-openspec-existing-projects",
+    "repo-openspec-schema",
+    "repo-openspec-verify",
+    "repo-marketingskills",
+    "repo-knowledge-research",
+    "repo-knowledge-analysis",
+    "repo-knowledge-validation",
+    "repo-madr",
+    "repo-backlog-md",
+    "repo-backlog-finalization",
+    "repo-repomix",
+    "repo-docling",
+    "repo-markitdown",
+    "repo-promptfoo",
+    "repo-inspect-ai",
+    "repo-llm-wiki-pattern",
+    "repo-microsoft-wiki-qa",
+    "llmwiki"
+  ],
+  "basis": "Inspected repository documentation and recommended Atlas procedure. Examples are illustrative.",
+  "confidence": "Moderate for the scoped source contributions. Project fit and workflow outcomes remain unverified.",
+  "catalog": {
+    "kind": "reference",
+    "domains": [
+      "instructions",
+      "workflow-design"
+    ],
+    "aliases": [
+      "Marketing Skills",
+      "Knowledge Work Plugins",
+      "MADR",
+      "Backlog.md",
+      "Repomix",
+      "Docling",
+      "MarkItDown",
+      "Promptfoo",
+      "Inspect AI",
+      "Karpathy LLM Wiki",
+      "Understand Anything",
+      "Groma.md",
+      "Serena",
+      "REA",
+      "Ghidra",
+      "Spec Kit",
+      "Superpowers",
+      "Ponytail",
+      "AgentRC",
+      "APM",
+      "Awesome Copilot",
+      "Anthropic Skills",
+      "Microsoft Skills",
+      "Agent Reach",
+      "Laya",
+      "autoresearch",
+      "OpenSpec"
+    ],
+    "revision": "2.gap1",
+    "applicability": "Find a source repository by the work it helps with, then inspect the procedure, outputs and checks before choosing it.",
+    "limits": "Reading guidance does not install a repository, select a tool, execute a workflow or establish a passing result. Use actual project versions, commands and evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Repository contributions",
+        "text": "Awesome Copilot documents a collection of agents, instructions, skills and plugins.",
+        "sourceRefs": [
+          "repo-awesome-copilot-current"
+        ]
+      },
+      {
+        "sectionLabel": "Repository contributions",
+        "text": "Anthropic Skills distinguishes open-source examples from source-available document skills.",
+        "sourceRefs": [
+          "repo-anthropic-skills"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "options",
+        "experiment-plan"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

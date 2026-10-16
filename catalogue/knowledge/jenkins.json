@@ -17,9 +17,27 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Pipeline success is evidence of the checks that ran, not proof of every requirement. A missing or skipped report remains visible."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Tests and review, Investigate the cause, Release and production. These links are recommendations based on the guide content, not required product or process choices.",
+        "A run record links the pipeline identity, checked-out commit, first actionable failure and exact generated reports.",
+        "A gate review distinguishes successful, unstable, failed, skipped and missing checks, including whether deployment continues after unstable results.",
+        "A release handoff identifies the reports and artifacts actually retained, plus exclusions and unrun acceptance checks.",
+        "Only the added source contribution was fact checked in this pass. Earlier statements retain their original basis and confidence. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Jenkins documents publishing generated test reports with junit and retaining files with archiveArtifacts. Failing tests can mark a Pipeline unstable, and execution proceeds by default unless configured otherwise. Inspect the actual report collection and deployment gate rather than assuming a green or completed run proves all checks. Checked against the linked primary source on 2026-10-15. This review covers this contribution only."
     }
   ],
-  "refs": [],
+  "refs": [
+    "jenkins-test-artifacts"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -34,12 +52,20 @@
       "test evidence",
       "failed stage"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this Jenkins example when executed tests and quality checks run in Jenkins and Sonar and their results must be attached to the actual candidate revision. Pipeline success is evidence of the checks that ran, not proof of every requirement.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Jenkins documents publishing generated test reports with junit and retaining files with archiveArtifacts. Failing tests can mark a Pipeline unstable, and execution proceeds by default unless configured otherwise. Inspect the actual report collection and deployment gate rather than assuming a green or completed run proves all checks.",
+        "sourceRefs": [
+          "jenkins-test-artifacts"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
@@ -52,7 +78,9 @@
     },
     "applies": {
       "stages": [
-        "verification"
+        "verification",
+        "diagnosis",
+        "release"
       ]
     }
   }

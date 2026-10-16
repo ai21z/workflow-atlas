@@ -1,0 +1,56 @@
+{
+  "id": "repository-task-workflow",
+  "title": "Track repository work with evidence",
+  "summary": "Keep scoped work items, dependencies, implementation notes and acceptance evidence alongside the project.",
+  "sections": [
+    {"type": "p", "label": "When to use", "text": "Use at breakdown, implementation or bug fixing when a project needs durable task records that reviewers and agents can inspect. Choose a task tool only after deciding where the authoritative work record belongs."},
+    {"type": "p", "label": "Inputs", "text": "An agreed outcome, accepted requirements and relevant decisions, the current repository revision, existing work items, project completion rules and available verification. Record the actual task store, identifier scheme, owner and allowed edit interface. Do not create duplicate authority when an existing tracker already owns the work."},
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Inspect existing tasks and the authoritative work record. Link the requirement and decision each new item implements. Choose a stable identifier and owner and define an observable result.",
+        "Write task-specific acceptance criteria and distinguish them from common completion rules. Include relevant failure behavior and exclusions. Split unresolved investigation from implementation that depends on its answer.",
+        "Record dependencies and verify their identities and current status. Order work by actual prerequisites. Treat a missing or ambiguous dependency as unresolved rather than complete.",
+        "Before implementation, inspect the current source and tests and refresh the plan. Keep material scope changes explicit. Use the project's approved task editing interface so identifiers, metadata and links remain consistent.",
+        "Implement a coherent slice and record useful notes. Run the checks that demonstrate its acceptance criteria, including interaction checks when behavior is interactive. Link actual commands, results, observations and the resulting revision.",
+        "Review the final change against every criterion and common completion rule. Mark only evidenced items complete. Record limitations and pending review, then use the project's completion status and retention process."
+      ]
+    },
+    {"type": "p", "label": "Optional reference example", "text": "Backlog.md is an optional repository task store for steps 1 to 6. Its reviewed documentation supplies task and completion guidance. If selected in a project, inspect that installed version and configuration before using commands. Atlas's topic does not install Backlog.md, initialize its files or configure CLI or MCP access."},
+    {"type": "p", "label": "Source contribution", "text": "Backlog.md's inspected README describes Markdown task files, task acceptance criteria, reusable Definition of Done items, milestones and dependencies. Its task finalization guide requires evidence for acceptance and completion items, relevant tests and interaction checks, and checking only proven items before the terminal status. Those are documentation contents, not observed completion of a project task."},
+    {"type": "p", "label": "Outputs", "text": "Traceable work items with scope, acceptance criteria, prerequisites, owner, current plan, implementation notes and final evidence. The completion record names what was checked, its result and revision, unresolved concerns and any remaining review."},
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "Every work item links to the intended outcome and has independently understandable scope and checkable acceptance criteria.",
+        "Dependencies resolve to identifiable records. Circular, missing or ambiguous prerequisites remain visible and block dependent work where relevant.",
+        "Every checked criterion points to an observed result. Code presence and a claimed pass are not substitutes for the required behavior check.",
+        "Final status matches the established completion rules and required review. The record preserves the final plan, evidence and outstanding concerns."
+      ]
+    },
+    {"type": "p", "label": "Illustrative worked example, not run", "text": "A fictional task requests restoring a saved search. Its criteria specify which supported fields survive reopening and what happens after a failed save. A prerequisite decision defines those fields. The planned check saves agreed values, reopens the search and compares the restored state, then exercises the failure case. Until those observations exist, the criteria stay unchecked. No task tool, save operation or browser check in this example has been executed."},
+    {"type": "p", "label": "Failure and uncertainty", "text": "If a dependency cannot be resolved, record the unknown identifier and investigate before starting dependent work. If an acceptance check fails or cannot run, keep the criterion incomplete and explain the result. If implementation reveals a new requirement, record the proposed scope change and follow the project's decision process before treating it as accepted work."}
+  ],
+  "refs": ["repo-backlog-md", "repo-backlog-finalization"],
+  "basis": "Inspected primary task documentation with a proposed Atlas adaptation and an unrun fictional example",
+  "confidence": "High for the inspected documentation contents. Moderate for the proposed workflow. Task completion requires actual project evidence.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": ["workflow-design", "engineering-tools", "verification"],
+    "aliases": ["repository tasks", "Backlog.md", "task evidence", "acceptance criteria", "Definition of Done", "dependency tracking"],
+    "revision": "1",
+    "applicability": "Use at breakdown, implementation and bug fix steps when work needs durable task records connected to requirements, dependencies and acceptance evidence. Backlog.md is an optional reference example.",
+    "limits": "This proposed reading procedure does not select an exportable skill, install a task manager, initialize backlog files, configure access or mark work complete. Reviewed documentation claims do not establish runtime support in Atlas or an executed result.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {"sectionLabel": "Source contribution", "text": "Backlog.md's README describes Markdown task files, task acceptance criteria, reusable Definition of Done items, milestones and dependencies.", "sourceRefs": ["repo-backlog-md"]},
+      {"sectionLabel": "Source contribution", "text": "Backlog.md's task finalization guide requires evidence, relevant tests and interaction checks, and checking only proven acceptance and completion items before the terminal status.", "sourceRefs": ["repo-backlog-finalization"]}
+    ],
+    "evidence": {"basisKinds": ["inspected", "proposed", "illustrative"], "confidenceLevel": "proposed"},
+    "applies": {"stages": ["breakdown", "implementation", "bug-fix"]},
+    "scope": {"generality": "general"}
+  }
+}

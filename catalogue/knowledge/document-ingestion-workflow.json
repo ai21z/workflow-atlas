@@ -1,0 +1,121 @@
+{
+  "id": "document-ingestion-workflow",
+  "title": "Extract documents with evidence checks",
+  "summary": "Turn source documents into usable text or structure while checking omissions, reading order and meaning.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use and inputs",
+      "text": "Use when current-process research, requirements or verification depend on documents that need conversion. Inputs are the original files and versions, the fields or passages needed, representative difficult pages, expected output structure, available converter versions and dependencies, and the downstream question. Record missing originals or inaccessible documents before extraction."
+    },
+    {
+      "type": "p",
+      "label": "Docling option",
+      "text": "The reviewed Docling README documents parsing multiple document formats, PDF layout, reading order and table structure, OCR support, a DoclingDocument representation, and exports including Markdown and JSON. Consider these options when the task needs document structure as well as text, then check them on the actual input."
+    },
+    {
+      "type": "p",
+      "label": "MarkItDown option",
+      "text": "The reviewed MarkItDown README describes conversion to Markdown for text analysis, including headings, lists, tables and links. It states that the output may be unsuitable for high-fidelity human-facing conversion and that individual file formats have optional dependencies. Consider it when Markdown serves the downstream task and the required format support is available."
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "State what information the next step needs. Choose acceptance examples for headings, reading order, tables, numbers, units, definitions and source anchors where they affect that task.",
+        "Inventory source identities, versions, formats and page or section counts. Preserve the originals and record unavailable, encrypted, damaged or unsupported inputs.",
+        "Choose a converter against the needed format and structure. Record its version, options, dependencies and any OCR or model component used. Do not infer installed support from the repository's feature list.",
+        "Convert a small representative set before a full batch. Retain source-to-output mappings and distinguish successful, empty, partial and failed conversions.",
+        "Compare extracted content with the original, including difficult pages. Inspect relationships within tables and definitions, not just the presence of plausible words or a valid output file.",
+        "Repair the settings or use another extraction route for failed cases, then recheck affected content. If a required passage cannot be extracted reliably, retain that gap for manual review.",
+        "Pass accepted text or structure to requirements, research or knowledge maintenance with source anchors, conversion records and unresolved gaps. Keep the original available for later verification."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Outputs",
+      "text": "Extracted text or structured content, an input and conversion manifest, source-to-output anchors, a review record for representative and critical passages, and a failure or omission list that downstream work can inspect."
+    },
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "Every expected input has a conversion status. Missing originals, unsupported formats, missing dependencies and empty outputs remain explicit.",
+        "A reviewer can trace a material extracted passage or table back to its source version and page or section.",
+        "Check document coverage and reading order. For a required table, verify headers, row and column associations, merged cells, footnotes, numbers and units against the original.",
+        "Required terms retain the correct definitions and qualifiers. Valid JSON, readable Markdown and a successful exit code do not establish semantic accuracy.",
+        "Critical omissions are resolved or assigned for review before downstream use. If sampling was used, record its scope and do not claim that unreviewed pages were verified."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Illustrative example, not run",
+      "text": "A proposed requirements task extracts a scanned service manual. Reviewers select a two-column page and a maintenance table as trial cases, compare item-to-interval associations with the originals, and withhold an unreadable footnote from the requirements brief. The example specifies checks only. Neither converter was run and no extraction result is claimed."
+    },
+    {
+      "type": "p",
+      "label": "Limits",
+      "text": "The upstream feature descriptions are capability references, not an accuracy ranking. This Atlas procedure is recommended and unbenchmarked. Reading it does not install a converter, supply OCR or model dependencies, process documents or create an exportable skill."
+    }
+  ],
+  "refs": [
+    "repo-docling",
+    "repo-markitdown"
+  ],
+  "basis": "Inspected upstream documentation and recommended Atlas procedure",
+  "confidence": "High for the scoped documentation statements. Moderate for choosing and checking a converter on an unseen corpus.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "information-retrieval",
+      "knowledge",
+      "verification"
+    ],
+    "aliases": [
+      "Docling",
+      "MarkItDown",
+      "document extraction",
+      "document conversion",
+      "OCR checks",
+      "table extraction",
+      "ingestion"
+    ],
+    "revision": "1",
+    "applicability": "Use during current-process research, requirements and verification when original documents need conversion before their content can be inspected or reused.",
+    "limits": "The source review covers documented converter options. The recommended procedure and unrun example do not demonstrate accuracy, establish a preferred converter or configure an integration.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Docling option",
+        "text": "Docling documents multiple-format parsing, PDF layout, reading order and table structure, OCR, a DoclingDocument representation, and exports including Markdown and JSON.",
+        "sourceRefs": [
+          "repo-docling"
+        ]
+      },
+      {
+        "sectionLabel": "MarkItDown option",
+        "text": "MarkItDown documents Markdown conversion for text analysis, warns that it may not suit high-fidelity human-facing conversion, and provides optional dependencies by file format.",
+        "sourceRefs": [
+          "repo-markitdown"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "inspected",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "current-process",
+        "requirements",
+        "verification"
+      ]
+    }
+  }
+}

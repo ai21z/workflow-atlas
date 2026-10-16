@@ -197,7 +197,7 @@ test('removing a historical anchor from matching preserves the dependent clause 
   const confirmed = updateIntentReview(config, { type: 'statement', clause, kind: 'context' })
   assert.equal(result(confirmed).localRetrievalBlocked, false)
   assert.equal(result(confirmed).clarification.statement, null)
-  assert.deepEqual(result(reopened(confirmed)).suggestions.map(item => item.practiceId), ['specification-first', 'minimum-change'])
+  assert.deepEqual(result(reopened(confirmed)).suggestions.map(item => item.practiceId).sort(), ['minimum-change', 'specification-first'], 'Resolved context preserves the exact supported practices independently of catalogue ranking')
   assert.equal(original.workflow.intentReview, undefined)
   assert.equal(config.workflow.intentReview.statements.length, 0)
 })

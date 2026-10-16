@@ -1,0 +1,110 @@
+{
+  "id": "bounded-experiment-workflow",
+  "title": "Run a bounded improvement experiment",
+  "summary": "Compare changes against a fixed objective while retaining requirements that the measured score may miss.",
+  "sections": [
+    {
+      "type": "p",
+      "label": "Use this workflow",
+      "text": "Use when a small repeatable experiment can resolve a decision or improve a candidate. Ordinary deterministic changes are valid. An autonomous agent is optional."
+    },
+    {
+      "type": "list",
+      "label": "Inputs",
+      "items": [
+        "Candidate and baseline revisions, a specific objective and representative cases.",
+        "Independent acceptance checks, retained requirements and held-out material where useful.",
+        "Actual commands, environment, time/cost budget and a stop rule."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Repository contributions",
+      "text": "Karpathy autoresearch documents a single-GPU model-training loop in which an agent changes training code, runs a fixed-budget experiment and evaluates the result. Atlas adapts the experiment method to other tasks without claiming that this package performs general internet research."
+    },
+    {
+      "type": "steps",
+      "label": "Procedure",
+      "items": [
+        "Freeze the objective, cases, evaluator and baseline before comparing candidates.",
+        "Name behavior, content and review requirements that the objective does not measure.",
+        "Propose one scoped change and record its revision.",
+        "Run the configured experiment only when the needed environment and authority are available.",
+        "Compare observed results under equivalent conditions. Detect stale caches, invalid runs and leakage from development cases.",
+        "Inspect retained changes against all acceptance requirements and relevant held-out cases. A higher score alone is insufficient.",
+        "Keep, discard or revise with recorded reasons. Stop at the budget or unresolved evidence, then hand off the observations."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Outputs",
+      "text": "A reproducible comparison record, candidate revisions, accepted changes and unresolved tradeoffs."
+    },
+    {
+      "type": "list",
+      "label": "Acceptance checks",
+      "items": [
+        "The evaluator and important requirements did not silently change between candidates.",
+        "Invalid, cached or unrun results are not wins.",
+        "Required features, review steps and failure behavior remain intact.",
+        "Reported gains remain scoped to the tested cases and environment."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Illustrative example",
+      "text": "Compare two extraction prompts on reviewed documents while retaining citation accuracy and required fields as separate checks. A better aggregate score cannot accept a missing field. No prompt, training run or experiment has been executed in this example."
+    }
+  ],
+  "refs": [
+    "repo-autoresearch"
+  ],
+  "basis": "Inspected repository documentation and recommended Atlas procedure. Examples are illustrative.",
+  "confidence": "Moderate for the scoped source contributions. Project fit and workflow outcomes remain unverified.",
+  "catalog": {
+    "kind": "procedure",
+    "domains": [
+      "evaluation",
+      "verification"
+    ],
+    "aliases": [
+      "autoresearch",
+      "bounded experiments",
+      "keep discard",
+      "frozen evaluator"
+    ],
+    "revision": "1",
+    "applicability": "Compare changes against a fixed objective while retaining requirements that the measured score may miss.",
+    "limits": "Reading guidance does not install a repository, select a tool, execute a workflow or establish a passing result. Use actual project versions, commands and evidence.",
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Repository contributions",
+        "text": "The autoresearch reference implements a fixed-budget single-GPU model-training experiment loop.",
+        "sourceRefs": [
+          "repo-autoresearch"
+        ]
+      }
+    ],
+    "evidence": {
+      "basisKinds": [
+        "documented",
+        "recommended",
+        "illustrative"
+      ],
+      "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan",
+        "verification",
+        "regression",
+        "operations"
+      ]
+    },
+    "scope": {
+      "generality": "general"
+    }
+  }
+}

@@ -17,6 +17,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Historical and current queries use the intended applicability window. A later publication or retrieval does not automatically supersede an earlier effective period."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Requirements and evidence, Development, Tests and review. Use when a requirement depends on dates, an implementation compares applicability windows or a review must reproduce current and historical answers. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Produce a field contract that separates publication, effective period, retrieval and approval times, including missing components.",
+        "Check output to obtain: Prepare expected before-start, at-start, at-end and after-end outcomes under the explicitly chosen interval convention.",
+        "Check output to obtain: Record observed historical and current results with source and dataset revisions. Do not infer supersession from a later retrieval time."
+      ]
     }
   ],
   "refs": [
@@ -37,7 +47,7 @@
       "applicability window",
       "date parsing"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when a rule, source or assertion carries more than one date and you must keep publication, effective period, retrieval time and approval time apart, or when historical queries must reproduce a past answer from recorded source and dataset versions.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -48,6 +58,13 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "requirements",
+        "implementation",
+        "verification"
+      ]
     }
   }
 }

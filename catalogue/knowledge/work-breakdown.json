@@ -51,9 +51,26 @@
       "type": "p",
       "label": "Useful result",
       "text": "Each work item contributes to the outcome, has checkable acceptance and names its prerequisites. Unknown estimates and decisions remain visible."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended use: Use the existing breakdown mapping to plan coherent, reviewable pieces with visible dependencies.",
+        "Connect each piece to an agreed outcome and a checkable acceptance example.",
+        "Keep integration checks and unresolved prerequisite decisions visible across the slices.",
+        "Workflow placement and checks are Atlas recommendations. Existing examples, tenant availability, older product claims and comparative benefits were not revalidated by this mapping review."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "The Scrum Guide describes developers planning selected backlog items into smaller work that meets the Definition of Done. This scoped source fact was checked on 15 October 2026. The guide's broader workflow and examples remain Atlas proposals, not demonstrated outcomes."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gap-scrum-guide"
+  ],
   "basis": "Proposed practice with fictional example",
   "confidence": "Moderate. Granularity depends on the project",
   "catalog": {
@@ -69,16 +86,26 @@
       "stories",
       "traceability"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when an agreed outcome and selected approach must become reviewable pieces, each with acceptance examples, a responsible actor and named prerequisites. Keep investigation of an unresolved decision separate from the implementation that depends on it.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "The Scrum Guide describes developers planning selected backlog items into smaller work that meets the Definition of Done.",
+        "sourceRefs": [
+          "gap-scrum-guide"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed",
-        "illustrative"
+        "illustrative",
+        "recommended",
+        "documented"
       ],
       "confidenceLevel": "proposed"
     },

@@ -27,6 +27,20 @@
       "type": "p",
       "label": "SDK session soft cap",
       "text": "Copilot SDK checks limits after responses return; a response can overshoot before another call is blocked. Connector, runtime and review costs need separate accounting."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Set task and resource limits when planning evidence, record the limits that actually govern Development, and compare observed consumption during Observe and improve. Existing GitHub Dynamic Workflow and SDK soft cap behavior was not reaudited in this gap review. Whether a limit is enforced in a particular client remains unknown until its current documentation and observed run are checked."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A budget sheet names each unit, limit, owner and runtime enforcement point, separating hard stops from warnings and soft caps.",
+        "A bounded trial report records observed calls, retries, time and cost against the configured limits, including any overshoot.",
+        "A stop or continuation decision records remaining budget, next useful action and uncounted connector or runner costs."
+      ]
     }
   ],
   "refs": [
@@ -49,7 +63,7 @@
       "budget exhaustion",
       "concurrent agents"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when setting model call, tool call, time and spend limits for a workflow and measuring consumption before scaling it. Run a small scope and size the limits from actual usage, since documented limits do not fall back to a cheaper model and can be overshot.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -60,6 +74,13 @@
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "experiment-plan",
+        "implementation",
+        "operations"
+      ]
     }
   }
 }

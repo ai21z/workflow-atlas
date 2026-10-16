@@ -97,7 +97,8 @@ async function run() {
   const sandbox = { window: {} }
   vm.runInNewContext(await fs.readFile(path.join(root, 'atlas/data.js'), 'utf8'), sandbox)
   current = JSON.parse(JSON.stringify(sandbox.window.TOPIC_DATA))
-  const wantedIds = ['ci-pipelines', 'containers', 'access-controls', 'workflow-measurements', 'clarify-the-work', 'design-and-delivery', 'verification-evidence', 'release-and-recovery', 'user-facing-feature', 'api-stored-data']
+  const navigation = JSON.parse(await fs.readFile(path.join(root, 'catalogue/navigation.json'), 'utf8'))
+  const wantedIds = navigation.subjects.map(subject => subject.id)
   assert.deepEqual(current.catalog.subjects.map(subject => subject.id), wantedIds)
   const bySubject = Object.fromEntries(current.catalog.subjects.map(subject => [subject.id, subject]))
   const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml' }

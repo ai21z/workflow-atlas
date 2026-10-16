@@ -47,6 +47,17 @@
       "type": "p",
       "label": "What Atlas changes",
       "text": "Selecting npm adds package, workspace, installation and script questions to generated skill references. A Node.js profile can also apply. Reading either guide does not install dependencies or authorize package scripts."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Development, Tests and review, Release and production. These links are recommendations based on the guide content, not required product or process choices.",
+        "An installation record identifies npm and Node.js versions, the correct package or workspace, lockfile and registry configuration without exposing secrets.",
+        "A command record names the repository scripts that actually ran and their results against the candidate revision.",
+        "Dependency or lockfile differences are reviewed explicitly. Unavailable registry access is marked as a blocker rather than a feature failure.",
+        "Existing source claims were not re-audited in this mapping pass. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
     }
   ],
   "refs": [
@@ -67,7 +78,7 @@
       "npm ci",
       "workspace"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when installation and project checks are controlled through npm and package.json in the actual repository.",
     "limits": "Use the installed version and actual repository configuration. Reading this guide does not select a technology, configure a tool or establish passing evidence.",
     "sourceStatus": "reviewed",
@@ -99,6 +110,11 @@
     "applies": {
       "technologies": [
         "npm"
+      ],
+      "stages": [
+        "implementation",
+        "verification",
+        "release"
       ]
     },
     "scope": {

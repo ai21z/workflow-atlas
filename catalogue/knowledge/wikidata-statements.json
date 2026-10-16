@@ -17,6 +17,16 @@
       "type": "p",
       "label": "Acceptance",
       "text": "A flattened import does not silently broaden applicability or lose the evidence needed for curation."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow use: Architecture and impact, Development, Tests and review. Use when designing a Wikidata import, implementing full-statement handling and checking that qualifiers, references and rank survive the relevant path. This is an Atlas recommendation reviewed on 2026-10-15, not a mandatory process or an observed execution result.",
+        "Check output to obtain: Record the exact imported statement and entity revision, required qualifiers, rank and underlying source reference.",
+        "Check output to obtain: Compare a flattened value with its full statement and document what information the application needs to retain.",
+        "Check output to obtain: Verify a scoped and time-qualified fixture through import and serving. A truthy value or imported reference alone is not independently verified domain truth."
+      ]
     }
   ],
   "refs": [
@@ -38,7 +48,7 @@
       "wikibase",
       "country assertion"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use this country-data example when importing Wikidata statements and the qualifiers, references, rank or revision matter. Keep full statements, since the truthy wdt representation drops those details and an imported reference or label match alone does not establish a country assertion.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
     "sourceStatus": "legacy",
@@ -53,6 +63,13 @@
     "scope": {
       "generality": "example",
       "context": "country-data"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "implementation",
+        "verification"
+      ]
     }
   }
 }

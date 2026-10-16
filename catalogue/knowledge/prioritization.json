@@ -23,9 +23,27 @@
       "type": "p",
       "label": "Acceptance",
       "text": "Priority explains why this outcome is worth addressing now. Estimates disclose uncertainty and do not pretend Sonar costs equal delivery effort."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: workflow use and checks",
+      "items": [
+        "Recommended workflow steps: Compare feasible approaches, Recommend go or no-go, Stories and delivery plan. These links are recommendations based on the guide content, not required product or process choices.",
+        "A triage table links each candidate to user consequence, exposure, change frequency, evidence strength and an accountable owner.",
+        "The decision explains why the selected outcome is worth doing now, documents duplicates and dependencies, and keeps estimates distinct from measurements.",
+        "Each accepted priority has a bounded next action and an acceptance check. Unsupported rankings remain provisional.",
+        "Only the added source contribution was fact checked in this pass. Earlier statements retain their original basis and confidence. Project configuration, usefulness and actual check outcomes remain unverified."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "The SEI debt analytics project describes consolidating candidate items and forming an initial ranking from defects, change and bug churn with causal analysis. The assessment dimensions here are a proposed decision aid. The source does not prescribe their weights or make an automatic priority decision. Checked against the linked primary source on 2026-10-15. This review covers this contribution only."
     }
   ],
-  "refs": [],
+  "refs": [
+    "sei-debt-analytics"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -41,17 +59,32 @@
       "priority score",
       "ticket discipline"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when many findings or warnings have been collected and you must decide which deserve tickets now. It ranks by consequence and change exposure, clusters duplicates by root cause and keeps estimate uncertainty visible.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "The SEI debt analytics project describes consolidating candidate items and forming an initial ranking from defects, change and bug churn with causal analysis. The assessment dimensions here are a proposed decision aid. The source does not prescribe their weights or make an automatic priority decision.",
+        "sourceRefs": [
+          "sei-debt-analytics"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "options",
+        "recommendation",
+        "breakdown"
+      ]
     }
   }
 }

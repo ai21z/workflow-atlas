@@ -17,9 +17,30 @@
       "type": "p",
       "label": "Acceptance",
       "text": "A reused result is attributable to the current task inputs. Old passing checks never masquerade as verification of a changed candidate."
+    },
+    {
+      "type": "p",
+      "label": "Gap review: workflow use and checks",
+      "text": "Define reuse boundaries while choosing the architecture, then check cached analysis inputs before using it as evidence during review or regression. The workflow placement and checks are Atlas recommendations. Only the source contribution below was verified on 15 October 2026, not every original assertion or project outcome."
+    },
+    {
+      "type": "list",
+      "label": "Gap review: acceptance outputs",
+      "items": [
+        "A reuse manifest records all material input revisions, schema, prompt and evaluation policy identities and the derived artifact.",
+        "A changed-input probe demonstrates recomputation or an explicit stale result status for a selected invalidation case.",
+        "The evidence packet distinguishes reused analysis from checks actually executed on the current candidate."
+      ]
+    },
+    {
+      "type": "p",
+      "label": "Gap review: verified source contribution",
+      "text": "Bazel describes actions with declared inputs, command lines and environment variables, and a cache mapping action hashes to result metadata. This is a concrete build caching example. An Atlas analysis cache key, its invalidation policy and any reuse benefit remain proposed and require project checks. Model prompt caching is a different mechanism. Review date: 15 October 2026. This review covers this source contribution only, not the whole guide."
     }
   ],
-  "refs": [],
+  "refs": [
+    "gap-bazel-action-cache"
+  ],
   "basis": "Proposed design",
   "confidence": "Moderate",
   "catalog": {
@@ -35,17 +56,32 @@
       "stale results",
       "derived results"
     ],
-    "revision": "1",
+    "revision": "1.gap1",
     "applicability": "Use when reusing a previous repository analysis, source review or graph result, so that the reuse is keyed by the commit, document version or dataset and ontology version it describes. A changed input, schema, prompt or evaluation policy invalidates the derived result.",
     "limits": "Reading a topic does not configure tools, execute a workflow or establish passing evidence.",
-    "sourceStatus": "legacy",
-    "reviewedOn": "",
-    "claims": [],
+    "sourceStatus": "reviewed",
+    "reviewedOn": "2026-10-15",
+    "claims": [
+      {
+        "sectionLabel": "Gap review: verified source contribution",
+        "text": "Bazel describes actions with declared inputs, command lines and environment variables, and a cache mapping action hashes to result metadata.",
+        "sourceRefs": [
+          "gap-bazel-action-cache"
+        ]
+      }
+    ],
     "evidence": {
       "basisKinds": [
         "proposed"
       ],
       "confidenceLevel": "proposed"
+    },
+    "applies": {
+      "stages": [
+        "architecture",
+        "verification",
+        "regression"
+      ]
     }
   }
 }
