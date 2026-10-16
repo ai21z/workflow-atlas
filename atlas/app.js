@@ -307,7 +307,7 @@
     const record=mapRecords.get(mapRecord);if(!record)return;
     $('map-record-kind').textContent=record.kind==='topic'?'READING TOPIC':record.kind==='practice'?'WORKFLOW PRACTICE':'TECHNOLOGY NAME';
     $('map-record-title').textContent=record.title;$('map-record-summary').textContent=record.summary||(mapReadingTarget(record)?'A catalogue record with a linked guide. Open the guide for context.':'A catalogue name. No explanatory guide is recorded yet.');
-    const count=(record.sourceRefs||[]).length,review=record.kind==='topic'?(record.reviewed&&record.reviewedOn?'Reviewed '+record.reviewedOn:'No claim review recorded'):(record.reviewedOn?'Record reviewed '+record.reviewedOn:'No record review date');
+    const count=(record.sourceRefs||[]).length,review=record.kind==='topic'?(record.reviewed&&record.reviewedOn?'Scoped source claims reviewed '+record.reviewedOn:'No claim review recorded'):(record.reviewedOn?'Record reviewed '+record.reviewedOn:'No record review date');
     $('map-record-evidence').textContent=`${review}. ${count} linked source${count===1?'':'s'}. Source links do not establish correctness.`;
     const sourceLinks=$('map-record-source-links');sourceLinks.replaceChildren();$('map-record-sources').hidden=!count;for(const id of record.sourceRefs||[]){const source=sources[id];if(!source)continue;const link=el('a','',source[0]+' ↗');link.href=source[1];link.target='_blank';link.rel='noopener noreferrer';sourceLinks.append(link);}
     const reading=mapReadingTarget(record);$('map-record-read').hidden=!reading;$('map-record-read').textContent=(reading?.label||'Read topic')+' →';$('map-record-read').setAttribute('aria-label',(reading?.label||'Read topic')+': '+record.title);

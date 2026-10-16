@@ -295,7 +295,7 @@ function sectionText(section) {
 export function sourceLine(record, sourcesById) {
   const count = record.sourceRefs.length
   const noun = count === 1 ? 'source' : 'sources'
-  if (record.sourceStatus === 'reviewed') return `Reviewed${record.reviewedOn ? ` ${record.reviewedOn}` : ''}, ${count} ${noun}`
+  if (record.sourceStatus === 'reviewed') return `Scoped source claims reviewed${record.reviewedOn ? ` ${record.reviewedOn}` : ''}, ${count} ${noun}`
   if (record.sourceStatus === 'needs-review') return `Not yet reviewed, ${count} ${noun}`
   if (record.sourceStatus === 'legacy') return count ? `References retained without claim review, ${count} ${noun}` : 'No sources recorded. No claim review recorded.'
   if (count) return `${count} ${noun}${record.reviewedOn ? `, reviewed ${record.reviewedOn}` : ''}`

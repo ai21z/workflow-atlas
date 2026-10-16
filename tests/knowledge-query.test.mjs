@@ -42,7 +42,7 @@ test('search ranks a topic by its own words and explains every match', () => {
   assert.equal(first.ref, 'topic:github-actions')
   assert.ok(first.matched.length >= 3)
   for (const match of first.matched) assert.ok(['title', 'aliases', 'practiceTitle', 'applicability', 'summary', 'practiceSummary', 'body'].includes(match.field))
-  assert.equal(first.sourceLine, 'Reviewed 2026-10-12, 14 sources')
+  assert.equal(first.sourceLine, 'Scoped source claims reviewed 2026-10-12, 14 sources')
   const retries = query.search('retry stopping rule correction')
   assert.ok(retries.slice(0, 3).some(hit => hit.ref === 'topic:retries'))
   assert.deepEqual(query.search('   '), [])
@@ -71,7 +71,8 @@ test('get returns a topic with sections, claims, sources and typed neighbours', 
 })
 
 test('source lines report recorded status and never a judgement', () => {
-  assert.equal(sourceLine({ sourceRefs: ['a', 'b'], sourceStatus: 'reviewed', reviewedOn: '2026-10-05' }), 'Reviewed 2026-10-05, 2 sources')
+  assert.equal(sourceLine({ sourceRefs: ['a', 'b'], sourceStatus: 'reviewed', reviewedOn: '2026-10-05' }), 'Scoped source claims reviewed 2026-10-05, 2 sources')
+  assert.equal(sourceLine({ sourceRefs: ['a'], sourceStatus: 'reviewed', reviewedOn: '' }), 'Scoped source claims reviewed, 1 source')
   assert.equal(sourceLine({ sourceRefs: ['a'], sourceStatus: 'needs-review', reviewedOn: '' }), 'Not yet reviewed, 1 source')
   assert.equal(sourceLine({ sourceRefs: [], sourceStatus: 'legacy', reviewedOn: '' }), 'No sources recorded. No claim review recorded.')
   assert.equal(sourceLine({ sourceRefs: ['a'], sourceStatus: 'legacy', reviewedOn: '' }), 'References retained without claim review, 1 source')

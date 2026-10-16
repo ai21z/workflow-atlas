@@ -286,7 +286,7 @@ async function run() {
       assert.equal(await page.locator('#map-record-title').innerText(), docker.title)
       const sourceText = await page.locator('#map-record-evidence').innerText()
       assert.ok(sourceText.includes(`${docker.refs.length} linked source${docker.refs.length === 1 ? '' : 's'}`))
-      assert.ok(sourceText.includes(docker.catalog.sourceStatus === 'reviewed' ? `Reviewed ${docker.catalog.reviewedOn}` : 'No claim review recorded'))
+      assert.ok(sourceText.includes(docker.catalog.sourceStatus === 'reviewed' ? `Scoped source claims reviewed ${docker.catalog.reviewedOn}.` : 'No claim review recorded'))
       assert.equal(await node('topic:docker').getAttribute('aria-pressed'), 'true')
       assert.equal(await node('topic:docker').locator('circle.map2d-shape').count(), 1)
       assert.equal(await page.evaluate(() => location.hash), '#docker')
