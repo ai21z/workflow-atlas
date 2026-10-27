@@ -77,6 +77,10 @@ jobs:
         run: npm run test:handoff
       - name: Check catalogue navigation and offline reading
         run: npm run test:catalogue-browser
+      - name: Check the knowledge table
+        run: npm run test:knowledge-browser
+      - name: Check repository workflow links
+        run: npm run test:repository-browser
       - name: Check the static site under the Pages path
         run: npm run test:static-browser
       - name: Build the public files
@@ -151,6 +155,10 @@ jobs:
             local-knowledge/retests/subjects/**/*.png
             local-knowledge/retests/map2d/**/*.json
             local-knowledge/retests/map2d/**/*.png
+            local-knowledge/retests/knowledge-table/**/*.json
+            local-knowledge/retests/knowledge-table/**/*.png
+            local-knowledge/retests/repository-links/**/*.json
+            local-knowledge/retests/repository-links/**/*.png
             exports/browser-qa-catalogue/*.png
           if-no-files-found: warn
           retention-days: 7
